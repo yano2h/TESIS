@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jsp:root
+    version="2.1"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:jstl="http://java.sun.com/jsp/jstl/functions"
+    xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <jsp:element name="text">
+        <jsp:attribute name="lang" />
+        <jsp:body>
+            <f:view>
+                <ice:outputStyle href="../css/replace.css" />
+                <ice:form>
+                    <c:choose>
+                        <c:when test="#{MbInfo.tipoExepcion eq MbInfo.tipoExepcionInfo}">
+                            <c:set var="panelStyle" scope="page" value="panelBoxInfo"/>
+                        </c:when>
+                        <c:when test="#{MbInfo.tipoExepcion eq MbInfo.tipoExepcionWarning}">
+                            <c:set var="panelStyle" scope="page" value="panelBoxWarning"/>
+                        </c:when>
+                        <c:when test="#{MbInfo.tipoExepcion eq MbInfo.tipoExepcionError}">
+                            <c:set var="panelStyle" scope="page" value="panelBoxError"/>
+                        </c:when>
+                    </c:choose>
+                    <ice:panelGroup styleClass="panelBox #{panelStyle} center">
+                        <ice:panelGrid styleClass="panelTituloBox fullWidth">
+                            <ice:outputText styleClass="textTituloBox" value="#{MbInfo.head}"/>
+                        </ice:panelGrid>
+                        <ice:panelGrid styleClass="center fullWidth">
+                            <ice:graphicImage url="#{MbInfo.imagen}" height="32px" width="32px" />
+                            <ice:panelGroup styleClass="space" />
+                            <ice:outputText value="#{MbInfo.mensaje}" styleClass="textTitleMensajeBox"/>
+                            <ice:panelGroup styleClass="space" />
+                            <ice:panelGroup styleClass="roundedcornr_box" rendered="#{MbInfo.renderedPanelInfo}">
+                                <ice:panelGroup styleClass="roundedcornr_top"><ice:panelGroup /></ice:panelGroup>
+                                <ice:panelGroup styleClass="roundedcornr_content justify">
+                                    <ice:panelGrid rendered="#{not empty MbInfo.contacto}" styleClass="fullWidth">
+                                        <ice:outputText value="#{MbInfo.titleIntructions}" styleClass="textTitleMensajeBox"/>
+                                        <ice:panelGroup styleClass="space" />
+                                        <ice:outputLabel value="#{MbInfo.contacto}" styleClass="textMensajeBox"/>
+                                    </ice:panelGrid>
+                                    <ice:panelGroup styleClass="space" />
+                                    <ice:panelGrid rendered="#{not empty MbInfo.exception}" styleClass="fullWidth">
+                                        <ice:outputText value="#{MbInfo.titleExceptionDetail}" styleClass="textTitleMensajeBox"/>
+                                        <ice:panelGroup styleClass="space" />
+                                        <ice:outputText value="#{MbInfo.exception}" styleClass="textMensajeBox"/>
+                                    </ice:panelGrid>
+                                </ice:panelGroup>
+                                <ice:panelGroup styleClass="roundedcornr_bottom"><ice:panelGroup /></ice:panelGroup>
+                            </ice:panelGroup>
+                            <ice:panelGroup styleClass="space" />
+                            <ice:commandButton value="Volver" actionListener="#{MbInfo.onClickVolver}"/>
+                        </ice:panelGrid>
+                    </ice:panelGroup>
+                </ice:form>
+            </f:view>
+        </jsp:body>
+    </jsp:element>
+</jsp:root>
