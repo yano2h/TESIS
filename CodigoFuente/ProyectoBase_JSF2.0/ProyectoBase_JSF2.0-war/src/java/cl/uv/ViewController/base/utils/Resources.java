@@ -1,7 +1,6 @@
 package cl.uv.ViewController.base.utils;
 
-import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Resources {
 
@@ -17,5 +16,16 @@ public class Resources {
 
     public static ResourceBundle getPageList(String path) {
         return PropertyResourceBundle.getBundle(Resources.getPropertiesPath(path));
+    }
+    
+    public static Map getMapPageList(String propertyName) {
+        ResourceBundle strBuffer = PropertyResourceBundle.getBundle(Resources.getPropertiesPath(propertyName));
+        Map mapPageList =  new HashMap();
+        for (Enumeration e = strBuffer.getKeys(); e.hasMoreElements();) {
+            String key = (String)e.nextElement();
+            mapPageList.put(key, strBuffer.getString(key));
+        }
+        
+        return mapPageList;
     }
 }
