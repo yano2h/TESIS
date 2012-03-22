@@ -1,0 +1,181 @@
+a.button {
+	display: block;
+	color: #555555;
+	font-weight: bold;
+	height: 30px;
+	line-height: 25px;
+	text-decoration: none;
+	width: auto;
+}
+span.add:hover {
+	color: #529214 !important;
+}
+span.delete:hover {
+	color: #336699 !important;
+}
+span.cancel:hover {
+	color: #d12f19 !important;
+}
+span.save:hover {
+	color: #336699 !important;
+}
+/* -------------------- */
+/* CLASSES */
+/* -------------------- */
+.add {
+	background: url(img/add.png) no-repeat 5px 8px;
+	text-indent: 30px;
+	display: block;
+}
+.delete {
+	background: url(img/delete.png) no-repeat 5px 8px;
+	text-indent: 30px;
+	display: block;
+}
+.cancel {
+	background: url(img/cancel.png) no-repeat 5px 8px;
+	text-indent: 30px;
+	display: block;
+}
+.save {
+	background: url(img/save.png) no-repeat 5px 8px;
+	text-indent: 30px;
+	display: block;
+}
+/**********************************************************************/
+/* BUTTONS */
+.buttons a {
+    display: block;
+    float: left;
+    margin: 0 7px 0 0;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+	font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif !important;
+    font-size: 100% !important;
+    line-height: 130%;
+    text-decoration: none;
+    font-weight: bold;
+    color: #565656 !important;
+    cursor: pointer;
+    padding: 5px 10px 6px 7px; /* Links */
+}
+.buttons a img {
+    margin: 0 3px -3px 0 !important;
+    padding: 0;
+    border: none;
+    width: 16px;
+    height: 16px;
+}
+/* STANDARD */
+.buttons a:hover {
+    background-color: #dff4ff;
+    border: 1px solid #c2e1ef;
+}
+.buttons a span, .buttons a:hover span {
+    color:#336699 !important;
+}/*
+.buttons a:active {
+    background-color:#6299c5;
+    border:1px solid #6299c5;
+}
+.buttons a:active span {
+    color:#fff !important;
+}*/
+/* POSITIVE */
+.buttons a.positive:hover {
+    background-color: #E6EFC2;
+    border: 1px solid #C6D880;
+}
+.buttons a.positive span, .buttons a.positive:hover span {
+	color: #529214 !important;
+}/*
+.buttons a.positive:active {
+    background-color:#529214;
+    border:1px solid #529214;
+}
+.buttons a.positive:active span {
+    color:#fff !important;
+}*/
+/* NEGATIVE */
+.buttons a.negative:hover {
+    background: #fbe3e4;
+    border: 1px solid #fbc2c4;
+}
+.buttons a.negative span, .buttons a.negative:hover span {
+	color: #d12f19 !important;
+}/*
+.buttons a.negative:active {
+    background-color:#d12f19;
+    border:1px solid #d12f19;
+}
+.buttons a.negative:active span {
+	color:#fff !important;
+}*/
+/**********************************************************************/
+.buttonsOnlyIcon a {
+    display: block;
+    float: left;
+    margin: 0;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    padding: 5px; /* Links */
+}
+.buttonsOnlyIcon a img {
+    border: medium none;
+    height: 16px;
+    padding-right: 2px;
+    width: 16px;
+}
+/* STANDARD */
+.buttonsOnlyIcon a:hover {
+    background-color: #dff4ff;
+    border: 1px solid #c2e1ef;
+}
+.buttonsOnlyIcon a:link {
+	border: 1px solid #ccc;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+}
+.buttonsOnlyIcon a:active {
+    border: 1px solid #ccc;
+	border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+/* POSITIVE */
+.buttonsOnlyIcon a.positive:hover {
+    background-color: #E6EFC2;
+    border: 1px solid #C6D880;
+}
+.buttonsOnlyIcon a.positive span, .buttonsOnlyIcon a.positive:hover span {
+	color:#529214 !important;
+}
+.buttonsOnlyIcon a.positive:link {
+	border: 1px solid #ccc;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+}
+.buttonsOnlyIcon a.positive:active {
+    border: 1px solid #ccc;
+	border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+/* NEGATIVE */
+.buttonsOnlyIcon a.negative:hover {
+    background: #fbe3e4;
+    border: 1px solid #fbc2c4;
+}
+.buttonsOnlyIcon a.negative span, .buttonsOnlyIcon a.negative:hover span {
+	color: #d12f19 !important;
+}
+.buttonsOnlyIcon a.negative:link {
+	border: 1px solid #ccc;
+    border-top: 1px solid #eee;
+    border-left: 1px solid #eee;
+}
+.buttonsOnlyIcon a.negative:active {
+    border: 1px solid #ccc;
+	border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
