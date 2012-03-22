@@ -1,0 +1,156 @@
+/* 
+    Document   : errors
+    Created on : 22-mar-2012, 16:01:47
+    Author     : Alejandro
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+/* Clases css base para el cuerpo de la pagina  */
+body {margin: 0px}
+#nav { margin-top: 10px !important; _margin-top: -2px !important; }
+#contenedor { margin: 0 auto; }
+.wrap { margin-left: 0; margin-top: 0; }
+.fullWidth{ width : 100%; }
+.halfWidth{ width : 50%; }
+.bordeBottom { border-bottom: 1px solid #bbb !important; }
+.left { float: left; }
+#left { width: 200px; }
+.justify { text-align: justify;}
+.center { margin: 0 auto; text-align: center; }
+.right { float: right; text-align: right !important;}
+.top { vertical-align: top;}
+.bottom { vertical-align: bottom; }
+.middle { vertical-align: middle; }
+.logoUv { border: none; width:165px; height:85px; top:0 }
+.iconAppImage { border: none; width:16px !important; height: 16px !important; }
+.textMensajeFooter { font-weight: normal !important; font-size: 11px !important; color: #777; }
+.space { margin-top: 5px; }
+
+/* Clases css para la pagina info*/
+
+.panelBox { width: 720px; font-family: Arial, Helvetica, sans-serif !important; margin-top: 5px; }
+.panelBoxInfo { border: 1px solid #045fb4; }
+.panelBoxWarning { border: 1px solid #fac336; }
+.panelBoxError { border: 1px solid #fa6058; }
+.panelTituloBox { display: block; height: 32px; text-align: left;}
+.panelBoxInfo .panelTituloBox { border: 1px solid #585cfa; background-color: #045fb4; }
+.panelBoxWarning .panelTituloBox { border: 1px solid #faed58; background-color: #fac336; }
+.panelBoxError .panelTituloBox { border: 1px solid #fa6058; background-color: #fa2c21; }
+.textTituloBox { display: block; font-size: 18px; color: #ffffff; font-weight: bold; }
+.textTitleMensajeBox { font-size: 12px; color: #18316d; font-weight: bold; text-decoration: underline;}
+.linkMensajeBox { font-size: 12px; color: #18316d; font-weight: bold; }
+.textMensajeBox { font-size:12px; color:#18316d; }
+
+/* Clases css para los paneles de popup */
+
+.panelPopUp { display: block; }
+.headerPanelPopUp { display: block; height: 20px; text-align: center; }
+.contentPanelPopUp { font-size: 11px; color: white; font-weight: bold; }
+.contentPanelPopUpBody { font-size:11px; color: #18316d; font-weight: bold; text-align: center; }
+.buttonPanelPopUpBody { font-size:11px; color: #18316d;}
+
+/* Clases para bordes redondos */
+
+.roundedcornr_box { background: url(./images_replaced/roundedcornr_tl.png) no-repeat top left; }
+.roundedcornr_top { background: url(./images_replaced/roundedcornr_tr.png) no-repeat top right; }
+.roundedcornr_bottom { background: url(./images_replaced/roundedcornr_bl.png) no-repeat bottom left; }
+.roundedcornr_bottom div { background: url(./images_replaced/roundedcornr_br.png) no-repeat bottom right; }
+.roundedcornr_content { background: url(./images_replaced/roundedcornr_r.png) top right repeat-y; }
+.roundedcornr_top div, .roundedcornr_top,
+.roundedcornr_bottom div, .roundedcornr_bottom { width: 100%; height: 20px; _height: 15px; font-size: 1px; }
+.roundedcornr_content, .roundedcornr_bottom { margin-top: -10px; _margin-top: 0;  }
+.roundedcornr_content { padding: 10px; }
+.roundedcornr_content img { border: none; }
+
+div.curved { margin: 0 auto; background: #aaa; min-width: 110px !important; position: absolute; top: 0; left: 45%; _left: 43.5%; right: 45%; _right: 43.5%; width: auto; padding: 0; _padding-top: 0; }
+span.rtop, span.rbottom { display:block; background: #FFF; padding: 0 !important; }
+span.rtop span, span.rbottom span { display: block; height: 1px; overflow: hidden; background: #aaa; padding: 0 !important; }
+span.r1 { margin: 0 5px; padding: 0 !important; }
+span.r2 { margin: 0 3px; padding: 0 !important; }
+span.r3 { margin: 0 2px; padding: 0 !important; }
+span.rtop span.r4, span.rbottom span.r4 { margin: 0 1px; height: 2px; padding: 0 !important; }
+
+/* Clases css base para el menu izquierdo  */
+
+.pnlMnu { margin-bottom: 5px; width: 200px; }
+.pnlMnuHdr { background: transparent url('./images_replaced/header_tab.gif') no-repeat top center !important; height: 25px !important; _height: 33px !important; border: none !important;}
+.pnlMnuColpsdHdr { background: transparent url('./images_replaced/header_tab_colpsd.gif') no-repeat top center !important; height: 25px !important; _height: 33px !important; border: none !important;}
+.titleMenuPnl { margin-top: 4px;}
+.titleMenu, .titleMain { color: #fff !important; font-size: 12px !important; }
+.titleMain { margin-left: 10px; padding-top: 8px;}
+.pnlMainContentHdr { background: transparent url('./images_replaced/PnlHdr_c.gif') repeat-x 0 0 !important; height: 25px !important; _height: 33px !important; border: none !important; padding-right: 0 !important;}
+.pnlMainLeftHdr { background: transparent url('./images_replaced/PnlHdr_l.gif') no-repeat center left!important; height: 33px !important; _height: 33px !important; border: none !important; margin-top: -4px; _margin-top: -4px; margin-left: -15px; }
+.pnlMainRightHdr { background: transparent url('./images_replaced/PnlHdr_r.gif') no-repeat center right !important; height: 33px !important; _height: 33px !important; border: none !important;  _margin-top: 0px; }
+
+/* Clases css reemplazan icefaces  */
+
+hr {height: 1px; border: 0; background-color: #ccc;}
+.iceMnuBar { margin-top: -14px !important; _margin-top: -1px !important; margin-left: -3px !important;_margin-left: 0px !important;}
+.iceMnuBarItem a {color: #777; background: none; border: none !important; text-decoration: none !important; _font-size: 1em !important;}
+.iceMnuBarItem a:hover  {color: #777 !important; border: none;  background: none !important; text-decoration: none !important; _font-size: 1em !important;}
+.iceMnuBarSubMenu {background-color: #fff !important; border: 1px solid #ccc !important;width: 200px !important;}
+.iceMnuBarSubMenu span , .iceMnuBarSubMenu a {background-color: #fff !important; color: #777 !important ;text-decoration: none !important; font-size: 1em !important;}
+.iceMnuBarSubMenu a:hover span, .iceMnuBarSubMenu a:hover {background-color: #fff !important; color: #18316D !important; text-decoration: none !important;}
+.iceMnuBarItemImage { width: auto !important; }
+.iceMnuBarItemLabel { padding-top: 0 !important; padding-left: 2px !important; }
+.iceMnuItmLabel, .iceMnuBarItemLabel { padding-left: 4px !important; }
+.iceSelOneMnu-dis, .iceSelMnyLb-dis, .iceSelMnyMnu-dis, .iceSelOneLb-dis { color: #A0A0A0 !important;}
+.iceSelOneMnu-dis {border: 1px solid #A5ACB2 !important; font-size: 11px !important; color: #18316D;}
+.iceInpTxt, .iceInpSecrt { color: #18316D; border: 1px solid #bbb; padding-top: 2px; height: 20px; font-size: 11px !important; }
+.iceInpTxt-dis, .iceInpSecrt-dis { background-color: #F0F0F0; border: 1px solid #A5ACB2 !important; color: #A0A0A0; padding-top: 2px; height: 20px; font-size: 11px !important;}
+.iceSelMnyCb table tr td label, .iceSelOneRb table tr td label { vertical-align: top; font-size: 11px; color: #18316D; }
+.iceSelMnyCb-dis, .iceSelOneRb-dis { background-color: #fff; border: none; margin: 0; padding: 0; }
+.iceSelMnyCb-dis table tr td label, .iceSelOneRb-dis table tr td label { vertical-align: top; background-color: #fff; border: none; color: #A0A0A0; margin: 0; padding: 0; }
+.iceSelOneMnu { border: 1px solid #bbb !important; font-size: 1em; width: auto !important; margin: 0 !important; color: #18316D;}
+.iceSelOneMnu-dis { border: 1px solid #A5ACB2 !important; font-size: 11px; width: auto !important; margin: 0 !important; color: #A0A0A0;}
+.iceCmdSrtHdr td { color: white !important; overflow: hidden !important; white-space: nowrap !important; }
+.iceDatTblFtr {	text-align: center !important; }
+.icePnlClpsblHdr, .icePnlClpsblColpsdHdr { color: #000 !important; padding-left: 15px; height: 25px !important; _height: 33px !important;}
+.icePnlClpsblHdr .iceOutTxt, .icePnlClpsblColpsdHdr .iceOutTxt { color: #000 ; }
+.icePnlClpsblCnt, .icePnlClpsblColpsdCnt, .icePnlClpsblColpsdCnt-dis, .icePnlClpsblCnt-dis {background-color: transparent !important; border-color: #abc0d4 !important; }
+.icePnlClpsblCnt a:hover span, .icePnlClpsblColpsdCnt a:hover span { color:#318496 !important; text-decoration: underline; }
+.icePnlGrd .iceOutTxt {padding-right: 3px !important;}
+.iceDatTbl { border: 1px solid #ccc !important;  margin: 0 !important; margin-top: 5px !important;}
+.iceCmdSrtHdr td { color: #000 !important; font-weight: bolder !important; }
+.iceDatTblColHdr, .iceDatTblColHdr1, .iceDatTblColHdr2 { background-color: #fff; background-image: none !important; border-right : 1px solid #ccc !important; border-top: none; font-weight: bolder; padding: 5px !important; color: #000 !important; }
+.iceDatTblColHdr a span, .iceDatTblColHdr1 a span, .iceDatTblColHdr2 a span { color: #000 !important; }
+.iceDatTblColHdr a:hover span, .iceDatTblColHdr1 a:hover span, .iceDatTblColHdr2 a:hover span { color: #000 !important; text-decoration: none !important;}
+.iceDatTblColHdr1 .iceOutTxt, .iceDatTblColHdr2 .iceOutTxt { padding-right: 0 !important; font-size: 1em !important; font-weight: bolder !important; color: #000 !important; }
+.iceCmdSrtHdr .iceOutTxt table tr td { text-decoration: underline !important; }
+.iceDatTblCol, .iceDatTblCol1, .iceDatTblCol2 {  border-bottom: 1px solid #ccc !important; border-right: 1px solid #ccc !important;}
+.iceDatPgrTbl { background-color: #fff !important; }
+.iceDatPgrCol a { background-color: #fff !important; border: #fff !important; color: #777 !important; }
+.iceDatPgrScrCol a {background-color: #ccc !important; border: 1px solid #aaa !important; color: #222 !important; }
+.iceOutConStat { margin: 0px !important; width: 25px !important; margin-top: -10px !important; _margin-top: -11px !important; margin-left: 5px !important; }
+.iceOutConStatInactv, .iceOutConStatActv, .iceOutConStatCaution, .iceOutConStatDisconnect {margin-top: 10px !important; _margin-top: 11px !important; margin-left: 5px !important; width: 25px !important; }
+.iceCmdSrtHdrAsc{ background-image: url('./images_replaced/column_sort_asc.gif') !important; }
+.iceCmdSrtHdrDesc{ background-image: url('./images_replaced/column_sort_desc.gif') !important; }
+.iceOutConStatInactv { background-image: url('./images_replaced/connect_idle.gif') !important; }
+.iceOutConStatActv { background-image: url('./images_replaced/connect_active.gif') !important; }
+.iceOutConStatCaution { background-image: url('./images_replaced/connect_caution.gif') !important; }
+.iceOutConStatDisconnect { background-image: url('./images_replaced/connect_disconnected.gif') !important; }
+.iceDatTblActvSrtHdr a span table {margin: 0 auto !important; text-align: center !important;}
+.iceOutProg { margin: 0 !important; margin-bottom: 5px !important; }
+.iceOutProgBg { width: 343px !important; }
+.iceSelInpDatePopup { min-width: 160px !important; }
+.iceSelInpDateOpenPopup { background-image: url('./images_replaced/calendar.png') !important; vertical-align: middle !important; margin-left: 5px; margin-top: -4px; _margin-top: -7px !important; }
+.iceSelInpDateClosePopup { background-image: url('./images_replaced/popupclose.gif') !important; vertical-align: middle !important; margin-left: 3px !important; margin-top: -4px; _margin-top: -7px !important; height: 18px !important; width: 18px !important; }
+.iceSelInpDatePopup input[type="image"] { border:none; filter:alpha(opacity=50); -moz-opacity: 0.5; opacity: 0.5; -khtml-opacity: 0.5; }
+.iceSelInpDatePopup input[type="image"]:hover { border:none; filter:alpha(opacity=100); -moz-opacity: 1.0; opacity: 1.0; -khtml-opacity: 1.0; }
+.iceSelInpDateInput { height: 20px !important; margin-left: 6px !important; color: #777 !important; font-size: 1em !important; padding-left: 2px;  border: 1px solid #bbb !important;}
+.iceSelInpDate { border-top: 1px solid #bbb !important; border-left: 1px solid #bbb !important; background-color: #fff !important; }
+.iceSelInpDateWeek { border-top: 1px solid #bbb !important; }
+.iceSelInpDateDay { border-right: 1px solid #bbb !important; border-bottom: 1px solid #bbb !important; }
+.iceSelInpDateDay a { background-color: #FFFFFF !important; text-align: center !important; }
+.iceSelInpDateCur { background-color: #FAA620; }
+.iceSelInpDateCur a { background-color: #FAA620;  border: 0 none; text-align: center !important; font-weight: bold !important;}
+.iceSelInpDateMoYrDropdown, .iceSelInpDateTimeDropDown { color: #777; width: 85px !important; background-color: #fff; font-weight: normal;}
+.iceSelInpDateMonthYear, .iceSelInpDateTime { background-color: #FFFFFF !important; background-image: none !important;  border-right: 1px solid #BBBBBB !important; }
+.iceSelInpDateWeek { background-color: #FFFFFF !important; color: #777777 !important; border-right: 1px solid #bbb !important; border-bottom: 1px solid #bbb !important; }
+.iceSelInpDateDay .iceOutTxt { color: #777777 !important; }
+
