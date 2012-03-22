@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" >
+    
+    <ui:composition template="./base/Template.xhtml">
+        <ui:define name="nav">
+            <ui:include src="#{MbSessionController.navPage}"/>
+        </ui:define>
+        <ui:define name="top">
+            <ui:include src="#{MbSessionController.headerPage}"/>
+        </ui:define>
+        <ui:define name="left">
+            <ui:include src="#{MbSessionController.leftMenuPage}"/>
+        </ui:define>
+        <ui:define name="content">
+            <ui:include src="#{MbSessionController.contentPage}"/>
+        </ui:define>
+        <ui:define name="bottom">
+            <ui:include src="#{MbSessionController.footerPage}"/>
+        </ui:define>
+    </ui:composition>
+
+</html>
