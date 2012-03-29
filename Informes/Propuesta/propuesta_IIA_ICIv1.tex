@@ -11,12 +11,16 @@
 \usepackage[dvips]{epsfig}
 \usepackage[dvips]{graphicx}
 
+% Quita el Cero de de las Secciones de 0.1 a 1
+\renewcommand*\thesection{\arabic{section}}
+%\renewcommand*\thesubsection{\arabic{subsection}}
 
 \begin{document}
 \begin{center}
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=2cm]{logoUV.eps}
+%\includegraphics[width=2cm]{logoUV.eps}
+\includegraphics[width=2cm]{logoUV.pdf}
 \end{center}
 \end{figure}
 UNIVERSIDAD DE VALPARAÍSO \\
@@ -76,73 +80,70 @@ que permitan definir el problema. Su extensión máxima es de
 \section{Definición del Problema}
 \label{def}
 
-La Dirección de Servicios de Información y Computación (DISICO)  de la 
+La Dirección de Servicios de Información y Computación (DISICO) de la 
 Universidad de Valparaíso desde hace ya un par de años se encuentra en 
 constante proceso de evolución y en busca de nuevas practicas y herramientas, 
 que permitan mejorar tanto la comunicación como la productividad de sus 
 empleados, es así como en esta constante búsqueda de aspectos posibles a 
-mejorar dentro se a detectado algunas falencias, as cuales se nombran y 
+mejorar, se han detectado algunas falencias, las cuales se nombran y 
 detallan a continuación:
 \\
 \subsection{Problemas en las Solicitudes de Requerimientos}
 \label{prob1}
-Las solicitudes de requerimientos que se reciben en DISICO es algo de todo los 
+Las solicitudes de requerimientos que se reciben en DISICO son algo de todo los 
 días, actualmente las solicitudes de requerimientos que tienen los funcionarios 
-de la Universidad, deben ser enviadas a travez del correo electrónico 
-institucional al Jefe de Area, quien revisa y evalúa detenidamente cada solicitud 
+de la Universidad, deben ser enviadas a través del correo electrónico 
+institucional al Jefe de Área, quien revisa y evalúa detenidamente cada solicitud 
 y luego de determinar quien es la persona idónea para realizar la tarea 
-correspondiente el Jefe de Area re envía el correo original a dicha persona, en 
+correspondiente el Jefe de Área reenvía el correo original a dicha persona, en 
 algunos casos adjuntando información adicional sobre como completar la tarea o 
 en caso que el correo no venga al caso o la información enviada sea demasiado 
 incompleta como para poder comprender o resolver completamente el 
-requerimiento se reenvía al funcionario el correo que ha enviado junto con las 
-observaciones correspondientes.
+requerimiento, se reenvía al funcionario el correo que ha enviado junto con las 
+observaciones correspondientes
 \\\\
 Aunque a primera vista parece simple, esto conlleva los siguientes problemas:
-
 \begin{itemize}
-  \item El correo del Jefe de Area puede verse saturado con cientos de correos 
+\item El correo del Jefe de Área puede verse saturado con cientos de correos 
 en un mismo día. Sobretodo en periodos críticos como son el inicio y termino de 
 cada semestre.
-  \item Los requerimientos quedan almacenados en emails y no se cuenta con 
+\item Los requerimientos quedan almacenados en emails y no se cuenta con 
 ninguna estructura de datos que permita, mejores búsquedas, priorización de 
 tareas, análisis de avance de las tareas, análisis posteriores acerca de velocidad 
 de desarrollo o productividad del personal, establecer dependencias entre 
 tareas, complejidad de las tareas, etc.
-  \item El Jefe de Area no tiene una visión clara de cuales ni cuantas tareas se 
+\item El Jefe de Área no tiene una visión clara de cuales ni cuantas tareas se 
 han asignado a cada miembro del equipo.
-  \item El Jefe de Area no tiene una visión clara sobre cuales ni cuantas tareas 
-están ahun en espera, en desarrollo o finalizadas.
-  \item Los funcionarios que envían solicitudes de requerimientos desconocen en 
+\item El Jefe de Área no tiene una visión clara sobre cuales ni cuantas tareas 
+están aún en espera, en desarrollo o finalizadas.
+\item Los funcionarios que envían solicitudes de requerimientos desconocen en 
 que estado se encuentran, cuanto se ha avanzado, ni la prioridad que esta 
 tiene, y menos las complicaciones que pueden haber surgido, por lo que deben 
 estar consultando por teléfono o simplemente esperando asta recibir un 
 respuesta.
-  \item Entre tanto correo muchas veces se pierden los requerimientos debido a 
-que el responsable leyo el correo y dejo la tarea para mas tarde debido a que 
-en ese momento aún se encontraba realizando otras tarea.
+\item Entre tanto correo muchas veces se pierden los requerimientos debido a 
+que el responsable leyó el correo y dejo la tarea para mas tarde debido a que 
+en ese momento aún se encontraba realizando otras tareas.
 \end{itemize}
-
 \subsection{Problemas en la Gestión de Requerimientos en los \\Proyectos}
 \label{prob2}
-Ademas de los requerimientos que se reciben diariamente en DISICO, existen 
+Además de los requerimientos que se reciben diariamente en DISICO, existen 
 requerimientos que superan esta categoría los cuales pasan a convertirse en 
 proyectos, estos nuevos proyectos que surgen también constan de un conjunto 
 de requerimientos que son capturados por los responsables de dicho proyecto, 
 estos requerimientos son agrupados y calendarizados mediante una Carta Gantt, 
-la cual debe ser entregada al Jefe de Area.
+la cual debe ser entregada al Jefe de Área.
 \\\\
 Este sistema también presenta algunas falencias, las cuales son similares a las 
 presentadas en el punto anterior y se detallan a continuación.
-
 \begin{itemize}
-  \item Aunque la Carta Gantt es un instrumento importante, no le permite al 
-Jefe de Area conocer cuales puntos ya han sido completados, en cuales se esta 
+\item Aunque la Carta Gantt es un instrumento importante, no le permite al 
+Jefe de Área conocer cuales puntos ya han sido completados, en cuales se esta 
 trabajado actualmente y cual es el nivel de avance de estos.
-  \item Tampoco tiene un registro de las causas que pueden estar demorando 
+\item Tampoco tiene un registro de las causas que pueden estar demorando 
 una tarea.
-  \item Esto también implica que el Jefe de Area no tiene una visión clara de la 
-productividad ni el avance de cada uno de los desarrolladores involucrados en 
+\item Esto también implica que el Jefe de Área no tiene una visión clara de la 
+productividad ni del avance de cada uno de los desarrolladores involucrados en 
 un proyecto.
 \end{itemize}
 
@@ -151,12 +152,12 @@ un proyecto.
 Antiguamente DISICO no contaba con un procedimiento formal para los 
 procesos de SCM, aunque se intentaba llevar a cabo un procedimiento similar al 
 de asignación de tareas, pero con algunas pequeñas diferencias. Los problemas 
-de este procedimiento fueron analizados y corregidos en un Trabajo de Titulo 
-anterior, en el cual se propuso una nueva metodología de SCM, en la cual ya 
+de este procedimiento fueron analizados y corregidos en el Trabajo de Titulo 
+Desarrollo de Metodologías de SQA y SCM para la Dirección de Servicios de Información y Computación \cite{paloma}, en el cual se propuso una nueva metodología de SCM, en la cual ya 
 fueron considerados la baja disponibilidad de tiempo del personal para aplicar 
 estos procesos y la falta de recursos para las mismas.
 \\\\
-En dicho trabajo para lograr un proceso de SCM de calidad se intenta crear toda 
+En dicho trabajo para lograr un proceso de SCM de calidad se creo toda 
 la documentación pertinente a los cambios que se realicen durante el desarrollo 
 de un proyecto, pero siempre buscando que ésta se realice de forma rápida y 
 precisa, apoyada de templates que exijan la información mínima para que la 
@@ -164,26 +165,24 @@ metodología cumpla sus objetivos.
 \\\\
 Sin embargo aun con esta nueva metodología aún se tienen algunos problemas 
 los cuales se detallan a continuación:
-
 \begin{itemize}
-  \item La metodología propuesta no logra ser lo suficientemente ágil, debido a 
-la documentación que exige.
-  \item La documentación se realiza en plantillas Word, por lo que es fácil 
+\item La metodología propuesta no logra ser lo suficientemente ágil, debido a 
+que creación de la documentación que exige, no se encuentra automatizada.
+\item La documentación se realiza en plantillas Word, por lo que es fácil 
 imaginar que primero el usuario deberá descargar la plantilla si es que no la 
 posee, abrirla con Word (o similar) para editarla luego imprimirla y archivarla o si 
 se desea compartirlas mantenerlas en SVN desde donde el resto de los usuarios 
 involucrados en los cambios deberían estar descargando la ultima versión para 
-conocer los nuevos cambios y actualizarla y volver a subirlas.
-  \item El uso de estas plantillas Word no facilita la búsqueda rapida de 
+conocer los nuevos cambios y actualizarlas si es necesario y volver a subir los cambios.
+\item El uso de estas plantillas Word no facilita la búsqueda rápida de 
 información sobre cambios pasados, personas involucradas en los cambios, etc. 
-Debido a que se debe descargando los últimos cambios de los documentos para 
-luego proceder a buscar por los nombres de los documentos cuales son los que 
+Debido a que se debe descargar los últimos cambios de los documentos para 
+luego proceder a buscar por los nombres de los documentos, cuales son los que 
 pueden estar relacionados a la búsqueda en particular y luego abrirlos para 
 buscar dentro de estos lo que se necesita.
 \end{itemize} 
 
-Todas estas problemáticas han provocado que la metodología diseñada aún no 
-se utilice del todo en DISICO, y como podemos ver la causa principal es que no 
+Todas estas problemáticas han provocado que no se esté sacando el máximo provecho a la metodología diseñada y como podemos ver la causa principal es que no 
 se posee una herramienta adecuada que le de soporte.
 
 \section{Objetivos}
