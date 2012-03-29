@@ -1,13 +1,13 @@
 \select@language {spanish}
-\contentsline {section}{\numberline {0.1}Introducci\'on}{2}
-\contentsline {section}{\numberline {0.2}Definici\'on del Problema}{2}
-\contentsline {subsection}{\numberline {0.2.1}Problemas en las Solicitudes de Requerimientos}{2}
-\contentsline {subsection}{\numberline {0.2.2}Problemas en la Gesti\'on de Requerimientos en los \\Proyectos}{3}
-\contentsline {subsection}{\numberline {0.2.3}Problemas en la Solicitudes de SCM}{3}
-\contentsline {section}{\numberline {0.3}Objetivos}{4}
-\contentsline {subsection}{\numberline {0.3.1}Objetivos Generales}{4}
-\contentsline {subsection}{\numberline {0.3.2}Objetivos Espec\IeC {\'\i }ficos}{4}
-\contentsline {subsection}{\numberline {0.3.3}Objetivos Secundarios}{5}
-\contentsline {section}{\numberline {0.4}Metodolog\IeC {\'\i }a}{5}
-\contentsline {section}{\numberline {0.5}Planificaci\'on}{5}
-\contentsline {section}{\numberline {0.6}Recursos}{5}
+\contentsline {section}{\numberline {1}Introducci\'on}{2}
+\contentsline {section}{\numberline {2}Definici\'on del Problema}{2}
+\contentsline {subsection}{\numberline {2.1}Problemas en las Solicitudes de Requerimientos}{2}
+\contentsline {subsection}{\numberline {2.2}Problemas en la Gesti\'on de Requerimientos en los \\Proyectos}{3}
+\contentsline {subsection}{\numberline {2.3}Problemas en la Solicitudes de SCM}{3}
+\contentsline {section}{\numberline {3}Objetivos}{4}
+\contentsline {subsection}{\numberline {3.1}Objetivos Generales}{4}
+\contentsline {subsection}{\numberline {3.2}Objetivos Espec\IeC {\'\i }ficos}{4}
+\contentsline {subsection}{\numberline {3.3}Objetivos Secundarios}{5}
+\contentsline {section}{\numberline {4}Metodolog\IeC {\'\i }a}{5}
+\contentsline {section}{\numberline {5}Planificaci\'on}{5}
+\contentsline {section}{\numberline {6}Recursos}{5}
