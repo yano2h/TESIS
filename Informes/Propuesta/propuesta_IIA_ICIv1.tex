@@ -10,7 +10,9 @@
 \usepackage{graphics}
 \usepackage[dvips]{epsfig}
 \usepackage[dvips]{graphicx}
+
 \usepackage{epstopdf} %Convierte los .eps en .pdf
+%\usepackage{urlbst}
 
 % Quita el Cero de de las Secciones de 0.1 a 1
 \renewcommand*\thesection{\arabic{section}}
@@ -258,15 +260,46 @@ detallan a continuación:
 
 \section{Metodología}
 \label{met} 
-Para los objetivos de este trabajo la Metodología de Desarrollo a utilizar debe considerar los siguientes puntos:
 
-Feedback constante de parte del personal de DISICO: Es importante ya que el nivel de aceptación de la herramienta 
-dependerá en gran parte de que los usuarios finales queden satisfechos y no sientan que el uso de la 
-herramienta les genera mas trabajo.
-
-Aceptar nuevos requisitos durante el desarrollo: Dado que siempre es probable que se vayan descubriendo 
-nuevos requisitos durante el desarrollo de un sistema, la metodología deberá adaptarse fácilmente a 
-la integración de estos.
+Para el desarrollo de este proyecto, se ha optado por mezclar aspectos de diferentes metodologías de desarrollo, 
+por una parte se toman aspectos de una metodología de cascada, dado que los entregables requeridos para 
+la asignatura de Seminario de Titulo están fuertemente marcados por un modelo de cascada, estos mezclados 
+con aspectos de la metodología iterativo e incremental las cuales pretenden solventar en medida las 
+falencias del modelo en cascada y permitir la codificación desde fases tempranas del proyecto. 
+Separaremos el proceso de la siguiente forma:
+\\\\
+\textbf{Fase de Análisis:} Esta fase estará netamente enfocada a la investigación del marco conceptual, 
+situación actual, búsqueda y análisis de herramientas y soluciones existentes, como también la definición 
+de la mayor parte de los requerimientos.  Al final de esta fase se debe tener un documento de definición 
+de requerimientos y el Informe 2 del Seminario de Titulo 1. 
+\\\\
+\textbf{Fase de Diseño:} En esta fase se trabajara principalmente en generar un diseño tanto lógico, 
+arquitectónico, de presentación y de datos para la aplicación. La forma en que se llevara a cabo esto 
+será un tanto diferente a la tradicional. Primero en base a los requerimientos obtenidos en el paso anterior, 
+se generaran la primera versión del diseño de los modelos necesarios, en base a dichos modelos se 
+implementara un prototipo cuyos objetivos son darle una primer vistazo al cliente de lo que se pretende realizar, 
+para que nos pueda dar el feedback necesario para mejorar la solución diseñada y a la vez permitirle descubrir nuevos 
+requerimientos que no fueron identificados en un principio. Una vez listo el prototipo se iterara de la siguiente forma, 
+se analizaran los nuevos requerimientos descubiertos o las modificaciones de estos, se integraran dichas 
+modificaciones al diseño junto con la corrección de problemas en el diseño descubiertos en la codificación del prototipo 
+anterior, se volverá a codificar un nuevo prototipo y se volverá a obtener un feedback del cliente asta que se estime 
+que tanto el diseño como los requerimientos son estables y no sufrirán mayores modificaciones en el futuro. 
+Se debe realizar a lo menos una iteración. Esta fase también servirá como periodo de aprendizaje de las 
+tecnologías de desarrollo necesarias para la implementación del proyecto. Al final de esta fase se  debe obtener 
+los documentos de diseño necesarios y una estructura base de la cual partir a codificar el proyecto. 
+Además del Tercer Informe para la Asignatura de Trabajo de Titulo 1. Finalizada esta fase ya no se aceptaran 
+mas cambios en los requerimientos. 
+\\\\
+\textbf{Fase de Implementación:} En esta fase se comenzara a desarrollar todas las funcionalidades 
+necesarias. La codificación se organizara de forma incremental, con incrementos de 1 semana donde 
+al principio de cada semana se definirá cuales serán las funcionalidades a implementar para dicho incremento , 
+las cuales deberán quedar completamente implementadas al final del incremento, el cliente revisara 
+la funcionalidad implementada y hará las correcciones  que estime pertinentes, las que serán consideradas 
+para el nuevo incremento (en las correcciones solo se esperan correcciones pequeñas, no cambios en los requerimientos). 
+\\\\
+\textbf{Fase de Pruebas:} En esta ultima fase se concentrara netamente el desarrollo de todo tipo de pruebas, 
+esto incluye el diseño de casos de pruebas, la ejecución y automatización de estas, junto con la documentación y 
+análisis de los resultados, y la aplicación de las correcciones correspondientes en el caso de encontrar errores o bugs.
 
 \section{Planificación}
 \label{plan}
@@ -280,12 +313,19 @@ corresponde, use una WBS. Extensión máxima \textbf{1 página}.
 
 \section{Recursos}
 \label{rec}
+Los principales recursos necesarios para realizar este trabajo son:
 
-Diga de que recursos dispone para realizar su trabajo. En esta
-sección debe determinar si efectivamente su trabajo es viable, es
-decir, si dispone de los recursos básicos para realizar las
-actividades que planteó en \ref{plan}. \textbf{Media página}.
-
+	\begin{itemize}
+		\item \textbf{NetBeans 7.2:} Es un entorno de desarrollo integrado, está diseñado principalmente para el lenguaje de programación Java - 
+		pero puede servir para cualquier otro lenguaje de programación. Es gratuito y sin restricciones de uso.
+		\item \textbf{Hibernate 4.1:} Es una herramienta de Mapeo objeto-relacional (ORM) para la plataforma Java.
+		\item \textbf{PrimeFaces 3.2:} PrimeFaces es una librería de componentes visuales open source desarrollada y mantenida por 
+		Prime Technology, una compañía Turca de IT especializada en consultoría ágil, JSF, Java EE y Outsourcing. 
+		\item \textbf{GlassFish 3:} GlassFish es un servidor de aplicaciones de software libre desarrollado por Sun Microsystems, 
+		compañía adquirida por Oracle Corporation, que implementa las tecnologías definidas en la plataforma Java EE y 
+		permite ejecutar aplicaciones que siguen esta especificación. Es gratuito y de código libre, se distribuye bajo un 
+		licenciamiento dual a través de la licencia CDDL y la GNU GPL.
+	\end{itemize}
 \bibliographystyle{plain}
 \bibliography{propuesta}
 
