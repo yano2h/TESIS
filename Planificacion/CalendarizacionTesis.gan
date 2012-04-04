@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Untitled Gantt Project" company="" webLink="http://" view-date="2012-02-27" view-index="0" gantt-divider-location="455" resource-divider-location="300" version="2.0">
+<project name="Untitled Gantt Project" company="" webLink="http://" view-date="2012-05-14" view-index="0" gantt-divider-location="507" resource-divider-location="300" version="2.0">
     <description/>
-    <view zooming-state="default:6" id="gantt-chart"/>
+    <view zooming-state="default:7" id="gantt-chart"/>
     <view id="resource-table">
         <field id="0" name="Nombre" width="50" order="0"/>
         <field id="1" name="Función" width="50" order="1"/>
@@ -32,55 +32,51 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="31" name="Propuesta Trabajo de Titulo" color="#8cb6ce" meeting="false" start="2012-03-13" duration="14" complete="0" expand="true">
-            <task id="33" name="Formulación del Problema" color="#8cb6ce" meeting="false" start="2012-03-13" duration="3" complete="0" expand="true"/>
-            <task id="34" name="Definir Objetivos Generales y Especificos" color="#8cb6ce" meeting="false" start="2012-03-14" duration="3" complete="0" expand="true"/>
-            <task id="35" name="Diseñar Metodologia de Trabajo" color="#8cb6ce" meeting="false" start="2012-03-19" duration="2" complete="0" expand="true"/>
-            <task id="36" name="Revision y Ajuste de la Planificaión" color="#8cb6ce" meeting="false" start="2012-03-23" duration="1" complete="0" expand="true"/>
-            <task id="37" name="Revision Bibliografica" color="#8cb6ce" meeting="false" start="2012-03-26" duration="5" complete="0" expand="false"/>
-        </task>
-        <task id="32" name="Marco Conceptual" color="#8cb6ce" meeting="false" start="2012-04-02" duration="15" complete="0" expand="true">
-            <task id="40" name="Contexto del Problema" color="#8cb6ce" meeting="false" start="2012-04-02" duration="5" complete="0" expand="false"/>
-            <task id="41" name="Terminologia" color="#8cb6ce" meeting="false" start="2012-04-06" duration="1" complete="0" expand="false"/>
-            <task id="38" name="Busqueda de Soluciones Actuales" color="#8cb6ce" meeting="false" start="2012-04-09" duration="5" complete="0" expand="false"/>
-            <task id="39" name="Analisis de las Soluciones Actuales" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="false"/>
-        </task>
-        <task id="0" name="Analisis" color="#8cb6ce" meeting="false" start="2012-03-12" duration="26" complete="0" expand="true">
-            <task id="3" name="Captura de Requerimientos" color="#8cb6ce" meeting="false" start="2012-03-12" duration="5" complete="0" expand="true">
+        <task id="0" name="Fase de Analisis" color="#8cb6ce" meeting="false" start="2012-04-05" duration="19" complete="0" expand="true">
+            <task id="32" name="Marco Conceptual" color="#8cb6ce" meeting="false" start="2012-04-05" duration="12" complete="0" expand="false">
+                <task id="40" name="Contexto del Problema" color="#8cb6ce" meeting="false" start="2012-04-05" duration="2" complete="0" expand="false"/>
+                <task id="41" name="Terminologia" color="#8cb6ce" meeting="false" start="2012-04-09" duration="2" complete="0" expand="false"/>
+                <task id="38" name="Busqueda de Soluciones Actuales" color="#8cb6ce" meeting="false" start="2012-04-11" duration="3" complete="0" expand="false"/>
+                <task id="39" name="Analisis de las Soluciones Actuales" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="false"/>
+            </task>
+            <task id="3" name="Captura de Requerimientos" color="#8cb6ce" meeting="false" start="2012-04-11" duration="3" complete="0" expand="false">
                 <depend id="4" type="2" difference="0" hardness="Strong"/>
-                <task id="8" name="Reuniones" color="#8cb6ce" meeting="false" start="2012-03-12" duration="4" complete="0" expand="true"/>
-                <task id="9" name="Revision de la Documentacion Existente" color="#8cb6ce" meeting="false" start="2012-03-12" duration="5" complete="0" expand="true"/>
+                <task id="8" name="Reuniones" color="#8cb6ce" meeting="false" start="2012-04-11" duration="3" complete="0" expand="true"/>
+                <task id="9" name="Revision de la Documentacion Existente" color="#8cb6ce" meeting="false" start="2012-04-11" duration="3" complete="0" expand="true"/>
             </task>
-            <task id="4" name="Analisis de Requerimientos" color="#8cb6ce" meeting="false" start="2012-03-19" duration="10" complete="0" expand="true">
+            <task id="4" name="Analisis de Requerimientos" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="false">
                 <depend id="5" type="2" difference="0" hardness="Rubber"/>
-                <task id="10" name="Identificacion de Requerimientos Funcionales" color="#8cb6ce" meeting="false" start="2012-03-19" duration="5" complete="0" expand="true"/>
-                <task id="11" name="Identificacion de Requerimientos No Funcionales" color="#8cb6ce" meeting="false" start="2012-03-26" duration="3" complete="0" expand="true"/>
-                <task id="12" name="Corrección de Inconsistencias" color="#8cb6ce" meeting="false" start="2012-03-29" duration="2" complete="0" expand="true"/>
+                <task id="10" name="Identificacion de Requerimientos Funcionales" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
+                <task id="11" name="Identificacion de Requerimientos No Funcionales" color="#8cb6ce" meeting="false" start="2012-04-18" duration="3" complete="0" expand="true"/>
             </task>
-            <task id="5" name="Especificacion de Requerimientos" color="#8cb6ce" meeting="false" start="2012-04-02" duration="4" complete="0" expand="true">
-                <task id="6" name="Documentar Requerimientos" color="#8cb6ce" meeting="false" start="2012-04-02" duration="3" complete="0" expand="true"/>
-                <task id="7" name="Priorizar los Reqeurimientos" color="#8cb6ce" meeting="false" start="2012-04-05" duration="1" complete="0" expand="true"/>
+            <task id="5" name="Especificacion de Requerimientos" color="#8cb6ce" meeting="false" start="2012-04-23" duration="3" complete="0" expand="false">
+                <task id="6" name="Documentar Requerimientos" color="#8cb6ce" meeting="false" start="2012-04-23" duration="3" complete="0" expand="true"/>
+                <task id="7" name="Priorizar los Reqeurimientos" color="#8cb6ce" meeting="false" start="2012-04-25" duration="1" complete="0" expand="true"/>
             </task>
-            <task id="16" name="Casos de Uso" color="#8cb6ce" meeting="false" start="2012-04-06" duration="2" complete="0" expand="true"/>
-            <task id="17" name="Modelo Conceptual" color="#8cb6ce" meeting="false" start="2012-04-10" duration="2" complete="0" expand="true"/>
-            <task id="13" name="Validación de Requerimientos" color="#8cb6ce" meeting="false" start="2012-04-12" duration="1" complete="0" expand="true"/>
-            <task id="14" name="Correción de Problemas Encontrados" color="#8cb6ce" meeting="false" start="2012-04-13" duration="2" complete="0" expand="true"/>
+            <task id="16" name="Casos de Uso" color="#8cb6ce" meeting="false" start="2012-04-26" duration="2" complete="0" expand="true"/>
+            <task id="17" name="Modelo Conceptual" color="#8cb6ce" meeting="false" start="2012-04-30" duration="2" complete="0" expand="true"/>
         </task>
-        <task id="1" name="Diseño" color="#8cb6ce" meeting="false" start="2012-04-16" duration="25" complete="0" expand="true">
-            <task id="21" name="Modelo de Datos" color="#8cb6ce" meeting="false" start="2012-04-16" duration="5" complete="0" expand="true"/>
-            <task id="23" name="Diseño Arquitectonico" color="#8cb6ce" meeting="false" start="2012-04-23" duration="5" complete="0" expand="true"/>
-            <task id="44" name="Diseño de Interfazes" color="#8cb6ce" meeting="false" start="2012-04-30" duration="5" complete="0" expand="false"/>
-            <task id="43" name="Diagrama de Clases" color="#8cb6ce" meeting="false" start="2012-05-07" duration="5" complete="0" expand="false"/>
-            <task id="24" name="Diagrama de Paquetes" color="#8cb6ce" meeting="false" start="2012-05-14" duration="1" complete="0" expand="true"/>
-            <task id="45" name="Diseño de Pruebas" color="#8cb6ce" meeting="false" start="2012-05-15" duration="4" complete="0" expand="false"/>
+        <task id="1" name="Fase de Diseño" color="#8cb6ce" meeting="false" start="2012-05-01" duration="24" complete="0" expand="true">
+            <task id="23" name="Diseño Arquitectonico" color="#8cb6ce" meeting="false" start="2012-05-01" duration="2" complete="0" expand="true"/>
+            <task id="21" name="Modelo de Datos" color="#8cb6ce" meeting="false" start="2012-05-03" duration="3" complete="0" expand="true"/>
+            <task id="43" name="Diagrama de Clases" color="#8cb6ce" meeting="false" start="2012-05-08" duration="2" complete="0" expand="false"/>
+            <task id="24" name="Diagrama de Paquetes" color="#8cb6ce" meeting="false" start="2012-05-10" duration="1" complete="0" expand="true"/>
+            <task id="44" name="Diseño de Interfazes" color="#8cb6ce" meeting="false" start="2012-05-10" duration="3" complete="0" expand="false"/>
+            <task id="50" name="Implementación Prototipo" color="#8cb6ce" meeting="false" start="2012-05-08" duration="9" complete="0" expand="true"/>
+            <task id="51" name="Iteracion 1 de Diseño" color="#8cb6ce" meeting="false" start="2012-05-21" duration="5" complete="0" expand="true"/>
+            <task id="52" name="Iteración 2 de Diseño" color="#8cb6ce" meeting="false" start="2012-05-28" duration="5" complete="0" expand="true"/>
         </task>
-        <task id="2" name="Implementación" color="#8cb6ce" meeting="false" start="2012-03-26" duration="70" complete="0" expand="true">
-            <task id="25" name="Implementacion Capa Web Proyecto Base" color="#8cb6ce" meeting="false" start="2012-03-26" duration="5" complete="0" expand="true"/>
-            <task id="26" name="Implementacion Capa EJB Proyecto Base" color="#8cb6ce" meeting="false" start="2012-04-02" duration="5" complete="0" expand="false"/>
-            <task id="27" name="Implementacion Persistencia Proyecto Base" color="#8cb6ce" meeting="false" start="2012-04-09" duration="5" complete="0" expand="false"/>
-            <task id="28" name="Implementacion Base de Datos" color="#8cb6ce" meeting="false" start="2012-04-16" duration="3" complete="0" expand="false"/>
-            <task id="30" name="Poblamiento Base de Datos" color="#8cb6ce" meeting="false" start="2012-04-19" duration="7" complete="0" expand="false"/>
-            <task id="29" name="Implementacion Funcionalidades Principales" color="#8cb6ce" meeting="false" start="2012-04-23" duration="50" complete="0" expand="true"/>
+        <task id="2" name="Implementación" color="#8cb6ce" meeting="false" start="2012-06-04" duration="25" complete="0" expand="false">
+            <task id="53" name="Incremento 1" color="#8cb6ce" meeting="false" start="2012-06-04" duration="5" complete="0" expand="true"/>
+            <task id="54" name="Incremento 2" color="#8cb6ce" meeting="false" start="2012-06-11" duration="5" complete="0" expand="false"/>
+            <task id="55" name="Incremento 3" color="#8cb6ce" meeting="false" start="2012-06-18" duration="5" complete="0" expand="false"/>
+            <task id="56" name="Incremento 4" color="#8cb6ce" meeting="false" start="2012-06-25" duration="5" complete="0" expand="false"/>
+            <task id="57" name="Incremento 5" color="#8cb6ce" meeting="false" start="2012-07-02" duration="5" complete="0" expand="false"/>
+        </task>
+        <task id="58" name="Pruebas" color="#8cb6ce" meeting="false" start="2012-07-23" duration="26" complete="0" expand="true">
+            <task id="59" name="Diseño de Casos de Pruebas" color="#8cb6ce" meeting="false" start="2012-07-23" duration="5" complete="0" expand="true"/>
+            <task id="60" name="Automatización de Pruebas" color="#8cb6ce" meeting="false" start="2012-07-26" duration="1" complete="0" expand="true"/>
+            <task id="61" name="Ejecución de Pruebas" color="#8cb6ce" meeting="false" start="2012-08-27" duration="1" complete="0" expand="true"/>
         </task>
     </tasks>
     <resources/>
@@ -95,9 +91,9 @@
         <displaycolumn property-id="tpd1" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd0" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="290" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="80" visible="true"/>
-        <displaycolumn property-id="tpd5" order="2" width="66" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="312" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="101" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="88" visible="true"/>
     </taskdisplaycolumns>
     <previous/>
     <roles roleset-name="Default"/>
