@@ -71,9 +71,42 @@ una mejora en la manera de hacer las cosas.
 
 \section{Introducción}
 \label{intr}
-Esta sección debe presentar una introducción al área de trabajo.
-Debe introducir terminología básica del área y principales conceptos
-que permitan definir el problema. Su extensión máxima es de \textbf{2 páginas}.
+La Dirección de Servicios de Información y Computación (DISICO) \cite{disico}, y con el objetivo de 
+dar una mejor la calidad de servicio, actualmente esta dividido en 3 áreas: Área de Sistemas Financiero-Contables, 
+Área de Desarrollo y Área de Redes, Comunicaciones y Soporte. Las funciones de las que DISICO 
+es responsable se encuentran descritas en detalle en el Decreto 427 \cite{decreto427}, siendo algunas de
+estas:
+	\begin{itemize}
+		\item Administrar todo el procesamiento de datos y documentación, que por medio de sistemas 
+		computacionales requiera la Universidad para su toma de decisiones.
+		\item Establecer un catastro renovable en el tiempo de los requerimientos 
+		informáticos de los usuarios de las distintas unidades de la Universidad.
+		\item Interrelacionar los sistemas con las otras áreas de desarrollo de la 
+		organización. 
+		\item Mantener en constante actualización los sistemas de información y propender 
+		a la creación y desarrollo de sistemas en ambientes corporativos.
+		\item Establecer pautas para obtener una estandarización en los sistemas computacionales.
+	\end{itemize}
+
+DISICO se encuentra en un proceso constante de crecimiento y mejora, para lograr dar un mejora servicio a toda
+la comunidad de la Universidad de Valparaíso. Y es en esta búsqueda constante de aspectos a mejorar, que
+se han detectado falencias tanto en los procesos de solicitudes de requerimientos, los cuales se realizan
+principalmente a través del correo institucional y también en los procesos de solicitudes de cambios, aunque
+para estas se cuenta actualmente con una metodología diseñada el Trabajo de Titulo 
+Desarrollo de Metodologías de SQA y SCM para la Dirección de Servicios de Información 
+y Computación \cite{paloma}, aun no se cuenta con una herramienta que permita su automatización.
+\\\\
+Por esto, es que se plantea dar solución a dichas falencias y los problemas que estas producen
+a través del desarrolla de una plataforma que le permita automatizar los procesos existentes antes mencionados,
+la cual permitirá un mejor control del ciclo de vida de las tareas que se desarrollan en DISICO. 
+Este documento se estructurara de la siguiente forma: En el punto 2 se analiza de forma mas detallada
+las falencias encontradas y los problemas que estas producen, junto con lo que se propone para dar 
+solución a las mismas. En el punto 3 veremos de forma mas detallada los diferentes problemas 
+que generan las falencias encontradas, junto con la solución que se propone y que es la que se 
+desarrollara a lo largo de este Trabajo de Titulo. Luego en el punto 4 encontrara los objetivos generales 
+y específicos que se esperan cumplir con el desarrollo de este trabajo. En el punto 5 se describe la
+Metodología que se utilizara para llevar a cabo este trabajo. En el punto 6 se describen los recursos
+necesarios para el desarrollo de este trabajo y por ultimo en el punto 7 encontrara la planificación.
 
 \section{Definición del Problema}
 \label{def}
@@ -187,6 +220,18 @@ detallan a continuación:
 	Todas estas problemáticas han provocado que no se esté sacando el máximo provecho a 
 	la metodología diseñada y como podemos ver la causa principal es que no 
 	se posee una herramienta adecuada que le de soporte.
+
+	\subsection{Solución Propuesta}
+	Como se pudo ver la mayoría de los problemas anteriormente identificados se encuentran ampliamente relacionados, 
+	esto se debe a que tanto las solicitudes de requerimientos, los requerimientos de un proyecto y las solicitudes de cambios, 
+	derivan en tareas que debe realizar el personal de DISICO, y sobre las cuales existe escaso control y documentación 
+	actualmente. Es por esto que se propone desarrollar una plataforma de solicitud y gestión de requerimientos y SCM, 
+	la cual integrara estos 3 puntos (los requerimientos diarios, los proyectos y las peticiones de cambios) en una 
+	plataforma que ayudara tanto en la comunicación, documentación y control de estas actividades dentro del equipo, 
+	permitiendo el mapeo de estas a tareas concretas que deberán llevar a cabo el personal de DISICO.  Y que 
+	integrara y brindara soporte a la metodología de SCM diseñada para DISICO\cite{paloma}.
+
+
 
 \section{Objetivos}
 \label{obj}
