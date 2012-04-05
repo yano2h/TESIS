@@ -11,7 +11,9 @@
 \usepackage[dvips]{epsfig}
 \usepackage[dvips]{graphicx}
 
-\usepackage{epstopdf} %Convierte los .eps en .pdf
+\usepackage{epstopdf}  %Convierte los .eps en .pdf
+\usepackage{multirow}  % Para poder unir filas en las tablas
+\usepackage{colortbl}    % Para colorear tablas
 %\usepackage{urlbst}
 
 % Quita el Cero de de las Secciones de 0.1 a 1
@@ -58,8 +60,7 @@ metodologías, sin embargo se carece de una herramienta que permita la
 automatización de estas. El propósito de este trabajo de título es dar solución 
 a dicho problema mediante el desarrollo de una plataforma que permita 
 automatizar los procedimientos actuales. Los principales resultados que se 
-esperan son el desarrollo de la plataforma, la adopción de esta en DISICO y que 
-disminuya el tiempo y esfuerzo invertido en la aplicación de las metodologías 
+esperan son disminuir el tiempo y esfuerzo invertido en la aplicación de las metodologías 
 que existen actualmente.
 \end{abstract}
 
@@ -103,13 +104,13 @@ como de quienes las realizan.
  \\\\
 Este documento se estructurara de la siguiente forma: 
 	\begin{itemize}
-		\item \textbf{En el punto 2} se analiza de forma mas detallada las falencias encontradas y los 
+		\item \textbf{En la sección 2} se analiza de forma mas detallada las falencias encontradas y los 
 		problemas que estas producen, junto con lo que se propone para dar solución a las mismas. 
-		\item \textbf{En el punto 3} encontrara los objetivos generales y específicos que se esperan cumplir 
+		\item \textbf{En la sección 3} encontrara los objetivos generales y específicos que se esperan cumplir 
 		con el desarrollo de este trabajo.
-		\item \textbf{En el punto 4} se describe la Metodología que se utilizara para llevar a cabo este trabajo. 
-		\item \textbf{En el punto 5} se encuentra la Planificación.
-		\item \textbf{En el punto 6} se describen los recursos necesarios para el desarrollo de este trabajo.
+		\item \textbf{En la sección 4} se describe la Metodología que se utilizara para llevar a cabo este trabajo. 
+		\item \textbf{En la sección 5} se encuentra la Planificación.
+		\item \textbf{En la sección 6} se describen los recursos necesarios para el desarrollo de este trabajo.
 \end{itemize}
 
 \section{Definición del Problema}
@@ -290,8 +291,62 @@ esto incluye el diseño de casos de pruebas, la ejecución y automatización de est
 análisis de los resultados, y la aplicación de las correcciones correspondientes en el caso de encontrar errores o bugs.
 
 \section{Planificación}
-\label{plan}
+\begin{tabular}{| l | c | c |}
+	\hline
+	\textbf{Nombre}	&	\textbf{Fecha de Inicio}	&	\textbf{Fecha de Termino}\\
+	\hline \hline
+	1.0	Propuesta	&	22-04-2012	&	05-04-2012	\\
+	\hline
+	2.0 Fase de Análisis	&	05-04-2012	&	01-05-2012	\\
+	\hline
+       2.0 Fase de Análisis	&	05-04-2012	&	01-05-2012	\\
+	\hline
+\end{tabular}
+\\\\
+\begin{tabular}{|l@{\hspace{5mm}} l@{\hspace{1cm}} l| c | c |}
+      \hline
+	\multicolumn{3}{|l|}{\textbf{Nombre}}	&	\textbf{Fecha Inicio}	&	\textbf{Fecha Termino}\\
+      \hline\hline
+	\multicolumn{3}{|l|}{1.0	Propuesta}	 &	22-04-2012	&	05-04-2012	\\
+	\hline
+	\multicolumn{3}{|l|}{2.0	Fase de Análisis}		&	05-04-2012	&	01-05-2012	\\
+	\hline
+	      &  \multicolumn{2}{ l|}{ 2.1	Marco Conceptual}		&	05-04-2012	&	01-05-2012	\\
+	\hline
+	&& {2.1.1 Identificacion de Requerimientos No Funcionales}	&	05-04-2012	&	01-05-2012	\\
+	\hline
 
+\end{tabular}\\\\------
+\begin{tabular}{| l  c | r |}
+	\hline
+	Celda 11	&	Celda 12	&	Celda 13	\\
+	\hline \hline
+	Celda 21	&	Celda 22	&	Celda 23	\\
+	\hline
+	Celda 31	&	Celda 32	&	Celda 33	\\
+	\hline
+\end{tabular}
+\\\\\\
+\begin{tabular}{| l | c | r |}
+	\hline
+	\multicolumn{2}{|l|}{Celdas 11 y 12}	&	Celda 13		\\
+	\hline
+	Celda 21	&	Celda 22	&	Celda 23		\\
+	\hline
+	Celda 31	&	\multicolumn{2}{c|}{Celdas 32 y 33}		\\
+	\hline
+\end{tabular}
+\\\\
+\begin{tabular}{| l | c | r |}
+	\hline
+	\multirow{2}{*}{Celdas 11 y 21}	& Celda 12 & \multirow{3}{10cm}{Celdas 13, 23 y 33}	\\
+	\cline{2-2}
+				&	\multirow{2}{*}{Celdas 22 y 32}	&		\\
+	\cline{1-1}
+	Celda 31	&				&		\\
+	\hline
+\end{tabular}
+\\\\
 Enumere las actividades que deberá realizar para cumplir los
 objetivos planteados en \ref{obj}. Para ello especifique una tagbla
 de actividades definiendo para cada una de ellas período y productos
@@ -310,7 +365,7 @@ Los principales recursos necesarios para realizar este trabajo son los siguiente
 		\item \textbf{Hibernate 4.1:} Es una herramienta de Mapeo objeto-relacional (ORM) para la plataforma Java.
 		\item \textbf{PrimeFaces 3.2:} PrimeFaces es una librería de componentes visuales open source desarrollada 
 		y mantenida por Prime Technology, una compañía Turca de IT especializada en consultoría ágil, JSF, Java EE y Outsourcing. 
-		\item \textbf{GlassFish 3:} GlassFish es un servidor de aplicaciones de software libre desarrollado por Sun Microsystems, 
+		\item \textbf{GlassFish 3.1.1:} GlassFish es un servidor de aplicaciones de software libre desarrollado por Sun Microsystems, 
 		compañía adquirida por Oracle Corporation, que implementa las tecnologías definidas en la plataforma Java EE y 
 		permite ejecutar aplicaciones que siguen esta especificación. Es gratuito y de código libre, se distribuye bajo un 
 		licenciamiento dual a través de la licencia CDDL y la GNU GPL.
