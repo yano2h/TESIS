@@ -12,7 +12,7 @@
 \usepackage[dvips]{graphicx}
 
 \usepackage{epstopdf} %Convierte los .eps en .pdf
-\usepackage{urlbst}
+%\usepackage{urlbst}
 
 % Quita el Cero de de las Secciones de 0.1 a 1
 \renewcommand*\thesection{\arabic{section}}
@@ -71,8 +71,8 @@ que existen actualmente.
 
 \section{Introducción}
 \label{intr}
-La Dirección de Servicios de Información y Computación (DISICO) \cite{disico}, y con el objetivo de 
-dar una mejor la calidad de servicio, actualmente esta dividido en 3 áreas: Área de Sistemas Financiero-Contables, 
+La Dirección de Servicios de Información y Computación (DISICO) \cite{disico}, con el objetivo de 
+dar una mejor la calidad de servicio, actualmente esta dividida en 3 áreas: Área de Sistemas Financiero-Contables, 
 Área de Desarrollo y Área de Redes, Comunicaciones y Soporte. Las funciones de las que DISICO 
 es responsable se encuentran descritas en detalle en el Decreto 427 \cite{decreto427}, siendo algunas de
 estas:
@@ -88,49 +88,45 @@ estas:
 		\item Establecer pautas para obtener una estandarización en los sistemas computacionales.
 	\end{itemize}
 
-DISICO se encuentra en un proceso constante de crecimiento y mejora, para lograr dar un mejora servicio a toda
-la comunidad de la Universidad de Valparaíso. Y es en esta búsqueda constante de aspectos a mejorar, que
-se han detectado falencias tanto en los procesos de solicitudes de requerimientos, los cuales se realizan
-principalmente a través del correo institucional y también en los procesos de solicitudes de cambios, aunque
-para estas se cuenta actualmente con una metodología diseñada el Trabajo de Titulo 
-Desarrollo de Metodologías de SQA y SCM para la Dirección de Servicios de Información 
-y Computación \cite{paloma}, aun no se cuenta con una herramienta que permita su automatización.
+DISICO se encuentra en un proceso constante de crecimiento y mejora, para dar un mejor servicio a toda
+la comunidad de la Universidad de Valparaíso. En esta búsqueda constante de aspectos a mejorar, es que 
+se han realizado mejoras como por ejemplo, el Desarrollo de Metodologías de SQA y SCM \cite{paloma}.
+Pero a pesar de esto se han detectado falencias tanto en los procesos de solicitudes de requerimientos, 
+las cuales se realizan principalmente a través del correo institucional y en las solicitudes de cambios, 
+las que cuentan con la metodología antes mencionada, pero aun no cuentan con una herramienta 
+que permita su automatización.
 \\\\
-Por esto, es que se plantea dar solución a dichas falencias y los problemas que estas producen
-a través del desarrolla de una plataforma que le permita automatizar los procesos existentes antes mencionados,
-la cual permitirá un mejor control del ciclo de vida de las tareas que se desarrollan en DISICO. 
-Este documento se estructurara de la siguiente forma: En el punto 2 se analiza de forma mas detallada
-las falencias encontradas y los problemas que estas producen, junto con lo que se propone para dar 
-solución a las mismas. En el punto 3 veremos de forma mas detallada los diferentes problemas 
-que generan las falencias encontradas, junto con la solución que se propone y que es la que se 
-desarrollara a lo largo de este Trabajo de Titulo. Luego en el punto 4 encontrara los objetivos generales 
-y específicos que se esperan cumplir con el desarrollo de este trabajo. En el punto 5 se describe la
-Metodología que se utilizara para llevar a cabo este trabajo. En el punto 6 se describen los recursos
-necesarios para el desarrollo de este trabajo y por ultimo en el punto 7 encontrara la planificación.
+Por tanto se plantea dar solución a dichas falencias y los problemas que estas producen
+a través del desarrolla de una plataforma que le permita automatizar los procesos existentes,
+la cual permitirá un mejor control tanto del ciclo de vida de las tareas que se desarrollan en DISICO,
+como de quienes las realizan.
+ \\\\
+Este documento se estructurara de la siguiente forma: 
+	\begin{itemize}
+		\item \textbf{En el punto 2} se analiza de forma mas detallada las falencias encontradas y los 
+		problemas que estas producen, junto con lo que se propone para dar solución a las mismas. 
+		\item \textbf{En el punto 3} encontrara los objetivos generales y específicos que se esperan cumplir 
+		con el desarrollo de este trabajo.
+		\item \textbf{En el punto 4} se describe la Metodología que se utilizara para llevar a cabo este trabajo. 
+		\item \textbf{En el punto 5} se encuentra la Planificación.
+		\item \textbf{En el punto 6} se describen los recursos necesarios para el desarrollo de este trabajo.
+\end{itemize}
 
 \section{Definición del Problema}
 \label{def}
 La Dirección de Servicios de Información y Computación (DISICO) de la 
-Universidad de Valparaíso desde hace ya un par de años se encuentra en 
-constante proceso de evolución y en busca de nuevas practicas y herramientas, 
-que permitan mejorar tanto la comunicación como la productividad de sus 
-empleados, es así como en esta constante búsqueda de aspectos posibles a 
-mejorar, se han detectado algunas falencias, las cuales se nombran y 
-detallan a continuación:
-\\
+Universidad de Valparaíso en su constante búsqueda por mejorar ha detectado 
+algunos problemas, los cuales se nombran y detallan a continuación:
+	
 	\subsection{Problemas en las Solicitudes de Requerimientos}
 	\label{prob1}
-	Las solicitudes de requerimientos que se reciben en DISICO son algo de todo los 
-	días, actualmente las solicitudes de requerimientos que tienen los funcionarios 
-	de la Universidad, deben ser enviadas a través del correo electrónico 
-	institucional al Jefe de Área, quien revisa y evalúa detenidamente cada solicitud 
-	y luego de determinar quien es la persona idónea para realizar la tarea 
-	correspondiente el Jefe de Área reenvía el correo original a dicha persona, en 
-	algunos casos adjuntando información adicional sobre como completar la tarea o 
-	en caso que el correo no venga al caso o la información enviada sea demasiado 
-	incompleta como para poder comprender o resolver completamente el 
-	requerimiento, se reenvía al funcionario el correo que ha enviado junto con las 
-	observaciones correspondientes
+	Las solicitudes de requerimientos que se reciben en DISICO, actualmente deben 
+	ser enviadas a través del correo electrónico institucional al Jefe de Área, quien revisa y evalúa 
+	cada solicitud para determinar quien realizar la tarea correspondiente, luego reenvía el 
+	correo original a dicha persona, en algunos casos adjuntando información adicional 
+	sobre como completar la tarea o en caso que la solicitud enviada en el correo este
+	incompleta como para poder comprender o resolver completamente el requerimiento, 
+	se reenvía al funcionario el correo que ha enviado junto con las observaciones correspondientes
 	\\\\
 	Aunque a primera vista parece simple, esto conlleva los siguientes problemas:
 	\begin{itemize}
@@ -140,8 +136,8 @@ detallan a continuación:
 		\item Los requerimientos quedan almacenados en emails y no se cuenta con 
 		ninguna estructura de datos que permita, mejores búsquedas, priorización de 
 		tareas, análisis de avance de las tareas, análisis posteriores acerca de velocidad 
-		de desarrollo o productividad del personal, establecer dependencias entre 
-		tareas, complejidad de las tareas, etc.
+		de desarrollo o productividad, establecer dependencias entre tareas, 
+		complejidad de las tareas, etc.
 		\item El Jefe de Área no tiene una visión clara de cuales ni cuantas tareas se 
 		han asignado a cada miembro del equipo.
 		\item El Jefe de Área no tiene una visión clara sobre cuales ni cuantas tareas 
@@ -149,25 +145,22 @@ detallan a continuación:
 		\item Los funcionarios que envían solicitudes de requerimientos desconocen en 
 		que estado se encuentran, cuanto se ha avanzado, ni la prioridad que esta 
 		tiene, y menos las complicaciones que pueden haber surgido, por lo que deben 
-		estar consultando por teléfono o simplemente esperando asta recibir un 
-		respuesta.
+		estar consultando por teléfono o esperando asta recibir un respuesta.
 		\item Entre tanto correo muchas veces se pierden los requerimientos debido a 
 		que el responsable leyó el correo y dejo la tarea para mas tarde debido a que 
 		en ese momento aún se encontraba realizando otras tareas.
 	\end{itemize}
 
-
 	\subsection{Problemas en la Gestión de Requerimientos en los \\Proyectos}
 	\label{prob2}
 	Además de los requerimientos que se reciben diariamente en DISICO, existen 
-	requerimientos que superan esta categoría los cuales pasan a convertirse en 
-	proyectos, estos nuevos proyectos que surgen también constan de un conjunto 
-	de requerimientos que son capturados por los responsables de dicho proyecto, 
-	estos requerimientos son agrupados y calendarizados mediante una Carta Gantt, 
-	la cual debe ser entregada al Jefe de Área.
+	requerimientos que superan esta categoría, los cuales pasan a convertirse en 
+	proyectos, estos nuevos proyectos constan de un conjunto 	de requerimientos 
+	que son capturados por los responsables de dicho proyecto, quienes los agrupan y 
+	calendarizan mediante una Carta Gantt, la cual debe ser entregada al Jefe de Área.
 	\\\\
 	Este sistema también presenta algunas falencias, las cuales son similares a las 
-	presentadas en el punto anterior y se detallan a continuación.
+	presentadas en el punto anterior y se detallan a continuación:
 	
 	\begin{itemize}
 		\item Aunque la Carta Gantt es un instrumento importante, no le permite al 
@@ -176,7 +169,7 @@ detallan a continuación:
 		\item Tampoco tiene un registro de las causas que pueden estar demorando 
 		una tarea.
 		\item Esto también implica que el Jefe de Área no tiene una visión clara de la 
-		productividad ni del avance de cada uno de los desarrolladores involucrados en 
+		productividad ni del avance de cada uno de los involucrados en 
 		un proyecto.
 	\end{itemize}
 
@@ -197,23 +190,21 @@ detallan a continuación:
 	precisa, apoyada de templates que exijan la información mínima para que la 
 	metodología cumpla sus objetivos.
 	\\\\
-	Sin embargo aun con esta nueva metodología aún se tienen algunos problemas 
+	Sin embargo aun con esta nueva metodología se tienen algunos problemas 
 	los cuales se detallan a continuación:
 	
 	\begin{itemize}
 		\item La metodología propuesta no logra ser lo suficientemente ágil, debido a 
 		que creación de la documentación que exige, no se encuentra automatizada.
-		\item La documentación se realiza en plantillas Word, por lo que es fácil 
-		imaginar que primero el usuario deberá descargar la plantilla si es que no la 
-		posee, abrirla con Word (o similar) para editarla luego imprimirla y archivarla o si 
-		se desea compartirlas mantenerlas en SVN desde donde el resto de los usuarios 
-		involucrados en los cambios deberían estar descargando la ultima versión para 
-		conocer los nuevos cambios y actualizarlas si es necesario y volver a subir los cambios.
+		\item La documentación se realiza en plantillas Word, por lo que la persona deberá descargar 
+		la plantilla si es que no la posee, abrirla con Word (o similar) para editarla, luego imprimirla y archivarla 
+		o si se desea compartirlas mantenerlas versionadas en SVN, de donde el resto de los involucrados en los 
+		cambios deberán estar descargando la ultima versión para conocer los nuevos cambios, y 
+		actualizarlas si es necesario.
 		\item El uso de estas plantillas Word no facilita la búsqueda rápida de 
 		información sobre cambios pasados, personas involucradas en los cambios, etc. 
-		Debido a que se debe descargar los últimos cambios de los documentos para 
-		luego proceder a buscar por los nombres de los documentos, cuales son los que 
-		pueden estar relacionados a la búsqueda en particular y luego abrirlos para 
+		Debido a que se debe descargar los últimos cambios de los documentos, buscar por los nombres de los documentos, 
+		cuales posiblemente están relacionados a la búsqueda en particular y abrirlos para 
 		buscar dentro de estos lo que se necesita.
 	\end{itemize} 
 	
@@ -222,16 +213,14 @@ detallan a continuación:
 	se posee una herramienta adecuada que le de soporte.
 
 	\subsection{Solución Propuesta}
-	Como se pudo ver la mayoría de los problemas anteriormente identificados se encuentran ampliamente relacionados, 
+	Como se observa la mayoría de los problemas identificados, se encuentran ampliamente relacionados, 
 	esto se debe a que tanto las solicitudes de requerimientos, los requerimientos de un proyecto y las solicitudes de cambios, 
 	derivan en tareas que debe realizar el personal de DISICO, y sobre las cuales existe escaso control y documentación 
 	actualmente. Es por esto que se propone desarrollar una plataforma de solicitud y gestión de requerimientos y SCM, 
 	la cual integrara estos 3 puntos (los requerimientos diarios, los proyectos y las peticiones de cambios) en una 
 	plataforma que ayudara tanto en la comunicación, documentación y control de estas actividades dentro del equipo, 
-	permitiendo el mapeo de estas a tareas concretas que deberán llevar a cabo el personal de DISICO.  Y que 
-	integrara y brindara soporte a la metodología de SCM diseñada para DISICO\cite{paloma}.
-
-
+	permitiendo el mapeo de estas, a tareas concretas que deben llevarse a cabo.  Y que también, 
+	integre y brinde el soporte a la metodología de SCM diseñada para DISICO\cite{paloma}.
 
 \section{Objetivos}
 \label{obj}
