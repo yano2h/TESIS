@@ -15,14 +15,14 @@
 \usepackage{multirow}  % Para poder unir filas en las tablas
 \usepackage{colortbl}    % Para colorear tablas
 \usepackage{url}
-
+\usepackage{float}
 % Quita el Cero de de las Secciones de 0.1 a 1
 \renewcommand*\thesection{\arabic{section}}
 %\renewcommand*\thesubsection{\arabic{subsection}}
 
 \begin{document}
 \begin{center}
-	\begin{figure}[ht]
+	\begin{figure}[H]
 		\begin{center}
 		\includegraphics[width=2cm]{logoUV.eps}
 		%\includegraphics[width=2cm]{logoUV.pdf}
@@ -49,7 +49,7 @@
 \end{center}
 
 \begin{abstract}
-La Dirección de Servicios de Información y Computación (DISICO) 
+La Dirección de Servicios de Información y Computación (DISICO)
 de la Universidad de Valparaíso durante los últimos años ha estado 
 en constante crecimiento y en busca de mejoras que le permitan 
 brindar un mejor servicio. Aunque en este poco tiempo son muchas 
@@ -65,9 +65,9 @@ que existen actualmente.
 \end{abstract}
 
 \newpage
-
-\tableofcontents
-
+	\tableofcontents
+\newpage
+	\listoffigures 
 \newpage
 
 \section{Introducción}
@@ -111,7 +111,7 @@ Este documento se estructurara de la siguiente forma:
 		\item \textbf{En la sección 4} se describe la Metodología que se utilizara para llevar a cabo este trabajo. 
 		\item \textbf{En la sección 5} se encuentra la Planificación.
 		\item \textbf{En la sección 6} se describen los recursos necesarios para el desarrollo de este trabajo.
-\end{itemize}
+	\end{itemize}
 
 \section{Definición del Problema}
 \label{def}
@@ -251,46 +251,80 @@ Para el desarrollo de este proyecto, se ha optado por un modelo en cascada tradi
 para la asignatura de Seminario de Titulo están fuertemente marcados por este modelo de cascada\cite{sommerville}. Ademas se mezcla 
 con aspectos de la metodología iterativo e incremental, con lo que se espera solventar la rigidez del Modelo en Cascada y 
 permitir la codificación desde fases tempranas del proyecto. 
-\\\\ Po lo que el proceso se estructurara de la siguiente forma:
-\\\\
-\textbf{Fase de Análisis:} Esta fase estará netamente enfocada a la investigación del marco conceptual, 
-situación actual, búsqueda y análisis de herramientas y soluciones existentes, como también la definición 
-de la mayor parte de los requerimientos.  Al final de esta fase se debe tener un documento de definición 
-de requerimientos y el Informe 2 del Seminario de Titulo 1. 
-\\\\
-\textbf{Fase de Diseño:} En esta fase se trabajara principalmente en generar un diseño lógico, 
-arquitectónico, de presentación y de datos para la aplicación. La forma en que se llevara a cabo esto 
-será la siguiente:
+Por lo que el proceso se estructurara de la siguiente forma:
+
+\begin{itemize}
+	\item\textbf{Fase de Análisis:} Esta fase estará netamente enfocada a la investigación del marco conceptual, 
+	situación actual, búsqueda y análisis de herramientas y soluciones existentes, como también la definición 
+	de la mayor parte de los requerimientos.  Al final de esta fase se debe tener un documento de definición 
+	de requerimientos y el Informe 2 del Seminario de Titulo 1. 	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=12cm]{FaseAnalisis.png}
+			\caption{Esquema de la Fase de Análisis}
+		\end{center}
+	\end{figure}
+	
+	\item\textbf{Fase de Diseño:} En esta fase se trabajara principalmente en generar un diseño lógico, 
+	arquitectónico, de presentación y de datos para la aplicación. La forma en que se llevara a cabo esto 
+	será la siguiente:
+		\begin{itemize}
+			\item Se genera una versión inicial de los modelos requeridos.
+			\item Se implementa un prototipo, que permitirá dar un primer vistazo al cliente,
+			descubrir nuevos requerimientos y problemas en el diseño actual.
+		\end{itemize}
+	Luego se continuara iterando en esta fase de la siguiente forma:
+		\begin{itemize}
+			\item Se analizan y documentan los nuevos requerimientos descubiertos.
+			\item Se refinan los modelos generados.
+			\item Se refina el prototipo, que permitirá dar un primer vistazo al cliente,
+			descubrir nuevos requerimientos y problemas en el diseño actual.
+			\item Se revisa el nuevo prototipo con el cliente y se obtiene el feedback necesario.
+		\end{itemize}
+	
+	Al final de esta fase se deben obtener los documentos de diseño necesarios y una estructura base de la cual partir a codificar el proyecto. 
+	Además del Tercer Informe para la Asignatura de Trabajo de Titulo 1. 
+	\\Finalizada esta fase ya no se realizaran mas cambios en los requerimientos. 
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=12cm]{FaseDiseno.png}
+			\caption{Esquema de la Fase de Diseño}
+		\end{center}
+	\end{figure}
+	
+	\item\textbf{Fase de Implementación:} En esta fase se comenzara a desarrollar todas las funcionalidades 
+	necesarias. La codificación se organizara de forma incremental, para lo cual se definen 3 incrementos
+	los cuales son:
 	\begin{itemize}
-		\item Se genera una versión inicial de los modelos requeridos.
-		\item Se implementa un prototipo, que permitirá dar un primer vistazo al cliente,
-		descubrir nuevos requerimientos y problemas en el diseño actual.
-	\end{itemize}
-Luego se continuara iterando en esta fase de la siguiente forma:
-	\begin{itemize}
-		\item Se analizan y documentan los nuevos requerimientos descubiertos.
-		\item Se refinan los modelos generados.
-		\item Se refina el prototipo, que permitirá dar un primer vistazo al cliente,
-		descubrir nuevos requerimientos y problemas en el diseño actual.
-		\item Se revisa el nuevo prototipo con el cliente y se obtiene el feedback necesario.
+		\item\textbf{Manejo de Tareas Diarias:} Consiste en implementar, todas las funcionalidades relacionados al
+		manejo de las tareas diarias, tanto creación, envió y seguimiento.
+		\item\textbf{Manejo de Proyectos}: Consiste en incorporar el concepto de proyectos, junto con el manejo de
+		tareas dentro de estos.
+		\item\textbf{Manejo de Solicitudes SCM:} Se incorporara las funcionalidades necesarias para el manejo de 
+		solicitudes SCM dentro de los Proyectos y la conversión de estas en tareas .
 	\end{itemize}
 
-Al final de esta fase se deben obtener los documentos de diseño necesarios y una estructura base de la cual partir a codificar el proyecto. 
-Además del Tercer Informe para la Asignatura de Trabajo de Titulo 1. 
-\\Finalizada esta fase ya no se aceptaran 
-mas cambios en los requerimientos. 
-\\\\
-\textbf{Fase de Implementación:} En esta fase se comenzara a desarrollar todas las funcionalidades 
-necesarias. La codificación se organizara de forma incremental, con incrementos de 1 semana donde 
-al principio de cada semana se definirá cuales serán las funcionalidades a implementar para dicho incremento , 
-las que quedaran completamente implementadas al final del incremento, el cliente revisara 
-la funcionalidad implementada y hará las correcciones  que estime pertinentes, las que serán consideradas 
-al inicio del nuevo incremento (en las correcciones solo se esperan correcciones pequeñas, no cambios en los requerimientos). 
-\\\\
-\textbf{Fase de Pruebas:} En esta ultima fase se concentrara netamente el desarrollo de todo tipo de pruebas, 
-esto incluye el diseño de casos de pruebas, la ejecución y automatización de estas, junto con la documentación y 
-análisis de los resultados, y la aplicación de las correcciones correspondientes en el caso de encontrar errores o bugs.
-
+	Al principio de cada incremento se definirá cuales son las funcionalidades necesarias a implementar 
+	para completar dicho incremento, el cliente revisara las funcionalidades implementadas y hará las correcciones  
+	que estime pertinentes, las que serán consideradas al inicio del nuevo incremento 
+	(en las correcciones solo se esperan correcciones pequeñas, no cambios en los requerimientos). 
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=12cm]{FaseImplementacion.png}
+			\caption{Esquema de la Fase de Implementación}
+		\end{center}
+	\end{figure}
+	
+	\item\textbf{Fase de Pruebas:} En esta ultima fase se concentrara netamente el desarrollo de todo tipo de pruebas, 
+	esto incluye el diseño de casos de pruebas, la ejecución y automatización de estas, junto con la documentación y 
+	análisis de los resultados, y la aplicación de las correcciones correspondientes en el caso de encontrar errores o bugs.
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=12cm]{FasePruebas.png}
+			\caption{Esquema de la Fase de Pruebas}
+		\end{center}
+	\end{figure}
+\end{itemize}
 \newpage
 \section{Planificación}
 A continuación se presenta la calendarización de las Actividades que se llevaran a cavo a lo
@@ -428,7 +462,8 @@ Los principales recursos necesarios para realizar este trabajo son los siguiente
 	\end{itemize}
 
 
-\bibliographystyle{plain}
+%\bibliographystyle{plain}
+\bibliographystyle{ieeetr} %Ordena por orden de aparición
 \bibliography{propuesta}
 
 \end{document}
