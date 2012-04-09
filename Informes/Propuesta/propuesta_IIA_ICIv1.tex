@@ -14,7 +14,7 @@
 \usepackage{epstopdf}  %Convierte los .eps en .pdf
 \usepackage{multirow}  % Para poder unir filas en las tablas
 \usepackage{colortbl}    % Para colorear tablas
-%\usepackage{urlbst}
+\usepackage{url}
 
 % Quita el Cero de de las Secciones de 0.1 a 1
 \renewcommand*\thesection{\arabic{section}}
@@ -248,8 +248,9 @@ algunos problemas, los cuales se nombran y detallan a continuación:
 \label{met} 
 
 Para el desarrollo de este proyecto, se ha optado por un modelo en cascada tradicional, dado que los entregables requeridos 
-para la asignatura de Seminario de Titulo están fuertemente marcados por este modelo de cascada. Ademas se mezcla 
-con aspectos de la metodología iterativo e incremental, con lo que se espera solventar la rigidez del Modelo en Cascada y permitir la codificación desde fases tempranas del proyecto. 
+para la asignatura de Seminario de Titulo están fuertemente marcados por este modelo de cascada\cite{sommerville}. Ademas se mezcla 
+con aspectos de la metodología iterativo e incremental, con lo que se espera solventar la rigidez del Modelo en Cascada y 
+permitir la codificación desde fases tempranas del proyecto. 
 \\\\ Po lo que el proceso se estructurara de la siguiente forma:
 \\\\
 \textbf{Fase de Análisis:} Esta fase estará netamente enfocada a la investigación del marco conceptual, 
@@ -414,17 +415,19 @@ largo del proyecto. \\
 Los principales recursos necesarios para realizar este trabajo son los siguientes:
 
 	\begin{itemize}
-		\item \textbf{NetBeans 7.2:} Es un entorno de desarrollo integrado, está diseñado principalmente para el 
+		\item \textbf{NetBeans 7.1.1:} Es un entorno de desarrollo integrado, está diseñado principalmente para el 
 		lenguaje de programación Java - pero puede servir para cualquier otro lenguaje de programación. 
-		Es gratuito y sin restricciones de uso.
-		\item \textbf{Hibernate 4.1:} Es una herramienta de Mapeo objeto-relacional (ORM) para la plataforma Java.
+		Es gratuito y sin restricciones de uso.\cite{netbeans}
+		\item \textbf{Hibernate 4.1:} Es una herramienta de Mapeo objeto-relacional (ORM) para la plataforma Java.\cite{hibernate}
 		\item \textbf{PrimeFaces 3.2:} PrimeFaces es una librería de componentes visuales open source desarrollada 
-		y mantenida por Prime Technology, una compañía Turca de IT especializada en consultoría ágil, JSF, Java EE y Outsourcing. 
+		y mantenida por Prime Technology, una compañía Turca de IT especializada en consultoría ágil, JSF, Java EE y Outsourcing.\cite{primefaces} 
 		\item \textbf{GlassFish 3.1.1:} GlassFish es un servidor de aplicaciones de software libre desarrollado por Sun Microsystems, 
 		compañía adquirida por Oracle Corporation, que implementa las tecnologías definidas en la plataforma Java EE y 
 		permite ejecutar aplicaciones que siguen esta especificación. Es gratuito y de código libre, se distribuye bajo un 
-		licenciamiento dual a través de la licencia CDDL y la GNU GPL.
+		licenciamiento dual a través de la licencia CDDL y la GNU GPL.\cite{glassfish}
 	\end{itemize}
+
+
 \bibliographystyle{plain}
 \bibliography{propuesta}
 
