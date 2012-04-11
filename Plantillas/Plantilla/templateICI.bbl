@@ -1,0 +1,21 @@
+\begin{thebibliography}{1}
+
+\bibitem{agrawal94}
+R.~Agrawal and R.~Srikant.
+\newblock Fast algorithms for mining association rules.
+\newblock In {\em VLDB}, pages 487--499. Morgan Kaufmann, 1994.
+
+\bibitem{beeferman00}
+D.~Beeferman and A.~Berger.
+\newblock Agglomerative clustering of a search engine query log.
+\newblock In {\em Proceedings of the sixth ACM SIGKDD International Conference
+  on Knowledege Discovery and Data Mining, Boston, MA, USA}, pages 407 -- 416.
+  ACM Press, August 2000.
+
+\bibitem{bharat97}
+K.~Bharat and A.~Broder.
+\newblock A technique for measuring the relative size and overlap of public web
+  search engines.
+\newblock {\em Computer Networks}, 30(1-7):379--388, 1998.
+
+\end{thebibliography}

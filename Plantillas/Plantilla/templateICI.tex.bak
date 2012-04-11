@@ -1,0 +1,84 @@
+\documentclass[12pt,letterpaper]{report}
+
+\marginparsep 0pt
+\textwidth 6in
+\topmargin 0pt
+\headsep .5in
+\textheight 9.2in
+\voffset = 0pt
+\hoffset = 0pt
+\marginparwidth = 0pt \oddsidemargin = 0pt \sloppy
+
+%Dimensiones de la página
+\usepackage[left=2.5cm,top=3cm,right=2.5cm,bottom=2.5cm]{geometry}
+%Sangría
+\setlength{\parindent}{1cm}
+
+%Numeracion
+\pagenumbering{arabic}
+
+\usepackage{templateIIA}
+\usepackage{amsmath,amsfonts}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage[dvips]{epsfig}
+\usepackage{times}
+\usepackage[latin1]{inputenc}
+\usepackage[dvips]{graphicx}
+\usepackage[usenames]{color}
+\usepackage[spanish]{babel}
+\newcommand{\ie}{i.e.}
+\newcommand {\out}[1]{}
+\newtheorem{definicion}{Definicion}
+\usepackage[dvips]{epsfig}
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage[]{fontenc}
+\usepackage{hyperref}
+
+\renewcommand{\shorthandsspanish}{}
+
+\addto\captionsspanish{
+\def\listtablename{Índice de tablas}
+\def\tablename{Tabla}}
+
+\sloppy
+
+\begin{document}
+\title{\textbf{NOMBRE TRABAJO TITULO}}
+\author{\textbf{Nombre Alumno}}
+\principaladviser{Nombre Profesor Guía}
+\coprincipaladviser{Nombre Profesor Correferente}
+\firstreader{Nombre Profesor Informante 1}
+
+\beforepreface
+\prefacesection{Resumen}
+Coloque aqui un resumen de su trabajo.
+
+
+\newpage
+\prefacesection{Agradecimientos}
+Aqui pueden colocar sus agradecimientos.
+Si han estudiado con becas es recomendable colocar los agradecimientos a las instituciones que les otorgaron las becas.
+
+\afterpreface
+
+%Aqui deben incluir el fuente de cada capitulo, sin su encabezado.
+\include{capitulo1}
+%\include{capitulo2}
+%\include{capitulo3}
+%\include{capitulo4}
+%\include{capitulo5}
+
+%\appendix
+
+%\include{appendix1}
+%\include{appendix2}
+%\include{appendix3}
+
+\bibliographystyle{plain}
+\bibliography{template}
+
+\end{document} 
