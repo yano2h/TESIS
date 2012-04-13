@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core" 
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <f:loadBundle basename="#{MbInfo.basename}" var="msg" />
+        <f:loadBundle basename="#{mbInfo.basename}" var="msg" />
         <h:outputStylesheet library="css" name="#{msg.cssSheet}"/>
     </h:head>
     <h:body>
@@ -17,9 +17,9 @@
                 <h:panelGrid styleClass="">
                     <h:graphicImage library="images" name="#{msg.messageImage}" height="32px" width="32px" />
                     <h:panelGroup styleClass="space" />
-                    <h:outputText value="#{MbInfo.message}" styleClass="textTitleMensajeBox"/>
+                    <h:outputText value="#{mbInfo.message}" styleClass="textTitleMensajeBox"/>
                     <h:panelGroup styleClass="space" />
-                    <h:panelGroup styleClass="roundedcornr_box" rendered="#{MbInfo.renderedPanelInfo}">
+                    <h:panelGroup styleClass="roundedcornr_box" rendered="#{mbInfo.renderedPanelInfo}">
                         <h:panelGroup styleClass="roundedcornr_top">
                             <h:panelGroup />
                         </h:panelGroup>
@@ -31,10 +31,10 @@
                                 <h:outputLabel value="#{msg.contact}" styleClass="textMensajeBox"/>
                             </h:panelGrid>
                             <h:panelGroup styleClass="space" />
-                            <h:panelGrid rendered="#{not empty MbInfo.exception}" styleClass="fullWidth">
+                            <h:panelGrid rendered="#{not empty mbInfo.exception}" styleClass="fullWidth">
                                 <h:outputText value="#{msg.titleExceptionDetail}" styleClass="textTitleMensajeBox"/>
                                 <h:panelGroup styleClass="space" />
-                                <h:outputText value="#{MbInfo.exception}" styleClass="textMensajeBox"/>
+                                <h:outputText value="#{mbInfo.exception}" styleClass="textMensajeBox"/>
                             </h:panelGrid>
                         </h:panelGroup>
                         <h:panelGroup styleClass="roundedcornr_bottom">
@@ -42,7 +42,7 @@
                         </h:panelGroup>
                     </h:panelGroup>
                     <h:panelGroup styleClass="space" />
-                    <p:commandButton value="#{msg.button}" actionListener="#{MbInfo.onClickVolver}"/>
+                    <p:commandButton value="#{msg.button}" actionListener="#{mbInfo.onClickVolver}"/>
                 </h:panelGrid>        
             </h:panelGroup>
         </h:form>
