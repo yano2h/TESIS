@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config 
+    version="1.2"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                        http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+    <application>
+        <view-handler>com.icesoft.faces.facelets.D2DFaceletViewHandler</view-handler>
+        <locale-config>
+            <default-locale>es</default-locale>
+        </locale-config>
+    </application>
+    <lifecycle>
+        <phase-listener>cl.uv.ViewController.base.jsf.core.CachePhaseListener</phase-listener>
+    </lifecycle>
+    <!--VALIDATORS-->
+    <validator>
+        <validator-id>rutValidator</validator-id>
+        <validator-class>cl.uv.ViewController.base.jsf.validators.RutValidator</validator-class>
+    </validator>
+    <validator>
+        <validator-id>SoloNumerosLetras</validator-id>
+        <validator-class>cl.uv.ViewController.base.jsf.validators.SoloNumerosLetras</validator-class>
+    </validator>
+</faces-config>
+
+
+
+
+
+
+
+
+
+
+
+
+
