@@ -6,7 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
-@ManagedBean(name="MbInfo")
+@ManagedBean
 @SessionScoped
 public class MbInfo {
 
