@@ -13,44 +13,44 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.naming.NamingException;
+import org.primefaces.component.menuitem.MenuItem;
+import org.primefaces.component.submenu.Submenu;
 
-@EJB(name = "MenuSuperiorEJBBeanLocal", beanInterface = MenuSuperiorEJBBeanLocal.class)
+@ManagedBean
+@SessionScoped
 public final class MbUserInfo extends MbGenerico {
-
+    
+    @EJB
     private MenuSuperiorEJBBeanLocal sessionBeanLocal = null;
+    
+    @ManagedProperty(value="#{mbSSOUtils}")
+    private MbSSOUtils mbSSOUtilsBean;     
+            
     private List<Aplicacion> listaAplicacion = null;
     private List<String> listaAplicacionesLDAP = null;
     private List<String> listaRoles;
-    private List menuModel;
+    private Submenu subMenuModel;
     private String uriApacheImages = null;
 
     public MbUserInfo() {
         try {
-            setSessionBeanLocal((MenuSuperiorEJBBeanLocal) getSessionBeanEJBLocal(MenuSuperiorEJBBeanLocal.class));
             setUriApacheImages(Resources.getValue("basicWebParam_path", "URI_APACHE_IMAGES"));
             getListaAplicionesLDAP();
             doListaRoles();
-            doMenuItemListaAplicacion();
+            doSubMenuItemListaAplicacion();
         } catch (NamingException ne) {
             Logger.getLogger(MbUserInfo.class.getName()).log(Level.SEVERE, null, ne);
         }
     }
 
-    public void onClickSalir(ActionEvent ev) {
-        Map map = JsfUtils.getExternalContext().getSessionMap();
-        map.remove("MbGenerico");
-        map.remove("MbInfo");
-        map.remove("MbLeftMenuController");
-        map.remove("MbMessagePopUp");
-        map.remove("MbSSOUtils");
-        map.remove("MbSessionController");
-        map.remove("MbUserInfo");
-        Map mapRequest = JsfUtils.getExternalContext().getRequestMap();
-        mapRequest.remove("MbAlumno");
+    public String onClickSalir() {
         JsfUtils.logout();
-        JsfUtils.redirect(Resources.getValue("basicWebParam_path", "URI_REDIRECT_LOGOUT"));
+        return JsfUtils.redirectTo(Resources.getValue("basicWebParam_path", "URI_REDIRECT_LOGOUT"));
     }
 
     private List<Aplicacion> getListaAplicacionDB() {
@@ -72,7 +72,7 @@ public final class MbUserInfo extends MbGenerico {
     private void getListaAplicionesLDAP() {
         if (Boolean.valueOf(Resources.getValue("project_info", "projectLDAP"))) {
             listaAplicacionesLDAP = new ArrayList<String>();
-            List<String> lista = ((MbSSOUtils) JsfUtils.getValue("#{MbSSOUtils}")).getAtributosFuncionarios().getListaRoles();
+            List<String> lista = mbSSOUtilsBean.getAtributosFuncionarios().getListaRoles();
             for (String rol : lista) {
                 listaAplicacionesLDAP.add(rol.split("-")[0].split("=")[1]);
             }
@@ -82,7 +82,7 @@ public final class MbUserInfo extends MbGenerico {
     private void doListaRoles() {
         if (Boolean.valueOf(Resources.getValue("project_info", "projectLDAP"))) {
             listaRoles = new ArrayList<String>();
-            List<String> lista = ((MbSSOUtils) JsfUtils.getValue("#{MbSSOUtils}")).getAtributosFuncionarios().getListaRoles();
+            List<String> lista = mbSSOUtilsBean.getAtributosFuncionarios().getListaRoles();
             String codeApp = Resources.getValue("project_info", "projectCode");
             for (String rol : lista) {
                 if ((rol.split("-")[0].split("=")[1]).equals(codeApp)) {
@@ -92,33 +92,35 @@ public final class MbUserInfo extends MbGenerico {
         }
     }
 
-    private void doMenuItemListaAplicacion() {
+    private void doSubMenuItemListaAplicacion() {
         if (Boolean.valueOf(Resources.getValue("project_info", "projectLDAP"))) {
             List<Aplicacion> listaAplicacionDB = getListaAplicacionDB();
-            MenuItem menuItem = null;
 
             if (listaAplicacionesLDAP.size() > 1) {
-                setMenuModel(new ArrayList());
+                subMenuModel = new Submenu();  
                 setListaAplicacion(new ArrayList<Aplicacion>());
                 String projectCode = Resources.getValue("project_info", "projectCode");
                 for (Aplicacion aplicacion : listaAplicacionDB) {
                     if (listaAplicacionesLDAP.contains(aplicacion.getCodigoProyecto()) &&
                         !aplicacion.getCodigoProyecto().equalsIgnoreCase(projectCode)) {
-                        menuItem = new MenuItem();
-                        menuItem.setLink(aplicacion.getUrl());
-                        menuItem.setStyleClass("fixItemMenu left iconApp");
-                        menuItem.setTitle(aplicacion.getGlosa());
-                        menuItem.setIcon(getUriApacheImages() + aplicacion.getImagen());
-                        menuItem.setValue(aplicacion.getGlosa());
-                        getMenuModel().add(menuItem);
+                        MenuItem item = new MenuItem();
+                        item.setUrl(aplicacion.getUrl());
+                        item.setStyleClass("fixItemMenu left iconApp");
+                        item.setIcon(getUriApacheImages() + aplicacion.getImagen());
+                        item.setValue(aplicacion.getGlosa());
+                        subMenuModel.getChildren().add(item);
                     }
                 }
             }
         }
     }
 
+    public void setMbSSOUtilsBean(MbSSOUtils mbSSOUtilsBean) {
+        this.mbSSOUtilsBean = mbSSOUtilsBean;
+    }
+    
     public AtributosFuncionario getAtributosFuncionario() {
-        return ((MbSSOUtils) JsfUtils.getValue("#{MbSSOUtils}")).getAtributosFuncionarios();
+        return mbSSOUtilsBean.getAtributosFuncionarios();
     }
 
     public MenuSuperiorEJBBeanLocal getSessionBeanLocal() {
@@ -137,12 +139,12 @@ public final class MbUserInfo extends MbGenerico {
         this.listaAplicacion = listaAplicacion;
     }
 
-    public List getMenuModel() {
-        return menuModel;
+    public Submenu getSubMenuModel() {
+        return subMenuModel;
     }
 
-    public void setMenuModel(ArrayList menuModel) {
-        this.menuModel = menuModel;
+    public void setSubMenuModel(Submenu subMenuModel) {
+        this.subMenuModel = subMenuModel;
     }
 
     public String getUriApacheImages() {
@@ -151,35 +153,6 @@ public final class MbUserInfo extends MbGenerico {
 
     public void setUriApacheImages(String uriApacheImages) {
         this.uriApacheImages = uriApacheImages;
-    }
-
-    /*Solo para test de pagina. puede ser eliminada*/
-    public List<String> getListaBeanTest() {
-        List lista = new ArrayList<String>();
-        lista.add("Cadena de texto 1");
-        lista.add("Cadena de texto 2");
-        lista.add("Cadena de texto 3");
-        lista.add("Cadena de texto 4");
-        lista.add("Cadena de texto 5");
-        return lista;
-    }
-
-    public List<String> getListaCabecera() {
-        List lista = new ArrayList<String>();
-        lista.add("Cabecera 1");
-        lista.add("Cabecera 2");
-        lista.add("Cabecera 3");
-        return lista;
-    }
-
-    public List<String> getListaContenido() {
-        List lista = new ArrayList<String>();
-        lista.add("Contenido 1");
-        lista.add("Contenido 2");
-        lista.add("Contenido 3");
-        lista.add("Contenido 4");
-        lista.add("Contenido 5");
-        return lista;
     }
 
     public List<String> getListaRoles() {
