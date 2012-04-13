@@ -26,15 +26,13 @@ public class JsfUtils {
     }
     
     /**
-     * En JSF 2 se usa la anotacion @ManagedProperty
-     * @param el
+     * @param beanName
      * @return
-     * @deprecated
      */
-    @Deprecated
-    public static Object getValue(String el) {
+    public static Object getValue(String beanName) {
         FacesContext ctx = getFacesContext();
-        return ctx.getApplication().createValueBinding(el).getValue(ctx);
+        return ctx.getELContext().getELResolver().getValue(ctx.getELContext(),null, beanName);
+       // return ctx.getApplication().createValueBinding(el).getValue(ctx);
     }
 
     public static void handleNavigation(String action) {
@@ -44,9 +42,7 @@ public class JsfUtils {
     }
 
     public static void logout() {
-        HttpSession session =
-                (HttpSession) getExternalContext().getSession(false);
-        session.invalidate();
+        getExternalContext().invalidateSession();
     }
     
     public static void redirect(String url) {
