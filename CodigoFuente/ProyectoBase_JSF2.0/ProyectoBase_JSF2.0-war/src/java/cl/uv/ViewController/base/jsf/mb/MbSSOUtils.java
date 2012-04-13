@@ -5,30 +5,27 @@ import cl.uv.ViewController.base.jsf.core.ServiceLocatorException;
 import cl.uv.ViewController.base.utils.Resources;
 import cl.uv.model.base.core.beans.AtributosFuncionario;
 import cl.uv.model.base.core.ejb.AuthEJBBeanLocal;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.naming.NamingException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.naming.NamingException;
 
-@EJB(name = "AuthEJBBeanLocal", beanInterface = AuthEJBBeanLocal.class)
+@ManagedBean
+@SessionScoped
 public class MbSSOUtils {
 
-    private AuthEJBBeanLocal sessionBeanLocal = null;
+    @EJB
+    private AuthEJBBeanLocal authEJB;
     private String tokenCookie = "";
 
     public MbSSOUtils() {
-        try {
-            if (!(sessionBeanLocal instanceof AuthEJBBeanLocal)) {
-                sessionBeanLocal = (AuthEJBBeanLocal) getSessionBeanEJBLocal(AuthEJBBeanLocal.class);
-            }
-        } catch (NamingException ne) {
-        }
-    }
-
-    private static Object getSessionBeanEJBLocal(Class<?> clase) throws NamingException {
-        return getServiceLocatorLocal(clase.getSimpleName());
     }
 
     private static Object getServiceLocatorLocal(String jndi) throws NamingException {
@@ -39,11 +36,10 @@ public class MbSSOUtils {
         }
     }
 
-    private String getTokenCookie() {
+    private String getTokenCookie(){
         if (tokenCookie.isEmpty()) {
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().
-                    getRequest();
+            FacesContext facesContext  = FacesContext.getCurrentInstance();
+            HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
             Cookie cookie[] = request.getCookies();
 
             String iPlanetDirectoryPro = Resources.getValue("basicWebParam_path", "nombreCookie");
@@ -65,18 +61,22 @@ public class MbSSOUtils {
                 }
             }
             if (valueCookie != null && !valueCookie.isEmpty()) {
-                tokenCookie = URLDecoder.decode(valueCookie);
+                try {
+                    tokenCookie = URLDecoder.decode(valueCookie,"UTF-8");
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(MbSSOUtils.class.getName()).log(Level.SEVERE, "Unsopported encoding cookie", ex);
+                }
             }
         }
         return tokenCookie;
     }
 
     public boolean doValidateUser() {
-        return getSessionBeanLocal().validateToken(getTokenCookie());
+        return getAuthEJB().validateToken(getTokenCookie());
     }
 
     public AtributosFuncionario getAtributosFuncionarios() {
-        return getSessionBeanLocal().getAtributosFuncionarios(getTokenCookie());
+        return getAuthEJB().getAtributosFuncionarios(getTokenCookie());
     }
 
     public String getNombreFuncionario() {
@@ -87,7 +87,7 @@ public class MbSSOUtils {
         }
     }
 
-    public AuthEJBBeanLocal getSessionBeanLocal() {
-        return sessionBeanLocal;
+    public AuthEJBBeanLocal getAuthEJB() {
+        return authEJB;
     }
 }
