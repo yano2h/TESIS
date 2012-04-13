@@ -29,6 +29,10 @@ public abstract class MbGenerico {
         oldAscending = !ascending;
     }
 
+    /** 
+     * En J2EE 6 se puede acceder a los EJB locales atraves de una vista sin interfaz 
+     * o utilizando lo anotacion @EJB por lo que estos metodos ya no deviesen necesitarse
+     
     public Object getSessionBeanEJBLocal(Class<?> clase) throws NamingException {
         return this.getServiceLocatorLocal(clase.getSimpleName());
     }
@@ -45,6 +49,8 @@ public abstract class MbGenerico {
         }
     }
 
+    **/
+    
     public Object getSessionBeanEJBRemote(Class<?> clazz) throws NamingException {
         return this.getServiceLocatorRemote(clazz.getSimpleName(), clazz);
     }
