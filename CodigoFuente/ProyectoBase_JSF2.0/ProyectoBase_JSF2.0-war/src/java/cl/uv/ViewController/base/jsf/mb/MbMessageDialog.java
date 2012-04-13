@@ -6,24 +6,16 @@ import javax.faces.event.ActionEvent;
 
 @ManagedBean
 @SessionScoped
-public class MbMessagePopUp {
+public class MbMessageDialog {
 
-    private boolean popupMessage = false;
-    private String titulo = "";
+    private boolean dialogMessage = false;
+    private String titulo  = "";
     private String mensaje = "";
 
-    public void onClickHidePanelPopUp(ActionEvent actionEvent) {
-        popupMessage = !popupMessage;
+    public void onClickDialog(ActionEvent actionEvent) {
+       
     }
-
-    public boolean isPopupMessage() {
-        return popupMessage;
-    }
-
-    public void setPopupMessage(boolean popupMessage) {
-        this.popupMessage = popupMessage;
-    }
-
+    
     public String getTitulo() {
         return titulo;
     }
