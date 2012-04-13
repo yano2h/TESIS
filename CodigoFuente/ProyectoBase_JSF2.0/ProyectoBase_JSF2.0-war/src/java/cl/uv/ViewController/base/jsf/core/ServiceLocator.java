@@ -65,8 +65,7 @@ public class ServiceLocator {
                 ejbRemote = (Object) dataSourceCache.get(jndiHomeName);
             } else {
                 Object objref = ic.lookup(jndiHomeName);
-                Object obj = PortableRemoteObject.narrow(objref, className);
-                ejbRemote = (Object) obj;
+                ejbRemote = (Object) PortableRemoteObject.narrow(objref, className);
                 dataSourceCache.put(jndiHomeName, ejbRemote);
             }
         } catch (NamingException ex) {
