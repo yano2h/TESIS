@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:graphicImage styleClass="logoUv" library="images" value="logouv.gif"/>
+            <p:dialog header="#{mbMessageDialog.titulo}" modal="true" widgetVar="dlg">
+                 <p:panelGrid styleClass="contentPanelPopUp">
+                     <h:outputText styleClass="contentBodyPanelPopUp" value="#{mbMessageDialog.mensaje}"/>
+                      <h:panelGroup styleClass="space" />
+                      <p:commandButton actionListener="#{mbMessageDialog.onClickDialog}" 
+                                       style="font-size:11px;color:#18316d;" 
+                                       value="Aceptar"
+                                       oncomplete="dlg.hide();"/>
+                 </p:panelGrid>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+

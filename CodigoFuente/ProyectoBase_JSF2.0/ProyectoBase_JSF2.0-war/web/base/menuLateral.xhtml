@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+    <h:head>
+         <f:loadBundle basename="cl.uv.ViewController.base.properties.message.Left" var="left"/>
+    </h:head>
+    <h:body>
+        <h:panelGroup styleClass="panelMenu">
+            <h:form>
+                <p:accordionPanel styleClass="pnlMnu" multiple="true" >
+                    <p:tab title="#{left['pageLeft.first.menu.title']}" titleStyleClass="titleMenu" >
+                        <h:panelGrid cellpadding="4">
+                            <p:commandLink>
+                                <h:outputText value="#{left['pageLeft.first.menu.first.submenu.title']}"/>
+                            </p:commandLink>
+                            <p:commandLink>
+                                <h:outputText value="#{left['pageLeft.first.menu.second.submenu.title']}"/>
+                            </p:commandLink>
+                            <p:commandLink>
+                                <h:outputText value="#{left['pageLeft.first.menu.third.submenu.title']}"/>
+                            </p:commandLink>
+                            <p:commandLink>
+                                <h:outputText value="#{left['pageLeft.first.menu.fourth.submenu.title']}"/>
+                            </p:commandLink>
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="#{left['pageLeft.second.menu.title']}" titleStyleClass="titleMenu">
+                        <h:panelGrid cellpadding="4">
+                            <p:commandLink>
+                                <h:outputText value="#{left['pageLeft.second.menu.first.submenu.title']}"/>
+                            </p:commandLink>
+                            <p:commandLink>
+                                <h:outputText value="#{left['pageLeft.second.menu.second.submenu.title']}"/>
+                            </p:commandLink>
+                            <p:commandLink>
+                                <h:outputText value="#{left['pageLeft.second.menu.third.submenu.title']}"/>
+                            </p:commandLink>
+                            <p:commandLink>
+                                <h:outputText value="#{left['pageLeft.second.menu.fourth.submenu.title']}"/>
+                            </p:commandLink>
+                         </h:panelGrid>                   
+                    </p:tab>
+                    <p:tab title="#{left['pageLeft.third.menu.title']}" titleStyleClass="titleMenu">
+                         <h:panelGrid cellpadding="4">
+                            <p:commandLink>
+                                <h:outputText value="#{left['pageLeft.third.menu.first.submenu.title']}"/>
+                            </p:commandLink>
+                            <p:commandLink>
+                                <h:outputText value="#{left['pageLeft.third.menu.second.submenu.title']}"/>
+                            </p:commandLink>
+                            <p:commandLink>
+                                <h:outputText value="#{left['pageLeft.third.menu.third.submenu.title']}"/>
+                            </p:commandLink>
+                            <p:commandLink>
+                                <h:outputText value="#{left['pageLeft.third.menu.fourth.submenu.title']}"/>
+                            </p:commandLink>
+                         </h:panelGrid>
+                    </p:tab>
+                </p:accordionPanel>
+            </h:form>
+        </h:panelGroup>
+    </h:body>
+</html>
+

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+         <f:loadBundle basename="cl.uv.ViewController.base.properties.message.Footer" var="footer" />
+    </h:head>
+    <h:body>
+          <p:panelGrid styleClass="center">
+              <h:outputLabel value="#{footer['pageFooter.first.text']}"  styleClass="textMensajeFooter" />
+              <h:outputLabel value="#{footer['pageFooter.second.text']}" styleClass="textMensajeFooter" />
+              <h:outputLabel value="#{footer['pageFooter.third.text']}"  styleClass="textMensajeFooter" />
+              <h:outputLabel value="#{footer['pageFooter.fourth.text']}" styleClass="textMensajeFooter" />
+              <h:outputLabel value="#{footer['pageFooter.fifth.text']}"  styleClass="textMensajeFooter" />
+              <h:outputLabel value="#{footer['pageFooter.sixth.text']}"  styleClass="textMensajeFooter" />
+          </p:panelGrid>
+    </h:body>
+</html>
+
