@@ -1,20 +1,25 @@
 package cl.uv.ViewController.base.jsf.mb;
 
-import cl.uv.ViewController.base.utils.JsfUtils;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 
+@ManagedBean
+@RequestScoped
 public class MbLeftMenuController {
 
+    @ManagedProperty(value="#{mbSessionController}")
     private MbSessionController sc;
-    private MbMessagePopUp popup;
+    
+    @ManagedProperty(value="#{mbMessageDialog}")
+    private MbMessageDialog dialog;
 
     public MbLeftMenuController() {
-        sc = (MbSessionController) JsfUtils.getValue("#{MbSessionController}");
-        popup = (MbMessagePopUp) JsfUtils.getValue("#{MbMessagePopUp}");
     }
 
     private void goPopUp(String message) {
-        popup.setMensaje(message);
-        popup.setPopupMessage(true);
+        dialog.setMensaje(message);
+        dialog.setDialogMessage(true);
     }
 
     public String goHome() {
@@ -22,4 +27,11 @@ public class MbLeftMenuController {
         return null;
     }
 
+    public void setDialog(MbMessageDialog dialog) {
+        this.dialog = dialog;
+    }
+    
+     public void setSc(MbSessionController sc) {
+        this.sc = sc;
+    }
 }
