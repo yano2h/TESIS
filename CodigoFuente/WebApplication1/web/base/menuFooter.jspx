@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jsp:root 
+    version="2.0"
+    xmlns:ice="http://www.icesoft.com/icefaces/component"
+    xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html" >
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+    <jsp:element name="text">
+        <jsp:attribute name="lang" />
+        <jsp:body>
+            <f:view>
+                <ice:form>
+                    <f:loadBundle basename="cl.uv.ViewController.base.properties.message.Footer" var="footer" />
+                    <ice:panelGroup styleClass="center">
+                        <ice:panelGrid styleClass="center">
+                            <ice:outputLabel value="#{footer['pageFooter.first.text']}" styleClass="textMensajeFooter" />
+                            <ice:outputLabel value="#{footer['pageFooter.second.text']}" styleClass="textMensajeFooter" />
+                            <ice:outputLabel value="#{footer['pageFooter.third.text']}" styleClass="textMensajeFooter" />
+                            <ice:outputLabel value="#{footer['pageFooter.fourth.text']}" styleClass="textMensajeFooter" />
+                            <ice:outputLabel value="#{footer['pageFooter.fifth.text']}" styleClass="textMensajeFooter" />
+                            <ice:outputLabel value="#{footer['pageFooter.sixth.text']}" styleClass="textMensajeFooter" />
+                        </ice:panelGrid>
+                    </ice:panelGroup>
+                </ice:form>
+            </f:view>
+        </jsp:body>
+    </jsp:element>
+</jsp:root>

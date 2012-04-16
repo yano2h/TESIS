@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root version="2.1"
+          xmlns:c="http://java.sun.com/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+    <jsp:element name="text">
+        <jsp:attribute name="lang" />
+        <jsp:body>
+            <f:view>
+                <f:loadBundle basename="cl.uv.ViewController.base.properties.message.Nav" var="nav" />
+                <ice:panelGroup styleClass="left">
+                    <ice:form>
+                        <ice:menuBar orientation="Horizontal">
+                            <ice:menuItem value="#{nav['pageNav.menuitem.left.first.text']}"
+                                          icon="#{nav['pageNav.menuitem.left.first.icon']}"
+                                          link="#{nav['pageNav.menuitem.left.first.link']}"
+                                          target="_blank" />
+                            <ice:menuItem value="#{nav['pageNav.menuitem.left.second.text']}"
+                                          icon="#{nav['pageNav.menuitem.left.second.icon']}"
+                                          link="#{nav['pageNav.menuitem.left.second.link']}"
+                                          target="_blank" />
+                            <ice:menuItem value="#{nav['pageNav.menuitem.left.third.text']}"
+                                          icon="#{nav['pageNav.menuitem.left.third.icon']}"
+                                          link="#{nav['pageNav.menuitem.left.third.link']}"
+                                          target="_blank" />
+                        </ice:menuBar>
+                    </ice:form>
+                </ice:panelGroup>
+                <ice:panelGroup styleClass="right">
+                    <ice:form>
+                        <ice:menuBar orientation="Horizontal">
+                            <ice:menuItem
+                                rendered="#{MbUserInfo.menuModel ne null}"
+                                value="#{nav['pageNav.menuitem.right.first.text']}"
+                                icon="#{nav['pageNav.menuitem.right.first.icon']}"
+                                link="#{nav['pageNav.menuitem.right.first.link']}"
+                                styleClass="fixItemMenu left">
+                                <ice:menuItems value="#{MbUserInfo.menuModel}" />
+                            </ice:menuItem>
+                            <ice:menuItem
+                                value="#{MbSSOUtils.nombreFuncionario}"
+                                icon="#{nav['pageNav.menuitem.right.second.icon']}"
+                                link="#{nav['pageNav.menuitem.right.second.link']}">
+                                <ice:menuItem
+                                    value="#{nav['pageNav.menuitem.right.second.submenuitem.first.text']}"
+                                    icon="#{nav['pageNav.menuitem.right.second.submenuitem.first.icon']}"
+                                    link="#{nav['pageNav.menuitem.right.second.submenuitem.first.link']}"
+                                    styleClass="fixItemMenu left" />
+                                <ice:menuItem
+                                    value="#{nav['pageNav.menuitem.right.second.submenuitem.second.text']}"
+                                    icon="#{nav['pageNav.menuitem.right.second.submenuitem.second.icon']}"
+                                    link="#{nav['pageNav.menuitem.right.second.submenuitem.second.link']}"
+                                    styleClass="fixItemMenu left" />
+                                <ice:menuItem
+                                    value="#{nav['pageNav.menuitem.right.second.submenuitem.third.text']}"
+                                    icon="#{nav['pageNav.menuitem.right.second.submenuitem.third.icon']}"
+                                    link="#{nav['pageNav.menuitem.right.second.submenuitem.third.link']}"
+                                    actionListener="#{MbUserInfo.onClickSalir}"
+                                    styleClass="fixItemMenu left" />
+                            </ice:menuItem>
+                        </ice:menuBar>
+                    </ice:form>
+                </ice:panelGroup>
+            </f:view>
+        </jsp:body>
+    </jsp:element>
+</jsp:root>

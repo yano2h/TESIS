@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jsp:root xmlns:ice="http://www.icesoft.com/icefaces/component"
+          xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html" >
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <jsp:element name="text">
+        <jsp:attribute name="lang" />
+        <jsp:body>
+            <f:view>
+                <f:loadBundle basename="cl.uv.ViewController.base.properties.message.Left" var="left"/>
+                <ice:panelGroup styleClass="panelMenu">
+                    <ice:form>
+                        <ice:panelCollapsible expanded="true" styleClass="pnlMnu">
+                            <f:facet name="header">
+                                <ice:panelGroup styleClass="titleMenuPnl">
+                                    <ice:outputText styleClass="titleMenu" value="#{left['pageLeft.first.menu.title']}"/>
+                                </ice:panelGroup>
+                            </f:facet>
+                            <ice:panelGrid cellpadding="4">
+                                <ice:commandLink>
+                                    <ice:outputText value="#{left['pageLeft.first.menu.first.submenu.title']}"/>
+                                </ice:commandLink>
+                                <ice:commandLink>
+                                    <ice:outputText value="#{left['pageLeft.first.menu.second.submenu.title']}"/>
+                                </ice:commandLink>
+                                <ice:commandLink>
+                                    <ice:outputText value="#{left['pageLeft.first.menu.third.submenu.title']}"/>
+                                </ice:commandLink>
+                                <ice:commandLink>
+                                    <ice:outputText value="#{left['pageLeft.first.menu.fourth.submenu.title']}"/>
+                                </ice:commandLink>
+                            </ice:panelGrid>
+                        </ice:panelCollapsible>
+                        <ice:panelCollapsible expanded="true" styleClass="pnlMnu">
+                            <f:facet name="header">
+                                <ice:panelGroup styleClass="titleMenuPnl">
+                                    <ice:outputText styleClass="titleMenu" value="#{left['pageLeft.second.menu.title']}"/>
+                                </ice:panelGroup>
+                            </f:facet>
+                            <ice:panelGrid cellpadding="4">
+                                <ice:commandLink>
+                                    <ice:outputText value="#{left['pageLeft.second.menu.first.submenu.title']}"/>
+                                </ice:commandLink>
+                                <ice:commandLink>
+                                    <ice:outputText value="#{left['pageLeft.second.menu.second.submenu.title']}"/>
+                                </ice:commandLink>
+                                <ice:commandLink>
+                                    <ice:outputText value="#{left['pageLeft.second.menu.third.submenu.title']}"/>
+                                </ice:commandLink>
+                                <ice:commandLink>
+                                    <ice:outputText value="#{left['pageLeft.second.menu.fourth.submenu.title']}"/>
+                                </ice:commandLink>
+                            </ice:panelGrid>
+                        </ice:panelCollapsible>
+                        <ice:panelCollapsible expanded="true" styleClass="pnlMnu">
+                            <f:facet name="header">
+                                <ice:panelGroup styleClass="titleMenuPnl">
+                                    <ice:outputText styleClass="titleMenu" value="#{left['pageLeft.third.menu.title']}"/>
+                                </ice:panelGroup>
+                            </f:facet>
+                            <ice:panelGrid cellpadding="4">
+                                <ice:commandLink>
+                                    <ice:outputText value="#{left['pageLeft.third.menu.first.submenu.title']}"/>
+                                </ice:commandLink>
+                                <ice:commandLink>
+                                    <ice:outputText value="#{left['pageLeft.third.menu.second.submenu.title']}"/>
+                                </ice:commandLink>
+                                <ice:commandLink>
+                                    <ice:outputText value="#{left['pageLeft.third.menu.third.submenu.title']}"/>
+                                </ice:commandLink>
+                                <ice:commandLink>
+                                    <ice:outputText value="#{left['pageLeft.third.menu.fourth.submenu.title']}"/>
+                                </ice:commandLink>
+                            </ice:panelGrid>
+                        </ice:panelCollapsible>
+                    </ice:form>
+                </ice:panelGroup>
+            </f:view>
+        </jsp:body>
+    </jsp:element>
+</jsp:root>

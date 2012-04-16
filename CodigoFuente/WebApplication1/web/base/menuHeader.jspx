@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jsp:root xmlns:ice="http://www.icesoft.com/icefaces/component"
+          xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html" >
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <jsp:element name="text">
+        <jsp:attribute name="lang" />
+        <jsp:body>
+            <f:view>
+                <ice:form>
+                    <ice:panelGrid>
+                        <ice:graphicImage styleClass="logoUv" value="./images/logouv.gif"/>
+                    </ice:panelGrid>
+                    <ice:panelPopup modal="true" rendered="#{MbMessagePopUp.popupMessage}">
+                        <f:facet name="header">
+                            <ice:panelGrid styleClass="panelPopUp">
+                                <ice:outputText styleClass="headerPanelPopUp" value="#{MbMessagePopUp.titulo}"/>
+                            </ice:panelGrid>
+                        </f:facet>
+                        <f:facet name="body">
+                            <ice:panelGrid styleClass="contentPanelPopUp">
+                                <ice:outputText styleClass="contentBodyPanelPopUp" value="#{MbMessagePopUp.mensaje}"/>
+                                <ice:panelGroup styleClass="space" />
+                                <ice:commandButton actionListener="#{MbMessagePopUp.onClickHidePanelPopUp}" style="font-size:11px;color:#18316d;" value="Aceptar"/>
+                            </ice:panelGrid>
+                        </f:facet>
+                    </ice:panelPopup>
+                </ice:form>
+            </f:view>
+        </jsp:body>
+    </jsp:element>
+</jsp:root>
