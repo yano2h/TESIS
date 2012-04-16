@@ -31,4 +31,12 @@ public class MbMessageDialog {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+
+    public boolean isDialogMessage() {
+        return dialogMessage;
+    }
+
+    public void setDialogMessage(boolean dialogMessage) {
+        this.dialogMessage = dialogMessage;
+    }
 }
