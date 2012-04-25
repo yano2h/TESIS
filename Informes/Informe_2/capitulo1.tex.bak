@@ -1,0 +1,8 @@
+\chapter{Introducci\'on}
+
+Este es un ejemplo de como referenciar \cite{bharat97,agrawal94}.
+M\'as ejemplos \cite{beeferman00}. Para m\'as detalle, revise el archivo \textit{template.bib}.\\
+
+Estilo IEEE. La lista es generada usando números correlativos de acuerdo al orden de aparición en el texto. Hay un solo documento referenciado por número. Si se desea usar un formato plano se coloca un número entre corchetes cuadrados. \\
+
+A continuación se entregan ejemplos de formatosespecíficos para cada la entrada de la lista, de acuerdo con el tipo de documento: Por ejemplo, un artículo de revista, se indicará de acuerdo a la forma que tiene la referencia 

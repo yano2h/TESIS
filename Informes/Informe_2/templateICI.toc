@@ -1,0 +1,13 @@
+\select@language {spanish}
+\contentsline {chapter}{Resumen}{\es@scroman {iii}}{chapter*.1}
+\contentsline {chapter}{Agradecimientos}{\es@scroman {iv}}{chapter*.2}
+\contentsline {chapter}{\numberline {1}Introducci\'on}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Marco Conceptual}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Conceptos y Terminologia}{3}{section.2.1}
+\contentsline {section}{\numberline {2.2}Est\'andares para la descripci\'on de Requerimientos}{4}{section.2.2}
+\contentsline {section}{\numberline {2.3}Herramientas para la Solicitudes de Requerimientos}{4}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Hesk}{4}{subsection.2.3.1}
+\contentsline {section}{\numberline {2.4}Estandares para SCM}{5}{section.2.4}
+\contentsline {section}{\numberline {2.5}Herramientas para SCM}{5}{section.2.5}
+\contentsline {section}{\numberline {2.6}Metodologia actuales de DISICO}{5}{section.2.6}
+\contentsline {chapter}{Bibliograf\'{\i }a}{6}{chapter*.6}
