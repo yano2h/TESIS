@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.3.29)  26 APR 2012 15:57
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.3.29)  26 APR 2012 16:19
 entering extended mode
 **D:/TESIS/Informes/Informe_2/templateICI.tex
 (D:/TESIS/Informes/Informe_2/templateICI.tex
@@ -546,14 +546,14 @@ Package pdftex.def Info: imagenes/hesk_interface.png used on input line 67.
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.89 		\item E
+l.91 		\item E
               l personal y los clientes se mantienen al dia con alertas de c...
  <D:/TESIS/Informes/Informe_2/imagenes/hesk_interface.png (PNG copy)>]
-<imagenes/osTicket_interface.png, id=159, 330.033pt x 233.673pt>
+<imagenes/osTicket_interface.png, id=161, 330.033pt x 233.673pt>
 File: imagenes/osTicket_interface.png Graphic file (type png)
 
 <use imagenes/osTicket_interface.png>
-Package pdftex.def Info: imagenes/osTicket_interface.png used on input line 101
+Package pdftex.def Info: imagenes/osTicket_interface.png used on input line 103
 .
 (pdftex.def)             Requested size: 330.03218pt x 233.67242pt.
  [6pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2
@@ -561,13 +561,13 @@ Package pdftex.def Info: imagenes/osTicket_interface.png used on input line 101
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.115 	\begin{itemize}
+l.117 	\begin{itemize}
                        <D:/TESIS/Informes/Informe_2/imagenes/osTicket_interface
-.png (PNG copy)>] <imagenes/OTRS_interface.png, id=165, 1027.84pt x 770.88pt>
+.png (PNG copy)>] <imagenes/OTRS_interface.png, id=168, 1027.84pt x 770.88pt>
 File: imagenes/OTRS_interface.png Graphic file (type png)
 
 <use imagenes/OTRS_interface.png>
-Package pdftex.def Info: imagenes/OTRS_interface.png used on input line 133.
+Package pdftex.def Info: imagenes/OTRS_interface.png used on input line 135.
 (pdftex.def)             Requested size: 411.12872pt x 308.34654pt.
  [7]) [8pdfTeX warning (ext4): destination with the same identifier (name{figur
 e.2.3}) has been already used, duplicate ignored
@@ -598,10 +598,10 @@ Package rerunfilecheck Info: File `templateICI.out' has not changed.
 (rerunfilecheck)             Checksum: DD52D853BB33C023235458D2653FEA3B;969.
  ) 
 Here is how much of TeX's memory you used:
- 7423 strings out of 494045
- 105149 string characters out of 3145957
- 201238 words of memory out of 3000000
- 10515 multiletter control sequences out of 15000+200000
+ 7427 strings out of 494045
+ 105187 string characters out of 3145957
+ 201294 words of memory out of 3000000
+ 10517 multiletter control sequences out of 15000+200000
  26205 words of font info for 56 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  29i,9n,30p,272b,394s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -610,9 +610,9 @@ m Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files (
 x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX
  2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
 type1/urw/times/utmr8a.pfb>
-Output written on templateICI.pdf (16 pages, 427614 bytes).
+Output written on templateICI.pdf (16 pages, 429284 bytes).
 PDF statistics:
- 215 PDF objects out of 1000 (max. 8388607)
- 47 named destinations out of 1000 (max. 500000)
+ 224 PDF objects out of 1000 (max. 8388607)
+ 49 named destinations out of 1000 (max. 500000)
  141 words of extra memory for PDF output out of 10000 (max. 10000000)
 
