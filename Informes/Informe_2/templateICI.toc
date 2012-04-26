@@ -8,9 +8,9 @@
 \contentsline {section}{\numberline {2.3}Herramientas para la Solicitudes de Requerimientos}{4}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Hesk}{4}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}osTicket}{5}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}OTRS}{7}{subsection.2.3.3}
-\contentsline {subsection}{\numberline {2.3.4}}{7}{subsection.2.3.4}
-\contentsline {section}{\numberline {2.4}Estandares para SCM}{7}{section.2.4}
-\contentsline {section}{\numberline {2.5}Herramientas para SCM}{7}{section.2.5}
-\contentsline {section}{\numberline {2.6}Metodologia actuales de DISICO}{7}{section.2.6}
-\contentsline {chapter}{Bibliograf\'{\i }a}{8}{chapter*.6}
+\contentsline {subsection}{\numberline {2.3.3}OTRS}{6}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}}{8}{subsection.2.3.4}
+\contentsline {section}{\numberline {2.4}Estandares para SCM}{8}{section.2.4}
+\contentsline {section}{\numberline {2.5}Herramientas para SCM}{8}{section.2.5}
+\contentsline {section}{\numberline {2.6}Metodologia actuales de DISICO}{8}{section.2.6}
+\contentsline {chapter}{Bibliograf\'{\i }a}{9}{chapter*.6}
