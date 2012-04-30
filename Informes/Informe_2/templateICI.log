@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.3.29)  26 APR 2012 16:19
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.3.29)  30 APR 2012 12:27
 entering extended mode
 **D:/TESIS/Informes/Informe_2/templateICI.tex
 (D:/TESIS/Informes/Informe_2/templateICI.tex
@@ -456,7 +456,7 @@ LaTeX Info: Redefining \nameref on input line 53.
 (D:\TESIS\Informes\Informe_2\templateICI.out)
 \@outlinefile=\write3
 
-<imagenes/logoUV.png, id=63, 240.9pt x 113.42375pt>
+<imagenes/logoUV.png, id=67, 240.9pt x 113.42375pt>
 File: imagenes/logoUV.png Graphic file (type png)
  <use imagenes/logoUV.png>
 Package pdftex.def Info: imagenes/logoUV.png used on input line 60.
@@ -527,7 +527,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 21--36
 ]) [2] (D:\TESIS\Informes\Informe_2\capitulo2.tex
 Cap\'{\i }tulo 2.
 
-Underfull \hbox (badness 10000) in paragraph at lines 31--46
+Underfull \hbox (badness 10000) in paragraph at lines 36--51
 
  []
 
@@ -535,25 +535,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 31--46
 
 
 
-] <imagenes/hesk_interface.png, id=149, 762.85pt x 531.9875pt>
+] <imagenes/hesk_interface.png, id=158, 762.85pt x 531.9875pt>
 File: imagenes/hesk_interface.png Graphic file (type png)
 
 <use imagenes/hesk_interface.png>
-Package pdftex.def Info: imagenes/hesk_interface.png used on input line 67.
+Package pdftex.def Info: imagenes/hesk_interface.png used on input line 72.
 (pdftex.def)             Requested size: 381.42407pt x 265.9931pt.
  [4] [5pdfTeX warning (ext4): destination with the same identifier (name{figure
 .2.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.91 		\item E
+l.96 		\item E
               l personal y los clientes se mantienen al dia con alertas de c...
  <D:/TESIS/Informes/Informe_2/imagenes/hesk_interface.png (PNG copy)>]
-<imagenes/osTicket_interface.png, id=161, 330.033pt x 233.673pt>
+<imagenes/osTicket_interface.png, id=170, 330.033pt x 233.673pt>
 File: imagenes/osTicket_interface.png Graphic file (type png)
 
 <use imagenes/osTicket_interface.png>
-Package pdftex.def Info: imagenes/osTicket_interface.png used on input line 103
+Package pdftex.def Info: imagenes/osTicket_interface.png used on input line 108
 .
 (pdftex.def)             Requested size: 330.03218pt x 233.67242pt.
  [6pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2
@@ -561,29 +561,63 @@ Package pdftex.def Info: imagenes/osTicket_interface.png used on input line 103
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.117 	\begin{itemize}
+l.122 	\begin{itemize}
                        <D:/TESIS/Informes/Informe_2/imagenes/osTicket_interface
-.png (PNG copy)>] <imagenes/OTRS_interface.png, id=168, 1027.84pt x 770.88pt>
+.png (PNG copy)>] <imagenes/OTRS_interface.png, id=177, 1027.84pt x 770.88pt>
 File: imagenes/OTRS_interface.png Graphic file (type png)
 
 <use imagenes/OTRS_interface.png>
-Package pdftex.def Info: imagenes/OTRS_interface.png used on input line 135.
+Package pdftex.def Info: imagenes/OTRS_interface.png used on input line 140.
 (pdftex.def)             Requested size: 411.12872pt x 308.34654pt.
- [7]) [8pdfTeX warning (ext4): destination with the same identifier (name{figur
-e.2.3}) has been already used, duplicate ignored
+ [7] [8pdfTeX warning (ext4): destination with the same identifier (name{figure
+.2.3}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.162 		\item C
+               rear Templates predefinidos para solicitudes de servicios a p...
+ <D:/TESIS/Informes/Informe_2/imagenes/OTRS_interface.png>]
+<imagenes/SysAid_interface.png, id=190, 893.3375pt x 451.6875pt>
+File: imagenes/SysAid_interface.png Graphic file (type png)
+
+<use imagenes/SysAid_interface.png>
+Package pdftex.def Info: imagenes/SysAid_interface.png used on input line 193.
+(pdftex.def)             Requested size: 401.99815pt x 203.25749pt.
+ [9] [10pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.2.4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.222 		\item P
+               ermite personalizar el flujo de trabajo para satisfacer las n...
+ <D:/TESIS/Informes/Informe_2/imagenes/SysAid_interface.png (PNG copy)>]
+<imagenes/changeGear_interface.png, id=201, 1161.33875pt x 831.105pt>
+File: imagenes/changeGear_interface.png Graphic file (type png)
+
+<use imagenes/changeGear_interface.png>
+Package pdftex.def Info: imagenes/changeGear_interface.png used on input line 2
+36.
+(pdftex.def)             Requested size: 464.52727pt x 332.43611pt.
+
+Overfull \hbox (30.90727pt too wide) in paragraph at lines 236--237
+ [] 
+ []
+
+[11]) [12pdfTeX warning (ext4): destination with the same identifier (name{figu
+re.2.5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.85 \include{capitulo2}
-                         <D:/TESIS/Informes/Informe_2/imagenes/OTRS_interface.p
-ng>] (D:\TESIS\Informes\Informe_2\templateICI.bbl
+                         <D:/TESIS/Informes/Informe_2/imagenes/changeGear_inter
+face.png>] (D:\TESIS\Informes\Informe_2\templateICI.bbl
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 5.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ))
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 99.
- [9
+ [13
 
 
 ]
@@ -595,13 +629,13 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 99.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 99.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 99.
 Package rerunfilecheck Info: File `templateICI.out' has not changed.
-(rerunfilecheck)             Checksum: DD52D853BB33C023235458D2653FEA3B;969.
+(rerunfilecheck)             Checksum: D1C1C385496A7283E3ACEB80D161F8B9;1054.
  ) 
 Here is how much of TeX's memory you used:
- 7427 strings out of 494045
- 105187 string characters out of 3145957
- 201294 words of memory out of 3000000
- 10517 multiletter control sequences out of 15000+200000
+ 7449 strings out of 494045
+ 105645 string characters out of 3145957
+ 202356 words of memory out of 3000000
+ 10528 multiletter control sequences out of 15000+200000
  26205 words of font info for 56 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  29i,9n,30p,272b,394s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -610,9 +644,9 @@ m Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files (
 x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX
  2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
 type1/urw/times/utmr8a.pfb>
-Output written on templateICI.pdf (16 pages, 429284 bytes).
+Output written on templateICI.pdf (20 pages, 629578 bytes).
 PDF statistics:
- 224 PDF objects out of 1000 (max. 8388607)
- 49 named destinations out of 1000 (max. 500000)
- 141 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 259 PDF objects out of 1000 (max. 8388607)
+ 58 named destinations out of 1000 (max. 500000)
+ 159 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -3,25 +3,30 @@
 \section{Conceptos y Terminologia}
 	\begin{itemize}
 		\item{\textbf{Solicitud:}}
-		\item{\textbf{Requerimiento:}} El Glosario de Terminología Estándar de Ingeniería de Software 
+		\item{\textbf{Requerimiento:}} El Glosario de Terminología Estándar de 
+		Ingeniería de Software 
 		\cite{ieee610.12:1990} define al requisito como:
 		\begin{enumerate}[(1)]
-			\item Una condición o capacidad que necesita un usuario para resolver un problema o 
-			alcanzar un objetivo.
-			\item Una condición o capacidad que debería ser reunida o poseída por un sistema o 
-			componente de un sistema para satisfacer un contrato, estándar, u otro documento impuesto
-			formalmente.
-			\item Una representación documentada de una condición o capacidad como las 
-			expresadas en (1) y (2).
+			\item Una condición o capacidad que necesita un usuario para resolver 
+			un problema o alcanzar un objetivo.
+			\item Una condición o capacidad que debería ser reunida o poseída por 
+			un sistema o componente de un sistema para satisfacer un contrato, 
+			estándar, u otro documento impuesto	formalmente.
+			\item Una representación documentada de una condición o capacidad 
+			como las expresadas en (1) y (2).
 		\end{enumerate}
-		\item{\textbf{Tarea:}} Una secuencia de instrucciones tratadas como una unidad básica de 
-		trabajo 
-		\item{\textbf{HelpDesk:}} O en español Mesa de ayuda establece un punto único de contacto
-		 y permite dar soporte remoto a los usuarios mejorando su productividad. Dentro de los
-		 subservicios que puede brindar la mesa de servicios TI están: atención de llamadas, soporte
-		 con control remoto, gestión de activos, distribución remota de software, soporte a sistemas de
-		 antivirus, aplicaciones de autoservicio: catálogo electrónico y reset de passwords y respaldo 	
+		\item{\textbf{Tarea:}} Una secuencia de instrucciones tratadas como una 	
+		unidad básica de trabajo 
+		\item{\textbf{HelpDesk:}} O en español Mesa de ayuda establece un punto 
+		único de contacto y permite dar soporte remoto a los usuarios mejorando su 
+		productividad. Dentro de los subservicios que puede brindar la mesa de 
+		servicios TI están: atención de llamadas, soporte con control remoto, gestión 
+		de activos, distribución remota de software, soporte a sistemas de antivirus, 
+		aplicaciones de autoservicio: catálogo electrónico y reset de passwords y 
+		respaldo 	
 		 online \cite{helpdesk}.
+		\item{\textbf{IT:}}
+		\item{\textbf{CMDB:}}
 		\item{\textbf{SCM:}}
 	\end{itemize}
 
@@ -137,41 +142,101 @@ de este tipo:
 		\end{center}
 	\end{figure}
 
+	\subsection{SysAid}
+	SysAid es una solución de servicio técnico integral que ayuda a optimizar las 
+	operaciones de IT, incrementa la productividad, e implementa las mejores
+	practicas de la industria. En una ubicación centralizada, tiene todas las herramientas
+	necesarias para manejar todas las solicitudes de servicio que recibe un departamento
+	de IT. Desde la asignación de a administradores y resolución de incidencias a 
+	automatización de flujos de trabajo y el seguimiento hasta su finalización \cite{SysAid}. 
+	Algunas de las principales características son:
+	\begin{itemize}
+		\item Crear reglas de enrutamiento, las cuales
+		especifican el individuo, la cola o el grupo de soporte a las cuales las
+		solicitudes deben ser directamente dirigidas en base a su categoría, urgencia o
+		de otros parámetros predefinidos.
+		\item Establece prioridades de las solicitudes basada en parámetros predefinidos.
+		\item Genera notificaciones automáticas que permiten mantener a los usuarios 
+		informados de las actualizaciones de sus solicitudes.
+		\item Establecer fecha de vencimiento para las solicitudes.
+		\item Crear Templates predefinidos para solicitudes de servicios a problemas
+		comunes.
+		\item Definición de permisos de administración y de grupos.
+		\item Asignar un individuo o grupo responsable para una solicitud.
+		\item Realiza encuestas de satisfacción a los usuarios una vez se cierra la solicitud.
+		\item Bases de conocimiento, para la resolución de problemas comunes.
+		\item Permite a los usuario tomar capturas de pantalla y las adjunta 
+		automáticamente a su solicitud.
+		\item Documenta todo el historial de mensajes dentro de la misma solicitud.
+		\item Si existen varias solicitudes relacionadas a un mismo problema, pueden ser
+		adjuntadas a una solicitud padre, de modo que todo los cambios y actualizaciones
+		en la solicitud padre sera replicada en sus hijos.
+		\item Integración con email, convierte automáticamente los emails enviados
+		a las direcciones predefinidas en solicitudes de servicio.
+		\item Integrarse con otros portales.
+		\item Chat online en vivo.
+		\item Ver el impacto en el negocio que puede tener una solicitud de servicio 
+		mediante la vinculación de la solicitud de servicio a un item de configuración en
+		tu CMDB.
+	\end{itemize}
+	Esta herramienta es de pago pero cuanta con una versión gratuita, la cual cuenta con
+	algunas limitaciones de uso, las cuales son:
+	\begin{itemize}
+		\item Permite solo 2 administradores.
+		\item Un máximo de 100 usuarios finales.
+		\item Solo incluye los módulos básicos para la administración de solicitudes de 
+		servicio, generación de reportes, notificaciones, acceso remoto y chat online.
+	\end{itemize}
 	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.45]{imagenes/SysAid_interface.png}
+			\caption{Interface de Vista de Tickets en SysAid}
+		\end{center}
+	\end{figure}
 	\subsection{ChangeGear - ServiceDesk}
 	ChangeGear Service Desk es una solución completa que permite al personal de
 	soporte responder rápida y fácilmente a las peticiones de los clientes. Diseñado
-	utilizando el framework de mejores prácticas de ITIL y la plataforma Microsoft. NET,
-	ChangeGear	 Service Desk cuenta con la automatización del flujo de trabajo, el
-	seguimiento inteligente y una arquitectura integrada \cite{changeGear}. Algunas de
-	sus principales caracteristicas son:
+	utilizando el framework de mejores prácticas de ITIL y la plataforma Microsoft. 
+	NET, ChangeGear Service Desk cuenta con la automatización del flujo de 
+	trabajo, el seguimiento inteligente y una arquitectura integrada 
+	\cite{changeGear}. Algunas de sus principales características son:
 	\begin{itemize}
 		\item Gestión de Incidentes que simplifica y automatiza el proceso de 
-		presentación de informes, seguimiento y gestión de las solicitudes de servicio.
-		\item Gestión de Problemas, identifica proactivamente la causa raíz para prevenir 
-		futuras interrupciones de servicio. Dispone de una base de datos para el 
-		almacenamiento de errores conocidos permitiendo el análisis futuro de estos.
-		\item Gestión de Cambios y Entregas, facilita el seguimiento, gestion y control
-		de todos los cambios de TI realizado en su entorno de TI, usando el framework de
-		mejores practicas de de 
-		practicas ITIL prácticas.
+		presentación de informes, seguimiento y gestión de las solicitudes de 
+		servicio.
+		\item Gestión de Problemas, identifica pro-activamente la causa raíz para 
+		prevenir futuras interrupciones de servicio. Dispone de una base de datos 
+		para el almacenamiento de errores conocidos permitiendo el análisis futuro 
+		de estos.
+		\item Gestión de Cambios y Entregas, facilita el seguimiento, gestión y 
+		control de todos los cambios de TI realizado en su entorno de TI, usando el 
+		framework de mejores practicas de de practicas ITIL prácticas.
 		\item La interfaz intuitiva de Microsoft. NET Web hace que sea fácil de usar y 
-		fácil de implementar. Incluso el personal no técnico puede utilizar ChangeGear 
-		con poca o ninguna formación en cuestión.
-		\item Portal Web basado en el usuario final, proporciona a los empleados un punto
-		de acceso unico para reportar y seguir las solicitudes de servicio.
-		\item Permite a los usuario buscar en una base de datos, para encontrar soluciones 
-		provisorias, errores conocidos y preguntas frecuentes.
-		\item Permite personalizar el flujo de trabajo para satisfacer las necesidades de su
-		organización.
-		\item Alertas automaticas sobre los cambios o actualizaciónes en las solicitudes.
-		\item Permite personalizar los template de emails, para el envio de notificaciones
-		perxonalisadas.
-		\item Las solicitudes de aporbación se enivan automaticamente a los aprovadores
-		basado en condiciones predefinidas y los avances en el flujo de trabajo.
-		\item Panel de rendimiento que muestra graficos en tiempo real y KPIs 
+		fácil de implementar. Incluso el personal no técnico puede utilizar
+		ChangeGear 	con poca o ninguna formación en cuestión.
+		\item Portal Web basado en el usuario final, proporciona a los empleados un
+		punto de acceso único para reportar y seguir las solicitudes de servicio.
+		\item Permite a los usuario buscar en una base de datos, para encontrar 
+		soluciones provisorias, errores conocidos y preguntas frecuentes.
+		\item Permite personalizar el flujo de trabajo para satisfacer las necesidades 
+		de su organización.
+		\item Alertas automáticas sobre los cambios o actualizaciones en las 
+		solicitudes.
+		\item Permite personalizar los template de emails, para el envió de 
+		notificaciones personalizadas.
+		\item Las solicitudes de aprobación se envían automáticamente a los
+		aprobadores	basado en condiciones predefinidas y los avances en el flujo de 
+		trabajo.
+		\item Panel de rendimiento que muestra gráficos en tiempo real y KPIs 
 		(Indicadores Clave de Desempeño).
 	\end{itemize}
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.4]{imagenes/changeGear_interface.png}
+			\caption{Interface de Vista de Tickets en ChangeGear}
+		\end{center}
+	\end{figure}
 
 \section{Estandares para SCM}
 \section{Herramientas para SCM}

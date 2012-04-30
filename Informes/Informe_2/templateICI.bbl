@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{disico}
 {Universidad de Valparaíso}, ``Dirección de servicios de información y
@@ -34,5 +34,12 @@ P.~Méndez, ``{Desarrollo de Metodologías de SQA y SCM para la Dirección de
 \bibitem{otrs}
 {OTRS Group}, ``{OTRS Help Desk}.'' Último acceso: 25 Abril 2012,
   \url{http://www.otrs.com/es}.
+
+\bibitem{SysAid}
+
+
+\bibitem{changeGear}
+{Sun View}, ``{ChangeGear - Service Desk}.'' Último acceso: 25 Abril 2012,
+  \url{http://www.sunviewsoftware.com/products/servicedesk.aspx}.
 
 \end{thebibliography}
