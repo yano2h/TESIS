@@ -14,13 +14,14 @@
 \contentsline {subsection}{\numberline {2.4.4}SysAid}{9}{subsection.2.4.4}
 \contentsline {subsection}{\numberline {2.4.5}ChangeGear - ServiceDesk}{11}{subsection.2.4.5}
 \contentsline {section}{\numberline {2.5}Est\'andares para SCM}{13}{section.2.5}
-\contentsline {subsection}{\numberline {2.5.1}ISO Sistemas de Gestion de calidad. Directrices para la Gestion de la Configuraci\'on}{13}{subsection.2.5.1}
-\contentsline {subsection}{\numberline {2.5.2}IEEE 828 Plan de Gesti\'on de Configuraci\'on de Software}{13}{subsection.2.5.2}
-\contentsline {subsection}{\numberline {2.5.3}ITIL v3 - Transici\'on del Servicios}{14}{subsection.2.5.3}
-\contentsline {section}{\numberline {2.6}Herramientas para SCM}{14}{section.2.6}
-\contentsline {subsection}{\numberline {2.6.1}SVN}{14}{subsection.2.6.1}
-\contentsline {subsection}{\numberline {2.6.2}Mercurial}{15}{subsection.2.6.2}
-\contentsline {subsection}{\numberline {2.6.3}Git}{15}{subsection.2.6.3}
-\contentsline {subsection}{\numberline {2.6.4}ChangeGear}{15}{subsection.2.6.4}
-\contentsline {section}{\numberline {2.7}Metodologia actuales de DISICO}{15}{section.2.7}
-\contentsline {chapter}{Bibliograf\'{\i }a}{16}{chapter*.6}
+\contentsline {subsection}{\numberline {2.5.1}ISO Sistemas de Gesti\'on de calidad. Directrices para la Gesti\'on de la Configuraci\'on}{13}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}IEEE 828-2005 Plan de Gesti\'on de Configuraci\'on de Software}{14}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}IEEE 828-2012 Gesti\'on de la Configuraci\'on en Sistemas e Ingenier\IeC {\'\i }a de Software}{15}{subsection.2.5.3}
+\contentsline {subsection}{\numberline {2.5.4}ITIL v3 - Transici\'on del Servicios}{15}{subsection.2.5.4}
+\contentsline {section}{\numberline {2.6}Herramientas para SCM}{15}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}SVN}{16}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.2}Mercurial}{16}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.3}Git}{16}{subsection.2.6.3}
+\contentsline {subsection}{\numberline {2.6.4}ChangeGear}{16}{subsection.2.6.4}
+\contentsline {section}{\numberline {2.7}Metodologia actuales de DISICO}{16}{section.2.7}
+\contentsline {chapter}{Bibliograf\'{\i }a}{17}{chapter*.6}

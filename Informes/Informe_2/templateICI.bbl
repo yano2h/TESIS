@@ -47,8 +47,17 @@ P.~Méndez, ``{Desarrollo de Metodologías de SQA y SCM para la Dirección de
 {Sun View}, ``{ChangeGear - Service Desk}.'' Último acceso: 25 Abril 2012,
   \url{http://www.sunviewsoftware.com/products/servicedesk.aspx}.
 
+\bibitem{iso10007}
+{International Organization for Standardization}, {\em {ISO} 10007: 2003 --
+  Quality management systems -- Guidelines for configuration management}, 2003.
+
 \bibitem{IEEE828}
 {IEEE}, {\em {IEEE Standard for Software Configuration Management Plans}}.
 \newblock {The Institute of Electrical and Electronics Engineers, Inc.}, 2005.
+
+\bibitem{IEEE828_2012}
+{IEEE}, {\em {IEEE Standard for Configuration Management in Systems and
+  Software Engineering}}.
+\newblock {The Institute of Electrical and Electronics Engineers, Inc.}, 2012.
 
 \end{thebibliography}

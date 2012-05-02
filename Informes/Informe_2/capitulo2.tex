@@ -38,8 +38,8 @@
 	mejorar la calidad de los servicios TI ofrecidos, evitar los problemas asociados
 	a los mismos y en caso de que estos ocurran ofrecer un marco de actuación 
 	para que estos sean solucionados con el menor impacto y a la mayor 
-	brevedad posible\cite{itil_v3}.
-	\\\\
+	brevedad posible\cite{itil_v3}.\\
+	
 	ITIL nos ofrece la siguiente definición de servicio; "Un servicio es un medio para 
 	entregar valor a los clientes facilitándoles un resultado deseado sin la necesidad 
 	de que estos asuman los costes y riesgos específicos asociados".
@@ -70,8 +70,8 @@ etc), pueden enviar solicitudes de requerimientos (Ej: de información, solución 
 problemas, cambios de clave), las cuales deben ser contestadas y resueltas 
 por DISICO a la brevedad, y que a su vez permite a los Jefes de Área asignar 
 responsables a las solicitudes y mantener un visión clara de cuantas y cuales 
-solicitudes tiene asignada cada miembro de su Área.
-\\\\
+solicitudes tiene asignada cada miembro de su Área.\\
+
 En este ámbito el tipo de herramientas en el mercado, que mas se adecua a 
 este propósito son los Sistemas de Mesa de Ayuda (Help Desk System) o de 
 Asignamiento de tickets. Ambos se centran principalmente en el seguimiento 
@@ -269,8 +269,52 @@ de este tipo:
 	\end{figure}
 
 \section{Estándares para SCM}
-	\subsection{ISO Sistemas de Gestion de calidad. Directrices para la Gestion de la 
+	
+	\subsection{ISO Sistemas de Gestión de calidad. Directrices para la Gestión de la 
 	Configuración}
+	El propósito de este estándar, es aumentar el entendimiento común de los temas
+	de gestión de la configuración, como también promover su uso, y ayudar a las
+	organizaciones aplicando la gestión de la configuración para mejorar su 
+	desempeño.	Este estándar sirve de guía en el uso de Gestión de la Configuración
+	dentro de una organización. Es aplicable para el soporte de los productos desde
+	su concepción hasta su eliminación \cite{iso10007}.\\
+	
+	La ISO 1007 describe las responsabilidades y autoridades, tambien describe
+	el proceso de gestión de la configuración, el cual se describe a continuación.
+	
+	\begin{table}[H]
+		\begin{tabular}{| l | l |}
+			\hline
+			\textbf{Etapa del Proceso} & \textbf{Descripción} \\
+			\hline 
+			\hline
+			\multirow{3}{*}{Planificación de SCM} & {Es la base del proceso, coordina las actividades de gestión} \\
+									         		 & {de la configuración en un contexto especifico dentro del ciclo} \\
+									         		 & {de vida del producto.} \\
+			\hline
+			\multirow{1}{*}[-0.2cm]{Identificación de la} & {La selección de los items de configuración y sus interrelaciones}\\
+			 \multirow{2}{*}{configuración}			      & {deberían describir la estructura del producto. Ademas define}\\	
+			                                                                      & {criterios para la selección de items de configuración.}\\								      
+ 			\hline
+			\multirow{4}{*}{Control de Cambio} & {Se deben controlar todos los cambios. El grado de control}\\
+			                                                        & {necesario para procesar una petición de cambio, dependerá del}\\
+			                                                        & {impacto potencial del cambio, los requerimientos del cliente y }\\
+			                                                        & {los baselines de configuración.}\\
+			\hline
+			{Reporte del Estado} & {Esta actividad resulta en registros y reportes relacionados a un}\\
+			{de la configuración} & {producto y su información de configuración.}\\
+
+			\hline
+			\multirow{1}{*}[-0.2cm]{Auditoria de la} & {Debe realizarse en concordancia de acuerdo con procedimientos}\\
+			\multirow{2}{*}{Configuración}    & {documentados para determinar si el producto cumple con sus }\\
+			 &	 {requisitos e información de configuración}\\
+										   
+			\hline
+		\end{tabular}
+		\caption{Proceso definido en la ISO 10007}
+	\end{table}
+	
+
 
 	\subsection{IEEE 828-2005 Plan de Gestión de Configuración de Software} 
 	A través de este estándar se establecen los contenidos mínimos requeridos
@@ -279,7 +323,7 @@ de este tipo:
 	y software ya desarrollado. La aplicación de este estandar no esta restringida a
 	ninguna forma, clase o tipo de software\cite{IEEE828}.
 	\\\\
-	En este estandar la información de la planificación de SCM 
+	En este estándar la información de la planificación de SCM 
 	es dividida en seis clases las cuales se describen a continuación.
 
 	\begin{table}[H]
@@ -312,8 +356,22 @@ de este tipo:
 		\caption{Clases de Información SCM definidas por la IEEE 828}
 	\end{table}
 
-	\subsection{IEEE 828-2012  Gestión de la Configuración en Ingeniería de Sistemas y de Software} 
+	\subsection{IEEE 828-2012  Gestión de la Configuración en Sistemas e Ingeniería de Software} 
+		
+	Esta norma establece los requisitos mínimos para los procesos de Gestión de la
+	Configuración (CM) en sistemas e ingeniería de software. La aplicación de esta
+	norma se aplica a cualquier forma, clase o tipo de software o sistema. Esta
+	revisión de la norma amplía la versión anterior para explicar CM,
+	incluyendo la identificación y adquisición de items de configuración, 
+	el control de cambios, reporte del estado de los items de configuración, así como
+	compilaciones de software e ingeniería de la liberación. \\
 
+	La edición anterior de 2005 define sólo el contenido de un Plan de Gestión de
+	Configuración de Software. Esta nueva edición del estándar aborda cuales son
+	las actividades de CM a realizar, cuando estas van a ocurrir en el ciclo de vida, 
+	y que planificación y recursos son necesarios. También se describen las áreas de
+	contenido para un Plan de CM\cite{IEEE828_2012}. 
+	
 	\subsection{ITIL v3 - Transición del Servicios}
 
 	
@@ -329,8 +387,8 @@ relacionadas a SCM de hoy en dia son:
 	fuente abierto. Permite manejar ficheros y directorios a través del tiempo utilizando un
 	árbol de ficheros en un repositorio central, el cual recuerda todos los cambios hechos a
 	sus ficheros y directorios, permitiendo asi recuperar versiones antiguas de sus datos, o
-	examinar el historial de cambios de los mismos.     
-	\\\\
+	examinar el historial de cambios de los mismos. \\
+
 	Subversion puede acceder al repositorio a través de redes, lo que permite que varias
 	personas puedan modificar y administrar el mismo conjunto de datos desde sus 
 	respectivas ubicaciones. Todo esto además permite realizar cambios sin temer que la

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.3.29)  2 MAY 2012 10:57
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.3.29)  2 MAY 2012 16:55
 entering extended mode
 **D:/TESIS/Informes/Informe_2/templateICI.tex
 (D:/TESIS/Informes/Informe_2/templateICI.tex
@@ -456,7 +456,7 @@ LaTeX Info: Redefining \nameref on input line 53.
 (D:\TESIS\Informes\Informe_2\templateICI.out)
 \@outlinefile=\write3
 
-<imagenes/logoUV.png, id=103, 240.9pt x 113.42375pt>
+<imagenes/logoUV.png, id=107, 240.9pt x 113.42375pt>
 File: imagenes/logoUV.png Graphic file (type png)
  <use imagenes/logoUV.png>
 Package pdftex.def Info: imagenes/logoUV.png used on input line 60.
@@ -493,19 +493,19 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
 ] (D:\TESIS\Informes\Informe_2\templateICI.toc
 LaTeX Font Info:    Font shape `OT1/ptm/bx/sc' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/sc' tried instead on input line 2.
-)
-\tf@toc=\write4
  [5
 
-]
+])
+\tf@toc=\write4
+ [6]
 (D:\TESIS\Informes\Informe_2\templateICI.lot)
 \tf@lot=\write5
- [6
+ [7
 
 ]
 (D:\TESIS\Informes\Informe_2\templateICI.lof)
 \tf@lof=\write6
- [7
+ [8
 
 ]
 (D:\TESIS\Informes\Informe_2\capitulo1.tex
@@ -531,21 +531,21 @@ Cap\'{\i }tulo 2.
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 36--49
+Underfull \hbox (badness 10000) in paragraph at lines 36--42
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--49
+Underfull \hbox (badness 10000) in paragraph at lines 43--49
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 66--81
+Underfull \hbox (badness 10000) in paragraph at lines 66--74
 
  []
 
-[4] <imagenes/hesk_interface.png, id=217, 762.85pt x 531.9875pt>
+[4] <imagenes/hesk_interface.png, id=229, 762.85pt x 531.9875pt>
 File: imagenes/hesk_interface.png Graphic file (type png)
 
 <use imagenes/hesk_interface.png>
@@ -559,7 +559,7 @@ Package pdftex.def Info: imagenes/hesk_interface.png used on input line 102.
 l.126 		\item E
                l personal y los clientes se mantienen al dia con alertas de ...
  <D:/TESIS/Informes/Informe_2/imagenes/hesk_interface.png (PNG copy)>]
-<imagenes/osTicket_interface.png, id=230, 330.033pt x 233.673pt>
+<imagenes/osTicket_interface.png, id=242, 330.033pt x 233.673pt>
 File: imagenes/osTicket_interface.png Graphic file (type png)
 
 <use imagenes/osTicket_interface.png>
@@ -573,7 +573,7 @@ Package pdftex.def Info: imagenes/osTicket_interface.png used on input line 138
                                                   \fi \fi 
 l.152 	\begin{itemize}
                        <D:/TESIS/Informes/Informe_2/imagenes/osTicket_interface
-.png (PNG copy)>] <imagenes/OTRS_interface.png, id=236, 1027.84pt x 770.88pt>
+.png (PNG copy)>] <imagenes/OTRS_interface.png, id=248, 1027.84pt x 770.88pt>
 File: imagenes/OTRS_interface.png Graphic file (type png)
 
 <use imagenes/OTRS_interface.png>
@@ -587,7 +587,7 @@ Package pdftex.def Info: imagenes/OTRS_interface.png used on input line 170.
 l.192 		\item C
                rear Templates predefinidos para solicitudes de servicios a p...
  <D:/TESIS/Informes/Informe_2/imagenes/OTRS_interface.png>]
-<imagenes/SysAid_interface.png, id=249, 893.3375pt x 451.6875pt>
+<imagenes/SysAid_interface.png, id=261, 893.3375pt x 451.6875pt>
 File: imagenes/SysAid_interface.png Graphic file (type png)
 
 <use imagenes/SysAid_interface.png>
@@ -601,7 +601,7 @@ re.2.4}) has been already used, duplicate ignored
 l.252 		\item P
                ermite personalizar el flujo de trabajo para satisfacer las n...
  <D:/TESIS/Informes/Informe_2/imagenes/SysAid_interface.png (PNG copy)>]
-<imagenes/changeGear_interface.png, id=260, 1161.33875pt x 831.105pt>
+<imagenes/changeGear_interface.png, id=273, 1161.33875pt x 831.105pt>
 File: imagenes/changeGear_interface.png Graphic file (type png)
 
 <use imagenes/changeGear_interface.png>
@@ -614,12 +614,12 @@ Overfull \hbox (30.90727pt too wide) in paragraph at lines 266--267
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 276--284
+Underfull \hbox (badness 10000) in paragraph at lines 275--281
 
  []
 
 
-Overfull \hbox (7.2429pt too wide) in paragraph at lines 286--312
+Overfull \hbox (5.13191pt too wide) in paragraph at lines 286--314
 [][]
  []
 
@@ -628,11 +628,16 @@ Overfull \hbox (7.2429pt too wide) in paragraph at lines 286--312
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.313 	\end{table}
+l.315 	\end{table}
                    <D:/TESIS/Informes/Informe_2/imagenes/changeGear_interface.p
 ng>]
-Underfull \hbox (badness 10000) in paragraph at lines 325--336
+Underfull \hbox (badness 10000) in paragraph at lines 320--328
 
+ []
+
+
+Overfull \hbox (7.2429pt too wide) in paragraph at lines 330--356
+[][]
  []
 
 [14pdfTeX warning (ext4): destination with the same identifier (name{table.2.1}
@@ -640,18 +645,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 325--336
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.336 
-      ]) [15] (D:\TESIS\Informes\Informe_2\templateICI.bbl
+l.358 
+      ]
+Underfull \hbox (badness 10000) in paragraph at lines 361--368
+
+ []
+
+[15pdfTeX warning (ext4): destination with the same identifier (name{table.2.2}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.384 
+      ]
+Underfull \hbox (badness 10000) in paragraph at lines 386--391
+
+ []
+
+) [16] (D:\TESIS\Informes\Informe_2\templateICI.bbl
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 5.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [16
+) [17
 
 
 ])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 99.
- [17]
+ [18]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 99.
 
 (D:\TESIS\Informes\Informe_2\templateICI.aux
@@ -660,25 +681,25 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 99.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 99.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 99.
 Package rerunfilecheck Info: File `templateICI.out' has not changed.
-(rerunfilecheck)             Checksum: 436FD833F0C71DFB9E408DDD26C6F427;1837.
+(rerunfilecheck)             Checksum: 7CF452DD67FEB92BB48FCDEE4511051C;1990.
  ) 
 Here is how much of TeX's memory you used:
- 7486 strings out of 494045
- 106102 string characters out of 3145957
- 203416 words of memory out of 3000000
- 10542 multiletter control sequences out of 15000+200000
+ 7495 strings out of 494045
+ 106215 string characters out of 3145957
+ 205482 words of memory out of 3000000
+ 10545 multiletter control sequences out of 15000+200000
  27889 words of font info for 58 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 29i,11n,30p,272b,450s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,11n,30p,272b,551s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Progra
 m Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files (
 x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX
  2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
 type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/t
 imes/utmri8a.pfb>
-Output written on templateICI.pdf (24 pages, 658956 bytes).
+Output written on templateICI.pdf (26 pages, 667715 bytes).
 PDF statistics:
- 345 PDF objects out of 1000 (max. 8388607)
- 79 named destinations out of 1000 (max. 500000)
- 231 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 367 PDF objects out of 1000 (max. 8388607)
+ 85 named destinations out of 1000 (max. 500000)
+ 239 words of extra memory for PDF output out of 10000 (max. 10000000)
 
