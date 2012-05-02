@@ -4,14 +4,23 @@
 \contentsline {chapter}{\numberline {1}Introducci\'on}{1}{chapter.1}
 \contentsline {chapter}{\numberline {2}Marco Conceptual}{3}{chapter.2}
 \contentsline {section}{\numberline {2.1}Conceptos y Terminologia}{3}{section.2.1}
-\contentsline {section}{\numberline {2.2}Est\'andares para la descripci\'on de Requerimientos}{4}{section.2.2}
-\contentsline {section}{\numberline {2.3}Herramientas para la Solicitudes de Requerimientos}{4}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Hesk}{4}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}osTicket}{5}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}OTRS}{6}{subsection.2.3.3}
-\contentsline {subsection}{\numberline {2.3.4}SysAid}{8}{subsection.2.3.4}
-\contentsline {subsection}{\numberline {2.3.5}ChangeGear - ServiceDesk}{10}{subsection.2.3.5}
-\contentsline {section}{\numberline {2.4}Estandares para SCM}{12}{section.2.4}
-\contentsline {section}{\numberline {2.5}Herramientas para SCM}{12}{section.2.5}
-\contentsline {section}{\numberline {2.6}Metodologia actuales de DISICO}{12}{section.2.6}
-\contentsline {chapter}{Bibliograf\'{\i }a}{13}{chapter*.6}
+\contentsline {section}{\numberline {2.2}Metodologias para la solicitudes de Requerimientos}{4}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}ITIL v3 - Operaci\'on de Servicios}{4}{subsection.2.2.1}
+\contentsline {section}{\numberline {2.3}Est\'andares para la descripci\'on de Requerimientos}{4}{section.2.3}
+\contentsline {section}{\numberline {2.4}Herramientas para la Solicitudes de Requerimientos}{4}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Hesk}{5}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}osTicket}{6}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}OTRS}{7}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}SysAid}{9}{subsection.2.4.4}
+\contentsline {subsection}{\numberline {2.4.5}ChangeGear - ServiceDesk}{11}{subsection.2.4.5}
+\contentsline {section}{\numberline {2.5}Est\'andares para SCM}{13}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}ISO Sistemas de Gestion de calidad. Directrices para la Gestion de la Configuraci\'on}{13}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}IEEE 828 Plan de Gesti\'on de Configuraci\'on de Software}{13}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}ITIL v3 - Transici\'on del Servicios}{14}{subsection.2.5.3}
+\contentsline {section}{\numberline {2.6}Herramientas para SCM}{14}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}SVN}{14}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.2}Mercurial}{14}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.3}Git}{15}{subsection.2.6.3}
+\contentsline {subsection}{\numberline {2.6.4}ChangeGear}{15}{subsection.2.6.4}
+\contentsline {section}{\numberline {2.7}Metodologia actuales de DISICO}{15}{section.2.7}
+\contentsline {chapter}{Bibliograf\'{\i }a}{16}{chapter*.6}

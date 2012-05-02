@@ -26,9 +26,39 @@
 		respaldo 	
 		 online \cite{helpdesk}.
 		\item{\textbf{IT:}}
+		\item{\textbf{ITIL:}}
 		\item{\textbf{CMDB:}}
 		\item{\textbf{SCM:}}
 	\end{itemize}
+
+\section{Metodologias para la solicitudes de Requerimientos}
+	\subsection{ITIL v3 - Operación de Servicios}
+	ITIL puede ser definido como un conjunto de buenas prácticas destinadas 
+	a mejorar la gestión y provisión de servicios TI. Su objetivo último es 
+	mejorar la calidad de los servicios TI ofrecidos, evitar los problemas asociados
+	a los mismos y en caso de que estos ocurran ofrecer un marco de actuación 
+	para que estos sean solucionados con el menor impacto y a la mayor 
+	brevedad posible\cite{itil_v3}.
+	\\\\
+	ITIL nos ofrece la siguiente definición de servicio; "Un servicio es un medio para 
+	entregar valor a los clientes facilitándoles un resultado deseado sin la necesidad 
+	de que estos asuman los costes y riesgos específicos asociados".
+	\\\\
+	ITIL v3 consta de 5 libros basados en el ciclo de vida del servicio:
+	\begin{enumerate}
+		\item Estrategia del Servicio
+		\item Diseño del Servicio
+		\item Transición del Servicio
+		\item Operación del Servicio
+		\item Mejora Continua del Servicio	
+	\end{enumerate}
+
+	De estos 5, la Operación de Servicio es donde se monitoriza activa y pasivamente
+	el funcionamiento del servico, se registran eventos, incidencias, problemas, peticiones
+	y accesos al servicio. Y aunque no son precisamente un estándar, es una buena
+ 	aproximación y vale la pena considerarlo.
+	
+	Detalles sobre la Operacion de servicios ....
 
 \section{Estándares para la descripción de Requerimientos}
 
@@ -238,6 +268,76 @@ de este tipo:
 		\end{center}
 	\end{figure}
 
-\section{Estandares para SCM}
+\section{Estándares para SCM}
+	\subsection{ISO Sistemas de Gestion de calidad. Directrices para la Gestion de la 
+	Configuración}
+
+	\subsection{IEEE 828 Plan de Gestión de Configuración de Software} 
+	A través de este estándar se establecen los contenidos mínimos requeridos
+	en un Plan de Gestión de la Configuración del Software (SCM). Este estandar se
+	aplica al ciclo de vida completo de software critico. Tambien a software no critico
+	y software ya desarrollado. La aplicación de este estandar no esta restringida a
+	ninguna forma, clase o tipo de software.
+	\\\\
+	En este estandar la información de la planificación de SCM 
+	es dividida en seis clases las cuales se describen a continuación.
+
+	\begin{table}
+		\begin{tabular}{| l | l |}
+			\hline
+			\textbf{Clase de información} & \textbf{Descripción} \\
+			\hline
+			\multirow{2}{*}{Introducción} & {Describe el propósito del plan, ámbito de} \\
+									     & {aplicación, términos clave y referencias} \\
+			\hline
+			\multirow{2}{*}{Administración SCM} & \multirow{2}{*}{(¿Quien?) Identifica las responsabilidades y autoridades la administración y cumplimiento de las actividades SCM}\\	
+ 			\hline
+			\multirow{2}{*}{Actividades SCM} & \multirow{2}{*}{(¿Que?) Se identifican todas las actividades a ser desarrolladas en la aplicación del proyecto}\\
+			\hline
+			\multirow{2}{*}{Cronograma SCM} & \multirow{2}{*}{(¿Cuando?) Identifica la coordinación necesaria en de las actividades de SCM con las otras actividades en el proyecto}\\
+			\hline
+			\multirow{2}{*}{Recursos SCM} & \multirow{2}{*}{(¿Como?) Identifica las herramientas y los recursos físicos y humanos para la ejecución del plan}\\
+			\hline
+			\multirow{2}{*}{Mantenimiento del plan SCM} & \multirow{2}{*}{Identifica como el plan se matendra mientras se encuentre vigente}\\
+			\hline
+		\end{tabular}
+	\end{table}
+	\subsection{ITIL v3 - Transición del Servicios}
+
+	
 \section{Herramientas para SCM}
+Actualmente la mayoria de las herramientas relacionadas con SCM se enfocan 
+solo al control de versiones, por lo que no existen realmente herramientas que
+abarquen el proceso completo de SCM, ya que el proceso de SCM va mucho mas
+aya que solo el control de versiones. Algunas de las principales herramientas
+relacionadas a SCM de hoy en dia son:
+
+	\subsection{SVN}
+	SVN o  Subversion es un sistema de control de versiones centralizado libre y de código
+	fuente abierto. Permite manejar ficheros y directorios a través del tiempo utilizando un
+	árbol de ficheros en un repositorio central, el cual recuerda todos los cambios hechos a
+	sus ficheros y directorios, permitiendo asi recuperar versiones antiguas de sus datos, o
+	examinar el historial de cambios de los mismos.     
+	\\\\
+	Subversion puede acceder al repositorio a través de redes, lo que permite que varias
+	personas puedan modificar y administrar el mismo conjunto de datos desde sus 
+	respectivas ubicaciones. Todo esto además permite realizar cambios sin temer que la
+	calidad del código se vea afectada, ya que ante cualquier problema se puede volver a la
+	versión anterior.
+	
+	\subsection{Mercurial}
+	Mercurial es una herramienta libre para administración del control de versiones. Ofrece 
+	el poder de manejar de manera eficiente sus proyectos de cualquier tamaño mientras 
+	usa una intuitiva interface. Es fácil de usar y difícil de romper, haciéndolo ideal para 
+	trabajar con cualquier archivo de versionados.
+	
+	\subsection{Git}
+	Git es un sistema distribuido de control de versiones libre y open sources, creado por 
+	Linus Torvalds (el creador del nucleo linux). Esta enfocado a la velocidad uso practico y
+	manejo de proyectos grandes. Y no depende de acceso a la red o a un repositorio 
+	central, dado que al ser distribuido cada participante cuenta con una copia completa 
+	del repositorio de manera local, lo que permite trabajar sin conexión a internet.
+	
+	\subsection{ChangeGear}
+
 \section{Metodologia actuales de DISICO}
