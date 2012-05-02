@@ -3,10 +3,3 @@ A level-1 auxiliary file: capitulo1.aux
 A level-1 auxiliary file: capitulo2.aux
 The style file: ieeetr.bst
 Database file #1: template.bib
-I was expecting a `,' or a `}'---line 69 of file template.bib
- :  
- :  author = {{SysAid Technologies}},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-Warning--all relevant fields are empty in SysAid
-(There was 1 error message)

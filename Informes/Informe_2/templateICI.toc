@@ -19,7 +19,7 @@
 \contentsline {subsection}{\numberline {2.5.3}ITIL v3 - Transici\'on del Servicios}{14}{subsection.2.5.3}
 \contentsline {section}{\numberline {2.6}Herramientas para SCM}{14}{section.2.6}
 \contentsline {subsection}{\numberline {2.6.1}SVN}{14}{subsection.2.6.1}
-\contentsline {subsection}{\numberline {2.6.2}Mercurial}{14}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.2}Mercurial}{15}{subsection.2.6.2}
 \contentsline {subsection}{\numberline {2.6.3}Git}{15}{subsection.2.6.3}
 \contentsline {subsection}{\numberline {2.6.4}ChangeGear}{15}{subsection.2.6.4}
 \contentsline {section}{\numberline {2.7}Metodologia actuales de DISICO}{15}{section.2.7}

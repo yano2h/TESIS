@@ -23,6 +23,10 @@ P.~Méndez, ``{Desarrollo de Metodologías de SQA y SCM para la Dirección de
 {Coasin Group}, ``{Mesa de Ayuda TI}.'' Último acceso: 25 Abril 2012,
   \url{http://www.coasin.cl/index.php?id=246}.
 
+\bibitem{itil_v3}
+{Osiatis}, ``{ITIL V3 Gestión de Servicios TI}.'' Último acceso: 1 Mayo 2012,
+  \url{http://itilv3.osiatis.es/}.
+
 \bibitem{hesk}
 {Hesk}, ``{Hesk Software Help}.'' Último acceso: 25 Abril 2012,
   \url{http://www.hesk.com}.
@@ -36,10 +40,15 @@ P.~Méndez, ``{Desarrollo de Metodologías de SQA y SCM para la Dirección de
   \url{http://www.otrs.com/es}.
 
 \bibitem{SysAid}
-
+{SysAid Technologies}, ``{SysAid IT}.'' Último acceso: 30 Abril 2012,
+  \url{http://www.sysaid.com}.
 
 \bibitem{changeGear}
 {Sun View}, ``{ChangeGear - Service Desk}.'' Último acceso: 25 Abril 2012,
   \url{http://www.sunviewsoftware.com/products/servicedesk.aspx}.
+
+\bibitem{IEEE828}
+{IEEE}, {\em {IEEE Standard for Software Configuration Management Plans}}.
+\newblock {The Institute of Electrical and Electronics Engineers, Inc.}, 2005.
 
 \end{thebibliography}
