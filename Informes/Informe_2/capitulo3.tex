@@ -1,0 +1,157 @@
+\chapter{Definición del Problema}
+
+
+\section{Situación Actual}
+
+	\subsection{Metodología Actual para la Solicitud de Requerimientos}
+
+	\subsection{Metodología Actual Gestión de Requerimientos en los Proyectos}
+	
+	\subsection{Metodología Actual de SCM}
+	La actual metodología de SCM utilizada en DISICO, fue desarrollada y descrita
+	en el Trabajo de Titulo \textit{Desarrollo de Metodologías de SQA y SCM para 
+	la Dirección de Servicios de Información y Computación}\cite{paloma}. Las 
+	principales etapas que componen esta metodología se encuentran representadas
+	en la Tabla \ref{scm_paloma}
+	
+	\begin{table}[H]
+		\begin{tabular}{| l | l |}
+			\hline
+			\textbf{Etapa} & \textbf{Descripción}\\
+			\hline
+			\multirow{2}{*}{Tareas y Responsables} & {Identificar tareas asociadas y asignar responsables}\\
+									                       & {a cada una.}\\
+			\hline
+			{Actividades SCM} & {Se definen las actividades principales a realizar.}\\
+			\hline
+			{Recursos} & {Herramientas de apoyo a la metodología}\\
+			\hline
+			\multirow{2}{*}{Formación} & {Material visual para educar a los integrantes de cada proyecto}\\
+                         							& {en cuanto a SCM.}\\
+			\hline
+		\end{tabular}
+		\caption{Etapas de la actual metodología de SCM}
+		\label{scm_paloma}
+	\end{table}
+
+	
+\section{Formulación del Problema}
+
+La Dirección de Servicios de Información y Computación (DISICO) de la 
+Universidad de Valparaíso en su constante búsqueda por mejorar ha detectado 
+algunos problemas, los cuales se nombran y detallan a continuación:
+	
+	\subsection{Problemas en las Solicitudes de Requerimientos}
+	\label{prob1}
+	Las solicitudes de requerimientos que se reciben en DISICO, actualmente deben 
+	ser enviadas a través del correo electrónico institucional al Jefe de Área, quien revisa y evalúa 
+	cada solicitud para determinar quien realizara la tarea correspondiente, luego reenvía el 
+	correo original a dicha persona, en algunos casos adjuntando información adicional 
+	sobre como completar la tarea o en caso que la solicitud enviada en el correo este
+	incompleta como para poder comprender o resolver completamente el requerimiento, 
+	se reenvía al funcionario el correo que ha enviado junto con las observaciones correspondientes
+	\\\\
+	Aunque a primera vista parece simple, esto conlleva los siguientes problemas:
+	\begin{itemize}
+		\item El correo del Jefe de Área puede verse saturado con cientos de correos 
+		en un mismo día. Sobretodo en periodos críticos como son el inicio y termino de 
+		cada semestre.
+		\item Los requerimientos quedan almacenados en emails y no se cuenta con 
+		ninguna estructura de datos que permita, mejores búsquedas, priorización de 
+		tareas, análisis de avance de las tareas, análisis posteriores acerca de velocidad 
+		de desarrollo o productividad, establecer dependencias entre tareas, 
+		complejidad de las tareas, etc.
+		\item El Jefe de Área no tiene una visión clara de cuales ni cuantas tareas se 
+		han asignado a cada miembro del equipo.
+		\item El Jefe de Área no tiene una visión clara sobre cuales ni cuantas tareas 
+		están aún en espera, en desarrollo o finalizadas.
+		\item Los funcionarios que envían solicitudes de requerimientos desconocen en 
+		que estado se encuentran, cuanto se ha avanzado, ni la prioridad que esta 
+		tiene, y menos las complicaciones que pueden haber surgido, por lo que deben 
+		estar consultando por teléfono o esperando asta recibir un respuesta.
+		\item Entre tanto correo muchas veces se pierden los requerimientos debido a 
+		que el responsable leyó el correo y dejo la tarea para mas tarde debido a que 
+		en ese momento aún se encontraba realizando otras tareas.
+	\end{itemize}
+
+	\subsection{Problemas en la Gestión de Requerimientos en los \\Proyectos}
+	\label{prob2}
+	Además de los requerimientos que se reciben diariamente en DISICO, existen 
+	requerimientos que superan esta categoría, los cuales pasan a convertirse en 
+	proyectos, estos nuevos proyectos constan de un conjunto 	de requerimientos 
+	que son capturados por los responsables de dicho proyecto, quienes los agrupan y 
+	calendarizan mediante una Carta Gantt, la cual debe ser entregada al Jefe de Área.
+	\\\\
+	Este sistema también presenta algunas falencias, las cuales son similares a las 
+	presentadas en el punto anterior y se detallan a continuación:
+	
+	\begin{itemize}
+		\item Aunque la Carta Gantt es un instrumento importante, no le permite al 
+		Jefe de Área conocer cuales puntos ya han sido completados, en cuales se esta 
+		trabajado actualmente y cual es el nivel de avance de estos.
+		\item Tampoco tiene un registro de las causas que pueden estar demorando 
+		una tarea.
+		\item Esto también implica que el Jefe de Área no tiene una visión clara de la 
+		productividad ni del avance de cada uno de los involucrados en 
+		un proyecto.
+	\end{itemize}
+
+	\subsection{Problemas en la Solicitudes de SCM}
+	\label{prob3}
+	Antiguamente DISICO no contaba con un procedimiento formal para los 
+	procesos de SCM, aunque se intentaba llevar a cabo un procedimiento similar al 
+	de asignación de tareas, pero con algunas pequeñas diferencias. Los problemas 
+	de este procedimiento fueron analizados y corregidos en el Trabajo de Titulo 
+	Desarrollo de Metodologías de SQA y SCM para la Dirección de Servicios de Información 
+	y Computación \cite{paloma}, en el cual se propuso una nueva metodología de SCM, 
+	en la cual ya fueron considerados la baja disponibilidad de tiempo del personal para 
+	aplicar estos procesos y la falta de recursos para las mismas.
+	\\\\
+	En dicho trabajo para lograr un proceso de SCM de calidad se creo toda 
+	la documentación pertinente a los cambios que se realicen durante el desarrollo 
+	de un proyecto, pero siempre buscando que ésta se realice de forma rápida y 
+	precisa, apoyada de templates que exijan la información mínima para que la 
+	metodología cumpla sus objetivos.
+	\\\\
+	Sin embargo aun con esta nueva metodología se tienen algunos problemas 
+	los cuales se detallan a continuación:
+	
+	\begin{itemize}
+		\item La metodología propuesta no logra ser lo suficientemente ágil, debido a 
+		que creación de la documentación que exige, no se encuentra automatizada.
+		\item La documentación se realiza en plantillas Word, por lo que la persona deberá descargar 
+		la plantilla si es que no la posee, abrirla con Word (o similar) para editarla, luego imprimirla y archivarla 
+		o si se desea compartirlas mantenerlas versionadas en SVN, de donde el resto de los involucrados en los 
+		cambios deberán estar descargando la ultima versión para conocer los nuevos cambios, y 
+		actualizarlas si es necesario.
+		\item El uso de estas plantillas Word no facilita la búsqueda rápida de 
+		información sobre cambios pasados, personas involucradas en los cambios, etc. 
+		Debido a que se debe descargar los últimos cambios de los documentos, buscar por los nombres de los documentos, 
+		cuales posiblemente están relacionados a la búsqueda en particular y abrirlos para 
+		buscar dentro de estos lo que se necesita.
+	\end{itemize} 
+	
+	Todas estas problemáticas han provocado que no se esté sacando el máximo provecho a 
+	la metodología diseñada y como podemos ver la causa principal es que no 
+	se posee una herramienta adecuada que le de soporte.
+\section{Solución Propuesta}
+
+\section{Objetivos}
+
+	\subsection{Objetivo General}
+	El objetivo es el desarrollo de una aplicación para la solicitud y gestión de requerimientos y SCM para 
+	la Dirección de Servicios de Información y Computación de la Universidad de Valparaíso (DISICO).
+
+	\subsection{Objetivos Específicos}
+	\begin{itemize}
+		\item Dar soporte mediante una aplicación web, a la Metodología de SCM 
+		diseñada para DISICO \cite{paloma}.
+		\item Permitir monitorear el ciclo de vida completo de cada solicitud de 
+		requerimiento y de cambio que se recibe en DISICO.
+		\item Mejorar el control que tiene el Jefe de Área sobre las labores que se 
+		encuentra desempeñando actualmente cada miembro del equipo.
+		\item Mantener un historial de todas los requerimientos que se han 
+		completado, para permitir mejorar las estimaciones de tiempo y esfuerzo, para 
+		futuros requerimientos de similares características.
+		\item Obtener mediciones cuantitativas de la productividad del equipo de desarrollo.  
+	\end{itemize}
