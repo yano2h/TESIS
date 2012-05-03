@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.3.29)  2 MAY 2012 16:55
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.3.29)  3 MAY 2012 15:57
 entering extended mode
 **D:/TESIS/Informes/Informe_2/templateICI.tex
 (D:/TESIS/Informes/Informe_2/templateICI.tex
@@ -370,7 +370,8 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 )
 (D:\TESIS\Informes\Informe_2\templateICI.aux
 (D:\TESIS\Informes\Informe_2\capitulo1.aux)
-(D:\TESIS\Informes\Informe_2\capitulo2.aux))
+(D:\TESIS\Informes\Informe_2\capitulo2.aux)
+(D:\TESIS\Informes\Informe_2\capitulo3.aux))
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
 LaTeX Font Info:    ... okay on input line 53.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
@@ -456,7 +457,7 @@ LaTeX Info: Redefining \nameref on input line 53.
 (D:\TESIS\Informes\Informe_2\templateICI.out)
 \@outlinefile=\write3
 
-<imagenes/logoUV.png, id=107, 240.9pt x 113.42375pt>
+<imagenes/logoUV.png, id=171, 240.9pt x 113.42375pt>
 File: imagenes/logoUV.png Graphic file (type png)
  <use imagenes/logoUV.png>
 Package pdftex.def Info: imagenes/logoUV.png used on input line 60.
@@ -541,29 +542,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 43--49
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 66--74
+Underfull \hbox (badness 10000) in paragraph at lines 68--76
 
  []
 
-[4] <imagenes/hesk_interface.png, id=229, 762.85pt x 531.9875pt>
+[4] [5] <imagenes/hesk_interface.png, id=318, 762.85pt x 531.9875pt>
 File: imagenes/hesk_interface.png Graphic file (type png)
 
 <use imagenes/hesk_interface.png>
-Package pdftex.def Info: imagenes/hesk_interface.png used on input line 102.
+Package pdftex.def Info: imagenes/hesk_interface.png used on input line 104.
 (pdftex.def)             Requested size: 381.42407pt x 265.9931pt.
- [5] [6pdfTeX warning (ext4): destination with the same identifier (name{figure
-.2.1}) has been already used, duplicate ignored
+ [6pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
+}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.126 		\item E
-               l personal y los clientes se mantienen al dia con alertas de ...
- <D:/TESIS/Informes/Informe_2/imagenes/hesk_interface.png (PNG copy)>]
-<imagenes/osTicket_interface.png, id=242, 330.033pt x 233.673pt>
+l.126 		\item T
+               emas de ayuda configurables para los tickets web. Enruta las <D:
+/TESIS/Informes/Informe_2/imagenes/hesk_interface.png (PNG copy)>]
+<imagenes/osTicket_interface.png, id=325, 330.033pt x 233.673pt>
 File: imagenes/osTicket_interface.png Graphic file (type png)
 
 <use imagenes/osTicket_interface.png>
-Package pdftex.def Info: imagenes/osTicket_interface.png used on input line 138
+Package pdftex.def Info: imagenes/osTicket_interface.png used on input line 140
 .
 (pdftex.def)             Requested size: 330.03218pt x 233.67242pt.
  [7pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2
@@ -571,55 +572,55 @@ Package pdftex.def Info: imagenes/osTicket_interface.png used on input line 138
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.152 	\begin{itemize}
+l.154 	\begin{itemize}
                        <D:/TESIS/Informes/Informe_2/imagenes/osTicket_interface
-.png (PNG copy)>] <imagenes/OTRS_interface.png, id=248, 1027.84pt x 770.88pt>
+.png (PNG copy)>] <imagenes/OTRS_interface.png, id=331, 1027.84pt x 770.88pt>
 File: imagenes/OTRS_interface.png Graphic file (type png)
 
 <use imagenes/OTRS_interface.png>
-Package pdftex.def Info: imagenes/OTRS_interface.png used on input line 170.
+Package pdftex.def Info: imagenes/OTRS_interface.png used on input line 172.
 (pdftex.def)             Requested size: 411.12872pt x 308.34654pt.
  [8] [9pdfTeX warning (ext4): destination with the same identifier (name{figure
 .2.3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.192 		\item C
+l.194 		\item C
                rear Templates predefinidos para solicitudes de servicios a p...
  <D:/TESIS/Informes/Informe_2/imagenes/OTRS_interface.png>]
-<imagenes/SysAid_interface.png, id=261, 893.3375pt x 451.6875pt>
+<imagenes/SysAid_interface.png, id=344, 893.3375pt x 451.6875pt>
 File: imagenes/SysAid_interface.png Graphic file (type png)
 
 <use imagenes/SysAid_interface.png>
-Package pdftex.def Info: imagenes/SysAid_interface.png used on input line 223.
+Package pdftex.def Info: imagenes/SysAid_interface.png used on input line 225.
 (pdftex.def)             Requested size: 401.99815pt x 203.25749pt.
  [10] [11pdfTeX warning (ext4): destination with the same identifier (name{figu
 re.2.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.252 		\item P
+l.254 		\item P
                ermite personalizar el flujo de trabajo para satisfacer las n...
  <D:/TESIS/Informes/Informe_2/imagenes/SysAid_interface.png (PNG copy)>]
-<imagenes/changeGear_interface.png, id=273, 1161.33875pt x 831.105pt>
+<imagenes/changeGear_interface.png, id=356, 1161.33875pt x 831.105pt>
 File: imagenes/changeGear_interface.png Graphic file (type png)
 
 <use imagenes/changeGear_interface.png>
 Package pdftex.def Info: imagenes/changeGear_interface.png used on input line 2
-66.
+68.
 (pdftex.def)             Requested size: 464.52727pt x 332.43611pt.
 
-Overfull \hbox (30.90727pt too wide) in paragraph at lines 266--267
+Overfull \hbox (30.90727pt too wide) in paragraph at lines 268--269
  [] 
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 275--281
+Underfull \hbox (badness 10000) in paragraph at lines 277--283
 
  []
 
 
-Overfull \hbox (5.13191pt too wide) in paragraph at lines 286--314
+Overfull \hbox (5.13191pt too wide) in paragraph at lines 288--316
 [][]
  []
 
@@ -628,15 +629,15 @@ Overfull \hbox (5.13191pt too wide) in paragraph at lines 286--314
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.315 	\end{table}
+l.317 	\end{table}
                    <D:/TESIS/Informes/Informe_2/imagenes/changeGear_interface.p
 ng>]
-Underfull \hbox (badness 10000) in paragraph at lines 320--328
+Underfull \hbox (badness 10000) in paragraph at lines 322--330
 
  []
 
 
-Overfull \hbox (7.2429pt too wide) in paragraph at lines 330--356
+Overfull \hbox (7.2429pt too wide) in paragraph at lines 332--358
 [][]
  []
 
@@ -645,9 +646,9 @@ Overfull \hbox (7.2429pt too wide) in paragraph at lines 330--356
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.358 
+l.360 
       ]
-Underfull \hbox (badness 10000) in paragraph at lines 361--368
+Underfull \hbox (badness 10000) in paragraph at lines 363--370
 
  []
 
@@ -656,50 +657,87 @@ Underfull \hbox (badness 10000) in paragraph at lines 361--368
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.384 
+l.386 
       ]
-Underfull \hbox (badness 10000) in paragraph at lines 386--391
+Underfull \hbox (badness 10000) in paragraph at lines 388--393
 
  []
 
-) [16] (D:\TESIS\Informes\Informe_2\templateICI.bbl
+) [16] (D:\TESIS\Informes\Informe_2\capitulo3.tex
+Cap\'{\i }tulo 3.
+[17
+
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{table.3.1}) h
+as been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.44 	\subsection
+                 {Problemas en las Solicitudes de Requerimientos}]
+Underfull \hbox (badness 10000) in paragraph at lines 46--55
+
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\\' on input line 77.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--87
+
+ []
+
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 101--118
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--118
+
+ []
+
+[19]) [20] (D:\TESIS\Informes\Informe_2\templateICI.bbl
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 5.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [17
+) [21
 
 
 ])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 99.
- [18]
+ [22]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 99.
 
 (D:\TESIS\Informes\Informe_2\templateICI.aux
 (D:\TESIS\Informes\Informe_2\capitulo1.aux)
-(D:\TESIS\Informes\Informe_2\capitulo2.aux))
+(D:\TESIS\Informes\Informe_2\capitulo2.aux)
+(D:\TESIS\Informes\Informe_2\capitulo3.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 99.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 99.
 Package rerunfilecheck Info: File `templateICI.out' has not changed.
-(rerunfilecheck)             Checksum: 7CF452DD67FEB92BB48FCDEE4511051C;1990.
+(rerunfilecheck)             Checksum: 332CBAAE4352BC5841FEDE8B3FCBE071;3440.
  ) 
 Here is how much of TeX's memory you used:
- 7495 strings out of 494045
- 106215 string characters out of 3145957
- 205482 words of memory out of 3000000
- 10545 multiletter control sequences out of 15000+200000
+ 7545 strings out of 494045
+ 107047 string characters out of 3145957
+ 206219 words of memory out of 3000000
+ 10567 multiletter control sequences out of 15000+200000
  27889 words of font info for 58 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 29i,11n,30p,272b,551s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,11n,34p,272b,544s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Progra
 m Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files (
 x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX
  2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
 type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/t
 imes/utmri8a.pfb>
-Output written on templateICI.pdf (26 pages, 667715 bytes).
+Output written on templateICI.pdf (30 pages, 691664 bytes).
 PDF statistics:
- 367 PDF objects out of 1000 (max. 8388607)
- 85 named destinations out of 1000 (max. 500000)
- 239 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 473 PDF objects out of 1000 (max. 8388607)
+ 106 named destinations out of 1000 (max. 500000)
+ 367 words of extra memory for PDF output out of 10000 (max. 10000000)
 
