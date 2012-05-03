@@ -3,24 +3,25 @@
 \BOOKMARK [0][-]{chapter.1}{Introducci\363n}{}% 3
 \BOOKMARK [0][-]{chapter.2}{Marco Conceptual}{}% 4
 \BOOKMARK [1][-]{section.2.1}{Conceptos y Terminologia}{chapter.2}% 5
-\BOOKMARK [1][-]{section.2.2}{Metodologias para la solicitudes de Requerimientos}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.2}{Metodolog\355as para la solicitudes de Requerimientos}{chapter.2}% 6
 \BOOKMARK [2][-]{subsection.2.2.1}{ITIL v3 - Operaci\363n de Servicios}{section.2.2}% 7
 \BOOKMARK [1][-]{section.2.3}{Est\341ndares para la descripci\363n de Requerimientos}{chapter.2}% 8
-\BOOKMARK [1][-]{section.2.4}{Herramientas para la Solicitudes de Requerimientos}{chapter.2}% 9
-\BOOKMARK [2][-]{subsection.2.4.1}{Hesk}{section.2.4}% 10
-\BOOKMARK [2][-]{subsection.2.4.2}{osTicket}{section.2.4}% 11
-\BOOKMARK [2][-]{subsection.2.4.3}{OTRS}{section.2.4}% 12
-\BOOKMARK [2][-]{subsection.2.4.4}{SysAid}{section.2.4}% 13
-\BOOKMARK [2][-]{subsection.2.4.5}{ChangeGear - ServiceDesk}{section.2.4}% 14
-\BOOKMARK [1][-]{section.2.5}{Est\341ndares para SCM}{chapter.2}% 15
-\BOOKMARK [2][-]{subsection.2.5.1}{ISO Sistemas de Gesti\363n de calidad. Directrices para la Gesti\363n de la Configuraci\363n}{section.2.5}% 16
-\BOOKMARK [2][-]{subsection.2.5.2}{IEEE 828-2005 Plan de Gesti\363n de Configuraci\363n de Software}{section.2.5}% 17
-\BOOKMARK [2][-]{subsection.2.5.3}{IEEE 828-2012 Gesti\363n de la Configuraci\363n en Sistemas e Ingenier\355a de Software}{section.2.5}% 18
-\BOOKMARK [2][-]{subsection.2.5.4}{ITIL v3 - Transici\363n del Servicios}{section.2.5}% 19
-\BOOKMARK [1][-]{section.2.6}{Herramientas para SCM}{chapter.2}% 20
-\BOOKMARK [2][-]{subsection.2.6.1}{SVN}{section.2.6}% 21
-\BOOKMARK [2][-]{subsection.2.6.2}{Mercurial}{section.2.6}% 22
-\BOOKMARK [2][-]{subsection.2.6.3}{Git}{section.2.6}% 23
-\BOOKMARK [2][-]{subsection.2.6.4}{ChangeGear}{section.2.6}% 24
-\BOOKMARK [1][-]{section.2.7}{Metodologia actuales de DISICO}{chapter.2}% 25
-\BOOKMARK [0][-]{chapter*.6}{Bibliograf\355a}{}% 26
+\BOOKMARK [2][-]{subsection.2.3.1}{IEEE Std-830-1998 : Especificaci\363n de los Requisitos del Software}{section.2.3}% 9
+\BOOKMARK [1][-]{section.2.4}{Herramientas para la Solicitudes de Requerimientos}{chapter.2}% 10
+\BOOKMARK [2][-]{subsection.2.4.1}{Hesk}{section.2.4}% 11
+\BOOKMARK [2][-]{subsection.2.4.2}{osTicket}{section.2.4}% 12
+\BOOKMARK [2][-]{subsection.2.4.3}{OTRS}{section.2.4}% 13
+\BOOKMARK [2][-]{subsection.2.4.4}{SysAid}{section.2.4}% 14
+\BOOKMARK [2][-]{subsection.2.4.5}{ChangeGear - ServiceDesk}{section.2.4}% 15
+\BOOKMARK [1][-]{section.2.5}{Est\341ndares para SCM}{chapter.2}% 16
+\BOOKMARK [2][-]{subsection.2.5.1}{ISO Sistemas de Gesti\363n de calidad. Directrices para la Gesti\363n de la Configuraci\363n}{section.2.5}% 17
+\BOOKMARK [2][-]{subsection.2.5.2}{IEEE 828-2005 Plan de Gesti\363n de Configuraci\363n de Software}{section.2.5}% 18
+\BOOKMARK [2][-]{subsection.2.5.3}{IEEE 828-2012 Gesti\363n de la Configuraci\363n en Sistemas e Ingenier\355a de Software}{section.2.5}% 19
+\BOOKMARK [2][-]{subsection.2.5.4}{ITIL v3 - Transici\363n del Servicios}{section.2.5}% 20
+\BOOKMARK [1][-]{section.2.6}{Herramientas para SCM}{chapter.2}% 21
+\BOOKMARK [2][-]{subsection.2.6.1}{SVN}{section.2.6}% 22
+\BOOKMARK [2][-]{subsection.2.6.2}{Mercurial}{section.2.6}% 23
+\BOOKMARK [2][-]{subsection.2.6.3}{Git}{section.2.6}% 24
+\BOOKMARK [2][-]{subsection.2.6.4}{ChangeGear}{section.2.6}% 25
+\BOOKMARK [1][-]{section.2.7}{Metodologia actuales de DISICO}{chapter.2}% 26
+\BOOKMARK [0][-]{chapter*.6}{Bibliograf\355a}{}% 27
