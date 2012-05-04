@@ -5,3 +5,6 @@
 /*.toc
 /*.gz
 /*.bak
+/*.out
+/*.lot
+/*.lof
