@@ -405,7 +405,7 @@ relacionadas a SCM de hoy en dia son:
 	
 	\subsection{Git}
 	Git es un sistema distribuido de control de versiones libre y open sources, creado por 
-	Linus Torvalds (el creador del nucleo linux). Esta enfocado a la velocidad uso practico y
+	Linus Torvalds (el creador del núcleo linux). Esta enfocado a la velocidad uso practico y
 	manejo de proyectos grandes. Y no depende de acceso a la red o a un repositorio 
 	central, dado que al ser distribuido cada participante cuenta con una copia completa 
 	del repositorio de manera local, lo que permite trabajar sin conexión a internet.
@@ -415,6 +415,65 @@ relacionadas a SCM de hoy en dia son:
 \section{Comparación entre Herramientas}
 
 	\subsection{Comparación entre Herramientas para Solicitud de Requerimientos}	
+	\begin{table}[H]
+		\begin{tabular}{|m{3.3cm}| m{1.8cm} | m{1.8cm} | m{1.8cm} | m{1.8cm} | m{2.1cm} |}
+			\hline
+			\multirow{2}{*}{\textbf{Característica}} & \multicolumn{5}{c|}{\textbf{Herramientas}}\\
+												      \cline{2-6}
+												     & \textbf{Hesk} & \textbf{osTicket} & \textbf{OTRS} & \textbf{SysAid} & \textbf{ChangeGear} \\
+			\hline
+			\textbf{Versión Gratuita} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{Idioma Español} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline
+			\textbf{Soporta SQL Server} & {NO} &  {NO} & {SI} & {SI} & {SI} \\
+			\hline
+			\textbf{Código Libre} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{Escrito en Java} & {NO (PHP)} &  {NO (PHP)} & {NO (PHP)} & {SI} & {NO (.NET)} \\
+			\hline
+			\textbf{Servidor Web} & {Apache} &  {Apache} & {Apache} & {Tomcat} & {IIS 7} \\ % IIS = Internet Information Services
+			\hline
+			\textbf{Soporta SSO} & {NO} &  {NO} & {SI (Modificando el código fuente)} & {SI} & {SI} \\
+			\hline
+			\textbf{¿Genera N° de Consulta para las solicitudes?} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline
+			\textbf{¿Enviá automáticamente el numero al email?} & {NO} &  {SI} & {SI} & {SI} & {NO} \\
+			\hline
+			\textbf{¿El solicitante puede ver su historial de solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline %Seguir aqui
+			\textbf{¿Es posible separar por áreas las solicitudes?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿Es posible separar por áreas los usuarios?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿Es posible establecer un administrador por área?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿Es posible asignar responsable a las solicitudes?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿Solo el administrador del área puede asignar responsable a las solicitudes?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿Existe un rol capaz de transferir solicitudes a otra área?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿Solo el administrador del área puede transferir solicitudes a otra área?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿Es posible priorizar las solicitudes?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿Es posible establecer fecha de vencimiento para las solicitudes?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿Se generan alarmas para las solicitudes vencidas?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿Cada área ve solo las solicitudes de su área?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿El administrador del área puede ver gráficos y estadísticas de las solicitudes de cada miembro de un área?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿El solicitante recibe notificaciones cuando su solicitud es actualizada?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿Es posible solicitar autorización a otro usuario para llevar a cabo una solicitud?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			\textbf{¿Al cerrar la solicitud es posible responder a otro usuario que no sea el solicitante?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+		\end{tabular}
+	\end{table}
 	
 	\subsection{Comparación ente Herramientas para SCM}
 	
