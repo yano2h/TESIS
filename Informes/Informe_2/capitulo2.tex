@@ -43,10 +43,13 @@
 		%\item{\textbf{KB:}}
 		%\item{\textbf{SKBS:}}
 		%\item{\textbf{Item de Configuración:}}
+		%\item{\textbf{SLAs:}}
 		%\item{\textbf{SCM:}}
 	\end{itemize}
 
-\section{Procesos para la solicitudes de Requerimientos}
+
+\section{Metodologías para la solicitudes de Requerimientos}
+\label{metod_sol_req}
 ITIL nos ofrece la siguiente definición de servicio; "Un servicio es un medio para 
 entregar valor a los clientes facilitándoles un resultado deseado sin la necesidad 
 de que estos asuman los costes y riesgos específicos asociados".\\
@@ -58,6 +61,7 @@ se registran eventos, incidencias, problemas, peticiones y accesos al servicio.\
 De los principales procesos asociados a esta fase existen dos relacionados
 de cierta manera a la solicitud de requerimientos, estos son la \textit{Petición de 
 Servicios TI} y \textit{Gestión de Incidencias}.
+
 	
 	\subsection{ITIL v3 - Petición de Servicios TI}
 	La Gestión de Peticiones, como su nombre indica, es la encargada de atender las 
@@ -94,17 +98,18 @@ Servicios TI} y \textit{Gestión de Incidencias}.
 			\caption{Proceso de la Petición de servicios TI}
 		\end{center}
 	\end{figure}
+
 		
 	\subsection{ITIL v3 - Gestión de Incidencias}
 	La Gestión de Incidencias tiene como objetivo resolver, de la manera más rápida y eficaz 
 	posible, cualquier incidente que cause una interrupción en el servicio. No se preocupa de 
 	encontrar y analizar las causas subyacentes a un determinado incidente sino exclusivamente
-	de restaurar el servicio.
+	de restaurar el servicio\cite{itil_v3}.
 	
 	Aunque el concepto de incidencia se asocia naturalmente con cualquier mal funcionamiento de 
 	los sistemas de hardware y software, según el libro de Soporte del Servicio de ITIL una incidencia es:
 	"Cualquier evento que no forma parte de la operación estándar de un servicio y que causa, o 
-	puede causar, una interrupción o una reducción de calidad del mismo".
+	puede causar, una interrupción o una reducción de calidad del mismo"\cite{itil_v3}.
 
 	Las actividades incluidas en el proceso de Gestión de Incidencias son:
 	\begin{itemize}
@@ -131,7 +136,10 @@ Servicios TI} y \textit{Gestión de Incidencias}.
 		\end{center}
 	\end{figure}
 
+
 \section{Estándares para la descripción de Requerimientos}
+\label{estandar_req}
+
 
 	\subsection{IEEE Std-830-1998 : Especificación de los Requisitos del Software}
 	El estándar IEEE 830 describe el contenido y cualidades de una buena especificación de 
@@ -184,6 +192,7 @@ Servicios TI} y \textit{Gestión de Incidencias}.
 	Sin embargo el estándar no identifica ningún método especifico, nomenclatura o 
 	herramienta para la preparación de una ERS.
 
+
 \section{Herramientas para la Solicitudes de Requerimientos}
 En este trabajo se entiende por Herramienta para la Solicitud de Requerimientos, 
 como una plataforma a través de la cual los usuarios de los sistemas de la Universidad 
@@ -200,6 +209,7 @@ Asignamiento de tickets. Ambos se centran principalmente en el seguimiento
 de problemas o de solicitudes de asistencia mediante el creación y asignación
 de Tickets. A continuación se nombran y describen algunas de las mas relevantes
 de este tipo:
+
 
 	\subsection{Hesk}
 	Es un sistema gratuito, programado en php con mysql, que permite gestionar 
@@ -225,6 +235,7 @@ de este tipo:
 			\caption{Interfaz de Administración de Hesk}
 		\end{center}
 	\end{figure}
+
 
 	\subsection{osTicket}
 	Es un sistema de ticket open source muy extendido. Integra sin problemas 
@@ -262,6 +273,7 @@ de este tipo:
 		\end{center}
 	\end{figure}
 
+
 	\subsection{OTRS}
 	OTRS  es una suite de código abierto líder en innovación de servicios, 
 	que incluye Help Desk, una solución para la gestión de servicios de IT. 
@@ -293,6 +305,7 @@ de este tipo:
 			\caption{Interfaz de Vista de Tickets en OTRS}
 		\end{center}
 	\end{figure}
+
 
 	\subsection{SysAid}
 	SysAid es una solución de servicio técnico integral que ayuda a optimizar las 
@@ -347,6 +360,7 @@ de este tipo:
 		\end{center}
 	\end{figure}
 
+
 	\subsection{ChangeGear - ServiceDesk}
 	ChangeGear Service Desk es una solución completa que permite al personal de
 	soporte responder rápida y fácilmente a las peticiones de los clientes. Diseñado
@@ -391,8 +405,10 @@ de este tipo:
 		\end{center}
 	\end{figure}
 
+
 \section{Estándares para SCM}
 	
+
 	\subsection{ISO Sistemas de Gestión de calidad. Directrices para la Gestión de la 
 	Configuración}
 	El propósito de este estándar, es aumentar el entendimiento común de los temas
@@ -438,7 +454,6 @@ de este tipo:
 	\end{table}
 	
 
-
 	\subsection{IEEE 828-2005 Plan de Gestión de Configuración de Software} 
 	A través de este estándar se establecen los contenidos mínimos requeridos
 	en un Plan de Gestión de la Configuración del Software (SCM). Este estandar se
@@ -479,8 +494,8 @@ de este tipo:
 		\caption{Clases de Información SCM definidas por la IEEE 828}
 	\end{table}
 
+
 	\subsection{IEEE 828-2012  Gestión de la Configuración en Sistemas e Ingeniería de Software} 
-		
 	Esta norma establece los requisitos mínimos para los procesos de Gestión de la
 	Configuración (CM) en sistemas e ingeniería de software. La aplicación de esta
 	norma se aplica a cualquier forma, clase o tipo de software o sistema. Esta
@@ -494,6 +509,7 @@ de este tipo:
 	las actividades de CM a realizar, cuando estas van a ocurrir en el ciclo de vida, 
 	y que planificación y recursos son necesarios. También se describen las áreas de
 	contenido para un Plan de CM\cite{IEEE828_2012}. 
+
 	
 	\subsection{ITIL v3 - Gestión del Cambio}
 	En la Fase de Transición de los Servicios TI de ITIL v3 se describe un proceso para
@@ -526,6 +542,7 @@ de este tipo:
 			\caption{Proceso de la Gestión de Cambios TI}
 		\end{center}
 	\end{figure}
+
 
 	\subsection{ITIL v3 - Gestión de la Configuración y Activos del Servicio}
 	En ITIL v3 también se hace mención a la Gestión de la Configuración, con el nombre
@@ -575,12 +592,14 @@ de este tipo:
 		\end{center}
 	\end{figure}
 
+
 \section{Herramientas para SCM}
 Actualmente la mayoria de las herramientas relacionadas con SCM se enfocan 
 solo al control de versiones, por lo que no existen realmente herramientas que
 abarquen el proceso completo de SCM, ya que el proceso de SCM va mucho mas
 aya que solo el control de versiones. Algunas de las principales herramientas
 relacionadas a SCM de hoy en dia son:
+
 
 	\subsection{SVN}
 	SVN o  Subversion es un sistema de control de versiones centralizado libre y de código
@@ -594,12 +613,14 @@ relacionadas a SCM de hoy en dia son:
 	respectivas ubicaciones. Todo esto además permite realizar cambios sin temer que la
 	calidad del código se vea afectada, ya que ante cualquier problema se puede volver a la
 	versión anterior.
+
 	
 	\subsection{Mercurial}
 	Mercurial es una herramienta libre para administración del control de versiones. Ofrece 
 	el poder de manejar de manera eficiente sus proyectos de cualquier tamaño mientras 
 	usa una intuitiva interface. Es fácil de usar y difícil de romper, haciéndolo ideal para 
 	trabajar con cualquier archivo de versionados.
+
 	
 	\subsection{Git}
 	Git es un sistema distribuido de control de versiones libre y open sources, creado por 
@@ -608,6 +629,7 @@ relacionadas a SCM de hoy en dia son:
 	central, dado que al ser distribuido cada participante cuenta con una copia completa 
 	del repositorio de manera local, lo que permite trabajar sin conexión a internet.
 	
+
 	\subsection{ChangeGear - Change Edition}
 	Esta es otra herramienta de GangeGear que ofrece automatización de procesos TI
 	para simplificar el proceso de cambio y de gestión de releases. Esto incluye la
@@ -617,17 +639,73 @@ relacionadas a SCM de hoy en dia son:
 	gestionar y controlar todos los cambios de TI realizados en su entorno de TI. El resto
 	de sus características son practicamente las mismas que ChangeGear - ServiceDesk.
 
+
 \section{Comparación entre Estandares}
-	\subsection{Comparación entre estandares de Requerimientos}
 	
-	\subsection{Comparación entre estandares para SCM}
+
+	\subsection{Comparación entre estándares y metodologías para solicitud y descripción Requerimientos}
+	\begin{table}[H]
+		\begin{tabular}{|c|m{8cm}|}
+			\hline
+			\textbf{Estándar } & \textbf{Descripción}\\
+			\hline
+			{ITIL v3 - Petición de Servicios TI} & {Define como atender las peticiones de los usuarios}\\
+			\hline
+			{ITIL v3 - Gestión de Incidencias} & {Define el proceso para resolver las incidencias que interrumpen el servicio.}\\
+			\hline
+			{IEEE Std-830-1998} & {Define como realizar una ERS}\\
+			\hline
+		\end{tabular}
+		\caption{Comparación de estándares para solicitud y descripción de requerimientos}
+		\label{comp_req}
+	\end{table}
+	
+	Según la tabla \ref{comp_req} y lo descrito anteriormente en la sección \label{metod_sol_req} 
+	y \ref{estandar_req} se observa que el estándar IEEE 830 escapa a los propósitos de este 
+	trabajo dado que el tipo de requerimientos	y el nivel de detalle de los mismos difícilmente 
+	podrá ser descrito por un usuario que no posee conocimientos sobre ingeniería de software, 
+	por lo que su utilización queda completamente descartada. Por otra parte ITIL v3 se acomoda 
+	bastante bien al propósito de permitir a los usuarios enviar peticiones de requerimientos (o servicio) 
+	a DISICO, ademas ITIL v3 describe relaciones entre estas peticiones y las peticiones de cambio, lo
+	cual también es abordado en este trabajo. 	Por tanto para este trabajo se utilizara una mezcla 
+	de ambos procesos (Petición de Servicios y Gestión de Incidencias), y serán adaptados a las 
+	necesidades y flujo de trabajo que tiene DISICO.
+	
+	Cabe destacar que ITIL v3 es mucho mas amplio y completo de lo que se a descrito en 
+	este documento y que abarca todo lo relacionado a servicios de TI. Sin embargo aquí 
+	se han resumido y considerado solo los procesos de Petición de Servicios 
+	y Gestión de Incidencias descritos por ITIL v3 ya que son los que abarcan los temas 
+	de nuestro interés. 
+	
+
+	\subsection{Comparación entre estándares para SCM}
+	\begin{table}[H]
+		\begin{tabular}{|c|m{8cm}|}
+			\hline
+			\textbf{Estándar } & \textbf{Descripción}\\
+			\hline
+			{ISO - 10007} & {}\\
+			\hline
+			{IEEE 828-2005 } & {}\\
+			\hline
+			{IEEE 828-2012 } & {}\\
+			\hline
+			{ITIL v3 - Gestión del Cambio} & {}\\
+			\hline
+			{ITIL v3 - Gestión de la Configuración y Activos del Servicio} & {}\\
+			\hline
+		\end{tabular}
+		\caption{Comparación de estándares para solicitud y descripción de requerimientos}
+		\label{comp_req}
+	\end{table}
 
 
 \section{Comparación entre Herramientas}
-	Acontinuación se presenta una comparación entre las herramientas anteriormente
-	descritas, en base a las caracteristicas y/o funciones basicas con las que
+	A continuación se presenta una comparación entre las herramientas anteriormente
+	descritas, en base a las características y/o funciones básicas con las que
 	debiesen contar para satisface la necesidad actual del cliente. 
 	
+
 	\subsection{Comparación entre Herramientas para Solicitud de Requerimientos}	
 	\begin{table}[H]
 		\begin{tabular}{|m{3.3cm}| m{1.8cm} | m{1.8cm} | m{1.8cm} | m{1.8cm} | m{2.1cm} |}
@@ -687,9 +765,8 @@ relacionadas a SCM de hoy en dia son:
 			{¿Al cerrar la solicitud es posible responder a otro usuario que no sea el solicitante?} & {NO} &  {NO} & {NO} & {NO} & {NO} \\
 			\hline
 		\end{tabular}
-		\caption{Comparación de Herramientas para solicitud de Requerimietnos}
+		\caption{Comparación de Herramientas para solicitud de Requerimientos}
 	\end{table}
-	
 
 	
 	\subsection{Comparación ente Herramientas para SCM}
@@ -714,6 +791,7 @@ relacionadas a SCM de hoy en dia son:
 	\end{tabular}
 		\caption{Comparación de Herramientas para SCM}
 	\end{table}
+
 
 	\subsection{Analisis de las Herramientas y Estandares investigados}
 	Luego de realizar un analisis de 
