@@ -2,7 +2,7 @@
 
 \section{Conceptos y Terminologia}
 	\begin{itemize}
-		\item{\textbf{Solicitud:}}
+		%\item{\textbf{Solicitud:}}
 		\item{\textbf{Requerimiento:}} El Glosario de Terminología Estándar de 
 		Ingeniería de Software 
 		\cite{ieee610.12:1990} define al requisito como:
@@ -25,40 +25,75 @@
 		aplicaciones de autoservicio: catálogo electrónico y reset de passwords y 
 		respaldo 	
 		 online \cite{helpdesk}.
-		\item{\textbf{IT:}}
-		\item{\textbf{ITIL:}}
-		\item{\textbf{CMDB:}}
-		\item{\textbf{SCM:}}
+		%\item{\textbf{IT:}}
+		\item{\textbf{ITIL:}} ITIL puede ser definido como un conjunto de buenas prácticas 
+		destinadas a mejorar la gestión y provisión de servicios TI. Su objetivo último es 
+		mejorar la calidad de los servicios TI ofrecidos, evitar los problemas asociados
+		a los mismos y en caso de que estos ocurran ofrecer un marco de actuación 
+		para que estos sean solucionados con el menor impacto y a la mayor 
+		brevedad posible\cite{itil_v3}.
+		\item{\textbf{CMDB:}} Base de Datos de la Gestión de Configuraciones,  esta base 
+		de datos debe incluir: 
+		\begin{itemize}
+			\item Información detallada de cada elemento de configuración,
+			\item Interrelaciones entre los diferentes elementos de configuración, como, 
+			por ejemplo, relaciones "padre-hijo" o interdependencias tanto lógicas como 
+			físicas.
+		\end{itemize}
+		%\item{\textbf{SCM:}}
 	\end{itemize}
 
-\section{Metodologías para la solicitudes de Requerimientos}
-	\subsection{ITIL v3 - Operación de Servicios}
-	ITIL puede ser definido como un conjunto de buenas prácticas destinadas 
-	a mejorar la gestión y provisión de servicios TI. Su objetivo último es 
-	mejorar la calidad de los servicios TI ofrecidos, evitar los problemas asociados
-	a los mismos y en caso de que estos ocurran ofrecer un marco de actuación 
-	para que estos sean solucionados con el menor impacto y a la mayor 
-	brevedad posible\cite{itil_v3}.\\
-	
-	ITIL nos ofrece la siguiente definición de servicio; "Un servicio es un medio para 
-	entregar valor a los clientes facilitándoles un resultado deseado sin la necesidad 
-	de que estos asuman los costes y riesgos específicos asociados".
-	\\\\
-	ITIL v3 consta de 5 libros basados en el ciclo de vida del servicio:
-	\begin{enumerate}
-		\item Estrategia del Servicio
-		\item Diseño del Servicio
-		\item Transición del Servicio
-		\item Operación del Servicio
-		\item Mejora Continua del Servicio	
-	\end{enumerate}
+\section{Procesos para la solicitudes de Requerimientos}
+ITIL nos ofrece la siguiente definición de servicio; "Un servicio es un medio para 
+entregar valor a los clientes facilitándoles un resultado deseado sin la necesidad 
+de que estos asuman los costes y riesgos específicos asociados".\\
 
-	De estos 5, la Operación de Servicio es donde se monitoriza activa y pasivamente
-	el funcionamiento del servicio, se registran eventos, incidencias, problemas, peticiones
-	y accesos al servicio. Y aunque no son precisamente un estándar, es una buena
- 	aproximación y vale la pena considerarlo.
+ITIL v3 consta de 5 libros basados en el ciclo de vida del servicio y de estos 5, la 
+Operación de Servicio monitoriza activa y pasivamente el funcionamiento del servicio, 
+se registran eventos, incidencias, problemas, peticiones y accesos al servicio.\\ 
+
+De los principales procesos asociados a esta fase existen dos relacionados
+de cierta manera a la solicitud de requerimientos, estos son la \textit{Petición de 
+Servicios TI} y \textit{Gestión de Problemas}.
 	
-	Detalles sobre la Operación de servicios ....
+	\subsection{ITIL v3 - Petición de Servicios TI}
+	La Gestión de Peticiones, como su nombre indica, es la encargada de atender las 
+	peticiones de los usuarios proporcionándoles información y acceso rápido a los 
+	servicios estándar de la organización TI.\\
+	
+	Es importante aclarar qué entendemos por petición de servicio, un concepto que 
+	engloba las solicitudes que los usuarios pueden plantear al departamento de TI:
+	
+	\begin{itemize}
+		\item Solicitudes de información o consejo.
+		\item Peticiones de cambios estándar (por ejemplo cuando el usuario olvida su 
+		contraseña y solicita una nueva).
+		\item Peticiones de acceso a servicios TI.
+	\end{itemize}
+	Las actividades incluidas en el proceso de Gestión de Peticiones son:
+	\begin{itemize}
+		\item \textbf{Selección de peticiones:} Los usuarios, a través de las 
+		herramientas destinadas a tal fin por la Gestión de Peticiones, emiten sus 
+		peticiones conforme a una serie de tipologías predefinidas.
+		\item \textbf{Aprobación financiera de la petición:} Dado que la mayoría de 
+		peticiones tienen implicaciones financieras, se considera su coste y se decide 
+		si tramitar la petición o no.
+		\item \textbf{Tramitación:} La petición es cursada por la persona o personas 
+		adecuadas según cada caso.
+		\item \textbf{Cierre:} Tras notificar al Centro de Servicios y comprobar desde 
+		aquél que el usuario ha quedado conforme con la gestión se procede a 
+		cerrarla.
+	\end{itemize}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/Proceso_gestion_peticiones_IT.png}
+			\caption{Proceso de la Petición de servicios TI}
+		\end{center}
+	\end{figure}
+		
+	\subsection{ITIL v3 - Gestión de Problemas}
+
 
 \section{Estándares para la descripción de Requerimientos}
 
@@ -110,7 +145,6 @@
 		criterios de V\&V, o procedimientos de aceptación.
 	\end{itemize}
 
-	
 	Sin embargo el estándar no identifica ningún método especifico, nomenclatura o 
 	herramienta para la preparación de una ERS.
 
@@ -276,6 +310,7 @@ de este tipo:
 			\caption{Interfaz de Vista de Tickets en SysAid}
 		\end{center}
 	\end{figure}
+
 	\subsection{ChangeGear - ServiceDesk}
 	ChangeGear Service Desk es una solución completa que permite al personal de
 	soporte responder rápida y fácilmente a las peticiones de los clientes. Diseñado
@@ -373,8 +408,8 @@ de este tipo:
 	en un Plan de Gestión de la Configuración del Software (SCM). Este estandar se
 	aplica al ciclo de vida completo de software critico. Tambien a software no critico
 	y software ya desarrollado. La aplicación de este estandar no esta restringida a
-	ninguna forma, clase o tipo de software\cite{IEEE828}.
-	\\\\
+	ninguna forma, clase o tipo de software\cite{IEEE828}.\\
+
 	En este estándar la información de la planificación de SCM 
 	es dividida en seis clases las cuales se describen a continuación.
 
@@ -424,9 +459,86 @@ de este tipo:
 	y que planificación y recursos son necesarios. También se describen las áreas de
 	contenido para un Plan de CM\cite{IEEE828_2012}. 
 	
-	\subsection{ITIL v3 - Transición del Servicios}
+	\subsection{ITIL v3 - Gestión del Cambio}
+	En la Fase de Transición de los Servicios TI de ITIL v3 se describe un proceso para
+	la gestión del cambio. Aquí se establece que el principal objetivo de la Gestión de 
+	Cambios es la evaluación y planificación del proceso de cambio para asegurar que, 
+	si éste se lleva a cabo, se haga de la forma más eficiente, siguiendo los procedimientos 
+	establecidos y asegurando en todo momento la calidad y continuidad del servicio TI.\\
 
-	
+	Las principales razones para la realización de cambios en la infraestructura TI son:
+	\begin{itemize}
+		\item Solución de errores conocidos.
+		\item Desarrollo de nuevos servicios.
+		\item Mejora de los servicios existentes.
+		\item Imperativo legal.
+	\end{itemize}
+	Las principales actividades de la Gestión de Cambios se resumen en:
+	\begin{itemize}
+		\item Registrar, evaluar y aceptar o rechazar las peticiones de cambio (RFC) 
+		recibidas.
+		\item Planificación e implementación del cambio
+		\item Convocar reuniones del Comite Acesor del Cambio, excepto en el caso de 
+		cambios menores, para la aprobación de las peticiones de cambio y la elaboración 
+		del calendario del cambio.
+		\item Evaluar los resultados del cambio y proceder a su cierre en caso de éxito.
+	\end{itemize}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/Proceso_gestion_cambio.png}
+			\caption{Proceso de la Gestión de Cambios TI}
+		\end{center}
+	\end{figure}
+
+	\subsection{ITIL v3 - Gestión de la Configuración y Activos del Servicio}
+	En ITIL v3 también se hace mención a la Gestión de la Configuración, con el nombre
+	de \textit{Gestión de la Configuración y Activos del Servicio} cuyas principales 
+	funciones pueden ser resumidas en:
+
+	\begin{itemize}
+		\item Llevar el control de todos los elementos de configuración de la 
+		infraestructura TI con el adecuado nivel de detalle y gestionar dicha 
+		información a través de la Base de Datos de Configuración (CMDB).
+		\item Proporcionar información precisa sobre la configuración TI a la 
+		Planificación y Soporte a la Transición en su papel de coordinación del 
+		cambio para que ésta pueda establecer las fases y plazos en que se articulará 
+		la Transición.
+		\item Interactuar con la Gestiones de Incidencias, Problemas, Cambios y 
+		Entregas y Despliegues de manera que éstas puedan resolver más 
+		eficientemente las incidencias, encontrar rápidamente la causa de los problemas, 
+		realizar los cambios necesarios para su resolución y mantener actualizada en todo 
+		momento la CMDB.
+		\item Monitorizar periódicamente la configuración de los sistemas en el entorno 
+		de producción y contrastarla con la almacenada en la CMDB para subsanar 
+		discrepancias.
+	\end{itemize}
+	El proceso Gestión de la Configuración y Activos TI en resumen tiene como 
+	principales actividades:
+
+	\begin{itemize}
+		\item \textbf{Planificación:} determinar los objetivos y estrategias de la Gestión de 
+		la Configuración y Activos TI.
+		\item \textbf{Clasificación y Registro:} los CIs deben ser registrados conforme al 
+		alcance, nivel de profundidad y nomenclatura predefinidos.
+		\item \textbf{Monitorización y Control:} monitorizar la CMDB para asegurar que 
+		todos los componentes autorizados estén correctamente registrados y se conoce 
+		su estado actual.
+		\item \textbf{Realización de auditorías:} para asegurar que la información 
+		registrada en la CMDB coincide con la configuración real de la estructura TI de la 
+		organización.
+		\item \textbf{Elaboración de informes:} para evaluar el rendimiento de la Gestión 
+		de la Configuración y Activos TI y aportar información de vital importancia a otras 
+		áreas de la infraestructura TI.
+	\end{itemize}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/Proceso_gestion_configuracion.png}
+			\caption{Proceso de la Gestión de Configuración TI}
+		\end{center}
+	\end{figure}
+
 \section{Herramientas para SCM}
 Actualmente la mayoria de las herramientas relacionadas con SCM se enfocan 
 solo al control de versiones, por lo que no existen realmente herramientas que
@@ -460,6 +572,15 @@ relacionadas a SCM de hoy en dia son:
 	central, dado que al ser distribuido cada participante cuenta con una copia completa 
 	del repositorio de manera local, lo que permite trabajar sin conexión a internet.
 	
-	\subsection{ChangeGear}
+	\subsection{ChangeGear - Change Edition}
+	Esta es otra herramienta de GangeGear que ofrece automatización de procesos TI
+	para simplificar el proceso de cambio y de gestión de releases. Esto incluye la
+	automatización de flujos de trabajo, aprobaciones, notificaciones, y que proporcionan
+	una completo historial  pista de auditoría. Su principal característica es que se
+	incorpora en el proceso de gestión de cambios y permite realizar un seguimiento, 
+	gestionar y controlar todos los cambios de TI realizados en su entorno de TI. El resto
+	de sus características son practicamente las mismas que ChangeGear - ServiceDesk.
+
+
 
 \section{Metodologia actuales de DISICO}

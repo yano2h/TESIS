@@ -1,8 +1,11 @@
 \select@language {spanish}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Interfaz de Administraci\'on de Hesk}}{7}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Interfaz de Vista y Respuesta de Tickets en osTicket}}{8}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Interfaz de Vista de Tickets en OTRS}}{10}{figure.2.3}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Interfaz de Vista de Tickets en SysAid}}{12}{figure.2.4}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Interfaz de Vista de Tickets en ChangeGear}}{14}{figure.2.5}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Proceso de la Petici\'on de servicios TI}}{5}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Interfaz de Administraci\'on de Hesk}}{8}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Interfaz de Vista y Respuesta de Tickets en osTicket}}{10}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Interfaz de Vista de Tickets en OTRS}}{11}{figure.2.4}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Interfaz de Vista de Tickets en SysAid}}{13}{figure.2.5}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Interfaz de Vista de Tickets en ChangeGear}}{15}{figure.2.6}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Proceso de la Gesti\'on de Cambios TI}}{18}{figure.2.7}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Proceso de la Gesti\'on de Configuraci\'on TI}}{20}{figure.2.8}
