@@ -16,7 +16,7 @@
 			como las expresadas en (1) y (2).
 		\end{enumerate}
 		\item{\textbf{Tarea:}} Una secuencia de instrucciones tratadas como una 	
-		unidad básica de trabajo 
+		unidad básica de trabajo. 
 		\item{\textbf{HelpDesk:}} O en español Mesa de ayuda establece un punto 
 		único de contacto y permite dar soporte remoto a los usuarios mejorando su 
 		productividad. Dentro de los subservicios que puede brindar la mesa de 
@@ -40,6 +40,9 @@
 			por ejemplo, relaciones "padre-hijo" o interdependencias tanto lógicas como 
 			físicas.
 		\end{itemize}
+		%\item{\textbf{KB:}}
+		%\item{\textbf{SKBS:}}
+		%\item{\textbf{Item de Configuración:}}
 		%\item{\textbf{SCM:}}
 	\end{itemize}
 
@@ -54,12 +57,12 @@ se registran eventos, incidencias, problemas, peticiones y accesos al servicio.\
 
 De los principales procesos asociados a esta fase existen dos relacionados
 de cierta manera a la solicitud de requerimientos, estos son la \textit{Petición de 
-Servicios TI} y \textit{Gestión de Problemas}.
+Servicios TI} y \textit{Gestión de Incidencias}.
 	
 	\subsection{ITIL v3 - Petición de Servicios TI}
 	La Gestión de Peticiones, como su nombre indica, es la encargada de atender las 
 	peticiones de los usuarios proporcionándoles información y acceso rápido a los 
-	servicios estándar de la organización TI.\\
+	servicios estándar de la organización TI\cite{itil_v3}.\\
 	
 	Es importante aclarar qué entendemos por petición de servicio, un concepto que 
 	engloba las solicitudes que los usuarios pueden plantear al departamento de TI:
@@ -92,8 +95,41 @@ Servicios TI} y \textit{Gestión de Problemas}.
 		\end{center}
 	\end{figure}
 		
-	\subsection{ITIL v3 - Gestión de Problemas}
+	\subsection{ITIL v3 - Gestión de Incidencias}
+	La Gestión de Incidencias tiene como objetivo resolver, de la manera más rápida y eficaz 
+	posible, cualquier incidente que cause una interrupción en el servicio. No se preocupa de 
+	encontrar y analizar las causas subyacentes a un determinado incidente sino exclusivamente
+	de restaurar el servicio.
+	
+	Aunque el concepto de incidencia se asocia naturalmente con cualquier mal funcionamiento de 
+	los sistemas de hardware y software, según el libro de Soporte del Servicio de ITIL una incidencia es:
+	"Cualquier evento que no forma parte de la operación estándar de un servicio y que causa, o 
+	puede causar, una interrupción o una reducción de calidad del mismo".
 
+	Las actividades incluidas en el proceso de Gestión de Incidencias son:
+	\begin{itemize}
+		\item \textbf{Registro:} La incidencia debe ser registrada inmediatamente, pues resulta 
+		mucho más costoso hacerlo posteriormente y se corre el riesgo de que la aparición de 
+		nuevas incidencias demore indefinidamente el proceso. 
+		\item \textbf{Clasificación:} Tiene como objetivo principal el recopilar toda la información 
+		que pueda ser utilizada para la resolución de la incidencia. Incluye categorización, 
+		establecimiento del nivel de prioridad, asignación de recursos, y monitorización del estado 
+		y tiempo de respuesta esperado.
+		\item \textbf{Diagnostico:} Se examina la incidencia con ayuda de la KB para determinar
+		si se puede identificar con alguna incidencia ya resuelta para aplicar el procedimiento asignado.
+		Si no se puede resolver esta escala a un nivel superior para su investigación. Si fuese necesario
+		se puede generar una petición de cambio.
+		\item \textbf{Resolución:} Una vez resuelta la incidencia, se debe consultar con los usuarios si la 
+		solución es satisfactoria, se reclasifica el incidente si es necesario, se actualiza la información en
+		el CMDB sobre los item de configuración implicados, se incorpora el proceso de resolución al SKMS.
+	\end{itemize}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/Proceso_gestion_incidencias.png}
+			\caption{Proceso de la gestión de incidencias}
+		\end{center}
+	\end{figure}
 
 \section{Estándares para la descripción de Requerimientos}
 
@@ -581,10 +617,17 @@ relacionadas a SCM de hoy en dia son:
 	gestionar y controlar todos los cambios de TI realizados en su entorno de TI. El resto
 	de sus características son practicamente las mismas que ChangeGear - ServiceDesk.
 
+\section{Comparación entre Estandares}
+	\subsection{Comparación entre estandares de Requerimientos}
+	
+	\subsection{Comparación entre estandares para SCM}
 
 
 \section{Comparación entre Herramientas}
-
+	Acontinuación se presenta una comparación entre las herramientas anteriormente
+	descritas, en base a las caracteristicas y/o funciones basicas con las que
+	debiesen contar para satisface la necesidad actual del cliente. 
+	
 	\subsection{Comparación entre Herramientas para Solicitud de Requerimientos}	
 	\begin{table}[H]
 		\begin{tabular}{|m{3.3cm}| m{1.8cm} | m{1.8cm} | m{1.8cm} | m{1.8cm} | m{2.1cm} |}
@@ -593,60 +636,89 @@ relacionadas a SCM de hoy en dia son:
 												      \cline{2-6}
 												     & \textbf{Hesk} & \textbf{osTicket} & \textbf{OTRS} & \textbf{SysAid} & \textbf{ChangeGear} \\
 			\hline
-			\textbf{Versión Gratuita} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{Versión Gratuita} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
 			\hline
-			\textbf{Idioma Español} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
+			{Idioma Español} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			\textbf{Soporta SQL Server} & {NO} &  {NO} & {SI} & {SI} & {SI} \\
+			{Soporta SQL Server} & {NO} &  {NO} & {SI} & {SI} & {SI} \\
 			\hline
-			\textbf{Código Libre} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{Código Libre} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
 			\hline
-			\textbf{Escrito en Java} & {NO (PHP)} &  {NO (PHP)} & {NO (PHP)} & {SI} & {NO (.NET)} \\
+			{Escrito en Java} & {NO (PHP)} &  {NO (PHP)} & {NO (PHP)} & {SI} & {NO (.NET)} \\
 			\hline
-			\textbf{Servidor Web} & {Apache} &  {Apache} & {Apache} & {Tomcat} & {IIS 7} \\ % IIS = Internet Information Services
+			{Servidor Web} & {Apache} &  {Apache} & {Apache} & {Tomcat} & {IIS 7} \\ % IIS = Internet Information Services
 			\hline
-			\textbf{Soporta SSO} & {NO} &  {NO} & {SI (Modificando el código fuente)} & {SI} & {SI} \\
+			{Soporta SSO} & {NO} &  {NO} & {SI (Modificando el código fuente)} & {SI} & {SI} \\
 			\hline
-			\textbf{¿Genera N° de Consulta para las solicitudes?} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
+			{¿Genera N° de Consulta para las solicitudes?} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			\textbf{¿Enviá automáticamente el numero al email?} & {NO} &  {SI} & {SI} & {SI} & {NO} \\
+			{¿Enviá automáticamente el numero al email?} & {NO} &  {SI} & {SI} & {SI} & {NO} \\
 			\hline
-			\textbf{¿El solicitante puede ver su historial de solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
-			\hline %Seguir aqui
-			\textbf{¿Es posible separar por áreas las solicitudes?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿El solicitante puede ver su historial de solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline 
+			{¿Es posible separar por áreas las solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			\textbf{¿Es posible separar por áreas los usuarios?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿Es posible separar por áreas los usuarios?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			\textbf{¿Es posible establecer un administrador por área?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿Es posible establecer un administrador por área?} & {NO} &  {SI} & {NO} & {NO} & {SI} \\
 			\hline
-			\textbf{¿Es posible asignar responsable a las solicitudes?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿Es posible asignar responsable a las solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			\textbf{¿Solo el administrador del área puede asignar responsable a las solicitudes?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿Solo el administrador del área puede asignar responsable a las solicitudes?} & {NO} &  {NO} & {SI} & {NO} & {SI} \\
 			\hline
-			\textbf{¿Existe un rol capaz de transferir solicitudes a otra área?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿Existe un rol capaz de transferir solicitudes a otra área?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			\textbf{¿Solo el administrador del área puede transferir solicitudes a otra área?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿Solo el administrador del área puede transferir solicitudes a otra área?} & {NO} &  {SI} & {NO} & {NO} & {SI} \\ %revisar
 			\hline
-			\textbf{¿Es posible priorizar las solicitudes?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿Es posible priorizar las solicitudes?} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			\textbf{¿Es posible establecer fecha de vencimiento para las solicitudes?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿Es posible establecer fecha de vencimiento para las solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			\textbf{¿Se generan alarmas para las solicitudes vencidas?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿Se generan alarmas para las solicitudes vencidas?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			\textbf{¿Cada área ve solo las solicitudes de su área?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿Cada área ve solo las solicitudes de su área?} & {NO} &  {NO} & {NO} & {NO} & {NO} \\
 			\hline
-			\textbf{¿El administrador del área puede ver gráficos y estadísticas de las solicitudes de cada miembro de un área?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿El administrador del área puede ver gráficos y estadísticas de las solicitudes de cada miembro de un área?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			\textbf{¿El solicitante recibe notificaciones cuando su solicitud es actualizada?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿El solicitante recibe notificaciones cuando su solicitud es actualizada?} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			\textbf{¿Es posible solicitar autorización a otro usuario para llevar a cabo una solicitud?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿Es posible solicitar autorización a otro usuario para llevar a cabo una solicitud?} & {NO} &  {NO} & {NO} & {NO} & {SI} \\
 			\hline
-			\textbf{¿Al cerrar la solicitud es posible responder a otro usuario que no sea el solicitante?} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			{¿Al cerrar la solicitud es posible responder a otro usuario que no sea el solicitante?} & {NO} &  {NO} & {NO} & {NO} & {NO} \\
 			\hline
 		\end{tabular}
+		\caption{Comparación de Herramientas para solicitud de Requerimietnos}
 	\end{table}
-	
-	\subsection{Comparación ente Herramientas para SCM}
 	
 
 	
+	\subsection{Comparación ente Herramientas para SCM}
+	
+	\begin{table}[H]
+		\begin{tabular}{|m{4.5cm}| m{2cm} | m{2cm} | m{2cm} | m{3cm} |}
+			\hline
+			\multirow{2}{*}{\textbf{Característica}} & \multicolumn{4}{c|}{\textbf{Herramientas}}\\
+												      \cline{2-5}
+												     & \textbf{SVN} & \textbf{Mercurial} & \textbf{Git} & \textbf{ChangeGear - Change Edition} \\
+			\hline
+			{Versión Gratuita} & {SI} &  {SI} & {SI} & {NO} \\
+			\hline
+			{¿Es posible crear solicitudes de cambio?} & {NO} &  {NO} & {NO} & {SI} \\
+			\hline
+			{¿Es posible definir IC?} & {NO} &  {NO} & {NO} & {SI} \\
+			\hline
+			{¿Es posible asignar responsables de los IC?} & {NO} &  {NO} & {NO} & {SI} \\
+			\hline
+			{¿Se adapta a la metodologia actual de SCM?} & {NO} &  {NO} & {NO} & {NO} \\
+			\hline
+	\end{tabular}
+		\caption{Comparación de Herramientas para SCM}
+	\end{table}
+
+	\subsection{Analisis de las Herramientas y Estandares investigados}
+	Luego de realizar un analisis de 
+	
+		Segun la descripción de las herramientas y la tabla de comparación,
+	es posible concluir que aunque actualmente existen herramientas bastante completas,
+	ninguna de ellas logra satisfacer completamente las necesidades precentadas por el cliente,
+	y la principal causa es que no se adecuan al flujo de trabajo que se desea manejar.
