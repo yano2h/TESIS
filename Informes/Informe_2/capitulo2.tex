@@ -669,7 +669,7 @@ relacionadas a SCM de hoy en dia son:
 	a DISICO, ademas ITIL v3 describe relaciones entre estas peticiones y las peticiones de cambio, lo
 	cual también es abordado en este trabajo. 	Por tanto para este trabajo se utilizara una mezcla 
 	de ambos procesos (Petición de Servicios y Gestión de Incidencias), y serán adaptados a las 
-	necesidades y flujo de trabajo que tiene DISICO.
+	necesidades y flujo de trabajo que tiene DISICO.\\
 	
 	Cabe destacar que ITIL v3 es mucho mas amplio y completo de lo que se a descrito en 
 	este documento y que abarca todo lo relacionado a servicios de TI. Sin embargo aquí 
@@ -677,38 +677,47 @@ relacionadas a SCM de hoy en dia son:
 	y Gestión de Incidencias descritos por ITIL v3 ya que son los que abarcan los temas 
 	de nuestro interés. 
 	
-
 	\subsection{Comparación entre estándares para SCM}
 	\begin{table}[H]
-		\begin{tabular}{|c|m{8cm}|}
+		\begin{tabular}{|m{5cm}|m{10cm}|}
 			\hline
 			\textbf{Estándar } & \textbf{Descripción}\\
 			\hline
-			{ISO - 10007} & {}\\
+			{ISO - 10007} & { Guía en el uso de Gestión de la Configuración dentro de una organización}\\
 			\hline
-			{IEEE 828-2005 } & {}\\
+			{IEEE 828-2005 } & { Establecen los contenidos mínimos requeridos en un Plan de Gestión de la Configuración del Software}\\
 			\hline
-			{IEEE 828-2012 } & {}\\
+			{IEEE 828-2012 } & {Establece los requisitos mínimos para los procesos de Gestión de la Configuración }\\
 			\hline
-			{ITIL v3 - Gestión del Cambio} & {}\\
+			{ITIL v3 - Gestión del Cambio} & {Define un proceso para evaluación y planificación del proceso de cambio}\\
 			\hline
-			{ITIL v3 - Gestión de la Configuración y Activos del Servicio} & {}\\
+			{ITIL v3 - Gestión de la Configuración y Activos del Servicio} & {Define un proceso para el registro, control y monitoreo de elementos de la configuración}\\
 			\hline
 		\end{tabular}
-		\caption{Comparación de estándares para solicitud y descripción de requerimientos}
-		\label{comp_req}
+		\caption{Comparación de estándares para SCM}
+		\label{comp_scm}
 	\end{table}
 
+	Aunque todos los estándares presentados son bastante útiles, su uso en este trabajo
+	carece de sentido dado que DISICO cuenta con una metodología de SCM propia hecha
+	a medida, y para cuyo desarrollo ya fueron considerados los estándares 
+	ISO - 10007 e IEEE 828. \\
+	
+	Ademas uno de los principales objetivos de este trabajo es dar soporte a la 
+	metodología de SCM existente y no el desarrollo de una nueva metodología. No 
+	obstante, sin perjuicio de lo anterior para el desarrollo de este trabajo se incorporaran 
+	aquellos aspectos de	los procesos ITIL v3, que permitan establecer una relación entre 
+	las solicitudes de requerimientos y la solicitudes de cambio y gestión de la 
+	configuración. 
 
 \section{Comparación entre Herramientas}
 	A continuación se presenta una comparación entre las herramientas anteriormente
 	descritas, en base a las características y/o funciones básicas con las que
 	debiesen contar para satisface la necesidad actual del cliente. 
 	
-
-	\subsection{Comparación entre Herramientas para Solicitud de Requerimientos}	
+	\subsection{Comparación entre Herramientas para Solicitud de Requerimientos}
 	\begin{table}[H]
-		\begin{tabular}{|m{3.3cm}| m{1.8cm} | m{1.8cm} | m{1.8cm} | m{1.8cm} | m{2.1cm} |}
+	\begin{tabular}{|m{4cm}| m{1.7cm} | m{1.7cm} | m{1.7cm} | m{1.7cm} | m{2.1cm} |}
 			\hline
 			\multirow{2}{*}{\textbf{Característica}} & \multicolumn{5}{c|}{\textbf{Herramientas}}\\
 												      \cline{2-6}
@@ -726,29 +735,39 @@ relacionadas a SCM de hoy en dia son:
 			\hline
 			{Servidor Web} & {Apache} &  {Apache} & {Apache} & {Tomcat} & {IIS 7} \\ % IIS = Internet Information Services
 			\hline
-			{Soporta SSO} & {NO} &  {NO} & {SI (Modificando el código fuente)} & {SI} & {SI} \\
+			{Soporta SSO} & {NO} &  {NO} & {SI} & {SI} & {SI} \\
 			\hline
 			{¿Genera N° de Consulta para las solicitudes?} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			{¿Enviá automáticamente el numero al email?} & {NO} &  {SI} & {SI} & {SI} & {NO} \\
+			{¿Enviá dicho Nº al email?} & {NO} &  {SI} & {SI} & {SI} & {NO} \\
 			\hline
-			{¿El solicitante puede ver su historial de solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+			{¿El solicitante tiene historial de solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline 
-			{¿Es posible separar por áreas las solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+			{¿Separa por áreas las solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			{¿Es posible separar por áreas los usuarios?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+			{¿Separar por áreas los usuarios?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
-			{¿Es posible establecer un administrador por área?} & {NO} &  {SI} & {NO} & {NO} & {SI} \\
+			{¿Existe administrador por área?} & {NO} &  {SI} & {NO} & {NO} & {SI} \\
 			\hline
 			{¿Es posible asignar responsable a las solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+
 			\hline
-			{¿Solo el administrador del área puede asignar responsable a las solicitudes?} & {NO} &  {NO} & {SI} & {NO} & {SI} \\
+			{¿Solo el administrador del área asigna los responsables?} & {NO} &  {NO} & {SI} & {NO} & {SI} \\
 			\hline
-			{¿Existe un rol capaz de transferir solicitudes a otra área?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+			{¿Se pueden transferir solicitudes a otra área?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+\hline
+\end{tabular}
+\end{table}
+\begin{table}[H]
+		\begin{tabular}{|m{4cm}| m{1.7cm} | m{1.7cm} | m{1.7cm} | m{1.7cm} | m{2.1cm} |}
 			\hline
-			{¿Solo el administrador del área puede transferir solicitudes a otra área?} & {NO} &  {SI} & {NO} & {NO} & {SI} \\ %revisar
+			\multirow{2}{*}{\textbf{Característica}} & \multicolumn{5}{c|}{\textbf{Herramientas}}\\
+												      \cline{2-6}
+												     & \textbf{Hesk} & \textbf{osTicket} & \textbf{OTRS} & \textbf{SysAid} & \textbf{ChangeGear} \\			
 			\hline
-			{¿Es posible priorizar las solicitudes?} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
+			{¿Solo el administrador del área puede transferir las solicitudes?} & {NO} &  {SI} & {NO} & {NO} & {SI} \\ %revisar
+			\hline
+			{¿Se priorizan las solicitudes?} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
 			{¿Es posible establecer fecha de vencimiento para las solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
@@ -756,18 +775,25 @@ relacionadas a SCM de hoy en dia son:
 			\hline
 			{¿Cada área ve solo las solicitudes de su área?} & {NO} &  {NO} & {NO} & {NO} & {NO} \\
 			\hline
-			{¿El administrador del área puede ver gráficos y estadísticas de las solicitudes de cada miembro de un área?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+			{¿El administrador del área puede ver gráficos y estadísticas de las solicitudes de cada miembro de su área?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
 			{¿El solicitante recibe notificaciones cuando su solicitud es actualizada?} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
 			\hline
 			{¿Es posible solicitar autorización a otro usuario para llevar a cabo una solicitud?} & {NO} &  {NO} & {NO} & {NO} & {SI} \\
 			\hline
-			{¿Al cerrar la solicitud es posible responder a otro usuario que no sea el solicitante?} & {NO} &  {NO} & {NO} & {NO} & {NO} \\
+			{¿Es posible responder a otro usuario que no sea el solicitante?} & {NO} &  {NO} & {NO} & {NO} & {NO} \\
 			\hline
 		\end{tabular}
 		\caption{Comparación de Herramientas para solicitud de Requerimientos}
 	\end{table}
 
+	Según la descripción de las herramientas y la tabla de comparación,
+	es posible concluir que aunque las herramientas que existen actualmente son 
+	bastante completas, ninguna de ellas logra satisfacer completamente las necesidades 
+	de DISICO. La principal causa de esto, es que las herramientas actuales no se adecuan 
+	al flujo de trabajo que se pretende lograr en DISICO, dado que todas estas 
+	herramientas están principalmente basadas en los procesos definidos ITIL v3.
+	Aun así no se descarta la posibilidad de rescatar algunas ideas de estas herramientas.
 	
 	\subsection{Comparación ente Herramientas para SCM}
 	
@@ -792,11 +818,10 @@ relacionadas a SCM de hoy en dia son:
 		\caption{Comparación de Herramientas para SCM}
 	\end{table}
 
-
-	\subsection{Analisis de las Herramientas y Estandares investigados}
-	Luego de realizar un analisis de 
+	En este caso, existen realmente pocas herramientas que permitan manejar solicitudes
+	de cambio y gestión de la configuración. La mayoría de herramientas para SCM
+	se basan en el control de cambios, y las pocas que implementan algún sistema
+	para el manejo de solicitudes de cambio, lo hacen desde la perspectiva de ITIL.
+	Por tanto tampoco sirven como soporte adecuado para la metodología de SCM
+	actual de DISICO, por ende es necesario el desarrollo de una herramienta ad hoc.
 	
-		Segun la descripción de las herramientas y la tabla de comparación,
-	es posible concluir que aunque actualmente existen herramientas bastante completas,
-	ninguna de ellas logra satisfacer completamente las necesidades precentadas por el cliente,
-	y la principal causa es que no se adecuan al flujo de trabajo que se desea manejar.
