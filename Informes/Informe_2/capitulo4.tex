@@ -455,32 +455,104 @@
 
 \section{Casos de Uso}
 
-	\begin{center}
+	\begin{table}[H]
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
 		\hline
 		{\textbf{Nombre Caso de Uso}} & {Crear Solicitud de Requerimiento.}\\
 		\hline
 		{\textbf{Actores}} & {Solicitante.}\\
 		\hline
-		{\textbf{Proposito}} & {Este caso de uso le posibilita al solicitante el enviar
-		solicitudes requerimientos a algun area de disico.}\\
+		{\textbf{Propósito}} & {Permitir al solicitante el enviar
+		solicitudes de requerimientos a algún área de DISICO.}\\
 		\hline
 		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario
-		desea enviar alguna solicitud de requerimiento a cualquiera de las areas
+		desea enviar alguna solicitud de requerimiento a cualquiera de las áreas
 		de DISICO, esto se hace ingresando la información de la solicitud y el 
-		area a la que esta va dirigida..}\\
+		área a la que esta va dirigida.}\\
 		\hline
 		{\textbf{Tipo}} & {Esencial.}\\
 		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
+		{\textbf{Referencias Cruzadas}} & {}\\
 		\hline
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
-		{} & {}\\
+		{1. El usuario selecciona la opción Nueva Solicitud.} & {}\\
+		{} & {2. El sistema despliega un formulario para el ingreso de los datos requeridos.}\\
+		{3. El usuario completa la información de la solicitud.} & {}\\
+		{4. El usuario selecciona el Área a la que desea dirigir su solicitud.} & {}\\
+		{5. El usuario envía la solicitud.} & {}\\
+		{} & {6. El sistema registra la solicitud.}\\
+		{} & {7. El sistema envía un correo electrónico al usuario con el numero de su solicitud.}\\
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
-		{} & {}\\
+		{5. El usuario cancela la solicitud.} & {}\\
+		{} & {6. El sistema vuelve al menú principal.}\\
+		\hline
+	\end{tabular}
+	\caption{Caso de Uso Extendido de Crear Solicitud de Requerimiento}
+	\end{table}
+	
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Consultar Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Solicitante.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir a un usuario consultar una solicitud.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario desea 
+		consultar el estado de una solicitud, para lo que ingresa el numero de consulta
+		para que se despliegue la información de la solicitud.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa el numero de consulta y selecciona la opción consultar.} & {}\\
+		{} & {2. El sistema encuentra la solicitud.}\\
+		{} & {3. El sistema despliega la información de la solicitud.}\\
+		{4. El usuario tiene la opción Comentar Solicitud: \textit{Consultar caso de uso Comentar Solicitud.}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {2. El sistema no encuentra la solicitud.}\\
+		{} & {3. El sistema despliega un mensaje indicando que no se encontró la solicitud.}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Extendido Consultar Solicitud.}
+	\end{table}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Comentar Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Solicitante, Jefe de Área, Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Añadir información, preguntas y respuestas a la solicitud.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario 
+		visualiza una solicitud y  selecciona la opción comentar y agrega un comentario.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Comentar Solicitud.} & {}\\
+		{} & {2. El sistema despliega el campo para el ingreso de texto.}\\
+		{3. El usuario ingresa su comentario.} & {}\\
+		{} & {4. El sistema registra el comentario.}\\
+		{} & {5. El sistema notifica a los involucrados.}\\
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{3. El usuario cancela la acción.} & {}\\
+		{} & {4. El sistema oculta el campo de texto.}\\
 		\hline
 	\end{tabular}
 	\end{center}
@@ -488,65 +560,15 @@
 	\begin{center}
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
 		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
+		{\textbf{Nombre Caso de Uso}} & {Gestionar Solicitud.}\\
 		\hline
-		{\textbf{Actores}} & {.}\\
+		{\textbf{Actores}} & {Jefe de Área.}\\
 		\hline
-		{\textbf{Proposito}} & {.}\\
+		{\textbf{Propósito}} & {Permitir al Jefe de área gestionar todas las solicitudes que 
+		llegan a su área.}\\
 		\hline
-		{\textbf{Resumen}} & {.}\\
-		\hline
-		{\textbf{Tipo}} & {.}\\
-		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
-		\hline
-		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-	\end{tabular}
-	\end{center}
-	
-	\begin{center}
-	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
-		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
-		\hline
-		{\textbf{Actores}} & {.}\\
-		\hline
-		{\textbf{Proposito}} & {.}\\
-		\hline
-		{\textbf{Resumen}} & {.}\\
-		\hline
-		{\textbf{Tipo}} & {.}\\
-		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
-		\hline
-		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-	\end{tabular}
-	\end{center}
-	
-	\begin{center}
-	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
-		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
-		\hline
-		{\textbf{Actores}} & {.}\\
-		\hline
-		{\textbf{Proposito}} & {.}\\
-		\hline
-		{\textbf{Resumen}} & {.}\\
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea 
+		indicar al sistema que hacer con una solicitud.}\\
 		\hline
 		{\textbf{Tipo}} & {.}\\
 		\hline
