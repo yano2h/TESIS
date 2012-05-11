@@ -500,11 +500,13 @@
 		\hline
 		{\textbf{Actores}} & {Solicitante.}\\
 		\hline
-		{\textbf{Propósito}} & {Permitir a un usuario consultar una solicitud.}\\
+		{\textbf{Propósito}} & {Permitir a un usuario consultar una solicitud a través de 
+		un numero de consulta.}\\
 		\hline
 		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario desea 
-		consultar el estado de una solicitud, para lo que ingresa el numero de consulta
-		para que se despliegue la información de la solicitud.}\\
+		consultar el estado de una solicitud, esto puede hacerlo a través del numero de consulta de 
+		la solicitud, lo que le permitirá ver la solicitud aunque esta no haya sido enviada por el,
+		o por fecha o asunto lo que le permitirá encontrar solo solicitudes enviadas por el mismo.}\\
 		\hline
 		{\textbf{Tipo}} & {Esencial.}\\
 		\hline
@@ -512,21 +514,63 @@
 		\hline
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
-		{1. El usuario ingresa el numero de consulta y selecciona la opción consultar.} & {}\\
-		{} & {2. El sistema encuentra la solicitud.}\\
-		{} & {3. El sistema despliega la información de la solicitud.}\\
-		{4. El usuario tiene la opción Comentar Solicitud: \textit{Consultar caso de uso Comentar Solicitud.}} & {}\\
+		{1. El usuario ingresa la opción Consultar Solicitud.} & {} \\
+		{} & {2. El sistema despliega una lista con todas las solicitudes del usuario
+		ordenadas por fecha de la mas reciente a la menos reciente.} \\
+		{3. El usuario tiene las siguientes opciones:} & {}\\
+		{a. Ingresar un filtro de búsqueda: \textit{Ver sección Filtrar Búsqueda}} & {}\\
+		{b. Consultar a través del numero de consulta: \textit{Ver sección Consultar 
+		a través de numero de consulta.}} & {}\\
+		
+	
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
-		{} & {2. El sistema no encuentra la solicitud.}\\
-		{} & {3. El sistema despliega un mensaje indicando que no se encontró la solicitud.}\\
+		{} & {}\\
 		\hline
 	\end{tabular}
 		\caption{Caso de Uso Extendido Consultar Solicitud.}
 	\end{table}
 	
 	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Filtrar Búsqueda}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa los filtros de búsqueda} & {}\\
+		{} & {2. El sistema actualiza la lista de solicitudes desplegadas, mostrando solo las
+		que coinciden con los filtros.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Consultar a través de numero de consulta}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa el numero de consulta y selecciona la opción consultar.} & {}\\
+		{} & {2. El sistema encuentra la solicitud.}\\
+		{} & {3. El sistema despliega la información de la solicitud.}\\
+		{4. El usuario tiene la opción Comentar Solicitud: \textit{Consultar caso de uso Comentar Solicitud.}} & {}\\		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {2. El sistema no encuentra la solicitud.}\\
+		{} & {3. El sistema despliega un mensaje indicando que no se encontró la solicitud.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	
+	\begin{table}[H]
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
 		\hline
 		{\textbf{Nombre Caso de Uso}} & {Comentar Solicitud.}\\
@@ -555,28 +599,88 @@
 		{} & {4. El sistema oculta el campo de texto.}\\
 		\hline
 	\end{tabular}
+		\caption{Caso de Uso Extendido Comentar Solicitud.}
 	\end{center}
 	
-	\begin{center}
+	\begin{table}[H]
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
 		\hline
 		{\textbf{Nombre Caso de Uso}} & {Gestionar Solicitud.}\\
 		\hline
 		{\textbf{Actores}} & {Jefe de Área.}\\
 		\hline
-		{\textbf{Propósito}} & {Permitir al Jefe de área gestionar todas las solicitudes que 
-		llegan a su área.}\\
+		{\textbf{Propósito}} & {Permitir al Jefe de área gestionar una solicitud que 
+		ha sido enviada a su área.}\\
 		\hline
 		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea 
-		indicar al sistema que hacer con una solicitud.}\\
+		indicar que se debe hacer con una solicitud que ha sido enviada a su área, 
+		para lo cual debe seleccionarla e indicar una opciones de gestión de solicitud, 
+		permitiendo Asignar, Transferir, Rechazar, Convertir en Proyecto, Comentar, Responder.}\\
 		\hline
-		{\textbf{Tipo}} & {.}\\
+		{\textbf{Tipo}} & {Esencial.}\\
 		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
+		{\textbf{Referencias Cruzadas}} & {}\\
 		\hline
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
+		{1. El usuario selecciona una solicitud.} & {}\\
+		{} & {2. El sistema muestra el detalle de la solicitud.}\\
+		{3. El usuario tiene las siguientes opciones:} & {}\\
+		{a. Asignar Responsable:  \textit{Ver sección Asignar Responsable Solicitud} } & {}\\
+		{b. Transferir Solicitud: \textit{Ver sección Transferir Solicitud} } & {}\\
+		{c. Rechazar:  \textit{Ver sección Rechazar Solicitud} } & {}\\
+		{d. Convertir en proyecto:  \textit{Ver sección Convertir Solicitud en Proyecto} } & {}\\
+		{e. Comentar:  \textit{Ver Caso de Uso Comentar Solicitud} } & {}\\
+		{f. Respuesta Directa:  \textit{Ver Caso de Uso Enviar Respuesta Directa.} } & {}\\
+		{g. Respuesta Manual:  \textit{Ver sección Enviar Respuesta Manual} } & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
 		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Extendido Gestionar Solicitud.}
+	\end{table}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Asignar Responsable Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Asignar Responsable} & {}\\
+		{} & {2. El sistema despliega un menú de selección, con el nombre de
+		todos los miembros del Área.}\\
+		{3. El usuario selecciona un responsable dentro de la lista.} & {}\\
+		{4. El usuario presiona confirmar.} & {}\\
+		{} & {5. El sistema registra la actualización y cambia el estado de la 
+		solicitud a asignada.}\\
+		{} & {6. El sistema muestra una notificación en la pantalla del responsable.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{4. El usuario presiona cancelar, se vuelve al paso 3.} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Transferir Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Transferir Solicitud} & {}\\
+		{} & {2. El sistema despliega una lista con el nombre de todas las Áreas, 
+		del departamento exceptuando el Área actual.}\\
+		{3. El usuario selecciona un área} & {}\\
+		{} & {4. El sistema ingresar el motivo de la transferencia.}\\
+		{5. El usuario ingresa el motivo de la transferencia y confirma la acción} & {}\\
+		{} & {6. El sistema registra la transferencia y muestra notificación en el
+		perfil del Jefe de Área al cual se transfirió la solicitud.}\\
+		{} & {7. El sistema vuelve a la pantalla principal.}\\
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
@@ -588,11 +692,95 @@
 	\begin{center}
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
 		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Rechazar Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario selecciona la opción rechazar solicitud.} & {}\\
+		{} & {2. El sistema solicita el ingreso del motivo del rechazo.}\\
+		{3. El usuario ingresa el motivo del rechazo y confirma la acción.} & {}\\
+		{} & {4. El sistema registra el motivo del rechazo y cambia el estado de la solicitud 
+		a rechazada.}\\
+		{} & {5. El sistema enviá un correo electrónico al solicitante indicando el motivo
+		por el cual su solicitud fue rechazada.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{3. El usuario cancela la acción.} & {}\\
+		{} & {4. El sistema vuelve al paso 2 del Caso de Uso Gestionar Solicitud. }\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Convertir Solicitud en Proyecto}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción  Convertir en Proyecto} & {}\\
+		{} & {2. El sistema solicitara confirmación.}\\
+		{3. El usuario confirma la acción} & {}\\
+		{} & {4. El sistema modifica el estado de la solicitud a 
+		convertida en proyecto.}
+		{} & {5. El sistema da inicio al caso de uso Crear Proyecto}\\ 
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Enviar Respuesta Manual}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario selecciona la opción de Respuesta Manual.} & {}\\
+		{} & {2. El sistema solicita el ingreso de la dirección de correo
+		de las personas a las que deberá ser respondida la solicitud.}\\
+		{3. El usuario ingresa las direcciones de correo.} & {}\\
+		{} & {4. El sistema solicita el ingreso del contenido del correo.}\\
+		{5. El usuario ingresa el contenido del correo y confirma el envío.} & {}\\
+		{} & {6. El sistema envía el correo a los destinatarios especificados.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección }} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{} & {}\\
+		{} & {}\\
+		{} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{table}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
 		{\textbf{Nombre Caso de Uso}} & {.}\\
 		\hline
 		{\textbf{Actores}} & {.}\\
 		\hline
-		{\textbf{Proposito}} & {.}\\
+		{\textbf{Propósito}} & {.}\\
 		\hline
 		{\textbf{Resumen}} & {.}\\
 		\hline
@@ -609,16 +797,18 @@
 		{} & {}\\
 		\hline
 	\end{tabular}
-	\end{center}
+		\caption{Caso de Uso Extendido }
+	\end{table}
 	
-	\begin{center}
+	\begin{table}
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
 		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
+		{\textbf{Nombre Caso de Uso}} & {Crear Proyecto.}\\
 		\hline
-		{\textbf{Actores}} & {.}\\
+		{\textbf{Actores}} & {Jefe de Área.}\\
 		\hline
-		{\textbf{Proposito}} & {.}\\
+		{\textbf{Propósito}} & {Crear un nuevo proyecto junto con la definición de sus
+		involucrados.}\\
 		\hline
 		{\textbf{Resumen}} & {.}\\
 		\hline
@@ -635,265 +825,7 @@
 		{} & {}\\
 		\hline
 	\end{tabular}
-	\end{center}
+		\caption{Caso de Uso Extendido }
+	\end{table}
 	
-	\begin{center}
-	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
-		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
-		\hline
-		{\textbf{Actores}} & {.}\\
-		\hline
-		{\textbf{Proposito}} & {.}\\
-		\hline
-		{\textbf{Resumen}} & {.}\\
-		\hline
-		{\textbf{Tipo}} & {.}\\
-		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
-		\hline
-		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-	\end{tabular}
-	\end{center}
-	
-	\begin{center}
-	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
-		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
-		\hline
-		{\textbf{Actores}} & {.}\\
-		\hline
-		{\textbf{Proposito}} & {.}\\
-		\hline
-		{\textbf{Resumen}} & {.}\\
-		\hline
-		{\textbf{Tipo}} & {.}\\
-		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
-		\hline
-		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-	\end{tabular}
-	\end{center}
-	
-	\begin{center}
-	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
-		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
-		\hline
-		{\textbf{Actores}} & {.}\\
-		\hline
-		{\textbf{Proposito}} & {.}\\
-		\hline
-		{\textbf{Resumen}} & {.}\\
-		\hline
-		{\textbf{Tipo}} & {.}\\
-		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
-		\hline
-		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-	\end{tabular}
-	\end{center}
-	
-	\begin{center}
-	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
-		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
-		\hline
-		{\textbf{Actores}} & {.}\\
-		\hline
-		{\textbf{Proposito}} & {.}\\
-		\hline
-		{\textbf{Resumen}} & {.}\\
-		\hline
-		{\textbf{Tipo}} & {.}\\
-		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
-		\hline
-		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-	\end{tabular}
-	\end{center}
-	
-	\begin{center}
-	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
-		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
-		\hline
-		{\textbf{Actores}} & {.}\\
-		\hline
-		{\textbf{Proposito}} & {.}\\
-		\hline
-		{\textbf{Resumen}} & {.}\\
-		\hline
-		{\textbf{Tipo}} & {.}\\
-		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
-		\hline
-		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-	\end{tabular}
-	\end{center}
-	
-	\begin{center}
-	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
-		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
-		\hline
-		{\textbf{Actores}} & {.}\\
-		\hline
-		{\textbf{Proposito}} & {.}\\
-		\hline
-		{\textbf{Resumen}} & {.}\\
-		\hline
-		{\textbf{Tipo}} & {.}\\
-		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
-		\hline
-		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-	\end{tabular}
-	\end{center}
-	
-	\begin{center}
-	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
-		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
-		\hline
-		{\textbf{Actores}} & {.}\\
-		\hline
-		{\textbf{Proposito}} & {.}\\
-		\hline
-		{\textbf{Resumen}} & {.}\\
-		\hline
-		{\textbf{Tipo}} & {.}\\
-		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
-		\hline
-		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-	\end{tabular}
-	\end{center}
-	
-	\begin{center}
-	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
-		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
-		\hline
-		{\textbf{Actores}} & {.}\\
-		\hline
-		{\textbf{Proposito}} & {.}\\
-		\hline
-		{\textbf{Resumen}} & {.}\\
-		\hline
-		{\textbf{Tipo}} & {.}\\
-		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
-		\hline
-		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-	\end{tabular}
-	\end{center}
-	
-	\begin{center}
-	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
-		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
-		\hline
-		{\textbf{Actores}} & {.}\\
-		\hline
-		{\textbf{Proposito}} & {.}\\
-		\hline
-		{\textbf{Resumen}} & {.}\\
-		\hline
-		{\textbf{Tipo}} & {.}\\
-		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
-		\hline
-		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-	\end{tabular}
-	\end{center}
-	
-	\begin{center}
-	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
-		\hline
-		{\textbf{Nombre Caso de Uso}} & {.}\\
-		\hline
-		{\textbf{Actores}} & {.}\\
-		\hline
-		{\textbf{Proposito}} & {.}\\
-		\hline
-		{\textbf{Resumen}} & {.}\\
-		\hline
-		{\textbf{Tipo}} & {.}\\
-		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
-		\hline
-		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-	\end{tabular}
-	\end{center}
 \section{Modelo Conceptual}
