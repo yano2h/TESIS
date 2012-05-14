@@ -16,7 +16,8 @@
 		computación. Encargado de administrar el sistema, con acceso a todas las 
 		funcionalidades del sistema.
 		\item \textbf{Jefe de Departamento:} Usuario con conocimientos generales
-		de computación. Quien es el jefe de todo DISICO.
+		de computación. Puede buscar solicitudes y ver resumenes del avance en
+		toda DISICO.
 		\item \textbf{Jefe de Área:} Jefe de alguno de los departamentos de DISICO, 
 		encargado de asignar responsables a las solicitudes y de controlar que estas 
 		se lleven a cabo.
@@ -616,8 +617,6 @@
 		{a. Ingresar un filtro de búsqueda: \textit{Ver sección Filtrar Búsqueda}} & {}\\
 		{b. Consultar a través del numero de consulta: \textit{Ver sección Consultar 
 		a través de numero de consulta.}} & {}\\
-		
-	
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
@@ -655,7 +654,8 @@
 		{1. El usuario ingresa el numero de consulta y selecciona la opción consultar.} & {}\\
 		{} & {2. El sistema encuentra la solicitud.}\\
 		{} & {3. El sistema despliega la información de la solicitud.}\\
-		{4. El usuario tiene la opción Comentar Solicitud: \textit{Consultar caso de uso Comentar Solicitud.}} & {}\\		\hline
+		{4. El usuario tiene la opción Comentar Solicitud: \textit{Consultar caso de uso Comentar Solicitud.}} & {}\\		
+		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
 		{} & {2. El sistema no encuentra la solicitud.}\\
@@ -695,7 +695,7 @@
 		\hline
 	\end{tabular}
 		\caption{Caso de Uso Extendido Comentar Solicitud.}
-	\end{center}
+	\end{table}
 	
 	\begin{table}[H]
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
@@ -818,12 +818,13 @@
 		{} & {2. El sistema solicitara confirmación.}\\
 		{3. El usuario confirma la acción} & {}\\
 		{} & {4. El sistema modifica el estado de la solicitud a 
-		convertida en proyecto.}
+		convertida en proyecto.}\\
 		{} & {5. El sistema da inicio al caso de uso Crear Proyecto}\\ 
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
-		{} & {}\\
+		{3. El usuario cancela la acción.} & {}\\
+		{} & {4. El sistema vuelve al paso 2 del Caso de Uso Gestionar Solicitud. }\\
 		\hline
 	\end{tabular}
 	\end{center}
@@ -845,6 +846,234 @@
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
+		{5. El usuario cancela la acción} & {}\\
+		{} & {6. El sistema vuelve al paso 2 del Caso de Uso Gestionar Solicitud.} \\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Respuesta Directa.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO, Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Enviar la respuesta de una solicitud directamente al solicitante.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea responder directamente
+		una solicitud, para lo cual ingresa un mensaje que sera enviado por correo electrónico al solicitante.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción respuesta directa.} & {}\\
+		{} & {2. El sistema solicita ingresar un mensaje de respuesta.}\\
+		{3. El usuario ingresa el mensaje.} & {}\\
+		{} & {4. El sistema solicita confirmación.} \\
+		{5. El usuario confirma la acción.} & {} \\
+		{} & {6. El sistema enviá el mensaje al correo electrónico del solicitante 
+		y cambia el estado de la solicitud a Finalizada.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la acción.} & {}\\
+		{} & {6. El sistema vuelve a mostrar la solicitud.}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Extendido Respuesta Directa}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Buscar Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área, Jefe de Departamento.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir a un usuario encontrar una solicitud.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario desea 
+		consultar una solicitud sin importar el autor o área, esto puede realizarse
+		filtrando por numero de consulta, estado, fecha, asunto, solicitante, responsable,
+		área.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa la opción Buscar Solicitud.} & {} \\
+		{} & {2. El sistema despliega una lista con todas las solicitudes existentes
+		ordenadas por fecha de la mas reciente a la menos reciente.} \\
+		{3. El usuario ingresa los filtros de búsqueda.} & {}\\
+		{} & {4. El sistema actualiza la lista de solicitudes desplegadas, mostrando solo las
+		que coinciden con los filtros.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Extendido Buscar Solicitud.}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Ver Resumen Personal.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al usuario ver un resumen con indicadores
+		y gráficos sobre todas las solicitudes que le han sido asignadas.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un funcionario desea ver
+		indicadores y gráficos que resumen todas las solicitudes que alguna ves le fueron asignadas,
+		para esto el sistema recupera todas las solicitudes del usuario y calcula los indicadores
+		y se construyen los gráficos para ser mostrados al usuario.}\\
+		\hline
+		{\textbf{Tipo}} & {Opcional.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Ver Resumen Personal} & {}\\
+		{} & {2. El sistema recupera todas las solicitudes alguna ves e fueron asignadas.}\\
+		{} & {3. Se calculan los indicadores correspondientes.}\\
+		{} & {4. El sistema muestra los indicadores y los gráficos.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Extendido Ver Resumen Personal}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Ver Resumen Área.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al usuario ver un resumen con indicadores
+		y gráficos sobre todas las solicitudes que le han sido asignadas a algún funcionario 
+		del área o en general de toda el área.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea ver indicadores
+		y gráficos sobre las solicitudes del área o por funcionario del área, para lo cual
+		el usuario indica si desea ver el resumen completo del área o filtrando por persona.}\\
+		\hline
+		{\textbf{Tipo}} & {Opcional.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Ver Resumen Área} & {}\\
+		{} & {2. El sistema solicita escoger el tipo de resumen (del área o por funcionario).}\\
+		{3. El usuario escoge el tipo de resumen} & {}\\
+		{} & {4. El sistema recupera las solicitudes correspondientes y calcula los indicadores.}\\
+		{} & {5. El sistema muestra los indicadores y los gráficos.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Extendido Ver Resumen Área}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso Ver Resumen Departamento}} & {.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Departamento.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al usuario ver un resumen con indicadores
+		y gráficos sobre todas las solicitudes que le han sido asignadas a algún funcionario, 
+		a un área o en general de todo el departamento.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea ver indicadores
+		y gráficos sobre las solicitudes del departamento, por área o por funcionario, para lo cual
+		el usuario indica el tipo de resumen que desea ver, y el sistema calcula y muestra los gráficos
+		e indicadores correspondientes.}\\
+		\hline
+		{\textbf{Tipo}} & {Opcional.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Ver Resumen Departamento} & {}\\
+		{} & {2. El sistema solicita escoger el tipo de resumen (del departamento, por área o por funcionario).}\\
+		{3. El usuario escoge el tipo de resumen} & {}\\
+		{} & {4. El sistema recupera las solicitudes correspondientes y calcula los indicadores.}\\
+		{} & {5. El sistema muestra los indicadores y los gráficos.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Extendido Ver Resumen Departamento}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Atender Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al usuario atender una solicitud que
+		le ha sido asignada.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario
+		desea atender una solicitud que le fue asignada, para lo cual debe 
+		indicar una opción de atención de solicitud, Iniciar, Finalizar, Comentar.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge una solicitud.} & {}\\
+		{} & {2. El sistema muestra el detalle de la solicitud.}\\
+		{3. El usuario tiene las siguientes opciones.} & {}\\
+		{a. Iniciar: \textit{Ver sección Iniciar Solicitud}} & {}\\
+		{b. Comentar: \textit{Ver caso de uso Comentar Solicitud}} & {}\\
+		{c. Cerrar: \textit{Ver sección Cerrar Solicitud}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Extendido Atender Solicitud}
+	\end{table}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Iniciar Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Iniciar.} & {}\\
+		{} & {2. El sistema cambia el estado de la solicitud a Iniciada.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
 		{} & {}\\
 		\hline
 	\end{tabular}
@@ -853,7 +1082,233 @@
 	\begin{center}
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
 		\hline
-		\multicolumn{2}{|l|}{\textbf{Sección }} \\
+		\multicolumn{2}{|l|}{\textbf{Sección Cerrar Solicitud} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción cerrar solicitud.} & {}\\
+		{} & {2. El sistema solicita seleccionar un tipo de respuesta}\\
+		{3. El usuario escoge tipo de respuesta:} & {}\\
+		{a. Respuesta Directa: \textit{Ver sección Respuesta Directa}} & {}\\
+		{b. Respuesta al Jefe de Área} & {Ver sección Respuesta al Jefe de Área}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Respuesta al Jefe de Área}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Respuesta la Jefe de Área.} & {}\\
+		{} & {2. El sistema solicita confirmación.} \\
+		{3. El usuario confirma la acción.} & {} \\
+		{} & {4. El sistema cambia el estado de la solicitud a Finalizada y notifica al jefe de área
+		que es el quien debe responder la solicitud.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{3. El usuario cancela la acción.} & {}\\
+		{} & {4. El sistema vuelve a mostrar la solicitud.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Gestionar Proyectos.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al jefe de área gestionar los proyectos que se 
+		manejan dentro del área.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el jefe de área desea escoger una
+		una acción que le permita gestionar los proyectos de su área, para lo cual el sistema le 
+		muestra una lista con los proyectos, donde puede escoger alguna opción de gestión.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción gestionar Proyectos} & {}\\
+		{} & {2. El sistema despliega una lista con todos los proyectos}\\
+		{3. El usuario puede escoger entre:} & {}\\
+		{a. Crear Proyecto: \textit{Ver caso se uso Crear Proyecto}} & {}\\
+		{b. Eliminar Proyecto: \textit{Ver sección Eliminar Proyecto}} & {}\\
+		{c. Modificar Proyecto: \textit{Ver sección Modificar Proyecto}} & {}\\
+		{d. Ver Resumen Avance: \textit{Ver sección Ver Resumen Avance Proyecto}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Extendido Gestionar Proyectos}
+	\end{table}
+	
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Crear Proyecto.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Crear un nuevo proyecto junto con la definición de sus
+		involucrados.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso puede comenzar por que el usuario a escogido
+		la opción Crear Proyecto o Convertir Solicitud en Proyecto, donde el usuario ingresa la
+		información del proyecto y define a lo menos el Jefe de Proyecto de Proyecto.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Crear Proyecto o Convertir Solicitud en Proyecto} & {}\\
+		{} & {2. El sistema solicita la información del proyecto.}\\
+		{3. El usuario ingresa los datos del proyecto.} & {}\\
+		{} & {4. El sistema solicita el nombre del jefe de proyecto.}\\
+		{5. El usuario ingresa el nombre del jefe de proyecto} & {}\\
+		{} & {6. El sistema solicita el ingreso de otros involucrados en el Proyecto.}\\
+		{7. El usuario ingresa el nombre del resto de los involucrados en el proyecto.} & {}\\
+		{} & {8. El sistema solicita confirmación.}\\
+		{9. El usuario confirma la acción.} & {}\\
+		{} & {10. El sistema registra la información del proyecto.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{7. El usuario omite este paso.} & {}\\
+		\hline
+		{9. El usuario cancela la acción.} & {}\\
+		{} & {10. El sistema regresa al caso de uso Gestionar Proyecto.}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Extendido Crear Proyecto}
+	\end{table}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Eliminar Proyecto.}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Eliminar Proyecto.} & {}\\
+		{} & {2. El sistema solicita la confirmación de la acción.}\\
+		{3. El usuario confirma.} & {}\\
+		{} & {4. El sistema elimina la información del proyecto.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{3. El usuario cancela la acción.} & {}\\
+		{} & {4. El sistema regresa al caso de uso Gestionar Proyecto.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Modificar Proyecto}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Modificar Proyecto.} & {}\\
+		{} & {2. El sistema solicita el ingreso de modificaciones.}\\
+		{3. El usuario ingresa las modificación e los datos del proyecto y confirma los cambios.} & {}\\
+		{} & {4. El sistema registra los cambios.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{3. El usuario cancela la acción.} & {}\\
+		{} & {4. El sistema regresa al caso de uso Gestionar Proyecto.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Ver Resumen Avance Proyecto.}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Ver Resumen Avance.} & {}\\
+		{} & {2. El sistema muestra el detalle de todas las actividades del proyecto y su estado.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Definir Tareas SCM.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Definir responsables para las tareas de SCM de un proyecto.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea definir responsables para
+		las tareas de SCM, el sistema despliega la lista de tareas de SCM y el usuario define el responsable de
+		cada una.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Definir Tareas SCM} & {}\\
+		{} & {2. El sistema muestra la lista de proyectos.}\\
+		{3. El usuario escoge un proyecto} & {}\\
+		{} & {4. El sistema despliega la lista de tareas de SCM.}\\
+		{5. El usuario ingresa el responsable para cada una.} & {}\\
+		{} & {6. El sistema solicita confirmación de los cambios.}\\
+		{7. El usuario ingresa confirmación.} & {}\\
+		{} & {8. El sistema registra los cambios.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{7. El usuario cancela los cambios.} & {}\\
+		{} & {8. El sistema regresa a la pantalla de inicio.}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Extendido Definir Tareas SCM}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Gestionar Tareas Proyecto.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Gestionar las Tareas de un Proyecto.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un
+		usuario desea gestionar sus tareas en un proyecto, esto le permite
+		crear nuevas tareas, eliminar tareas y actualizar el estado de avance de las mismas.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
 		\hline
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
@@ -866,9 +1321,44 @@
 		{} & {}\\
 		\hline
 	\end{tabular}
+		\caption{Caso de Uso Extendido }
+	\end{table}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección }} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción .} & {}\\
+		{} & {2. .}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
 	\end{center}
-	
-	\begin{table}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección }} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción .} & {}\\
+		{} & {2. .}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{table}[H]
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
 		\hline
 		{\textbf{Nombre Caso de Uso}} & {.}\\
@@ -894,33 +1384,5 @@
 	\end{tabular}
 		\caption{Caso de Uso Extendido }
 	\end{table}
-	
-	\begin{table}
-	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
-		\hline
-		{\textbf{Nombre Caso de Uso}} & {Crear Proyecto.}\\
-		\hline
-		{\textbf{Actores}} & {Jefe de Área.}\\
-		\hline
-		{\textbf{Propósito}} & {Crear un nuevo proyecto junto con la definición de sus
-		involucrados.}\\
-		\hline
-		{\textbf{Resumen}} & {.}\\
-		\hline
-		{\textbf{Tipo}} & {.}\\
-		\hline
-		{\textbf{Referencias Cruzadas}} & {.}\\
-		\hline
-		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
-		\hline
-		{} & {}\\
-		\hline
-	\end{tabular}
-		\caption{Caso de Uso Extendido }
-	\end{table}
-	
+
 \section{Modelo Conceptual}
