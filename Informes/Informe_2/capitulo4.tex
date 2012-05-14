@@ -1312,9 +1312,12 @@
 		\hline
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
-		{} & {}\\
-		{} & {}\\
-		{} & {}\\
+		{1. El usuario escoge la opción Gestionar Tareas del Proyecto} & {}\\
+		{} & {2. El sistema despliega la lista de tareas del proyecto.}\\
+		{3. El usuario escoge entre:} & {}\\
+		{a. Crear Tarea: \textit{Ver sección Crear Tarea}} & {}\\
+		{b. Eliminar Tarea: \textit{Ver sección Eliminar Tarea}} & {}\\
+		{c. Actualizar Estado de Avance: \textit{Ver sección Actualizar estado de avance}} & {}\\
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
@@ -1327,7 +1330,47 @@
 	\begin{center}
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
 		\hline
-		\multicolumn{2}{|l|}{\textbf{Sección }} \\
+		\multicolumn{2}{|l|}{\textbf{Sección Crear Tarea}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Crear Tarea.} & {}\\
+		{} & {2. El sistema solicita el ingreso de la información de la tarea.}\\
+		{3. El usuario ingresa la tarea.} & {}\\
+		{} & {4. El sistema solicita confirmación.}\\
+		{5. El usuario confirma.} & {}\\
+		{} & {6. El sistema registra la tarea.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{6. El usuario cancela la acción.} & {}\\
+		{} & {7. El sistema regresa al caso de uso Gestionar Tareas Proyecto.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Eliminar Tarea}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Eliminar Tarea.} & {}\\
+		{} & {2. El sistema .}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Actualizar estado de avance}} \\
 		\hline
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
@@ -1357,6 +1400,7 @@
 		\hline
 	\end{tabular}
 	\end{center}
+
 
 	\begin{table}[H]
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
