@@ -285,7 +285,7 @@
 		\begin{itemize}
 			\item \textbf{Responder al Jefe de Área:} Esta opción solo enviá una notificación al jefe de Área quien 
 			deberá encargarse de responder luego al solicitante.
-			\item \textbf{Responder al solicitante:} Esta enviá un correo electrónico al solicitante, notificándole 
+			\item \textbf{Responder Directamente:} Esta enviá un correo electrónico al solicitante, notificándole 
 			que su solicitud ha sido completada.
 		\end{itemize}
 		}\\
@@ -550,7 +550,22 @@
 	\end{center}
 
 \section{Casos de Uso}
+	\subsection{Modelo de Casos de Uso}
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.45]{imagenes/Caso_uso_solicitud_req.jpg}
+			\caption{Modelo de Casos de Uso Solicitud de Requerimientos}
+		\end{center}
+	\end{figure}
 
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.5]{imagenes/Caso_uso_solicitud_scm.jpg}
+			\caption{Modelo Casos de Uso Gestión de SCM}
+		\end{center}
+	\end{figure}
+	
+	\subsection{Casos de Uso Extendidos}
 	\begin{table}[H]
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
 		\hline
@@ -589,6 +604,20 @@
 	\caption{Caso de Uso Extendido de Crear Solicitud de Requerimiento}
 	\end{table}
 	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/DS/DS_Crear_Solicitud.jpg}
+			\caption{Diagrama de Secuencia Crear Solicitud}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/DE/CrearSolicitudReq.png}
+			\caption{Diagrama de Estados Crear Solicitud}
+		\end{center}
+	\end{figure}
+	
 	\begin{table}[H]
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
 		\hline
@@ -625,6 +654,20 @@
 	\end{tabular}
 		\caption{Caso de Uso Extendido Consultar Solicitud.}
 	\end{table}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/DS/DS_Consultar_Solicitud.jpg}
+			\caption{Diagrama de Secuencia Consultar Solicitud}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/DE/ConsultarSolicitudReq.png}
+			\caption{Diagrama de Estados Consultar Solicitud}
+		\end{center}
+	\end{figure}
 	
 	\begin{center}
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
@@ -698,6 +741,20 @@
 		\caption{Caso de Uso Extendido Comentar Solicitud.}
 	\end{table}
 	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/DS/DS_Comentar_Solicitud.jpg}
+			\caption{Diagrama de Secuencia Comentar Solicitud}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/DE/ComentarSolicitudReq.png}
+			\caption{Diagrama de Estados Comentar Solicitud}
+		\end{center}
+	\end{figure}
+	
 	\begin{table}[H]
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
 		\hline
@@ -737,6 +794,19 @@
 	\end{tabular}
 		\caption{Caso de Uso Extendido Gestionar Solicitud.}
 	\end{table}
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/DS/DS_Gestionar_Solicitud.jpg}
+			\caption{Diagrama de Secuencia Gestionar Solicitud}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/DE/GestionarSolicitud.png}
+			\caption{Diagrama de Estados Gestiona Solicitud}
+		\end{center}
+	\end{figure}
 	
 	\begin{center}
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
@@ -760,6 +830,20 @@
 		\hline
 	\end{tabular}
 	\end{center}
+	
+		\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/DS/DS_Asignar_Responsable.jpg}
+			\caption{Diagrama de Secuencia Asignar Responsable Solicitud}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/DE/AsignarResponsable.png}
+			\caption{Diagrama de Estados Asignar Responsable Solicitud}
+		\end{center}
+	\end{figure}
 	
 	\begin{center}
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
@@ -1544,3 +1628,10 @@
 	\end{center}
 
 \section{Modelo Conceptual}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/Modelo_Conceptual.jpg}
+			\caption{Modelo Conceptual}
+		\end{center}
+	\end{figure}
