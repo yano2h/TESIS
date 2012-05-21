@@ -553,14 +553,14 @@
 	\subsection{Modelo de Casos de Uso}
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.45]{imagenes/Caso_uso_solicitud_req.jpg}
+			\includegraphics[scale=0.45]{imagenes/CU/CU_SolicitudReq.png}
 			\caption{Modelo de Casos de Uso Solicitud de Requerimientos}
 		\end{center}
 	\end{figure}
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.5]{imagenes/Caso_uso_solicitud_scm.jpg}
+			\includegraphics[scale=0.5]{imagenes/CU/CU_SolicitudSCM.png}
 			\caption{Modelo Casos de Uso Gestión de SCM}
 		\end{center}
 	\end{figure}
@@ -606,14 +606,14 @@
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/DS/DS_Crear_Solicitud.jpg}
+			\includegraphics[scale=0.7]{imagenes/DS/DS_CrearSolicitudReq.png}
 			\caption{Diagrama de Secuencia Crear Solicitud}
 		\end{center}
 	\end{figure}
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/DE/CrearSolicitudReq.png}
+			\includegraphics[scale=0.7]{imagenes/DE/DE_CrearSolicitudReq.png}
 			\caption{Diagrama de Estados Crear Solicitud}
 		\end{center}
 	\end{figure}
@@ -657,14 +657,14 @@
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/DS/DS_Consultar_Solicitud.jpg}
+			\includegraphics[scale=0.7]{imagenes/DS/DS_ConsultarSolicitudReq.png}
 			\caption{Diagrama de Secuencia Consultar Solicitud}
 		\end{center}
 	\end{figure}
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/DE/ConsultarSolicitudReq.png}
+			\includegraphics[scale=0.7]{imagenes/DE/DE_ConsultarSolicitudReq.png}
 			\caption{Diagrama de Estados Consultar Solicitud}
 		\end{center}
 	\end{figure}
@@ -726,7 +726,7 @@
 		\hline
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
-		{1. El usuario escoge la opción Comentar Solicitud.} & {}\\
+		{1. El usuario escoge una solicitud y la opción Comentar Solicitud.} & {}\\
 		{} & {2. El sistema despliega el campo para el ingreso de texto.}\\
 		{3. El usuario ingresa su comentario.} & {}\\
 		{} & {4. El sistema registra el comentario.}\\
@@ -743,14 +743,14 @@
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/DS/DS_Comentar_Solicitud.jpg}
+			\includegraphics[scale=0.7]{imagenes/DS/DS_ComentarSolicitudReq.png}
 			\caption{Diagrama de Secuencia Comentar Solicitud}
 		\end{center}
 	\end{figure}
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/DE/ComentarSolicitudReq.png}
+			\includegraphics[scale=0.7]{imagenes/DE/DE_ComentarSolicitudReq.png}
 			\caption{Diagrama de Estados Comentar Solicitud}
 		\end{center}
 	\end{figure}
@@ -796,14 +796,14 @@
 	\end{table}
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/DS/DS_Gestionar_Solicitud.jpg}
+			\includegraphics[scale=0.7]{imagenes/DS/DS_GestionarSolicitudReq.png}
 			\caption{Diagrama de Secuencia Gestionar Solicitud}
 		\end{center}
 	\end{figure}
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/DE/GestionarSolicitud.png}
+			\includegraphics[scale=0.7]{imagenes/DE/DE_GestionarSolicitudReq.png}
 			\caption{Diagrama de Estados Gestiona Solicitud}
 		\end{center}
 	\end{figure}
@@ -831,16 +831,16 @@
 	\end{tabular}
 	\end{center}
 	
-		\begin{figure}[H]
+	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/DS/DS_Asignar_Responsable.jpg}
+			\includegraphics[scale=0.7]{imagenes/DS/DS_AsignarResponsable.png}
 			\caption{Diagrama de Secuencia Asignar Responsable Solicitud}
 		\end{center}
 	\end{figure}
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/DE/AsignarResponsable.png}
+			\includegraphics[scale=0.7]{imagenes/DE/DE_AsignarResponsable.png}
 			\caption{Diagrama de Estados Asignar Responsable Solicitud}
 		\end{center}
 	\end{figure}
@@ -1234,6 +1234,7 @@
 		{b. Eliminar Proyecto: \textit{Ver sección Eliminar Proyecto}} & {}\\
 		{c. Modificar Proyecto: \textit{Ver sección Modificar Proyecto}} & {}\\
 		{d. Ver Resumen Avance: \textit{Ver sección Ver Resumen Avance Proyecto}} & {}\\
+		{e. Buscar Proyecto: \textit{Ver caso se uso Buscar Proyecto}} & {}\\
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
@@ -1285,6 +1286,40 @@
 		\caption{Caso de Uso Extendido Crear Proyecto}
 	\end{table}
 
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Buscar Proyecto.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área, Funcionario.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir a un usuario encontrar un proyecto.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario desea 
+		consultar un Proyecto sin importar el autor o área, esto puede realizarse
+		filtrando por nombre, estado, fecha, responsable, área.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa la opción Buscar Proyecto.} & {} \\
+		{} & {2. El sistema despliega una lista con todos los proyectos
+		ordenados por fecha del mas reciente al menos reciente.} \\
+		{3. El usuario ingresa los filtros de búsqueda.} & {}\\
+		{} & {4. El sistema actualiza la lista de proyectos desplegados, mostrando solo las
+		que coinciden con los filtros.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Extendido Buscar Proyecto.}
+	\end{table}
+
 	\begin{center}
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
 		\hline
@@ -1292,15 +1327,17 @@
 		\hline
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
-		{1. El usuario escoge la opción Eliminar Proyecto.} & {}\\
-		{} & {2. El sistema solicita la confirmación de la acción.}\\
-		{3. El usuario confirma.} & {}\\
-		{} & {4. El sistema elimina la información del proyecto.}\\
+		{1. El usuario escoge un proyecto.} & {}\\
+		{} & {2. El sistema muestra el detalle del proyecto.}\\
+		{3. El usuario escoge la opción Eliminar Proyecto.} & {}\\
+		{} & {4. El sistema solicita la confirmación de la acción.}\\
+		{5. El usuario confirma.} & {}\\
+		{} & {6. El sistema elimina la información del proyecto.}\\
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
-		{3. El usuario cancela la acción.} & {}\\
-		{} & {4. El sistema regresa al caso de uso Gestionar Proyecto.}\\
+		{5. El usuario cancela la acción.} & {}\\
+		{} & {6. El sistema regresa al caso de uso Gestionar Proyecto.}\\
 		\hline
 	\end{tabular}
 	\end{center}
@@ -1312,15 +1349,17 @@
 		\hline
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
-		{1. El usuario escoge la opción Modificar Proyecto.} & {}\\
-		{} & {2. El sistema solicita el ingreso de modificaciones.}\\
-		{3. El usuario ingresa las modificación e los datos del proyecto y confirma los cambios.} & {}\\
-		{} & {4. El sistema registra los cambios.}\\
+		{1. El usuario escoge un proyecto.} & {}\\
+		{} & {2. El sistema muestra el detalle del proyecto.}\\
+		{3. El usuario escoge la opción Modificar Proyecto.} & {}\\
+		{} & {4. El sistema solicita el ingreso de modificaciones.}\\
+		{5. El usuario ingresa las modificación e los datos del proyecto y confirma los cambios.} & {}\\
+		{} & {6. El sistema registra los cambios.}\\
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
-		{3. El usuario cancela la acción.} & {}\\
-		{} & {4. El sistema regresa al caso de uso Gestionar Proyecto.}\\
+		{5. El usuario cancela la acción.} & {}\\
+		{} & {6. El sistema regresa al caso de uso Gestionar Proyecto.}\\
 		\hline
 	\end{tabular}
 	\end{center}
@@ -1332,8 +1371,10 @@
 		\hline
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
-		{1. El usuario escoge la opción Ver Resumen Avance.} & {}\\
-		{} & {2. El sistema muestra el detalle de todas las actividades del proyecto y su estado.}\\
+		{1. El usuario escoge un proyecto.} & {}\\
+		{} & {2. El sistema muestra el detalle del proyecto.}\\
+		{3. El usuario la opción Ver Resumen Avance.} & {}\\
+		{} & {4. El sistema muestra el detalle de todas las actividades del proyecto y su estado.}\\
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
@@ -1442,19 +1483,20 @@
 		\hline
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
-		{1. El usuario escoge la opción Eliminar Tarea.} & {}\\
-		{} & {2. El sistema solicita confirmación.}\\
-		{3. El usuario confirma la acción.} & {}\\
-		{} & {4. El sistema elimina la tarea.}\\
+		{1. El usuario escoge una Tarea.} & {}\\
+		{} & {2. El sistema muestra el detalle de la tarea.}\\
+		{3. El usuario escoge la opción Eliminar Tarea.} & {}\\
+		{} & {4. El sistema solicita confirmación.}\\
+		{5. El usuario confirma la acción.} & {}\\
+		{} & {6. El sistema elimina la tarea.}\\
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
-		{3. El usuario cancela la acción.} & {}\\
-		{} & {4. El sistema regresa al caso de uso Gestionar Tareas Proyecto.}\\
+		{5. El usuario cancela la acción.} & {}\\
+		{} & {6. El sistema regresa al caso de uso Gestionar Tareas Proyecto.}\\
 		\hline
 	\end{tabular}
 	\end{center}
-
 
 	\begin{center}
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
@@ -1463,16 +1505,18 @@
 		\hline
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
-		{1. El usuario escoge la opción Actualizar estado de avance.} & {}\\
-		{} & {2. El sistema solicita que ingrese el nivel de avance de la tarea.}\\
-		{3. El usuario ingresa el nivel de avance.} & {}\\
-		{} & {4. El sistema valida que el nivel de avance sea mayor al actual.}\\
-		{} & {5. El sistema registra el nuevo nivel de avance.}\\
+		{1. El usuario escoge una Tarea.} & {}\\
+		{} & {2. El sistema muestra el detalle de la tarea.}\\
+		{3. El usuario escoge la opción Actualizar estado de avance.} & {}\\
+		{} & {4. El sistema solicita que ingrese el nivel de avance de la tarea.}\\
+		{5. El usuario ingresa el nivel de avance.} & {}\\
+		{} & {6. El sistema valida que el nivel de avance sea mayor al actual.}\\
+		{} & {7. El sistema registra el nuevo nivel de avance.}\\
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
-		{} & {4. El nivel de avance es erróneo.}\\
-		{} & {5. El sistema despliega un mensaje indicando el error.}\\
+		{} & {6. El nivel de avance es erróneo.}\\
+		{} & {7. El sistema despliega un mensaje indicando el error.}\\
 		\hline
 	\end{tabular}
 	\end{center}
@@ -1568,13 +1612,16 @@
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
 		{1. El usuario escoge la opción Análisis de Impacto.} & {}\\
-		{} & {2. El sistema solicita el ingreso del analisis del impacto.}\\
-		{3. El usuario ingresa su analisis del impacto y confirma los cambios.} & {}\\
-		{} & {4. El sistema registra los cambios.}\\
+		{} & {2. El sistema despliega lista de solicitudes que el usuario debe analisar.}\\
+		{3. El usuario escoge solicitud.} & {}\\
+		{} & {4. El sistema solicita el ingreso del analisis del impacto.}\\
+		{5. El usuario ingresa su analisis del impacto y confirma los cambios.} & {}\\
+		{} & {6. El sistema registra los cambios.}\\
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
-		{} & {}\\
+		{5. El usuario cancela la acción.} & {}\\
+		{} & {6. El sistema regresa al paso 2}\\
 		\hline
 	\end{tabular}
 	\end{center}
@@ -1600,7 +1647,7 @@
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
 		{8. El usuario cancela la acción.} & {}\\
-		{} & {9. El sistema regresa al Caso de uso Gestión de Cambio}\\
+		{} & {9. El sistema regresa al paso 2}\\
 		\hline
 	\end{tabular}
 	\end{center}
@@ -1613,16 +1660,19 @@
 		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
 		\hline
 		{1. El usuario escoge la opción Implementación de Cambio.} & {}\\
-		{} & {2. El sistema solicita completar los datos del formulario de implementación.}\\
-		{3. El usuario completa el formulario.} & {}\\
-		{} & {4. El sistema solicita confirmación.}\\
-		{5. El usuario confirma la acción.} & {}\\
-		{} & {6. El sistema registra el cambio y cierra la solicitud.}\\
+		{} & {2. El sistema despliega lista de solicitudes que el usuario esta a autorizado para 
+		completar el formulario de implementación de cambio.}\\
+		{3. El usuario escoge una solicitud.} & {}\\
+		{} & {4. El sistema solicita completar los datos del formulario de implementación.}\\
+		{5. El usuario completa el formulario.} & {}\\
+		{} & {6. El sistema solicita confirmación.}\\
+		{7. El usuario confirma la acción.} & {}\\
+		{} & {8. El sistema registra el cambio y cierra la solicitud.}\\
 		\hline
 		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
 		\hline
-		{5. El usuario cancela la acción.} & {}\\
-		{} & {6. El sistema regresa al Caso de uso Gestión de Cambio}\\
+		{7. El usuario cancela la acción.} & {}\\
+		{} & {8. El sistema regresa al paso 2}\\
 		\hline
 	\end{tabular}
 	\end{center}
