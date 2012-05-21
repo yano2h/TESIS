@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2012-05-21 02:55:25 +0000</string>
+	<string>2012-05-21 17:54:12 +0000</string>
 	<key>Modifier</key>
 	<string>Alejandro Alvarez</string>
 	<key>NotesVisible</key>
@@ -17033,8 +17033,8 @@ Crear Proyecto}</string>
 					<integer>88</integer>
 					<key>Points</key>
 					<array>
-						<string>{300.37943, 354.95084}</string>
-						<string>{262.97858, 343.63477}</string>
+						<string>{310.96609, 215.4294}</string>
+						<string>{284.09283, 209.30872}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -17066,8 +17066,8 @@ Crear Proyecto}</string>
 					<integer>13</integer>
 					<key>Points</key>
 					<array>
-						<string>{300.3775, 383.55655}</string>
-						<string>{262.5, 393.87973}</string>
+						<string>{310.98486, 248.80116}</string>
+						<string>{284.43622, 261.66544}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -17087,7 +17087,7 @@ Crear Proyecto}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{300.61871, 343.5}, {99, 53}}</string>
+					<string>{{311.20984, 199.60284}, {93.237427, 53}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FontInfo</key>
@@ -17133,7 +17133,7 @@ Correspondientes}</string>
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{21.08432, 184.33783}, {46.64566, 15.280511}}</string>
+							<string>{{42.570541, 85.327774}, {40.429462, 12.371422}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>ID</key>
@@ -17178,8 +17178,8 @@ Correspondientes}</string>
 									<integer>5</integer>
 									<key>Points</key>
 									<array>
-										<string>{59.955673, 146.56107}</string>
-										<string>{44.40715, 146.56107}</string>
+										<string>{76.261742, 54.742905}</string>
+										<string>{62.785278, 54.742905}</string>
 									</array>
 									<key>Style</key>
 									<dict>
@@ -17201,8 +17201,8 @@ Correspondientes}</string>
 									<integer>38</integer>
 									<key>Points</key>
 									<array>
-										<string>{44.407124, 146.56107}</string>
-										<string>{28.85857, 146.56107}</string>
+										<string>{62.785229, 54.742905}</string>
+										<string>{49.308773, 54.742905}</string>
 									</array>
 									<key>Style</key>
 									<dict>
@@ -17224,8 +17224,8 @@ Correspondientes}</string>
 									<integer>7</integer>
 									<key>Points</key>
 									<array>
-										<string>{44.407135, 161.84155}</string>
-										<string>{52.181396, 184.76233}</string>
+										<string>{62.785248, 67.114304}</string>
+										<string>{69.52346, 85.67144}</string>
 									</array>
 									<key>Style</key>
 									<dict>
@@ -17247,8 +17247,8 @@ Correspondientes}</string>
 									<integer>8</integer>
 									<key>Points</key>
 									<array>
-										<string>{44.407169, 161.84155}</string>
-										<string>{36.632908, 184.76233}</string>
+										<string>{62.785271, 67.114304}</string>
+										<string>{56.047058, 85.67144}</string>
 									</array>
 									<key>Style</key>
 									<dict>
@@ -17274,8 +17274,8 @@ Correspondientes}</string>
 									<integer>9</integer>
 									<key>Points</key>
 									<array>
-										<string>{44.407154, 138.92081}</string>
-										<string>{44.407154, 161.84158}</string>
+										<string>{62.785263, 48.557194}</string>
+										<string>{62.785263, 67.114334}</string>
 									</array>
 									<key>Style</key>
 									<dict>
@@ -17290,7 +17290,7 @@ Correspondientes}</string>
 								</dict>
 								<dict>
 									<key>Bounds</key>
-									<string>{{36.632877, 123.64029}, {15.548554, 15.280511}}</string>
+									<string>{{56.047028, 36.185764}, {13.476483, 12.371422}}</string>
 									<key>Class</key>
 									<string>ShapedGraphic</string>
 									<key>ID</key>
@@ -17306,7 +17306,7 @@ Correspondientes}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{21.08432, 115.99999}, {46.64566, 84.042809}}</string>
+							<string>{{42.570541, 30}, {40.429462, 68.042816}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>ID</key>
@@ -17338,7 +17338,7 @@ Correspondientes}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{243.00002, 366.5}, {21.999969, 7}}</string>
+					<string>{{264.48624, 234.50363}, {21.999969, 7}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -17361,7 +17361,7 @@ Correspondientes}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{33.513794, 363}, {21.999969, 7}}</string>
+					<string>{{55.000015, 231.00363}, {21.999969, 7}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -17384,7 +17384,7 @@ Correspondientes}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{33.407166, 305.00003}, {21.999969, 7}}</string>
+					<string>{{55.000015, 170.81882}, {21.999969, 7}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -17407,7 +17407,7 @@ Correspondientes}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{243.00002, 304.05215}, {21.999969, 7}}</string>
+					<string>{{264.59286, 169.87094}, {21.999969, 7}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -17430,7 +17430,7 @@ Correspondientes}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{68.953568, 370.59921}, {163, 14}}</string>
+					<string>{{90.439789, 238.60284}, {163, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -17482,7 +17482,7 @@ Correspondientes}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 2.b: RespuestaJAlefeDeArea()}</string>
+\f0\fs24 \cf0 2.b: RespuestaAlJefeDeArea()}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -17505,8 +17505,8 @@ Correspondientes}</string>
 					<integer>83</integer>
 					<key>Points</key>
 					<array>
-						<string>{48, 388.5083}</string>
-						<string>{245, 388.5083}</string>
+						<string>{69.486221, 256.51193}</string>
+						<string>{266.48624, 256.51193}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -17525,7 +17525,7 @@ Correspondientes}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{245.5, 388.5083}, {17, 21.485779}}</string>
+					<string>{{266.98621, 256.51193}, {17, 21.485779}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>HFlip</key>
@@ -17570,7 +17570,7 @@ Correspondientes}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{245.5, 327.37561}, {17, 21.485779}}</string>
+					<string>{{267.09283, 193.1944}, {17, 21.485779}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>HFlip</key>
@@ -17615,7 +17615,7 @@ Correspondientes}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{86.953568, 309.46652}, {127, 14}}</string>
+					<string>{{108.54642, 175.28531}, {127, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -17690,8 +17690,8 @@ Correspondientes}</string>
 					<integer>79</integer>
 					<key>Points</key>
 					<array>
-						<string>{48, 327.37561}</string>
-						<string>{245, 327.37561}</string>
+						<string>{69.59285, 193.1944}</string>
+						<string>{266.59286, 193.1944}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -17710,7 +17710,7 @@ Correspondientes}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{97.744904, 248.33386}, {101, 14}}</string>
+					<string>{{117.98892, 112.60522}, {101, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -17785,8 +17785,8 @@ Correspondientes}</string>
 					<integer>77</integer>
 					<key>Points</key>
 					<array>
-						<string>{43.397934, 266.24292}</string>
-						<string>{245, 266.24295}</string>
+						<string>{65, 130.51431}</string>
+						<string>{263.99078, 130.51431}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -17805,7 +17805,7 @@ Correspondientes}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{245.5, 266.24292}, {17, 21.485779}}</string>
+					<string>{{264.49081, 130.51431}, {17, 21.485779}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>HFlip</key>
@@ -17862,8 +17862,8 @@ Correspondientes}</string>
 							<integer>35</integer>
 							<key>Points</key>
 							<array>
-								<string>{254.08447, 210.7758}</string>
-								<string>{255.72662, 437.00037}</string>
+								<string>{275.57141, 105.01842}</string>
+								<string>{277.21283, 292.99994}</string>
 							</array>
 							<key>Style</key>
 							<dict>
@@ -17889,7 +17889,7 @@ Correspondientes}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{207.38129, 188.00012}, {93.237427, 22.27569}}</string>
+							<string>{{228.86749, 86.000099}, {93.237427, 18.518322}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>ID</key>
@@ -17942,8 +17942,8 @@ Correspondientes}</string>
 							<integer>63</integer>
 							<key>Points</key>
 							<array>
-								<string>{44.513779, 211.19963}</string>
-								<string>{44.513748, 432.99988}</string>
+								<string>{66, 105.67896}</string>
+								<string>{65.999969, 293}</string>
 							</array>
 							<key>Style</key>
 							<dict>
@@ -17969,7 +17969,7 @@ Correspondientes}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{3.5137787, 188.00015}, {82, 22.699472}}</string>
+							<string>{{25, 86.000206}, {82, 19.178741}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>ID</key>
@@ -38510,7 +38510,7 @@ Correspondientes}</string>
 			<key>RowSpacing</key>
 			<real>36</real>
 			<key>SheetTitle</key>
-			<string>DS_BuscarProyectos</string>
+			<string>DS_BuscarProyecto</string>
 			<key>UniqueID</key>
 			<integer>34</integer>
 			<key>VPages</key>
@@ -38526,7 +38526,7 @@ Correspondientes}</string>
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>33</integer>
+		<integer>15</integer>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
@@ -38715,7 +38715,7 @@ Correspondientes}</string>
 				<real>1</real>
 			</array>
 			<array>
-				<string>DS_BuscarProyectos</string>
+				<string>DS_BuscarProyecto</string>
 				<real>1</real>
 				<real>1</real>
 			</array>
