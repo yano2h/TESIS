@@ -1,12 +1,23 @@
 \chapter{Análisis}
 
 \section{Especificación de Requerimientos}
-	A continuación se describen los requerimientos funcionales (RF) y también
-	los requerimientos no funcionales (RNF), los cuales describen las funciones
+	A continuación se describen los requerimientos funcionales y también
+	los requerimientos no funcionales, los cuales describen las funciones
 	y características que debe poseer la plataforma que se debe desarrollar.
 	
-	\subsection{Definiciones, Acronimos y Abreviaturas}
-	
+	\subsection{Acronimos y Abreviaturas}
+	Los acronimos y abreviaturas utilizados de aquí en adelante, se encuentran definidos
+	a continuación.
+	\begin{itemize}
+		\item \textbf{SCM:} Software Configuration Management.
+		\item \textbf{DISICO:} Dirección de Servicios de Información y Computación.
+		\item \textbf{SSO:} Single Sign-On.
+		\item \textbf{IC:} Item de Configuración.
+		\item \textbf{J.A:} Jefe de Área. 
+		\item \textbf{RF:} Requerimiento Funcional.
+		\item \textbf{RNF:} Requerimiento No Funcional.
+	\end{itemize}
+
 	\subsection{Tipos de Usuarios}
 	Dentro del sistema a desarrollar se pueden encontrar diferentes tipos de usuarios,
 	los cuales son definidos y descritos a continuación:
@@ -17,7 +28,7 @@
 		funcionalidades del sistema.
 		\item \textbf{Jefe de Departamento:} Usuario con conocimientos generales
 		de computación. Puede buscar solicitudes y ver resumenes del avance en
-		toda DISICO.
+		todo DISICO.
 		\item \textbf{Jefe de Área:} Jefe de alguno de los departamentos de DISICO, 
 		encargado de asignar responsables a las solicitudes y de controlar que estas 
 		se lleven a cabo.
@@ -60,8 +71,7 @@
 		Descripción de la solicitud, tipo de solicitud, departamento de DISICO a la que esta dirigida, sistema 
 		al que se refiere).}\\
 		\hline
-		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se registra y almacena la solicitud, 
-		y se genera.}\\
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se registra y almacena la solicitud.}\\
 		\hline
 		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Pantalla de envió exitoso y 
 		notificación en el perfil del Jefe de Área correspondiente.}\\
@@ -276,16 +286,16 @@
 		\hline
 		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Al finalizar una solicitud el 
 		responsable puede escoger entre 2 tipos de respuesta que son: Responder al Jefe de Área o 
-		Responder al solicitante.}	\\
+		Responder al solicitante directamente.}	\\
 		\hline
 		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Selección de una opción de respuesta.}\\
 		\hline
 		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Según la opción se realiza alguna de las 
 		siguientes acciones:
 		\begin{itemize}
-			\item \textbf{Responder al Jefe de Área:} Esta opción solo enviá una notificación al jefe de Área quien 
+			\item \textbf{Respuesta al Jefe de Área:} Esta opción solo enviá una notificación al jefe de Área quien 
 			deberá encargarse de responder luego al solicitante.
-			\item \textbf{Responder Directamente:} Esta enviá un correo electrónico al solicitante, notificándole 
+			\item \textbf{Respuesta Directa:} Esta enviá un correo electrónico al solicitante, notificándole 
 			que su solicitud ha sido completada.
 		\end{itemize}
 		}\\
@@ -300,8 +310,8 @@
 		\hline
 		\textbf{Id} & {RF15} & \textbf{Tipo de Usuario} & {Jefe de Área} & \textbf{Prioridad} & {Obligatorio}\\
 		\hline
-		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Las solicitudes que deben ser
-		respuestas por el, tienen la posibilidad de responderse de 2 formas, las cuales son: Respuesta Directa o
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{El Jefe de Área 
+		tienen la posibilidad de responder solicitudes de 2 formas, las cuales son: Respuesta Directa o
 		Respuesta manual.}\\
 		\hline
 		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Selección de una opción de respuesta.}\\
@@ -310,7 +320,7 @@
 		siguientes acciones:
 		\begin{itemize}
 			\item \textbf{Respuesta Directa:} Se notifica directamente al solicitante a trabes de correo electrónico.
-			\item \textbf{Responder Manual:} Se enviá un correo electrónico personalizado a una o mas personas
+			\item \textbf{Respuesta Manual:} Se enviá un correo electrónico personalizado a una o mas personas
 			entre las cuales puede estar o no el solicitante.
 		\end{itemize}
 		}\\
@@ -2080,11 +2090,13 @@
 			\caption{Diagrama de Estados Implementación del Cambio}
 		\end{center}
 	\end{figure}
+
+
 \section{Modelo Conceptual}
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/Modelo_Conceptual.jpg}
+			\includegraphics[angle=90,scale=0.61]{imagenes/ModeloConceptual.png}
 			\caption{Modelo Conceptual}
 		\end{center}
 	\end{figure}
