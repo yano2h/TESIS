@@ -6,9 +6,9 @@ Explicar Diseño
 	
 	\subsection{Restricciones Arquitecturales}
 	Antes de comenzar a definir la arquitectura del sistema es importante,
-	especificar de forma explicita cuales son las restricciones arquitecturales
+	identificar de forma explicita cuales son las restricciones arquitecturales
 	que existen, las cuales se pueden deducir desde los requerimientos
-	impuestos por el cliente, estas son:
+	impuestos por el cliente, estas restricciones son:
 	\begin{itemize}
 		\item La aplicación debe ser desarrollada en lenguaje de programación Java.
 		\item La aplicación debe ser desarrollada siguiendo los estándar Java EE, 
@@ -21,9 +21,9 @@ Explicar Diseño
 	\end{itemize}
 	
 	\subsection{Estructura del Sistema}
-	Para satisfacer los requerimientos y restricciones del cliente, se hará uso de la
-	arquitectura Cliente-Servidor de 4-Capas la cual esta basada en el estándar 
-	definido por Java EE 6.
+	Para satisfacer los requerimientos y restricciones del cliente, se utilizara la
+	arquitectura Cliente-Servidor separada 4-Capas como lo plantea el estándar 
+	definido por Java EE 6\cite{javaee}.
 
 	\begin{figure}[H]
 		\begin{center}
@@ -43,21 +43,26 @@ Explicar Diseño
 			\item Un Navegador Web que interpreta las paginas enviadas por el 
 			servidor.
 		\end{itemize} 
-		\item \textbf{Capa de Web:} Son componentes web creados con la
-		tecnología Java Server Faces, y contenidos en el contenedor web
+		
+		\item \textbf{Capa Web:} Son componentes web creados con la
+		tecnología Java Server Faces, y contenidos dentro del contenedor web
 		del servidor de aplicaciones Java EE. Los cuales se utilizan para generar
 		las paginas web que son enviadas al cliente.
+		
 		\item \textbf{Capa de Negoció:} Aquí se define toda la lógica
 		particular del dominio del negoció, a cargo de Enterprise Beans y Java
 		Persistence Entities, estos reciben los datos que envía el cliente, los 
 		procesan de ser necesario y los envían a la mecanismo de almacenamiento.
 		También recuperan información desde el mecanismo de almacenamiento, 
-		la procesan de ser necesario y la envían al cliente. Se encuentra 
-		almacenados en el contenedor EJB del servidor de aplicaciones Java EE.
+		la procesan de ser necesario y la envían al cliente. Los componentes 
+		que conforman esta capa se encuentra almacenados 
+		en el contenedor EJB del servidor de aplicaciones Java EE.
 		
 		\item \textbf{Capa de Datos:} Es un mecanismo de almacenamiento
-		persistente, el cual almacena la información relevante para el sistema.
-		En este caso el mecanismo es base de datos relacional.
+		persistente, donde residen la información relevante para el sistema y es
+		la encargada de acceder los mismos. En este caso particular esta formado
+		por un gestor de base de datos relacional. Recibe solicitudes de 
+		almacenamiento o recuperación de información desde la capa de negocio.
 	\end{enumerate}
 	
 	\subsection{Modelo de Control}
