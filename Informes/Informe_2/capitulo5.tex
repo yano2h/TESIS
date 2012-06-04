@@ -22,7 +22,7 @@ Explicar Diseño
 	
 	\subsection{Estructura del Sistema}
 	Para satisfacer los requerimientos y restricciones del cliente, se utilizara la
-	arquitectura Cliente-Servidor separada 4-Capas como lo plantea el estándar 
+	arquitectura Cliente-Servidor separada Múltiples-Capas como lo plantea el estándar 
 	definido por Java EE 6\cite{javaee}.
 
 	\begin{figure}[H]
@@ -34,29 +34,39 @@ Explicar Diseño
 	
 	Las capas definidas son:
 	\begin{enumerate}
-		\item \textbf{Capa del Cliente:} Es la capa destinada a mostrar la interfaz 
-		gráfica de usuario y se ejecuta en el computador del cliente. Compuesta 
-		principalmente por 2 partes: 
-		\begin{itemize}
-			\item Paginas web dinámicas que contienen varios tipos de lenguajes de
-			marcas (HTML, XML u otros), las cuales son generadas por la capa web.
-			\item Un Navegador Web que interpreta las paginas enviadas por el 
-			servidor.
-		\end{itemize} 
+	%	\item \textbf{Capa del Cliente:} Es la capa destinada a mostrar la interfaz 
+	%	gráfica de usuario y se ejecuta en el computador del cliente. Compuesta 
+	%	principalmente por 2 partes: 
+	%	\begin{itemize}
+	%		\item Paginas web dinámicas que contienen varios tipos de lenguajes de
+	%		marcas (HTML, XML u otros), las cuales son generadas por la capa web.
+	%		\item Un Navegador Web que interpreta las paginas enviadas por el 
+	%		servidor.
+	%	\end{itemize} 
 		
 		\item \textbf{Capa Web:} Son componentes web creados con la
 		tecnología Java Server Faces, y contenidos dentro del contenedor web
 		del servidor de aplicaciones Java EE. Los cuales se utilizan para generar
-		las paginas web que son enviadas al cliente.
+		las paginas web dinamicas, las cuales son enviadas en respuestas a las
+		peticiones del clientes e interpretadas por el navegador web del mismo.
 		
-		\item \textbf{Capa de Negoció:} Aquí se define toda la lógica
-		particular del dominio del negoció, a cargo de Enterprise Beans y Java
-		Persistence Entities, estos reciben los datos que envía el cliente, los 
-		procesan de ser necesario y los envían a la mecanismo de almacenamiento.
-		También recuperan información desde el mecanismo de almacenamiento, 
-		la procesan de ser necesario y la envían al cliente. Los componentes 
-		que conforman esta capa se encuentra almacenados 
-		en el contenedor EJB del servidor de aplicaciones Java EE.
+		\item \textbf{Capa de Negoció:} Es la capa intermedia, la cual comunica la 	
+		capa de datos con la capa web, esta capa contiene toda la lógica
+		particular del dominio del negoció y también envía y recupera información 
+		desde la capa de Datos. Esta capa a su ves se compone por 
+		dos sub-capas, las cuales se almacenan y trabajan conjuntamente
+		dentro del contenedor EJB del servidor de aplicaciones Java EE. Estas 
+		sub-capas son:
+		\begin{itemize}
+		 	\item \textbf{Capa EJB:} Esta capa contiene toda la lógica
+		 	de negocio y procesamiento de datos, y se se comunica con la capa 
+		 	de persistencia para poder comunicarse con la capa de datos.
+			\item \textbf{Capa de Persistencia:} Es capa contiene toda la lógica
+			para el manejo y uso de API de persistencia de Java 
+			(en este caso implementada con hibernate), se encarga de mapear
+			las tablas de la base de datos a entidades Java, el manejo de 
+			transacciones y la inserción y recuperación de datos desde esta.
+		\end{itemize}
 		
 		\item \textbf{Capa de Datos:} Es un mecanismo de almacenamiento
 		persistente, donde residen la información relevante para el sistema y es
