@@ -76,15 +76,43 @@ Explicar Diseño
 	\end{enumerate}
 	
 	\subsection{Estilo de Descomposición Modular}
+
 	En esta sección se describe como se descompone el sistema en diferentes modulos,
 	esto se realizara utilizando el enfoque Orientado a Objetos (OO), para este caso 
 	este enfoque es el mas adecuado, ya que el sistema debe ser implementado haciendo uso de 
 	un lenguaje OO (particularmente java), así se mantendrá la correcta correspondencia 
 	entre los modelos y la implementación.
 
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/DescomposicionModular.png}
+			\caption{Diagrama de Descomposición Modular del Sistema}
+		\end{center}
+	\end{figure}	
 
-	\subsection{Modelo de Control}
+	A continuación se describen las responsabilidades de cada modulo:
+	\begin{itemize}
+		\item \textbf{Gestor de Sesiones de Usuarios:}
+		\item \textbf{Acceso SSO:}
+		\item \textbf{Manejador de Notificaciones y Alertas:}
+		\item \textbf{:}
+		\item \textbf{:}
+		\item \textbf{:}
+		\item \textbf{:}
+		\item \textbf{:}
+		\item \textbf{:}
+		\item \textbf{:}
+		\item \textbf{:}
+	\end{itemize}
 	
+	\subsection{Modelo de Control}
+	Para que el sistema trabaje como tal, se deben controlar los diferentes módulos o subsistemas
+	de este de manera tal que sus servicios se entregue en el lugar correcto en el momento preciso. 
+	Para este caso el modelo de control seleccionado es el control Basado en Eventos de Broadcast, 
+	esta decisión se justifica principalmente en el echo que el sistema debe generar notificaciones 
+	o alertas en las pantallas de los diferentes usuarios en respuesta a algún evento de tiempo o 
+	generado por otro usuario, de esta manera mantener a los usuarios comunicados y con la información
+	actualizada.
 
 	
 	
