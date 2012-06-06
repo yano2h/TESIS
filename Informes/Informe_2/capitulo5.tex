@@ -1,8 +1,17 @@
 \chapter{Diseño}
-Explicar Diseño
+Este capitulo contiene toda la documentación generada correspondiente
+a la fase de diseño del sistema, en concreto aquí se encuentra:
+\begin{itemize}
+	\item Diseño Arquitectónico.
+	\item Diseño Lógico.
+	\item Diseño de Datos.
+	\item Diseño de Interfaces.
+	\item Diseño de Pruebas.
+\end{itemize}
+
 \section{Diseño Arquitectónico}
+%	Explicar que es arquitectura
 %	\subsection{Requerimientos Arquitecturales}
-	Explicar que es arquitectura
 	
 	\subsection{Restricciones Arquitecturales}
 	Antes de comenzar a definir la arquitectura del sistema es importante,
@@ -27,12 +36,12 @@ Explicar Diseño
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/Arquitectura.png}
+			\includegraphics[scale=0.7]{imagenes/Arquitectura.jpg}
 			\caption{Diagrama de Arquitectura}
 		\end{center}
 	\end{figure}	
 	
-	Las capas definidas son:
+	A continuación se describe el propósito de cada una de las capas definidas:
 	\begin{enumerate}
 	%	\item \textbf{Capa del Cliente:} Es la capa destinada a mostrar la interfaz 
 	%	gráfica de usuario y se ejecuta en el computador del cliente. Compuesta 
@@ -44,34 +53,33 @@ Explicar Diseño
 	%		servidor.
 	%	\end{itemize} 
 		
-		\item \textbf{Capa Web:} Son componentes web creados con la
+		\item \textbf{Capa Web:} Representa los componentes web creados con la
 		tecnología Java Server Faces, y contenidos dentro del contenedor web
-		del servidor de aplicaciones Java EE. Los cuales se utilizan para generar
+		del servidor de aplicaciones Java EE. Estos se utilizan para generar
 		las paginas web dinamicas, las cuales son enviadas en respuestas a las
 		peticiones del clientes e interpretadas por el navegador web del mismo.
 		
 		\item \textbf{Capa de Negoció:} Es la capa intermedia, la cual comunica la 	
-		capa de datos con la capa web, esta capa contiene toda la lógica
-		particular del dominio del negoció y también envía y recupera información 
-		desde la capa de Datos. Esta capa a su ves se compone por 
-		dos sub-capas, las cuales se almacenan y trabajan conjuntamente
-		dentro del contenedor EJB del servidor de aplicaciones Java EE. Estas 
-		sub-capas son:
+		capa de datos con la capa web, contiene toda la lógica particular del dominio 
+		del negoció y también envía y recupera información desde la capa de Datos. 
+		Esta capa a su ves se compone por dos sub-capas, las cuales se almacenan 
+		y trabajan conjuntamente dentro del contenedor EJB del servidor de 
+		aplicaciones Java EE. Las dos sub-capas que componen esta capa son:
 		\begin{itemize}
 		 	\item \textbf{Capa EJB:} Esta capa contiene toda la lógica
 		 	de negocio y procesamiento de datos, y se se comunica con la capa 
-		 	de persistencia para poder comunicarse con la capa de datos.
-			\item \textbf{Capa de Persistencia:} Es capa contiene toda la lógica
+		 	de persistencia para acceder a los datos.
+			\item \textbf{Capa de Persistencia:} Esta capa contiene toda la lógica
 			para el manejo y uso de API de persistencia de Java 
-			(en este caso implementada con hibernate), se encarga de mapear
-			las tablas de la base de datos a entidades Java, el manejo de 
-			transacciones y la inserción y recuperación de datos desde esta.
+			(implementada con Hibernate), se encarga de mapear
+			las tablas de la base de datos a entidades Java, maneja transacciones,
+			inserta y recupera de datos desde esta.
 		\end{itemize}
 		
 		\item \textbf{Capa de Datos:} Es un mecanismo de almacenamiento
 		persistente, donde residen la información relevante para el sistema y es
-		la encargada de acceder los mismos. En este caso particular esta formado
-		por un gestor de base de datos relacional. Recibe solicitudes de 
+		la encargada de acceder los mismos. En este caso esta formada
+		por un gestor de base de datos relacional. Esta recibe solicitudes de 
 		almacenamiento o recuperación de información desde la capa de negocio.
 	\end{enumerate}
 	
@@ -79,40 +87,95 @@ Explicar Diseño
 
 	En esta sección se describe como se descompone el sistema en diferentes modulos,
 	esto se realizara utilizando el enfoque Orientado a Objetos (OO), para este caso 
-	este enfoque es el mas adecuado, ya que el sistema debe ser implementado haciendo uso de 
-	un lenguaje OO (particularmente java), así se mantendrá la correcta correspondencia 
-	entre los modelos y la implementación.
+	este enfoque es el mas adecuado, ya que el sistema debe ser implementado 
+	haciendo uso de un lenguaje OO (particularmente java), así se mantendrá la 
+	correcta correspondencia entre los modelos y la implementación.
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/DescomposicionModular.png}
+			\includegraphics[scale=0.5]{imagenes/DescomposicionModular.png}
 			\caption{Diagrama de Descomposición Modular del Sistema}
 		\end{center}
 	\end{figure}	
 
 	A continuación se describen las responsabilidades de cada modulo:
 	\begin{itemize}
-		\item \textbf{Gestor de Sesiones de Usuarios:}
-		\item \textbf{Acceso SSO:}
-		\item \textbf{Manejador de Notificaciones y Alertas:}
-		\item \textbf{:}
-		\item \textbf{:}
-		\item \textbf{:}
-		\item \textbf{:}
-		\item \textbf{:}
-		\item \textbf{:}
-		\item \textbf{:}
-		\item \textbf{:}
+		\item \textbf{Identity Services:} Servicio web proporcionado por
+		la Universidad de Valparaiso, que proporciona servicios de acceso a la
+		información de todas las cuentas de los funcionarios de la 
+		Universidad, que se encuentran almacenadas en LDAP.
+		
+		\item \textbf{Acceso SSO:} Componente que se conecta con el 
+		servicio \textit{Identity Services} para recuperar la información de los 
+		usuarios, también se encarga de administrar las cookies generadas 
+		por el sistema de acceso de SSO de la Universidad.
+		
+		\item \textbf{Gestor de Sesiones de Usuarios:} Mantiene el registro 
+		de todos los usuarios conectados a la aplicación, proporciona acceso a 
+		la información de los perfiles de usuarios y da la autorización para acceder
+		a diferentes funcionalidades a los usuarios según sus roles.
+		
+		\item \textbf{Manejador de Notificaciones y Alertas:} Se encarga de detectar
+		los diferentes eventos ocurridos dentro del sistema que producen algun tipo de
+		notificación o alerta y a la vez se preocupa de enviar dichas notificaciones y 
+		alertas a los usuarios que corresponde.
+		
+		\item \textbf{Gestor de Emails:} Proporciona funciones para la creación y envio
+		de emails de manera manual o automática.
+		
+		\item \textbf{Gestor de Solicitudes de Requerimientos:} Permite administrar la 
+		creación, envió y respuesta de las solicitudes de requerimientos.
+		
+		\item \textbf{Generador de Indicadores:} Este componente calcula los valores
+		de los diferentes indicadores, y las medidas necesarias para generar los 
+		diferentes gráficos, que son necesarios en los resúmenes que ven
+		los Jefes de Area y Departamento.
+		
+		\item \textbf{Buscador de Solicitudes de Requerimientos:} Permite buscar 
+		solicitudes de requerimientos, según los diferentes criterios de búsqueda
+		existentes.
+
+		\item \textbf{Gestor de Proyectos:} Proporciona acceso a las funciones de 
+		creación, eliminación y modificación de los proyectos, y la información de estos
+		como sus tareas, responsables, avance.
+
+		\item \textbf{Monitor de Avance:} Este componente es el encargado de 
+		calcula las medidas de avance de cualquier proyecto.
+		
+		\item \textbf{Buscador de Proyectos:} Permite la búsqueda de proyectos
+		bajo diferentes criterios.
+		
+		\item \textbf{Gestor de Tareas de Proyectos:} Este permite agregar, eliminar y
+		editar tareas en un proyecto.
+
+		\item \textbf{Gestor de Tareas SCM:} Permite editar las información de las
+		tareas de SCM y definir responsables para estas.
+
+		\item \textbf{Administrador de Items de Configuración:} Proporciona funciones
+		para agregar, eliminar, editar y buscar Items de configuración de un proyecto.
+		
+		\item \textbf{Gestor de Solicitudes de Cambio:} Permite crear, eliminar, 
+		responder solicitudes de cambio y gestiona el ciclo de vida de estas.
+		
+		\item \textbf{Manejador de Objetos Persistentes:} Es una fachada a la que 
+		accede cualquiera de los componente de la capa de negocio, que proporciona 
+		acceso a las entidades persistentes utilizadas en el sistema.
+		
+		\item \textbf{Entidades Persistentes:} Contiene todas las entidades 
+		persistentes del sistema y las cuales están mapeadas directamente a la
+		base de datos a trabes de hibernate, solo pueden ser accedidas a través
+		del \textit{Manejador de Objetos Persistentes}.
 	\end{itemize}
 	
 	\subsection{Modelo de Control}
-	Para que el sistema trabaje como tal, se deben controlar los diferentes módulos o subsistemas
-	de este de manera tal que sus servicios se entregue en el lugar correcto en el momento preciso. 
-	Para este caso el modelo de control seleccionado es el control Basado en Eventos de Broadcast, 
-	esta decisión se justifica principalmente en el echo que el sistema debe generar notificaciones 
-	o alertas en las pantallas de los diferentes usuarios en respuesta a algún evento de tiempo o 
-	generado por otro usuario, de esta manera mantener a los usuarios comunicados y con la información
-	actualizada.
+	Para que el sistema trabaje como tal, se deben controlar los diferentes módulos o 
+	subsistemas de este de manera tal que sus servicios se entregue en el lugar 
+	correcto en el momento preciso. Para este caso el modelo de control seleccionado 
+	es el control Basado en Eventos de Broadcast, esta decisión se justifica 
+	principalmente en el echo que el sistema debe generar notificaciones 
+	o alertas en las pantallas de los diferentes usuarios en respuesta a algún evento de
+	tiempo o generado por otro usuario, de esta manera mantener a los usuarios 
+	comunicados y con la información actualizada.
 
 	
 	
