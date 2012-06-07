@@ -31,42 +31,50 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\subsection{Estructura del Sistema}
 	Para satisfacer los requerimientos y restricciones del cliente, se utilizara la
-	arquitectura Cliente-Servidor separada Múltiples-Capas como lo plantea el estándar 
-	definido por Java EE 6\cite{javaee}.
+	arquitectura Cliente-Servidor separada en Múltiples-Capas como lo plantea el 
+	estándar definido por Java EE 6\cite{javaee}.
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.7]{imagenes/Arquitectura.jpg}
+			\includegraphics[scale=1]{imagenes/Arquitecturaj2EE.png}
 			\caption{Diagrama de Arquitectura}
 		\end{center}
 	\end{figure}	
 	
-	A continuación se describe el propósito de cada una de las capas definidas:
+	A continuación se describe el propósito de cada una de las capas definidas en el
+	diagrama:
 	\begin{enumerate}
-	%	\item \textbf{Capa del Cliente:} Es la capa destinada a mostrar la interfaz 
-	%	gráfica de usuario y se ejecuta en el computador del cliente. Compuesta 
-	%	principalmente por 2 partes: 
-	%	\begin{itemize}
-	%		\item Paginas web dinámicas que contienen varios tipos de lenguajes de
-	%		marcas (HTML, XML u otros), las cuales son generadas por la capa web.
-	%		\item Un Navegador Web que interpreta las paginas enviadas por el 
-	%		servidor.
-	%	\end{itemize} 
-		
-		\item \textbf{Capa Web:} Representa los componentes web creados con la
-		tecnología Java Server Faces, y contenidos dentro del contenedor web
-		del servidor de aplicaciones Java EE. Estos se utilizan para generar
-		las paginas web dinamicas, las cuales son enviadas en respuestas a las
-		peticiones del clientes e interpretadas por el navegador web del mismo.
+		\item \textbf{Capa de Presentación:} Es la capa destinada a la mostrar la
+		parte gráfica de la aplicación, que se descompone en 2 sub-capas:
+		\begin{itemize}
+			\item \textbf{Capa del Cliente:} Es la capa destinada a interpretar y 
+			mostrar la interfaz gráfica de usuario del lado del cliente. Esta capa 
+			se encuentra compuesta por: 
+
+			\begin{itemize}
+				\item Paginas web dinámicas que contienen varios tipos de lenguajes 
+				de marcas (HTML, XML u otros), las cuales son generadas por la capa 
+				web.
+				\item Un Navegador Web que interpreta las paginas enviadas por el 
+				servidor.\\
+			\end{itemize} 
+			
+			\item \textbf{Capa Web:} Representa los componentes web creados con la
+			tecnología Java Server Faces, los cuales se ejecutan dentro del contenedor 
+			web del servidor de aplicaciones Java EE. Estos componentes generan
+			paginas web dinámicas, las cuales son enviadas en respuestas a las
+			peticiones HTTP del clientes e interpretadas por el navegador web del 
+			mismo.
+		\end{itemize}
 		
 		\item \textbf{Capa de Negoció:} Es la capa intermedia, la cual comunica la 	
 		capa de datos con la capa web, contiene toda la lógica particular del dominio 
-		del negoció y también envía y recupera información desde la capa de Datos. 
+		del negoció y también envía y recupera información desde la capa de datos. 
 		Esta capa a su ves se compone por dos sub-capas, las cuales se almacenan 
 		y trabajan conjuntamente dentro del contenedor EJB del servidor de 
 		aplicaciones Java EE. Las dos sub-capas que componen esta capa son:
 		\begin{itemize}
-		 	\item \textbf{Capa EJB:} Esta capa contiene toda la lógica
+		 	\item \textbf{Capa de Servicio:} Esta capa contiene toda la lógica
 		 	de negocio y procesamiento de datos, y se se comunica con la capa 
 		 	de persistencia para acceder a los datos.
 			\item \textbf{Capa de Persistencia:} Esta capa contiene toda la lógica
@@ -93,7 +101,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.5]{imagenes/DescomposicionModular.png}
+			\includegraphics[scale=0.5]{imagenes/DescomposicionModular2.png}
 			\caption{Diagrama de Descomposición Modular del Sistema}
 		\end{center}
 	\end{figure}	
@@ -115,12 +123,12 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 		la información de los perfiles de usuarios y da la autorización para acceder
 		a diferentes funcionalidades a los usuarios según sus roles.
 		
-		\item \textbf{Manejador de Notificaciones y Alertas:} Se encarga de detectar
-		los diferentes eventos ocurridos dentro del sistema que producen algun tipo de
-		notificación o alerta y a la vez se preocupa de enviar dichas notificaciones y 
+		\item \textbf{Generador de Notificaciones y Alertas:} Se encarga de detectar
+		los diferentes eventos ocurridos dentro del sistema que producen algún tipo 
+		de notificación o alerta y a la vez se preocupa de enviar dichas notificaciones y 
 		alertas a los usuarios que corresponde.
 		
-		\item \textbf{Gestor de Emails:} Proporciona funciones para la creación y envio
+		\item \textbf{Envió de Emails:} Proporciona funciones para la creación y envió
 		de emails de manera manual o automática.
 		
 		\item \textbf{Gestor de Solicitudes de Requerimientos:} Permite administrar la 
@@ -129,24 +137,24 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 		\item \textbf{Generador de Indicadores:} Este componente calcula los valores
 		de los diferentes indicadores, y las medidas necesarias para generar los 
 		diferentes gráficos, que son necesarios en los resúmenes que ven
-		los Jefes de Area y Departamento.
+		los Jefes de Área y Departamento.
 		
 		\item \textbf{Buscador de Solicitudes de Requerimientos:} Permite buscar 
 		solicitudes de requerimientos, según los diferentes criterios de búsqueda
 		existentes.
 
 		\item \textbf{Gestor de Proyectos:} Proporciona acceso a las funciones de 
-		creación, eliminación y modificación de los proyectos, y la información de estos
-		como sus tareas, responsables, avance.
+		creación, eliminación y modificación de los proyectos, y la información de 
+		estos como sus tareas, responsables, avance.
 
-		\item \textbf{Monitor de Avance:} Este componente es el encargado de 
+		\item \textbf{Medidor de Avance:} Este componente es el encargado de 
 		calcula las medidas de avance de cualquier proyecto.
 		
 		\item \textbf{Buscador de Proyectos:} Permite la búsqueda de proyectos
 		bajo diferentes criterios.
 		
-		\item \textbf{Gestor de Tareas de Proyectos:} Este permite agregar, eliminar y
-		editar tareas en un proyecto.
+		\item \textbf{Calendarizador de Tareas de Proyectos:} Este permite agregar, 
+		eliminar y editar tareas en un proyecto.
 
 		\item \textbf{Gestor de Tareas SCM:} Permite editar las información de las
 		tareas de SCM y definir responsables para estas.
