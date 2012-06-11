@@ -1,0 +1,24 @@
+/* 
+    Document   : header
+    Created on : 11-jun-2012, 11:08:04
+    Author     : Alejandro
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.logoUv { 
+    border: none; 
+    width:165px; 
+    height:85px; 
+    top:0 
+}
+
+.basicInfo{
+    float:right;
+    padding: 10px;
+}
+

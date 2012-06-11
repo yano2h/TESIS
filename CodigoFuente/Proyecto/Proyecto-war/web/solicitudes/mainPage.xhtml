@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Portal</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./../template/Template.xhtml">
+            <ui:define name="top">
+                <ui:include src="#{mbSessionController.top}"/>
+            </ui:define>
+            <ui:define name="left">
+                <ui:include src="#{mbSessionController.left}"/>
+            </ui:define>
+            <ui:define name="content">
+                <ui:include src="#{mbSessionController.content}"/>
+            </ui:define>
+            <ui:define name="bottom">
+                <ui:include src="#{mbSessionController.footer}"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
