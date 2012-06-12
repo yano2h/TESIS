@@ -224,23 +224,39 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{enumerate}
 	
-		\item \textbf{Clase Funcionario:}\\\\
+		\item \textbf{Clase Funcionario:} Es la clase que representa a los 
+		usuarios del sistema, principalmente a los que se dedican a enviar
+		solicitudes de requerimiento a DISICO.\\\\
 		\textbf{Atributos de la Clase:}
 		\begin{itemize}
-			\item \textbf{rut:}
-			\item \textbf{nombre:}
-			\item \textbf{apellidoPaterno:}
-			\item \textbf{apellidoMaterno:}
-			\item \textbf{correoUV:}
-			\item \textbf{fechaPrimerAcceso:}
-			\item \textbf{fechaUltimoAcceso:}
+			\item \textbf{rut:} Es el rut de la persona en formato entero sin 
+			puntos guiones ni dígito verificador, que sirve para identificar a un 
+			usuario de manera unequivoca.
+			\item \textbf{nombre:} Cadena que contiene el nombre o nombres 
+			del funcionario.
+			\item \textbf{apellidoPaterno:} Cadena que almacena el apellido 
+			paterno (o primer apellido) del funcionario.
+			\item \textbf{apellidoMaterno:} Cadena que almacena el apellido 
+			materno (o segundo apellido) del funcionario.
+			\item \textbf{correoUV:} Cadena que almacena el correo 
+			institucional (con dominio @uv.cl) del funcionario.
+			\item \textbf{fechaPrimerAcceso:} Fecha y hora en que accedió por
+			primera vez el funcionario al sistema.
+			\item \textbf{fechaUltimoAcceso:} Fecha y hora en que accedió por
+			ultima vez el funcionario al sistema.
+			
 		\end{itemize}
 		
-		\item \textbf{Clase FuncionarioDisico:}\\\\
+		\item \textbf{Clase FuncionarioDisico:} Esta clase extiende a de la 
+		clase Funcionario y representa a los funcionarios de la universidad que
+		trabajan en el departamento de DISICO.\\\\
 		\textbf{Atributos de la Clase:}
 		\begin{itemize}
-			\item \textbf{cargo:}
+			\item Hereda todos los atributos de la clase Funcionario
+			\item \textbf{cargo:} Cadena con el cargo que tiene el funcionario
+			dentro de disico
 			\item \textbf{anexo:}
+			\item \textbf{estadisticasPersonales:} %modificar cardinalidad en diagrama
 		\end{itemize}
 
 		\item \textbf{Clase Area:}\\\\
