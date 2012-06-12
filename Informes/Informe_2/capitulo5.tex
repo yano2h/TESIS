@@ -206,16 +206,331 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	
 \section{Diseño Lógico}
+	Como se menciono anteriormente, se utilizara un paradigma Orientado a Objetos por
+	lo que en esta sección, se presenta el diagrama de clases correspondiente al sistema a 
+	desarrollar.
+	
 	\subsection{Diseño de Clases}
+	A continuación se presenta el diagrama de clases del sistema.
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[scale=0.25, angle=90]{imagenes/DiagramaDeClases.png}
 			\caption{Diagrama de Clases}
 		\end{center}
 	\end{figure}
+	
+	Para una mayor comprensión del diagrama anterior, es que se presenta una breve 
+	explicación de cada clase y los atributos y/o métodos que la componen.
+
+	\begin{enumerate}
+	
+		\item \textbf{Clase Funcionario:}\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{rut:}
+			\item \textbf{nombre:}
+			\item \textbf{apellidoPaterno:}
+			\item \textbf{apellidoMaterno:}
+			\item \textbf{correoUV:}
+			\item \textbf{fechaPrimerAcceso:}
+			\item \textbf{fechaUltimoAcceso:}
+		\end{itemize}
+		
+		\item \textbf{Clase FuncionarioDisico:}\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{cargo:}
+			\item \textbf{anexo:}
+		\end{itemize}
+
+		\item \textbf{Clase Area:}\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{codigoArea:}
+			\item \textbf{nombreArea:}
+			\item \textbf{descripcionArea:}
+		\end{itemize}
+
+		\item \textbf{Clase SolicitudDeRequerimiento:}\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idSolicitud:}
+			\item \textbf{codigoConsulta:}
+			\item \textbf{asunto:}
+			\item \textbf{mensaje:}
+			\item \textbf{justificacionTransferencia:}
+			\item \textbf{respuesta:}
+			\item \textbf{fechaEnvio:}
+			\item \textbf{fechaCierre:}
+			\item \textbf{fechaVencimiento:}
+			\item \textbf{fechaUltimaActualizacion:}
+		\end{itemize}
+
+		\item \textbf{Clase Notificacion:}\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idNotificacion:}
+			\item \textbf{fechaNotificacion:}
+			\item \textbf{mensajeNotificacion:}
+			\item \textbf{revisada:}
+		\end{itemize}
+
+		\item \textbf{Clase EstadisticaPersonalDiaria:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEstadistica:}
+			\item \textbf{fechaMedicion:}
+			\item \textbf{totalSolicitudesAsegnadas:}
+			\item \textbf{cantidadSolicitudesPendientes:}
+			\item \textbf{cantidadSolicitudesVencidas:}
+			\item \textbf{cantidadSolicitudesIniciadas:}
+			\item \textbf{cantidadProyectosAcargo:}
+			\item \textbf{cantidadProyectosQueParticipa:}
+			\item \textbf{cantidadTareasProyecto:}
+			\item \textbf{cantidadTareasSCM:}
+		\end{itemize}
+
+		\item \textbf{Clase ComentarioSolicitud:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idComentario:}
+			\item \textbf{fechaComentario:}
+			\item \textbf{comentario:}
+			\item \textbf{visible:}
+		\end{itemize}
+
+		\item \textbf{Clase TipoSolicitudRequerimiento:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idTipoSolicitud:}
+			\item \textbf{nombreTipoSolicitud:}
+		\end{itemize}
+
+		\item \textbf{Clase EstadoSolicitudRequerimiento:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEstadoSolicitud:}
+			\item \textbf{nombreEstadoSolicitud:}
+		\end{itemize}
+
+		\item \textbf{Clase Prioridad:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idPrioridad:}
+			\item \textbf{nombrePrioridad:}
+		\end{itemize}
+
+		\item \textbf{Clase SolicitudDeCambio:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idSolicitud:}
+			\item \textbf{fechaEnvio:}
+			\item \textbf{descripcionNecesidadDelCambio:}
+			\item \textbf{descripcionCambio:}
+			\item \textbf{fechaAnalisis:}
+			\item \textbf{descripcionImpactoDelCambio:}
+			\item \textbf{fechaCierre:}
+			\item \textbf{moduloAfectado:}
+			\item \textbf{descripcionResolucion:}
+		\end{itemize}
+
+		\item \textbf{Clase FormularioDeImplementacion:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idFormulario:}
+			\item \textbf{observaciones:}
+			\item \textbf{fechaVerificacion:}
+		\end{itemize}
+
+		\item \textbf{Clase TareaSCM:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idTareaSCM:}
+			\item \textbf{nombreTarea:}
+			\item \textbf{descripcion:}
+		\end{itemize}
+
+		\item \textbf{Clase Entregable:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEntregable:}
+			\item \textbf{nombreEntregable:}
+		\end{itemize}
+
+		\item \textbf{Clase Proyecto:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idProyecto:}
+			\item \textbf{codigoInterno:}
+			\item \textbf{nombre:}
+			\item \textbf{descripcion:}
+			\item \textbf{fechaInicio:}
+			\item \textbf{fechaTermino:}
+		\end{itemize}
+
+		\item \textbf{Clase RolProyecto:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idRol:}
+			\item \textbf{nombreRol:}
+		\end{itemize}
+
+		\item \textbf{Clase Participante:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{rol:}
+			\item \textbf{funcionario:}
+		\end{itemize}
+
+		\item \textbf{Clase EstadoProyecto:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEstadoProyecto:}
+			\item \textbf{nombreEstadoProyecto:}
+		\end{itemize}
+
+		\item \textbf{Clase TipoProyecto:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idTipoProyecto:}
+			\item \textbf{nombreTipoProyecto:}
+		\end{itemize}
+
+		\item \textbf{Clase ItemConfiguracion:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idItemConfiguracion:}
+			\item \textbf{codigoIdentificador:}
+			\item \textbf{nombreItemConfiguracion:}
+			\item \textbf{version:}
+			\item \textbf{ubicacionEnBiblioteca:}
+			\item \textbf{fechaUltimaModificacion:}
+		\end{itemize}
+
+		\item \textbf{Clase TareaProyecto:}
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idTareaProyecto:}
+			\item \textbf{descripcionTarea:}
+			\item \textbf{fechaCreacion:}
+			\item \textbf{fechaInicioPropuesta:}
+			\item \textbf{fechaInicioReal:}
+			\item \textbf{fechaTerminoPropuesta:}
+			\item \textbf{fechaTerminoReal:}
+			\item \textbf{nivelAvance:}
+			\item \textbf{visible:}
+		\end{itemize}
+
+		\item \textbf{Clase EjbSolicitudRequerimeinto:}
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{generarCodigoConsulta:}
+			\item \textbf{validarCodigoConsulta:}
+			\item \textbf{buscarSolicitudPorCodigo:}
+			\item \textbf{buscarSolicitudPorSolicitante:}
+			\item \textbf{buscarSolicitudPorResponsable:}
+			\item \textbf{buscarSolicitudPorArea:}
+			\item \textbf{enviarSolicitud:}
+			\item \textbf{cerrarSolicitud:}
+			\item \textbf{respuestaDirecta:}
+			\item \textbf{respuestaJefeArea:}
+			\item \textbf{respuestaManual:}
+			\item \textbf{asignarResponsable:}
+		\end{itemize}
+		
+		\item \textbf{Clase EjbEmail:}
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{crearEmail:}
+			\item \textbf{enviarEmail:}
+		\end{itemize}
+		
+		\item \textbf{Clase EjbSSO:}
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{obtenerDatosUsuario:}
+			\item \textbf{cerrarSesion:}
+			\item \textbf{validarSesion:}
+		\end{itemize}
+		
+		
+		\item \textbf{Clase EjbGeneradorDeIndicadores:}
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{:}
+		\end{itemize}
+		
+		\item \textbf{Clase EjbGestorNotificaciones:}
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{calcularEstadisticaPersonal:}
+			\item \textbf{calcularEstadisticaArea:}
+			\item \textbf{calcularEstadisticaDepartamento:}
+		\end{itemize}
+		
+		\item \textbf{Clase EjbCalendarizadorDeTareas:}
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{agendarTarea:}
+			\item \textbf{editarTarea:}
+			\item \textbf{listarTareasProyecto:}
+			\item \textbf{buscarTareasPorResponsable:}
+		\end{itemize}
+		
+		%Corregir dependencia en el diagrama de clases
+		\item \textbf{Clase EjbMedidorAvanceProyecto:}
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{actualizarAvanceTarea:}
+			\item \textbf{buscarTareasRetrasadas:} %renombrar en diagrama
+			\item \textbf{generarIndicadoresDeAvanceProyecto:}
+		\end{itemize}
+		
+		\item \textbf{Clase EjbItemsConfiguracion:}
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{agregarItemConfiguracion:}
+			\item \textbf{listarItemsConfiguracion:}
+			\item \textbf{editarItemConfiguracion:}
+			\item \textbf{asignarResponsableItemConfiguracion:}
+		\end{itemize}
+		
+		\item \textbf{Clase EjbProyectos:}
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{crearProyecto:}
+			\item \textbf{editarProyecto:}
+			\item \textbf{buscarProyectoPorArea:}
+			\item \textbf{asignarParticipantes:}
+		\end{itemize}
+		
+		\item \textbf{Clase EjbTareasSCM:}
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{listarTareasSCM:}
+			\item \textbf{asignarResponsableTarea:}
+			\item \textbf{buscarTareasSCMPorProyecto:}
+			\item \textbf{buscarTareasSCMPorResponsable:}
+			\item \textbf{iniciarTarea:}
+			\item \textbf{cerrarTarea:}
+		\end{itemize}
+		
+		\item \textbf{Clase EjbSolicitudDeCambio:}
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{enviarSolicitudCambio:}
+			\item \textbf{analisarImpacto:}
+			\item \textbf{evaluarSolicitud:}
+			\item \textbf{guardarFormularioImplementacion:}
+			\item \textbf{buscarSolicitudesDeCambioPorProyecto:}
+		\end{itemize}
+
+	\end{enumerate}
 %	\subsection{Patrones de Diseño}
 	
 \section{Diseño de Datos}
+	Dado que los datos seran almacenados dentro de una base de datos relacional,
+	se presenta en esta sección el diagrama de entidad relación que se implementara.
 	\subsection{Modelo Entidad Relación}
 	\begin{figure}[H]
 		\begin{center}
@@ -224,7 +539,11 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 		\end{center}
 	\end{figure}
 	
-%	\subsection{Diccionario de Datos}
+	\subsection{Diccionario de Datos}
+	Para dar un mayor nivel de detalle a continuación se presenta el diccionario de datos
+	de la base de datos, en la cual se describe cada tabla con sus atributos.
+	
+	
 %\section{Diseño de Interfaces}
 %\section{Diseño de Pruebas}
 %	\subsection{Pruebas Unitarias}
