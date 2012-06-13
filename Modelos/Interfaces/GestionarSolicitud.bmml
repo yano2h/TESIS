@@ -47,58 +47,57 @@
         <text>Mi%20Perfil</text>
       </controlProperties>
     </control>
-    <control controlID="41" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="779" y="191" w="-1" h="335" measuredW="16" measuredH="100" zOrder="9" locked="false" isInGroup="-1"/>
-    <control controlID="47" controlTypeID="com.balsamiq.mockups::ButtonBar" x="39" y="159" w="-1" h="-1" measuredW="250" measuredH="29" zOrder="10" locked="false" isInGroup="-1">
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::ButtonBar" x="39" y="159" w="-1" h="-1" measuredW="250" measuredH="29" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
         <selectedIndex>0</selectedIndex>
         <text>Solicitudes%20%2C%20Proyectos%20%2C%20SCM</text>
       </controlProperties>
     </control>
-    <control controlID="49" controlTypeID="com.balsamiq.mockups::Button" x="39" y="191" w="125" h="38" measuredW="70" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+    <control controlID="49" controlTypeID="com.balsamiq.mockups::Button" x="39" y="191" w="125" h="38" measuredW="70" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
         <size>11</size>
         <state>up</state>
         <text>Resumen</text>
       </controlProperties>
     </control>
-    <control controlID="50" controlTypeID="com.balsamiq.mockups::Button" x="39" y="218" w="125" h="38" measuredW="93" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::Button" x="39" y="218" w="125" h="38" measuredW="93" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
       <controlProperties>
         <size>11</size>
         <state>up</state>
         <text>Mis%20Solicitudes</text>
       </controlProperties>
     </control>
-    <control controlID="51" controlTypeID="com.balsamiq.mockups::Button" x="39" y="251" w="125" h="38" measuredW="119" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::Button" x="39" y="251" w="125" h="38" measuredW="119" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
       <controlProperties>
         <size>11</size>
         <state>selected</state>
         <text>Solicitudes%20del%20Area</text>
       </controlProperties>
     </control>
-    <control controlID="52" controlTypeID="com.balsamiq.mockups::Button" x="39" y="279" w="125" h="38" measuredW="99" measuredH="27" zOrder="14" locked="false" isInGroup="-1">
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::Button" x="39" y="279" w="125" h="38" measuredW="99" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
         <size>11</size>
         <state>up</state>
         <text>Buscar%20Solicitud</text>
       </controlProperties>
     </control>
-    <control controlID="71" controlTypeID="com.balsamiq.mockups::DataGrid" x="171" y="192" w="608" h="294" measuredW="608" measuredH="325" zOrder="15" locked="false" isInGroup="-1">
+    <control controlID="71" controlTypeID="com.balsamiq.mockups::DataGrid" x="171" y="188" w="638" h="298" measuredW="661" measuredH="325" zOrder="14" locked="false" isInGroup="-1">
       <controlProperties>
         <selectedIndex>2</selectedIndex>
-        <text>Codigo%20%5Ev%2C%20Fecha%20%5Ev%2C%20Estado%20%5Ev%2C%20%20Tipo%20%5Ev%2C%20Titulo%20%5Ev%2C%20Solicitante%20%5Ev%2C%20Responsable%20%5Ev%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez</text>
+        <text>Codigo%20%5Ev%2C%20Fecha%20%5Ev%2C%20Estado%20%5Ev%2C%20%20Tipo%20%5Ev%2C%20Titulo%20%5Ev%2C%20Solicitante%20%5Ev%2C%20Responsable%20%5Ev%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0ABCF-AA0-3%2C%202012-06-01%2C%20No%20Asignada%2C%20Correo%2C%20Creacion%20correo%20uv%2C%20Alberto%20Gonzales%2C%20-%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez%0A000-000-1%2C%202012-06-01%2C%20Iniciada%2C%20Correo%2C%20Creacion%20cuenta%20uv%2C%20Juan%20Perez%2C%20Raul%20Gomez</text>
       </controlProperties>
     </control>
-    <control controlID="72" controlTypeID="com.balsamiq.mockups::Icon" x="382" y="490" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="16" locked="false" isInGroup="-1">
+    <control controlID="72" controlTypeID="com.balsamiq.mockups::Icon" x="382" y="490" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="15" locked="false" isInGroup="-1">
       <controlProperties>
         <icon>RewindIcon%7Csmall</icon>
       </controlProperties>
     </control>
-    <control controlID="73" controlTypeID="com.balsamiq.mockups::Icon" x="478" y="490" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="17" locked="false" isInGroup="-1">
+    <control controlID="73" controlTypeID="com.balsamiq.mockups::Icon" x="478" y="490" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="16" locked="false" isInGroup="-1">
       <controlProperties>
         <icon>ForwardIcon%7Csmall</icon>
       </controlProperties>
     </control>
-    <control controlID="74" controlTypeID="com.balsamiq.mockups::Label" x="412" y="492" w="-1" h="-1" measuredW="60" measuredH="21" zOrder="18" locked="false" isInGroup="-1">
+    <control controlID="74" controlTypeID="com.balsamiq.mockups::Label" x="412" y="492" w="-1" h="-1" measuredW="60" measuredH="21" zOrder="17" locked="false" isInGroup="-1">
       <controlProperties>
         <text>1%202%203%204%205</text>
       </controlProperties>
