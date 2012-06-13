@@ -112,7 +112,7 @@
         <borderStyle>square</borderStyle>
         <hasHeader>true</hasHeader>
         <rowHeight>24</rowHeight>
-        <selectedIndex>-1</selectedIndex>
+        <selectedIndex>2</selectedIndex>
         <text>Codigo%20%5Cr%5Cr%5Cr%2C%20Fecha%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Cr%5Cr%5Cr%2C%20Asunto%20%5Cr%5Cr%5Cr%2C%20Estado%20%5Cr%5Cr%5Cr%2CTipo%5Cr%5Cr%5Cr%0A3F4-890-K%2C%202012-05-01%2C%20Solicitud%20de%20Clave%2C%20Pendiente%2C%20Clave%0AAF4-091-H%2C%202012-04-20%2C%20Solicitud%20de%20Informacion%20Alumno%2C%20Iniciada%2C%20Informaci%F3n%0A5A2-EC1-4%2C%202012-04-13%2C%20Solicitud%20de%20Correo%2C%20Vencida%2C%20Correo%0AJB7-7QS-7%2C%202012-04-09%2C%20Solicitud%20de%20Ficha%2C%20Cerrada%2C%20Informaci%F3n%0AAF4-091-H%2C%202012-03-12%2C%20Solicitud%20de%20Listado%2C%20Cerrada%2C%20Informaci%F3n</text>
       </controlProperties>
     </control>

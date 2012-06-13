@@ -15,7 +15,7 @@
     </control>
     <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="39" y="163" w="125" h="341" measuredW="100" measuredH="70" zOrder="2" locked="true" isInGroup="-1"/>
     <control controlID="3" controlTypeID="com.balsamiq.mockups::Canvas" x="164" y="163" w="607" h="341" measuredW="100" measuredH="70" zOrder="3" locked="true" isInGroup="-1"/>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="39" y="87" w="-1" h="-1" measuredW="161" measuredH="75" zOrder="4" locked="true" isInGroup="-1">
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="39" y="87" w="125" h="61" measuredW="161" measuredH="75" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
         <borderStyle>square</borderStyle>
         <src>../../../../C%3A/Users/Alejandro/Downloads/menu_marca.gif</src>
@@ -82,17 +82,17 @@
       </controlProperties>
     </control>
     <control controlID="41" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="757" y="169" w="-1" h="335" measuredW="16" measuredH="100" zOrder="15" locked="false" isInGroup="-1"/>
-    <control controlID="42" controlTypeID="com.balsamiq.mockups::Button" x="207" y="442" w="-1" h="-1" measuredW="59" measuredH="27" zOrder="16" locked="false" isInGroup="-1">
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::Button" x="202" y="428" w="-1" h="-1" measuredW="59" measuredH="27" zOrder="16" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Enviar</text>
       </controlProperties>
     </control>
-    <control controlID="43" controlTypeID="com.balsamiq.mockups::Button" x="292" y="443" w="-1" h="-1" measuredW="65" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::Button" x="294" y="428" w="-1" h="-1" measuredW="65" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Limpiar</text>
       </controlProperties>
     </control>
-    <control controlID="44" controlTypeID="com.balsamiq.mockups::Button" x="375" y="443" w="-1" h="-1" measuredW="75" measuredH="27" zOrder="18" locked="false" isInGroup="-1">
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::Button" x="383" y="428" w="-1" h="-1" measuredW="75" measuredH="27" zOrder="18" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Cancelar</text>
       </controlProperties>
@@ -139,16 +139,6 @@
     <control controlID="55" controlTypeID="com.balsamiq.mockups::Label" x="200" y="296" w="-1" h="-1" measuredW="81" measuredH="21" zOrder="28" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Descripcion%3A*</text>
-      </controlProperties>
-    </control>
-    <control controlID="56" controlTypeID="com.balsamiq.mockups::Button" x="298" y="400" w="100" h="27" measuredW="91" measuredH="27" zOrder="29" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Seleccionar</text>
-      </controlProperties>
-    </control>
-    <control controlID="57" controlTypeID="com.balsamiq.mockups::Label" x="200" y="400" w="122" h="15" measuredW="98" measuredH="21" zOrder="30" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Archivo%20Adjunto%3A</text>
       </controlProperties>
     </control>
   </controls>

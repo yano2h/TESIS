@@ -15,7 +15,7 @@
     </control>
     <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="39" y="163" w="125" h="341" measuredW="100" measuredH="70" zOrder="2" locked="true" isInGroup="-1"/>
     <control controlID="3" controlTypeID="com.balsamiq.mockups::Canvas" x="164" y="163" w="607" h="341" measuredW="100" measuredH="70" zOrder="3" locked="true" isInGroup="-1"/>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="39" y="87" w="-1" h="-1" measuredW="161" measuredH="75" zOrder="4" locked="true" isInGroup="-1">
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="39" y="87" w="125" h="61" measuredW="161" measuredH="75" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
         <borderStyle>square</borderStyle>
         <src>../../../../C%3A/Users/Alejandro/Downloads/menu_marca.gif</src>
