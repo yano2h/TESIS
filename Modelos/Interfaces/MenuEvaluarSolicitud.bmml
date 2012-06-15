@@ -77,13 +77,14 @@
     <control controlID="187" controlTypeID="com.balsamiq.mockups::Button" x="39" y="287" w="125" h="36" measuredW="104" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
         <size>11</size>
-        <state>selected</state>
+        <state>up</state>
         <text>Analizar%20Solicitud</text>
       </controlProperties>
     </control>
     <control controlID="188" controlTypeID="com.balsamiq.mockups::Button" x="39" y="317" w="125" h="33" measuredW="113" measuredH="27" zOrder="14" locked="false" isInGroup="-1">
       <controlProperties>
         <size>11</size>
+        <state>selected</state>
         <text>Evaluar%20Solicitudes</text>
       </controlProperties>
     </control>
@@ -94,9 +95,9 @@
         <text>Itdentificar%20%5CrConfiguracion</text>
       </controlProperties>
     </control>
-    <control controlID="190" controlTypeID="com.balsamiq.mockups::SubTitle" x="181" y="194" w="-1" h="-1" measuredW="207" measuredH="33" zOrder="16" locked="false" isInGroup="-1">
+    <control controlID="190" controlTypeID="com.balsamiq.mockups::SubTitle" x="181" y="194" w="-1" h="-1" measuredW="201" measuredH="33" zOrder="16" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Analizar%20Solicitudes</text>
+        <text>Evaluar%20Solicitudes</text>
       </controlProperties>
     </control>
     <control controlID="219" controlTypeID="com.balsamiq.mockups::DataGrid" x="181" y="251" w="419" h="85" measuredW="468" measuredH="85" zOrder="17" locked="false" isInGroup="-1">
@@ -105,19 +106,19 @@
         <text>N%BA%20%2C%20Descripcion%2C%20Fecha%20Envio%20%5Ev%2C%20Solicitante%2C%20Prioridad%0A13%20%2CCambiar%20formato%20reporte%2C%202012-10-01%2C%20Alberto%20Veaz%2C%20Media%0A21%2C%20Cambiar%20estilo%20css%2C%202012-10-01%2C%20Gonzalo%20Valdes%2C%20Baja</text>
       </controlProperties>
     </control>
-    <control controlID="220" controlTypeID="com.balsamiq.mockups::DataGrid" x="181" y="407" w="533" h="85" measuredW="509" measuredH="85" zOrder="18" locked="false" isInGroup="-1">
+    <control controlID="220" controlTypeID="com.balsamiq.mockups::DataGrid" x="181" y="407" w="533" h="85" measuredW="528" measuredH="85" zOrder="18" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>N%BA%20%2C%20Descripcion%2C%20Fecha%20Envio%20%5Ev%2C%20Fecha%20Analisis%20%5Ev%2C%20Solicitante%0A1%2C%20Cambiar%20formato%20reporte%2C%202012-10-01%2C%202012-10-01%2C%20Alberto%20Veaz%0A2%2C%20Cambiar%20estilo%20css%2C%202012-10-01%2C%202012-10-01%2C%20Gonzalo%20Valdes</text>
+        <text>N%BA%20%2C%20Descripcion%2C%20Fecha%20Envio%20%5Ev%2C%20Fecha%20Evaluacion%20%5Ev%2C%20Solicitante%0A1%2C%20Cambiar%20formato%20reporte%2C%202012-10-01%2C%202012-10-01%2C%20Alberto%20Veaz%0A2%2C%20Cambiar%20estilo%20css%2C%202012-10-01%2C%202012-10-01%2C%20Gonzalo%20Valdes</text>
       </controlProperties>
     </control>
-    <control controlID="221" controlTypeID="com.balsamiq.mockups::Label" x="181" y="227" w="-1" h="-1" measuredW="203" measuredH="21" zOrder="19" locked="false" isInGroup="-1">
+    <control controlID="221" controlTypeID="com.balsamiq.mockups::Label" x="181" y="227" w="-1" h="-1" measuredW="285" measuredH="21" zOrder="19" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Solicitudes%20de%20Cambio%20pendientes%3A</text>
+        <text>Solicitudes%20de%20Cambio%20pendientes%20de%20evaluacion%3A</text>
       </controlProperties>
     </control>
-    <control controlID="222" controlTypeID="com.balsamiq.mockups::Label" x="181" y="386" w="-1" h="-1" measuredW="173" measuredH="21" zOrder="20" locked="false" isInGroup="-1">
+    <control controlID="222" controlTypeID="com.balsamiq.mockups::Label" x="181" y="386" w="-1" h="-1" measuredW="171" measuredH="21" zOrder="20" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Solicitudes%20Analizadas%20por%20mi%3A</text>
+        <text>Solicitudes%20Evaluadas%20por%20mi%3A</text>
       </controlProperties>
     </control>
     <control controlID="223" controlTypeID="com.balsamiq.mockups::Label" x="356" y="499" w="49" h="9" measuredW="49" measuredH="21" zOrder="21" locked="false" isInGroup="-1">

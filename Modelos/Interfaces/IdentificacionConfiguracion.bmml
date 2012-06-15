@@ -14,7 +14,7 @@
       </controlProperties>
     </control>
     <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="39" y="188" w="125" h="290" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="-1"/>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="39" y="87" w="125" h="61" measuredW="77" measuredH="79" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="39" y="87" w="125" h="61" measuredW="161" measuredH="75" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <borderStyle>square</borderStyle>
         <src>../../../../C%3A/Users/Alejandro/Downloads/menu_marca.gif</src>
@@ -102,6 +102,21 @@
       <controlProperties>
         <selectedIndex>1</selectedIndex>
         <text>Codigo%2C%20Nombre%20Proyecto%2C%20Estado%2C%20Responsable%0AF0021%2C%20Proyecto%20X%2C%20En%20ejecucion%2C%20Francisco%20Soto%0AF0011%2C%20Proyecto%20Z%2C%20Finalizado%2C%20Javier%20Gonzales</text>
+      </controlProperties>
+    </control>
+    <control controlID="204" controlTypeID="com.balsamiq.mockups::Label" x="366" y="373" w="-1" h="-1" measuredW="49" measuredH="21" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>1%202%203%204</text>
+      </controlProperties>
+    </control>
+    <control controlID="205" controlTypeID="com.balsamiq.mockups::Icon" x="326" y="371" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>RewindIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="206" controlTypeID="com.balsamiq.mockups::Icon" x="421" y="371" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>ForwardIcon%7Csmall</icon>
       </controlProperties>
     </control>
   </controls>

@@ -1,6 +1,6 @@
-<mockup version="1.0" skin="sketch" measuredW="796" measuredH="504" mockupW="757" mockupH="498">
+<mockup version="1.0" skin="sketch" measuredW="796" measuredH="581" mockupW="757" mockupH="575">
   <controls>
-    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="39" y="6" w="757" h="498" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="39" y="6" w="757" h="575" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
       <controlProperties>
         <text>A%20Web%20Page%0Ahttp%3A//</text>
         <value>0</value>
@@ -13,8 +13,8 @@
         <color>16777215</color>
       </controlProperties>
     </control>
-    <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="39" y="188" w="125" h="290" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="-1"/>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="39" y="87" w="125" h="61" measuredW="77" measuredH="79" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="39" y="188" w="125" h="370" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="-1"/>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="39" y="87" w="125" h="61" measuredW="161" measuredH="75" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <borderStyle>square</borderStyle>
         <src>../../../../C%3A/Users/Alejandro/Downloads/menu_marca.gif</src>
@@ -97,7 +97,7 @@
         <text>Crear%20Solicitud%20de%20Cambio</text>
       </controlProperties>
     </control>
-    <control controlID="192" controlTypeID="com.balsamiq.mockups::Label" x="181" y="236" w="-1" h="-1" measuredW="62" measuredH="21" zOrder="17" locked="false" isInGroup="-1">
+    <control controlID="192" controlTypeID="com.balsamiq.mockups::Label" x="181" y="236" w="-1" h="-1" measuredW="63" measuredH="21" zOrder="17" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Proyecto%3A</text>
       </controlProperties>
@@ -129,7 +129,7 @@
     </control>
     <control controlID="199" controlTypeID="com.balsamiq.mockups::TextArea" x="181" y="350" w="396" h="65" measuredW="200" measuredH="140" zOrder="23" locked="false" isInGroup="-1">
       <controlProperties>
-        <text/>
+        <text>Describa%20por%20que%20es%20necesario%20el%20cambio</text>
       </controlProperties>
     </control>
     <control controlID="200" controlTypeID="com.balsamiq.mockups::Label" x="181" y="323" w="-1" h="-1" measuredW="139" measuredH="21" zOrder="24" locked="false" isInGroup="-1">
@@ -137,14 +137,24 @@
         <text>Necesidad%20del%20Cambio%3A</text>
       </controlProperties>
     </control>
-    <control controlID="201" controlTypeID="com.balsamiq.mockups::Button" x="420" y="428" w="-1" h="-1" measuredW="71" measuredH="27" zOrder="25" locked="false" isInGroup="-1">
+    <control controlID="201" controlTypeID="com.balsamiq.mockups::Button" x="420" y="516" w="-1" h="-1" measuredW="71" measuredH="27" zOrder="25" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Guardar</text>
       </controlProperties>
     </control>
-    <control controlID="202" controlTypeID="com.balsamiq.mockups::Button" x="502" y="428" w="-1" h="-1" measuredW="75" measuredH="27" zOrder="26" locked="false" isInGroup="-1">
+    <control controlID="202" controlTypeID="com.balsamiq.mockups::Button" x="502" y="516" w="-1" h="-1" measuredW="75" measuredH="27" zOrder="26" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Cancelar</text>
+      </controlProperties>
+    </control>
+    <control controlID="203" controlTypeID="com.balsamiq.mockups::TextArea" x="181" y="444" w="396" h="65" measuredW="200" measuredH="140" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Describa%20el%20cambio%20concreto%20a%20realizar</text>
+      </controlProperties>
+    </control>
+    <control controlID="204" controlTypeID="com.balsamiq.mockups::Label" x="181" y="423" w="151" h="21" measuredW="143" measuredH="21" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Descripcion%20del%20Cambio%3A</text>
       </controlProperties>
     </control>
   </controls>
