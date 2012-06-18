@@ -14,115 +14,115 @@
       </controlProperties>
     </control>
     <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="39" y="188" w="125" h="290" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="-1"/>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="39" y="87" w="125" h="61" measuredW="77" measuredH="79" zOrder="3" locked="false" isInGroup="-1">
-      <controlProperties>
-        <borderStyle>square</borderStyle>
-        <src>../../../../C%3A/Users/Alejandro/Downloads/menu_marca.gif</src>
-        <text/>
-      </controlProperties>
-    </control>
-    <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="611" y="96" w="-1" h="-1" measuredW="149" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="611" y="96" w="-1" h="-1" measuredW="149" measuredH="21" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Usuario%3A%20Nombre%20Apellido</text>
       </controlProperties>
     </control>
-    <control controlID="6" controlTypeID="com.balsamiq.mockups::Title" x="214" y="111" w="-1" h="-1" measuredW="386" measuredH="37" zOrder="5" locked="false" isInGroup="-1">
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Title" x="214" y="111" w="-1" h="-1" measuredW="386" measuredH="37" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
         <size>28</size>
         <text>Sistema%20de%20Gestion%20de%20Tareas</text>
       </controlProperties>
     </control>
-    <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="611" y="110" w="-1" h="-1" measuredW="103" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="611" y="110" w="-1" h="-1" measuredW="103" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
         <text>RUT%3A%2011.111.111-1</text>
       </controlProperties>
     </control>
-    <control controlID="8" controlTypeID="com.balsamiq.mockups::Link" x="714" y="132" w="-1" h="-1" measuredW="30" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Link" x="714" y="132" w="-1" h="-1" measuredW="30" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Salir</text>
       </controlProperties>
     </control>
-    <control controlID="9" controlTypeID="com.balsamiq.mockups::Link" x="636" y="132" w="-1" h="-1" measuredW="50" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Link" x="636" y="132" w="-1" h="-1" measuredW="50" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Mi%20Perfil</text>
       </controlProperties>
     </control>
-    <control controlID="47" controlTypeID="com.balsamiq.mockups::ButtonBar" x="39" y="159" w="-1" h="-1" measuredW="250" measuredH="29" zOrder="9" locked="false" isInGroup="-1">
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::ButtonBar" x="39" y="159" w="-1" h="-1" measuredW="250" measuredH="29" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <selectedIndex>2</selectedIndex>
         <text>Solicitudes%20%2C%20Proyectos%20%2C%20SCM</text>
       </controlProperties>
     </control>
-    <control controlID="49" controlTypeID="com.balsamiq.mockups::Button" x="39" y="191" w="125" h="38" measuredW="70" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+    <control controlID="49" controlTypeID="com.balsamiq.mockups::Button" x="39" y="191" w="125" h="38" measuredW="70" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
         <size>11</size>
         <state>up</state>
         <text>Resumen</text>
       </controlProperties>
     </control>
-    <control controlID="50" controlTypeID="com.balsamiq.mockups::Button" x="39" y="218" w="125" h="38" measuredW="78" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::Button" x="39" y="218" w="125" h="38" measuredW="78" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
       <controlProperties>
         <size>11</size>
         <state>up</state>
         <text>Mis%20Tareas</text>
       </controlProperties>
     </control>
-    <control controlID="51" controlTypeID="com.balsamiq.mockups::Button" x="39" y="251" w="125" h="38" measuredW="86" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::Button" x="39" y="251" w="125" h="38" measuredW="86" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
       <controlProperties>
         <size>11</size>
         <state>selected</state>
         <text>Tareas%20SCM</text>
       </controlProperties>
     </control>
-    <control controlID="144" controlTypeID="com.balsamiq.mockups::SubTitle" x="179" y="196" w="-1" h="-1" measuredW="217" measuredH="33" zOrder="13" locked="false" isInGroup="-1">
+    <control controlID="144" controlTypeID="com.balsamiq.mockups::SubTitle" x="179" y="196" w="-1" h="-1" measuredW="217" measuredH="33" zOrder="12" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Definir%20Tareas%20SCM</text>
       </controlProperties>
     </control>
-    <control controlID="170" controlTypeID="com.balsamiq.mockups::DataGrid" x="179" y="244" w="568" h="139" measuredW="576" measuredH="89" zOrder="14" locked="false" isInGroup="-1">
+    <control controlID="170" controlTypeID="com.balsamiq.mockups::DataGrid" x="179" y="244" w="568" h="139" measuredW="576" measuredH="89" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
         <align>left</align>
         <text>Tarea%2C%20Entregables%2C%20Responsable%2C%20Fecha%20Inicio%2C%20Fecha%20Termino%2C%20Opcion%0AIdentificar%20Items%5Cr%20Control%2C%20Documento%20de%20IC%2C%20Francisco%20Soto%2C%2010-05-2011%2C%2011-05-2011%2C%20%20%0ASolicitar%20Cambios%2C%20Solicitud%20de%5CrCambio%2C%20%2C%20%2C</text>
       </controlProperties>
     </control>
-    <control controlID="174" controlTypeID="com.balsamiq.mockups::ComboBox" x="411" y="302" w="98" h="-1" measuredW="106" measuredH="23" zOrder="15" locked="false" isInGroup="-1">
+    <control controlID="174" controlTypeID="com.balsamiq.mockups::ComboBox" x="411" y="302" w="98" h="-1" measuredW="106" measuredH="23" zOrder="14" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Responsable</text>
       </controlProperties>
     </control>
-    <control controlID="175" controlTypeID="com.balsamiq.mockups::DateChooser" x="596" y="301" w="79" h="-1" measuredW="90" measuredH="25" zOrder="16" locked="false" isInGroup="-1">
+    <control controlID="175" controlTypeID="com.balsamiq.mockups::DateChooser" x="596" y="301" w="79" h="-1" measuredW="90" measuredH="25" zOrder="15" locked="false" isInGroup="-1">
       <controlProperties>
         <text>%20%20/%20%20/%20%20%20%20</text>
       </controlProperties>
     </control>
-    <control controlID="176" controlTypeID="com.balsamiq.mockups::DateChooser" x="509" y="301" w="74" h="-1" measuredW="90" measuredH="25" zOrder="17" locked="false" isInGroup="-1">
+    <control controlID="176" controlTypeID="com.balsamiq.mockups::DateChooser" x="509" y="301" w="74" h="-1" measuredW="90" measuredH="25" zOrder="16" locked="false" isInGroup="-1">
       <controlProperties>
         <text>%20%20/%20%20/%20%20%20%20</text>
       </controlProperties>
     </control>
-    <control controlID="177" controlTypeID="com.balsamiq.mockups::Icon" x="707" y="273" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="18" locked="false" isInGroup="-1">
+    <control controlID="177" controlTypeID="com.balsamiq.mockups::Icon" x="707" y="273" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="17" locked="false" isInGroup="-1">
       <controlProperties>
         <icon>PencilIcon%7Cxsmall</icon>
       </controlProperties>
     </control>
-    <control controlID="178" controlTypeID="com.balsamiq.mockups::Icon" x="698" y="305" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="19" locked="false" isInGroup="-1">
+    <control controlID="178" controlTypeID="com.balsamiq.mockups::Icon" x="698" y="305" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="18" locked="false" isInGroup="-1">
       <controlProperties>
         <icon>CheckMarkIcon%7Cxsmall</icon>
       </controlProperties>
     </control>
-    <control controlID="179" controlTypeID="com.balsamiq.mockups::Icon" x="714" y="305" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="20" locked="false" isInGroup="-1">
+    <control controlID="179" controlTypeID="com.balsamiq.mockups::Icon" x="714" y="305" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="19" locked="false" isInGroup="-1">
       <controlProperties>
         <icon>XIcon%7Cxsmall</icon>
       </controlProperties>
     </control>
-    <control controlID="180" controlTypeID="com.balsamiq.mockups::Button" x="544" y="408" w="-1" h="-1" measuredW="123" measuredH="27" zOrder="21" locked="false" isInGroup="-1">
+    <control controlID="180" controlTypeID="com.balsamiq.mockups::Button" x="544" y="408" w="-1" h="-1" measuredW="123" measuredH="27" zOrder="20" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Guardar%20Cambios</text>
       </controlProperties>
     </control>
-    <control controlID="181" controlTypeID="com.balsamiq.mockups::Button" x="675" y="408" w="-1" h="-1" measuredW="75" measuredH="27" zOrder="22" locked="false" isInGroup="-1">
+    <control controlID="181" controlTypeID="com.balsamiq.mockups::Button" x="675" y="408" w="-1" h="-1" measuredW="75" measuredH="27" zOrder="21" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Cancelar</text>
+      </controlProperties>
+    </control>
+    <control controlID="182" controlTypeID="com.balsamiq.mockups::Image" x="39" y="87" w="125" h="61" measuredW="161" measuredH="75" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <src>./assets/logo_uv.gif</src>
+        <text/>
       </controlProperties>
     </control>
   </controls>
