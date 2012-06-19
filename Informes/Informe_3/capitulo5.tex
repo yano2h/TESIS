@@ -2329,9 +2329,39 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	Las pruebas unitarias concentran su esfuerzo en la verificación de la 
 	unidad mas pequeña del diseño de software, ya sea un componente o 
 	un modulo de software \cite{ing_soft_ep}. Permite asegurar que estos 
-	funcionan correctamente de forma	independiente (por separado).
+	funcionan correctamente de forma independiente (o por separado).
 	
-	Estas pruebas deben cumplir con los siguientes requisitos
+	Para este trabajo mas que desarrollar documentación exhaustiva de cada test,
+	se pretende generar un set de pruebas unitarias automatizadas, dichas pruebas
+	se ejecutaran cada vez que se vuelva a compilar la aplicación, esto nos permitirá
+	estar seguros cada vez que se compile la aplicación que se han superado todas las
+	pruebas o en caso de falla nos permitirá detectar rápidamente que parte es la 
+	que esta fallando. 
+	
+	Esto es de mas valor para el cliente, ya que al ser la unidad de desarrollo de sistemas
+	de la universidad, continuamente deben estar actualizando, modificando o agregando
+	nuevas funcionalidades a las aplicaciones y un set de pruebas automatizadas
+	les facilitara el trabajo de tener probar nuevamente la aplicación en el futuro.
+	
+	Para obtener un buen set de pruebas se deberá respetar lo siguiente, todo test unitario debe ser: 
+	\begin{itemize}
+		\item \textbf{Atómico:} Prueba la mínima cantidad de funcionalidades posibles.
+		\item \textbf{Independiente:} No debe depender de otros test para producir un
+		resultado satisfactorio.
+		\item \textbf{Inocuo:} No debe alterar el estado del sistema (no altera la BD,
+		no enviá emails y no crear archivos ni los borra).
+		\item \textbf{Rápido:} Deben ser rápidos porque se ejecutan muchos test cada 
+		pocos minutos.
+	\end{itemize}
+	
+	Ademas cada test deberá ser auto-explicativo, de manera tal que cada prueba diseñada
+	quede debidamente documentado por el mismo test unitario que la implementa.
+	
+	Para el desarrollo y automatización de los test unitarios se hará uso \textbf{JUnit:}
+	que es un Framework Open Source para la automatización de las pruebas en 
+	los proyectos Software. El framework provee de herramientas, clases y métodos 
+	que facilitan la tarea de realizar pruebas en un sistema.
+			
 
 	\subsection{Pruebas de Integración}
 	El proceso de integración del sistema implica construir este a partir de sus
