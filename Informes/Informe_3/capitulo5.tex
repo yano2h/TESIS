@@ -769,7 +769,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 									\cline{2-5}
 									& {descripcion\_tipo} & {VARCHAR(255)} & {SI} & {} \\
 		\hline
-		\multirow{15}{*}{SOLICITUD\_REQUERIMIENTO} & {id\_solicitud\_req} & {BIGINT} & {NO} & {PK}  \\
+		\multirow{7}{*}{} & {id\_solicitud\_req} & {BIGINT} & {NO} & {PK}  \\
 									\cline{2-5}
 									& {codigo\_consulta} & {VARCHAR(9)} & {NO} & {} \\
 									\cline{2-5}
@@ -783,11 +783,11 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 									\cline{2-5}
 									& {id\_area} & {TINYINT} & {NO} & {FK} \\
 									\cline{2-5}
-									& {rut\_responsable} & {INT} & {NO} & {FK} \\
+	{SOLICITUD\_REQUERI-}			& {rut\_responsable} & {INT} & {NO} & {FK} \\
 									\cline{2-5}
-									& {rut\_solicitante} & {INT} & {NO} & {FK} \\
+	{MIENTO}						& {rut\_solicitante} & {INT} & {NO} & {FK} \\
 									\cline{2-5}
-									& {id\_tipo\_prioridad} & {TINYINT} & {NO} & {FK} \\
+	\multirow{7}{*}{}				& {id\_tipo\_prioridad} & {TINYINT} & {NO} & {FK} \\
 									\cline{2-5}
 									& {fecha\_envio} & {DATETIME} & {NO} & {} \\
 									\cline{2-5}
@@ -2329,19 +2329,19 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	Las pruebas unitarias concentran su esfuerzo en la verificación de la 
 	unidad mas pequeña del diseño de software, ya sea un componente o 
 	un modulo de software \cite{ing_soft_ep}. Permite asegurar que estos 
-	funcionan correctamente de forma independiente (o por separado).
+	funcionan correctamente de forma independiente (o por separado).\\
 	
 	Para este trabajo mas que desarrollar documentación exhaustiva de cada test,
 	se pretende generar un set de pruebas unitarias automatizadas, dichas pruebas
 	se ejecutaran cada vez que se vuelva a compilar la aplicación, esto nos permitirá
 	estar seguros cada vez que se compile la aplicación que se han superado todas las
 	pruebas o en caso de falla nos permitirá detectar rápidamente que parte es la 
-	que esta fallando. 
+	que esta fallando.\\
 	
 	Esto es de mas valor para el cliente, ya que al ser la unidad de desarrollo de sistemas
 	de la universidad, continuamente deben estar actualizando, modificando o agregando
 	nuevas funcionalidades a las aplicaciones y un set de pruebas automatizadas
-	les facilitara el trabajo de tener probar nuevamente la aplicación en el futuro.
+	les facilitara el trabajo de tener probar nuevamente la aplicación en el futuro.\\
 	
 	Para obtener un buen set de pruebas se deberá respetar lo siguiente, todo test unitario debe ser: 
 	\begin{itemize}
@@ -2354,13 +2354,49 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 		pocos minutos.
 	\end{itemize}
 	
-	Ademas cada test deberá ser auto-explicativo, de manera tal que cada prueba diseñada
-	quede debidamente documentado por el mismo test unitario que la implementa.
 	
-	Para el desarrollo y automatización de los test unitarios se hará uso \textbf{JUnit:}
+	Ademas cada test deberá ser \textit{auto-explicativo}, de manera tal que cada prueba 
+	diseñada quede debidamente documentado por el mismo test unitario que la implementa.
+	Sin perjucio de esto, se completara la tabla \ref{testUnit}, en la que debera detallar
+	el nombre de cada modulo, el nombre de las pruebas que cubren dicho modulo
+	y el propoposito de la prueba.\\
+
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{4cm} | m{4cm}|m{6cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Modulo}} & \textbf{Test} & \textbf{Proposito del Test}\\
+		\hline
+		\multirow{3}{*}{} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+		\multirow{3}{*}{} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+		\multirow{3}{*}{} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Formato para la documentación de los test unitarios}
+		\label{testUnit}
+	\end{table}
+
+	Para el desarrollo y automatización de los test unitarios se utilizara \textbf{JUnit},
 	que es un Framework Open Source para la automatización de las pruebas en 
 	los proyectos Software. El framework provee de herramientas, clases y métodos 
-	que facilitan la tarea de realizar pruebas en un sistema.
+	que facilitan la tarea de realizar pruebas unitarias en una aplicación.\\
+
+	Estas pruebas se diseñaran y escribiran idealmente en conjunto con la implementación
+	de la aplicación, pero con el fin de cumplir con las fechas de entrega esta actividad 
+	podra ser postergada asta la fase de pruebas.
 			
 
 	\subsection{Pruebas de Integración}
