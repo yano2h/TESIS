@@ -893,6 +893,129 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 		\end{tabular}
 	\end{table}
 	
+	\begin{table}[H]
+		\begin{tabular}{| m{5cm} | m{4.5cm} | m{3.5cm} | c | m{1cm}  |}
+		\hline
+		{ESTADISTICA\_PERSONAL} & {id} & {BIGINT} & {NO} & {PK}  \\
+									\cline{2-5}
+								{}	& {rut\_funcionario} & {INT} & {NO} & {FK} \\
+									\cline{2-5}
+								{}	& {fecha} & {DATE} & {NO} & {} \\
+									\cline{2-5}
+								{}	& {cantidad\_total\_solicitudes\_asignadas} & {BIGINT} & {NO} & {} \\
+									\cline{2-5}
+								{}	& {cantidad\_solicitudes\_} & {INT} & {NO} & {} \\
+								{}	& {pendientes} & {} & {} & {} \\
+									\cline{2-5}
+								{}	& {cantidad\_solicitudes\_vencidas} & {INT} & {NO} & {} \\
+									\cline{2-5}
+								{}	& {cantidad\_solicitudes\_iniciadas} & {INT} & {NO} & {} \\
+									\cline{2-5}
+								{}	& {cantidad\_solicitudes\_cerradas} & {INT} & {NO} & {} \\
+									\cline{2-5}
+								{}	& {cantidad\_proyectos\_acargo} & {INT} & {NO} & {} \\
+									\cline{2-5}
+								{}	& {cantidad\_proyectos\_en\_que\_participa} & {INT} & {NO} & {} \\
+									\cline{2-5}
+								{}	& {cantidad\_tareas\_proyecto\_asociadas} & {INT} & {NO} & {} \\
+									\cline{2-5}
+									& {cantidad\_tareas\_scm\_asociadas} & {INT} & {NO} & {} \\		
+		\hline		
+		\multirow{11}{*}{TREA\_PROYECTO} & {id\_tarea\_proyecto} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {id\_proyecto} & {INT} & {NO} & {FK}  \\
+									\cline{2-5}
+									& {rut\_responsable} & {INT} & {NO} & {FK}  \\
+									\cline{2-5}
+									& {tarea} & {VARCHAR(45)} & {NO} & {}  \\
+									\cline{2-5}
+									& {fecha\_creacion} & {DATE} & {NO} & {}  \\
+									\cline{2-5}
+									& {fecha\_inicio\_propuesta} & {DATETIME} & {NO} & {}  \\
+									\cline{2-5}
+									& {fecha\_inicio\_real} & {DATETIME} & {SI} & {}  \\
+									\cline{2-5}
+									& {fecha\_termino\_propuesta} & {DATETIME} & {NO} & {}  \\
+									\cline{2-5}
+									& {fecha\_termino\_real} & {DATETIME} & {SI} & {}  \\
+									\cline{2-5}
+									& {nivel\_avance} & {SMALLINT} & {NO} & {}  \\
+									\cline{2-5}
+									& {visible} & {BOOLEAN} & {NO} & {}  \\
+		\hline
+		\multirow{3}{*}{TREA\_SCM} & {id\_tarea\_scm} & {INT} & {NO} & {PK}  \\
+									   & {nombre\_tarea} & {VARCHAR(45)} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {descripcion\_tarea} & {VARCHAR(255)} & {NO} & {}  \\
+									  \cline{2-5}
+		\hline
+		\multirow{3}{*}{ENTREGABLE} & {id\_entregable} & {INT} & {NO} & {PK}  \\
+									   & {nombre\_entregable} & {VARCHAR(45)} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {id\_tarea\_scm} & {INT} & {NO} & {FK}  \\
+									  \cline{2-5}
+		\hline
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[H]
+		\begin{tabular}{| m{5cm} | m{4.5cm} | m{3.5cm} | c | m{1cm}  |}
+		\hline
+		\multirow{6}{*}{TAREA\_SCM\_PROYECTO} & {id\_tarea\_scm\_proyecto} & {INT} & {NO} & {PK}  \\
+									   & {id\_tarea\_scm} & {INT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {id\_proyecto} & {INT} & {NO} & {FK}  \\
+									  \cline{2-5}
+									   & {rut\_responsable} & {INT} & {NO} & {FK}  \\
+									  \cline{2-5}
+									   & {fecha\_inicio} & {DATE} & {NO} & {}  \\
+									  \cline{2-5}
+									   & {id\_termino} & {DATE} & {NO} & {}  \\
+		\hline
+		\multirow{3}{*}{ESTADO\_SOLICITUD\_CAMBIO} & {id\_estado\_solicitud\_cambio} & {TINYINT} & {NO} & {PK}  \\
+									   & {estado\_solicitud\_cambio} & {VARCHAR(45)} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {descripcion} & {VARCHAR(255)} & {SI} & {}  \\
+		\hline
+		\multirow{3}{*}{SOLICITUD\_CAMBIO} & {id\_solicitud\_cambio} & {INT} & {NO} & {PK}  \\
+									   & {id\_proyecto} & {INT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {rut\_solicitante} & {INT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {titulo} & {VARCHAR(50)} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {fecha\_solicitud} & {DATETIME} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {descripcion\_necesidad\_cambio} & {TEXT} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {id\_tipo\_prioridad} & {TINYINT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {id\_estado\_solicitud\_cambio} & {TINYINT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {id\_item\_configuracion} & {INT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {descripcion\_cambio} & {TEXT} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {rut\_evaluador\_impacto} & {INT} & {SI} & {FK}  \\
+									   \cline{2-5}
+									   & {fecha\_analisis} & {DATETIME} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {descripcion\_impacto\_cambio} & {TEXT} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {fecha\_cierre} & {DATETIME} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {modulo\_afectado} & {VARCHAR(60)} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {rut\_evaluador\_final} & {INT} & {SI} & {FK}  \\
+									   \cline{2-5}
+									   & {descripcion\_resolucion} & {VARCHAR(255)} & {SI} & {}  \\
+		\hline
+
+									  								  
+		\end{tabular}
+	\end{table}
+	
+	
 \section{Casos de Uso Reales}
 	\begin{table}[H]
 	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
@@ -2393,6 +2516,21 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	que es un Framework Open Source para la automatización de las pruebas en 
 	los proyectos Software. El framework provee de herramientas, clases y métodos 
 	que facilitan la tarea de realizar pruebas unitarias en una aplicación.\\
+	
+	Dado que para el desarrollo se utiliza la tecnología de Java EE, muchas de las
+	pruebas sobre clases como EJBs por ejemplo requieren ser desplegadas en el
+	contenedor para poder ejecutarse correctamente, esto puede llegar a tomar 
+	bastante tiempo lo que dificulta la tarea de hacer las pruebas. Para resolver
+	esto se utilizara Arrquillian, este es un framework de JBoos que ademas de 
+	proveer de herramientas, clases y metodos para la creación y automatización
+	de pruebas, utiliza contenedores embebidos que le permiten simular la ejecución
+	de los componentes como si estuviesen en el contenedor real,  la diferencia 
+	es que el despliegue en este tipo de contenedores es mucho mas rapido
+	y nos permite simular un ambiente mas real en nuestras pruebas.
+	Permite probar EJBs, CDI, Percistencia (JPA) entre otros, ademas entre los
+	contenedores con los que es compatible se encuentra Glassfish Embedded por 
+	lo que proporciona completa compatibilad con el servidor de aplicaciones a utilizar.
+	
 
 	Estas pruebas se diseñaran y escribiran idealmente en conjunto con la implementación
 	de la aplicación, pero con el fin de cumplir con las fechas de entrega esta actividad 
@@ -2400,20 +2538,82 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 			
 
 	\subsection{Pruebas de Integración}
+	Las pruebas de integración se realizan una vez terminadas las pruebas unitarias,
+	es decir una vez que no aseguramos que todo funciona bien individualmente,
+	debemos asegurarnos que cuando juntemos los módulos todo siga funcionando
+	correctamente.
+	
+	Estas pruebas son similares a las pruebas unitarias, con la salvedad que pueden
+	romper las reglas mencionadas anteriormente, ya que como su nombre indica, 
+	integración significa que ayuda a unir distintas partes del sistema. Por tanto, 
+	estas pruebas serán de granularidad más gruesa y más frágiles que
+	los tests unitarios, por lo que el número de tests de integración sera menor que 
+	el número de tests unitarios.
+	
+	Al igual que en el caso anterior esta pueden ser automatizadas a través
+	de un framework de pruebas. Para integrar los componentes se debe hacer
+	uso intensivo de los servicios del contenedor, por lo que es conveniente
+	hacer solo uso de Arquillian para las pruebas de integración.
+	
 	El proceso de integración del sistema implica construir este a partir de sus
 	componentes y probar el sistema resultante para encontrar problemas que 
-	pueden surgir debido a la integración de los componentes.
+	pueden surgir debido a la integración de los componentes. Por este motivo
+	las pruebas de integración se diseñaran e implementaran acorde al orden 
+	indicado en la Figura \ref{integracion}, donde las primeros niveles son
+	lo que presentan menos dependencia y los superiores mayor dependencia.
 
-	Enfoque de integración ascendente 
-
-	Formato
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.46]{imagenes/logoUV.png}
+			\caption{Interfaz de Implementación del Cambio}
+			\label{integracion}
+		\end{center}
+	\end{figure}
+	
+	Al igual que en el caso anterior, las pruebas deben quedar debidamente documentadas
+	por el código que las implementa. Y ademas se completara una tabla similar a la anterior
+	indicando las pruebas que se implementaron y su propósito.
+	
+	
 	\begin{table}[H]
-	\begin{tabular}{|m{3.6cm}|m{3.6cm}|m{3.6cm}|m{3.6cm}|}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{2cm} | m{4cm}|m{8cm}|}
 		\hline
-			\multicolumn{4}{|c|}{\textbf{Prueba de Integración}}\\
+		\rowcolor[gray]{0.7} {\textbf{Identificador}} & {\textbf{Prueba de Integración}} & \textbf{Propósito} \\
 		\hline
+		& {} & {}\\
+		\hline
+		& {} & {}\\
+		\hline
+		& {} & {}\\
 		\hline
 	\end{tabular}
+		\caption{Formato para la documentación de los test de Integración}
+		\label{testIntegracion}
+	\end{table}
+	
+	Ademas como cada prueba afecta a mas de un modulo se completara la siguiente tabla indicando
+	los módulos a los que afecta cada prueba.
+	
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} l | m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|}
+		\hline
+		\rowcolor[gray]{0.7} \backslashbox{Modulo}{Prueba}& {PI-1}  & {PI-2} & {PI-3} & {PI-4} & {PI-5} \\
+		\hline
+		{Modulo 1} & {x}  & {} & {} & {} & {} \\
+		\hline
+		{Modulo 2} & {x}  & {x} & {x} & {x} & {} \\
+		\hline
+		{Modulo 3} & {}  & {x} & {x} & {} & {x} \\
+		\hline
+		{Modulo 4} & {}  & {} & {x} & {x} & {x} \\
+		\hline
+		{Modulo 5} & {}  & {} & {} & {} & {x} \\
+		\hline
+	\end{tabular}
+		\caption{Cobertura de las Pruebas de Integración}
 	\end{table}
 
+	\subsection{Pruebas de Aceptación}
+	Las pruebas de aceptaci
+	
 %	\subsection{Pruebas de Rendimiento}
