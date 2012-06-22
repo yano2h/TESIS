@@ -34,7 +34,6 @@ public class FormularioImplementacion implements Serializable {
     private String observaciones;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "fecha_verificacion")
     @Temporal(TemporalType.DATE)
     private Date fechaVerificacion;
