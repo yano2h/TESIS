@@ -4,7 +4,6 @@
  */
 package cl.uv.proyecto.persistencia.entidades;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,18 +15,14 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "FUNCIONARIO_DISICO")
+@PrimaryKeyJoinColumn(name="rut")
 @NamedQueries({
     @NamedQuery(name = "FuncionarioDisico.findAll", query = "SELECT f FROM FuncionarioDisico f"),
     @NamedQuery(name = "FuncionarioDisico.findByRut", query = "SELECT f FROM FuncionarioDisico f WHERE f.rut = :rut"),
     @NamedQuery(name = "FuncionarioDisico.findByCargo", query = "SELECT f FROM FuncionarioDisico f WHERE f.cargo = :cargo"),
     @NamedQuery(name = "FuncionarioDisico.findByAnexo", query = "SELECT f FROM FuncionarioDisico f WHERE f.anexo = :anexo")})
-public class FuncionarioDisico implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "rut")
-    private Integer rut;
+public class FuncionarioDisico extends Funcionario {
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -43,10 +38,7 @@ public class FuncionarioDisico implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
     private List<EstadisticaPersonal> estadisticaPersonalList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
-    private List<SolicitudRequerimiento> solicitudRequerimientoList;
-    @JoinColumn(name = "rut", referencedColumnName = "rut", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Funcionario funcionario;
+    private List<SolicitudRequerimiento> solicitudesRequerimientosAsignadas;
     @JoinColumn(name = "id_area", referencedColumnName = "id_area")
     @ManyToOne(optional = false)
     private Area area;
@@ -68,21 +60,9 @@ public class FuncionarioDisico implements Serializable {
     public FuncionarioDisico() {
     }
 
-    public FuncionarioDisico(Integer rut) {
-        this.rut = rut;
-    }
-
     public FuncionarioDisico(Integer rut, String cargo) {
-        this.rut = rut;
+        super.setRut(rut);
         this.cargo = cargo;
-    }
-
-    public Integer getRut() {
-        return rut;
-    }
-
-    public void setRut(Integer rut) {
-        this.rut = rut;
     }
 
     public String getCargo() {
@@ -125,20 +105,12 @@ public class FuncionarioDisico implements Serializable {
         this.estadisticaPersonalList = estadisticaPersonalList;
     }
 
-    public List<SolicitudRequerimiento> getSolicitudRequerimientoList() {
-        return solicitudRequerimientoList;
+    public List<SolicitudRequerimiento> getSolicitudesRequerimientosAsignadas() {
+        return solicitudesRequerimientosAsignadas;
     }
 
-    public void setSolicitudRequerimientoList(List<SolicitudRequerimiento> solicitudRequerimientoList) {
-        this.solicitudRequerimientoList = solicitudRequerimientoList;
-    }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setSolicitudesRequerimientosAsignadas(List<SolicitudRequerimiento> solicitudesRequerimientosAsignadas) {
+        this.solicitudesRequerimientosAsignadas = solicitudesRequerimientosAsignadas;
     }
 
     public Area getArea() {
@@ -206,28 +178,28 @@ public class FuncionarioDisico implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (rut != null ? rut.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof FuncionarioDisico)) {
             return false;
         }
         FuncionarioDisico other = (FuncionarioDisico) object;
-        if ((this.rut == null && other.rut != null) || (this.rut != null && !this.rut.equals(other.rut))) {
+        if ((this.getRut() == null && other.getRut() != null) || (this.getRut() != null && !this.getRut().equals(other.getRut()))) {
             return false;
         }
         return true;
     }
 
     @Override
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash += (this.area != null ? this.area.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
     public String toString() {
-        return "cl.uv.proyecto.persistencia.entidades.FuncionarioDisico[ rut=" + rut + " ]";
+        return "cl.uv.proyecto.persistencia.entidades.FuncionarioDisico[ rut=" + getRut() + " ]";
     }
     
 }

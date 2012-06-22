@@ -17,12 +17,13 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "FUNCIONARIO")
+@Inheritance(strategy = InheritanceType.JOINED) 
 @NamedQueries({
     @NamedQuery(name = "Funcionario.findAll", query = "SELECT f FROM Funcionario f"),
     @NamedQuery(name = "Funcionario.findByRut", query = "SELECT f FROM Funcionario f WHERE f.rut = :rut"),
     @NamedQuery(name = "Funcionario.findByNombre", query = "SELECT f FROM Funcionario f WHERE f.nombre = :nombre"),
     @NamedQuery(name = "Funcionario.findByApellidoPaterno", query = "SELECT f FROM Funcionario f WHERE f.apellidoPaterno = :apellidoPaterno"),
-    @NamedQuery(name = "Funcionario.findByApellidoM", query = "SELECT f FROM Funcionario f WHERE f.apellidoM = :apellidoM"),
+    @NamedQuery(name = "Funcionario.findByApellidoMaterno", query = "SELECT f FROM Funcionario f WHERE f.apellidoMaterno = :apellidoMaterno"),
     @NamedQuery(name = "Funcionario.findByCorreoUv", query = "SELECT f FROM Funcionario f WHERE f.correoUv = :correoUv"),
     @NamedQuery(name = "Funcionario.findByFechaUltimoAcceso", query = "SELECT f FROM Funcionario f WHERE f.fechaUltimoAcceso = :fechaUltimoAcceso"),
     @NamedQuery(name = "Funcionario.findByFechaPrimerAcceso", query = "SELECT f FROM Funcionario f WHERE f.fechaPrimerAcceso = :fechaPrimerAcceso")})
@@ -46,8 +47,8 @@ public class Funcionario implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
-    @Column(name = "apellido_m")
-    private String apellidoM;
+    @Column(name = "apellido_materno")
+    private String apellidoMaterno;
     @Size(max = 45)
     @Column(name = "correo_uv")
     private String correoUv;
@@ -60,9 +61,8 @@ public class Funcionario implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
     private List<Notificacion> notificacionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
-    private List<SolicitudRequerimiento> solicitudRequerimientoList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "funcionario")
-    private FuncionarioDisico funcionarioDisico;
+    private List<SolicitudRequerimiento> solicitudesRequerimientosEnviadas;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
     private List<ComentarioSolicitud> comentarioSolicitudList;
 
@@ -77,7 +77,7 @@ public class Funcionario implements Serializable {
         this.rut = rut;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
-        this.apellidoM = apellidoM;
+        this.apellidoMaterno = apellidoM;
     }
 
     public Integer getRut() {
@@ -104,12 +104,12 @@ public class Funcionario implements Serializable {
         this.apellidoPaterno = apellidoPaterno;
     }
 
-    public String getApellidoM() {
-        return apellidoM;
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
     }
 
-    public void setApellidoM(String apellidoM) {
-        this.apellidoM = apellidoM;
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
     }
 
     public String getCorreoUv() {
@@ -144,20 +144,12 @@ public class Funcionario implements Serializable {
         this.notificacionList = notificacionList;
     }
 
-    public List<SolicitudRequerimiento> getSolicitudRequerimientoList() {
-        return solicitudRequerimientoList;
+    public List<SolicitudRequerimiento> getSolicitudesRequerimientosEnviadas() {
+        return solicitudesRequerimientosEnviadas;
     }
 
-    public void setSolicitudRequerimientoList(List<SolicitudRequerimiento> solicitudRequerimientoList) {
-        this.solicitudRequerimientoList = solicitudRequerimientoList;
-    }
-
-    public FuncionarioDisico getFuncionarioDisico() {
-        return funcionarioDisico;
-    }
-
-    public void setFuncionarioDisico(FuncionarioDisico funcionarioDisico) {
-        this.funcionarioDisico = funcionarioDisico;
+    public void setSolicitudesRequerimientosEnviadas(List<SolicitudRequerimiento> solicitudesRequerimientosEnviadas) {
+        this.solicitudesRequerimientosEnviadas = solicitudesRequerimientosEnviadas;
     }
 
     public List<ComentarioSolicitud> getComentarioSolicitudList() {
