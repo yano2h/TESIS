@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -38,7 +37,7 @@ public class FormularioImplementacion implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaVerificacion;
     @JoinColumn(name = "id_solicitud_cambio", referencedColumnName = "id_solicitud_cambio")
-    @ManyToOne(optional = false)
+    @OneToOne(fetch=FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval=true,optional=false)
     private SolicitudCambio solicitudCambio;
     @JoinColumn(name = "rut_implementador", referencedColumnName = "rut")
     @ManyToOne(optional = false)

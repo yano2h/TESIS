@@ -6,7 +6,6 @@ package cl.uv.proyecto.persistencia.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,7 +20,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "SolicitudCambio.findAll", query = "SELECT s FROM SolicitudCambio s"),
     @NamedQuery(name = "SolicitudCambio.findByIdSolicitudCambio", query = "SELECT s FROM SolicitudCambio s WHERE s.idSolicitudCambio = :idSolicitudCambio"),
     @NamedQuery(name = "SolicitudCambio.findByTitulo", query = "SELECT s FROM SolicitudCambio s WHERE s.titulo = :titulo"),
-    @NamedQuery(name = "SolicitudCambio.findByFechaSolicitud", query = "SELECT s FROM SolicitudCambio s WHERE s.fechaSolicitud = :fechaSolicitud"),
+    @NamedQuery(name = "SolicitudCambio.findByFechaEnvio", query = "SELECT s FROM SolicitudCambio s WHERE s.fechaEnvio = :fechaEnvio"),
     @NamedQuery(name = "SolicitudCambio.findByFechaAnalisis", query = "SELECT s FROM SolicitudCambio s WHERE s.fechaAnalisis = :fechaAnalisis"),
     @NamedQuery(name = "SolicitudCambio.findByFechaCierre", query = "SELECT s FROM SolicitudCambio s WHERE s.fechaCierre = :fechaCierre"),
     @NamedQuery(name = "SolicitudCambio.findByModuloAfectado", query = "SELECT s FROM SolicitudCambio s WHERE s.moduloAfectado = :moduloAfectado"),
@@ -42,7 +41,7 @@ public class SolicitudCambio implements Serializable {
     @NotNull
     @Column(name = "fecha_solicitud")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaSolicitud;
+    private Date fechaEnvio;
     @Basic(optional = false)
     @NotNull
     @Lob
@@ -66,8 +65,6 @@ public class SolicitudCambio implements Serializable {
     @Size(max = 255)
     @Column(name = "descripcion_resolucuion")
     private String descripcionResolucuion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudCambio")
-    private List<FormularioImplementacion> formularioImplementacionList;
     @JoinColumn(name = "id_tipo_prioridad", referencedColumnName = "id_tipo_prioridad")
     @ManyToOne(optional = false)
     private TipoPrioridad tipoPrioridad;
@@ -77,19 +74,22 @@ public class SolicitudCambio implements Serializable {
     @JoinColumn(name = "id_item_configuracion", referencedColumnName = "id_item_configuracion")
     @ManyToOne(optional = false)
     private ItemConfiguracion itemConfiguracion;
-    @JoinColumn(name = "rut_evaluador_final", referencedColumnName = "rut")
-    @ManyToOne
-    private FuncionarioDisico funcionarioDisico;
-    @JoinColumn(name = "rut_evaluador_impacto", referencedColumnName = "rut")
-    @ManyToOne
-    private FuncionarioDisico funcionarioDisico1;
     @JoinColumn(name = "rut_solicitante", referencedColumnName = "rut")
     @ManyToOne(optional = false)
-    private FuncionarioDisico funcionarioDisico2;
+    private FuncionarioDisico solicitante;
+    @JoinColumn(name = "rut_evaluador_impacto", referencedColumnName = "rut")
+    @ManyToOne
+    private FuncionarioDisico evaluadorImpacto;
+    @JoinColumn(name = "rut_evaluador_final", referencedColumnName = "rut")
+    @ManyToOne
+    private FuncionarioDisico evaluadorFinalSolicitud;
     @JoinColumn(name = "id_estado_solicitud_cambio", referencedColumnName = "id_estado_solicitud_cambio")
     @ManyToOne(optional = false)
     private EstadoSolicitudCambio estadoSolicitudCambio;
-
+    
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "solicitudCambio")
+    private FormularioImplementacion formularioImplementacion;
+   
     public SolicitudCambio() {
     }
 
@@ -100,7 +100,7 @@ public class SolicitudCambio implements Serializable {
     public SolicitudCambio(Integer idSolicitudCambio, String titulo, Date fechaSolicitud, String descripcionNecesidadCambio) {
         this.idSolicitudCambio = idSolicitudCambio;
         this.titulo = titulo;
-        this.fechaSolicitud = fechaSolicitud;
+        this.fechaEnvio = fechaSolicitud;
         this.descripcionNecesidadCambio = descripcionNecesidadCambio;
     }
 
@@ -120,12 +120,12 @@ public class SolicitudCambio implements Serializable {
         this.titulo = titulo;
     }
 
-    public Date getFechaSolicitud() {
-        return fechaSolicitud;
+    public Date getFechaEnvio() {
+        return fechaEnvio;
     }
 
-    public void setFechaSolicitud(Date fechaSolicitud) {
-        this.fechaSolicitud = fechaSolicitud;
+    public void setFechaEnvio(Date fechaEnvio) {
+        this.fechaEnvio = fechaEnvio;
     }
 
     public String getDescripcionNecesidadCambio() {
@@ -184,12 +184,12 @@ public class SolicitudCambio implements Serializable {
         this.descripcionResolucuion = descripcionResolucuion;
     }
 
-    public List<FormularioImplementacion> getFormularioImplementacionList() {
-        return formularioImplementacionList;
+    public FormularioImplementacion getFormularioImplementacion() {
+        return formularioImplementacion;
     }
 
-    public void setFormularioImplementacionList(List<FormularioImplementacion> formularioImplementacionList) {
-        this.formularioImplementacionList = formularioImplementacionList;
+    public void setFormularioImplementacion(FormularioImplementacion formularioImplementacion) {
+        this.formularioImplementacion = formularioImplementacion;
     }
 
     public TipoPrioridad getTipoPrioridad() {
@@ -216,28 +216,28 @@ public class SolicitudCambio implements Serializable {
         this.itemConfiguracion = itemConfiguracion;
     }
 
-    public FuncionarioDisico getFuncionarioDisico() {
-        return funcionarioDisico;
+    public FuncionarioDisico getEvaluadorFinalSolicitud() {
+        return evaluadorFinalSolicitud;
     }
 
-    public void setFuncionarioDisico(FuncionarioDisico funcionarioDisico) {
-        this.funcionarioDisico = funcionarioDisico;
+    public void setEvaluadorFinalSolicitud(FuncionarioDisico evaluadorFinalSolicitud) {
+        this.evaluadorFinalSolicitud = evaluadorFinalSolicitud;
     }
 
-    public FuncionarioDisico getFuncionarioDisico1() {
-        return funcionarioDisico1;
+    public FuncionarioDisico getEvaluadorImpacto() {
+        return evaluadorImpacto;
     }
 
-    public void setFuncionarioDisico1(FuncionarioDisico funcionarioDisico1) {
-        this.funcionarioDisico1 = funcionarioDisico1;
+    public void setEvaluadorImpacto(FuncionarioDisico evaluadorImpacto) {
+        this.evaluadorImpacto = evaluadorImpacto;
     }
 
-    public FuncionarioDisico getFuncionarioDisico2() {
-        return funcionarioDisico2;
+    public FuncionarioDisico getSolicitante() {
+        return solicitante;
     }
 
-    public void setFuncionarioDisico2(FuncionarioDisico funcionarioDisico2) {
-        this.funcionarioDisico2 = funcionarioDisico2;
+    public void setSolicitante(FuncionarioDisico solicitante) {
+        this.solicitante = solicitante;
     }
 
     public EstadoSolicitudCambio getEstadoSolicitudCambio() {

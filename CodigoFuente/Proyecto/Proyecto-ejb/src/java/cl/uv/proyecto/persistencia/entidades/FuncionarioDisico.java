@@ -43,19 +43,19 @@ public class FuncionarioDisico extends Funcionario {
     @ManyToOne(optional = false)
     private Area area; 
     
-        @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsableTarea")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsableTarea")
     private List<TareaScmProyecto> tareaScmProyectoList; //tareas de scm de las que es responsable
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
-    private List<ParticipanteProyecto> participanteProyectoList;
+    private List<ParticipanteProyecto> proyectosEnQueParticipa; //proyectos en los que ha trabajado
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "implementador")
     private List<FormularioImplementacion> formulariosImplementacionImplementador; // Lista de formularios en los que aparece como implementador
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "verificador")
     private List<FormularioImplementacion> formulariosImplementacionVerificador; // Lista de formularios en los que aparece como verificador
-    @OneToMany(mappedBy = "funcionarioDisico")
+        @OneToMany(mappedBy = "evaluadorFinalSolicitud")
     private List<SolicitudCambio> solicitudCambioList;
-    @OneToMany(mappedBy = "funcionarioDisico1")
+        @OneToMany(mappedBy = "evaluadorImpacto")
     private List<SolicitudCambio> solicitudCambioList1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico2")
+        @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitante")
     private List<SolicitudCambio> solicitudCambioList2;
 
     public FuncionarioDisico() {
@@ -130,12 +130,12 @@ public class FuncionarioDisico extends Funcionario {
         this.tareaScmProyectoList = tareaScmProyectoList;
     }
 
-    public List<ParticipanteProyecto> getParticipanteProyectoList() {
-        return participanteProyectoList;
+    public List<ParticipanteProyecto> getProyectosEnQueParticipa() {
+        return proyectosEnQueParticipa;
     }
 
-    public void setParticipanteProyectoList(List<ParticipanteProyecto> participanteProyectoList) {
-        this.participanteProyectoList = participanteProyectoList;
+    public void setProyectosEnQueParticipa(List<ParticipanteProyecto> proyectosEnQueParticipa) {
+        this.proyectosEnQueParticipa = proyectosEnQueParticipa;
     }
 
     public List<FormularioImplementacion> getFormulariosImplementacionImplementador() {
