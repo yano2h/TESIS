@@ -38,7 +38,7 @@ CREATE  TABLE FUNCIONARIO (
   rut INT NOT NULL ,
   nombre VARCHAR(45) NOT NULL ,
   apellido_paterno VARCHAR(25) NOT NULL ,
-  apellido_m VARCHAR(25) NOT NULL ,
+  apellido_materno VARCHAR(25) NOT NULL ,
   correo_uv VARCHAR(45) NULL ,
   fecha_ultimo_acceso DATETIME NULL ,
   fecha_primer_acceso DATETIME NULL ,
