@@ -5,6 +5,7 @@
 package cl.uv.proyecto.persistencia.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -35,16 +36,17 @@ public class FormularioImplementacion implements Serializable {
     @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "fecha_verificacion")
-    private String fechaVerificacion;
+    @Temporal(TemporalType.DATE)
+    private Date fechaVerificacion;
     @JoinColumn(name = "id_solicitud_cambio", referencedColumnName = "id_solicitud_cambio")
     @ManyToOne(optional = false)
     private SolicitudCambio solicitudCambio;
     @JoinColumn(name = "rut_implementador", referencedColumnName = "rut")
     @ManyToOne(optional = false)
-    private FuncionarioDisico funcionarioDisico;
+    private FuncionarioDisico implementador;
     @JoinColumn(name = "rut_verificador", referencedColumnName = "rut")
     @ManyToOne(optional = false)
-    private FuncionarioDisico funcionarioDisico1;
+    private FuncionarioDisico verificador;
 
     public FormularioImplementacion() {
     }
@@ -53,7 +55,7 @@ public class FormularioImplementacion implements Serializable {
         this.idFormularioImplementacion = idFormularioImplementacion;
     }
 
-    public FormularioImplementacion(Integer idFormularioImplementacion, String observaciones, String fechaVerificacion) {
+    public FormularioImplementacion(Integer idFormularioImplementacion, String observaciones, Date fechaVerificacion) {
         this.idFormularioImplementacion = idFormularioImplementacion;
         this.observaciones = observaciones;
         this.fechaVerificacion = fechaVerificacion;
@@ -75,11 +77,11 @@ public class FormularioImplementacion implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public String getFechaVerificacion() {
+    public Date getFechaVerificacion() {
         return fechaVerificacion;
     }
 
-    public void setFechaVerificacion(String fechaVerificacion) {
+    public void setFechaVerificacion(Date fechaVerificacion) {
         this.fechaVerificacion = fechaVerificacion;
     }
 
@@ -91,20 +93,20 @@ public class FormularioImplementacion implements Serializable {
         this.solicitudCambio = solicitudCambio;
     }
 
-    public FuncionarioDisico getFuncionarioDisico() {
-        return funcionarioDisico;
+    public FuncionarioDisico getImplementador() {
+        return implementador;
     }
 
-    public void setFuncionarioDisico(FuncionarioDisico funcionarioDisico) {
-        this.funcionarioDisico = funcionarioDisico;
+    public void setImplementador(FuncionarioDisico implementador) {
+        this.implementador = implementador;
     }
 
-    public FuncionarioDisico getFuncionarioDisico1() {
-        return funcionarioDisico1;
+    public FuncionarioDisico getVerificador() {
+        return verificador;
     }
 
-    public void setFuncionarioDisico1(FuncionarioDisico funcionarioDisico1) {
-        this.funcionarioDisico1 = funcionarioDisico1;
+    public void setVerificador(FuncionarioDisico verificador) {
+        this.verificador = verificador;
     }
 
     @Override

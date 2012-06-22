@@ -32,24 +32,25 @@ public class FuncionarioDisico extends Funcionario {
     @Column(name = "anexo")
     private String anexo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
-    private List<ItemConfiguracion> itemConfiguracionList;
+    private List<ItemConfiguracion> itemConfiguracionList; //lista de items de configuracion de los que es responsable
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
-    private List<TareaProyecto> tareaProyectoList;
+    private List<TareaProyecto> tareaProyectoList; //lista de las tareas de proyecto de las que es responsable
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
-    private List<EstadisticaPersonal> estadisticaPersonalList;
+    private List<EstadisticaPersonal> estadisticaPersonalList; 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
-    private List<SolicitudRequerimiento> solicitudesRequerimientosAsignadas;
+    private List<SolicitudRequerimiento> solicitudesRequerimientosAsignadas; //lista de solicitudes que le han sido asignadas
     @JoinColumn(name = "id_area", referencedColumnName = "id_area")
     @ManyToOne(optional = false)
-    private Area area;
+    private Area area; 
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
-    private List<TareaScmProyecto> tareaScmProyectoList;
+    private List<TareaScmProyecto> tareaScmProyectoList; //tareas de scm de las que es responsable
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
     private List<ParticipanteProyecto> participanteProyectoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
-    private List<FormularioImplementacion> formularioImplementacionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico1")
-    private List<FormularioImplementacion> formularioImplementacionList1;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "implementador")
+    private List<FormularioImplementacion> formulariosImplementacionImplementador; // Lista de formularios en los que aparece como implementador
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "verificador")
+    private List<FormularioImplementacion> formulariosImplementacionVerificador; // Lista de formularios en los que aparece como verificador
     @OneToMany(mappedBy = "funcionarioDisico")
     private List<SolicitudCambio> solicitudCambioList;
     @OneToMany(mappedBy = "funcionarioDisico1")
@@ -137,20 +138,20 @@ public class FuncionarioDisico extends Funcionario {
         this.participanteProyectoList = participanteProyectoList;
     }
 
-    public List<FormularioImplementacion> getFormularioImplementacionList() {
-        return formularioImplementacionList;
+    public List<FormularioImplementacion> getFormulariosImplementacionImplementador() {
+        return formulariosImplementacionImplementador;
     }
 
-    public void setFormularioImplementacionList(List<FormularioImplementacion> formularioImplementacionList) {
-        this.formularioImplementacionList = formularioImplementacionList;
+    public void setFormulariosImplementacionImplementador(List<FormularioImplementacion> formulariosImplementacionImplementador) {
+        this.formulariosImplementacionImplementador = formulariosImplementacionImplementador;
     }
 
-    public List<FormularioImplementacion> getFormularioImplementacionList1() {
-        return formularioImplementacionList1;
+    public List<FormularioImplementacion> getFormulariosImplementacionVerificador() {
+        return formulariosImplementacionVerificador;
     }
 
-    public void setFormularioImplementacionList1(List<FormularioImplementacion> formularioImplementacionList1) {
-        this.formularioImplementacionList1 = formularioImplementacionList1;
+    public void setFormulariosImplementacionVerificador(List<FormularioImplementacion> formulariosImplementacionVerificador) {
+        this.formulariosImplementacionVerificador = formulariosImplementacionVerificador;
     }
 
     public List<SolicitudCambio> getSolicitudCambioList() {
