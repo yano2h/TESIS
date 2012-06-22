@@ -9,7 +9,6 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -17,7 +16,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "NOTIFICACION")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Notificacion.findAll", query = "SELECT n FROM Notificacion n"),
     @NamedQuery(name = "Notificacion.findByIdNotificacion", query = "SELECT n FROM Notificacion n WHERE n.idNotificacion = :idNotificacion"),
@@ -29,23 +27,23 @@ public class Notificacion implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_notificacion", nullable = false)
+    @Column(name = "id_notificacion")
     private Long idNotificacion;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha", nullable = false)
+    @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 90)
-    @Column(name = "mensaje_notificacion", nullable = false, length = 90)
+    @Column(name = "mensaje_notificacion")
     private String mensajeNotificacion;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "revisada", nullable = false)
+    @Column(name = "revisada")
     private boolean revisada;
-    @JoinColumn(name = "rut_destinatario", referencedColumnName = "rut", nullable = false)
+    @JoinColumn(name = "rut_destinatario", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private Funcionario funcionario;
 

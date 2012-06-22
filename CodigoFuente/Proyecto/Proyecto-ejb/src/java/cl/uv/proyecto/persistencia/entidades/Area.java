@@ -9,8 +9,6 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -18,7 +16,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "AREA")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Area.findAll", query = "SELECT a FROM Area a"),
     @NamedQuery(name = "Area.findByIdArea", query = "SELECT a FROM Area a WHERE a.idArea = :idArea"),
@@ -28,12 +25,12 @@ public class Area implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_area", nullable = false)
+    @Column(name = "id_area")
     private Short idArea;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre", nullable = false, length = 45)
+    @Column(name = "nombre")
     private String nombre;
     @Lob
     @Column(name = "descripcion_area")
@@ -79,7 +76,6 @@ public class Area implements Serializable {
         this.descripcionArea = descripcionArea;
     }
 
-    @XmlTransient
     public List<SolicitudRequerimiento> getSolicitudRequerimientoList() {
         return solicitudRequerimientoList;
     }
@@ -88,7 +84,6 @@ public class Area implements Serializable {
         this.solicitudRequerimientoList = solicitudRequerimientoList;
     }
 
-    @XmlTransient
     public List<FuncionarioDisico> getFuncionarioDisicoList() {
         return funcionarioDisicoList;
     }

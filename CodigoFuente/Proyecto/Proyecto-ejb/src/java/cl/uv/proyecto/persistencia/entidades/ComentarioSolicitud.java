@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -16,7 +15,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "COMENTARIO_SOLICITUD")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ComentarioSolicitud.findAll", query = "SELECT c FROM ComentarioSolicitud c"),
     @NamedQuery(name = "ComentarioSolicitud.findByIdComentario", query = "SELECT c FROM ComentarioSolicitud c WHERE c.idComentario = :idComentario"),
@@ -27,26 +25,26 @@ public class ComentarioSolicitud implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_comentario", nullable = false)
+    @Column(name = "id_comentario")
     private Long idComentario;
     @Basic(optional = false)
     @NotNull
     @Lob
-    @Column(name = "comentario", nullable = false)
+    @Column(name = "comentario")
     private String comentario;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha", nullable = false)
+    @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "visible", nullable = false)
+    @Column(name = "visible")
     private boolean visible;
-    @JoinColumn(name = "id_solicitud_req", referencedColumnName = "id_solicitud_req", nullable = false)
+    @JoinColumn(name = "id_solicitud_req", referencedColumnName = "id_solicitud_req")
     @ManyToOne(optional = false)
     private SolicitudRequerimiento solicitudRequerimiento;
-    @JoinColumn(name = "rut_autor", referencedColumnName = "rut", nullable = false)
+    @JoinColumn(name = "rut_autor", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private Funcionario funcionario;
 

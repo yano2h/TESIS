@@ -10,8 +10,6 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -19,7 +17,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "ITEM_CONFIGURACION")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ItemConfiguracion.findAll", query = "SELECT i FROM ItemConfiguracion i"),
     @NamedQuery(name = "ItemConfiguracion.findByIdItemConfiguracion", query = "SELECT i FROM ItemConfiguracion i WHERE i.idItemConfiguracion = :idItemConfiguracion"),
@@ -33,37 +30,37 @@ public class ItemConfiguracion implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_item_configuracion", nullable = false)
+    @Column(name = "id_item_configuracion")
     private Integer idItemConfiguracion;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 5)
-    @Column(name = "codigo_identificador_ic", nullable = false, length = 5)
+    @Column(name = "codigo_identificador_ic")
     private String codigoIdentificadorIc;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre_ic", nullable = false, length = 45)
+    @Column(name = "nombre_ic")
     private String nombreIc;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "version", nullable = false, length = 10)
+    @Column(name = "version")
     private String version;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "ubicacion_en_biblioteca", nullable = false, length = 100)
+    @Column(name = "ubicacion_en_biblioteca")
     private String ubicacionEnBiblioteca;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha_ultima_modificacion", nullable = false)
+    @Column(name = "fecha_ultima_modificacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaUltimaModificacion;
-    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", nullable = false)
+    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto")
     @ManyToOne(optional = false)
     private Proyecto proyecto;
-    @JoinColumn(name = "rut_responsable_ic", referencedColumnName = "rut", nullable = false)
+    @JoinColumn(name = "rut_responsable_ic", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private FuncionarioDisico funcionarioDisico;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemConfiguracion")
@@ -149,7 +146,6 @@ public class ItemConfiguracion implements Serializable {
         this.funcionarioDisico = funcionarioDisico;
     }
 
-    @XmlTransient
     public List<SolicitudCambio> getSolicitudCambioList() {
         return solicitudCambioList;
     }

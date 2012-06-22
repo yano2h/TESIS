@@ -10,8 +10,6 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -19,7 +17,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "PROYECTO")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Proyecto.findAll", query = "SELECT p FROM Proyecto p"),
     @NamedQuery(name = "Proyecto.findByIdProyecto", query = "SELECT p FROM Proyecto p WHERE p.idProyecto = :idProyecto"),
@@ -33,26 +30,26 @@ public class Proyecto implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_proyecto", nullable = false)
+    @Column(name = "id_proyecto")
     private Integer idProyecto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 6)
-    @Column(name = "codigo_interno", nullable = false, length = 6)
+    @Column(name = "codigo_interno")
     private String codigoInterno;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre", nullable = false, length = 45)
+    @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "descripcion", nullable = false, length = 255)
+    @Column(name = "descripcion")
     private String descripcion;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha_inicio", nullable = false)
+    @Column(name = "fecha_inicio")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaInicio;
     @Column(name = "fecha_termino")
@@ -66,10 +63,10 @@ public class Proyecto implements Serializable {
     private List<TareaScmProyecto> tareaScmProyectoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
     private List<ParticipanteProyecto> participanteProyectoList;
-    @JoinColumn(name = "id_tipo_proyecto", referencedColumnName = "id_tipo_proyecto", nullable = false)
+    @JoinColumn(name = "id_tipo_proyecto", referencedColumnName = "id_tipo_proyecto")
     @ManyToOne(optional = false)
     private TipoProyecto tipoProyecto;
-    @JoinColumn(name = "id_estado_proyecto", referencedColumnName = "id_estado_proyecto", nullable = false)
+    @JoinColumn(name = "id_estado_proyecto", referencedColumnName = "id_estado_proyecto")
     @ManyToOne(optional = false)
     private EstadoProyecto estadoProyecto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
@@ -138,7 +135,6 @@ public class Proyecto implements Serializable {
         this.fechaTermino = fechaTermino;
     }
 
-    @XmlTransient
     public List<ItemConfiguracion> getItemConfiguracionList() {
         return itemConfiguracionList;
     }
@@ -147,7 +143,6 @@ public class Proyecto implements Serializable {
         this.itemConfiguracionList = itemConfiguracionList;
     }
 
-    @XmlTransient
     public List<TareaProyecto> getTareaProyectoList() {
         return tareaProyectoList;
     }
@@ -156,7 +151,6 @@ public class Proyecto implements Serializable {
         this.tareaProyectoList = tareaProyectoList;
     }
 
-    @XmlTransient
     public List<TareaScmProyecto> getTareaScmProyectoList() {
         return tareaScmProyectoList;
     }
@@ -165,7 +159,6 @@ public class Proyecto implements Serializable {
         this.tareaScmProyectoList = tareaScmProyectoList;
     }
 
-    @XmlTransient
     public List<ParticipanteProyecto> getParticipanteProyectoList() {
         return participanteProyectoList;
     }
@@ -190,7 +183,6 @@ public class Proyecto implements Serializable {
         this.estadoProyecto = estadoProyecto;
     }
 
-    @XmlTransient
     public List<SolicitudCambio> getSolicitudCambioList() {
         return solicitudCambioList;
     }

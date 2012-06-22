@@ -9,8 +9,6 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -18,7 +16,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "TIPO_PRIORIDAD")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TipoPrioridad.findAll", query = "SELECT t FROM TipoPrioridad t"),
     @NamedQuery(name = "TipoPrioridad.findByIdTipoPrioridad", query = "SELECT t FROM TipoPrioridad t WHERE t.idTipoPrioridad = :idTipoPrioridad"),
@@ -28,12 +25,12 @@ public class TipoPrioridad implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_tipo_prioridad", nullable = false)
+    @Column(name = "id_tipo_prioridad")
     private Short idTipoPrioridad;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre_prioridad", nullable = false, length = 45)
+    @Column(name = "nombre_prioridad")
     private String nombrePrioridad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoPrioridad")
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
@@ -68,7 +65,6 @@ public class TipoPrioridad implements Serializable {
         this.nombrePrioridad = nombrePrioridad;
     }
 
-    @XmlTransient
     public List<SolicitudRequerimiento> getSolicitudRequerimientoList() {
         return solicitudRequerimientoList;
     }
@@ -77,7 +73,6 @@ public class TipoPrioridad implements Serializable {
         this.solicitudRequerimientoList = solicitudRequerimientoList;
     }
 
-    @XmlTransient
     public List<SolicitudCambio> getSolicitudCambioList() {
         return solicitudCambioList;
     }

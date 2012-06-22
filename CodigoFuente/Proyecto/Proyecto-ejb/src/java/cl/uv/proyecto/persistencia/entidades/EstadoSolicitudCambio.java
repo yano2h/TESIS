@@ -9,8 +9,6 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -18,7 +16,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "ESTADO_SOLICITUD_CAMBIO")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "EstadoSolicitudCambio.findAll", query = "SELECT e FROM EstadoSolicitudCambio e"),
     @NamedQuery(name = "EstadoSolicitudCambio.findByIdEstadoSolicitudCambio", query = "SELECT e FROM EstadoSolicitudCambio e WHERE e.idEstadoSolicitudCambio = :idEstadoSolicitudCambio"),
@@ -29,15 +26,15 @@ public class EstadoSolicitudCambio implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_estado_solicitud_cambio", nullable = false)
+    @Column(name = "id_estado_solicitud_cambio")
     private Short idEstadoSolicitudCambio;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre_estado_solicitud", nullable = false, length = 45)
+    @Column(name = "nombre_estado_solicitud")
     private String nombreEstadoSolicitud;
     @Size(max = 255)
-    @Column(name = "descripcion", length = 255)
+    @Column(name = "descripcion")
     private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoSolicitudCambio")
     private List<SolicitudCambio> solicitudCambioList;
@@ -78,7 +75,6 @@ public class EstadoSolicitudCambio implements Serializable {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
     public List<SolicitudCambio> getSolicitudCambioList() {
         return solicitudCambioList;
     }

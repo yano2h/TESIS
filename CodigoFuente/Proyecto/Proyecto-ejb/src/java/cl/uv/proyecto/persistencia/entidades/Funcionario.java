@@ -10,8 +10,6 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -19,7 +17,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "FUNCIONARIO")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Funcionario.findAll", query = "SELECT f FROM Funcionario f"),
     @NamedQuery(name = "Funcionario.findByRut", query = "SELECT f FROM Funcionario f WHERE f.rut = :rut"),
@@ -34,25 +31,25 @@ public class Funcionario implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "rut", nullable = false)
+    @Column(name = "rut")
     private Integer rut;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre", nullable = false, length = 45)
+    @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
-    @Column(name = "apellido_paterno", nullable = false, length = 25)
+    @Column(name = "apellido_paterno")
     private String apellidoPaterno;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
-    @Column(name = "apellido_m", nullable = false, length = 25)
+    @Column(name = "apellido_m")
     private String apellidoM;
     @Size(max = 45)
-    @Column(name = "correo_uv", length = 45)
+    @Column(name = "correo_uv")
     private String correoUv;
     @Column(name = "fecha_ultimo_acceso")
     @Temporal(TemporalType.TIMESTAMP)
@@ -139,7 +136,6 @@ public class Funcionario implements Serializable {
         this.fechaPrimerAcceso = fechaPrimerAcceso;
     }
 
-    @XmlTransient
     public List<Notificacion> getNotificacionList() {
         return notificacionList;
     }
@@ -148,7 +144,6 @@ public class Funcionario implements Serializable {
         this.notificacionList = notificacionList;
     }
 
-    @XmlTransient
     public List<SolicitudRequerimiento> getSolicitudRequerimientoList() {
         return solicitudRequerimientoList;
     }
@@ -165,7 +160,6 @@ public class Funcionario implements Serializable {
         this.funcionarioDisico = funcionarioDisico;
     }
 
-    @XmlTransient
     public List<ComentarioSolicitud> getComentarioSolicitudList() {
         return comentarioSolicitudList;
     }

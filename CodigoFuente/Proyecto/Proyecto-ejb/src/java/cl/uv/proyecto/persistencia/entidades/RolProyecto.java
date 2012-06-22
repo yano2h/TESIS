@@ -9,8 +9,6 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -18,7 +16,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "ROL_PROYECTO")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RolProyecto.findAll", query = "SELECT r FROM RolProyecto r"),
     @NamedQuery(name = "RolProyecto.findByIdRol", query = "SELECT r FROM RolProyecto r WHERE r.idRol = :idRol"),
@@ -28,12 +25,12 @@ public class RolProyecto implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_rol", nullable = false)
+    @Column(name = "id_rol")
     private Short idRol;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre_rol", nullable = false, length = 45)
+    @Column(name = "nombre_rol")
     private String nombreRol;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolProyecto")
     private List<ParticipanteProyecto> participanteProyectoList;
@@ -66,7 +63,6 @@ public class RolProyecto implements Serializable {
         this.nombreRol = nombreRol;
     }
 
-    @XmlTransient
     public List<ParticipanteProyecto> getParticipanteProyectoList() {
         return participanteProyectoList;
     }

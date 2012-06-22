@@ -9,8 +9,6 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -18,7 +16,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "TAREA_SCM")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TareaScm.findAll", query = "SELECT t FROM TareaScm t"),
     @NamedQuery(name = "TareaScm.findByIdTareaScm", query = "SELECT t FROM TareaScm t WHERE t.idTareaScm = :idTareaScm"),
@@ -29,17 +26,17 @@ public class TareaScm implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_tarea_scm", nullable = false)
+    @Column(name = "id_tarea_scm")
     private Integer idTareaScm;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre_tarea", nullable = false, length = 45)
+    @Column(name = "nombre_tarea")
     private String nombreTarea;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "descripcion_tarea", nullable = false, length = 255)
+    @Column(name = "descripcion_tarea")
     private String descripcionTarea;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tareaScm")
     private List<Entregable> entregableList;
@@ -83,7 +80,6 @@ public class TareaScm implements Serializable {
         this.descripcionTarea = descripcionTarea;
     }
 
-    @XmlTransient
     public List<Entregable> getEntregableList() {
         return entregableList;
     }
@@ -92,7 +88,6 @@ public class TareaScm implements Serializable {
         this.entregableList = entregableList;
     }
 
-    @XmlTransient
     public List<TareaScmProyecto> getTareaScmProyectoList() {
         return tareaScmProyectoList;
     }

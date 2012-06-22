@@ -9,8 +9,6 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -18,7 +16,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "ESTADO_PROYECTO")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "EstadoProyecto.findAll", query = "SELECT e FROM EstadoProyecto e"),
     @NamedQuery(name = "EstadoProyecto.findByIdEstadoProyecto", query = "SELECT e FROM EstadoProyecto e WHERE e.idEstadoProyecto = :idEstadoProyecto"),
@@ -28,12 +25,12 @@ public class EstadoProyecto implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_estado_proyecto", nullable = false)
+    @Column(name = "id_estado_proyecto")
     private Short idEstadoProyecto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre_estado_proyecto", nullable = false, length = 45)
+    @Column(name = "nombre_estado_proyecto")
     private String nombreEstadoProyecto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoProyecto")
     private List<Proyecto> proyectoList;
@@ -66,7 +63,6 @@ public class EstadoProyecto implements Serializable {
         this.nombreEstadoProyecto = nombreEstadoProyecto;
     }
 
-    @XmlTransient
     public List<Proyecto> getProyectoList() {
         return proyectoList;
     }

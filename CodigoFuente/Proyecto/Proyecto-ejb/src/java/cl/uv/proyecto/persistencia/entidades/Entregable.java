@@ -8,7 +8,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -16,7 +15,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "ENTREGABLE")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Entregable.findAll", query = "SELECT e FROM Entregable e"),
     @NamedQuery(name = "Entregable.findByIdEntregable", query = "SELECT e FROM Entregable e WHERE e.idEntregable = :idEntregable"),
@@ -26,14 +24,14 @@ public class Entregable implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_entregable", nullable = false)
+    @Column(name = "id_entregable")
     private Integer idEntregable;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre_entregable", nullable = false, length = 45)
+    @Column(name = "nombre_entregable")
     private String nombreEntregable;
-    @JoinColumn(name = "id_tarea_scm", referencedColumnName = "id_tarea_scm", nullable = false)
+    @JoinColumn(name = "id_tarea_scm", referencedColumnName = "id_tarea_scm")
     @ManyToOne(optional = false)
     private TareaScm tareaScm;
 

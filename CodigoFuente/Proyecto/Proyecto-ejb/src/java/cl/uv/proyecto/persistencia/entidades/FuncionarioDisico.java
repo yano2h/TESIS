@@ -9,8 +9,6 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -18,7 +16,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "FUNCIONARIO_DISICO")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "FuncionarioDisico.findAll", query = "SELECT f FROM FuncionarioDisico f"),
     @NamedQuery(name = "FuncionarioDisico.findByRut", query = "SELECT f FROM FuncionarioDisico f WHERE f.rut = :rut"),
@@ -29,15 +26,15 @@ public class FuncionarioDisico implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "rut", nullable = false)
+    @Column(name = "rut")
     private Integer rut;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "cargo", nullable = false, length = 45)
+    @Column(name = "cargo")
     private String cargo;
     @Size(max = 5)
-    @Column(name = "anexo", length = 5)
+    @Column(name = "anexo")
     private String anexo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
     private List<ItemConfiguracion> itemConfiguracionList;
@@ -47,10 +44,10 @@ public class FuncionarioDisico implements Serializable {
     private List<EstadisticaPersonal> estadisticaPersonalList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
-    @JoinColumn(name = "rut", referencedColumnName = "rut", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "rut", referencedColumnName = "rut", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Funcionario funcionario;
-    @JoinColumn(name = "id_area", referencedColumnName = "id_area", nullable = false)
+    @JoinColumn(name = "id_area", referencedColumnName = "id_area")
     @ManyToOne(optional = false)
     private Area area;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
@@ -104,7 +101,6 @@ public class FuncionarioDisico implements Serializable {
         this.anexo = anexo;
     }
 
-    @XmlTransient
     public List<ItemConfiguracion> getItemConfiguracionList() {
         return itemConfiguracionList;
     }
@@ -113,7 +109,6 @@ public class FuncionarioDisico implements Serializable {
         this.itemConfiguracionList = itemConfiguracionList;
     }
 
-    @XmlTransient
     public List<TareaProyecto> getTareaProyectoList() {
         return tareaProyectoList;
     }
@@ -122,7 +117,6 @@ public class FuncionarioDisico implements Serializable {
         this.tareaProyectoList = tareaProyectoList;
     }
 
-    @XmlTransient
     public List<EstadisticaPersonal> getEstadisticaPersonalList() {
         return estadisticaPersonalList;
     }
@@ -131,7 +125,6 @@ public class FuncionarioDisico implements Serializable {
         this.estadisticaPersonalList = estadisticaPersonalList;
     }
 
-    @XmlTransient
     public List<SolicitudRequerimiento> getSolicitudRequerimientoList() {
         return solicitudRequerimientoList;
     }
@@ -156,7 +149,6 @@ public class FuncionarioDisico implements Serializable {
         this.area = area;
     }
 
-    @XmlTransient
     public List<TareaScmProyecto> getTareaScmProyectoList() {
         return tareaScmProyectoList;
     }
@@ -165,7 +157,6 @@ public class FuncionarioDisico implements Serializable {
         this.tareaScmProyectoList = tareaScmProyectoList;
     }
 
-    @XmlTransient
     public List<ParticipanteProyecto> getParticipanteProyectoList() {
         return participanteProyectoList;
     }
@@ -174,7 +165,6 @@ public class FuncionarioDisico implements Serializable {
         this.participanteProyectoList = participanteProyectoList;
     }
 
-    @XmlTransient
     public List<FormularioImplementacion> getFormularioImplementacionList() {
         return formularioImplementacionList;
     }
@@ -183,7 +173,6 @@ public class FuncionarioDisico implements Serializable {
         this.formularioImplementacionList = formularioImplementacionList;
     }
 
-    @XmlTransient
     public List<FormularioImplementacion> getFormularioImplementacionList1() {
         return formularioImplementacionList1;
     }
@@ -192,7 +181,6 @@ public class FuncionarioDisico implements Serializable {
         this.formularioImplementacionList1 = formularioImplementacionList1;
     }
 
-    @XmlTransient
     public List<SolicitudCambio> getSolicitudCambioList() {
         return solicitudCambioList;
     }
@@ -201,7 +189,6 @@ public class FuncionarioDisico implements Serializable {
         this.solicitudCambioList = solicitudCambioList;
     }
 
-    @XmlTransient
     public List<SolicitudCambio> getSolicitudCambioList1() {
         return solicitudCambioList1;
     }
@@ -210,7 +197,6 @@ public class FuncionarioDisico implements Serializable {
         this.solicitudCambioList1 = solicitudCambioList1;
     }
 
-    @XmlTransient
     public List<SolicitudCambio> getSolicitudCambioList2() {
         return solicitudCambioList2;
     }

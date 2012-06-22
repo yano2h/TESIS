@@ -6,7 +6,6 @@ package cl.uv.proyecto.persistencia.entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -14,7 +13,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "PARTICIPANTE_PROYECTO")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ParticipanteProyecto.findAll", query = "SELECT p FROM ParticipanteProyecto p"),
     @NamedQuery(name = "ParticipanteProyecto.findByRutParticipante", query = "SELECT p FROM ParticipanteProyecto p WHERE p.participanteProyectoPK.rutParticipante = :rutParticipante"),
@@ -23,13 +21,13 @@ public class ParticipanteProyecto implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ParticipanteProyectoPK participanteProyectoPK;
-    @JoinColumn(name = "id_rol", referencedColumnName = "id_rol", nullable = false)
+    @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
     @ManyToOne(optional = false)
     private RolProyecto rolProyecto;
-    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Proyecto proyecto;
-    @JoinColumn(name = "rut_participante", referencedColumnName = "rut", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "rut_participante", referencedColumnName = "rut", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private FuncionarioDisico funcionarioDisico;
 

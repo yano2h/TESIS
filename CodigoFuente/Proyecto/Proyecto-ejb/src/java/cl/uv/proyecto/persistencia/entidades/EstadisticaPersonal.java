@@ -8,7 +8,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -16,7 +15,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "ESTADISTICA_PERSONAL")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "EstadisticaPersonal.findAll", query = "SELECT e FROM EstadisticaPersonal e"),
     @NamedQuery(name = "EstadisticaPersonal.findById", query = "SELECT e FROM EstadisticaPersonal e WHERE e.id = :id"),
@@ -35,50 +33,50 @@ public class EstadisticaPersonal implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "fecha", nullable = false, length = 10)
+    @Column(name = "fecha")
     private String fecha;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "cantidad_total_solicitudes_asignadas", nullable = false)
+    @Column(name = "cantidad_total_solicitudes_asignadas")
     private long cantidadTotalSolicitudesAsignadas;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "cantidad_solicitudes_pendientes", nullable = false)
+    @Column(name = "cantidad_solicitudes_pendientes")
     private int cantidadSolicitudesPendientes;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "cantidad_solicitudes_vencidas", nullable = false)
+    @Column(name = "cantidad_solicitudes_vencidas")
     private int cantidadSolicitudesVencidas;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "cantidad_solicitudes_iniciadas", nullable = false)
+    @Column(name = "cantidad_solicitudes_iniciadas")
     private int cantidadSolicitudesIniciadas;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "cantidad_solicitudes_cerradas", nullable = false)
+    @Column(name = "cantidad_solicitudes_cerradas")
     private int cantidadSolicitudesCerradas;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "cantidad_proyectos_acargo", nullable = false)
+    @Column(name = "cantidad_proyectos_acargo")
     private int cantidadProyectosAcargo;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "cantidad_proyectos_en_que_participa", nullable = false)
+    @Column(name = "cantidad_proyectos_en_que_participa")
     private int cantidadProyectosEnQueParticipa;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "cantidad_tareas_proyecto_asociadas", nullable = false)
+    @Column(name = "cantidad_tareas_proyecto_asociadas")
     private int cantidadTareasProyectoAsociadas;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "cantidad_tareas_scm_asociadas", nullable = false)
+    @Column(name = "cantidad_tareas_scm_asociadas")
     private int cantidadTareasScmAsociadas;
-    @JoinColumn(name = "rut_funcionario", referencedColumnName = "rut", nullable = false)
+    @JoinColumn(name = "rut_funcionario", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private FuncionarioDisico funcionarioDisico;
 

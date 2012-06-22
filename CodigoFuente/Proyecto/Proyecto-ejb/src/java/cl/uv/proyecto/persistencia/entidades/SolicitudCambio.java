@@ -10,8 +10,6 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -19,7 +17,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "SOLICITUD_CAMBIO")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "SolicitudCambio.findAll", query = "SELECT s FROM SolicitudCambio s"),
     @NamedQuery(name = "SolicitudCambio.findByIdSolicitudCambio", query = "SELECT s FROM SolicitudCambio s WHERE s.idSolicitudCambio = :idSolicitudCambio"),
@@ -34,22 +31,22 @@ public class SolicitudCambio implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_solicitud_cambio", nullable = false)
+    @Column(name = "id_solicitud_cambio")
     private Integer idSolicitudCambio;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "titulo", nullable = false, length = 50)
+    @Column(name = "titulo")
     private String titulo;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha_solicitud", nullable = false)
+    @Column(name = "fecha_solicitud")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaSolicitud;
     @Basic(optional = false)
     @NotNull
     @Lob
-    @Column(name = "descripcion_necesidad_cambio", nullable = false)
+    @Column(name = "descripcion_necesidad_cambio")
     private String descripcionNecesidadCambio;
     @Lob
     @Column(name = "descripcion_cambio")
@@ -64,20 +61,20 @@ public class SolicitudCambio implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCierre;
     @Size(max = 60)
-    @Column(name = "modulo_afectado", length = 60)
+    @Column(name = "modulo_afectado")
     private String moduloAfectado;
     @Size(max = 255)
-    @Column(name = "descripcion_resolucuion", length = 255)
+    @Column(name = "descripcion_resolucuion")
     private String descripcionResolucuion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudCambio")
     private List<FormularioImplementacion> formularioImplementacionList;
-    @JoinColumn(name = "id_tipo_prioridad", referencedColumnName = "id_tipo_prioridad", nullable = false)
+    @JoinColumn(name = "id_tipo_prioridad", referencedColumnName = "id_tipo_prioridad")
     @ManyToOne(optional = false)
     private TipoPrioridad tipoPrioridad;
-    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", nullable = false)
+    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto")
     @ManyToOne(optional = false)
     private Proyecto proyecto;
-    @JoinColumn(name = "id_item_configuracion", referencedColumnName = "id_item_configuracion", nullable = false)
+    @JoinColumn(name = "id_item_configuracion", referencedColumnName = "id_item_configuracion")
     @ManyToOne(optional = false)
     private ItemConfiguracion itemConfiguracion;
     @JoinColumn(name = "rut_evaluador_final", referencedColumnName = "rut")
@@ -86,10 +83,10 @@ public class SolicitudCambio implements Serializable {
     @JoinColumn(name = "rut_evaluador_impacto", referencedColumnName = "rut")
     @ManyToOne
     private FuncionarioDisico funcionarioDisico1;
-    @JoinColumn(name = "rut_solicitante", referencedColumnName = "rut", nullable = false)
+    @JoinColumn(name = "rut_solicitante", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private FuncionarioDisico funcionarioDisico2;
-    @JoinColumn(name = "id_estado_solicitud_cambio", referencedColumnName = "id_estado_solicitud_cambio", nullable = false)
+    @JoinColumn(name = "id_estado_solicitud_cambio", referencedColumnName = "id_estado_solicitud_cambio")
     @ManyToOne(optional = false)
     private EstadoSolicitudCambio estadoSolicitudCambio;
 
@@ -187,7 +184,6 @@ public class SolicitudCambio implements Serializable {
         this.descripcionResolucuion = descripcionResolucuion;
     }
 
-    @XmlTransient
     public List<FormularioImplementacion> getFormularioImplementacionList() {
         return formularioImplementacionList;
     }

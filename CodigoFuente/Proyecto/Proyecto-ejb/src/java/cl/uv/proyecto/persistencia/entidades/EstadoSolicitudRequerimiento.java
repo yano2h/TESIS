@@ -9,8 +9,6 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -18,7 +16,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "ESTADO_SOLICITUD_REQ")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "EstadoSolicitudRequerimiento.findAll", query = "SELECT e FROM EstadoSolicitudRequerimiento e"),
     @NamedQuery(name = "EstadoSolicitudRequerimiento.findByIdEstadoSolicitudReq", query = "SELECT e FROM EstadoSolicitudRequerimiento e WHERE e.idEstadoSolicitudReq = :idEstadoSolicitudReq"),
@@ -29,15 +26,15 @@ public class EstadoSolicitudRequerimiento implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_estado_solicitud_req", nullable = false)
+    @Column(name = "id_estado_solicitud_req")
     private Short idEstadoSolicitudReq;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre_estado_solicitud", nullable = false, length = 45)
+    @Column(name = "nombre_estado_solicitud")
     private String nombreEstadoSolicitud;
     @Size(max = 255)
-    @Column(name = "descripcion_estado", length = 255)
+    @Column(name = "descripcion_estado")
     private String descripcionEstado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoSolicitudRequerimiento")
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
@@ -78,7 +75,6 @@ public class EstadoSolicitudRequerimiento implements Serializable {
         this.descripcionEstado = descripcionEstado;
     }
 
-    @XmlTransient
     public List<SolicitudRequerimiento> getSolicitudRequerimientoList() {
         return solicitudRequerimientoList;
     }

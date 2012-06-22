@@ -9,7 +9,6 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -17,7 +16,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "TAREA_PROYECTO")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TareaProyecto.findAll", query = "SELECT t FROM TareaProyecto t"),
     @NamedQuery(name = "TareaProyecto.findByIdTareaProyecto", query = "SELECT t FROM TareaProyecto t WHERE t.idTareaProyecto = :idTareaProyecto"),
@@ -34,21 +32,21 @@ public class TareaProyecto implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_tarea_proyecto", nullable = false)
+    @Column(name = "id_tarea_proyecto")
     private Integer idTareaProyecto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
-    @Column(name = "tarea", nullable = false, length = 60)
+    @Column(name = "tarea")
     private String tarea;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "fecha_creacion", nullable = false, length = 10)
+    @Column(name = "fecha_creacion")
     private String fechaCreacion;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha_inicio_propuesta", nullable = false)
+    @Column(name = "fecha_inicio_propuesta")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaInicioPropuesta;
     @Column(name = "fecha_inicio_real")
@@ -56,7 +54,7 @@ public class TareaProyecto implements Serializable {
     private Date fechaInicioReal;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha_termino_propuesta", nullable = false)
+    @Column(name = "fecha_termino_propuesta")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaTerminoPropuesta;
     @Column(name = "fecha_termino_real")
@@ -64,16 +62,16 @@ public class TareaProyecto implements Serializable {
     private Date fechaTerminoReal;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "nivel_avance", nullable = false)
+    @Column(name = "nivel_avance")
     private short nivelAvance;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "visible", nullable = false)
+    @Column(name = "visible")
     private boolean visible;
-    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", nullable = false)
+    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto")
     @ManyToOne(optional = false)
     private Proyecto proyecto;
-    @JoinColumn(name = "rut_responsable", referencedColumnName = "rut", nullable = false)
+    @JoinColumn(name = "rut_responsable", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private FuncionarioDisico funcionarioDisico;
 

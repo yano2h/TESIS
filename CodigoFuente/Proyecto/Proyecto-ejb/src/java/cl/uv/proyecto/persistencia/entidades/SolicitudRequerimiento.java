@@ -10,17 +10,13 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Alejandro
  */
 @Entity
-@Table(name = "SOLICITUD_REQUERIMIENTO", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"codigo_consulta"})})
-@XmlRootElement
+@Table(name = "SOLICITUD_REQUERIMIENTO")
 @NamedQueries({
     @NamedQuery(name = "SolicitudRequerimiento.findAll", query = "SELECT s FROM SolicitudRequerimiento s"),
     @NamedQuery(name = "SolicitudRequerimiento.findByIdSolicitudReq", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.idSolicitudReq = :idSolicitudReq"),
@@ -36,26 +32,26 @@ public class SolicitudRequerimiento implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_solicitud_req", nullable = false)
+    @Column(name = "id_solicitud_req")
     private Long idSolicitudReq;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 9)
-    @Column(name = "codigo_consulta", nullable = false, length = 9)
+    @Column(name = "codigo_consulta")
     private String codigoConsulta;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "asunto", nullable = false, length = 45)
+    @Column(name = "asunto")
     private String asunto;
     @Basic(optional = false)
     @NotNull
     @Lob
-    @Column(name = "mensaje", nullable = false)
+    @Column(name = "mensaje")
     private String mensaje;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha_envio", nullable = false)
+    @Column(name = "fecha_envio")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEnvio;
     @Column(name = "fecha_cierre")
@@ -66,31 +62,31 @@ public class SolicitudRequerimiento implements Serializable {
     private Date fechaVencimiento;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha_ultima_actualizacion", nullable = false)
+    @Column(name = "fecha_ultima_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaUltimaActualizacion;
     @Size(max = 255)
-    @Column(name = "justificacion_trasnferencia", length = 255)
+    @Column(name = "justificacion_trasnferencia")
     private String justificacionTrasnferencia;
     @Lob
     @Column(name = "respuesta")
     private String respuesta;
-    @JoinColumn(name = "id_tipo_solicitud_req", referencedColumnName = "id_tipo_solicitud_req", nullable = false)
+    @JoinColumn(name = "id_tipo_solicitud_req", referencedColumnName = "id_tipo_solicitud_req")
     @ManyToOne(optional = false)
-    private TipoSolicitudReq tipoSolicitudReq;
-    @JoinColumn(name = "id_tipo_prioridad", referencedColumnName = "id_tipo_prioridad", nullable = false)
+    private TipoSolicitudRequerimiento tipoSolicitudRequerimiento;
+    @JoinColumn(name = "id_tipo_prioridad", referencedColumnName = "id_tipo_prioridad")
     @ManyToOne(optional = false)
     private TipoPrioridad tipoPrioridad;
-    @JoinColumn(name = "rut_responsable", referencedColumnName = "rut", nullable = false)
+    @JoinColumn(name = "rut_responsable", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private FuncionarioDisico funcionarioDisico;
-    @JoinColumn(name = "rut_solicitante", referencedColumnName = "rut", nullable = false)
+    @JoinColumn(name = "rut_solicitante", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private Funcionario funcionario;
-    @JoinColumn(name = "id_estado_solicitud_req", referencedColumnName = "id_estado_solicitud_req", nullable = false)
+    @JoinColumn(name = "id_estado_solicitud_req", referencedColumnName = "id_estado_solicitud_req")
     @ManyToOne(optional = false)
     private EstadoSolicitudRequerimiento estadoSolicitudRequerimiento;
-    @JoinColumn(name = "id_area", referencedColumnName = "id_area", nullable = false)
+    @JoinColumn(name = "id_area", referencedColumnName = "id_area")
     @ManyToOne(optional = false)
     private Area area;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudRequerimiento")
@@ -192,12 +188,12 @@ public class SolicitudRequerimiento implements Serializable {
         this.respuesta = respuesta;
     }
 
-    public TipoSolicitudReq getTipoSolicitudReq() {
-        return tipoSolicitudReq;
+    public TipoSolicitudRequerimiento getTipoSolicitudRequerimiento() {
+        return tipoSolicitudRequerimiento;
     }
 
-    public void setTipoSolicitudReq(TipoSolicitudReq tipoSolicitudReq) {
-        this.tipoSolicitudReq = tipoSolicitudReq;
+    public void setTipoSolicitudRequerimiento(TipoSolicitudRequerimiento tipoSolicitudRequerimiento) {
+        this.tipoSolicitudRequerimiento = tipoSolicitudRequerimiento;
     }
 
     public TipoPrioridad getTipoPrioridad() {
@@ -240,7 +236,6 @@ public class SolicitudRequerimiento implements Serializable {
         this.area = area;
     }
 
-    @XmlTransient
     public List<ComentarioSolicitud> getComentarioSolicitudList() {
         return comentarioSolicitudList;
     }

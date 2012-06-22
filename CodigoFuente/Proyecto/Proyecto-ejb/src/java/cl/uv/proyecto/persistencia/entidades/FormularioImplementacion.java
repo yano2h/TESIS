@@ -8,7 +8,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -16,7 +15,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "FORMULARIO_IMPLEMENTACION")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "FormularioImplementacion.findAll", query = "SELECT f FROM FormularioImplementacion f"),
     @NamedQuery(name = "FormularioImplementacion.findByIdFormularioImplementacion", query = "SELECT f FROM FormularioImplementacion f WHERE f.idFormularioImplementacion = :idFormularioImplementacion"),
@@ -26,25 +24,25 @@ public class FormularioImplementacion implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_formulario_implementacion", nullable = false)
+    @Column(name = "id_formulario_implementacion")
     private Integer idFormularioImplementacion;
     @Basic(optional = false)
     @NotNull
     @Lob
-    @Column(name = "observaciones", nullable = false)
+    @Column(name = "observaciones")
     private String observaciones;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "fecha_verificacion", nullable = false, length = 10)
+    @Column(name = "fecha_verificacion")
     private String fechaVerificacion;
-    @JoinColumn(name = "id_solicitud_cambio", referencedColumnName = "id_solicitud_cambio", nullable = false)
+    @JoinColumn(name = "id_solicitud_cambio", referencedColumnName = "id_solicitud_cambio")
     @ManyToOne(optional = false)
     private SolicitudCambio solicitudCambio;
-    @JoinColumn(name = "rut_implementador", referencedColumnName = "rut", nullable = false)
+    @JoinColumn(name = "rut_implementador", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private FuncionarioDisico funcionarioDisico;
-    @JoinColumn(name = "rut_verificador", referencedColumnName = "rut", nullable = false)
+    @JoinColumn(name = "rut_verificador", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private FuncionarioDisico funcionarioDisico1;
 

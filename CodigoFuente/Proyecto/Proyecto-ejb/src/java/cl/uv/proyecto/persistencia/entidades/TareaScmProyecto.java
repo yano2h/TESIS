@@ -8,7 +8,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -16,7 +15,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "TAREA_SCM_PROYECTO")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TareaScmProyecto.findAll", query = "SELECT t FROM TareaScmProyecto t"),
     @NamedQuery(name = "TareaScmProyecto.findByIdTareaScmProyecto", query = "SELECT t FROM TareaScmProyecto t WHERE t.idTareaScmProyecto = :idTareaScmProyecto"),
@@ -27,25 +25,25 @@ public class TareaScmProyecto implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_tarea_scm_proyecto", nullable = false)
+    @Column(name = "id_tarea_scm_proyecto")
     private Integer idTareaScmProyecto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "fecha_inicio", nullable = false, length = 10)
+    @Column(name = "fecha_inicio")
     private String fechaInicio;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "fecha_termino", nullable = false, length = 10)
+    @Column(name = "fecha_termino")
     private String fechaTermino;
-    @JoinColumn(name = "id_tarea_scm", referencedColumnName = "id_tarea_scm", nullable = false)
+    @JoinColumn(name = "id_tarea_scm", referencedColumnName = "id_tarea_scm")
     @ManyToOne(optional = false)
     private TareaScm tareaScm;
-    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", nullable = false)
+    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto")
     @ManyToOne(optional = false)
     private Proyecto proyecto;
-    @JoinColumn(name = "rut_responsable", referencedColumnName = "rut", nullable = false)
+    @JoinColumn(name = "rut_responsable", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private FuncionarioDisico funcionarioDisico;
 

@@ -18,11 +18,11 @@ import javax.validation.constraints.NotNull;
 public class ParticipanteProyectoPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "rut_participante", nullable = false)
+    @Column(name = "rut_participante")
     private int rutParticipante;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_proyecto", nullable = false)
+    @Column(name = "id_proyecto")
     private int idProyecto;
 
     public ParticipanteProyectoPK() {
