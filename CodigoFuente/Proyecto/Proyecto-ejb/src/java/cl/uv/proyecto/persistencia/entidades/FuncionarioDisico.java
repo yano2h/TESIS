@@ -43,7 +43,7 @@ public class FuncionarioDisico extends Funcionario {
     @ManyToOne(optional = false)
     private Area area; 
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
+        @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsableTarea")
     private List<TareaScmProyecto> tareaScmProyectoList; //tareas de scm de las que es responsable
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
     private List<ParticipanteProyecto> participanteProyectoList;

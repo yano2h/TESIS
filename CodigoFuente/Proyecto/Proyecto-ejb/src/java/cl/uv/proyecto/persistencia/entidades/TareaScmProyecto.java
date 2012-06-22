@@ -5,9 +5,9 @@
 package cl.uv.proyecto.persistencia.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -29,23 +29,25 @@ public class TareaScmProyecto implements Serializable {
     private Integer idTareaScmProyecto;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "fecha_inicio")
-    private String fechaInicio;
+    @Temporal(TemporalType.DATE)
+    private Date fechaInicio;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "fecha_termino")
-    private String fechaTermino;
+    @Temporal(TemporalType.DATE)
+    private Date fechaTermino;
     @JoinColumn(name = "id_tarea_scm", referencedColumnName = "id_tarea_scm")
     @ManyToOne(optional = false)
     private TareaScm tareaScm;
+    @JoinColumn(name = "rut_responsable", referencedColumnName = "rut")
+    @ManyToOne(optional = false)
+    private FuncionarioDisico responsableTarea;
+    
     @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto")
     @ManyToOne(optional = false)
     private Proyecto proyecto;
-    @JoinColumn(name = "rut_responsable", referencedColumnName = "rut")
-    @ManyToOne(optional = false)
-    private FuncionarioDisico funcionarioDisico;
+    
 
     public TareaScmProyecto() {
     }
@@ -54,7 +56,7 @@ public class TareaScmProyecto implements Serializable {
         this.idTareaScmProyecto = idTareaScmProyecto;
     }
 
-    public TareaScmProyecto(Integer idTareaScmProyecto, String fechaInicio, String fechaTermino) {
+    public TareaScmProyecto(Integer idTareaScmProyecto, Date fechaInicio, Date fechaTermino) {
         this.idTareaScmProyecto = idTareaScmProyecto;
         this.fechaInicio = fechaInicio;
         this.fechaTermino = fechaTermino;
@@ -68,19 +70,19 @@ public class TareaScmProyecto implements Serializable {
         this.idTareaScmProyecto = idTareaScmProyecto;
     }
 
-    public String getFechaInicio() {
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(String fechaInicio) {
+    public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public String getFechaTermino() {
+    public Date getFechaTermino() {
         return fechaTermino;
     }
 
-    public void setFechaTermino(String fechaTermino) {
+    public void setFechaTermino(Date fechaTermino) {
         this.fechaTermino = fechaTermino;
     }
 
@@ -100,12 +102,12 @@ public class TareaScmProyecto implements Serializable {
         this.proyecto = proyecto;
     }
 
-    public FuncionarioDisico getFuncionarioDisico() {
-        return funcionarioDisico;
+    public FuncionarioDisico getResponsableTarea() {
+        return responsableTarea;
     }
 
-    public void setFuncionarioDisico(FuncionarioDisico funcionarioDisico) {
-        this.funcionarioDisico = funcionarioDisico;
+    public void setResponsableTarea(FuncionarioDisico responsableTarea) {
+        this.responsableTarea = responsableTarea;
     }
 
     @Override
