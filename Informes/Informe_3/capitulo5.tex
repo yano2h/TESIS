@@ -2521,7 +2521,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	pruebas sobre clases como EJBs por ejemplo requieren ser desplegadas en el
 	contenedor para poder ejecutarse correctamente, esto puede llegar a tomar 
 	bastante tiempo lo que dificulta la tarea de hacer las pruebas. Para resolver
-	esto se utilizara Arrquillian, este es un framework de JBoos que ademas de 
+	esto se utilizara \textbf{Arrquillian}, este es un framework de JBoos que ademas de 
 	proveer de herramientas, clases y metodos para la creación y automatización
 	de pruebas, utiliza contenedores embebidos que le permiten simular la ejecución
 	de los componentes como si estuviesen en el contenedor real,  la diferencia 
@@ -2529,43 +2529,43 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	y nos permite simular un ambiente mas real en nuestras pruebas.
 	Permite probar EJBs, CDI, Percistencia (JPA) entre otros, ademas entre los
 	contenedores con los que es compatible se encuentra Glassfish Embedded por 
-	lo que proporciona completa compatibilad con el servidor de aplicaciones a utilizar.
+	lo que proporciona completa compatibilad con el servidor de aplicaciones a utilizar.\\
 	
 
 	Estas pruebas se diseñaran y escribiran idealmente en conjunto con la implementación
 	de la aplicación, pero con el fin de cumplir con las fechas de entrega esta actividad 
-	podra ser postergada asta la fase de pruebas.
+	podra ser postergada asta la fase de pruebas.\\
 			
 
 	\subsection{Pruebas de Integración}
 	Las pruebas de integración se realizan una vez terminadas las pruebas unitarias,
 	es decir una vez que no aseguramos que todo funciona bien individualmente,
 	debemos asegurarnos que cuando juntemos los módulos todo siga funcionando
-	correctamente.
+	correctamente.\\
 	
 	Estas pruebas son similares a las pruebas unitarias, con la salvedad que pueden
 	romper las reglas mencionadas anteriormente, ya que como su nombre indica, 
 	integración significa que ayuda a unir distintas partes del sistema. Por tanto, 
 	estas pruebas serán de granularidad más gruesa y más frágiles que
 	los tests unitarios, por lo que el número de tests de integración sera menor que 
-	el número de tests unitarios.
+	el número de tests unitarios.\\
 	
 	Al igual que en el caso anterior esta pueden ser automatizadas a través
 	de un framework de pruebas. Para integrar los componentes se debe hacer
 	uso intensivo de los servicios del contenedor, por lo que es conveniente
-	hacer solo uso de Arquillian para las pruebas de integración.
+	hacer solo uso de Arquillian para las pruebas de integración.\\
 	
 	El proceso de integración del sistema implica construir este a partir de sus
 	componentes y probar el sistema resultante para encontrar problemas que 
 	pueden surgir debido a la integración de los componentes. Por este motivo
 	las pruebas de integración se diseñaran e implementaran acorde al orden 
 	indicado en la Figura \ref{integracion}, donde las primeros niveles son
-	lo que presentan menos dependencia y los superiores mayor dependencia.
+	lo que presentan menos dependencia y los superiores mayor dependencia.\\
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/logoUV.png}
-			\caption{Interfaz de Implementación del Cambio}
+			\includegraphics[scale=0.46]{imagenes/PruebasIntegracion.png}
+			\caption{Esquema de Integración}
 			\label{integracion}
 		\end{center}
 	\end{figure}
@@ -2576,7 +2576,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	
 	\begin{table}[H]
-	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{2cm} | m{4cm}|m{8cm}|}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{2.5cm} | m{4cm}|m{7.5cm}|}
 		\hline
 		\rowcolor[gray]{0.7} {\textbf{Identificador}} & {\textbf{Prueba de Integración}} & \textbf{Propósito} \\
 		\hline
@@ -2595,9 +2595,11 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	los módulos a los que afecta cada prueba.
 	
 	\begin{table}[H]
+	\begin{center}
 	\begin{tabular}{|>{\columncolor[gray]{0.9}} l | m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|}
 		\hline
-		\rowcolor[gray]{0.7} \backslashbox{Modulo}{Prueba}& {PI-1}  & {PI-2} & {PI-3} & {PI-4} & {PI-5} \\
+		%\rowcolor[gray]{0.7} \backslashbox{Modulo}{Prueba}& {PI-1}  & {PI-2} & {PI-3} & {PI-4} & {PI-5} \\
+\rowcolor[gray]{0.7} {Modulo/Prueba}& {PI-1}  & {PI-2} & {PI-3} & {PI-4} & {PI-5} \\
 		\hline
 		{Modulo 1} & {x}  & {} & {} & {} & {} \\
 		\hline
@@ -2610,10 +2612,11 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 		{Modulo 5} & {}  & {} & {} & {} & {x} \\
 		\hline
 	\end{tabular}
-		\caption{Cobertura de las Pruebas de Integración}
+	\end{center}
+		\caption{Ejemplo Tabla de Cobertura de las Pruebas de Integración}
 	\end{table}
 
 	\subsection{Pruebas de Aceptación}
-	Las pruebas de aceptaci
+	%Las pruebas de aceptaci
 	
 %	\subsection{Pruebas de Rendimiento}
