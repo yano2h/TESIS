@@ -894,30 +894,34 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\end{table}
 	
 	\begin{table}[H]
-		\begin{tabular}{| m{5cm} | m{4.5cm} | m{3.5cm} | c | m{1cm}  |}
+		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
 		\hline
-		{ESTADISTICA\_PERSONAL} & {id} & {BIGINT} & {NO} & {PK}  \\
+		\multirow{13}{*}{ESTADISTICA\_PERSONAL} & {id} & {BIGINT} & {NO} & {PK}  \\
 									\cline{2-5}
-								{}	& {rut\_funcionario} & {INT} & {NO} & {FK} \\
+									& {rut\_funcionario} & {INT} & {NO} & {FK} \\
 									\cline{2-5}
-								{}	& {fecha} & {DATE} & {NO} & {} \\
+									& {fecha} & {DATE} & {NO} & {} \\
 									\cline{2-5}
-								{}	& {cantidad\_total\_solicitudes\_asignadas} & {BIGINT} & {NO} & {} \\
+									& {cantidad\_total\_solicitudes} & \multirow{2}{*}{BIGINT} & \multirow{2}{*}{NO} & {} \\
+									& {\_asignadas}  & & & \\
 									\cline{2-5}
-								{}	& {cantidad\_solicitudes\_} & {INT} & {NO} & {} \\
-								{}	& {pendientes} & {} & {} & {} \\
+									& {cantidad\_solicitudes} & \multirow{2}{*}{INT} & \multirow{2}{*}{NO} & \multirow{2}{*}{} \\
+									& {\_pendientes} &  &  &  \\
 									\cline{2-5}
-								{}	& {cantidad\_solicitudes\_vencidas} & {INT} & {NO} & {} \\
+									& {cantidad\_solicitudes\_vencidas} & {INT} & {NO} & {} \\
+									& {\_vencidas} & {INT} & {NO} & {} \\
 									\cline{2-5}
-								{}	& {cantidad\_solicitudes\_iniciadas} & {INT} & {NO} & {} \\
+									& {cantidad\_solicitudes\_iniciadas} & {INT} & {NO} & {} \\
 									\cline{2-5}
-								{}	& {cantidad\_solicitudes\_cerradas} & {INT} & {NO} & {} \\
+									& {cantidad\_solicitudes\_cerradas} & {INT} & {NO} & {} \\
 									\cline{2-5}
-								{}	& {cantidad\_proyectos\_acargo} & {INT} & {NO} & {} \\
+									& {cantidad\_proyectos\_acargo} & {INT} & {NO} & {} \\
 									\cline{2-5}
-								{}	& {cantidad\_proyectos\_en\_que\_participa} & {INT} & {NO} & {} \\
+									& {cantidad\_proyectos\_en\_que} & \multirow{2}{*}{INT} & \multirow{2}{*}{NO} & \multirow{2}{*}{} \\
+									& {\_participa} & & & \\
 									\cline{2-5}
-								{}	& {cantidad\_tareas\_proyecto\_asociadas} & {INT} & {NO} & {} \\
+									& {cantidad\_tareas\_proyecto} & \multirow{2}{*}{INT} & \multirow{2}{*}{NO} & \multirow{2}{*}{} \\
+									& {\_asociadas} & & & \\
 									\cline{2-5}
 									& {cantidad\_tareas\_scm\_asociadas} & {INT} & {NO} & {} \\		
 		\hline		
@@ -973,11 +977,13 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 									   & {id\_termino} & {DATE} & {NO} & {}  \\
 		\hline
 		\multirow{3}{*}{ESTADO\_SOLICITUD\_CAMBIO} & {id\_estado\_solicitud\_cambio} & {TINYINT} & {NO} & {PK}  \\
+									   \cline{2-5}
 									   & {estado\_solicitud\_cambio} & {VARCHAR(45)} & {NO} & {}  \\
 									   \cline{2-5}
 									   & {descripcion} & {VARCHAR(255)} & {SI} & {}  \\
 		\hline
-		\multirow{3}{*}{SOLICITUD\_CAMBIO} & {id\_solicitud\_cambio} & {INT} & {NO} & {PK}  \\
+		\multirow{17}{*}{SOLICITUD\_CAMBIO} & {id\_solicitud\_cambio} & {INT} & {NO} & {PK}  \\
+									   \cline{2-5}
 									   & {id\_proyecto} & {INT} & {NO} & {FK}  \\
 									   \cline{2-5}
 									   & {rut\_solicitante} & {INT} & {NO} & {FK}  \\
@@ -1010,7 +1016,19 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 									   \cline{2-5}
 									   & {descripcion\_resolucion} & {VARCHAR(255)} & {SI} & {}  \\
 		\hline
-
+\multirow{6}{*}{FORMULARIO\_IMPLEMENTACION} & {id\_formulario\_implementación} & {INT} & {NO} & {PK}  \\
+									 \cline{2-5}
+									 & {observaciones} & {TEXT} & {NO} & {}  \\
+									 \cline{2-5}
+									 & {fecha\_verificacion} & {DATE} & {SI} & {}  \\
+\cline{2-5}
+									& {rut\_verificador} & {INT} & {NO} & {FK}  \\
+									\cline{2-5}
+									& {rut\_implementador} & {INT} & {NO} & {FK}  \\
+									 \cline{2-5}
+									& {id\_solicitud\_cambio} & {INT} & {NO} & {FK}  \\
+									 \cline{2-5}
+	\hline
 									  								  
 		\end{tabular}
 	\end{table}
@@ -2765,7 +2783,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	Para estas pruebas se utilizaran las herramientas JMeter y Visual VM.
 	
-	\subseccion{Pruebas Beta}
+	\subsection{Pruebas Beta}
 	Por ultimo una vez que se hayan aprobado todas las pruebas diseñadas
 	el sistema pasara a las pruebas betas, donde el objetivo es estar preparado
 	para todos los tipos de usuarios. 
