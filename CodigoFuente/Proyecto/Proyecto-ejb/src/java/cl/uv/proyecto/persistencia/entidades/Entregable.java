@@ -21,7 +21,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Entregable.findByNombreEntregable", query = "SELECT e FROM Entregable e WHERE e.nombreEntregable = :nombreEntregable")})
 public class Entregable implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_entregable")

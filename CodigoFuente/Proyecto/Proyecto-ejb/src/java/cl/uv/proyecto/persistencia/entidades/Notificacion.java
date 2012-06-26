@@ -24,7 +24,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Notificacion.findByRevisada", query = "SELECT n FROM Notificacion n WHERE n.revisada = :revisada")})
 public class Notificacion implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_notificacion")

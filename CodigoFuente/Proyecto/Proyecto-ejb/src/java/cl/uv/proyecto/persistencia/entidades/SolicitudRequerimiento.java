@@ -29,7 +29,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "SolicitudRequerimiento.findByJustificacionTrasnferencia", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.justificacionTrasnferencia = :justificacionTrasnferencia")})
 public class SolicitudRequerimiento implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_solicitud_req")

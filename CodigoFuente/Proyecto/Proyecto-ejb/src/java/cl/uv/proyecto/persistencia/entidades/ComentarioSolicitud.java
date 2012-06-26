@@ -22,7 +22,8 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "ComentarioSolicitud.findByVisible", query = "SELECT c FROM ComentarioSolicitud c WHERE c.visible = :visible")})
 public class ComentarioSolicitud implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_comentario")

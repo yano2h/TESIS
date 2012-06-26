@@ -27,7 +27,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Proyecto.findByFechaTermino", query = "SELECT p FROM Proyecto p WHERE p.fechaTermino = :fechaTermino")})
 public class Proyecto implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_proyecto")

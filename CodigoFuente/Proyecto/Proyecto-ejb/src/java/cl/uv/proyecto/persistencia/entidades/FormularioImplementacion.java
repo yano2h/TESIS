@@ -21,7 +21,8 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "FormularioImplementacion.findByFechaVerificacion", query = "SELECT f FROM FormularioImplementacion f WHERE f.fechaVerificacion = :fechaVerificacion")})
 public class FormularioImplementacion implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_formulario_implementacion")

@@ -27,7 +27,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "ItemConfiguracion.findByFechaUltimaModificacion", query = "SELECT i FROM ItemConfiguracion i WHERE i.fechaUltimaModificacion = :fechaUltimaModificacion")})
 public class ItemConfiguracion implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_item_configuracion")

@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "EstadisticaPersonal.findByCantidadTareasScmAsociadas", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadTareasScmAsociadas = :cantidadTareasScmAsociadas")})
 public class EstadisticaPersonal implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")

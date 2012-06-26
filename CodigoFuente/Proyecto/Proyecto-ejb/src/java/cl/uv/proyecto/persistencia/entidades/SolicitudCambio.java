@@ -24,14 +24,16 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "SolicitudCambio.findByFechaAnalisis", query = "SELECT s FROM SolicitudCambio s WHERE s.fechaAnalisis = :fechaAnalisis"),
     @NamedQuery(name = "SolicitudCambio.findByFechaCierre", query = "SELECT s FROM SolicitudCambio s WHERE s.fechaCierre = :fechaCierre"),
     @NamedQuery(name = "SolicitudCambio.findByModuloAfectado", query = "SELECT s FROM SolicitudCambio s WHERE s.moduloAfectado = :moduloAfectado"),
-    @NamedQuery(name = "SolicitudCambio.findByDescripcionResolucuion", query = "SELECT s FROM SolicitudCambio s WHERE s.descripcionResolucuion = :descripcionResolucuion")})
+    @NamedQuery(name = "SolicitudCambio.findByDescripcionResolucion", query = "SELECT s FROM SolicitudCambio s WHERE s.descripcionResolucion = :descripcionResolucion")})
 public class SolicitudCambio implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_solicitud_cambio")
     private Integer idSolicitudCambio;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -64,7 +66,7 @@ public class SolicitudCambio implements Serializable {
     private String moduloAfectado;
     @Size(max = 255)
     @Column(name = "descripcion_resolucuion")
-    private String descripcionResolucuion;
+    private String descripcionResolucion;
     @JoinColumn(name = "id_tipo_prioridad", referencedColumnName = "id_tipo_prioridad")
     @ManyToOne(optional = false)
     private TipoPrioridad tipoPrioridad;
@@ -176,12 +178,12 @@ public class SolicitudCambio implements Serializable {
         this.moduloAfectado = moduloAfectado;
     }
 
-    public String getDescripcionResolucuion() {
-        return descripcionResolucuion;
+    public String getDescripcionResolucion() {
+        return descripcionResolucion;
     }
 
-    public void setDescripcionResolucuion(String descripcionResolucuion) {
-        this.descripcionResolucuion = descripcionResolucuion;
+    public void setDescripcionResolucion(String descripcionResolucion) {
+        this.descripcionResolucion = descripcionResolucion;
     }
 
     public FormularioImplementacion getFormularioImplementacion() {

@@ -22,7 +22,8 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "TareaScmProyecto.findByFechaTermino", query = "SELECT t FROM TareaScmProyecto t WHERE t.fechaTermino = :fechaTermino")})
 public class TareaScmProyecto implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_tarea_scm_proyecto")

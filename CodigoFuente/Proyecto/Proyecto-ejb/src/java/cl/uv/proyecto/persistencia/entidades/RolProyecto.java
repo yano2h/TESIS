@@ -22,7 +22,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "RolProyecto.findByNombreRol", query = "SELECT r FROM RolProyecto r WHERE r.nombreRol = :nombreRol")})
 public class RolProyecto implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_rol")
