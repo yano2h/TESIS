@@ -252,7 +252,7 @@ CREATE  TABLE IF NOT EXISTS `SOLICITUD_CAMBIO` (
   `fecha_cierre` DATETIME NULL ,
   `modulo_afectado` VARCHAR(60) NULL ,
   `rut_evaluador_final` INT NULL ,
-  `descripcion_resolucuion` VARCHAR(255) NULL ,
+  `descripcion_resolucion` VARCHAR(255) NULL ,
   PRIMARY KEY (`id_solicitud_cambio`) ,
   INDEX `fk_SOLICITUD_CAMBIO_PROYECTO1` (`id_proyecto` ASC) ,
   INDEX `fk_SOLICITUD_CAMBIO_FUNCIONARIO_DISICO1` (`rut_solicitante` ASC) ,
