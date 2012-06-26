@@ -31,6 +31,10 @@ public class FuncionarioDisico extends Funcionario {
     @Size(max = 5)
     @Column(name = "anexo")
     private String anexo;
+    @JoinColumn(name = "id_area", referencedColumnName = "id_area")
+    @ManyToOne(optional = false)
+    private Area area; 
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
     private List<ItemConfiguracion> itemConfiguracionList; //lista de items de configuracion de los que es responsable
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
@@ -39,10 +43,6 @@ public class FuncionarioDisico extends Funcionario {
     private List<EstadisticaPersonal> estadisticaPersonalList; 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
     private List<SolicitudRequerimiento> solicitudesRequerimientosAsignadas; //lista de solicitudes que le han sido asignadas
-    @JoinColumn(name = "id_area", referencedColumnName = "id_area")
-    @ManyToOne(optional = false)
-    private Area area; 
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsableTarea")
     private List<TareaScmProyecto> tareaScmProyectoList; //tareas de scm de las que es responsable
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
@@ -51,12 +51,12 @@ public class FuncionarioDisico extends Funcionario {
     private List<FormularioImplementacion> formulariosImplementacionImplementador; // Lista de formularios en los que aparece como implementador
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "verificador")
     private List<FormularioImplementacion> formulariosImplementacionVerificador; // Lista de formularios en los que aparece como verificador
-        @OneToMany(mappedBy = "evaluadorFinalSolicitud")
-    private List<SolicitudCambio> solicitudCambioList;
-        @OneToMany(mappedBy = "evaluadorImpacto")
-    private List<SolicitudCambio> solicitudCambioList1;
-        @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitante")
-    private List<SolicitudCambio> solicitudCambioList2;
+    @OneToMany(mappedBy = "evaluadorFinalSolicitud")
+    private List<SolicitudCambio> solicitudesCambioEvaluadorFinal; // Lista de solicitudes de cambio en las que aparece como evaluador final
+    @OneToMany(mappedBy = "evaluadorImpacto")
+    private List<SolicitudCambio> solicitudesCambioEvaluadorImpacto; // Lista de solicitudes de cambio en las que aparece como evaluador del impacto
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitante")
+    private List<SolicitudCambio> solicitudesCambioEnviadas;  // Lista de solicitudes de cambio que ha enviado
 
     public FuncionarioDisico() {
     }
@@ -154,28 +154,28 @@ public class FuncionarioDisico extends Funcionario {
         this.formulariosImplementacionVerificador = formulariosImplementacionVerificador;
     }
 
-    public List<SolicitudCambio> getSolicitudCambioList() {
-        return solicitudCambioList;
+    public List<SolicitudCambio> getSolicitudesCambioEvaluadorFinal() {
+        return solicitudesCambioEvaluadorFinal;
     }
 
-    public void setSolicitudCambioList(List<SolicitudCambio> solicitudCambioList) {
-        this.solicitudCambioList = solicitudCambioList;
+    public void setSolicitudesCambioEvaluadorFinal(List<SolicitudCambio> solicitudesCambioEvaluadorFinal) {
+        this.solicitudesCambioEvaluadorFinal = solicitudesCambioEvaluadorFinal;
     }
 
-    public List<SolicitudCambio> getSolicitudCambioList1() {
-        return solicitudCambioList1;
+    public List<SolicitudCambio> getSoolicitudesCambioEvaluadorImpacto() {
+        return solicitudesCambioEvaluadorImpacto;
     }
 
-    public void setSolicitudCambioList1(List<SolicitudCambio> solicitudCambioList1) {
-        this.solicitudCambioList1 = solicitudCambioList1;
+    public void setSolicitudesCambioEvaluadorImpacto(List<SolicitudCambio> solicitudesCambioEvaluadorImpacto) {
+        this.solicitudesCambioEvaluadorImpacto = solicitudesCambioEvaluadorImpacto;
     }
 
-    public List<SolicitudCambio> getSolicitudCambioList2() {
-        return solicitudCambioList2;
+    public List<SolicitudCambio> getSolicitudesCambioEnviadas() {
+        return solicitudesCambioEnviadas;
     }
 
-    public void setSolicitudCambioList2(List<SolicitudCambio> solicitudCambioList2) {
-        this.solicitudCambioList2 = solicitudCambioList2;
+    public void setSolicitudesCambioEnviadas(List<SolicitudCambio> solicitudesCambioEnviadas) {
+        this.solicitudesCambioEnviadas = solicitudesCambioEnviadas;
     }
 
     @Override
