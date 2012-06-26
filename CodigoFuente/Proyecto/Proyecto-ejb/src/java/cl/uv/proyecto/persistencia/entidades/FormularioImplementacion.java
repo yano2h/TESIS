@@ -36,9 +36,11 @@ public class FormularioImplementacion implements Serializable {
     @Column(name = "fecha_verificacion")
     @Temporal(TemporalType.DATE)
     private Date fechaVerificacion;
+    
+    @OneToOne(optional=false, fetch=FetchType.EAGER)
     @JoinColumn(name = "id_solicitud_cambio", referencedColumnName = "id_solicitud_cambio")
-    @OneToOne(fetch=FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval=true,optional=false)
     private SolicitudCambio solicitudCambio;
+    
     @JoinColumn(name = "rut_implementador", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private FuncionarioDisico implementador;

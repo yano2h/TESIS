@@ -87,7 +87,7 @@ public class SolicitudCambio implements Serializable {
     @ManyToOne(optional = false)
     private EstadoSolicitudCambio estadoSolicitudCambio;
     
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "solicitudCambio")
+    @OneToOne(fetch= FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "solicitudCambio")
     private FormularioImplementacion formularioImplementacion;
    
     public SolicitudCambio() {
