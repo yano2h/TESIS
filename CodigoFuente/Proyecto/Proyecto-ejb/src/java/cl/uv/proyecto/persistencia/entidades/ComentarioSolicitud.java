@@ -42,12 +42,13 @@ public class ComentarioSolicitud implements Serializable {
     @NotNull
     @Column(name = "visible")
     private boolean visible;
+    
     @JoinColumn(name = "id_solicitud_req", referencedColumnName = "id_solicitud_req")
     @ManyToOne(optional = false)
     private SolicitudRequerimiento solicitudRequerimiento;
     @JoinColumn(name = "rut_autor", referencedColumnName = "rut")
     @ManyToOne(optional = false)
-    private Funcionario funcionario;
+    private Funcionario autor;
 
     public ComentarioSolicitud() {
     }
@@ -103,12 +104,12 @@ public class ComentarioSolicitud implements Serializable {
         this.solicitudRequerimiento = solicitudRequerimiento;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
+    public Funcionario getAutor() {
+        return autor;
     }
 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setAutor(Funcionario autor) {
+        this.autor = autor;
     }
 
     @Override

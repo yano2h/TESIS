@@ -35,6 +35,7 @@ public class Area implements Serializable {
     @Lob
     @Column(name = "descripcion_area")
     private String descripcionArea;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "area")
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "area")

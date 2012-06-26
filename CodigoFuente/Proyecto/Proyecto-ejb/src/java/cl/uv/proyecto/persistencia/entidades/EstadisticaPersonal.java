@@ -30,6 +30,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "EstadisticaPersonal.findByCantidadTareasScmAsociadas", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadTareasScmAsociadas = :cantidadTareasScmAsociadas")})
 public class EstadisticaPersonal implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
@@ -39,6 +40,7 @@ public class EstadisticaPersonal implements Serializable {
     @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "fecha")
+    @Temporal(TemporalType.DATE)
     private String fecha;
     @Basic(optional = false)
     @NotNull

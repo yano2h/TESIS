@@ -63,7 +63,7 @@ public class Funcionario implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
     private List<SolicitudRequerimiento> solicitudesRequerimientosEnviadas;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
+        @OneToMany(cascade = CascadeType.ALL, mappedBy = "autor")
     private List<ComentarioSolicitud> comentarioSolicitudList;
 
     public Funcionario() {
