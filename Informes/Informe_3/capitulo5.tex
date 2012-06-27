@@ -731,9 +731,9 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	de la base de datos, en la cual se describe cada tabla con sus atributos.
 	
 	\begin{table}[H]
-		\begin{tabular}{| m{5cm} | m{4.5cm} | m{3.5cm} | c | m{1cm}  |}
+		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
 		\hline
-		\textbf{Entidad} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Null} & \textbf{Clave}  \\
+		\rowcolor[gray]{0.9}\textbf{Entidad} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Null} & \textbf{Clave}  \\
 		\hline
 		\multirow{7}{*}{FUNCIONARIO} & {rut} & {INT} & {NO} & {PK} \\
 									\cline{2-5}
@@ -801,11 +801,14 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 									\cline{2-5}
 									& {respuesta} & {TEXT} & {SI} & {} \\
 		\hline
+
 		\end{tabular}
 	\end{table}
 	
 	\begin{table}[H]
-		\begin{tabular}{| m{5cm} | m{4.5cm} | m{3.5cm} | c | m{1cm}  |}
+		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
+		\hline
+		\rowcolor[gray]{0.9}\textbf{Entidad} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Null} & \textbf{Clave}  \\
 		\hline
 		\multirow{2}{*}{TIPO\_PRIORIDAD} & {id\_tipo\_prioridad} & {TINYINT} & {NO} & {PK}  \\
 									\cline{2-5}
@@ -896,6 +899,8 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\begin{table}[H]
 		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
 		\hline
+		\rowcolor[gray]{0.9}\textbf{Entidad} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Null} & \textbf{Clave}  \\
+		\hline
 		\multirow{13}{*}{ESTADISTICA\_PERSONAL} & {id} & {BIGINT} & {NO} & {PK}  \\
 									\cline{2-5}
 									& {rut\_funcionario} & {INT} & {NO} & {FK} \\
@@ -948,24 +953,21 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 									& {visible} & {BOOLEAN} & {NO} & {}  \\
 		\hline
 		\multirow{3}{*}{TREA\_SCM} & {id\_tarea\_scm} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
 									   & {nombre\_tarea} & {VARCHAR(45)} & {NO} & {}  \\
 									   \cline{2-5}
 									   & {descripcion\_tarea} & {VARCHAR(255)} & {NO} & {}  \\
 									  \cline{2-5}
 		\hline
 		\multirow{3}{*}{ENTREGABLE} & {id\_entregable} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
 									   & {nombre\_entregable} & {VARCHAR(45)} & {NO} & {}  \\
 									   \cline{2-5}
 									   & {id\_tarea\_scm} & {INT} & {NO} & {FK}  \\
 									  \cline{2-5}
 		\hline
-		\end{tabular}
-	\end{table}
-	
-	\begin{table}[H]
-		\begin{tabular}{| m{5cm} | m{4.5cm} | m{3.5cm} | c | m{1cm}  |}
-		\hline
 		\multirow{6}{*}{TAREA\_SCM\_PROYECTO} & {id\_tarea\_scm\_proyecto} & {INT} & {NO} & {PK}  \\
+									   \cline{2-5}
 									   & {id\_tarea\_scm} & {INT} & {NO} & {FK}  \\
 									   \cline{2-5}
 									   & {id\_proyecto} & {INT} & {NO} & {FK}  \\
@@ -976,12 +978,20 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 									  \cline{2-5}
 									   & {id\_termino} & {DATE} & {NO} & {}  \\
 		\hline
-		\multirow{3}{*}{ESTADO\_SOLICITUD\_CAMBIO} & {id\_estado\_solicitud\_cambio} & {TINYINT} & {NO} & {PK}  \\
+
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[H]
+		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
+		\hline
+		\rowcolor[gray]{0.9}\textbf{Entidad} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Null} & \textbf{Clave}  \\
+		\hline
+		\multirow{2}{*}{ESTADO\_SOLICITUD} & {id\_estado\_solicitud\_cambio} & {TINYINT} & {NO} & {PK}  \\
 									   \cline{2-5}
 									   & {estado\_solicitud\_cambio} & {VARCHAR(45)} & {NO} & {}  \\
 									   \cline{2-5}
-									   & {descripcion} & {VARCHAR(255)} & {SI} & {}  \\
-		\hline
+       	{\_CAMBIO}						   & {descripcion} & {VARCHAR(255)} & {SI} & {}  \\		\hline
 		\multirow{17}{*}{SOLICITUD\_CAMBIO} & {id\_solicitud\_cambio} & {INT} & {NO} & {PK}  \\
 									   \cline{2-5}
 									   & {id\_proyecto} & {INT} & {NO} & {FK}  \\
@@ -1016,15 +1026,15 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 									   \cline{2-5}
 									   & {descripcion\_resolucion} & {VARCHAR(255)} & {SI} & {}  \\
 		\hline
-\multirow{6}{*}{FORMULARIO\_IMPLEMENTACION} & {id\_formulario\_implementación} & {INT} & {NO} & {PK}  \\
+\multirow{2}{*}{} & {id\_formulario\_implementación} & {INT} & {NO} & {PK}  \\
 									 \cline{2-5}
 									 & {observaciones} & {TEXT} & {NO} & {}  \\
 									 \cline{2-5}
-									 & {fecha\_verificacion} & {DATE} & {SI} & {}  \\
+				{FORMULARIO}		 & {fecha\_verificacion} & {DATE} & {SI} & {}  \\
 \cline{2-5}
-									& {rut\_verificador} & {INT} & {NO} & {FK}  \\
+				{\_IMPLEMENTACION}	& {rut\_verificador} & {INT} & {NO} & {FK}  \\
 									\cline{2-5}
-									& {rut\_implementador} & {INT} & {NO} & {FK}  \\
+\multirow{2}{*}{}						& {rut\_implementador} & {INT} & {NO} & {FK}  \\
 									 \cline{2-5}
 									& {id\_solicitud\_cambio} & {INT} & {NO} & {FK}  \\
 									 \cline{2-5}
@@ -1075,7 +1085,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/S_NuevaSolicitud.png}
+			\includegraphics[scale=0.45]{imagenes/CUR/S_NuevaSolicitud.png}
 			\caption{Interfaz Crear Nueva Solicitud}
 			\label{CrearSolicitud}
 		\end{center}
@@ -1083,7 +1093,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/S_Resumen.png}
+			\includegraphics[scale=0.45]{imagenes/CUR/S_Resumen.png}
 			\caption{Interfaz Menú de Inicio}
 			\label{resumen}
 		\end{center}
@@ -1182,7 +1192,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/S_NumConsulta.png}
+			\includegraphics[scale=0.448]{imagenes/CUR/S_NumConsulta.png}
 			\caption{Interfaz Consultar Solicitud}
 			\label{numConsulta}
 		\end{center}
@@ -1190,7 +1200,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/S_DetalleSolicitud.png}
+			\includegraphics[scale=0.448]{imagenes/CUR/S_DetalleSolicitud.png}
 			\caption{Interfaz Detalle Solicitud}
 			\label{detSol}
 		\end{center}
@@ -1198,7 +1208,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/S_SolicitudNoEncontrada.png}
+			\includegraphics[scale=0.62]{imagenes/CUR/S_SolicitudNoEncontrada.png}
 			\caption{Interfaz Solicitud no encontrada}
 			\label{noEncontrada}
 		\end{center}
@@ -1239,7 +1249,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.465]{imagenes/CUR/S_ComentarSolicitud.png}
+			\includegraphics[scale=0.62]{imagenes/CUR/S_ComentarSolicitud.png}
 			\caption{Interfaz de Comentar Solicitud}
 			\label{comSolicitud}
 		\end{center}
@@ -1287,7 +1297,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\end{table}
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_GestionarSolicitud.png}
+			\includegraphics[scale=0.43]{imagenes/CUR/R_GestionarSolicitud.png}
 			\caption{Interfaz de Gestionar Solicitud}
 			\label{gestSolicitud}
 		\end{center}
@@ -1295,7 +1305,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_DetalleSolicitudJA.png}
+			\includegraphics[scale=0.44]{imagenes/CUR/R_DetalleSolicitudJA.png}
 			\caption{Interfaz de Detalle Solicitud del Jefe de Área}
 			\label{detSolJa}
 		\end{center}
@@ -1326,7 +1336,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_AsignarResponsable.png}
+			\includegraphics[scale=0.56]{imagenes/CUR/R_AsignarResponsable.png}
 			\caption{Interfaz Asignar Responsable Solicitud}
 			\label{asigSol}
 		\end{center}
@@ -1359,7 +1369,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_TransferirSolicitud.png}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_TransferirSolicitud.png}
 			\caption{Interfaz Transferir Solicitud}
 			\label{transSol}
 		\end{center}
@@ -1390,7 +1400,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_RechazarSolicitud.png}
+			\includegraphics[scale=0.6]{imagenes/CUR/R_RechazarSolicitud.png}
 			\caption{Interfaz Rechazar Solicitud}
 			\label{rechSol}
 		\end{center}
@@ -1420,7 +1430,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_ConvertirEnProyecto.png}
+			\includegraphics[scale=0.5]{imagenes/CUR/R_ConvertirEnProyecto.png}
 			\caption{Interfaz Convertir Solicitud en Proyecto}
 			\label{convSol}
 		\end{center}
@@ -1451,7 +1461,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.465]{imagenes/CUR/R_RespuestaManual.png}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_RespuestaManual.png}
 			\caption{Interfaz Enviar Respuesta Manual}
 			\label{resManual}
 		\end{center}
@@ -1494,7 +1504,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_RespuestaDirecta.png}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_RespuestaDirecta.png}
 			\caption{Interfaz de Respuesta Directa}
 			\label{resDirecta}
 		\end{center}
@@ -1537,7 +1547,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_BuscarSolicitud.png}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_BuscarSolicitud.png}
 			\caption{Interfaz Buscar Solicitud}
 			\label{buscSol}
 		\end{center}
@@ -1579,7 +1589,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_ResumenPersonal.png}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_ResumenPersonal.png}
 			\caption{Interfaz Ver Resumen Personal}
 			\label{resPersonal}
 		\end{center}
@@ -1622,7 +1632,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_ResumenArea.png}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_ResumenArea.png}
 			\caption{Interfaz Ver Resumen Área}
 			\label{resArea}
 		\end{center}
@@ -1666,7 +1676,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_ResumenDepartamento.png}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_ResumenDepartamento.png}
 			\caption{Interfaz Ver Resumen Departamento}
 			\label{resDepto}
 		\end{center}
@@ -1709,7 +1719,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_ListarSolicitudes.png}
+			\includegraphics[scale=0.6]{imagenes/CUR/R_ListarSolicitudes.png}
 			\caption{Interfaz de Mis Solicitud}
 			\label{misSol}
 		\end{center}
@@ -1717,7 +1727,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_AtenderSolicitud.png}
+			\includegraphics[scale=0.6]{imagenes/CUR/R_AtenderSolicitud.png}
 			\caption{Interfaz Atender Solicitud}
 			\label{atenSol}
 		\end{center}
@@ -1762,7 +1772,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_CerrarSolicitud.png}
+			\includegraphics[scale=0.52]{imagenes/CUR/R_CerrarSolicitud.png}
 			\caption{Interfaz Cerrar Solicitud}
 			\label{cerrarSol}
 		\end{center}
@@ -1791,7 +1801,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/R_RespuestaJA.png}
+			\includegraphics[scale=0.53]{imagenes/CUR/R_RespuestaJA.png}
 			\caption{Interfaz de Respuesta al Jefe de Área}
 			\label{resJa}
 		\end{center}
@@ -1836,7 +1846,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.65]{imagenes/CUR/P_GestionProyectos.png}
+			\includegraphics[scale=0.61]{imagenes/CUR/P_GestionProyectos.png}
 			\caption{Interfaz Gestionar Proyectos}
 			\label{gestPro}
 		\end{center}
@@ -1886,7 +1896,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/P_CrearProyecto.png}
+			\includegraphics[scale=0.6]{imagenes/CUR/P_CrearProyecto.png}
 			\caption{Interfaz Crear Proyecto}
 			\label{crearPro}
 		\end{center}
@@ -1958,7 +1968,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.6]{imagenes/CUR/P_DetalleProyecto.png}
+			\includegraphics[scale=0.39]{imagenes/CUR/P_DetalleProyecto.png}
 			\caption{Interfaz Detalle Proyecto}
 			\label{detPro}
 		\end{center}
@@ -1966,7 +1976,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/P_EliminarProyecto.png}
+			\includegraphics[scale=0.41]{imagenes/CUR/P_EliminarProyecto.png}
 			\caption{Interfaz Eliminar Proyecto}
 			\label{elimPro}
 		\end{center}
@@ -1996,7 +2006,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/P_EditarProyecto.png}
+			\includegraphics[scale=0.5]{imagenes/CUR/P_EditarProyecto.png}
 			\caption{Interfaz Modificar Proyecto}
 			\label{editPro}
 		\end{center}
@@ -2023,7 +2033,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/P_ResumenAvance.png}
+			\includegraphics[scale=0.6]{imagenes/CUR/P_ResumenAvance.png}
 			\caption{Interfaz Resumen Avance Proyecto}
 			\label{resAvance}
 		\end{center}
@@ -2068,7 +2078,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/SCM_TareasSCM.png}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_TareasSCM.png}
 			\caption{Interfaz Definir Tareas SCM}
 			\label{defTareasSCM}
 		\end{center}
@@ -2076,7 +2086,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.65]{imagenes/CUR/SCM_DefinirTareasSCM.png}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_DefinirTareasSCM.png}
 			\caption{Interfaz Asignar Tareas SCM}
 			\label{asigTareasSCM}
 		\end{center}
@@ -2118,7 +2128,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/P_GestionarTareas.png}
+			\includegraphics[scale=0.6]{imagenes/CUR/P_GestionarTareas.png}
 			\caption{Interfaz Gestionar Tareas Proyecto}
 			\label{gestTareasPro}
 		\end{center}
@@ -2148,7 +2158,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/P_NuevaTarea.png}
+			\includegraphics[scale=0.55]{imagenes/CUR/P_NuevaTarea.png}
 			\caption{Interfaz Crear Tarea}
 			\label{crearTarea}
 		\end{center}
@@ -2178,7 +2188,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/P_EliminarTarea.png}
+			\includegraphics[scale=0.55]{imagenes/CUR/P_EliminarTarea.png}
 			\caption{Interfaz Eliminar Tarea}
 			\label{delTarea}
 		\end{center}
@@ -2212,7 +2222,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/P_ActualizarAvance.png}
+			\includegraphics[scale=0.52]{imagenes/CUR/P_ActualizarAvance.png}
 			\caption{Interfaz Actualizar estado de avance Tarea}
 			\label{upAvance}
 		\end{center}
@@ -2220,7 +2230,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/P_ActualizarAvanceError.png}
+			\includegraphics[scale=0.52]{imagenes/CUR/P_ActualizarAvanceError.png}
 			\caption{Interfaz Error al Actualizar estado de avance Tarea}
 			\label{errorAvance}
 		\end{center}
@@ -2264,7 +2274,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/SCM_GestionCambios.png}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_GestionCambios.png}
 			\caption{Interfaz de Gestión de Cambios}
 			\label{gestCamb}
 		\end{center}
@@ -2297,7 +2307,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/SCM_IdentificacionConfiguracion.png}
+			\includegraphics[scale=0.44]{imagenes/CUR/SCM_IdentificacionConfiguracion.png}
 			\caption{Interfaz de Identificación de la Configuración}
 			\label{identIC}
 		\end{center}
@@ -2305,7 +2315,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/SCM_AgregarIC.png}
+			\includegraphics[scale=0.44]{imagenes/CUR/SCM_AgregarIC.png}
 			\caption{Interfaz para agregar Item de Configuración}
 			\label{addIC}
 		\end{center}
@@ -2335,7 +2345,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/SCM_CrearSolicitudDeCambio.png}
+			\includegraphics[scale=0.44]{imagenes/CUR/SCM_CrearSolicitudDeCambio.png}
 			\caption{Interfaz Crear Solicitud de Cambio}
 			\label{newSol}
 		\end{center}
@@ -2365,7 +2375,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/SCM_MenuAnalizarSolicitudes.png}
+			\includegraphics[scale=0.42]{imagenes/CUR/SCM_MenuAnalizarSolicitudes.png}
 			\caption{Interfaz Analizar Impacto del Cambio}
 			\label{anImpacto}
 		\end{center}
@@ -2373,7 +2383,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/SCM_AnalisisDeImpacto.png}
+			\includegraphics[scale=0.4]{imagenes/CUR/SCM_AnalisisDeImpacto.png}
 			\caption{Interfaz de Ingreso del Análisis del Impacto del Cambio}
 			\label{ingresoImpacto}
 		\end{center}
@@ -2407,7 +2417,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/SCM_MenuEvaluarSolicitud.png}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_MenuEvaluarSolicitud.png}
 			\caption{Interfaz para Aprobar/Rechazar Solicitud}
 			\label{evSol}
 		\end{center}
@@ -2415,7 +2425,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/SCM_EvaluarSolicitud.png}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_EvaluarSolicitud.png}
 			\caption{Interfaz de ingreso de la Aprobación/Rechazo de la Solicitud}
 			\label{ingresoEvSol}
 		\end{center}
@@ -2448,7 +2458,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/SCM_MenuFormImplement.png}
+			\includegraphics[scale=0.37]{imagenes/CUR/SCM_MenuFormImplement.png}
 			\caption{Interfaz de Implementación del Cambio}
 			\label{impCamb}
 		\end{center}
@@ -2456,7 +2466,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/CUR/SCM_FormImplement.png}
+			\includegraphics[scale=0.37]{imagenes/CUR/SCM_FormImplement.png}
 			\caption{Interfaz del Formulario de Implementación del Cambio}
 			\label{formImpCamb}
 		\end{center}
@@ -2635,6 +2645,22 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 		\label{cobertura}
 	\end{table}
 
+	\subsection{Pruebas de Rendimiento}
+	Una vez el sistema se ha integrado completamente, es posible probar las propiedades
+	emergentes del sistema, en este caso el rendimiento es nuestra principal preocupación
+	dado que es la única que el cliente menciono en los requerimientos funcionales. 
+
+	El objetivo de estas pruebas es asegurar que el sistema podrá soportar la carga esperada.
+	Para esto se diseñaran una serie de pruebas que ejerciten las tareas mas comunes en el 
+	sistema, estas son el envío de solicitudes de cambio 
+
+	En conjunto con las pruebas de Aceptación se realizara un conjunto de pruebas de
+	de rendimiento, cuyo objetivo principal es demostrar que la aplicación satisface los
+	requisitos de rendimiento impuestos por el cliente y a la vez determinar cual es la 
+	capacidad máxima del sistema, antes de ver degradado el rendimiento.
+
+	Para estas pruebas se utilizaran las herramientas JMeter y Visual VM.
+
 	\subsection{Pruebas de Aceptación}
 	Las pruebas de aceptación tienen como propósito demostrar al cliente el 
 	cumplimiento total o parcial de los requisitos del software\cite{reqPA}. Las características 
@@ -2720,7 +2746,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\end{itemize}
 	
 	Ademas una vez ejecutadas las pruebas los resultados de estas deben ser documentados 
-	completando la Tabla \ref{} que muestra cuyos campos son descritos a continuación.
+	completando la Tabla \ref{cobertura} que muestra cuyos campos son descritos a continuación.
 
 	\begin{itemize}
 		\item \textbf{Id-Prueba:} Identificador de la prueba ejecutada.
@@ -2757,6 +2783,8 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\begin{center}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}} m{3cm} | m{3cm}|m{3cm}|m{5cm}|}
 		\hline
+		\multicolumn{4}{|c|}{\cellcolor[gray]{0.9}\textbf{Caso de Prueba}}\\
+		\hline
 		{\textbf{Id-Prueba}} & {} & {\cellcolor[gray]{0.8}\textbf{Fecha Ejecución}} & {}\\
 		\hline
 		{\textbf{Completación}} & \multicolumn{3}{l|}{}\\
@@ -2774,14 +2802,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 		\caption{Formato del resultado de una Prueba de Aceptación}
 		\label{cobertura}
 	\end{table}
-	
-	\subsection{Pruebas de Rendimiento}
-	En conjunto con las pruebas de Aceptación se realizara un conjunto de pruebas de
-	de rendimiento, cuyo objetivo principal es demostrar que la aplicación satisface los
-	requisitos de rendimiento impuestos por el cliente y a la vez determinar cual es la 
-	capacidad máxima del sistema, antes de ver degradado el rendimiento.
 
-	Para estas pruebas se utilizaran las herramientas JMeter y Visual VM.
 	
 	\subsection{Pruebas Beta}
 	Por ultimo una vez que se hayan aprobado todas las pruebas diseñadas
