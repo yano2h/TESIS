@@ -215,7 +215,8 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[scale=0.35, angle=90]{imagenes/DiagramaDeClases.png}
-			\caption{Interfaz de Clases}
+			\caption{Diagrama de Clases}
+			\label{dgClases}
 		\end{center}
 	\end{figure}
 	
@@ -714,11 +715,60 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 	\end{enumerate}
 %	\subsection{Patrones de Diseño}
-	
+\newpage
 \section{Diseño de Datos}
-	Dado que los datos seran almacenados dentro de una base de datos relacional,
-	se presenta en esta sección el diagrama de entidad relación que se implementara.
+	Dado que los datos serán almacenados dentro de una base de datos relacional,
+	en esta sección se presenta el diagrama de entidad relación que se implementara y
+	un diccionario de datos de este.
+	
 	\subsection{Modelo Entidad Relación}
+	En esta sección se presenta el modelo de entidad-relación que se utilizara para el 
+	sistema, el cual muestra en detalle las cada tabla, junto con las columnas que estas 
+	poseen y el tipo de dato de las mismas. \\
+	
+	Cada una de estas estas tablas se encuentra mepeada ha una clase java por el
+	framework de persistencia (JPA e Hibernate), por lo que no se entrara en detalle 
+	acerca del significado de cada campo, ya que este se subentiende es el mismo que
+	el del atributo de la clase que le corresponde.\\
+	
+	El modelo cuenta de 23 tablas, todas relacionadas. En la Sección \ref{dicDatos} se 
+	muestra en detalle los tipos de datos y cuales de los campos son claves primarias 
+	o foráneas. A continuación una breve explicación sobre el modelo y su relación con 
+	las clases.\\
+	
+	Para representar la relación de herencia que existe en el diagrama de clases 
+	Figura \ref{dgClases} entre la clase Funcionario y la clase FuncionarioDisico, se utilizo 
+	una relación fuerte uno a uno donde entre las tablas FUNCIONARIO y  FUNCIONARIO\_DISICO, 
+	donde la los atributos de la clase padre quedan en la tabla FUNCIONARIO y la clase 
+	FuncionarioDisico dado que hereda los atributos de la clase Funcionario, almacena sus atributos 
+	propios en la tabla de FUNCIONARIO\_DISICO y los heredados en la tabla FUNCIONARIO.\\
+	
+	Dado que existe una serie de tareas de SCM por defecto, definidas por la metodología de SCM de 
+	disico \cite{paloma}, se utilizo una tabla tabla llamada TAREA\_SCM la cual almacena dichas tareas
+	y aparte se creo una tabla llamada TAREAS\_SCM\_PROYECTO la cual establece una triple relación 
+	entre las tablas FUNCIONARIO\_DISICO, TAREA\_SCM y PROYECTO, estableciendo así las tareas 
+	de SCM de cada proyecto y el responsable de esta.\\
+	
+	Para registrar los funcionarios que participan en cada proyecto, se creo la tabla PARTICIPANTE\_PROYECTO
+	la cual relaciona tres tablas FUNCIONARIO\_DISICO, PROYECTO y ROL\_PROYECTO, definiendo de 
+	esta manera que funcionario participa en que proyecto y con que rol, dado que la clave primaria solo 
+	se compone del id del proyecto y del rut del funcionario, un funcionario puede participar solo con un 
+	rol en el proyecto.\\
+	
+	Por ultimo existe una relación uno a uno entre las tablas SOLICITUD\_CAMBIO y FORMULARIO\_IMPLEMENTACION
+	donde se relaciona cual es el formulario de implementación completado para cada solicitud de 
+	cambio aprobada, por ende se estableció una relación uno a uno entre ambas dado que una solicitud de 
+	cambio no debiese tener asociada mas de un formulario.\\
+	
+	El resto de las relaciones del diagrama no requieren mucha explicación dado que no son mas que
+	simples relaciones uno a muchos principalmente utilizadas para registrar campos cuyos valores
+	están restringidos a un conjunto pequeño de valores como son tipos, estados posibles, roles, etc.\\
+	
+	Las claves de acceso y permisos de los usuarios no son almacenadas en la base de datos, 
+	estos son gestionadas almacenadas haciendo uso del protocolo LDAP, que es el que se utiliza
+	para todos los sistemas de la Universidad de Valparaíso, y que es lo que se utilizara en 
+	para este sistema.
+	
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[scale=0.3]{imagenes/ModeloBD.png}
@@ -727,8 +777,11 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\end{figure}
 	
 	\subsection{Diccionario de Datos}
-	Para dar un mayor nivel de detalle a continuación se presenta el diccionario de datos
-	de la base de datos, en la cual se describe cada tabla con sus atributos.
+	\label{dicDatos}
+	Para dar un mayor nivel de detalle a continuación se presenta el diccionario de datos, 
+	en la cual se describe cada tabla con sus atributos, el tipo de estos
+	y se indica si aceptan valores nulo y si tienen algún tipo de restricción como clave primaria
+	o foránea.
 	
 	\begin{table}[H]
 		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
@@ -804,7 +857,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 
 		\end{tabular}
 	\end{table}
-	
+
 	\begin{table}[H]
 		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
 		\hline
@@ -2648,18 +2701,91 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\subsection{Pruebas de Rendimiento}
 	Una vez el sistema se ha integrado completamente, es posible probar las propiedades
 	emergentes del sistema, en este caso el rendimiento es nuestra principal preocupación
-	dado que es la única que el cliente menciono en los requerimientos funcionales. 
+	dado que es la única propiedad que el cliente menciono en los requerimientos no funcionales. 
+	
+	Para el desarrollo de estas pruebas se utilizaran 2 herramientas:
+	\begin{itemize}
+		\item \textbf{JMeter:} Es una herramienta Open Source diseñada 100\% en Java, que puede 
+		ser utilizada como una herramienta de prueba de carga para analizar y medir el desempeño
+		de una variedad de servicios, con énfasis en aplicaciones web \cite{jmeter}.
+		\item \textbf{VisualVM:} Es una herramienta que proporciona una interfaz visual para ver 
+		información detallada sobre las aplicaciones Java que están ejecutandoce en una Maquina 
+		Virtual de Java (JVM), normalmente se distribuye junto con el Java Development Kit (JDK) 
+		\cite{visualvm}.
+	\end{itemize}
 
 	El objetivo de estas pruebas es asegurar que el sistema podrá soportar la carga esperada.
-	Para esto se diseñaran una serie de pruebas que ejerciten las tareas mas comunes en el 
-	sistema, estas son el envío de solicitudes de cambio 
-
-	En conjunto con las pruebas de Aceptación se realizara un conjunto de pruebas de
-	de rendimiento, cuyo objetivo principal es demostrar que la aplicación satisface los
-	requisitos de rendimiento impuestos por el cliente y a la vez determinar cual es la 
-	capacidad máxima del sistema, antes de ver degradado el rendimiento.
-
-	Para estas pruebas se utilizaran las herramientas JMeter y Visual VM.
+	Para esto se diseñaran y ejecutaran un conjunto reducido de pruebas que ejerciten las tareas 
+	que debiesen ser accedidas con mayor frecuencia por los usuarios, el procedimiento para estas
+	pruebas sera el siguiente.
+	
+	\begin{enumerate}
+		\item Se seleccionara un escenario de ejecución frecuente del sistema.
+		\item Se ingresara al sistema y se grabara el escenario con JMeter, creando así un escenario 
+		de prueba.
+		\item Se ejecutara el escenario de prueba simulando 1 solo usuario, para tener una medición 
+		base y corroborar que la prueba funciona correctamente.
+		\item Se ejecutara el escenario de prueba simulando 100 usuarios.
+		\item Se continuara ejecutando el escenario de prueba incrementando la cantidad de usuarios
+		en 100, deteniéndose cuando el rendimiento del sistema se vea degradado.
+	\end{enumerate}
+	
+	\textbf{Nota:} Antes de ejecutar un escenario de prueba, se debe reiniciar el servidor para 
+	liberar todos los recursos que pueden haber quedado reservados por ejecución de la prueba 
+	anterior, de esta manera no afectar las mediciones de la siguiente prueba.
+	
+ 	Se debe documentar tanto los escenarios de prueba en la Tabla \ref{escenarioPR} como las mediciones obtenidas en sus 
+	ejecuciones en la Tabla \ref{medicionPR}.
+	
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{| m{1cm}| m{5cm}|m{7cm}|}
+		\hline
+		\rowcolor[gray]{0.8}\textbf{Id-Prueba} & \textbf{Nombre archivo (.jmx)} & \textbf{Descripción del Escenario} \\
+		\hline
+		{} & {} & {} \\
+		\hline
+		{} & {} & {} \\
+		\hline
+		{} & {} & {} \\
+		\hline
+		{} & {} & {} \\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Documentación de los escenarios de pruebas de rendimiento}
+		\label{escenarioPR}
+	\end{table}
+		
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|m{3cm}| m{3cm}|m{4cm}|m{2.5cm}|}
+		\hline
+			\multicolumn{4}{|c|}{\cellcolor[gray]{0.8}\textbf{Configuración de la Prueba}}\\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Id-Prueba} & {} & \cellcolor[gray]{0.9}\textbf{Fecha Ejecución} & {}\\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Hilos} & {} & \cellcolor[gray]{0.9}\textbf{Ciclos} & {} \\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Rand Up} & {} & \cellcolor[gray]{0.9}\textbf{Retardo} & {} \\
+		\hline
+			\multicolumn{4}{|c|}{\cellcolor[gray]{0.8} \textbf{Resultados}}\\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Duración} & {} & \cellcolor[gray]{0.9}\textbf{Rendimiento} & {} \\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Errores} & {} & \cellcolor[gray]{0.9}\textbf{Tasa de Transferencia} & {} \\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Documentación de las mediciones de las pruebas de rendimiento}
+		\label{medicionPR}
+	\end{table}
+	
+	Ademas adjunto a la Tabla \ref{medicionPR} deben ir los graficos del uso de CPU y el uso de RAM, obtenidos con VisualVM.
+	
+	Con todo esto ademas de demostrar que la aplicación satisface los
+	requisitos de rendimiento impuestos por el cliente. Se debe determinar 
+	cual es la capacidad máxima del sistema, antes de ver degradado el rendimiento.
 
 	\subsection{Pruebas de Aceptación}
 	Las pruebas de aceptación tienen como propósito demostrar al cliente el 
@@ -2781,17 +2907,17 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{table}[H]
 	\begin{center}
-	\begin{tabular}{|>{\columncolor[gray]{0.8}} m{3cm} | m{3cm}|m{3cm}|m{5cm}|}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{3cm} | m{3cm}|m{3cm}|m{5cm}|}
 		\hline
-		\multicolumn{4}{|c|}{\cellcolor[gray]{0.9}\textbf{Caso de Prueba}}\\
+		\multicolumn{4}{|c|}{\cellcolor[gray]{0.8}\textbf{Caso de Prueba}}\\
 		\hline
-		{\textbf{Id-Prueba}} & {} & {\cellcolor[gray]{0.8}\textbf{Fecha Ejecución}} & {}\\
+		{\textbf{Id-Prueba}} & {} & {\cellcolor[gray]{0.9}\textbf{Fecha Ejecución}} & {}\\
 		\hline
 		{\textbf{Completación}} & \multicolumn{3}{l|}{}\\
 		\hline
 		{\textbf{Observaciones del Cliente}} & \multicolumn{3}{l|}{}\\
 		\hline
-		\multicolumn{4}{|c|}{\cellcolor[gray]{0.9}\textbf{Error}}\\
+		\multicolumn{4}{|c|}{\cellcolor[gray]{0.8}\textbf{Error}}\\
 		\hline
 		{\textbf{Descripción Error}} & \multicolumn{3}{l|}{}\\
 		\hline
