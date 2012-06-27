@@ -203,7 +203,69 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	tiempo o generado por otro usuario, de esta manera mantener a los usuarios 
 	comunicados y con la información actualizada.
 
+\section{Diseño de Interfaz}
+	En esta sección se mencionan los criterios básicos que serán considerados al
+	momento de implementar la interfaz con la que interactúaran los usuarios finales.
+	Para esto se definen:
+	\begin{itemize}
+		\item Estilo de Interacción.
+		\item Pautas de Estilo.
+		\item Esquemas de Navegación.
+	\end{itemize}
 	
+	\subsection{Estilo de Interacción}
+	Los estilos de interacción determinan la forma en que el usuario se comunicara con
+	el sistema, antiguamente la única forma era a través de una interfaz de linea de comandos,
+	por lo que los usuarios quedaban restringidos solo expertos, pero actualmente existen
+	varios enfoques los cuales son mas fáciles de utilizar, estos fueron clasificados en cinco estilos
+	principales de interacción en 1998 por Shniederman \cite{sommerville}. \\
+	
+	Para el desarrollo de este sistema se utilizara el estilo de rellenado de formularios,
+	donde el usuario puede rellenar los campos de un formulario. Algunos campos pueden
+	llevar menús asociados y el formulario puede tener botones de acción que, cuando
+	cuando se presionan, hacen que se de inicio a alguna acción. Este es el enfoque mas
+	se adecua a este sistema, ya que las principales operaciones del sistema como envio de solicitudes,
+	asignación y respuesta de las mismas, etc. se basan en el ingreso de información y la presentación 
+	de la misma en pantalla, y este estilo proporciona una forma sencilla de introducir datos. 
+	
+	\subsection{Pautas de Estilo}
+	Dado que el sistema a desarrollar, es un sistema tanto para DISICO, como para diferentes 
+	funcionarios de la Universidad de Valparaíso, este debe mantener la uniformidad con el resto
+	de los sistema de la universidad, tanto en el uso de la marca, símbolos, colores institucionales, 
+	tipografías, etc. Cumpliendo así con la normativa existente, definida en el Decreto Exento 
+	N° 03301 \cite{decreto03301}, el cual indica que todas las reparticiones de la universidad 
+	deben dar cumplimiento a lo dispuesto por el \textit{"Manual de Normas Gráficas de la Universidad de Valparaíso"}
+	\cite{normasGraficas}. En resumen de este documento y de los portales de la Universidad
+	se extrae lo siguiente.
+
+	\begin{itemize}
+		\item \textbf{Tipografía:} La tipografia recomendada en el Manual para la aplicaciones institucionales 
+		es "Swiss 721 Condensed BT", sin embargo por motivos de compatibilidad el tipo de fuente utilizado
+		normalmente por los sistemas de la universidad es "Arial, Helvetica, sans-serif". Y es este el que se
+		utilizara en la interfaz del diseño del sistema.
+		
+		\item \textbf{Marca Institucional:}
+		\item \textbf{Colores:} Se establece que el uso de los colores institucionales es obligatorio para toda 
+		aplicación con la excepción de limitaciones técnicas. Estos básicamente son dos:
+			\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=0.5]{imagenes/coloresInstitucionales.png}
+				%\caption{Interfaz de Descomposición Modular del Sistema}
+			\end{center}
+			\end{figure}	
+		Aparte de estos dos colores, comunmente los portales de la universidad hacen uso de los siguientes
+		colores.
+		\begin{itemize}
+			\item Blanco (\#FFFFFF): Para el fondo, para texto sobre fondos oscuros, para enlaces con el mouse sobre ellos
+			en fondos oscuros.
+			\item Café (\#695002): Para enlaces sobre fondos claros.
+			\item Gris (\#DDDDDD): Para enlaces sobre fondos oscuro.
+		\end{itemize}
+		
+		\item \textbf{Tamaños:}
+	\end{itemize}
+	
+	\subsection{Esquemas de Navegación}
 	
 \section{Diseño Lógico}
 	Como se menciono anteriormente, se utilizara un paradigma Orientado a Objetos por
