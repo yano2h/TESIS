@@ -217,55 +217,118 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	Los estilos de interacción determinan la forma en que el usuario se comunicara con
 	el sistema, antiguamente la única forma era a través de una interfaz de linea de comandos,
 	por lo que los usuarios quedaban restringidos solo expertos, pero actualmente existen
-	varios enfoques los cuales son mas fáciles de utilizar, estos fueron clasificados en cinco estilos
-	principales de interacción en 1998 por Shniederman \cite{sommerville}. \\
+	varios enfoques los cuales son mas fáciles de utilizar, estos fueron clasificados en cinco 
+	estilos principales de interacción en 1998 por Shniederman \cite{sommerville}. \\
 	
 	Para el desarrollo de este sistema se utilizara el estilo de rellenado de formularios,
 	donde el usuario puede rellenar los campos de un formulario. Algunos campos pueden
 	llevar menús asociados y el formulario puede tener botones de acción que, cuando
 	cuando se presionan, hacen que se de inicio a alguna acción. Este es el enfoque mas
-	se adecua a este sistema, ya que las principales operaciones del sistema como envio de solicitudes,
-	asignación y respuesta de las mismas, etc. se basan en el ingreso de información y la presentación 
-	de la misma en pantalla, y este estilo proporciona una forma sencilla de introducir datos. 
+	se adecua a este sistema, ya que las principales operaciones del sistema como envio de 
+	solicitudes, asignación y respuesta de las mismas, etc. se basan en el ingreso de información 
+	y la presentación de la misma en pantalla, y este estilo proporciona una forma sencilla de 
+	introducir datos. 
 	
 	\subsection{Pautas de Estilo}
 	Dado que el sistema a desarrollar, es un sistema tanto para DISICO, como para diferentes 
 	funcionarios de la Universidad de Valparaíso, este debe mantener la uniformidad con el resto
-	de los sistema de la universidad, tanto en el uso de la marca, símbolos, colores institucionales, 
-	tipografías, etc. Cumpliendo así con la normativa existente, definida en el Decreto Exento 
-	N° 03301 \cite{decreto03301}, el cual indica que todas las reparticiones de la universidad 
-	deben dar cumplimiento a lo dispuesto por el \textit{"Manual de Normas Gráficas de la Universidad de Valparaíso"}
-	\cite{normasGraficas}. En resumen de este documento y de los portales de la Universidad
-	se extrae lo siguiente.
+	de los sistema de la universidad, tanto en el uso de la marca, símbolos, colores 
+	institucionales, tipografías, etc. Cumpliendo así con la normativa existente, definida en el 
+	Decreto Exento N° 03301 \cite{decreto03301}, el cual indica que todas las reparticiones de la 
+	universidad deben dar cumplimiento a lo dispuesto por el \textit{"Manual de Normas Gráficas 
+	de la Universidad de Valparaíso"} \cite{normasGraficas}. En resumen de este documento y de 
+	los portales de la Universidad se extrae lo siguiente.
 
 	\begin{itemize}
-		\item \textbf{Tipografía:} La tipografia recomendada en el Manual para la aplicaciones institucionales 
-		es "Swiss 721 Condensed BT", sin embargo por motivos de compatibilidad el tipo de fuente utilizado
-		normalmente por los sistemas de la universidad es "Arial, Helvetica, sans-serif". Y es este el que se
-		utilizara en la interfaz del diseño del sistema.
+		\item \textbf{Tipografía:} La tipografia recomendada en el Manual para la aplicaciones 
+		institucionales es "Swiss 721 Condensed BT", sin embargo por motivos de compatibilidad 
+		el tipo de fuente utilizado normalmente por los sistemas de la universidad es "Arial, 
+		Helvetica, sans-serif". Y es este el que se utilizara en la interfaz del diseño del sistema.
 		
-		\item \textbf{Marca Institucional:}
-		\item \textbf{Colores:} Se establece que el uso de los colores institucionales es obligatorio para toda 
-		aplicación con la excepción de limitaciones técnicas. Estos básicamente son dos:
+		\item \textbf{Marca Institucional:} Se recomienda utilizar el logo institucional 
+		especialmente, preparado para paginas Web (en formato jpg, png o gif). Este debe
+		estar ubicada en la esquina superior izquierda.
+			\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=0.5]{imagenes/uv_logo_baja_rgba.png}
+			\end{center}
+			\end{figure}	
+		
+		\item \textbf{Colores:} Se establece que el uso de los colores institucionales es 
+		obligatorio para toda aplicación con la excepción de limitaciones técnicas. Estos 
+		básicamente son dos:
 			\begin{figure}[H]
 			\begin{center}
 				\includegraphics[scale=0.5]{imagenes/coloresInstitucionales.png}
-				%\caption{Interfaz de Descomposición Modular del Sistema}
 			\end{center}
 			\end{figure}	
-		Aparte de estos dos colores, comunmente los portales de la universidad hacen uso de los siguientes
-		colores.
+		Aparte de estos dos colores, comunmente los portales de la universidad hacen uso de 
+		los siguientes colores.
+
 		\begin{itemize}
-			\item Blanco (\#FFFFFF): Para el fondo, para texto sobre fondos oscuros, para enlaces con el mouse sobre ellos
-			en fondos oscuros.
-			\item Café (\#695002): Para enlaces sobre fondos claros.
-			\item Gris (\#DDDDDD): Para enlaces sobre fondos oscuro.
+			\item \textbf{Blanco [\#FFFFFF]:} Para el fondo, para texto sobre fondos oscuros, 
+			para enlaces con el mouse sobre ellos en fondos oscuros.
+			\item \textbf{Gris [\#DDDDDD]:} Para enlaces sobre fondos oscuro.
+			\item \textbf{Café [\#695002]:} Para enlaces sobre fondos claros.
 		\end{itemize}
 		
-		\item \textbf{Tamaños:}
+		\item \textbf{Tamaños:} Los tamaños de las fuentes no están definidos por el Manual de 
+		Normas Gráficas, sin embargo en los portales de se utilizan los siguientes tamaños.
+
+		\begin{itemize}
+			\item \textbf{Títulos:} 16px
+			\item \textbf{Texto en general:} 12px.
+		\end{itemize}
 	\end{itemize}
 	
+	Estas son las pautas mínimas que se deben seguir para mantener un estilo uniforme
+	con el resto de los portales institucionales. 
+	
+
 	\subsection{Esquemas de Navegación}
+	A continuación se presentan los esquemas de navegación, los cuales muestran
+	los posibles flujos de navegación que pueden realizar los usuarios, acorde a su perfil
+	de usuario. Existen 5 perfiles, Administrador, Jefe de Departamento (Figura \ref{mnJd}),
+	 Jefe de Área (Figura \ref{mnJa}), Funcionario Disico (Figura \ref{mnFunc}), y solicitante
+	(Figura \ref{mnSol}).  El esquema de navegación para el perfil de administrador, no se
+	diseño ya que no es mas que la combinación de todos los esquemas de navegación.\\
+
+	Ademas es de esperarse que existan usuarios con mas de uno de los perfiles
+	de usuarios, para estos usuarios se sigue el principio de que su esquema de navegación
+	es la combinación de los esquemas de navegación de sus perfiles.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.48]{imagenes/MN/MN_JA.png}
+			\caption{Esquema de Navegación Perfil Jefe de Área}
+			\label{mnJa}
+		\end{center}
+	\end{figure}	
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.52]{imagenes/MN/MN_Solicitante.png}
+			\caption{Esquema de Navegación Perfil Solicitante}
+			\label{mnSol}
+		\end{center}
+	\end{figure}	
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.48]{imagenes/MN/MN_Funcionario.png}
+			\caption{Esquema de Navegación Perfil Funcionario Disico}
+			\label{mnFunc}
+		\end{center}
+	\end{figure}	
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.52]{imagenes/MN/MN_JD.png}
+			\caption{Esquema de Navegación Perfil Jefe Departamento}
+			\label{mnJd}
+		\end{center}
+	\end{figure}	
+
 	
 \section{Diseño Lógico}
 	Como se menciono anteriormente, se utilizara un paradigma Orientado a Objetos por
@@ -2763,7 +2826,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\subsection{Pruebas de Rendimiento}
 	Una vez el sistema se ha integrado completamente, es posible probar las propiedades
 	emergentes del sistema, en este caso el rendimiento es nuestra principal preocupación
-	dado que es la única propiedad que el cliente menciono en los requerimientos no funcionales. 
+	dado que es la única propiedad que el cliente menciono en los requerimientos no funcionales. \\
 	
 	Para el desarrollo de estas pruebas se utilizaran 2 herramientas:
 	\begin{itemize}
@@ -2794,7 +2857,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\textbf{Nota:} Antes de ejecutar un escenario de prueba, se debe reiniciar el servidor para 
 	liberar todos los recursos que pueden haber quedado reservados por ejecución de la prueba 
-	anterior, de esta manera no afectar las mediciones de la siguiente prueba.
+	anterior, de esta manera no afectar las mediciones de la siguiente prueba.\\
 	
  	Se debe documentar tanto los escenarios de prueba en la Tabla \ref{escenarioPR} como las mediciones obtenidas en sus 
 	ejecuciones en la Tabla \ref{medicionPR}.
@@ -2843,7 +2906,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 		\label{medicionPR}
 	\end{table}
 	
-	Ademas adjunto a la Tabla \ref{medicionPR} deben ir los graficos del uso de CPU y el uso de RAM, obtenidos con VisualVM.
+	Ademas adjunto a la Tabla \ref{medicionPR} deben ir los graficos del uso de CPU y el uso de RAM, obtenidos con VisualVM.\\
 	
 	Con todo esto ademas de demostrar que la aplicación satisface los
 	requisitos de rendimiento impuestos por el cliente. Se debe determinar 
@@ -2880,11 +2943,15 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	Basándose en estas pruebas es que el cliente decidirá finalmente si acepta o rechaza el 
 	sistema, el criterio de aprobación de estas se alcanza cuando el software funciona de tal
 	manera que satisface las expectativas razonables del cliente, las cuales están definidas por
-	la Especificación de Requerimientos de software \cite{sommerville}.
+	la Especificación de Requerimientos de software \cite{sommerville}.\\
 	
-	Para esto se diseñaron una seria de casos de prueba basados en requerimientos con los
+	Para esto se diseñaron una seria de casos de prueba basados en los casos de uso con los
 	cuales se intenta demostrar que el sistema ha implementado los requerimientos en forma 
-	adecuada. El formato con el que se especifican las pruebas es el que se muestra en la Tabla
+	adecuada. Las pruebas consistirán en ejercitar cada caso de uso, probando cada uno de estos
+	para un conjunto de valores que permitan seguir el flujo normal y luego para otro conjunto
+	que permitan seguir el flujo alternativo del caso de uso.\\
+
+	El formato con el que se especifican las pruebas es el que se muestra en la Tabla
 	\ref{fpa}. 
 	
 	\begin{table}[H]
@@ -2995,16 +3062,16 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\subsection{Pruebas Beta}
 	Por ultimo una vez que se hayan aprobado todas las pruebas diseñadas
 	el sistema pasara a las pruebas betas, donde el objetivo es estar preparado
-	para todos los tipos de usuarios. 
+	para todos los tipos de usuarios. \\
 	
 	Estas pruebas se realizan en un ambiente de producción real, y son ejecutadas 
 	por los usuarios reales del sistema sin la supervición del desarrollador. En este 
 	caso no existen casos de pruebas, por lo que los mismos usuarios seran los encargados
 	de documentar los problemas encontrados y comunicarlos de manera regular al 
-	desarrollador \cite{sommerville}. 
+	desarrollador \cite{sommerville}. \\
 
 	Como resultado de los problemas informados durante las pruebas beta el desarrollador 
-	corrige los problemas y prepara el sistema para su liberación final.
+	corrige los problemas y prepara el sistema para su liberación final.\\
 
 	Para la ejecución de estas pruebas se liberara la aplicación para una conjunto reducido de 
 	usuarios reales, a los cuales se les crearan las cuentas de usuarios reales con los permisos
