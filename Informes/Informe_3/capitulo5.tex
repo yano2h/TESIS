@@ -498,7 +498,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 			\item \textbf{idTipoSolicitud:} Entero con el identificador del tipo de solicitud.
 			\item \textbf{nombreTipoSolicitud:} Cadena de con el nombre del tipo de solicitud.
 		\end{itemize}
-
+\pagebreak
 		\item \textbf{Clase EstadoSolicitudRequerimiento:} Clase utilizada para representar los estados
 		que puede tener una solicitud de requerimiento.\\\\
 		\textbf{Atributos de la Clase:}
@@ -896,8 +896,8 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.3]{imagenes/ModeloBD.png}
-			\caption{Modelo Fisico de la Base de Datos}
+			\includegraphics[scale=0.37]{imagenes/ModeloBD.png}
+			\caption{Modelo Físico de la Base de Datos}
 		\end{center}
 	\end{figure}
 	
@@ -2686,7 +2686,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	
 	Ademas cada test deberá ser \textit{auto-explicativo}, de manera tal que cada prueba 
 	diseñada quede debidamente documentado por el mismo test unitario que la implementa.
-	Sin perjuicio de esto, se completara la tabla \ref{testUnit}, en la que deberá detallar
+	Sin perjuicio de esto, se completara la Tabla \ref{testUnit}, en la que deberá detallar
 	el nombre de cada modulo, el nombre de las pruebas que cubren dicho modulo
 	y el propósito de la prueba.\\
 
@@ -2754,31 +2754,32 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	integración significa que ayuda a unir distintas partes del sistema. Por tanto, 
 	estas pruebas serán de granularidad más gruesa y más frágiles que
 	los tests unitarios, por lo que el número de tests de integración sera menor que 
-	el número de tests unitarios\cite{disenoTDD}.\\
+	el número de tests unitarios \cite{disenoTDD}.\\
 	
 	Al igual que en el caso anterior esta pueden ser automatizadas a través
 	de un framework de pruebas. Para integrar los componentes se debe hacer
 	uso intensivo de los servicios del contenedor, por lo que es conveniente
 	hacer solo uso de Arquillian para las pruebas de integración.\\
-	
-	El proceso de integración del sistema implica construir este a partir de sus
-	componentes y probar el sistema resultante para encontrar problemas que 
-	pueden surgir debido a la integración de los componentes\cite{sommerville}. 
-	Por este motivo las pruebas de integración se diseñaran e implementaran acorde 
-	al orden indicado en la Figura \ref{integracion}, donde las primeros niveles son
-	lo que presentan menos dependencia y los superiores mayor dependencia.\\
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.46]{imagenes/PruebasIntegracion.png}
+			\includegraphics[scale=0.44]{imagenes/PruebasIntegracion.png}
 			\caption{Esquema de Integración}
 			\label{integracion}
 		\end{center}
 	\end{figure}
 	
+	El proceso de integración del sistema implica construir este a partir de sus
+	componentes y probar el sistema resultante para encontrar problemas que 
+	pueden surgir debido a la integración de los componentes \cite{sommerville}. 
+	Por este motivo las pruebas de integración se diseñaran e implementaran acorde 
+	al orden indicado en la Figura \ref{integracion}, donde las primeros niveles son
+	lo que presentan menos dependencia y los superiores mayor dependencia.\\
+
 	Al igual que en el caso anterior, las pruebas deben quedar debidamente documentadas
-	por el código que las implementa. Y ademas se completara una tabla similar a la anterior
-	indicando las pruebas que se implementaron y su propósito.
+	por el código que las implementa. Y ademas se completara la Tabla \ref{testIntegracion} 
+	la cual es similar a la la Tabla \ref{testUnit} y en la que se deben indicar las pruebas que se implementaron 
+	y su propósito.
 	
 	
 	\begin{table}[H]
@@ -2798,7 +2799,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\end{table}
 	
 	Ademas como cada prueba afecta a mas de un modulo se completara la Tabla 
-	\ref{cobertura} indicando los módulos a los que afecta cada prueba.
+	\ref{coberturaIntegracion} indicando los módulos a los que afecta cada prueba.
 	
 	\begin{table}[H]
 	\begin{center}
@@ -2820,7 +2821,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\end{tabular}
 	\end{center}
 		\caption{Formato Tabla de Cobertura de las Pruebas de Integración}
-		\label{cobertura}
+		\label{coberturaIntegracion}
 	\end{table}
 
 	\subsection{Pruebas de Rendimiento}
@@ -3001,7 +3002,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\end{itemize}
 	
 	Ademas una vez ejecutadas las pruebas los resultados de estas deben ser documentados 
-	completando la Tabla \ref{cobertura} que muestra cuyos campos son descritos a continuación.
+	completando la Tabla \ref{coberturaAceptacion} que muestra cuyos campos son descritos a continuación.
 
 	\begin{itemize}
 		\item \textbf{Id-Prueba:} Identificador de la prueba ejecutada.
@@ -3055,7 +3056,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\end{tabular}
 	\end{center}
 		\caption{Formato del resultado de una Prueba de Aceptación}
-		\label{cobertura}
+		\label{coberturaAceptacion}
 	\end{table}
 
 	
@@ -3065,8 +3066,8 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	para todos los tipos de usuarios. \\
 	
 	Estas pruebas se realizan en un ambiente de producción real, y son ejecutadas 
-	por los usuarios reales del sistema sin la supervición del desarrollador. En este 
-	caso no existen casos de pruebas, por lo que los mismos usuarios seran los encargados
+	por los usuarios reales del sistema sin la supervisión del desarrollador. En este 
+	caso no existen casos de pruebas, por lo que los mismos usuarios serán los encargados
 	de documentar los problemas encontrados y comunicarlos de manera regular al 
 	desarrollador \cite{sommerville}. \\
 
@@ -3077,9 +3078,9 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	usuarios reales, a los cuales se les crearan las cuentas de usuarios reales con los permisos
 	correspondientes. El conjunto de usuarios estara compuesto por:
 	\begin{itemize}
-		\item El Jede de Departamento de DISICO.
-		\item 1 Jefe de Area, el Jefe del Área de Desarrollo.
-		\item El area de desarrollo de DISICO.
+		\item El Jefe de Departamento de DISICO.
+		\item 1 Jefe de Área, el Jefe del Área de Desarrollo.
+		\item El área de desarrollo de DISICO.
 		\item 2 Jefes de Carreras.
 		\item 4 Secretarias.
 	\end{itemize}
@@ -3094,3 +3095,185 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 		datos de entrada, pasos que realizo, opciones que selecciono, etc
 	\end{itemize}
 
+	Finalmente una vez terminadas la fase de pruebas beta, los usuario que participaron
+	de estas pruebas, deben contestar una encuesta, con el objetivo de obtener información
+	sobre:
+	\begin{itemize}
+		\item La percepción que tienen los usuarios acerca del sistema después de haber 
+		interactuado con el.
+		\item Los aspectos del sistema que requieren ser mejorados. 
+		\item Saber que tan dispuestos están los usuarios a utilizar el nuevo sistema.
+	\end{itemize}
+	
+	Para esto se diseñaron las siguientes encuestas, las cuales se encuentran separadas por 
+	perfil de usuario. La escala de respuestas va de 1 a 5, donde 1 es \textit{Muy en desacuerdo}
+	y 5 es \textit{Muy de acuerdo}.
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta General para todos los Usuarios }}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{Los nombres de los menús y botones son representativos} & {} & {} & {} & {} & {}\\
+		\hline
+		{Los mensajes de error ayudan a entender la causa y la solución de estos} & {} & {} & {} & {} & {}\\
+		\hline
+		{El estilo visual del sistema sigue el estilo del resto de los portales de la UV} & {} & {} & {} & {} & {}\\
+		\hline
+		{Es simple aprender a utilizar el sistema} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema mejora la comunicación entre los diferentes usuarios} & {} & {} & {} & {} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta General para todos los Usuarios}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Solicitante}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{Es fácil enviar una solicitud de requerimiento} & {} & {} & {} & {} & {}\\
+		\hline
+		{Es fácil buscar una solicitud de requerimiento} & {} & {} & {} & {} & {}\\
+		\hline
+		{Las solicitudes quedan mejor documentadas que en correos electrónicos} & {} & {} & {} & {} & {}\\
+		\hline
+		{Los mensajes de notificación son lo suficientemente breves y claros} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema envía una cantidad prudente de correos electrónicos} & {} & {} & {} & {} & {}\\
+		\hline
+		{La información de las solicitudes se presentan de forma clara y entendible } & {} & {} & {} & {} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Solicitante }
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Funcionario}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{La presentación de las solicitudes asignadas esta claramente ordenada} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica claramente cuando se le a asignado una nueva solicitud	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica claramente cuando una solicitud esta vencidas (retrasadas)	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica oportunamente cuando se le a asignado una nueva solicitud	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica oportunamente cuando una solicitud esta vencidas (retrasadas)	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema ayuda a que no olvide las solicitudes que dejo pendientes	} & {} &{} &{} & {} & {} \\
+		\hline
+		{Los gráficos en los resumen permiten una mejor visualización de la información} & {} &{} &{} & {} & {} \\
+		\hline
+		{Las mediciones que se muestran en el Resumen Personal se entiend claramente} & {} &{} &{} & {} & {} \\
+		\hline
+		{Es rápido y sencillo responder las solicitudes de los usuarios} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica claramente cuando se le a asignado una nueva tarea de SCM	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema alerta oportunamente ante retrasos en las tareas de SCM} & {} &{} &{} & {} & {} \\
+		\hline
+		{Se entiende claramente la relacion las opciones del subsistema de SCM y la metodología de SCM de DISICO} & {} &{} &{} & {} & {} \\
+		\hline
+		{Es mas fácil mantener actualizada la información sobre los cambios} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema documenta de forma clara el historial de cambios de los items de configuración} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema permite administrar fácilmente los items de configuración de un proyecto} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema permite agendar de forma fácil nuevas tareas	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema alerta oportunamente cuando existen retraso en las tareas} & {} &{} &{} & {} & {} \\
+		\hline
+		{La opción de actualizar el avance de una tarea le brinda un mayor expresividad} & {} &{} &{} & {} & {} \\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Funcionario}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Jefe de Área}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{El sistema mantiene organizadas las solicitudes de su área} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema le permite dar seguimiento completo cada solicitud} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema le ayuda a decidir a quien asignar una solicitud} & {} & {} & {} & {} & {}\\
+		\hline
+		{Los gráficos en los resumen permiten una mejor visualización de la información} & {} & {} & {} & {} & {}\\
+		\hline
+		{Las mediciones del área son de utilidad para la toma de decisiones} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema lo mantiene informado del estado de cada solicitud de su área} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema notifica claramente cuando llega una nueva solicitud al área} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema notifica claramente cuando existen retrasos en las solicitudes} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema notifica oportunamente cuando  llega una nueva solicitud al área} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema notifica oportunamente cuando existen retrasos en las solicitudes} & {} & {} & {} & {} & {}\\
+		\hline
+		{Es útil la opción de respuesta manual} & {} & {} & {} & {} & {}\\
+		\hline
+		{Las solicitudes quedan debidamente documentadas} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema mejora el monitorio de avance en los proyectos} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema facilita la documentación de los proyectos existentes} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema facilita mantener documentado los participantes de cada proyecto y sus tareas} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema facilita la tareas de gestión de cambios} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema permite asignar fácilmente responsables de las tareas de SCM} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema permite documentar correctamente los templates de la metodologia de SCM} & {} & {} & {} & {} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Jefe de Área}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Jefe de Departamento}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{El sistema permite tener un mayor control de las actividades que se realizan en el departamento} & {} & {} & {} & {} & {}\\
+		\hline
+		{EL sistema documenta correctamente las solicitudes de requerimientos} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema facilita la tarea de buscar solicitudes de requerimientos} & {} & {} & {} & {} & {}\\
+		\hline
+		{Las mediciones mostradas son de utilidad} & {} & {} & {} & {} & {}\\
+		\hline
+		{Los gráficos en los resumen permiten una mejor visualización de la información} & {} & {} & {} & {} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Jefe de Departamento}
+	\end{table}
