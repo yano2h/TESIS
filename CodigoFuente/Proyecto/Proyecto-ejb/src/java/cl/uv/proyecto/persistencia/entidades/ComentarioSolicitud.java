@@ -8,10 +8,11 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "COMENTARIO_SOLICITUD")
@@ -22,8 +23,8 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "ComentarioSolicitud.findByVisible", query = "SELECT c FROM ComentarioSolicitud c WHERE c.visible = :visible")})
 public class ComentarioSolicitud implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_comentario")
@@ -31,6 +32,7 @@ public class ComentarioSolicitud implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Lob
+    @Size(min = 1, max = 65535)
     @Column(name = "comentario")
     private String comentario;
     @Basic(optional = false)
@@ -43,12 +45,12 @@ public class ComentarioSolicitud implements Serializable {
     @Column(name = "visible")
     private boolean visible;
     
-    @JoinColumn(name = "id_solicitud_req", referencedColumnName = "id_solicitud_req")
-    @ManyToOne(optional = false)
-    private SolicitudRequerimiento solicitudRequerimiento;
-    @JoinColumn(name = "rut_autor", referencedColumnName = "rut")
+    @JoinColumn(name = "autor", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private Funcionario autor;
+    @JoinColumn(name = "solicitud_requerimiento", referencedColumnName = "id_solicitud_req")
+    @ManyToOne(optional = false)
+    private SolicitudRequerimiento solicitudRequerimiento;
 
     public ComentarioSolicitud() {
     }
@@ -96,20 +98,20 @@ public class ComentarioSolicitud implements Serializable {
         this.visible = visible;
     }
 
-    public SolicitudRequerimiento getSolicitudRequerimiento() {
-        return solicitudRequerimiento;
-    }
-
-    public void setSolicitudRequerimiento(SolicitudRequerimiento solicitudRequerimiento) {
-        this.solicitudRequerimiento = solicitudRequerimiento;
-    }
-
     public Funcionario getAutor() {
         return autor;
     }
 
     public void setAutor(Funcionario autor) {
         this.autor = autor;
+    }
+
+    public SolicitudRequerimiento getSolicitudRequerimiento() {
+        return solicitudRequerimiento;
+    }
+
+    public void setSolicitudRequerimiento(SolicitudRequerimiento solicitudRequerimiento) {
+        this.solicitudRequerimiento = solicitudRequerimiento;
     }
 
     @Override

@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "TIPO_PRIORIDAD")
@@ -32,9 +32,9 @@ public class TipoPrioridad implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombre_prioridad")
     private String nombrePrioridad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoPrioridad")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prioridadSolicitud")
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoPrioridad")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prioridadSolicitud")
     private List<SolicitudCambio> solicitudCambioList;
 
     public TipoPrioridad() {

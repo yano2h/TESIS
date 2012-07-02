@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "ESTADO_SOLICITUD_CAMBIO")
@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "EstadoSolicitudCambio.findAll", query = "SELECT e FROM EstadoSolicitudCambio e"),
     @NamedQuery(name = "EstadoSolicitudCambio.findByIdEstadoSolicitudCambio", query = "SELECT e FROM EstadoSolicitudCambio e WHERE e.idEstadoSolicitudCambio = :idEstadoSolicitudCambio"),
     @NamedQuery(name = "EstadoSolicitudCambio.findByNombreEstadoSolicitud", query = "SELECT e FROM EstadoSolicitudCambio e WHERE e.nombreEstadoSolicitud = :nombreEstadoSolicitud"),
-    @NamedQuery(name = "EstadoSolicitudCambio.findByDescripcion", query = "SELECT e FROM EstadoSolicitudCambio e WHERE e.descripcion = :descripcion")})
+    @NamedQuery(name = "EstadoSolicitudCambio.findByDescripcionEstado", query = "SELECT e FROM EstadoSolicitudCambio e WHERE e.descripcionEstado = :descripcionEstado")})
 public class EstadoSolicitudCambio implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -34,9 +34,11 @@ public class EstadoSolicitudCambio implements Serializable {
     @Column(name = "nombre_estado_solicitud")
     private String nombreEstadoSolicitud;
     @Size(max = 255)
-    @Column(name = "descripcion")
-    private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoSolicitudCambio")
+    @Column(name = "descripcion_estado")
+    private String descripcionEstado;
+    
+    /* Ver si borrar */
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoSolicitud")
     private List<SolicitudCambio> solicitudCambioList;
 
     public EstadoSolicitudCambio() {
@@ -67,12 +69,12 @@ public class EstadoSolicitudCambio implements Serializable {
         this.nombreEstadoSolicitud = nombreEstadoSolicitud;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripcionEstado() {
+        return descripcionEstado;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcionEstado(String descripcionEstado) {
+        this.descripcionEstado = descripcionEstado;
     }
 
     public List<SolicitudCambio> getSolicitudCambioList() {

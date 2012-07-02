@@ -5,20 +5,20 @@
 package cl.uv.proyecto.persistencia.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "ESTADISTICA_PERSONAL")
 @NamedQueries({
     @NamedQuery(name = "EstadisticaPersonal.findAll", query = "SELECT e FROM EstadisticaPersonal e"),
     @NamedQuery(name = "EstadisticaPersonal.findById", query = "SELECT e FROM EstadisticaPersonal e WHERE e.id = :id"),
-    @NamedQuery(name = "EstadisticaPersonal.findByFecha", query = "SELECT e FROM EstadisticaPersonal e WHERE e.fecha = :fecha"),
+    @NamedQuery(name = "EstadisticaPersonal.findByFechaMedicion", query = "SELECT e FROM EstadisticaPersonal e WHERE e.fechaMedicion = :fechaMedicion"),
     @NamedQuery(name = "EstadisticaPersonal.findByCantidadTotalSolicitudesAsignadas", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadTotalSolicitudesAsignadas = :cantidadTotalSolicitudesAsignadas"),
     @NamedQuery(name = "EstadisticaPersonal.findByCantidadSolicitudesPendientes", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadSolicitudesPendientes = :cantidadSolicitudesPendientes"),
     @NamedQuery(name = "EstadisticaPersonal.findByCantidadSolicitudesVencidas", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadSolicitudesVencidas = :cantidadSolicitudesVencidas"),
@@ -30,18 +30,17 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "EstadisticaPersonal.findByCantidadTareasScmAsociadas", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadTareasScmAsociadas = :cantidadTareasScmAsociadas")})
 public class EstadisticaPersonal implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "fecha")
+    @Column(name = "fecha_medicion")
     @Temporal(TemporalType.DATE)
-    private String fecha;
+    private Date fechaMedicion;
     @Basic(optional = false)
     @NotNull
     @Column(name = "cantidad_total_solicitudes_asignadas")
@@ -78,7 +77,7 @@ public class EstadisticaPersonal implements Serializable {
     @NotNull
     @Column(name = "cantidad_tareas_scm_asociadas")
     private int cantidadTareasScmAsociadas;
-    @JoinColumn(name = "rut_funcionario", referencedColumnName = "rut")
+    @JoinColumn(name = "funcionario", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private FuncionarioDisico funcionarioDisico;
 
@@ -89,9 +88,9 @@ public class EstadisticaPersonal implements Serializable {
         this.id = id;
     }
 
-    public EstadisticaPersonal(Long id, String fecha, long cantidadTotalSolicitudesAsignadas, int cantidadSolicitudesPendientes, int cantidadSolicitudesVencidas, int cantidadSolicitudesIniciadas, int cantidadSolicitudesCerradas, int cantidadProyectosAcargo, int cantidadProyectosEnQueParticipa, int cantidadTareasProyectoAsociadas, int cantidadTareasScmAsociadas) {
+    public EstadisticaPersonal(Long id, Date fechaMedicion, long cantidadTotalSolicitudesAsignadas, int cantidadSolicitudesPendientes, int cantidadSolicitudesVencidas, int cantidadSolicitudesIniciadas, int cantidadSolicitudesCerradas, int cantidadProyectosAcargo, int cantidadProyectosEnQueParticipa, int cantidadTareasProyectoAsociadas, int cantidadTareasScmAsociadas) {
         this.id = id;
-        this.fecha = fecha;
+        this.fechaMedicion = fechaMedicion;
         this.cantidadTotalSolicitudesAsignadas = cantidadTotalSolicitudesAsignadas;
         this.cantidadSolicitudesPendientes = cantidadSolicitudesPendientes;
         this.cantidadSolicitudesVencidas = cantidadSolicitudesVencidas;
@@ -111,12 +110,12 @@ public class EstadisticaPersonal implements Serializable {
         this.id = id;
     }
 
-    public String getFecha() {
-        return fecha;
+    public Date getFechaMedicion() {
+        return fechaMedicion;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setFechaMedicion(Date fechaMedicion) {
+        this.fechaMedicion = fechaMedicion;
     }
 
     public long getCantidadTotalSolicitudesAsignadas() {

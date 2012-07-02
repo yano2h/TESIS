@@ -12,14 +12,14 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "AREA")
 @NamedQueries({
     @NamedQuery(name = "Area.findAll", query = "SELECT a FROM Area a"),
     @NamedQuery(name = "Area.findByIdArea", query = "SELECT a FROM Area a WHERE a.idArea = :idArea"),
-    @NamedQuery(name = "Area.findByNombre", query = "SELECT a FROM Area a WHERE a.nombre = :nombre")})
+    @NamedQuery(name = "Area.findByNombreArea", query = "SELECT a FROM Area a WHERE a.nombreArea = :nombreArea")})
 public class Area implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -30,13 +30,14 @@ public class Area implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "nombre_area")
+    private String nombreArea;
     @Lob
+    @Size(max = 65535)
     @Column(name = "descripcion_area")
     private String descripcionArea;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "area")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "areaResponsable")
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "area")
     private List<FuncionarioDisico> funcionarioDisicoList;
@@ -48,9 +49,9 @@ public class Area implements Serializable {
         this.idArea = idArea;
     }
 
-    public Area(Short idArea, String nombre) {
+    public Area(Short idArea, String nombreArea) {
         this.idArea = idArea;
-        this.nombre = nombre;
+        this.nombreArea = nombreArea;
     }
 
     public Short getIdArea() {
@@ -61,12 +62,12 @@ public class Area implements Serializable {
         this.idArea = idArea;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreArea() {
+        return nombreArea;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreArea(String nombreArea) {
+        this.nombreArea = nombreArea;
     }
 
     public String getDescripcionArea() {

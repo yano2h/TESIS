@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "ITEM_CONFIGURACION")
@@ -21,14 +21,14 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "ItemConfiguracion.findAll", query = "SELECT i FROM ItemConfiguracion i"),
     @NamedQuery(name = "ItemConfiguracion.findByIdItemConfiguracion", query = "SELECT i FROM ItemConfiguracion i WHERE i.idItemConfiguracion = :idItemConfiguracion"),
     @NamedQuery(name = "ItemConfiguracion.findByCodigoIdentificadorIc", query = "SELECT i FROM ItemConfiguracion i WHERE i.codigoIdentificadorIc = :codigoIdentificadorIc"),
-    @NamedQuery(name = "ItemConfiguracion.findByNombreIc", query = "SELECT i FROM ItemConfiguracion i WHERE i.nombreIc = :nombreIc"),
+    @NamedQuery(name = "ItemConfiguracion.findByNombreItemConfiguracion", query = "SELECT i FROM ItemConfiguracion i WHERE i.nombreItemConfiguracion = :nombreItemConfiguracion"),
     @NamedQuery(name = "ItemConfiguracion.findByVersion", query = "SELECT i FROM ItemConfiguracion i WHERE i.version = :version"),
     @NamedQuery(name = "ItemConfiguracion.findByUbicacionEnBiblioteca", query = "SELECT i FROM ItemConfiguracion i WHERE i.ubicacionEnBiblioteca = :ubicacionEnBiblioteca"),
     @NamedQuery(name = "ItemConfiguracion.findByFechaUltimaModificacion", query = "SELECT i FROM ItemConfiguracion i WHERE i.fechaUltimaModificacion = :fechaUltimaModificacion")})
 public class ItemConfiguracion implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_item_configuracion")
@@ -41,8 +41,8 @@ public class ItemConfiguracion implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre_ic")
-    private String nombreIc;
+    @Column(name = "nombre_item_configuracion")
+    private String nombreItemConfiguracion;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
@@ -50,7 +50,7 @@ public class ItemConfiguracion implements Serializable {
     private String version;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 200)
     @Column(name = "ubicacion_en_biblioteca")
     private String ubicacionEnBiblioteca;
     @Basic(optional = false)
@@ -58,12 +58,12 @@ public class ItemConfiguracion implements Serializable {
     @Column(name = "fecha_ultima_modificacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaUltimaModificacion;
-    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto")
+    @JoinColumn(name = "responsable_item", referencedColumnName = "rut")
+    @ManyToOne(optional = false)
+    private FuncionarioDisico responsableItem;
+    @JoinColumn(name = "proyecto", referencedColumnName = "id_proyecto")
     @ManyToOne(optional = false)
     private Proyecto proyecto;
-    @JoinColumn(name = "rut_responsable_ic", referencedColumnName = "rut")
-    @ManyToOne(optional = false)
-    private FuncionarioDisico funcionarioDisico;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemConfiguracion")
     private List<SolicitudCambio> solicitudCambioList;
 
@@ -74,10 +74,10 @@ public class ItemConfiguracion implements Serializable {
         this.idItemConfiguracion = idItemConfiguracion;
     }
 
-    public ItemConfiguracion(Integer idItemConfiguracion, String codigoIdentificadorIc, String nombreIc, String version, String ubicacionEnBiblioteca, Date fechaUltimaModificacion) {
+    public ItemConfiguracion(Integer idItemConfiguracion, String codigoIdentificadorIc, String nombreItemConfiguracion, String version, String ubicacionEnBiblioteca, Date fechaUltimaModificacion) {
         this.idItemConfiguracion = idItemConfiguracion;
         this.codigoIdentificadorIc = codigoIdentificadorIc;
-        this.nombreIc = nombreIc;
+        this.nombreItemConfiguracion = nombreItemConfiguracion;
         this.version = version;
         this.ubicacionEnBiblioteca = ubicacionEnBiblioteca;
         this.fechaUltimaModificacion = fechaUltimaModificacion;
@@ -99,12 +99,12 @@ public class ItemConfiguracion implements Serializable {
         this.codigoIdentificadorIc = codigoIdentificadorIc;
     }
 
-    public String getNombreIc() {
-        return nombreIc;
+    public String getNombreItemConfiguracion() {
+        return nombreItemConfiguracion;
     }
 
-    public void setNombreIc(String nombreIc) {
-        this.nombreIc = nombreIc;
+    public void setNombreItemConfiguracion(String nombreItemConfiguracion) {
+        this.nombreItemConfiguracion = nombreItemConfiguracion;
     }
 
     public String getVersion() {
@@ -131,20 +131,20 @@ public class ItemConfiguracion implements Serializable {
         this.fechaUltimaModificacion = fechaUltimaModificacion;
     }
 
+    public FuncionarioDisico getResponsableItem() {
+        return responsableItem;
+    }
+
+    public void setResponsableItem(FuncionarioDisico responsableItem) {
+        this.responsableItem = responsableItem;
+    }
+
     public Proyecto getProyecto() {
         return proyecto;
     }
 
     public void setProyecto(Proyecto proyecto) {
         this.proyecto = proyecto;
-    }
-
-    public FuncionarioDisico getFuncionarioDisico() {
-        return funcionarioDisico;
-    }
-
-    public void setFuncionarioDisico(FuncionarioDisico funcionarioDisico) {
-        this.funcionarioDisico = funcionarioDisico;
     }
 
     public List<SolicitudCambio> getSolicitudCambioList() {

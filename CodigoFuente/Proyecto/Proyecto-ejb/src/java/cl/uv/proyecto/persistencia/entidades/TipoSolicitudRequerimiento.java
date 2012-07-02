@@ -12,13 +12,13 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "TIPO_SOLICITUD_REQ")
 @NamedQueries({
     @NamedQuery(name = "TipoSolicitudRequerimiento.findAll", query = "SELECT t FROM TipoSolicitudRequerimiento t"),
-    @NamedQuery(name = "TipoSolicitudRequerimiento.findByIdTipoSolicitudReq", query = "SELECT t FROM TipoSolicitudRequerimiento t WHERE t.idTipoSolicitudReq = :idTipoSolicitudReq"),
+    @NamedQuery(name = "TipoSolicitudRequerimiento.findByIdTipoSolicitudRequerimiento", query = "SELECT t FROM TipoSolicitudRequerimiento t WHERE t.idTipoSolicitudRequerimiento = :idTipoSolicitudRequerimiento"),
     @NamedQuery(name = "TipoSolicitudRequerimiento.findByNombreTipoSolicitud", query = "SELECT t FROM TipoSolicitudRequerimiento t WHERE t.nombreTipoSolicitud = :nombreTipoSolicitud"),
     @NamedQuery(name = "TipoSolicitudRequerimiento.findByDescripcionTipo", query = "SELECT t FROM TipoSolicitudRequerimiento t WHERE t.descripcionTipo = :descripcionTipo")})
 public class TipoSolicitudRequerimiento implements Serializable {
@@ -27,7 +27,7 @@ public class TipoSolicitudRequerimiento implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_tipo_solicitud_req")
-    private Short idTipoSolicitudReq;
+    private Short idTipoSolicitudRequerimiento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -36,27 +36,27 @@ public class TipoSolicitudRequerimiento implements Serializable {
     @Size(max = 255)
     @Column(name = "descripcion_tipo")
     private String descripcionTipo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoSolicitudRequerimiento")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoSolicitud")
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
 
     public TipoSolicitudRequerimiento() {
     }
 
-    public TipoSolicitudRequerimiento(Short idTipoSolicitudReq) {
-        this.idTipoSolicitudReq = idTipoSolicitudReq;
+    public TipoSolicitudRequerimiento(Short idTipoSolicitudRequerimiento) {
+        this.idTipoSolicitudRequerimiento = idTipoSolicitudRequerimiento;
     }
 
-    public TipoSolicitudRequerimiento(Short idTipoSolicitudReq, String nombreTipoSolicitud) {
-        this.idTipoSolicitudReq = idTipoSolicitudReq;
+    public TipoSolicitudRequerimiento(Short idTipoSolicitudRequerimiento, String nombreTipoSolicitud) {
+        this.idTipoSolicitudRequerimiento = idTipoSolicitudRequerimiento;
         this.nombreTipoSolicitud = nombreTipoSolicitud;
     }
 
-    public Short getIdTipoSolicitudReq() {
-        return idTipoSolicitudReq;
+    public Short getIdTipoSolicitudRequerimiento() {
+        return idTipoSolicitudRequerimiento;
     }
 
-    public void setIdTipoSolicitudReq(Short idTipoSolicitudReq) {
-        this.idTipoSolicitudReq = idTipoSolicitudReq;
+    public void setIdTipoSolicitudRequerimiento(Short idTipoSolicitudRequerimiento) {
+        this.idTipoSolicitudRequerimiento = idTipoSolicitudRequerimiento;
     }
 
     public String getNombreTipoSolicitud() {
@@ -86,7 +86,7 @@ public class TipoSolicitudRequerimiento implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTipoSolicitudReq != null ? idTipoSolicitudReq.hashCode() : 0);
+        hash += (idTipoSolicitudRequerimiento != null ? idTipoSolicitudRequerimiento.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +97,7 @@ public class TipoSolicitudRequerimiento implements Serializable {
             return false;
         }
         TipoSolicitudRequerimiento other = (TipoSolicitudRequerimiento) object;
-        if ((this.idTipoSolicitudReq == null && other.idTipoSolicitudReq != null) || (this.idTipoSolicitudReq != null && !this.idTipoSolicitudReq.equals(other.idTipoSolicitudReq))) {
+        if ((this.idTipoSolicitudRequerimiento == null && other.idTipoSolicitudRequerimiento != null) || (this.idTipoSolicitudRequerimiento != null && !this.idTipoSolicitudRequerimiento.equals(other.idTipoSolicitudRequerimiento))) {
             return false;
         }
         return true;
@@ -105,7 +105,7 @@ public class TipoSolicitudRequerimiento implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.uv.proyecto.persistencia.entidades.TipoSolicitudRequerimiento[ idTipoSolicitudReq=" + idTipoSolicitudReq + " ]";
+        return "cl.uv.proyecto.persistencia.entidades.TipoSolicitudRequerimiento[ idTipoSolicitudRequerimiento=" + idTipoSolicitudRequerimiento + " ]";
     }
     
 }

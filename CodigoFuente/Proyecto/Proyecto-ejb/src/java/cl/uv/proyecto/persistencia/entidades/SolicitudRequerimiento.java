@@ -13,13 +13,13 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
-@Table(name = "SOLICITUD_REQUERIMIENTO")
+@Table(name = "SOLICITUD_REQUERIMIENTO", uniqueConstraints=@UniqueConstraint(columnNames="codigo_consulta"))
 @NamedQueries({
     @NamedQuery(name = "SolicitudRequerimiento.findAll", query = "SELECT s FROM SolicitudRequerimiento s"),
-    @NamedQuery(name = "SolicitudRequerimiento.findByIdSolicitudReq", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.idSolicitudReq = :idSolicitudReq"),
+    @NamedQuery(name = "SolicitudRequerimiento.findByIdSolicitudRequerimiento", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.idSolicitudRequerimiento = :idSolicitudRequerimiento"),
     @NamedQuery(name = "SolicitudRequerimiento.findByCodigoConsulta", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.codigoConsulta = :codigoConsulta"),
     @NamedQuery(name = "SolicitudRequerimiento.findByAsunto", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.asunto = :asunto"),
     @NamedQuery(name = "SolicitudRequerimiento.findByFechaEnvio", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.fechaEnvio = :fechaEnvio"),
@@ -29,12 +29,12 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "SolicitudRequerimiento.findByJustificacionTrasnferencia", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.justificacionTrasnferencia = :justificacionTrasnferencia")})
 public class SolicitudRequerimiento implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_solicitud_req")
-    private Long idSolicitudReq;
+    private Long idSolicitudRequerimiento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 9)
@@ -48,6 +48,7 @@ public class SolicitudRequerimiento implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Lob
+    @Size(min = 1, max = 65535)
     @Column(name = "mensaje")
     private String mensaje;
     @Basic(optional = false)
@@ -70,38 +71,39 @@ public class SolicitudRequerimiento implements Serializable {
     @Column(name = "justificacion_trasnferencia")
     private String justificacionTrasnferencia;
     @Lob
+    @Size(max = 65535)
     @Column(name = "respuesta")
     private String respuesta;
-    @JoinColumn(name = "id_tipo_solicitud_req", referencedColumnName = "id_tipo_solicitud_req")
+    @JoinColumn(name = "prioridad_solicitud", referencedColumnName = "id_tipo_prioridad")
     @ManyToOne(optional = false)
-    private TipoSolicitudRequerimiento tipoSolicitudRequerimiento;
-    @JoinColumn(name = "id_tipo_prioridad", referencedColumnName = "id_tipo_prioridad")
+    private TipoPrioridad prioridadSolicitud;
+    @JoinColumn(name = "solicitante", referencedColumnName = "rut")
     @ManyToOne(optional = false)
-    private TipoPrioridad tipoPrioridad;
-    @JoinColumn(name = "rut_responsable", referencedColumnName = "rut")
+    private Funcionario solicitante;
+    @JoinColumn(name = "responsable", referencedColumnName = "rut")
     @ManyToOne(optional = false)
-    private FuncionarioDisico funcionarioDisico;
-    @JoinColumn(name = "rut_solicitante", referencedColumnName = "rut")
+    private FuncionarioDisico responsable;
+    @JoinColumn(name = "area_responsable", referencedColumnName = "id_area")
     @ManyToOne(optional = false)
-    private Funcionario funcionario;
-    @JoinColumn(name = "id_estado_solicitud_req", referencedColumnName = "id_estado_solicitud_req")
+    private Area areaResponsable;
+    @JoinColumn(name = "estado_solicitud", referencedColumnName = "id_estado_solicitud_req")
     @ManyToOne(optional = false)
-    private EstadoSolicitudRequerimiento estadoSolicitudRequerimiento;
-    @JoinColumn(name = "id_area", referencedColumnName = "id_area")
+    private EstadoSolicitudRequerimiento estadoSolicitud;
+    @JoinColumn(name = "tipo_solicitud", referencedColumnName = "id_tipo_solicitud_req")
     @ManyToOne(optional = false)
-    private Area area;
+    private TipoSolicitudRequerimiento tipoSolicitud;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudRequerimiento")
-    private List<ComentarioSolicitud> comentarioSolicitudList;
+    private List<ComentarioSolicitud> comentarios;
 
     public SolicitudRequerimiento() {
     }
 
     public SolicitudRequerimiento(Long idSolicitudReq) {
-        this.idSolicitudReq = idSolicitudReq;
+        this.idSolicitudRequerimiento = idSolicitudReq;
     }
 
     public SolicitudRequerimiento(Long idSolicitudReq, String codigoConsulta, String asunto, String mensaje, Date fechaEnvio, Date fechaUltimaActualizacion) {
-        this.idSolicitudReq = idSolicitudReq;
+        this.idSolicitudRequerimiento = idSolicitudReq;
         this.codigoConsulta = codigoConsulta;
         this.asunto = asunto;
         this.mensaje = mensaje;
@@ -109,12 +111,12 @@ public class SolicitudRequerimiento implements Serializable {
         this.fechaUltimaActualizacion = fechaUltimaActualizacion;
     }
 
-    public Long getIdSolicitudReq() {
-        return idSolicitudReq;
+    public Long getIdSolicitudRequerimiento() {
+        return idSolicitudRequerimiento;
     }
 
-    public void setIdSolicitudReq(Long idSolicitudReq) {
-        this.idSolicitudReq = idSolicitudReq;
+    public void setIdSolicitudRequerimiento(Long idSolicitudRequerimiento) {
+        this.idSolicitudRequerimiento = idSolicitudRequerimiento;
     }
 
     public String getCodigoConsulta() {
@@ -189,66 +191,66 @@ public class SolicitudRequerimiento implements Serializable {
         this.respuesta = respuesta;
     }
 
-    public TipoSolicitudRequerimiento getTipoSolicitudRequerimiento() {
-        return tipoSolicitudRequerimiento;
+    public TipoPrioridad getPrioridadSolicitud() {
+        return prioridadSolicitud;
     }
 
-    public void setTipoSolicitudRequerimiento(TipoSolicitudRequerimiento tipoSolicitudRequerimiento) {
-        this.tipoSolicitudRequerimiento = tipoSolicitudRequerimiento;
+    public void setPrioridadSolicitud(TipoPrioridad prioridadSolicitud) {
+        this.prioridadSolicitud = prioridadSolicitud;
     }
 
-    public TipoPrioridad getTipoPrioridad() {
-        return tipoPrioridad;
+    public Funcionario getSolicitante() {
+        return solicitante;
     }
 
-    public void setTipoPrioridad(TipoPrioridad tipoPrioridad) {
-        this.tipoPrioridad = tipoPrioridad;
+    public void setSolicitante(Funcionario solicitante) {
+        this.solicitante = solicitante;
     }
 
-    public FuncionarioDisico getFuncionarioDisico() {
-        return funcionarioDisico;
+    public FuncionarioDisico getResponsable() {
+        return responsable;
     }
 
-    public void setFuncionarioDisico(FuncionarioDisico funcionarioDisico) {
-        this.funcionarioDisico = funcionarioDisico;
+    public void setResponsable(FuncionarioDisico responsable) {
+        this.responsable = responsable;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
+    public Area getAreaResponsable() {
+        return areaResponsable;
     }
 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setAreaResponsable(Area areaResponsable) {
+        this.areaResponsable = areaResponsable;
     }
 
-    public EstadoSolicitudRequerimiento getEstadoSolicitudRequerimiento() {
-        return estadoSolicitudRequerimiento;
+    public EstadoSolicitudRequerimiento getEstadoSolicitud() {
+        return estadoSolicitud;
     }
 
-    public void setEstadoSolicitudRequerimiento(EstadoSolicitudRequerimiento estadoSolicitudRequerimiento) {
-        this.estadoSolicitudRequerimiento = estadoSolicitudRequerimiento;
+    public void setEstadoSolicitud(EstadoSolicitudRequerimiento estadoSolicitud) {
+        this.estadoSolicitud = estadoSolicitud;
     }
 
-    public Area getArea() {
-        return area;
+    public TipoSolicitudRequerimiento getTipoSolicitud() {
+        return tipoSolicitud;
     }
 
-    public void setArea(Area area) {
-        this.area = area;
+    public void setTipoSolicitud(TipoSolicitudRequerimiento tipoSolicitud) {
+        this.tipoSolicitud = tipoSolicitud;
     }
 
-    public List<ComentarioSolicitud> getComentarioSolicitudList() {
-        return comentarioSolicitudList;
+    public List<ComentarioSolicitud> getComentarios() {
+        return comentarios;
     }
 
-    public void setComentarioSolicitudList(List<ComentarioSolicitud> comentarioSolicitudList) {
-        this.comentarioSolicitudList = comentarioSolicitudList;
+    public void setComentarios(List<ComentarioSolicitud> comentarios) {
+        this.comentarios = comentarios;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idSolicitudReq != null ? idSolicitudReq.hashCode() : 0);
+        hash += (idSolicitudRequerimiento != null ? idSolicitudRequerimiento.hashCode() : 0);
         return hash;
     }
 
@@ -259,7 +261,7 @@ public class SolicitudRequerimiento implements Serializable {
             return false;
         }
         SolicitudRequerimiento other = (SolicitudRequerimiento) object;
-        if ((this.idSolicitudReq == null && other.idSolicitudReq != null) || (this.idSolicitudReq != null && !this.idSolicitudReq.equals(other.idSolicitudReq))) {
+        if ((this.idSolicitudRequerimiento == null && other.idSolicitudRequerimiento != null) || (this.idSolicitudRequerimiento != null && !this.idSolicitudRequerimiento.equals(other.idSolicitudRequerimiento))) {
             return false;
         }
         return true;
@@ -267,7 +269,7 @@ public class SolicitudRequerimiento implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento[ idSolicitudReq=" + idSolicitudReq + " ]";
+        return "cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento[ idSolicitudRequerimiento=" + idSolicitudRequerimiento + " ]";
     }
     
 }

@@ -13,11 +13,11 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "FUNCIONARIO")
-@Inheritance(strategy = InheritanceType.JOINED) 
+@Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
     @NamedQuery(name = "Funcionario.findAll", query = "SELECT f FROM Funcionario f"),
     @NamedQuery(name = "Funcionario.findByRut", query = "SELECT f FROM Funcionario f WHERE f.rut = :rut"),
@@ -58,12 +58,12 @@ public class Funcionario implements Serializable {
     @Column(name = "fecha_primer_acceso")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPrimerAcceso;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
-    private List<Notificacion> notificacionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
-    private List<SolicitudRequerimiento> solicitudesRequerimientosEnviadas;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "destinatario")
+    private List<Notificacion> notificaciones;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitante")
+    private List<SolicitudRequerimiento> solicitudesRequerimientoEnviadas;
 
-        @OneToMany(cascade = CascadeType.ALL, mappedBy = "autor")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "autor")
     private List<ComentarioSolicitud> comentarioSolicitudList;
 
     public Funcionario() {
@@ -73,11 +73,11 @@ public class Funcionario implements Serializable {
         this.rut = rut;
     }
 
-    public Funcionario(Integer rut, String nombre, String apellidoPaterno, String apellidoM) {
+    public Funcionario(Integer rut, String nombre, String apellidoPaterno, String apellidoMaterno) {
         this.rut = rut;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoM;
+        this.apellidoMaterno = apellidoMaterno;
     }
 
     public Integer getRut() {
@@ -136,20 +136,20 @@ public class Funcionario implements Serializable {
         this.fechaPrimerAcceso = fechaPrimerAcceso;
     }
 
-    public List<Notificacion> getNotificacionList() {
-        return notificacionList;
+    public List<Notificacion> getNotificaciones() {
+        return notificaciones;
     }
 
-    public void setNotificacionList(List<Notificacion> notificacionList) {
-        this.notificacionList = notificacionList;
+    public void setNotificaciones(List<Notificacion> notificaciones) {
+        this.notificaciones = notificaciones;
     }
 
-    public List<SolicitudRequerimiento> getSolicitudesRequerimientosEnviadas() {
-        return solicitudesRequerimientosEnviadas;
+    public List<SolicitudRequerimiento> getSolicitudesRequerimientoEnviadas() {
+        return solicitudesRequerimientoEnviadas;
     }
 
-    public void setSolicitudesRequerimientosEnviadas(List<SolicitudRequerimiento> solicitudesRequerimientosEnviadas) {
-        this.solicitudesRequerimientosEnviadas = solicitudesRequerimientosEnviadas;
+    public void setSolicitudesRequerimientoEnviadas(List<SolicitudRequerimiento> solicitudesRequerimientoEnviadas) {
+        this.solicitudesRequerimientoEnviadas = solicitudesRequerimientoEnviadas;
     }
 
     public List<ComentarioSolicitud> getComentarioSolicitudList() {

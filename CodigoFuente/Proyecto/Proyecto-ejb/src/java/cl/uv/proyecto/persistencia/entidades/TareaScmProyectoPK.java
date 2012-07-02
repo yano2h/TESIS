@@ -15,30 +15,30 @@ import javax.validation.constraints.NotNull;
  * @author Jano
  */
 @Embeddable
-public class ParticipanteProyectoPK implements Serializable {
+public class TareaScmProyectoPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "rut_participante")
-    private int rutParticipante;
+    @Column(name = "id_tarea_scm")
+    private int idTareaScm;
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_proyecto")
     private int idProyecto;
 
-    public ParticipanteProyectoPK() {
+    public TareaScmProyectoPK() {
     }
 
-    public ParticipanteProyectoPK(int rutParticipante, int idProyecto) {
-        this.rutParticipante = rutParticipante;
+    public TareaScmProyectoPK(int idTareaScm, int idProyecto) {
+        this.idTareaScm = idTareaScm;
         this.idProyecto = idProyecto;
     }
 
-    public int getRutParticipante() {
-        return rutParticipante;
+    public int getIdTareaScm() {
+        return idTareaScm;
     }
 
-    public void setRutParticipante(int rutParticipante) {
-        this.rutParticipante = rutParticipante;
+    public void setIdTareaScm(int idTareaScm) {
+        this.idTareaScm = idTareaScm;
     }
 
     public int getIdProyecto() {
@@ -52,7 +52,7 @@ public class ParticipanteProyectoPK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) rutParticipante;
+        hash += (int) idTareaScm;
         hash += (int) idProyecto;
         return hash;
     }
@@ -60,11 +60,11 @@ public class ParticipanteProyectoPK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ParticipanteProyectoPK)) {
+        if (!(object instanceof TareaScmProyectoPK)) {
             return false;
         }
-        ParticipanteProyectoPK other = (ParticipanteProyectoPK) object;
-        if (this.rutParticipante != other.rutParticipante) {
+        TareaScmProyectoPK other = (TareaScmProyectoPK) object;
+        if (this.idTareaScm != other.idTareaScm) {
             return false;
         }
         if (this.idProyecto != other.idProyecto) {
@@ -75,7 +75,7 @@ public class ParticipanteProyectoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.uv.proyecto.persistencia.entidades.ParticipanteProyectoPK[ rutParticipante=" + rutParticipante + ", idProyecto=" + idProyecto + " ]";
+        return "cl.uv.proyecto.percistencia.entidades.TareaScmProyectoPK[ idTareaScm=" + idTareaScm + ", idProyecto=" + idProyecto + " ]";
     }
     
 }

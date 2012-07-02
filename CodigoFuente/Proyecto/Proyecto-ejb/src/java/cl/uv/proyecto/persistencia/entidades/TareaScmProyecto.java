@@ -11,23 +11,20 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "TAREA_SCM_PROYECTO")
 @NamedQueries({
     @NamedQuery(name = "TareaScmProyecto.findAll", query = "SELECT t FROM TareaScmProyecto t"),
-    @NamedQuery(name = "TareaScmProyecto.findByIdTareaScmProyecto", query = "SELECT t FROM TareaScmProyecto t WHERE t.idTareaScmProyecto = :idTareaScmProyecto"),
+    @NamedQuery(name = "TareaScmProyecto.findByIdTareaScm", query = "SELECT t FROM TareaScmProyecto t WHERE t.tareaScmProyectoPK.idTareaScm = :idTareaScm"),
+    @NamedQuery(name = "TareaScmProyecto.findByIdProyecto", query = "SELECT t FROM TareaScmProyecto t WHERE t.tareaScmProyectoPK.idProyecto = :idProyecto"),
     @NamedQuery(name = "TareaScmProyecto.findByFechaInicio", query = "SELECT t FROM TareaScmProyecto t WHERE t.fechaInicio = :fechaInicio"),
     @NamedQuery(name = "TareaScmProyecto.findByFechaTermino", query = "SELECT t FROM TareaScmProyecto t WHERE t.fechaTermino = :fechaTermino")})
 public class TareaScmProyecto implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_tarea_scm_proyecto")
-    private Integer idTareaScmProyecto;
+    @EmbeddedId
+    protected TareaScmProyectoPK tareaScmProyectoPK;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_inicio")
@@ -38,37 +35,39 @@ public class TareaScmProyecto implements Serializable {
     @Column(name = "fecha_termino")
     @Temporal(TemporalType.DATE)
     private Date fechaTermino;
-    @JoinColumn(name = "id_tarea_scm", referencedColumnName = "id_tarea_scm")
+    @JoinColumn(name = "responsable", referencedColumnName = "rut")
     @ManyToOne(optional = false)
-    private TareaScm tareaScm;
-    @JoinColumn(name = "rut_responsable", referencedColumnName = "rut")
-    @ManyToOne(optional = false)
-    private FuncionarioDisico responsableTarea;
-    
-    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto")
+    private FuncionarioDisico responsable;
+    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Proyecto proyecto;
-    
+    @JoinColumn(name = "id_tarea_scm", referencedColumnName = "id_tarea_scm", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private TareaScm tareaScm;
 
     public TareaScmProyecto() {
     }
 
-    public TareaScmProyecto(Integer idTareaScmProyecto) {
-        this.idTareaScmProyecto = idTareaScmProyecto;
+    public TareaScmProyecto(TareaScmProyectoPK tareaScmProyectoPK) {
+        this.tareaScmProyectoPK = tareaScmProyectoPK;
     }
 
-    public TareaScmProyecto(Integer idTareaScmProyecto, Date fechaInicio, Date fechaTermino) {
-        this.idTareaScmProyecto = idTareaScmProyecto;
+    public TareaScmProyecto(TareaScmProyectoPK tareaScmProyectoPK, Date fechaInicio, Date fechaTermino) {
+        this.tareaScmProyectoPK = tareaScmProyectoPK;
         this.fechaInicio = fechaInicio;
         this.fechaTermino = fechaTermino;
     }
 
-    public Integer getIdTareaScmProyecto() {
-        return idTareaScmProyecto;
+    public TareaScmProyecto(int idTareaScm, int idProyecto) {
+        this.tareaScmProyectoPK = new TareaScmProyectoPK(idTareaScm, idProyecto);
     }
 
-    public void setIdTareaScmProyecto(Integer idTareaScmProyecto) {
-        this.idTareaScmProyecto = idTareaScmProyecto;
+    public TareaScmProyectoPK getTareaScmProyectoPK() {
+        return tareaScmProyectoPK;
+    }
+
+    public void setTareaScmProyectoPK(TareaScmProyectoPK tareaScmProyectoPK) {
+        this.tareaScmProyectoPK = tareaScmProyectoPK;
     }
 
     public Date getFechaInicio() {
@@ -87,12 +86,12 @@ public class TareaScmProyecto implements Serializable {
         this.fechaTermino = fechaTermino;
     }
 
-    public TareaScm getTareaScm() {
-        return tareaScm;
+    public FuncionarioDisico getResponsable() {
+        return responsable;
     }
 
-    public void setTareaScm(TareaScm tareaScm) {
-        this.tareaScm = tareaScm;
+    public void setResponsable(FuncionarioDisico responsable) {
+        this.responsable = responsable;
     }
 
     public Proyecto getProyecto() {
@@ -103,18 +102,18 @@ public class TareaScmProyecto implements Serializable {
         this.proyecto = proyecto;
     }
 
-    public FuncionarioDisico getResponsableTarea() {
-        return responsableTarea;
+    public TareaScm getTareaScm() {
+        return tareaScm;
     }
 
-    public void setResponsableTarea(FuncionarioDisico responsableTarea) {
-        this.responsableTarea = responsableTarea;
+    public void setTareaScm(TareaScm tareaScm) {
+        this.tareaScm = tareaScm;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTareaScmProyecto != null ? idTareaScmProyecto.hashCode() : 0);
+        hash += (tareaScmProyectoPK != null ? tareaScmProyectoPK.hashCode() : 0);
         return hash;
     }
 
@@ -125,7 +124,7 @@ public class TareaScmProyecto implements Serializable {
             return false;
         }
         TareaScmProyecto other = (TareaScmProyecto) object;
-        if ((this.idTareaScmProyecto == null && other.idTareaScmProyecto != null) || (this.idTareaScmProyecto != null && !this.idTareaScmProyecto.equals(other.idTareaScmProyecto))) {
+        if ((this.tareaScmProyectoPK == null && other.tareaScmProyectoPK != null) || (this.tareaScmProyectoPK != null && !this.tareaScmProyectoPK.equals(other.tareaScmProyectoPK))) {
             return false;
         }
         return true;
@@ -133,7 +132,7 @@ public class TareaScmProyecto implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.uv.proyecto.persistencia.entidades.TareaScmProyecto[ idTareaScmProyecto=" + idTareaScmProyecto + " ]";
+        return "cl.uv.proyecto.percistencia.entidades.TareaScmProyecto[ tareaScmProyectoPK=" + tareaScmProyectoPK + " ]";
     }
     
 }

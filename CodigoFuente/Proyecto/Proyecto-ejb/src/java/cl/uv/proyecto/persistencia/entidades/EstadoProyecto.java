@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "ESTADO_PROYECTO")
@@ -32,6 +32,8 @@ public class EstadoProyecto implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombre_estado_proyecto")
     private String nombreEstadoProyecto;
+    
+    /* Ver si borrar */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoProyecto")
     private List<Proyecto> proyectoList;
 

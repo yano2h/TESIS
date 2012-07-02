@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "ROL_PROYECTO")
@@ -22,8 +22,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "RolProyecto.findByNombreRol", query = "SELECT r FROM RolProyecto r WHERE r.nombreRol = :nombreRol")})
 public class RolProyecto implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_rol")
@@ -33,7 +33,7 @@ public class RolProyecto implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombre_rol")
     private String nombreRol;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolProyecto")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
     private List<ParticipanteProyecto> participanteProyectoList;
 
     public RolProyecto() {

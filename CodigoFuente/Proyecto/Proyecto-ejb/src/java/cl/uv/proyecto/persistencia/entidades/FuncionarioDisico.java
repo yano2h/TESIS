@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "FUNCIONARIO_DISICO")
@@ -22,7 +22,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "FuncionarioDisico.findByCargo", query = "SELECT f FROM FuncionarioDisico f WHERE f.cargo = :cargo"),
     @NamedQuery(name = "FuncionarioDisico.findByAnexo", query = "SELECT f FROM FuncionarioDisico f WHERE f.anexo = :anexo")})
 public class FuncionarioDisico extends Funcionario {
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -31,32 +31,32 @@ public class FuncionarioDisico extends Funcionario {
     @Size(max = 5)
     @Column(name = "anexo")
     private String anexo;
-    @JoinColumn(name = "id_area", referencedColumnName = "id_area")
+    @JoinColumn(name = "area", referencedColumnName = "id_area")
     @ManyToOne(optional = false)
-    private Area area; 
+    private Area area;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
-    private List<ItemConfiguracion> itemConfiguracionList; //lista de items de configuracion de los que es responsable
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
-    private List<TareaProyecto> tareaProyectoList; //lista de las tareas de proyecto de las que es responsable
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
-    private List<EstadisticaPersonal> estadisticaPersonalList; 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
-    private List<SolicitudRequerimiento> solicitudesRequerimientosAsignadas; //lista de solicitudes que le han sido asignadas
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsableItem")
+    private List<ItemConfiguracion> itemsConfiguracionAcargo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsableTarea")
-    private List<TareaScmProyecto> tareaScmProyectoList; //tareas de scm de las que es responsable
+    private List<TareaProyecto> tareasProyectoAgendadas;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
-    private List<ParticipanteProyecto> proyectosEnQueParticipa; //proyectos en los que ha trabajado
+    private List<EstadisticaPersonal> estadisticasPersonales;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsable")
+    private List<SolicitudRequerimiento> solicitudesRequerimientosAsignadas;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsable")
+    private List<TareaScmProyecto> tareasScmAsignadas;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "participante")
+    private List<ParticipanteProyecto> participacionesProyecto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "implementador")
-    private List<FormularioImplementacion> formulariosImplementacionImplementador; // Lista de formularios en los que aparece como implementador
+    private List<FormularioImplementacion> implementadorForlumarios;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "verificador")
-    private List<FormularioImplementacion> formulariosImplementacionVerificador; // Lista de formularios en los que aparece como verificador
-    @OneToMany(mappedBy = "evaluadorFinalSolicitud")
-    private List<SolicitudCambio> solicitudesCambioEvaluadorFinal; // Lista de solicitudes de cambio en las que aparece como evaluador final
+    private List<FormularioImplementacion> verificadorFormularios;
+    @OneToMany(mappedBy = "evaluadorFinal")
+    private List<SolicitudCambio> solicitudesCambioEvaluadorFinal;
     @OneToMany(mappedBy = "evaluadorImpacto")
-    private List<SolicitudCambio> solicitudesCambioEvaluadorImpacto; // Lista de solicitudes de cambio en las que aparece como evaluador del impacto
+    private List<SolicitudCambio> solicitudesCambioEvaluadorImpacto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitante")
-    private List<SolicitudCambio> solicitudesCambioEnviadas;  // Lista de solicitudes de cambio que ha enviado
+    private List<SolicitudCambio> solicitudesCambioEnviadas;
 
     public FuncionarioDisico() {
     }
@@ -82,28 +82,28 @@ public class FuncionarioDisico extends Funcionario {
         this.anexo = anexo;
     }
 
-    public List<ItemConfiguracion> getItemConfiguracionList() {
-        return itemConfiguracionList;
+    public List<ItemConfiguracion> getItemsConfiguracionAcargo() {
+        return itemsConfiguracionAcargo;
     }
 
-    public void setItemConfiguracionList(List<ItemConfiguracion> itemConfiguracionList) {
-        this.itemConfiguracionList = itemConfiguracionList;
+    public void setItemsConfiguracionAcargo(List<ItemConfiguracion> itemsConfiguracionAcargo) {
+        this.itemsConfiguracionAcargo = itemsConfiguracionAcargo;
     }
 
-    public List<TareaProyecto> getTareaProyectoList() {
-        return tareaProyectoList;
+    public List<TareaProyecto> getTareasProyectoAgendadas() {
+        return tareasProyectoAgendadas;
     }
 
-    public void setTareaProyectoList(List<TareaProyecto> tareaProyectoList) {
-        this.tareaProyectoList = tareaProyectoList;
+    public void setTareasProyectoAgendadas(List<TareaProyecto> tareasProyectoAgendadas) {
+        this.tareasProyectoAgendadas = tareasProyectoAgendadas;
     }
 
-    public List<EstadisticaPersonal> getEstadisticaPersonalList() {
-        return estadisticaPersonalList;
+    public List<EstadisticaPersonal> getEstadisticasPersonales() {
+        return estadisticasPersonales;
     }
 
-    public void setEstadisticaPersonalList(List<EstadisticaPersonal> estadisticaPersonalList) {
-        this.estadisticaPersonalList = estadisticaPersonalList;
+    public void setEstadisticasPersonales(List<EstadisticaPersonal> estadisticasPersonales) {
+        this.estadisticasPersonales = estadisticasPersonales;
     }
 
     public List<SolicitudRequerimiento> getSolicitudesRequerimientosAsignadas() {
@@ -122,36 +122,36 @@ public class FuncionarioDisico extends Funcionario {
         this.area = area;
     }
 
-    public List<TareaScmProyecto> getTareaScmProyectoList() {
-        return tareaScmProyectoList;
+    public List<TareaScmProyecto> getTareasScmAsignadas() {
+        return tareasScmAsignadas;
     }
 
-    public void setTareaScmProyectoList(List<TareaScmProyecto> tareaScmProyectoList) {
-        this.tareaScmProyectoList = tareaScmProyectoList;
+    public void setTareasScmAsignadas(List<TareaScmProyecto> tareasScmAsignadas) {
+        this.tareasScmAsignadas = tareasScmAsignadas;
     }
 
-    public List<ParticipanteProyecto> getProyectosEnQueParticipa() {
-        return proyectosEnQueParticipa;
+    public List<ParticipanteProyecto> getParticipacionesProyecto() {
+        return participacionesProyecto;
     }
 
-    public void setProyectosEnQueParticipa(List<ParticipanteProyecto> proyectosEnQueParticipa) {
-        this.proyectosEnQueParticipa = proyectosEnQueParticipa;
+    public void setParticipacionesProyecto(List<ParticipanteProyecto> participacionesProyecto) {
+        this.participacionesProyecto = participacionesProyecto;
     }
 
-    public List<FormularioImplementacion> getFormulariosImplementacionImplementador() {
-        return formulariosImplementacionImplementador;
+    public List<FormularioImplementacion> getImplementadorForlumarios() {
+        return implementadorForlumarios;
     }
 
-    public void setFormulariosImplementacionImplementador(List<FormularioImplementacion> formulariosImplementacionImplementador) {
-        this.formulariosImplementacionImplementador = formulariosImplementacionImplementador;
+    public void setImplementadorForlumarios(List<FormularioImplementacion> implementadorForlumarios) {
+        this.implementadorForlumarios = implementadorForlumarios;
     }
 
-    public List<FormularioImplementacion> getFormulariosImplementacionVerificador() {
-        return formulariosImplementacionVerificador;
+    public List<FormularioImplementacion> getVerificadorFormularios() {
+        return verificadorFormularios;
     }
 
-    public void setFormulariosImplementacionVerificador(List<FormularioImplementacion> formulariosImplementacionVerificador) {
-        this.formulariosImplementacionVerificador = formulariosImplementacionVerificador;
+    public void setVerificadorFormularios(List<FormularioImplementacion> verificadorFormularios) {
+        this.verificadorFormularios = verificadorFormularios;
     }
 
     public List<SolicitudCambio> getSolicitudesCambioEvaluadorFinal() {
@@ -162,7 +162,7 @@ public class FuncionarioDisico extends Funcionario {
         this.solicitudesCambioEvaluadorFinal = solicitudesCambioEvaluadorFinal;
     }
 
-    public List<SolicitudCambio> getSoolicitudesCambioEvaluadorImpacto() {
+    public List<SolicitudCambio> getSolicitudesCambioEvaluadorImpacto() {
         return solicitudesCambioEvaluadorImpacto;
     }
 
@@ -202,5 +202,6 @@ public class FuncionarioDisico extends Funcionario {
     public String toString() {
         return "cl.uv.proyecto.persistencia.entidades.FuncionarioDisico[ rut=" + getRut() + " ]";
     }
-    
+
+  
 }

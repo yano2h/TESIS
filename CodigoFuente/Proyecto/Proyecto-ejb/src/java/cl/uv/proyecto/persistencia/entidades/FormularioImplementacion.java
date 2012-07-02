@@ -8,10 +8,11 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "FORMULARIO_IMPLEMENTACION")
@@ -21,8 +22,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "FormularioImplementacion.findByFechaVerificacion", query = "SELECT f FROM FormularioImplementacion f WHERE f.fechaVerificacion = :fechaVerificacion")})
 public class FormularioImplementacion implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_formulario_implementacion")
@@ -30,6 +30,7 @@ public class FormularioImplementacion implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Lob
+    @Size(min = 1, max = 65535)
     @Column(name = "observaciones")
     private String observaciones;
     @Basic(optional = false)
@@ -37,15 +38,13 @@ public class FormularioImplementacion implements Serializable {
     @Column(name = "fecha_verificacion")
     @Temporal(TemporalType.DATE)
     private Date fechaVerificacion;
-    
-    @OneToOne(optional=false, fetch=FetchType.EAGER)
-    @JoinColumn(name = "id_solicitud_cambio", referencedColumnName = "id_solicitud_cambio")
+    @JoinColumn(name = "id_formulario_implementacion", referencedColumnName = "id_solicitud_cambio", insertable = false, updatable = false)
+    @OneToOne(optional = false)
     private SolicitudCambio solicitudCambio;
-    
-    @JoinColumn(name = "rut_implementador", referencedColumnName = "rut")
+    @JoinColumn(name = "implementador", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private FuncionarioDisico implementador;
-    @JoinColumn(name = "rut_verificador", referencedColumnName = "rut")
+    @JoinColumn(name = "verificador", referencedColumnName = "rut")
     @ManyToOne(optional = false)
     private FuncionarioDisico verificador;
 

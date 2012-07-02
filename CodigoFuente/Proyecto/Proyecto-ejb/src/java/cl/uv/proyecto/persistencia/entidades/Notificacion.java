@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "NOTIFICACION")
@@ -24,8 +24,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Notificacion.findByRevisada", query = "SELECT n FROM Notificacion n WHERE n.revisada = :revisada")})
 public class Notificacion implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_notificacion")
@@ -37,16 +37,16 @@ public class Notificacion implements Serializable {
     private Date fecha;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 90)
+    @Size(min = 1, max = 100)
     @Column(name = "mensaje_notificacion")
     private String mensajeNotificacion;
     @Basic(optional = false)
     @NotNull
     @Column(name = "revisada")
     private boolean revisada;
-    @JoinColumn(name = "rut_destinatario", referencedColumnName = "rut")
+    @JoinColumn(name = "destinatario", referencedColumnName = "rut")
     @ManyToOne(optional = false)
-    private Funcionario funcionario;
+    private Funcionario destinatario;
 
     public Notificacion() {
     }
@@ -94,12 +94,12 @@ public class Notificacion implements Serializable {
         this.revisada = revisada;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
+    public Funcionario getDestinatario() {
+        return destinatario;
     }
 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setDestinatario(Funcionario destinatario) {
+        this.destinatario = destinatario;
     }
 
     @Override

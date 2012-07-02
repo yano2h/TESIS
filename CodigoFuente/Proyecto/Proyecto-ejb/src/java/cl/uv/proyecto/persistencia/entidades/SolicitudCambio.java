@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "SOLICITUD_CAMBIO")
@@ -27,13 +27,12 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "SolicitudCambio.findByDescripcionResolucion", query = "SELECT s FROM SolicitudCambio s WHERE s.descripcionResolucion = :descripcionResolucion")})
 public class SolicitudCambio implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_solicitud_cambio")
     private Integer idSolicitudCambio;
-    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -41,21 +40,24 @@ public class SolicitudCambio implements Serializable {
     private String titulo;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha_solicitud")
+    @Column(name = "fecha_envio")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEnvio;
     @Basic(optional = false)
     @NotNull
     @Lob
+    @Size(min = 1, max = 65535)
     @Column(name = "descripcion_necesidad_cambio")
     private String descripcionNecesidadCambio;
     @Lob
+    @Size(max = 65535)
     @Column(name = "descripcion_cambio")
     private String descripcionCambio;
     @Column(name = "fecha_analisis")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaAnalisis;
     @Lob
+    @Size(max = 65535)
     @Column(name = "descripcion_impacto_cambio")
     private String descripcionImpactoCambio;
     @Column(name = "fecha_cierre")
@@ -65,33 +67,33 @@ public class SolicitudCambio implements Serializable {
     @Column(name = "modulo_afectado")
     private String moduloAfectado;
     @Size(max = 255)
-    @Column(name = "descripcion_resolucuion")
+    @Column(name = "descripcion_resolucion")
     private String descripcionResolucion;
-    @JoinColumn(name = "id_tipo_prioridad", referencedColumnName = "id_tipo_prioridad")
-    @ManyToOne(optional = false)
-    private TipoPrioridad tipoPrioridad;
-    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto")
-    @ManyToOne(optional = false)
-    private Proyecto proyecto;
-    @JoinColumn(name = "id_item_configuracion", referencedColumnName = "id_item_configuracion")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "solicitudCambio")
+    private FormularioImplementacion formularioImplementacion;
+    @JoinColumn(name = "item_configuracion", referencedColumnName = "id_item_configuracion")
     @ManyToOne(optional = false)
     private ItemConfiguracion itemConfiguracion;
-    @JoinColumn(name = "rut_solicitante", referencedColumnName = "rut")
-    @ManyToOne(optional = false)
-    private FuncionarioDisico solicitante;
-    @JoinColumn(name = "rut_evaluador_impacto", referencedColumnName = "rut")
+    @JoinColumn(name = "evaluador_final", referencedColumnName = "rut")
+    @ManyToOne
+    private FuncionarioDisico evaluadorFinal;
+    @JoinColumn(name = "evaluador_impacto", referencedColumnName = "rut")
     @ManyToOne
     private FuncionarioDisico evaluadorImpacto;
-    @JoinColumn(name = "rut_evaluador_final", referencedColumnName = "rut")
-    @ManyToOne
-    private FuncionarioDisico evaluadorFinalSolicitud;
-    @JoinColumn(name = "id_estado_solicitud_cambio", referencedColumnName = "id_estado_solicitud_cambio")
+    @JoinColumn(name = "estado_solicitud", referencedColumnName = "id_estado_solicitud_cambio")
     @ManyToOne(optional = false)
-    private EstadoSolicitudCambio estadoSolicitudCambio;
+    private EstadoSolicitudCambio estadoSolicitud;
+    @JoinColumn(name = "prioridad_solicitud", referencedColumnName = "id_tipo_prioridad")
+    @ManyToOne(optional = false)
+    private TipoPrioridad prioridadSolicitud;
+    @JoinColumn(name = "solicitante", referencedColumnName = "rut")
+    @ManyToOne(optional = false)
+    private FuncionarioDisico solicitante;
+    @JoinColumn(name = "proyecto", referencedColumnName = "id_proyecto")
+    @ManyToOne(optional = false)
+    private Proyecto proyecto;
     
-    @OneToOne(fetch= FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "solicitudCambio")
-    private FormularioImplementacion formularioImplementacion;
-   
+
     public SolicitudCambio() {
     }
 
@@ -99,10 +101,10 @@ public class SolicitudCambio implements Serializable {
         this.idSolicitudCambio = idSolicitudCambio;
     }
 
-    public SolicitudCambio(Integer idSolicitudCambio, String titulo, Date fechaSolicitud, String descripcionNecesidadCambio) {
+    public SolicitudCambio(Integer idSolicitudCambio, String titulo, Date fechaEnvio, String descripcionNecesidadCambio) {
         this.idSolicitudCambio = idSolicitudCambio;
         this.titulo = titulo;
-        this.fechaEnvio = fechaSolicitud;
+        this.fechaEnvio = fechaEnvio;
         this.descripcionNecesidadCambio = descripcionNecesidadCambio;
     }
 
@@ -194,22 +196,6 @@ public class SolicitudCambio implements Serializable {
         this.formularioImplementacion = formularioImplementacion;
     }
 
-    public TipoPrioridad getTipoPrioridad() {
-        return tipoPrioridad;
-    }
-
-    public void setTipoPrioridad(TipoPrioridad tipoPrioridad) {
-        this.tipoPrioridad = tipoPrioridad;
-    }
-
-    public Proyecto getProyecto() {
-        return proyecto;
-    }
-
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
-    }
-
     public ItemConfiguracion getItemConfiguracion() {
         return itemConfiguracion;
     }
@@ -218,12 +204,12 @@ public class SolicitudCambio implements Serializable {
         this.itemConfiguracion = itemConfiguracion;
     }
 
-    public FuncionarioDisico getEvaluadorFinalSolicitud() {
-        return evaluadorFinalSolicitud;
+    public FuncionarioDisico getEvaluadorFinal() {
+        return evaluadorFinal;
     }
 
-    public void setEvaluadorFinalSolicitud(FuncionarioDisico evaluadorFinalSolicitud) {
-        this.evaluadorFinalSolicitud = evaluadorFinalSolicitud;
+    public void setEvaluadorFinal(FuncionarioDisico evaluadorFinal) {
+        this.evaluadorFinal = evaluadorFinal;
     }
 
     public FuncionarioDisico getEvaluadorImpacto() {
@@ -234,6 +220,22 @@ public class SolicitudCambio implements Serializable {
         this.evaluadorImpacto = evaluadorImpacto;
     }
 
+    public EstadoSolicitudCambio getEstadoSolicitud() {
+        return estadoSolicitud;
+    }
+
+    public void setEstadoSolicitud(EstadoSolicitudCambio estadoSolicitud) {
+        this.estadoSolicitud = estadoSolicitud;
+    }
+
+    public TipoPrioridad getPrioridadSolicitud() {
+        return prioridadSolicitud;
+    }
+
+    public void setPrioridadSolicitud(TipoPrioridad prioridadSolicitud) {
+        this.prioridadSolicitud = prioridadSolicitud;
+    }
+
     public FuncionarioDisico getSolicitante() {
         return solicitante;
     }
@@ -242,12 +244,12 @@ public class SolicitudCambio implements Serializable {
         this.solicitante = solicitante;
     }
 
-    public EstadoSolicitudCambio getEstadoSolicitudCambio() {
-        return estadoSolicitudCambio;
+    public Proyecto getProyecto() {
+        return proyecto;
     }
 
-    public void setEstadoSolicitudCambio(EstadoSolicitudCambio estadoSolicitudCambio) {
-        this.estadoSolicitudCambio = estadoSolicitudCambio;
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
     }
 
     @Override

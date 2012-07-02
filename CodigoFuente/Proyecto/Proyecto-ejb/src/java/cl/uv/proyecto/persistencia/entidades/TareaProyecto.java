@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "TAREA_PROYECTO")
@@ -20,6 +20,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "TareaProyecto.findAll", query = "SELECT t FROM TareaProyecto t"),
     @NamedQuery(name = "TareaProyecto.findByIdTareaProyecto", query = "SELECT t FROM TareaProyecto t WHERE t.idTareaProyecto = :idTareaProyecto"),
     @NamedQuery(name = "TareaProyecto.findByTarea", query = "SELECT t FROM TareaProyecto t WHERE t.tarea = :tarea"),
+    @NamedQuery(name = "TareaProyecto.findByDescripcionTarea", query = "SELECT t FROM TareaProyecto t WHERE t.descripcionTarea = :descripcionTarea"),
     @NamedQuery(name = "TareaProyecto.findByFechaCreacion", query = "SELECT t FROM TareaProyecto t WHERE t.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "TareaProyecto.findByFechaInicioPropuesta", query = "SELECT t FROM TareaProyecto t WHERE t.fechaInicioPropuesta = :fechaInicioPropuesta"),
     @NamedQuery(name = "TareaProyecto.findByFechaInicioReal", query = "SELECT t FROM TareaProyecto t WHERE t.fechaInicioReal = :fechaInicioReal"),
@@ -29,8 +30,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "TareaProyecto.findByVisible", query = "SELECT t FROM TareaProyecto t WHERE t.visible = :visible")})
 public class TareaProyecto implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_tarea_proyecto")
@@ -42,9 +43,14 @@ public class TareaProyecto implements Serializable {
     private String tarea;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 255)
+    @Column(name = "descripcion_tarea")
+    private String descripcionTarea;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "fecha_creacion")
-    private String fechaCreacion;
+    @Temporal(TemporalType.DATE)
+    private Date fechaCreacion;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_inicio_propuesta")
@@ -69,12 +75,12 @@ public class TareaProyecto implements Serializable {
     @NotNull
     @Column(name = "visible")
     private boolean visible;
-    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto")
+    @JoinColumn(name = "responsable_tarea", referencedColumnName = "rut")
+    @ManyToOne(optional = false)
+    private FuncionarioDisico responsableTarea;
+    @JoinColumn(name = "proyecto", referencedColumnName = "id_proyecto")
     @ManyToOne(optional = false)
     private Proyecto proyecto;
-    @JoinColumn(name = "rut_responsable", referencedColumnName = "rut")
-    @ManyToOne(optional = false)
-    private FuncionarioDisico funcionarioDisico;
 
     public TareaProyecto() {
     }
@@ -83,9 +89,10 @@ public class TareaProyecto implements Serializable {
         this.idTareaProyecto = idTareaProyecto;
     }
 
-    public TareaProyecto(Integer idTareaProyecto, String tarea, String fechaCreacion, Date fechaInicioPropuesta, Date fechaTerminoPropuesta, short nivelAvance, boolean visible) {
+    public TareaProyecto(Integer idTareaProyecto, String tarea, String descripcionTarea, Date fechaCreacion, Date fechaInicioPropuesta, Date fechaTerminoPropuesta, short nivelAvance, boolean visible) {
         this.idTareaProyecto = idTareaProyecto;
         this.tarea = tarea;
+        this.descripcionTarea = descripcionTarea;
         this.fechaCreacion = fechaCreacion;
         this.fechaInicioPropuesta = fechaInicioPropuesta;
         this.fechaTerminoPropuesta = fechaTerminoPropuesta;
@@ -109,11 +116,19 @@ public class TareaProyecto implements Serializable {
         this.tarea = tarea;
     }
 
-    public String getFechaCreacion() {
+    public String getDescripcionTarea() {
+        return descripcionTarea;
+    }
+
+    public void setDescripcionTarea(String descripcionTarea) {
+        this.descripcionTarea = descripcionTarea;
+    }
+
+    public Date getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
+    public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
@@ -165,20 +180,20 @@ public class TareaProyecto implements Serializable {
         this.visible = visible;
     }
 
+    public FuncionarioDisico getResponsableTarea() {
+        return responsableTarea;
+    }
+
+    public void setResponsableTarea(FuncionarioDisico responsableTarea) {
+        this.responsableTarea = responsableTarea;
+    }
+
     public Proyecto getProyecto() {
         return proyecto;
     }
 
     public void setProyecto(Proyecto proyecto) {
         this.proyecto = proyecto;
-    }
-
-    public FuncionarioDisico getFuncionarioDisico() {
-        return funcionarioDisico;
-    }
-
-    public void setFuncionarioDisico(FuncionarioDisico funcionarioDisico) {
-        this.funcionarioDisico = funcionarioDisico;
     }
 
     @Override

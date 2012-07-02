@@ -12,13 +12,13 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "ESTADO_SOLICITUD_REQ")
 @NamedQueries({
     @NamedQuery(name = "EstadoSolicitudRequerimiento.findAll", query = "SELECT e FROM EstadoSolicitudRequerimiento e"),
-    @NamedQuery(name = "EstadoSolicitudRequerimiento.findByIdEstadoSolicitudReq", query = "SELECT e FROM EstadoSolicitudRequerimiento e WHERE e.idEstadoSolicitudReq = :idEstadoSolicitudReq"),
+    @NamedQuery(name = "EstadoSolicitudRequerimiento.findByIdEstadoSolicitudRequerimiento", query = "SELECT e FROM EstadoSolicitudRequerimiento e WHERE e.idEstadoSolicitudRequerimiento = :idEstadoSolicitudRequerimiento"),
     @NamedQuery(name = "EstadoSolicitudRequerimiento.findByNombreEstadoSolicitud", query = "SELECT e FROM EstadoSolicitudRequerimiento e WHERE e.nombreEstadoSolicitud = :nombreEstadoSolicitud"),
     @NamedQuery(name = "EstadoSolicitudRequerimiento.findByDescripcionEstado", query = "SELECT e FROM EstadoSolicitudRequerimiento e WHERE e.descripcionEstado = :descripcionEstado")})
 public class EstadoSolicitudRequerimiento implements Serializable {
@@ -27,7 +27,7 @@ public class EstadoSolicitudRequerimiento implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_estado_solicitud_req")
-    private Short idEstadoSolicitudReq;
+    private Short idEstadoSolicitudRequerimiento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -36,27 +36,29 @@ public class EstadoSolicitudRequerimiento implements Serializable {
     @Size(max = 255)
     @Column(name = "descripcion_estado")
     private String descripcionEstado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoSolicitudRequerimiento")
+    
+    /* Ver si borrar */
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoSolicitud")
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
 
     public EstadoSolicitudRequerimiento() {
     }
 
-    public EstadoSolicitudRequerimiento(Short idEstadoSolicitudReq) {
-        this.idEstadoSolicitudReq = idEstadoSolicitudReq;
+    public EstadoSolicitudRequerimiento(Short idEstadoSolicitudRequerimiento) {
+        this.idEstadoSolicitudRequerimiento = idEstadoSolicitudRequerimiento;
     }
 
-    public EstadoSolicitudRequerimiento(Short idEstadoSolicitudReq, String nombreEstadoSolicitud) {
-        this.idEstadoSolicitudReq = idEstadoSolicitudReq;
+    public EstadoSolicitudRequerimiento(Short idEstadoSolicitudRequerimiento, String nombreEstadoSolicitud) {
+        this.idEstadoSolicitudRequerimiento = idEstadoSolicitudRequerimiento;
         this.nombreEstadoSolicitud = nombreEstadoSolicitud;
     }
 
-    public Short getIdEstadoSolicitudReq() {
-        return idEstadoSolicitudReq;
+    public Short getIdEstadoSolicitudRequerimiento() {
+        return idEstadoSolicitudRequerimiento;
     }
 
-    public void setIdEstadoSolicitudReq(Short idEstadoSolicitudReq) {
-        this.idEstadoSolicitudReq = idEstadoSolicitudReq;
+    public void setIdEstadoSolicitudRequerimiento(Short idEstadoSolicitudRequerimiento) {
+        this.idEstadoSolicitudRequerimiento = idEstadoSolicitudRequerimiento;
     }
 
     public String getNombreEstadoSolicitud() {
@@ -86,7 +88,7 @@ public class EstadoSolicitudRequerimiento implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idEstadoSolicitudReq != null ? idEstadoSolicitudReq.hashCode() : 0);
+        hash += (idEstadoSolicitudRequerimiento != null ? idEstadoSolicitudRequerimiento.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +99,7 @@ public class EstadoSolicitudRequerimiento implements Serializable {
             return false;
         }
         EstadoSolicitudRequerimiento other = (EstadoSolicitudRequerimiento) object;
-        if ((this.idEstadoSolicitudReq == null && other.idEstadoSolicitudReq != null) || (this.idEstadoSolicitudReq != null && !this.idEstadoSolicitudReq.equals(other.idEstadoSolicitudReq))) {
+        if ((this.idEstadoSolicitudRequerimiento == null && other.idEstadoSolicitudRequerimiento != null) || (this.idEstadoSolicitudRequerimiento != null && !this.idEstadoSolicitudRequerimiento.equals(other.idEstadoSolicitudRequerimiento))) {
             return false;
         }
         return true;
@@ -105,7 +107,7 @@ public class EstadoSolicitudRequerimiento implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.uv.proyecto.persistencia.entidades.EstadoSolicitudRequerimiento[ idEstadoSolicitudReq=" + idEstadoSolicitudReq + " ]";
+        return "cl.uv.proyecto.persistencia.entidades.EstadoSolicitudRequerimiento[ idEstadoSolicitudRequerimiento=" + idEstadoSolicitudRequerimiento + " ]";
     }
     
 }

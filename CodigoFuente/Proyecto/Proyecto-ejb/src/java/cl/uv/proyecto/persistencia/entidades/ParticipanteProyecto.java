@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "PARTICIPANTE_PROYECTO")
@@ -21,15 +21,15 @@ public class ParticipanteProyecto implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ParticipanteProyectoPK participanteProyectoPK;
-    @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
+    @JoinColumn(name = "rol", referencedColumnName = "id_rol")
     @ManyToOne(optional = false)
-    private RolProyecto rolProyecto;
+    private RolProyecto rol;
     @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Proyecto proyecto;
     @JoinColumn(name = "rut_participante", referencedColumnName = "rut", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private FuncionarioDisico funcionarioDisico;
+    private FuncionarioDisico participante;
 
     public ParticipanteProyecto() {
     }
@@ -50,12 +50,12 @@ public class ParticipanteProyecto implements Serializable {
         this.participanteProyectoPK = participanteProyectoPK;
     }
 
-    public RolProyecto getRolProyecto() {
-        return rolProyecto;
+    public RolProyecto getRol() {
+        return rol;
     }
 
-    public void setRolProyecto(RolProyecto rolProyecto) {
-        this.rolProyecto = rolProyecto;
+    public void setRol(RolProyecto rol) {
+        this.rol = rol;
     }
 
     public Proyecto getProyecto() {
@@ -66,12 +66,12 @@ public class ParticipanteProyecto implements Serializable {
         this.proyecto = proyecto;
     }
 
-    public FuncionarioDisico getFuncionarioDisico() {
-        return funcionarioDisico;
+    public FuncionarioDisico getParticipante() {
+        return participante;
     }
 
-    public void setFuncionarioDisico(FuncionarioDisico funcionarioDisico) {
-        this.funcionarioDisico = funcionarioDisico;
+    public void setParticipante(FuncionarioDisico participante) {
+        this.participante = participante;
     }
 
     @Override

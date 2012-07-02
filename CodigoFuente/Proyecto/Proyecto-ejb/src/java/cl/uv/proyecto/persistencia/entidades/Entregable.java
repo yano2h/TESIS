@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "ENTREGABLE")
@@ -21,18 +21,18 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Entregable.findByNombreEntregable", query = "SELECT e FROM Entregable e WHERE e.nombreEntregable = :nombreEntregable")})
 public class Entregable implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_entregable")
     private Integer idEntregable;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 50)
     @Column(name = "nombre_entregable")
     private String nombreEntregable;
-    @JoinColumn(name = "id_tarea_scm", referencedColumnName = "id_tarea_scm")
+    @JoinColumn(name = "tarea_scm", referencedColumnName = "id_tarea_scm")
     @ManyToOne(optional = false)
     private TareaScm tareaScm;
 

@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "TAREA_SCM")
@@ -24,13 +24,14 @@ import javax.validation.constraints.Size;
 public class TareaScm implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_tarea_scm")
     private Integer idTareaScm;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 60)
     @Column(name = "nombre_tarea")
     private String nombreTarea;
     @Basic(optional = false)

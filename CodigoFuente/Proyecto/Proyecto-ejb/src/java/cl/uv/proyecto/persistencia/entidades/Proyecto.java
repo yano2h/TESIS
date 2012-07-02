@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Alejandro
+ * @author Jano
  */
 @Entity
 @Table(name = "PROYECTO")
@@ -27,8 +27,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Proyecto.findByFechaTermino", query = "SELECT p FROM Proyecto p WHERE p.fechaTermino = :fechaTermino")})
 public class Proyecto implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_proyecto")
@@ -57,21 +57,21 @@ public class Proyecto implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaTermino;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
-    private List<ItemConfiguracion> itemConfiguracionList;
+    private List<ItemConfiguracion> itemsDeConfiguracion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
-    private List<TareaProyecto> tareaProyectoList;
+    private List<TareaProyecto> tareasAgendadas;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
-    private List<TareaScmProyecto> tareaScmProyectoList;
+    private List<TareaScmProyecto> tareasScmProyecto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
-    private List<ParticipanteProyecto> participanteProyectoList;
-    @JoinColumn(name = "id_tipo_proyecto", referencedColumnName = "id_tipo_proyecto")
-    @ManyToOne(optional = false)
-    private TipoProyecto tipoProyecto;
-    @JoinColumn(name = "id_estado_proyecto", referencedColumnName = "id_estado_proyecto")
+    private List<ParticipanteProyecto> participantes;
+    @JoinColumn(name = "estado_proyecto", referencedColumnName = "id_estado_proyecto")
     @ManyToOne(optional = false)
     private EstadoProyecto estadoProyecto;
+    @JoinColumn(name = "tipo_proyecto", referencedColumnName = "id_tipo_proyecto")
+    @ManyToOne(optional = false)
+    private TipoProyecto tipoProyecto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
-    private List<SolicitudCambio> solicitudCambioList;
+    private List<SolicitudCambio> solicitudesDeCambio;
 
     public Proyecto() {
     }
@@ -136,44 +136,36 @@ public class Proyecto implements Serializable {
         this.fechaTermino = fechaTermino;
     }
 
-    public List<ItemConfiguracion> getItemConfiguracionList() {
-        return itemConfiguracionList;
+    public List<ItemConfiguracion> getItemsDeConfiguracion() {
+        return itemsDeConfiguracion;
     }
 
-    public void setItemConfiguracionList(List<ItemConfiguracion> itemConfiguracionList) {
-        this.itemConfiguracionList = itemConfiguracionList;
+    public void setItemsDeConfiguracion(List<ItemConfiguracion> itemsDeConfiguracion) {
+        this.itemsDeConfiguracion = itemsDeConfiguracion;
     }
 
-    public List<TareaProyecto> getTareaProyectoList() {
-        return tareaProyectoList;
+    public List<TareaProyecto> getTareasAgendadas() {
+        return tareasAgendadas;
     }
 
-    public void setTareaProyectoList(List<TareaProyecto> tareaProyectoList) {
-        this.tareaProyectoList = tareaProyectoList;
+    public void setTareasAgendadas(List<TareaProyecto> tareasAgendadas) {
+        this.tareasAgendadas = tareasAgendadas;
     }
 
-    public List<TareaScmProyecto> getTareaScmProyectoList() {
-        return tareaScmProyectoList;
+    public List<TareaScmProyecto> getTareasScmProyecto() {
+        return tareasScmProyecto;
     }
 
-    public void setTareaScmProyectoList(List<TareaScmProyecto> tareaScmProyectoList) {
-        this.tareaScmProyectoList = tareaScmProyectoList;
+    public void setTareasScmProyecto(List<TareaScmProyecto> tareasScmProyecto) {
+        this.tareasScmProyecto = tareasScmProyecto;
     }
 
-    public List<ParticipanteProyecto> getParticipanteProyectoList() {
-        return participanteProyectoList;
+    public List<ParticipanteProyecto> getParticipantes() {
+        return participantes;
     }
 
-    public void setParticipanteProyectoList(List<ParticipanteProyecto> participanteProyectoList) {
-        this.participanteProyectoList = participanteProyectoList;
-    }
-
-    public TipoProyecto getTipoProyecto() {
-        return tipoProyecto;
-    }
-
-    public void setTipoProyecto(TipoProyecto tipoProyecto) {
-        this.tipoProyecto = tipoProyecto;
+    public void setParticipantes(List<ParticipanteProyecto> participantes) {
+        this.participantes = participantes;
     }
 
     public EstadoProyecto getEstadoProyecto() {
@@ -184,12 +176,20 @@ public class Proyecto implements Serializable {
         this.estadoProyecto = estadoProyecto;
     }
 
-    public List<SolicitudCambio> getSolicitudCambioList() {
-        return solicitudCambioList;
+    public TipoProyecto getTipoProyecto() {
+        return tipoProyecto;
     }
 
-    public void setSolicitudCambioList(List<SolicitudCambio> solicitudCambioList) {
-        this.solicitudCambioList = solicitudCambioList;
+    public void setTipoProyecto(TipoProyecto tipoProyecto) {
+        this.tipoProyecto = tipoProyecto;
+    }
+
+    public List<SolicitudCambio> getSolicitudesDeCambio() {
+        return solicitudesDeCambio;
+    }
+
+    public void setSolicitudesDeCambio(List<SolicitudCambio> solicitudesDeCambio) {
+        this.solicitudesDeCambio = solicitudesDeCambio;
     }
 
     @Override
