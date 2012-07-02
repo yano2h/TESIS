@@ -391,16 +391,15 @@ ENGINE = InnoDB;
 -- Table TAREA_SCM_PROYECTO
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS TAREA_SCM_PROYECTO (
-  id_tarea_scm_proyecto INT NOT NULL AUTO_INCREMENT ,
-  tarea_scm INT NOT NULL ,
-  proyecto INT NOT NULL ,
+  id_tarea_scm INT NOT NULL ,
+  id_proyecto INT NOT NULL ,
   responsable INT NOT NULL ,
   fecha_inicio DATE NOT NULL ,
   fecha_termino DATE NOT NULL ,
   INDEX fk_TAREA_SCM_has_PROYECTO_PROYECTO1 (proyecto ASC) ,
   INDEX fk_TAREA_SCM_has_PROYECTO_TAREA_SCM1 (tarea_scm ASC) ,
   INDEX fk_TAREA_SCM_has_PROYECTO_FUNCIONARIO_DISICO1 (responsable ASC) ,
-  PRIMARY KEY (id_tarea_scm_proyecto) ,
+  PRIMARY KEY (tarea_scm, proyecto) ,
   CONSTRAINT fk_TAREA_SCM_has_PROYECTO_TAREA_SCM1
     FOREIGN KEY (tarea_scm )
     REFERENCES TAREA_SCM (id_tarea_scm )
