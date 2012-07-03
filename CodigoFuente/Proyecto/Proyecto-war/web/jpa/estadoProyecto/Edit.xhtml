@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditEstadoProyectoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditEstadoProyectoLabel_idEstadoProyecto}" for="idEstadoProyecto" />
+                    <h:inputText id="idEstadoProyecto" value="#{estadoProyectoController.selected.idEstadoProyecto}" title="#{bundle.EditEstadoProyectoTitle_idEstadoProyecto}" required="true" requiredMessage="#{bundle.EditEstadoProyectoRequiredMessage_idEstadoProyecto}"/>
+                    <h:outputLabel value="#{bundle.EditEstadoProyectoLabel_nombreEstadoProyecto}" for="nombreEstadoProyecto" />
+                    <h:inputText id="nombreEstadoProyecto" value="#{estadoProyectoController.selected.nombreEstadoProyecto}" title="#{bundle.EditEstadoProyectoTitle_nombreEstadoProyecto}" required="true" requiredMessage="#{bundle.EditEstadoProyectoRequiredMessage_nombreEstadoProyecto}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{estadoProyectoController.update}" value="#{bundle.EditEstadoProyectoSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditEstadoProyectoViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{estadoProyectoController.prepareList}" value="#{bundle.EditEstadoProyectoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditEstadoProyectoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

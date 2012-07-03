@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateEstadoSolicitudRequerimientoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateEstadoSolicitudRequerimientoLabel_idEstadoSolicitudRequerimiento}" for="idEstadoSolicitudRequerimiento" />
+                    <h:inputText id="idEstadoSolicitudRequerimiento" value="#{estadoSolicitudRequerimientoController.selected.idEstadoSolicitudRequerimiento}" title="#{bundle.CreateEstadoSolicitudRequerimientoTitle_idEstadoSolicitudRequerimiento}" required="true" requiredMessage="#{bundle.CreateEstadoSolicitudRequerimientoRequiredMessage_idEstadoSolicitudRequerimiento}"/>
+                    <h:outputLabel value="#{bundle.CreateEstadoSolicitudRequerimientoLabel_nombreEstadoSolicitud}" for="nombreEstadoSolicitud" />
+                    <h:inputText id="nombreEstadoSolicitud" value="#{estadoSolicitudRequerimientoController.selected.nombreEstadoSolicitud}" title="#{bundle.CreateEstadoSolicitudRequerimientoTitle_nombreEstadoSolicitud}" required="true" requiredMessage="#{bundle.CreateEstadoSolicitudRequerimientoRequiredMessage_nombreEstadoSolicitud}"/>
+                    <h:outputLabel value="#{bundle.CreateEstadoSolicitudRequerimientoLabel_descripcionEstado}" for="descripcionEstado" />
+                    <h:inputText id="descripcionEstado" value="#{estadoSolicitudRequerimientoController.selected.descripcionEstado}" title="#{bundle.CreateEstadoSolicitudRequerimientoTitle_descripcionEstado}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{estadoSolicitudRequerimientoController.create}" value="#{bundle.CreateEstadoSolicitudRequerimientoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{estadoSolicitudRequerimientoController.prepareList}" value="#{bundle.CreateEstadoSolicitudRequerimientoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateEstadoSolicitudRequerimientoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

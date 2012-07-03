@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateFuncionarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateFuncionarioLabel_rut}" for="rut" />
+                    <h:inputText id="rut" value="#{funcionarioController.selected.rut}" title="#{bundle.CreateFuncionarioTitle_rut}" required="true" requiredMessage="#{bundle.CreateFuncionarioRequiredMessage_rut}"/>
+                    <h:outputLabel value="#{bundle.CreateFuncionarioLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{funcionarioController.selected.nombre}" title="#{bundle.CreateFuncionarioTitle_nombre}" required="true" requiredMessage="#{bundle.CreateFuncionarioRequiredMessage_nombre}"/>
+                    <h:outputLabel value="#{bundle.CreateFuncionarioLabel_apellidoPaterno}" for="apellidoPaterno" />
+                    <h:inputText id="apellidoPaterno" value="#{funcionarioController.selected.apellidoPaterno}" title="#{bundle.CreateFuncionarioTitle_apellidoPaterno}" required="true" requiredMessage="#{bundle.CreateFuncionarioRequiredMessage_apellidoPaterno}"/>
+                    <h:outputLabel value="#{bundle.CreateFuncionarioLabel_apellidoMaterno}" for="apellidoMaterno" />
+                    <h:inputText id="apellidoMaterno" value="#{funcionarioController.selected.apellidoMaterno}" title="#{bundle.CreateFuncionarioTitle_apellidoMaterno}" required="true" requiredMessage="#{bundle.CreateFuncionarioRequiredMessage_apellidoMaterno}"/>
+                    <h:outputLabel value="#{bundle.CreateFuncionarioLabel_correoUv}" for="correoUv" />
+                    <h:inputText id="correoUv" value="#{funcionarioController.selected.correoUv}" title="#{bundle.CreateFuncionarioTitle_correoUv}" />
+                    <h:outputLabel value="#{bundle.CreateFuncionarioLabel_fechaUltimoAcceso}" for="fechaUltimoAcceso" />
+                    <h:inputText id="fechaUltimoAcceso" value="#{funcionarioController.selected.fechaUltimoAcceso}" title="#{bundle.CreateFuncionarioTitle_fechaUltimoAcceso}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateFuncionarioLabel_fechaPrimerAcceso}" for="fechaPrimerAcceso" />
+                    <h:inputText id="fechaPrimerAcceso" value="#{funcionarioController.selected.fechaPrimerAcceso}" title="#{bundle.CreateFuncionarioTitle_fechaPrimerAcceso}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{funcionarioController.create}" value="#{bundle.CreateFuncionarioSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{funcionarioController.prepareList}" value="#{bundle.CreateFuncionarioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateFuncionarioIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

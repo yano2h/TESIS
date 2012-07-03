@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewNotificacionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewNotificacionLabel_idNotificacion}"/>
+                    <h:outputText value="#{notificacionController.selected.idNotificacion}" title="#{bundle.ViewNotificacionTitle_idNotificacion}"/>
+                    <h:outputText value="#{bundle.ViewNotificacionLabel_fecha}"/>
+                    <h:outputText value="#{notificacionController.selected.fecha}" title="#{bundle.ViewNotificacionTitle_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewNotificacionLabel_mensajeNotificacion}"/>
+                    <h:outputText value="#{notificacionController.selected.mensajeNotificacion}" title="#{bundle.ViewNotificacionTitle_mensajeNotificacion}"/>
+                    <h:outputText value="#{bundle.ViewNotificacionLabel_revisada}"/>
+                    <h:outputText value="#{notificacionController.selected.revisada}" title="#{bundle.ViewNotificacionTitle_revisada}"/>
+                    <h:outputText value="#{bundle.ViewNotificacionLabel_destinatario}"/>
+                    <h:outputText value="#{notificacionController.selected.destinatario}" title="#{bundle.ViewNotificacionTitle_destinatario}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{notificacionController.destroyAndView}" value="#{bundle.ViewNotificacionDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewNotificacionEditLink}"/>
+                <br />
+                <h:commandLink action="#{notificacionController.prepareCreate}" value="#{bundle.ViewNotificacionCreateLink}" />
+                <br />
+                <h:commandLink action="#{notificacionController.prepareList}" value="#{bundle.ViewNotificacionShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewNotificacionIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

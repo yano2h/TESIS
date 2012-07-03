@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListFuncionarioDisicoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListFuncionarioDisicoEmpty}" rendered="#{funcionarioDisicoController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{funcionarioDisicoController.items.rowCount > 0}">
+                    <h:outputText value="#{funcionarioDisicoController.pagination.pageFirstItem + 1}..#{funcionarioDisicoController.pagination.pageLastItem + 1}/#{funcionarioDisicoController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{funcionarioDisicoController.previous}" value="#{bundle.Previous} #{funcionarioDisicoController.pagination.pageSize}" rendered="#{funcionarioDisicoController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{funcionarioDisicoController.next}" value="#{bundle.Next} #{funcionarioDisicoController.pagination.pageSize}" rendered="#{funcionarioDisicoController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{funcionarioDisicoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFuncionarioDisicoTitle_cargo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cargo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFuncionarioDisicoTitle_anexo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.anexo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFuncionarioDisicoTitle_area}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.area}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFuncionarioDisicoTitle_rut}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rut}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFuncionarioDisicoTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFuncionarioDisicoTitle_apellidoPaterno}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apellidoPaterno}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFuncionarioDisicoTitle_apellidoMaterno}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apellidoMaterno}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFuncionarioDisicoTitle_correoUv}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.correoUv}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFuncionarioDisicoTitle_fechaUltimoAcceso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaUltimoAcceso}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFuncionarioDisicoTitle_fechaPrimerAcceso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaPrimerAcceso}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{funcionarioDisicoController.prepareView}" value="#{bundle.ListFuncionarioDisicoViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{funcionarioDisicoController.prepareEdit}" value="#{bundle.ListFuncionarioDisicoEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{funcionarioDisicoController.destroy}" value="#{bundle.ListFuncionarioDisicoDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{funcionarioDisicoController.prepareCreate}" value="#{bundle.ListFuncionarioDisicoCreateLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ListFuncionarioDisicoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

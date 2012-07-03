@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateComentarioSolicitudTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateComentarioSolicitudLabel_idComentario}" for="idComentario" />
+                    <h:inputText id="idComentario" value="#{comentarioSolicitudController.selected.idComentario}" title="#{bundle.CreateComentarioSolicitudTitle_idComentario}" required="true" requiredMessage="#{bundle.CreateComentarioSolicitudRequiredMessage_idComentario}"/>
+                    <h:outputLabel value="#{bundle.CreateComentarioSolicitudLabel_comentario}" for="comentario" />
+                    <h:inputTextarea rows="4" cols="30" id="comentario" value="#{comentarioSolicitudController.selected.comentario}" title="#{bundle.CreateComentarioSolicitudTitle_comentario}" required="true" requiredMessage="#{bundle.CreateComentarioSolicitudRequiredMessage_comentario}"/>
+                    <h:outputLabel value="#{bundle.CreateComentarioSolicitudLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{comentarioSolicitudController.selected.fecha}" title="#{bundle.CreateComentarioSolicitudTitle_fecha}" required="true" requiredMessage="#{bundle.CreateComentarioSolicitudRequiredMessage_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateComentarioSolicitudLabel_visible}" for="visible" />
+                    <h:inputText id="visible" value="#{comentarioSolicitudController.selected.visible}" title="#{bundle.CreateComentarioSolicitudTitle_visible}" required="true" requiredMessage="#{bundle.CreateComentarioSolicitudRequiredMessage_visible}"/>
+                    <h:outputLabel value="#{bundle.CreateComentarioSolicitudLabel_autor}" for="autor" />
+                    <h:selectOneMenu id="autor" value="#{comentarioSolicitudController.selected.autor}" title="#{bundle.CreateComentarioSolicitudTitle_autor}" required="true" requiredMessage="#{bundle.CreateComentarioSolicitudRequiredMessage_autor}">
+                        <f:selectItems value="#{funcionarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateComentarioSolicitudLabel_solicitudRequerimiento}" for="solicitudRequerimiento" />
+                    <h:selectOneMenu id="solicitudRequerimiento" value="#{comentarioSolicitudController.selected.solicitudRequerimiento}" title="#{bundle.CreateComentarioSolicitudTitle_solicitudRequerimiento}" required="true" requiredMessage="#{bundle.CreateComentarioSolicitudRequiredMessage_solicitudRequerimiento}">
+                        <f:selectItems value="#{solicitudRequerimientoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{comentarioSolicitudController.create}" value="#{bundle.CreateComentarioSolicitudSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{comentarioSolicitudController.prepareList}" value="#{bundle.CreateComentarioSolicitudShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateComentarioSolicitudIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

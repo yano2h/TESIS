@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListNotificacionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListNotificacionEmpty}" rendered="#{notificacionController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{notificacionController.items.rowCount > 0}">
+                    <h:outputText value="#{notificacionController.pagination.pageFirstItem + 1}..#{notificacionController.pagination.pageLastItem + 1}/#{notificacionController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{notificacionController.previous}" value="#{bundle.Previous} #{notificacionController.pagination.pageSize}" rendered="#{notificacionController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{notificacionController.next}" value="#{bundle.Next} #{notificacionController.pagination.pageSize}" rendered="#{notificacionController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{notificacionController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificacionTitle_idNotificacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idNotificacion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificacionTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificacionTitle_mensajeNotificacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mensajeNotificacion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificacionTitle_revisada}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.revisada}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificacionTitle_destinatario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.destinatario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{notificacionController.prepareView}" value="#{bundle.ListNotificacionViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{notificacionController.prepareEdit}" value="#{bundle.ListNotificacionEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{notificacionController.destroy}" value="#{bundle.ListNotificacionDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{notificacionController.prepareCreate}" value="#{bundle.ListNotificacionCreateLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ListNotificacionIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

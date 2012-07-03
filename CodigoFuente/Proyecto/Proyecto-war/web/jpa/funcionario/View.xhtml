@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewFuncionarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewFuncionarioLabel_rut}"/>
+                    <h:outputText value="#{funcionarioController.selected.rut}" title="#{bundle.ViewFuncionarioTitle_rut}"/>
+                    <h:outputText value="#{bundle.ViewFuncionarioLabel_nombre}"/>
+                    <h:outputText value="#{funcionarioController.selected.nombre}" title="#{bundle.ViewFuncionarioTitle_nombre}"/>
+                    <h:outputText value="#{bundle.ViewFuncionarioLabel_apellidoPaterno}"/>
+                    <h:outputText value="#{funcionarioController.selected.apellidoPaterno}" title="#{bundle.ViewFuncionarioTitle_apellidoPaterno}"/>
+                    <h:outputText value="#{bundle.ViewFuncionarioLabel_apellidoMaterno}"/>
+                    <h:outputText value="#{funcionarioController.selected.apellidoMaterno}" title="#{bundle.ViewFuncionarioTitle_apellidoMaterno}"/>
+                    <h:outputText value="#{bundle.ViewFuncionarioLabel_correoUv}"/>
+                    <h:outputText value="#{funcionarioController.selected.correoUv}" title="#{bundle.ViewFuncionarioTitle_correoUv}"/>
+                    <h:outputText value="#{bundle.ViewFuncionarioLabel_fechaUltimoAcceso}"/>
+                    <h:outputText value="#{funcionarioController.selected.fechaUltimoAcceso}" title="#{bundle.ViewFuncionarioTitle_fechaUltimoAcceso}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFuncionarioLabel_fechaPrimerAcceso}"/>
+                    <h:outputText value="#{funcionarioController.selected.fechaPrimerAcceso}" title="#{bundle.ViewFuncionarioTitle_fechaPrimerAcceso}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{funcionarioController.destroyAndView}" value="#{bundle.ViewFuncionarioDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewFuncionarioEditLink}"/>
+                <br />
+                <h:commandLink action="#{funcionarioController.prepareCreate}" value="#{bundle.ViewFuncionarioCreateLink}" />
+                <br />
+                <h:commandLink action="#{funcionarioController.prepareList}" value="#{bundle.ViewFuncionarioShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewFuncionarioIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTareaScmTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTareaScmLabel_idTareaScm}" for="idTareaScm" />
+                    <h:inputText id="idTareaScm" value="#{tareaScmController.selected.idTareaScm}" title="#{bundle.EditTareaScmTitle_idTareaScm}" required="true" requiredMessage="#{bundle.EditTareaScmRequiredMessage_idTareaScm}"/>
+                    <h:outputLabel value="#{bundle.EditTareaScmLabel_nombreTarea}" for="nombreTarea" />
+                    <h:inputText id="nombreTarea" value="#{tareaScmController.selected.nombreTarea}" title="#{bundle.EditTareaScmTitle_nombreTarea}" required="true" requiredMessage="#{bundle.EditTareaScmRequiredMessage_nombreTarea}"/>
+                    <h:outputLabel value="#{bundle.EditTareaScmLabel_descripcionTarea}" for="descripcionTarea" />
+                    <h:inputText id="descripcionTarea" value="#{tareaScmController.selected.descripcionTarea}" title="#{bundle.EditTareaScmTitle_descripcionTarea}" required="true" requiredMessage="#{bundle.EditTareaScmRequiredMessage_descripcionTarea}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{tareaScmController.update}" value="#{bundle.EditTareaScmSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditTareaScmViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{tareaScmController.prepareList}" value="#{bundle.EditTareaScmShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditTareaScmIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

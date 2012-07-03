@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditProyectoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditProyectoLabel_idProyecto}" for="idProyecto" />
+                    <h:inputText id="idProyecto" value="#{proyectoController.selected.idProyecto}" title="#{bundle.EditProyectoTitle_idProyecto}" required="true" requiredMessage="#{bundle.EditProyectoRequiredMessage_idProyecto}"/>
+                    <h:outputLabel value="#{bundle.EditProyectoLabel_codigoInterno}" for="codigoInterno" />
+                    <h:inputText id="codigoInterno" value="#{proyectoController.selected.codigoInterno}" title="#{bundle.EditProyectoTitle_codigoInterno}" required="true" requiredMessage="#{bundle.EditProyectoRequiredMessage_codigoInterno}"/>
+                    <h:outputLabel value="#{bundle.EditProyectoLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{proyectoController.selected.nombre}" title="#{bundle.EditProyectoTitle_nombre}" required="true" requiredMessage="#{bundle.EditProyectoRequiredMessage_nombre}"/>
+                    <h:outputLabel value="#{bundle.EditProyectoLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{proyectoController.selected.descripcion}" title="#{bundle.EditProyectoTitle_descripcion}" required="true" requiredMessage="#{bundle.EditProyectoRequiredMessage_descripcion}"/>
+                    <h:outputLabel value="#{bundle.EditProyectoLabel_fechaInicio}" for="fechaInicio" />
+                    <h:inputText id="fechaInicio" value="#{proyectoController.selected.fechaInicio}" title="#{bundle.EditProyectoTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditProyectoRequiredMessage_fechaInicio}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditProyectoLabel_fechaTermino}" for="fechaTermino" />
+                    <h:inputText id="fechaTermino" value="#{proyectoController.selected.fechaTermino}" title="#{bundle.EditProyectoTitle_fechaTermino}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditProyectoLabel_estadoProyecto}" for="estadoProyecto" />
+                    <h:selectOneMenu id="estadoProyecto" value="#{proyectoController.selected.estadoProyecto}" title="#{bundle.EditProyectoTitle_estadoProyecto}" required="true" requiredMessage="#{bundle.EditProyectoRequiredMessage_estadoProyecto}">
+                        <f:selectItems value="#{estadoProyectoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditProyectoLabel_tipoProyecto}" for="tipoProyecto" />
+                    <h:selectOneMenu id="tipoProyecto" value="#{proyectoController.selected.tipoProyecto}" title="#{bundle.EditProyectoTitle_tipoProyecto}" required="true" requiredMessage="#{bundle.EditProyectoRequiredMessage_tipoProyecto}">
+                        <f:selectItems value="#{tipoProyectoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{proyectoController.update}" value="#{bundle.EditProyectoSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditProyectoViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{proyectoController.prepareList}" value="#{bundle.EditProyectoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditProyectoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

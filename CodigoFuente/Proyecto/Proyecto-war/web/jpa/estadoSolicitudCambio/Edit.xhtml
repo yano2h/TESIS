@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditEstadoSolicitudCambioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditEstadoSolicitudCambioLabel_idEstadoSolicitudCambio}" for="idEstadoSolicitudCambio" />
+                    <h:inputText id="idEstadoSolicitudCambio" value="#{estadoSolicitudCambioController.selected.idEstadoSolicitudCambio}" title="#{bundle.EditEstadoSolicitudCambioTitle_idEstadoSolicitudCambio}" required="true" requiredMessage="#{bundle.EditEstadoSolicitudCambioRequiredMessage_idEstadoSolicitudCambio}"/>
+                    <h:outputLabel value="#{bundle.EditEstadoSolicitudCambioLabel_nombreEstadoSolicitud}" for="nombreEstadoSolicitud" />
+                    <h:inputText id="nombreEstadoSolicitud" value="#{estadoSolicitudCambioController.selected.nombreEstadoSolicitud}" title="#{bundle.EditEstadoSolicitudCambioTitle_nombreEstadoSolicitud}" required="true" requiredMessage="#{bundle.EditEstadoSolicitudCambioRequiredMessage_nombreEstadoSolicitud}"/>
+                    <h:outputLabel value="#{bundle.EditEstadoSolicitudCambioLabel_descripcionEstado}" for="descripcionEstado" />
+                    <h:inputText id="descripcionEstado" value="#{estadoSolicitudCambioController.selected.descripcionEstado}" title="#{bundle.EditEstadoSolicitudCambioTitle_descripcionEstado}" />
+                </h:panelGrid>
+                <h:commandLink action="#{estadoSolicitudCambioController.update}" value="#{bundle.EditEstadoSolicitudCambioSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditEstadoSolicitudCambioViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{estadoSolicitudCambioController.prepareList}" value="#{bundle.EditEstadoSolicitudCambioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditEstadoSolicitudCambioIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

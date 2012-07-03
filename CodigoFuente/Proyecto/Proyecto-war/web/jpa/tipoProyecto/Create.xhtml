@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTipoProyectoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTipoProyectoLabel_idTipoProyecto}" for="idTipoProyecto" />
+                    <h:inputText id="idTipoProyecto" value="#{tipoProyectoController.selected.idTipoProyecto}" title="#{bundle.CreateTipoProyectoTitle_idTipoProyecto}" required="true" requiredMessage="#{bundle.CreateTipoProyectoRequiredMessage_idTipoProyecto}"/>
+                    <h:outputLabel value="#{bundle.CreateTipoProyectoLabel_nombreTipoProyecto}" for="nombreTipoProyecto" />
+                    <h:inputText id="nombreTipoProyecto" value="#{tipoProyectoController.selected.nombreTipoProyecto}" title="#{bundle.CreateTipoProyectoTitle_nombreTipoProyecto}" required="true" requiredMessage="#{bundle.CreateTipoProyectoRequiredMessage_nombreTipoProyecto}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tipoProyectoController.create}" value="#{bundle.CreateTipoProyectoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tipoProyectoController.prepareList}" value="#{bundle.CreateTipoProyectoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateTipoProyectoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

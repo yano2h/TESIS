@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditFuncionarioDisicoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditFuncionarioDisicoLabel_cargo}" for="cargo" />
+                    <h:inputText id="cargo" value="#{funcionarioDisicoController.selected.cargo}" title="#{bundle.EditFuncionarioDisicoTitle_cargo}" required="true" requiredMessage="#{bundle.EditFuncionarioDisicoRequiredMessage_cargo}"/>
+                    <h:outputLabel value="#{bundle.EditFuncionarioDisicoLabel_anexo}" for="anexo" />
+                    <h:inputText id="anexo" value="#{funcionarioDisicoController.selected.anexo}" title="#{bundle.EditFuncionarioDisicoTitle_anexo}" />
+                    <h:outputLabel value="#{bundle.EditFuncionarioDisicoLabel_area}" for="area" />
+                    <h:selectOneMenu id="area" value="#{funcionarioDisicoController.selected.area}" title="#{bundle.EditFuncionarioDisicoTitle_area}" required="true" requiredMessage="#{bundle.EditFuncionarioDisicoRequiredMessage_area}">
+                        <f:selectItems value="#{areaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditFuncionarioDisicoLabel_rut}" for="rut" />
+                    <h:inputText id="rut" value="#{funcionarioDisicoController.selected.rut}" title="#{bundle.EditFuncionarioDisicoTitle_rut}" required="true" requiredMessage="#{bundle.EditFuncionarioDisicoRequiredMessage_rut}"/>
+                    <h:outputLabel value="#{bundle.EditFuncionarioDisicoLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{funcionarioDisicoController.selected.nombre}" title="#{bundle.EditFuncionarioDisicoTitle_nombre}" required="true" requiredMessage="#{bundle.EditFuncionarioDisicoRequiredMessage_nombre}"/>
+                    <h:outputLabel value="#{bundle.EditFuncionarioDisicoLabel_apellidoPaterno}" for="apellidoPaterno" />
+                    <h:inputText id="apellidoPaterno" value="#{funcionarioDisicoController.selected.apellidoPaterno}" title="#{bundle.EditFuncionarioDisicoTitle_apellidoPaterno}" required="true" requiredMessage="#{bundle.EditFuncionarioDisicoRequiredMessage_apellidoPaterno}"/>
+                    <h:outputLabel value="#{bundle.EditFuncionarioDisicoLabel_apellidoMaterno}" for="apellidoMaterno" />
+                    <h:inputText id="apellidoMaterno" value="#{funcionarioDisicoController.selected.apellidoMaterno}" title="#{bundle.EditFuncionarioDisicoTitle_apellidoMaterno}" required="true" requiredMessage="#{bundle.EditFuncionarioDisicoRequiredMessage_apellidoMaterno}"/>
+                    <h:outputLabel value="#{bundle.EditFuncionarioDisicoLabel_correoUv}" for="correoUv" />
+                    <h:inputText id="correoUv" value="#{funcionarioDisicoController.selected.correoUv}" title="#{bundle.EditFuncionarioDisicoTitle_correoUv}" />
+                    <h:outputLabel value="#{bundle.EditFuncionarioDisicoLabel_fechaUltimoAcceso}" for="fechaUltimoAcceso" />
+                    <h:inputText id="fechaUltimoAcceso" value="#{funcionarioDisicoController.selected.fechaUltimoAcceso}" title="#{bundle.EditFuncionarioDisicoTitle_fechaUltimoAcceso}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditFuncionarioDisicoLabel_fechaPrimerAcceso}" for="fechaPrimerAcceso" />
+                    <h:inputText id="fechaPrimerAcceso" value="#{funcionarioDisicoController.selected.fechaPrimerAcceso}" title="#{bundle.EditFuncionarioDisicoTitle_fechaPrimerAcceso}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                </h:panelGrid>
+                <h:commandLink action="#{funcionarioDisicoController.update}" value="#{bundle.EditFuncionarioDisicoSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditFuncionarioDisicoViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{funcionarioDisicoController.prepareList}" value="#{bundle.EditFuncionarioDisicoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditFuncionarioDisicoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

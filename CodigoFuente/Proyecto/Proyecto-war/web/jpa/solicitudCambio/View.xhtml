@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewSolicitudCambioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_idSolicitudCambio}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.idSolicitudCambio}" title="#{bundle.ViewSolicitudCambioTitle_idSolicitudCambio}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_titulo}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.titulo}" title="#{bundle.ViewSolicitudCambioTitle_titulo}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_fechaEnvio}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.fechaEnvio}" title="#{bundle.ViewSolicitudCambioTitle_fechaEnvio}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_descripcionNecesidadCambio}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.descripcionNecesidadCambio}" title="#{bundle.ViewSolicitudCambioTitle_descripcionNecesidadCambio}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_descripcionCambio}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.descripcionCambio}" title="#{bundle.ViewSolicitudCambioTitle_descripcionCambio}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_fechaAnalisis}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.fechaAnalisis}" title="#{bundle.ViewSolicitudCambioTitle_fechaAnalisis}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_descripcionImpactoCambio}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.descripcionImpactoCambio}" title="#{bundle.ViewSolicitudCambioTitle_descripcionImpactoCambio}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_fechaCierre}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.fechaCierre}" title="#{bundle.ViewSolicitudCambioTitle_fechaCierre}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_moduloAfectado}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.moduloAfectado}" title="#{bundle.ViewSolicitudCambioTitle_moduloAfectado}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_descripcionResolucion}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.descripcionResolucion}" title="#{bundle.ViewSolicitudCambioTitle_descripcionResolucion}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_formularioImplementacion}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.formularioImplementacion}" title="#{bundle.ViewSolicitudCambioTitle_formularioImplementacion}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_itemConfiguracion}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.itemConfiguracion}" title="#{bundle.ViewSolicitudCambioTitle_itemConfiguracion}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_evaluadorFinal}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.evaluadorFinal}" title="#{bundle.ViewSolicitudCambioTitle_evaluadorFinal}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_evaluadorImpacto}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.evaluadorImpacto}" title="#{bundle.ViewSolicitudCambioTitle_evaluadorImpacto}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_estadoSolicitud}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.estadoSolicitud}" title="#{bundle.ViewSolicitudCambioTitle_estadoSolicitud}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_prioridadSolicitud}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.prioridadSolicitud}" title="#{bundle.ViewSolicitudCambioTitle_prioridadSolicitud}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_solicitante}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.solicitante}" title="#{bundle.ViewSolicitudCambioTitle_solicitante}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudCambioLabel_proyecto}"/>
+                    <h:outputText value="#{solicitudCambioController.selected.proyecto}" title="#{bundle.ViewSolicitudCambioTitle_proyecto}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{solicitudCambioController.destroyAndView}" value="#{bundle.ViewSolicitudCambioDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewSolicitudCambioEditLink}"/>
+                <br />
+                <h:commandLink action="#{solicitudCambioController.prepareCreate}" value="#{bundle.ViewSolicitudCambioCreateLink}" />
+                <br />
+                <h:commandLink action="#{solicitudCambioController.prepareList}" value="#{bundle.ViewSolicitudCambioShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewSolicitudCambioIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

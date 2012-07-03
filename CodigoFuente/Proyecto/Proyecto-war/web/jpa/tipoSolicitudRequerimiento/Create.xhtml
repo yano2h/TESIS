@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTipoSolicitudRequerimientoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTipoSolicitudRequerimientoLabel_idTipoSolicitudRequerimiento}" for="idTipoSolicitudRequerimiento" />
+                    <h:inputText id="idTipoSolicitudRequerimiento" value="#{tipoSolicitudRequerimientoController.selected.idTipoSolicitudRequerimiento}" title="#{bundle.CreateTipoSolicitudRequerimientoTitle_idTipoSolicitudRequerimiento}" required="true" requiredMessage="#{bundle.CreateTipoSolicitudRequerimientoRequiredMessage_idTipoSolicitudRequerimiento}"/>
+                    <h:outputLabel value="#{bundle.CreateTipoSolicitudRequerimientoLabel_nombreTipoSolicitud}" for="nombreTipoSolicitud" />
+                    <h:inputText id="nombreTipoSolicitud" value="#{tipoSolicitudRequerimientoController.selected.nombreTipoSolicitud}" title="#{bundle.CreateTipoSolicitudRequerimientoTitle_nombreTipoSolicitud}" required="true" requiredMessage="#{bundle.CreateTipoSolicitudRequerimientoRequiredMessage_nombreTipoSolicitud}"/>
+                    <h:outputLabel value="#{bundle.CreateTipoSolicitudRequerimientoLabel_descripcionTipo}" for="descripcionTipo" />
+                    <h:inputText id="descripcionTipo" value="#{tipoSolicitudRequerimientoController.selected.descripcionTipo}" title="#{bundle.CreateTipoSolicitudRequerimientoTitle_descripcionTipo}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tipoSolicitudRequerimientoController.create}" value="#{bundle.CreateTipoSolicitudRequerimientoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tipoSolicitudRequerimientoController.prepareList}" value="#{bundle.CreateTipoSolicitudRequerimientoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateTipoSolicitudRequerimientoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditItemConfiguracionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditItemConfiguracionLabel_idItemConfiguracion}" for="idItemConfiguracion" />
+                    <h:inputText id="idItemConfiguracion" value="#{itemConfiguracionController.selected.idItemConfiguracion}" title="#{bundle.EditItemConfiguracionTitle_idItemConfiguracion}" required="true" requiredMessage="#{bundle.EditItemConfiguracionRequiredMessage_idItemConfiguracion}"/>
+                    <h:outputLabel value="#{bundle.EditItemConfiguracionLabel_codigoIdentificadorIc}" for="codigoIdentificadorIc" />
+                    <h:inputText id="codigoIdentificadorIc" value="#{itemConfiguracionController.selected.codigoIdentificadorIc}" title="#{bundle.EditItemConfiguracionTitle_codigoIdentificadorIc}" required="true" requiredMessage="#{bundle.EditItemConfiguracionRequiredMessage_codigoIdentificadorIc}"/>
+                    <h:outputLabel value="#{bundle.EditItemConfiguracionLabel_nombreItemConfiguracion}" for="nombreItemConfiguracion" />
+                    <h:inputText id="nombreItemConfiguracion" value="#{itemConfiguracionController.selected.nombreItemConfiguracion}" title="#{bundle.EditItemConfiguracionTitle_nombreItemConfiguracion}" required="true" requiredMessage="#{bundle.EditItemConfiguracionRequiredMessage_nombreItemConfiguracion}"/>
+                    <h:outputLabel value="#{bundle.EditItemConfiguracionLabel_version}" for="version" />
+                    <h:inputText id="version" value="#{itemConfiguracionController.selected.version}" title="#{bundle.EditItemConfiguracionTitle_version}" required="true" requiredMessage="#{bundle.EditItemConfiguracionRequiredMessage_version}"/>
+                    <h:outputLabel value="#{bundle.EditItemConfiguracionLabel_ubicacionEnBiblioteca}" for="ubicacionEnBiblioteca" />
+                    <h:inputText id="ubicacionEnBiblioteca" value="#{itemConfiguracionController.selected.ubicacionEnBiblioteca}" title="#{bundle.EditItemConfiguracionTitle_ubicacionEnBiblioteca}" required="true" requiredMessage="#{bundle.EditItemConfiguracionRequiredMessage_ubicacionEnBiblioteca}"/>
+                    <h:outputLabel value="#{bundle.EditItemConfiguracionLabel_fechaUltimaModificacion}" for="fechaUltimaModificacion" />
+                    <h:inputText id="fechaUltimaModificacion" value="#{itemConfiguracionController.selected.fechaUltimaModificacion}" title="#{bundle.EditItemConfiguracionTitle_fechaUltimaModificacion}" required="true" requiredMessage="#{bundle.EditItemConfiguracionRequiredMessage_fechaUltimaModificacion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditItemConfiguracionLabel_responsableItem}" for="responsableItem" />
+                    <h:selectOneMenu id="responsableItem" value="#{itemConfiguracionController.selected.responsableItem}" title="#{bundle.EditItemConfiguracionTitle_responsableItem}" required="true" requiredMessage="#{bundle.EditItemConfiguracionRequiredMessage_responsableItem}">
+                        <f:selectItems value="#{funcionarioDisicoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditItemConfiguracionLabel_proyecto}" for="proyecto" />
+                    <h:selectOneMenu id="proyecto" value="#{itemConfiguracionController.selected.proyecto}" title="#{bundle.EditItemConfiguracionTitle_proyecto}" required="true" requiredMessage="#{bundle.EditItemConfiguracionRequiredMessage_proyecto}">
+                        <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{itemConfiguracionController.update}" value="#{bundle.EditItemConfiguracionSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditItemConfiguracionViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{itemConfiguracionController.prepareList}" value="#{bundle.EditItemConfiguracionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditItemConfiguracionIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

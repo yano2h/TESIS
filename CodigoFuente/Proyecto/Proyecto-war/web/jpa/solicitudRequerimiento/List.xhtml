@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListSolicitudRequerimientoEmpty}" rendered="#{solicitudRequerimientoController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{solicitudRequerimientoController.items.rowCount > 0}">
+                    <h:outputText value="#{solicitudRequerimientoController.pagination.pageFirstItem + 1}..#{solicitudRequerimientoController.pagination.pageLastItem + 1}/#{solicitudRequerimientoController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{solicitudRequerimientoController.previous}" value="#{bundle.Previous} #{solicitudRequerimientoController.pagination.pageSize}" rendered="#{solicitudRequerimientoController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{solicitudRequerimientoController.next}" value="#{bundle.Next} #{solicitudRequerimientoController.pagination.pageSize}" rendered="#{solicitudRequerimientoController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{solicitudRequerimientoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_idSolicitudRequerimiento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idSolicitudRequerimiento}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_codigoConsulta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codigoConsulta}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_asunto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.asunto}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_mensaje}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mensaje}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_fechaEnvio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaEnvio}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_fechaCierre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaCierre}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_fechaVencimiento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaVencimiento}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_fechaUltimaActualizacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaUltimaActualizacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_justificacionTrasnferencia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.justificacionTrasnferencia}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_respuesta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.respuesta}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_prioridadSolicitud}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prioridadSolicitud}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_solicitante}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.solicitante}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_responsable}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.responsable}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_areaResponsable}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.areaResponsable}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_estadoSolicitud}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estadoSolicitud}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudRequerimientoTitle_tipoSolicitud}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoSolicitud}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{solicitudRequerimientoController.prepareView}" value="#{bundle.ListSolicitudRequerimientoViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{solicitudRequerimientoController.prepareEdit}" value="#{bundle.ListSolicitudRequerimientoEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{solicitudRequerimientoController.destroy}" value="#{bundle.ListSolicitudRequerimientoDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{solicitudRequerimientoController.prepareCreate}" value="#{bundle.ListSolicitudRequerimientoCreateLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ListSolicitudRequerimientoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

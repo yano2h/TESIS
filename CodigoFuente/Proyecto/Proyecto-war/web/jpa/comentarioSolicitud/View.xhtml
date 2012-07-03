@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewComentarioSolicitudTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewComentarioSolicitudLabel_idComentario}"/>
+                    <h:outputText value="#{comentarioSolicitudController.selected.idComentario}" title="#{bundle.ViewComentarioSolicitudTitle_idComentario}"/>
+                    <h:outputText value="#{bundle.ViewComentarioSolicitudLabel_comentario}"/>
+                    <h:outputText value="#{comentarioSolicitudController.selected.comentario}" title="#{bundle.ViewComentarioSolicitudTitle_comentario}"/>
+                    <h:outputText value="#{bundle.ViewComentarioSolicitudLabel_fecha}"/>
+                    <h:outputText value="#{comentarioSolicitudController.selected.fecha}" title="#{bundle.ViewComentarioSolicitudTitle_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewComentarioSolicitudLabel_visible}"/>
+                    <h:outputText value="#{comentarioSolicitudController.selected.visible}" title="#{bundle.ViewComentarioSolicitudTitle_visible}"/>
+                    <h:outputText value="#{bundle.ViewComentarioSolicitudLabel_autor}"/>
+                    <h:outputText value="#{comentarioSolicitudController.selected.autor}" title="#{bundle.ViewComentarioSolicitudTitle_autor}"/>
+                    <h:outputText value="#{bundle.ViewComentarioSolicitudLabel_solicitudRequerimiento}"/>
+                    <h:outputText value="#{comentarioSolicitudController.selected.solicitudRequerimiento}" title="#{bundle.ViewComentarioSolicitudTitle_solicitudRequerimiento}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{comentarioSolicitudController.destroyAndView}" value="#{bundle.ViewComentarioSolicitudDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewComentarioSolicitudEditLink}"/>
+                <br />
+                <h:commandLink action="#{comentarioSolicitudController.prepareCreate}" value="#{bundle.ViewComentarioSolicitudCreateLink}" />
+                <br />
+                <h:commandLink action="#{comentarioSolicitudController.prepareList}" value="#{bundle.ViewComentarioSolicitudShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewComentarioSolicitudIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

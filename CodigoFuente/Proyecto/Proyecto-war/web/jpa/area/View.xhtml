@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewAreaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewAreaLabel_idArea}"/>
+                    <h:outputText value="#{areaController.selected.idArea}" title="#{bundle.ViewAreaTitle_idArea}"/>
+                    <h:outputText value="#{bundle.ViewAreaLabel_nombreArea}"/>
+                    <h:outputText value="#{areaController.selected.nombreArea}" title="#{bundle.ViewAreaTitle_nombreArea}"/>
+                    <h:outputText value="#{bundle.ViewAreaLabel_descripcionArea}"/>
+                    <h:outputText value="#{areaController.selected.descripcionArea}" title="#{bundle.ViewAreaTitle_descripcionArea}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{areaController.destroyAndView}" value="#{bundle.ViewAreaDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewAreaEditLink}"/>
+                <br />
+                <h:commandLink action="#{areaController.prepareCreate}" value="#{bundle.ViewAreaCreateLink}" />
+                <br />
+                <h:commandLink action="#{areaController.prepareList}" value="#{bundle.ViewAreaShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewAreaIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditNotificacionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditNotificacionLabel_idNotificacion}" for="idNotificacion" />
+                    <h:inputText id="idNotificacion" value="#{notificacionController.selected.idNotificacion}" title="#{bundle.EditNotificacionTitle_idNotificacion}" required="true" requiredMessage="#{bundle.EditNotificacionRequiredMessage_idNotificacion}"/>
+                    <h:outputLabel value="#{bundle.EditNotificacionLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{notificacionController.selected.fecha}" title="#{bundle.EditNotificacionTitle_fecha}" required="true" requiredMessage="#{bundle.EditNotificacionRequiredMessage_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditNotificacionLabel_mensajeNotificacion}" for="mensajeNotificacion" />
+                    <h:inputText id="mensajeNotificacion" value="#{notificacionController.selected.mensajeNotificacion}" title="#{bundle.EditNotificacionTitle_mensajeNotificacion}" required="true" requiredMessage="#{bundle.EditNotificacionRequiredMessage_mensajeNotificacion}"/>
+                    <h:outputLabel value="#{bundle.EditNotificacionLabel_revisada}" for="revisada" />
+                    <h:inputText id="revisada" value="#{notificacionController.selected.revisada}" title="#{bundle.EditNotificacionTitle_revisada}" required="true" requiredMessage="#{bundle.EditNotificacionRequiredMessage_revisada}"/>
+                    <h:outputLabel value="#{bundle.EditNotificacionLabel_destinatario}" for="destinatario" />
+                    <h:selectOneMenu id="destinatario" value="#{notificacionController.selected.destinatario}" title="#{bundle.EditNotificacionTitle_destinatario}" required="true" requiredMessage="#{bundle.EditNotificacionRequiredMessage_destinatario}">
+                        <f:selectItems value="#{funcionarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{notificacionController.update}" value="#{bundle.EditNotificacionSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditNotificacionViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{notificacionController.prepareList}" value="#{bundle.EditNotificacionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditNotificacionIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewSolicitudRequerimientoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_idSolicitudRequerimiento}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.idSolicitudRequerimiento}" title="#{bundle.ViewSolicitudRequerimientoTitle_idSolicitudRequerimiento}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_codigoConsulta}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.codigoConsulta}" title="#{bundle.ViewSolicitudRequerimientoTitle_codigoConsulta}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_asunto}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.asunto}" title="#{bundle.ViewSolicitudRequerimientoTitle_asunto}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_mensaje}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.mensaje}" title="#{bundle.ViewSolicitudRequerimientoTitle_mensaje}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_fechaEnvio}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.fechaEnvio}" title="#{bundle.ViewSolicitudRequerimientoTitle_fechaEnvio}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_fechaCierre}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.fechaCierre}" title="#{bundle.ViewSolicitudRequerimientoTitle_fechaCierre}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_fechaVencimiento}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.fechaVencimiento}" title="#{bundle.ViewSolicitudRequerimientoTitle_fechaVencimiento}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_fechaUltimaActualizacion}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.fechaUltimaActualizacion}" title="#{bundle.ViewSolicitudRequerimientoTitle_fechaUltimaActualizacion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_justificacionTrasnferencia}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.justificacionTrasnferencia}" title="#{bundle.ViewSolicitudRequerimientoTitle_justificacionTrasnferencia}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_respuesta}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.respuesta}" title="#{bundle.ViewSolicitudRequerimientoTitle_respuesta}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_prioridadSolicitud}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.prioridadSolicitud}" title="#{bundle.ViewSolicitudRequerimientoTitle_prioridadSolicitud}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_solicitante}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.solicitante}" title="#{bundle.ViewSolicitudRequerimientoTitle_solicitante}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_responsable}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.responsable}" title="#{bundle.ViewSolicitudRequerimientoTitle_responsable}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_areaResponsable}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.areaResponsable}" title="#{bundle.ViewSolicitudRequerimientoTitle_areaResponsable}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_estadoSolicitud}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.estadoSolicitud}" title="#{bundle.ViewSolicitudRequerimientoTitle_estadoSolicitud}"/>
+                    <h:outputText value="#{bundle.ViewSolicitudRequerimientoLabel_tipoSolicitud}"/>
+                    <h:outputText value="#{solicitudRequerimientoController.selected.tipoSolicitud}" title="#{bundle.ViewSolicitudRequerimientoTitle_tipoSolicitud}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{solicitudRequerimientoController.destroyAndView}" value="#{bundle.ViewSolicitudRequerimientoDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewSolicitudRequerimientoEditLink}"/>
+                <br />
+                <h:commandLink action="#{solicitudRequerimientoController.prepareCreate}" value="#{bundle.ViewSolicitudRequerimientoCreateLink}" />
+                <br />
+                <h:commandLink action="#{solicitudRequerimientoController.prepareList}" value="#{bundle.ViewSolicitudRequerimientoShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewSolicitudRequerimientoIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

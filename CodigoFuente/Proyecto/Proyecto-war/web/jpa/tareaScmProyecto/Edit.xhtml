@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTareaScmProyectoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTareaScmProyectoLabel_fechaInicio}" for="fechaInicio" />
+                    <h:inputText id="fechaInicio" value="#{tareaScmProyectoController.selected.fechaInicio}" title="#{bundle.EditTareaScmProyectoTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditTareaScmProyectoRequiredMessage_fechaInicio}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditTareaScmProyectoLabel_fechaTermino}" for="fechaTermino" />
+                    <h:inputText id="fechaTermino" value="#{tareaScmProyectoController.selected.fechaTermino}" title="#{bundle.EditTareaScmProyectoTitle_fechaTermino}" required="true" requiredMessage="#{bundle.EditTareaScmProyectoRequiredMessage_fechaTermino}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditTareaScmProyectoLabel_responsable}" for="responsable" />
+                    <h:selectOneMenu id="responsable" value="#{tareaScmProyectoController.selected.responsable}" title="#{bundle.EditTareaScmProyectoTitle_responsable}" required="true" requiredMessage="#{bundle.EditTareaScmProyectoRequiredMessage_responsable}">
+                        <f:selectItems value="#{funcionarioDisicoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditTareaScmProyectoLabel_proyecto}" for="proyecto" />
+                    <h:selectOneMenu id="proyecto" value="#{tareaScmProyectoController.selected.proyecto}" title="#{bundle.EditTareaScmProyectoTitle_proyecto}" required="true" requiredMessage="#{bundle.EditTareaScmProyectoRequiredMessage_proyecto}">
+                        <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditTareaScmProyectoLabel_tareaScm}" for="tareaScm" />
+                    <h:selectOneMenu id="tareaScm" value="#{tareaScmProyectoController.selected.tareaScm}" title="#{bundle.EditTareaScmProyectoTitle_tareaScm}" required="true" requiredMessage="#{bundle.EditTareaScmProyectoRequiredMessage_tareaScm}">
+                        <f:selectItems value="#{tareaScmController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{tareaScmProyectoController.update}" value="#{bundle.EditTareaScmProyectoSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditTareaScmProyectoViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{tareaScmProyectoController.prepareList}" value="#{bundle.EditTareaScmProyectoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditTareaScmProyectoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

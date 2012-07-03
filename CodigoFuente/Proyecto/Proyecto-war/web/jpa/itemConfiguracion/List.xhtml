@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListItemConfiguracionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListItemConfiguracionEmpty}" rendered="#{itemConfiguracionController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{itemConfiguracionController.items.rowCount > 0}">
+                    <h:outputText value="#{itemConfiguracionController.pagination.pageFirstItem + 1}..#{itemConfiguracionController.pagination.pageLastItem + 1}/#{itemConfiguracionController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{itemConfiguracionController.previous}" value="#{bundle.Previous} #{itemConfiguracionController.pagination.pageSize}" rendered="#{itemConfiguracionController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{itemConfiguracionController.next}" value="#{bundle.Next} #{itemConfiguracionController.pagination.pageSize}" rendered="#{itemConfiguracionController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{itemConfiguracionController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemConfiguracionTitle_idItemConfiguracion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idItemConfiguracion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemConfiguracionTitle_codigoIdentificadorIc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codigoIdentificadorIc}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemConfiguracionTitle_nombreItemConfiguracion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreItemConfiguracion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemConfiguracionTitle_version}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.version}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemConfiguracionTitle_ubicacionEnBiblioteca}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ubicacionEnBiblioteca}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemConfiguracionTitle_fechaUltimaModificacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaUltimaModificacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemConfiguracionTitle_responsableItem}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.responsableItem}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemConfiguracionTitle_proyecto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.proyecto}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{itemConfiguracionController.prepareView}" value="#{bundle.ListItemConfiguracionViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{itemConfiguracionController.prepareEdit}" value="#{bundle.ListItemConfiguracionEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{itemConfiguracionController.destroy}" value="#{bundle.ListItemConfiguracionDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{itemConfiguracionController.prepareCreate}" value="#{bundle.ListItemConfiguracionCreateLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ListItemConfiguracionIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

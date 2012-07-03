@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAreaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListAreaEmpty}" rendered="#{areaController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{areaController.items.rowCount > 0}">
+                    <h:outputText value="#{areaController.pagination.pageFirstItem + 1}..#{areaController.pagination.pageLastItem + 1}/#{areaController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{areaController.previous}" value="#{bundle.Previous} #{areaController.pagination.pageSize}" rendered="#{areaController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{areaController.next}" value="#{bundle.Next} #{areaController.pagination.pageSize}" rendered="#{areaController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{areaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAreaTitle_idArea}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idArea}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAreaTitle_nombreArea}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreArea}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAreaTitle_descripcionArea}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcionArea}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{areaController.prepareView}" value="#{bundle.ListAreaViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{areaController.prepareEdit}" value="#{bundle.ListAreaEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{areaController.destroy}" value="#{bundle.ListAreaDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{areaController.prepareCreate}" value="#{bundle.ListAreaCreateLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ListAreaIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

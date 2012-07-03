@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditEstadisticaPersonalTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditEstadisticaPersonalLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{estadisticaPersonalController.selected.id}" title="#{bundle.EditEstadisticaPersonalTitle_id}" required="true" requiredMessage="#{bundle.EditEstadisticaPersonalRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditEstadisticaPersonalLabel_fechaMedicion}" for="fechaMedicion" />
+                    <h:inputText id="fechaMedicion" value="#{estadisticaPersonalController.selected.fechaMedicion}" title="#{bundle.EditEstadisticaPersonalTitle_fechaMedicion}" required="true" requiredMessage="#{bundle.EditEstadisticaPersonalRequiredMessage_fechaMedicion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditEstadisticaPersonalLabel_cantidadTotalSolicitudesAsignadas}" for="cantidadTotalSolicitudesAsignadas" />
+                    <h:inputText id="cantidadTotalSolicitudesAsignadas" value="#{estadisticaPersonalController.selected.cantidadTotalSolicitudesAsignadas}" title="#{bundle.EditEstadisticaPersonalTitle_cantidadTotalSolicitudesAsignadas}" required="true" requiredMessage="#{bundle.EditEstadisticaPersonalRequiredMessage_cantidadTotalSolicitudesAsignadas}"/>
+                    <h:outputLabel value="#{bundle.EditEstadisticaPersonalLabel_cantidadSolicitudesPendientes}" for="cantidadSolicitudesPendientes" />
+                    <h:inputText id="cantidadSolicitudesPendientes" value="#{estadisticaPersonalController.selected.cantidadSolicitudesPendientes}" title="#{bundle.EditEstadisticaPersonalTitle_cantidadSolicitudesPendientes}" required="true" requiredMessage="#{bundle.EditEstadisticaPersonalRequiredMessage_cantidadSolicitudesPendientes}"/>
+                    <h:outputLabel value="#{bundle.EditEstadisticaPersonalLabel_cantidadSolicitudesVencidas}" for="cantidadSolicitudesVencidas" />
+                    <h:inputText id="cantidadSolicitudesVencidas" value="#{estadisticaPersonalController.selected.cantidadSolicitudesVencidas}" title="#{bundle.EditEstadisticaPersonalTitle_cantidadSolicitudesVencidas}" required="true" requiredMessage="#{bundle.EditEstadisticaPersonalRequiredMessage_cantidadSolicitudesVencidas}"/>
+                    <h:outputLabel value="#{bundle.EditEstadisticaPersonalLabel_cantidadSolicitudesIniciadas}" for="cantidadSolicitudesIniciadas" />
+                    <h:inputText id="cantidadSolicitudesIniciadas" value="#{estadisticaPersonalController.selected.cantidadSolicitudesIniciadas}" title="#{bundle.EditEstadisticaPersonalTitle_cantidadSolicitudesIniciadas}" required="true" requiredMessage="#{bundle.EditEstadisticaPersonalRequiredMessage_cantidadSolicitudesIniciadas}"/>
+                    <h:outputLabel value="#{bundle.EditEstadisticaPersonalLabel_cantidadSolicitudesCerradas}" for="cantidadSolicitudesCerradas" />
+                    <h:inputText id="cantidadSolicitudesCerradas" value="#{estadisticaPersonalController.selected.cantidadSolicitudesCerradas}" title="#{bundle.EditEstadisticaPersonalTitle_cantidadSolicitudesCerradas}" required="true" requiredMessage="#{bundle.EditEstadisticaPersonalRequiredMessage_cantidadSolicitudesCerradas}"/>
+                    <h:outputLabel value="#{bundle.EditEstadisticaPersonalLabel_cantidadProyectosAcargo}" for="cantidadProyectosAcargo" />
+                    <h:inputText id="cantidadProyectosAcargo" value="#{estadisticaPersonalController.selected.cantidadProyectosAcargo}" title="#{bundle.EditEstadisticaPersonalTitle_cantidadProyectosAcargo}" required="true" requiredMessage="#{bundle.EditEstadisticaPersonalRequiredMessage_cantidadProyectosAcargo}"/>
+                    <h:outputLabel value="#{bundle.EditEstadisticaPersonalLabel_cantidadProyectosEnQueParticipa}" for="cantidadProyectosEnQueParticipa" />
+                    <h:inputText id="cantidadProyectosEnQueParticipa" value="#{estadisticaPersonalController.selected.cantidadProyectosEnQueParticipa}" title="#{bundle.EditEstadisticaPersonalTitle_cantidadProyectosEnQueParticipa}" required="true" requiredMessage="#{bundle.EditEstadisticaPersonalRequiredMessage_cantidadProyectosEnQueParticipa}"/>
+                    <h:outputLabel value="#{bundle.EditEstadisticaPersonalLabel_cantidadTareasProyectoAsociadas}" for="cantidadTareasProyectoAsociadas" />
+                    <h:inputText id="cantidadTareasProyectoAsociadas" value="#{estadisticaPersonalController.selected.cantidadTareasProyectoAsociadas}" title="#{bundle.EditEstadisticaPersonalTitle_cantidadTareasProyectoAsociadas}" required="true" requiredMessage="#{bundle.EditEstadisticaPersonalRequiredMessage_cantidadTareasProyectoAsociadas}"/>
+                    <h:outputLabel value="#{bundle.EditEstadisticaPersonalLabel_cantidadTareasScmAsociadas}" for="cantidadTareasScmAsociadas" />
+                    <h:inputText id="cantidadTareasScmAsociadas" value="#{estadisticaPersonalController.selected.cantidadTareasScmAsociadas}" title="#{bundle.EditEstadisticaPersonalTitle_cantidadTareasScmAsociadas}" required="true" requiredMessage="#{bundle.EditEstadisticaPersonalRequiredMessage_cantidadTareasScmAsociadas}"/>
+                    <h:outputLabel value="#{bundle.EditEstadisticaPersonalLabel_funcionarioDisico}" for="funcionarioDisico" />
+                    <h:selectOneMenu id="funcionarioDisico" value="#{estadisticaPersonalController.selected.funcionarioDisico}" title="#{bundle.EditEstadisticaPersonalTitle_funcionarioDisico}" required="true" requiredMessage="#{bundle.EditEstadisticaPersonalRequiredMessage_funcionarioDisico}">
+                        <f:selectItems value="#{funcionarioDisicoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{estadisticaPersonalController.update}" value="#{bundle.EditEstadisticaPersonalSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditEstadisticaPersonalViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{estadisticaPersonalController.prepareList}" value="#{bundle.EditEstadisticaPersonalShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditEstadisticaPersonalIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewParticipanteProyectoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewParticipanteProyectoLabel_rol}"/>
+                    <h:outputText value="#{participanteProyectoController.selected.rol}" title="#{bundle.ViewParticipanteProyectoTitle_rol}"/>
+                    <h:outputText value="#{bundle.ViewParticipanteProyectoLabel_proyecto}"/>
+                    <h:outputText value="#{participanteProyectoController.selected.proyecto}" title="#{bundle.ViewParticipanteProyectoTitle_proyecto}"/>
+                    <h:outputText value="#{bundle.ViewParticipanteProyectoLabel_participante}"/>
+                    <h:outputText value="#{participanteProyectoController.selected.participante}" title="#{bundle.ViewParticipanteProyectoTitle_participante}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{participanteProyectoController.destroyAndView}" value="#{bundle.ViewParticipanteProyectoDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewParticipanteProyectoEditLink}"/>
+                <br />
+                <h:commandLink action="#{participanteProyectoController.prepareCreate}" value="#{bundle.ViewParticipanteProyectoCreateLink}" />
+                <br />
+                <h:commandLink action="#{participanteProyectoController.prepareList}" value="#{bundle.ViewParticipanteProyectoShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewParticipanteProyectoIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

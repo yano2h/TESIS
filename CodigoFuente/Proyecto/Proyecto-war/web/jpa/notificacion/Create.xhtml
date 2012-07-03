@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateNotificacionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateNotificacionLabel_idNotificacion}" for="idNotificacion" />
+                    <h:inputText id="idNotificacion" value="#{notificacionController.selected.idNotificacion}" title="#{bundle.CreateNotificacionTitle_idNotificacion}" required="true" requiredMessage="#{bundle.CreateNotificacionRequiredMessage_idNotificacion}"/>
+                    <h:outputLabel value="#{bundle.CreateNotificacionLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{notificacionController.selected.fecha}" title="#{bundle.CreateNotificacionTitle_fecha}" required="true" requiredMessage="#{bundle.CreateNotificacionRequiredMessage_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateNotificacionLabel_mensajeNotificacion}" for="mensajeNotificacion" />
+                    <h:inputText id="mensajeNotificacion" value="#{notificacionController.selected.mensajeNotificacion}" title="#{bundle.CreateNotificacionTitle_mensajeNotificacion}" required="true" requiredMessage="#{bundle.CreateNotificacionRequiredMessage_mensajeNotificacion}"/>
+                    <h:outputLabel value="#{bundle.CreateNotificacionLabel_revisada}" for="revisada" />
+                    <h:inputText id="revisada" value="#{notificacionController.selected.revisada}" title="#{bundle.CreateNotificacionTitle_revisada}" required="true" requiredMessage="#{bundle.CreateNotificacionRequiredMessage_revisada}"/>
+                    <h:outputLabel value="#{bundle.CreateNotificacionLabel_destinatario}" for="destinatario" />
+                    <h:selectOneMenu id="destinatario" value="#{notificacionController.selected.destinatario}" title="#{bundle.CreateNotificacionTitle_destinatario}" required="true" requiredMessage="#{bundle.CreateNotificacionRequiredMessage_destinatario}">
+                        <f:selectItems value="#{funcionarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{notificacionController.create}" value="#{bundle.CreateNotificacionSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{notificacionController.prepareList}" value="#{bundle.CreateNotificacionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateNotificacionIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

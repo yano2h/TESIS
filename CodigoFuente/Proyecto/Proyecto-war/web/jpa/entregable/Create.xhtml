@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateEntregableTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateEntregableLabel_idEntregable}" for="idEntregable" />
+                    <h:inputText id="idEntregable" value="#{entregableController.selected.idEntregable}" title="#{bundle.CreateEntregableTitle_idEntregable}" required="true" requiredMessage="#{bundle.CreateEntregableRequiredMessage_idEntregable}"/>
+                    <h:outputLabel value="#{bundle.CreateEntregableLabel_nombreEntregable}" for="nombreEntregable" />
+                    <h:inputText id="nombreEntregable" value="#{entregableController.selected.nombreEntregable}" title="#{bundle.CreateEntregableTitle_nombreEntregable}" required="true" requiredMessage="#{bundle.CreateEntregableRequiredMessage_nombreEntregable}"/>
+                    <h:outputLabel value="#{bundle.CreateEntregableLabel_tareaScm}" for="tareaScm" />
+                    <h:selectOneMenu id="tareaScm" value="#{entregableController.selected.tareaScm}" title="#{bundle.CreateEntregableTitle_tareaScm}" required="true" requiredMessage="#{bundle.CreateEntregableRequiredMessage_tareaScm}">
+                        <f:selectItems value="#{tareaScmController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{entregableController.create}" value="#{bundle.CreateEntregableSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{entregableController.prepareList}" value="#{bundle.CreateEntregableShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateEntregableIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

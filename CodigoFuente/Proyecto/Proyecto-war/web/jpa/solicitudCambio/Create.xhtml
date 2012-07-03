@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateSolicitudCambioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_idSolicitudCambio}" for="idSolicitudCambio" />
+                    <h:inputText id="idSolicitudCambio" value="#{solicitudCambioController.selected.idSolicitudCambio}" title="#{bundle.CreateSolicitudCambioTitle_idSolicitudCambio}" required="true" requiredMessage="#{bundle.CreateSolicitudCambioRequiredMessage_idSolicitudCambio}"/>
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_titulo}" for="titulo" />
+                    <h:inputText id="titulo" value="#{solicitudCambioController.selected.titulo}" title="#{bundle.CreateSolicitudCambioTitle_titulo}" required="true" requiredMessage="#{bundle.CreateSolicitudCambioRequiredMessage_titulo}"/>
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_fechaEnvio}" for="fechaEnvio" />
+                    <h:inputText id="fechaEnvio" value="#{solicitudCambioController.selected.fechaEnvio}" title="#{bundle.CreateSolicitudCambioTitle_fechaEnvio}" required="true" requiredMessage="#{bundle.CreateSolicitudCambioRequiredMessage_fechaEnvio}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_descripcionNecesidadCambio}" for="descripcionNecesidadCambio" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcionNecesidadCambio" value="#{solicitudCambioController.selected.descripcionNecesidadCambio}" title="#{bundle.CreateSolicitudCambioTitle_descripcionNecesidadCambio}" required="true" requiredMessage="#{bundle.CreateSolicitudCambioRequiredMessage_descripcionNecesidadCambio}"/>
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_descripcionCambio}" for="descripcionCambio" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcionCambio" value="#{solicitudCambioController.selected.descripcionCambio}" title="#{bundle.CreateSolicitudCambioTitle_descripcionCambio}" />
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_fechaAnalisis}" for="fechaAnalisis" />
+                    <h:inputText id="fechaAnalisis" value="#{solicitudCambioController.selected.fechaAnalisis}" title="#{bundle.CreateSolicitudCambioTitle_fechaAnalisis}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_descripcionImpactoCambio}" for="descripcionImpactoCambio" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcionImpactoCambio" value="#{solicitudCambioController.selected.descripcionImpactoCambio}" title="#{bundle.CreateSolicitudCambioTitle_descripcionImpactoCambio}" />
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_fechaCierre}" for="fechaCierre" />
+                    <h:inputText id="fechaCierre" value="#{solicitudCambioController.selected.fechaCierre}" title="#{bundle.CreateSolicitudCambioTitle_fechaCierre}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_moduloAfectado}" for="moduloAfectado" />
+                    <h:inputText id="moduloAfectado" value="#{solicitudCambioController.selected.moduloAfectado}" title="#{bundle.CreateSolicitudCambioTitle_moduloAfectado}" />
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_descripcionResolucion}" for="descripcionResolucion" />
+                    <h:inputText id="descripcionResolucion" value="#{solicitudCambioController.selected.descripcionResolucion}" title="#{bundle.CreateSolicitudCambioTitle_descripcionResolucion}" />
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_formularioImplementacion}" for="formularioImplementacion" />
+                    <h:selectOneMenu id="formularioImplementacion" value="#{solicitudCambioController.selected.formularioImplementacion}" title="#{bundle.CreateSolicitudCambioTitle_formularioImplementacion}" >
+                        <f:selectItems value="#{formularioImplementacionController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_itemConfiguracion}" for="itemConfiguracion" />
+                    <h:selectOneMenu id="itemConfiguracion" value="#{solicitudCambioController.selected.itemConfiguracion}" title="#{bundle.CreateSolicitudCambioTitle_itemConfiguracion}" required="true" requiredMessage="#{bundle.CreateSolicitudCambioRequiredMessage_itemConfiguracion}">
+                        <f:selectItems value="#{itemConfiguracionController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_evaluadorFinal}" for="evaluadorFinal" />
+                    <h:selectOneMenu id="evaluadorFinal" value="#{solicitudCambioController.selected.evaluadorFinal}" title="#{bundle.CreateSolicitudCambioTitle_evaluadorFinal}" >
+                        <f:selectItems value="#{funcionarioDisicoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_evaluadorImpacto}" for="evaluadorImpacto" />
+                    <h:selectOneMenu id="evaluadorImpacto" value="#{solicitudCambioController.selected.evaluadorImpacto}" title="#{bundle.CreateSolicitudCambioTitle_evaluadorImpacto}" >
+                        <f:selectItems value="#{funcionarioDisicoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_estadoSolicitud}" for="estadoSolicitud" />
+                    <h:selectOneMenu id="estadoSolicitud" value="#{solicitudCambioController.selected.estadoSolicitud}" title="#{bundle.CreateSolicitudCambioTitle_estadoSolicitud}" required="true" requiredMessage="#{bundle.CreateSolicitudCambioRequiredMessage_estadoSolicitud}">
+                        <f:selectItems value="#{estadoSolicitudCambioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_prioridadSolicitud}" for="prioridadSolicitud" />
+                    <h:selectOneMenu id="prioridadSolicitud" value="#{solicitudCambioController.selected.prioridadSolicitud}" title="#{bundle.CreateSolicitudCambioTitle_prioridadSolicitud}" required="true" requiredMessage="#{bundle.CreateSolicitudCambioRequiredMessage_prioridadSolicitud}">
+                        <f:selectItems value="#{tipoPrioridadController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_solicitante}" for="solicitante" />
+                    <h:selectOneMenu id="solicitante" value="#{solicitudCambioController.selected.solicitante}" title="#{bundle.CreateSolicitudCambioTitle_solicitante}" required="true" requiredMessage="#{bundle.CreateSolicitudCambioRequiredMessage_solicitante}">
+                        <f:selectItems value="#{funcionarioDisicoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSolicitudCambioLabel_proyecto}" for="proyecto" />
+                    <h:selectOneMenu id="proyecto" value="#{solicitudCambioController.selected.proyecto}" title="#{bundle.CreateSolicitudCambioTitle_proyecto}" required="true" requiredMessage="#{bundle.CreateSolicitudCambioRequiredMessage_proyecto}">
+                        <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{solicitudCambioController.create}" value="#{bundle.CreateSolicitudCambioSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{solicitudCambioController.prepareList}" value="#{bundle.CreateSolicitudCambioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateSolicitudCambioIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

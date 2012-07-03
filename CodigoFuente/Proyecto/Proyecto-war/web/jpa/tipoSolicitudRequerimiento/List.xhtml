@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTipoSolicitudRequerimientoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTipoSolicitudRequerimientoEmpty}" rendered="#{tipoSolicitudRequerimientoController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{tipoSolicitudRequerimientoController.items.rowCount > 0}">
+                    <h:outputText value="#{tipoSolicitudRequerimientoController.pagination.pageFirstItem + 1}..#{tipoSolicitudRequerimientoController.pagination.pageLastItem + 1}/#{tipoSolicitudRequerimientoController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{tipoSolicitudRequerimientoController.previous}" value="#{bundle.Previous} #{tipoSolicitudRequerimientoController.pagination.pageSize}" rendered="#{tipoSolicitudRequerimientoController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{tipoSolicitudRequerimientoController.next}" value="#{bundle.Next} #{tipoSolicitudRequerimientoController.pagination.pageSize}" rendered="#{tipoSolicitudRequerimientoController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{tipoSolicitudRequerimientoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipoSolicitudRequerimientoTitle_idTipoSolicitudRequerimiento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTipoSolicitudRequerimiento}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipoSolicitudRequerimientoTitle_nombreTipoSolicitud}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreTipoSolicitud}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipoSolicitudRequerimientoTitle_descripcionTipo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcionTipo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{tipoSolicitudRequerimientoController.prepareView}" value="#{bundle.ListTipoSolicitudRequerimientoViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tipoSolicitudRequerimientoController.prepareEdit}" value="#{bundle.ListTipoSolicitudRequerimientoEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tipoSolicitudRequerimientoController.destroy}" value="#{bundle.ListTipoSolicitudRequerimientoDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{tipoSolicitudRequerimientoController.prepareCreate}" value="#{bundle.ListTipoSolicitudRequerimientoCreateLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ListTipoSolicitudRequerimientoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

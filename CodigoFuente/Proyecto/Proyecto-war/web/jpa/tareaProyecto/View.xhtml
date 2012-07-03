@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTareaProyectoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTareaProyectoLabel_idTareaProyecto}"/>
+                    <h:outputText value="#{tareaProyectoController.selected.idTareaProyecto}" title="#{bundle.ViewTareaProyectoTitle_idTareaProyecto}"/>
+                    <h:outputText value="#{bundle.ViewTareaProyectoLabel_tarea}"/>
+                    <h:outputText value="#{tareaProyectoController.selected.tarea}" title="#{bundle.ViewTareaProyectoTitle_tarea}"/>
+                    <h:outputText value="#{bundle.ViewTareaProyectoLabel_descripcionTarea}"/>
+                    <h:outputText value="#{tareaProyectoController.selected.descripcionTarea}" title="#{bundle.ViewTareaProyectoTitle_descripcionTarea}"/>
+                    <h:outputText value="#{bundle.ViewTareaProyectoLabel_fechaCreacion}"/>
+                    <h:outputText value="#{tareaProyectoController.selected.fechaCreacion}" title="#{bundle.ViewTareaProyectoTitle_fechaCreacion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTareaProyectoLabel_fechaInicioPropuesta}"/>
+                    <h:outputText value="#{tareaProyectoController.selected.fechaInicioPropuesta}" title="#{bundle.ViewTareaProyectoTitle_fechaInicioPropuesta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTareaProyectoLabel_fechaInicioReal}"/>
+                    <h:outputText value="#{tareaProyectoController.selected.fechaInicioReal}" title="#{bundle.ViewTareaProyectoTitle_fechaInicioReal}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTareaProyectoLabel_fechaTerminoPropuesta}"/>
+                    <h:outputText value="#{tareaProyectoController.selected.fechaTerminoPropuesta}" title="#{bundle.ViewTareaProyectoTitle_fechaTerminoPropuesta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTareaProyectoLabel_fechaTerminoReal}"/>
+                    <h:outputText value="#{tareaProyectoController.selected.fechaTerminoReal}" title="#{bundle.ViewTareaProyectoTitle_fechaTerminoReal}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTareaProyectoLabel_nivelAvance}"/>
+                    <h:outputText value="#{tareaProyectoController.selected.nivelAvance}" title="#{bundle.ViewTareaProyectoTitle_nivelAvance}"/>
+                    <h:outputText value="#{bundle.ViewTareaProyectoLabel_visible}"/>
+                    <h:outputText value="#{tareaProyectoController.selected.visible}" title="#{bundle.ViewTareaProyectoTitle_visible}"/>
+                    <h:outputText value="#{bundle.ViewTareaProyectoLabel_responsableTarea}"/>
+                    <h:outputText value="#{tareaProyectoController.selected.responsableTarea}" title="#{bundle.ViewTareaProyectoTitle_responsableTarea}"/>
+                    <h:outputText value="#{bundle.ViewTareaProyectoLabel_proyecto}"/>
+                    <h:outputText value="#{tareaProyectoController.selected.proyecto}" title="#{bundle.ViewTareaProyectoTitle_proyecto}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tareaProyectoController.destroyAndView}" value="#{bundle.ViewTareaProyectoDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewTareaProyectoEditLink}"/>
+                <br />
+                <h:commandLink action="#{tareaProyectoController.prepareCreate}" value="#{bundle.ViewTareaProyectoCreateLink}" />
+                <br />
+                <h:commandLink action="#{tareaProyectoController.prepareList}" value="#{bundle.ViewTareaProyectoShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewTareaProyectoIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

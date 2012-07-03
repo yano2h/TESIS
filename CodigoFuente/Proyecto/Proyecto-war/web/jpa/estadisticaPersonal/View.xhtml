@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewEstadisticaPersonalTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewEstadisticaPersonalLabel_id}"/>
+                    <h:outputText value="#{estadisticaPersonalController.selected.id}" title="#{bundle.ViewEstadisticaPersonalTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewEstadisticaPersonalLabel_fechaMedicion}"/>
+                    <h:outputText value="#{estadisticaPersonalController.selected.fechaMedicion}" title="#{bundle.ViewEstadisticaPersonalTitle_fechaMedicion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewEstadisticaPersonalLabel_cantidadTotalSolicitudesAsignadas}"/>
+                    <h:outputText value="#{estadisticaPersonalController.selected.cantidadTotalSolicitudesAsignadas}" title="#{bundle.ViewEstadisticaPersonalTitle_cantidadTotalSolicitudesAsignadas}"/>
+                    <h:outputText value="#{bundle.ViewEstadisticaPersonalLabel_cantidadSolicitudesPendientes}"/>
+                    <h:outputText value="#{estadisticaPersonalController.selected.cantidadSolicitudesPendientes}" title="#{bundle.ViewEstadisticaPersonalTitle_cantidadSolicitudesPendientes}"/>
+                    <h:outputText value="#{bundle.ViewEstadisticaPersonalLabel_cantidadSolicitudesVencidas}"/>
+                    <h:outputText value="#{estadisticaPersonalController.selected.cantidadSolicitudesVencidas}" title="#{bundle.ViewEstadisticaPersonalTitle_cantidadSolicitudesVencidas}"/>
+                    <h:outputText value="#{bundle.ViewEstadisticaPersonalLabel_cantidadSolicitudesIniciadas}"/>
+                    <h:outputText value="#{estadisticaPersonalController.selected.cantidadSolicitudesIniciadas}" title="#{bundle.ViewEstadisticaPersonalTitle_cantidadSolicitudesIniciadas}"/>
+                    <h:outputText value="#{bundle.ViewEstadisticaPersonalLabel_cantidadSolicitudesCerradas}"/>
+                    <h:outputText value="#{estadisticaPersonalController.selected.cantidadSolicitudesCerradas}" title="#{bundle.ViewEstadisticaPersonalTitle_cantidadSolicitudesCerradas}"/>
+                    <h:outputText value="#{bundle.ViewEstadisticaPersonalLabel_cantidadProyectosAcargo}"/>
+                    <h:outputText value="#{estadisticaPersonalController.selected.cantidadProyectosAcargo}" title="#{bundle.ViewEstadisticaPersonalTitle_cantidadProyectosAcargo}"/>
+                    <h:outputText value="#{bundle.ViewEstadisticaPersonalLabel_cantidadProyectosEnQueParticipa}"/>
+                    <h:outputText value="#{estadisticaPersonalController.selected.cantidadProyectosEnQueParticipa}" title="#{bundle.ViewEstadisticaPersonalTitle_cantidadProyectosEnQueParticipa}"/>
+                    <h:outputText value="#{bundle.ViewEstadisticaPersonalLabel_cantidadTareasProyectoAsociadas}"/>
+                    <h:outputText value="#{estadisticaPersonalController.selected.cantidadTareasProyectoAsociadas}" title="#{bundle.ViewEstadisticaPersonalTitle_cantidadTareasProyectoAsociadas}"/>
+                    <h:outputText value="#{bundle.ViewEstadisticaPersonalLabel_cantidadTareasScmAsociadas}"/>
+                    <h:outputText value="#{estadisticaPersonalController.selected.cantidadTareasScmAsociadas}" title="#{bundle.ViewEstadisticaPersonalTitle_cantidadTareasScmAsociadas}"/>
+                    <h:outputText value="#{bundle.ViewEstadisticaPersonalLabel_funcionarioDisico}"/>
+                    <h:outputText value="#{estadisticaPersonalController.selected.funcionarioDisico}" title="#{bundle.ViewEstadisticaPersonalTitle_funcionarioDisico}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{estadisticaPersonalController.destroyAndView}" value="#{bundle.ViewEstadisticaPersonalDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewEstadisticaPersonalEditLink}"/>
+                <br />
+                <h:commandLink action="#{estadisticaPersonalController.prepareCreate}" value="#{bundle.ViewEstadisticaPersonalCreateLink}" />
+                <br />
+                <h:commandLink action="#{estadisticaPersonalController.prepareList}" value="#{bundle.ViewEstadisticaPersonalShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewEstadisticaPersonalIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

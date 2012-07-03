@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTareaProyectoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTareaProyectoLabel_idTareaProyecto}" for="idTareaProyecto" />
+                    <h:inputText id="idTareaProyecto" value="#{tareaProyectoController.selected.idTareaProyecto}" title="#{bundle.CreateTareaProyectoTitle_idTareaProyecto}" required="true" requiredMessage="#{bundle.CreateTareaProyectoRequiredMessage_idTareaProyecto}"/>
+                    <h:outputLabel value="#{bundle.CreateTareaProyectoLabel_tarea}" for="tarea" />
+                    <h:inputText id="tarea" value="#{tareaProyectoController.selected.tarea}" title="#{bundle.CreateTareaProyectoTitle_tarea}" required="true" requiredMessage="#{bundle.CreateTareaProyectoRequiredMessage_tarea}"/>
+                    <h:outputLabel value="#{bundle.CreateTareaProyectoLabel_descripcionTarea}" for="descripcionTarea" />
+                    <h:inputText id="descripcionTarea" value="#{tareaProyectoController.selected.descripcionTarea}" title="#{bundle.CreateTareaProyectoTitle_descripcionTarea}" required="true" requiredMessage="#{bundle.CreateTareaProyectoRequiredMessage_descripcionTarea}"/>
+                    <h:outputLabel value="#{bundle.CreateTareaProyectoLabel_fechaCreacion}" for="fechaCreacion" />
+                    <h:inputText id="fechaCreacion" value="#{tareaProyectoController.selected.fechaCreacion}" title="#{bundle.CreateTareaProyectoTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.CreateTareaProyectoRequiredMessage_fechaCreacion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTareaProyectoLabel_fechaInicioPropuesta}" for="fechaInicioPropuesta" />
+                    <h:inputText id="fechaInicioPropuesta" value="#{tareaProyectoController.selected.fechaInicioPropuesta}" title="#{bundle.CreateTareaProyectoTitle_fechaInicioPropuesta}" required="true" requiredMessage="#{bundle.CreateTareaProyectoRequiredMessage_fechaInicioPropuesta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTareaProyectoLabel_fechaInicioReal}" for="fechaInicioReal" />
+                    <h:inputText id="fechaInicioReal" value="#{tareaProyectoController.selected.fechaInicioReal}" title="#{bundle.CreateTareaProyectoTitle_fechaInicioReal}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTareaProyectoLabel_fechaTerminoPropuesta}" for="fechaTerminoPropuesta" />
+                    <h:inputText id="fechaTerminoPropuesta" value="#{tareaProyectoController.selected.fechaTerminoPropuesta}" title="#{bundle.CreateTareaProyectoTitle_fechaTerminoPropuesta}" required="true" requiredMessage="#{bundle.CreateTareaProyectoRequiredMessage_fechaTerminoPropuesta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTareaProyectoLabel_fechaTerminoReal}" for="fechaTerminoReal" />
+                    <h:inputText id="fechaTerminoReal" value="#{tareaProyectoController.selected.fechaTerminoReal}" title="#{bundle.CreateTareaProyectoTitle_fechaTerminoReal}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTareaProyectoLabel_nivelAvance}" for="nivelAvance" />
+                    <h:inputText id="nivelAvance" value="#{tareaProyectoController.selected.nivelAvance}" title="#{bundle.CreateTareaProyectoTitle_nivelAvance}" required="true" requiredMessage="#{bundle.CreateTareaProyectoRequiredMessage_nivelAvance}"/>
+                    <h:outputLabel value="#{bundle.CreateTareaProyectoLabel_visible}" for="visible" />
+                    <h:inputText id="visible" value="#{tareaProyectoController.selected.visible}" title="#{bundle.CreateTareaProyectoTitle_visible}" required="true" requiredMessage="#{bundle.CreateTareaProyectoRequiredMessage_visible}"/>
+                    <h:outputLabel value="#{bundle.CreateTareaProyectoLabel_responsableTarea}" for="responsableTarea" />
+                    <h:selectOneMenu id="responsableTarea" value="#{tareaProyectoController.selected.responsableTarea}" title="#{bundle.CreateTareaProyectoTitle_responsableTarea}" required="true" requiredMessage="#{bundle.CreateTareaProyectoRequiredMessage_responsableTarea}">
+                        <f:selectItems value="#{funcionarioDisicoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateTareaProyectoLabel_proyecto}" for="proyecto" />
+                    <h:selectOneMenu id="proyecto" value="#{tareaProyectoController.selected.proyecto}" title="#{bundle.CreateTareaProyectoTitle_proyecto}" required="true" requiredMessage="#{bundle.CreateTareaProyectoRequiredMessage_proyecto}">
+                        <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tareaProyectoController.create}" value="#{bundle.CreateTareaProyectoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tareaProyectoController.prepareList}" value="#{bundle.CreateTareaProyectoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateTareaProyectoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

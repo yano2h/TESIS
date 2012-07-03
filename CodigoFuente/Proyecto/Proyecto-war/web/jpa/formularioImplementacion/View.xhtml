@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewFormularioImplementacionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewFormularioImplementacionLabel_idFormularioImplementacion}"/>
+                    <h:outputText value="#{formularioImplementacionController.selected.idFormularioImplementacion}" title="#{bundle.ViewFormularioImplementacionTitle_idFormularioImplementacion}"/>
+                    <h:outputText value="#{bundle.ViewFormularioImplementacionLabel_observaciones}"/>
+                    <h:outputText value="#{formularioImplementacionController.selected.observaciones}" title="#{bundle.ViewFormularioImplementacionTitle_observaciones}"/>
+                    <h:outputText value="#{bundle.ViewFormularioImplementacionLabel_fechaVerificacion}"/>
+                    <h:outputText value="#{formularioImplementacionController.selected.fechaVerificacion}" title="#{bundle.ViewFormularioImplementacionTitle_fechaVerificacion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFormularioImplementacionLabel_solicitudCambio}"/>
+                    <h:outputText value="#{formularioImplementacionController.selected.solicitudCambio}" title="#{bundle.ViewFormularioImplementacionTitle_solicitudCambio}"/>
+                    <h:outputText value="#{bundle.ViewFormularioImplementacionLabel_implementador}"/>
+                    <h:outputText value="#{formularioImplementacionController.selected.implementador}" title="#{bundle.ViewFormularioImplementacionTitle_implementador}"/>
+                    <h:outputText value="#{bundle.ViewFormularioImplementacionLabel_verificador}"/>
+                    <h:outputText value="#{formularioImplementacionController.selected.verificador}" title="#{bundle.ViewFormularioImplementacionTitle_verificador}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{formularioImplementacionController.destroyAndView}" value="#{bundle.ViewFormularioImplementacionDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewFormularioImplementacionEditLink}"/>
+                <br />
+                <h:commandLink action="#{formularioImplementacionController.prepareCreate}" value="#{bundle.ViewFormularioImplementacionCreateLink}" />
+                <br />
+                <h:commandLink action="#{formularioImplementacionController.prepareList}" value="#{bundle.ViewFormularioImplementacionShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewFormularioImplementacionIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateFormularioImplementacionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateFormularioImplementacionLabel_idFormularioImplementacion}" for="idFormularioImplementacion" />
+                    <h:inputText id="idFormularioImplementacion" value="#{formularioImplementacionController.selected.idFormularioImplementacion}" title="#{bundle.CreateFormularioImplementacionTitle_idFormularioImplementacion}" required="true" requiredMessage="#{bundle.CreateFormularioImplementacionRequiredMessage_idFormularioImplementacion}"/>
+                    <h:outputLabel value="#{bundle.CreateFormularioImplementacionLabel_observaciones}" for="observaciones" />
+                    <h:inputTextarea rows="4" cols="30" id="observaciones" value="#{formularioImplementacionController.selected.observaciones}" title="#{bundle.CreateFormularioImplementacionTitle_observaciones}" required="true" requiredMessage="#{bundle.CreateFormularioImplementacionRequiredMessage_observaciones}"/>
+                    <h:outputLabel value="#{bundle.CreateFormularioImplementacionLabel_fechaVerificacion}" for="fechaVerificacion" />
+                    <h:inputText id="fechaVerificacion" value="#{formularioImplementacionController.selected.fechaVerificacion}" title="#{bundle.CreateFormularioImplementacionTitle_fechaVerificacion}" required="true" requiredMessage="#{bundle.CreateFormularioImplementacionRequiredMessage_fechaVerificacion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateFormularioImplementacionLabel_solicitudCambio}" for="solicitudCambio" />
+                    <h:selectOneMenu id="solicitudCambio" value="#{formularioImplementacionController.selected.solicitudCambio}" title="#{bundle.CreateFormularioImplementacionTitle_solicitudCambio}" required="true" requiredMessage="#{bundle.CreateFormularioImplementacionRequiredMessage_solicitudCambio}">
+                        <f:selectItems value="#{solicitudCambioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateFormularioImplementacionLabel_implementador}" for="implementador" />
+                    <h:selectOneMenu id="implementador" value="#{formularioImplementacionController.selected.implementador}" title="#{bundle.CreateFormularioImplementacionTitle_implementador}" required="true" requiredMessage="#{bundle.CreateFormularioImplementacionRequiredMessage_implementador}">
+                        <f:selectItems value="#{funcionarioDisicoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateFormularioImplementacionLabel_verificador}" for="verificador" />
+                    <h:selectOneMenu id="verificador" value="#{formularioImplementacionController.selected.verificador}" title="#{bundle.CreateFormularioImplementacionTitle_verificador}" required="true" requiredMessage="#{bundle.CreateFormularioImplementacionRequiredMessage_verificador}">
+                        <f:selectItems value="#{funcionarioDisicoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{formularioImplementacionController.create}" value="#{bundle.CreateFormularioImplementacionSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{formularioImplementacionController.prepareList}" value="#{bundle.CreateFormularioImplementacionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateFormularioImplementacionIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

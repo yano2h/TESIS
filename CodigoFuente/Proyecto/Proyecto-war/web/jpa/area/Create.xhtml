@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAreaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAreaLabel_idArea}" for="idArea" />
+                    <h:inputText id="idArea" value="#{areaController.selected.idArea}" title="#{bundle.CreateAreaTitle_idArea}" required="true" requiredMessage="#{bundle.CreateAreaRequiredMessage_idArea}"/>
+                    <h:outputLabel value="#{bundle.CreateAreaLabel_nombreArea}" for="nombreArea" />
+                    <h:inputText id="nombreArea" value="#{areaController.selected.nombreArea}" title="#{bundle.CreateAreaTitle_nombreArea}" required="true" requiredMessage="#{bundle.CreateAreaRequiredMessage_nombreArea}"/>
+                    <h:outputLabel value="#{bundle.CreateAreaLabel_descripcionArea}" for="descripcionArea" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcionArea" value="#{areaController.selected.descripcionArea}" title="#{bundle.CreateAreaTitle_descripcionArea}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{areaController.create}" value="#{bundle.CreateAreaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{areaController.prepareList}" value="#{bundle.CreateAreaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateAreaIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

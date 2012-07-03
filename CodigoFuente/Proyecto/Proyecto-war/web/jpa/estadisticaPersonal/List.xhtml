@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListEstadisticaPersonalTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListEstadisticaPersonalEmpty}" rendered="#{estadisticaPersonalController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{estadisticaPersonalController.items.rowCount > 0}">
+                    <h:outputText value="#{estadisticaPersonalController.pagination.pageFirstItem + 1}..#{estadisticaPersonalController.pagination.pageLastItem + 1}/#{estadisticaPersonalController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{estadisticaPersonalController.previous}" value="#{bundle.Previous} #{estadisticaPersonalController.pagination.pageSize}" rendered="#{estadisticaPersonalController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{estadisticaPersonalController.next}" value="#{bundle.Next} #{estadisticaPersonalController.pagination.pageSize}" rendered="#{estadisticaPersonalController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{estadisticaPersonalController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadisticaPersonalTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadisticaPersonalTitle_fechaMedicion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaMedicion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadisticaPersonalTitle_cantidadTotalSolicitudesAsignadas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidadTotalSolicitudesAsignadas}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadisticaPersonalTitle_cantidadSolicitudesPendientes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidadSolicitudesPendientes}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadisticaPersonalTitle_cantidadSolicitudesVencidas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidadSolicitudesVencidas}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadisticaPersonalTitle_cantidadSolicitudesIniciadas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidadSolicitudesIniciadas}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadisticaPersonalTitle_cantidadSolicitudesCerradas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidadSolicitudesCerradas}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadisticaPersonalTitle_cantidadProyectosAcargo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidadProyectosAcargo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadisticaPersonalTitle_cantidadProyectosEnQueParticipa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidadProyectosEnQueParticipa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadisticaPersonalTitle_cantidadTareasProyectoAsociadas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidadTareasProyectoAsociadas}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadisticaPersonalTitle_cantidadTareasScmAsociadas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidadTareasScmAsociadas}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadisticaPersonalTitle_funcionarioDisico}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.funcionarioDisico}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{estadisticaPersonalController.prepareView}" value="#{bundle.ListEstadisticaPersonalViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{estadisticaPersonalController.prepareEdit}" value="#{bundle.ListEstadisticaPersonalEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{estadisticaPersonalController.destroy}" value="#{bundle.ListEstadisticaPersonalDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{estadisticaPersonalController.prepareCreate}" value="#{bundle.ListEstadisticaPersonalCreateLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ListEstadisticaPersonalIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

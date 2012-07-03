@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateSolicitudRequerimientoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_idSolicitudRequerimiento}" for="idSolicitudRequerimiento" />
+                    <h:inputText id="idSolicitudRequerimiento" value="#{solicitudRequerimientoController.selected.idSolicitudRequerimiento}" title="#{bundle.CreateSolicitudRequerimientoTitle_idSolicitudRequerimiento}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_idSolicitudRequerimiento}"/>
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_codigoConsulta}" for="codigoConsulta" />
+                    <h:inputText id="codigoConsulta" value="#{solicitudRequerimientoController.selected.codigoConsulta}" title="#{bundle.CreateSolicitudRequerimientoTitle_codigoConsulta}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_codigoConsulta}"/>
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_asunto}" for="asunto" />
+                    <h:inputText id="asunto" value="#{solicitudRequerimientoController.selected.asunto}" title="#{bundle.CreateSolicitudRequerimientoTitle_asunto}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_asunto}"/>
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_mensaje}" for="mensaje" />
+                    <h:inputTextarea rows="4" cols="30" id="mensaje" value="#{solicitudRequerimientoController.selected.mensaje}" title="#{bundle.CreateSolicitudRequerimientoTitle_mensaje}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_mensaje}"/>
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_fechaEnvio}" for="fechaEnvio" />
+                    <h:inputText id="fechaEnvio" value="#{solicitudRequerimientoController.selected.fechaEnvio}" title="#{bundle.CreateSolicitudRequerimientoTitle_fechaEnvio}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_fechaEnvio}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_fechaCierre}" for="fechaCierre" />
+                    <h:inputText id="fechaCierre" value="#{solicitudRequerimientoController.selected.fechaCierre}" title="#{bundle.CreateSolicitudRequerimientoTitle_fechaCierre}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_fechaVencimiento}" for="fechaVencimiento" />
+                    <h:inputText id="fechaVencimiento" value="#{solicitudRequerimientoController.selected.fechaVencimiento}" title="#{bundle.CreateSolicitudRequerimientoTitle_fechaVencimiento}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_fechaUltimaActualizacion}" for="fechaUltimaActualizacion" />
+                    <h:inputText id="fechaUltimaActualizacion" value="#{solicitudRequerimientoController.selected.fechaUltimaActualizacion}" title="#{bundle.CreateSolicitudRequerimientoTitle_fechaUltimaActualizacion}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_fechaUltimaActualizacion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_justificacionTrasnferencia}" for="justificacionTrasnferencia" />
+                    <h:inputText id="justificacionTrasnferencia" value="#{solicitudRequerimientoController.selected.justificacionTrasnferencia}" title="#{bundle.CreateSolicitudRequerimientoTitle_justificacionTrasnferencia}" />
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_respuesta}" for="respuesta" />
+                    <h:inputTextarea rows="4" cols="30" id="respuesta" value="#{solicitudRequerimientoController.selected.respuesta}" title="#{bundle.CreateSolicitudRequerimientoTitle_respuesta}" />
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_prioridadSolicitud}" for="prioridadSolicitud" />
+                    <h:selectOneMenu id="prioridadSolicitud" value="#{solicitudRequerimientoController.selected.prioridadSolicitud}" title="#{bundle.CreateSolicitudRequerimientoTitle_prioridadSolicitud}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_prioridadSolicitud}">
+                        <f:selectItems value="#{tipoPrioridadController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_solicitante}" for="solicitante" />
+                    <h:selectOneMenu id="solicitante" value="#{solicitudRequerimientoController.selected.solicitante}" title="#{bundle.CreateSolicitudRequerimientoTitle_solicitante}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_solicitante}">
+                        <f:selectItems value="#{funcionarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_responsable}" for="responsable" />
+                    <h:selectOneMenu id="responsable" value="#{solicitudRequerimientoController.selected.responsable}" title="#{bundle.CreateSolicitudRequerimientoTitle_responsable}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_responsable}">
+                        <f:selectItems value="#{funcionarioDisicoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_areaResponsable}" for="areaResponsable" />
+                    <h:selectOneMenu id="areaResponsable" value="#{solicitudRequerimientoController.selected.areaResponsable}" title="#{bundle.CreateSolicitudRequerimientoTitle_areaResponsable}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_areaResponsable}">
+                        <f:selectItems value="#{areaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_estadoSolicitud}" for="estadoSolicitud" />
+                    <h:selectOneMenu id="estadoSolicitud" value="#{solicitudRequerimientoController.selected.estadoSolicitud}" title="#{bundle.CreateSolicitudRequerimientoTitle_estadoSolicitud}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_estadoSolicitud}">
+                        <f:selectItems value="#{estadoSolicitudRequerimientoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_tipoSolicitud}" for="tipoSolicitud" />
+                    <h:selectOneMenu id="tipoSolicitud" value="#{solicitudRequerimientoController.selected.tipoSolicitud}" title="#{bundle.CreateSolicitudRequerimientoTitle_tipoSolicitud}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_tipoSolicitud}">
+                        <f:selectItems value="#{tipoSolicitudRequerimientoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{solicitudRequerimientoController.create}" value="#{bundle.CreateSolicitudRequerimientoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{solicitudRequerimientoController.prepareList}" value="#{bundle.CreateSolicitudRequerimientoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateSolicitudRequerimientoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

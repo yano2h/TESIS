@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListSolicitudCambioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListSolicitudCambioEmpty}" rendered="#{solicitudCambioController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{solicitudCambioController.items.rowCount > 0}">
+                    <h:outputText value="#{solicitudCambioController.pagination.pageFirstItem + 1}..#{solicitudCambioController.pagination.pageLastItem + 1}/#{solicitudCambioController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{solicitudCambioController.previous}" value="#{bundle.Previous} #{solicitudCambioController.pagination.pageSize}" rendered="#{solicitudCambioController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{solicitudCambioController.next}" value="#{bundle.Next} #{solicitudCambioController.pagination.pageSize}" rendered="#{solicitudCambioController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{solicitudCambioController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_idSolicitudCambio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idSolicitudCambio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_titulo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.titulo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_fechaEnvio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaEnvio}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_descripcionNecesidadCambio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcionNecesidadCambio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_descripcionCambio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcionCambio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_fechaAnalisis}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaAnalisis}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_descripcionImpactoCambio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcionImpactoCambio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_fechaCierre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaCierre}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_moduloAfectado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.moduloAfectado}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_descripcionResolucion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcionResolucion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_formularioImplementacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.formularioImplementacion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_itemConfiguracion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itemConfiguracion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_evaluadorFinal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.evaluadorFinal}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_evaluadorImpacto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.evaluadorImpacto}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_estadoSolicitud}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estadoSolicitud}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_prioridadSolicitud}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prioridadSolicitud}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_solicitante}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.solicitante}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSolicitudCambioTitle_proyecto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.proyecto}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{solicitudCambioController.prepareView}" value="#{bundle.ListSolicitudCambioViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{solicitudCambioController.prepareEdit}" value="#{bundle.ListSolicitudCambioEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{solicitudCambioController.destroy}" value="#{bundle.ListSolicitudCambioDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{solicitudCambioController.prepareCreate}" value="#{bundle.ListSolicitudCambioCreateLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ListSolicitudCambioIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
