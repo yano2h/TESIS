@@ -396,17 +396,17 @@ CREATE  TABLE IF NOT EXISTS TAREA_SCM_PROYECTO (
   responsable INT NOT NULL ,
   fecha_inicio DATE NOT NULL ,
   fecha_termino DATE NOT NULL ,
-  INDEX fk_TAREA_SCM_has_PROYECTO_PROYECTO1 (proyecto ASC) ,
-  INDEX fk_TAREA_SCM_has_PROYECTO_TAREA_SCM1 (tarea_scm ASC) ,
+  INDEX fk_TAREA_SCM_has_PROYECTO_PROYECTO1 (id_proyecto ASC) ,
+  INDEX fk_TAREA_SCM_has_PROYECTO_TAREA_SCM1 (id_tarea_scm ASC) ,
   INDEX fk_TAREA_SCM_has_PROYECTO_FUNCIONARIO_DISICO1 (responsable ASC) ,
-  PRIMARY KEY (tarea_scm, proyecto) ,
+  PRIMARY KEY (id_tarea_scm, id_proyecto) ,
   CONSTRAINT fk_TAREA_SCM_has_PROYECTO_TAREA_SCM1
-    FOREIGN KEY (tarea_scm )
+    FOREIGN KEY (id_tarea_scm )
     REFERENCES TAREA_SCM (id_tarea_scm )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_TAREA_SCM_has_PROYECTO_PROYECTO1
-    FOREIGN KEY (proyecto )
+    FOREIGN KEY (id_proyecto )
     REFERENCES PROYECTO (id_proyecto )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
