@@ -240,7 +240,7 @@ CREATE  TABLE IF NOT EXISTS SOLICITUD_CAMBIO (
   proyecto INT NOT NULL ,
   solicitante INT NOT NULL ,
   titulo VARCHAR(50) NOT NULL ,
-  fecha_solicitud DATETIME NOT NULL ,
+  fecha_envio DATETIME NOT NULL ,
   descripcion_necesidad_cambio TEXT NOT NULL ,
   prioridad_solicitud TINYINT NOT NULL ,
   estado_solicitud TINYINT NOT NULL ,
