@@ -22,3 +22,14 @@ root {
     padding: 10px;
 }
 
+div#header_c {
+	background: url(../imagenes/header/mw_header_t.png) 0 0 repeat-x;
+}
+
+div#header_l {
+	background: url(../imagenes/header/mw_header_t_l.png) 0 0 no-repeat;
+}
+
+div#header_r {
+	background: url(../imagenes/header/mw_header_t_r.png) 100% 0 no-repeat;
+}
