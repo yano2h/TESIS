@@ -3,7 +3,7 @@ package cl.uv.proyecto.persistencia.jsf.mb;
 import cl.uv.proyecto.persistencia.entidades.RolProyecto;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.RolProyectoFacade;
+import cl.uv.proyecto.persistencia.ejb.RolProyectoFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class RolProyectoController implements Serializable {
     private RolProyecto current;
     private DataModel items = null;
     @EJB
-    private cl.uv.proyecto.persistencia.ejb.RolProyectoFacade ejbFacade;
+    private RolProyectoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,7 +40,7 @@ public class RolProyectoController implements Serializable {
         return current;
     }
 
-    private RolProyectoFacade getFacade() {
+    private RolProyectoFacadeLocal getFacade() {
         return ejbFacade;
     }
 

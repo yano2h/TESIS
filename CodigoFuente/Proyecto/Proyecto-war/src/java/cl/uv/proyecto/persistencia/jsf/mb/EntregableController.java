@@ -3,7 +3,7 @@ package cl.uv.proyecto.persistencia.jsf.mb;
 import cl.uv.proyecto.persistencia.entidades.Entregable;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.EntregableFacade;
+import cl.uv.proyecto.persistencia.ejb.EntregableFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class EntregableController implements Serializable {
     private Entregable current;
     private DataModel items = null;
     @EJB
-    private cl.uv.proyecto.persistencia.ejb.EntregableFacade ejbFacade;
+    private EntregableFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,7 +40,7 @@ public class EntregableController implements Serializable {
         return current;
     }
 
-    private EntregableFacade getFacade() {
+    private EntregableFacadeLocal getFacade() {
         return ejbFacade;
     }
 

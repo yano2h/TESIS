@@ -3,7 +3,7 @@ package cl.uv.proyecto.persistencia.jsf.mb;
 import cl.uv.proyecto.persistencia.entidades.SolicitudCambio;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.SolicitudCambioFacade;
+import cl.uv.proyecto.persistencia.ejb.SolicitudCambioFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class SolicitudCambioController implements Serializable {
     private SolicitudCambio current;
     private DataModel items = null;
     @EJB
-    private cl.uv.proyecto.persistencia.ejb.SolicitudCambioFacade ejbFacade;
+    private SolicitudCambioFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,7 +40,7 @@ public class SolicitudCambioController implements Serializable {
         return current;
     }
 
-    private SolicitudCambioFacade getFacade() {
+    private SolicitudCambioFacadeLocal getFacade() {
         return ejbFacade;
     }
 

@@ -3,7 +3,7 @@ package cl.uv.proyecto.persistencia.jsf.mb;
 import cl.uv.proyecto.persistencia.entidades.ComentarioSolicitud;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.ComentarioSolicitudFacade;
+import cl.uv.proyecto.persistencia.ejb.ComentarioSolicitudFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class ComentarioSolicitudController implements Serializable {
     private ComentarioSolicitud current;
     private DataModel items = null;
     @EJB
-    private cl.uv.proyecto.persistencia.ejb.ComentarioSolicitudFacade ejbFacade;
+    private ComentarioSolicitudFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,7 +40,7 @@ public class ComentarioSolicitudController implements Serializable {
         return current;
     }
 
-    private ComentarioSolicitudFacade getFacade() {
+    private ComentarioSolicitudFacadeLocal getFacade() {
         return ejbFacade;
     }
 

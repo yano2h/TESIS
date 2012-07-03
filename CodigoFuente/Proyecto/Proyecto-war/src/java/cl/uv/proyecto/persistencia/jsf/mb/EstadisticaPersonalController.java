@@ -3,7 +3,7 @@ package cl.uv.proyecto.persistencia.jsf.mb;
 import cl.uv.proyecto.persistencia.entidades.EstadisticaPersonal;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.EstadisticaPersonalFacade;
+import cl.uv.proyecto.persistencia.ejb.EstadisticaPersonalFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class EstadisticaPersonalController implements Serializable {
     private EstadisticaPersonal current;
     private DataModel items = null;
     @EJB
-    private cl.uv.proyecto.persistencia.ejb.EstadisticaPersonalFacade ejbFacade;
+    private EstadisticaPersonalFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,7 +40,7 @@ public class EstadisticaPersonalController implements Serializable {
         return current;
     }
 
-    private EstadisticaPersonalFacade getFacade() {
+    private EstadisticaPersonalFacadeLocal getFacade() {
         return ejbFacade;
     }
 

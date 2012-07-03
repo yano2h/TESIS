@@ -3,7 +3,7 @@ package cl.uv.proyecto.persistencia.jsf.mb;
 import cl.uv.proyecto.persistencia.entidades.Notificacion;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.NotificacionFacade;
+import cl.uv.proyecto.persistencia.ejb.NotificacionFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class NotificacionController implements Serializable {
     private Notificacion current;
     private DataModel items = null;
     @EJB
-    private cl.uv.proyecto.persistencia.ejb.NotificacionFacade ejbFacade;
+    private NotificacionFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,7 +40,7 @@ public class NotificacionController implements Serializable {
         return current;
     }
 
-    private NotificacionFacade getFacade() {
+    private NotificacionFacadeLocal getFacade() {
         return ejbFacade;
     }
 

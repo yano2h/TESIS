@@ -3,7 +3,7 @@ package cl.uv.proyecto.persistencia.jsf.mb;
 import cl.uv.proyecto.persistencia.entidades.ParticipanteProyecto;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacade;
+import cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class ParticipanteProyectoController implements Serializable {
     private ParticipanteProyecto current;
     private DataModel items = null;
     @EJB
-    private cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacade ejbFacade;
+    private ParticipanteProyectoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -41,7 +41,7 @@ public class ParticipanteProyectoController implements Serializable {
         return current;
     }
 
-    private ParticipanteProyectoFacade getFacade() {
+    private ParticipanteProyectoFacadeLocal getFacade() {
         return ejbFacade;
     }
 

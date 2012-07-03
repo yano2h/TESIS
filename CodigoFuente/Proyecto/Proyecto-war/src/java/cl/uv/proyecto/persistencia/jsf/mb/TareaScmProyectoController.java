@@ -3,7 +3,7 @@ package cl.uv.proyecto.persistencia.jsf.mb;
 import cl.uv.proyecto.persistencia.entidades.TareaScmProyecto;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.TareaScmProyectoFacade;
+import cl.uv.proyecto.persistencia.ejb.TareaScmProyectoFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class TareaScmProyectoController implements Serializable {
     private TareaScmProyecto current;
     private DataModel items = null;
     @EJB
-    private cl.uv.proyecto.persistencia.ejb.TareaScmProyectoFacade ejbFacade;
+    private TareaScmProyectoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -41,7 +41,7 @@ public class TareaScmProyectoController implements Serializable {
         return current;
     }
 
-    private TareaScmProyectoFacade getFacade() {
+    private TareaScmProyectoFacadeLocal getFacade() {
         return ejbFacade;
     }
 

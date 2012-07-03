@@ -3,7 +3,7 @@ package cl.uv.proyecto.persistencia.jsf.mb;
 import cl.uv.proyecto.persistencia.entidades.FormularioImplementacion;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.FormularioImplementacionFacade;
+import cl.uv.proyecto.persistencia.ejb.FormularioImplementacionFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class FormularioImplementacionController implements Serializable {
     private FormularioImplementacion current;
     private DataModel items = null;
     @EJB
-    private cl.uv.proyecto.persistencia.ejb.FormularioImplementacionFacade ejbFacade;
+    private FormularioImplementacionFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,7 +40,7 @@ public class FormularioImplementacionController implements Serializable {
         return current;
     }
 
-    private FormularioImplementacionFacade getFacade() {
+    private FormularioImplementacionFacadeLocal getFacade() {
         return ejbFacade;
     }
 

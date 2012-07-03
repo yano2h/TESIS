@@ -3,7 +3,7 @@ package cl.uv.proyecto.persistencia.jsf.mb;
 import cl.uv.proyecto.persistencia.entidades.ItemConfiguracion;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.ItemConfiguracionFacade;
+import cl.uv.proyecto.persistencia.ejb.ItemConfiguracionFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class ItemConfiguracionController implements Serializable {
     private ItemConfiguracion current;
     private DataModel items = null;
     @EJB
-    private cl.uv.proyecto.persistencia.ejb.ItemConfiguracionFacade ejbFacade;
+    private ItemConfiguracionFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,7 +40,7 @@ public class ItemConfiguracionController implements Serializable {
         return current;
     }
 
-    private ItemConfiguracionFacade getFacade() {
+    private ItemConfiguracionFacadeLocal getFacade() {
         return ejbFacade;
     }
 

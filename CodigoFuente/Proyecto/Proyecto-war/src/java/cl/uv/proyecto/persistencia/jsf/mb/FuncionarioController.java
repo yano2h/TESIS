@@ -3,7 +3,7 @@ package cl.uv.proyecto.persistencia.jsf.mb;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.FuncionarioFacade;
+import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class FuncionarioController implements Serializable {
     private Funcionario current;
     private DataModel items = null;
     @EJB
-    private cl.uv.proyecto.persistencia.ejb.FuncionarioFacade ejbFacade;
+    private FuncionarioFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,7 +40,7 @@ public class FuncionarioController implements Serializable {
         return current;
     }
 
-    private FuncionarioFacade getFacade() {
+    private FuncionarioFacadeLocal getFacade() {
         return ejbFacade;
     }
 

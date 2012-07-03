@@ -3,7 +3,7 @@ package cl.uv.proyecto.persistencia.jsf.mb;
 import cl.uv.proyecto.persistencia.entidades.TipoPrioridad;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.TipoPrioridadFacade;
+import cl.uv.proyecto.persistencia.ejb.TipoPrioridadFacadeLocal;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class TipoPrioridadController implements Serializable {
     private TipoPrioridad current;
     private DataModel items = null;
     @EJB
-    private cl.uv.proyecto.persistencia.ejb.TipoPrioridadFacade ejbFacade;
+    private TipoPrioridadFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,7 +40,7 @@ public class TipoPrioridadController implements Serializable {
         return current;
     }
 
-    private TipoPrioridadFacade getFacade() {
+    private TipoPrioridadFacadeLocal getFacade() {
         return ejbFacade;
     }
 
