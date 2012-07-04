@@ -19,30 +19,26 @@
 
         <div id="top">
             <ui:insert name="top">
-               <!-- <ui:include src="#{pages['template.solicitud']}/menuTop.xhtml"/>-->
-                Top
+                <ui:include src="#{pages.template_solicitud}/menuTop.xhtml"/>
             </ui:insert>
         </div>
         
         <div>
             <div id="left">
                 <ui:insert name="left">
-   <!--                <ui:include src="#{pages['template.solicitud']}/menuLeft.xhtml"/>-->
-                    Left
+                   <ui:include src="#{pages.template_solicitud}/menuLeft.xhtml"/>-->
                 </ui:insert>
             </div>
             <div id="content" class="left_content">
                 <ui:insert name="content">
-                    <!--<ui:include src="#{pages['template.solicitud']}/home.xhtml"/>-->
-                    Content
-                </ui:insert>
+                    <ui:include src="#{pages.template_solicitud}/home.xhtml"/>
+                 </ui:insert>
             </div>
         </div>
         
         <div id="bottom">
             <ui:insert name="bottom">
-                <!--<ui:include src="#{pages['template.solicitud']}/menuBottom.xhtml"/>-->
-                Bottom
+                <ui:include src="#{pages.template_solicitud}/menuBottom.xhtml"/>
             </ui:insert>
         </div>
 
