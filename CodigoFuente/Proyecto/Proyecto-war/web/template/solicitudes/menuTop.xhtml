@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <div id="header_c">
+            <div id="header_l">
+                <div id="header_r">
+        <h:form>
+            <h:panelGrid id="header" columns="3" width="100%">
+                <h:graphicImage styleClass="logoUv" library="imagenes" name="logouv.gif"/>
+                <h:outputLabel value="SISTEMA X"/>
+                <h:panelGrid columns="1" styleClass="basicInfo">
+                    <h:panelGrid columns="2" >     
+                        <h:outputLabel value="Usuario:" />  
+                        <h:outputText value="Alejandro Alvarez" />  
+                        <h:outputLabel value="RUT:" />  
+                        <h:outputText value="16.775.578-K" />  
+                    </h:panelGrid>
+                    <h:panelGroup>
+                        <p:commandButton value="Ver Perfil"/>
+                        <p:commandButton value="Cerrar Sesión"/>
+                    </h:panelGroup>
+
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:form>
+       </div></div></div>
+    </h:body>
+</html>
+
