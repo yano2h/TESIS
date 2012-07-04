@@ -8,9 +8,9 @@
     </h:head>
     <h:body>
         <ui:composition template="#{pages.layout_solicitud}">
-           <!-- <ui:define name="top">
-                <ui:include src="#{mbSessionController.top}"/>
-            </ui:define>
+           <ui:define name="top">
+                <ui:include src="#{pages.template_solicitud}/menuTop.xhtml"/>
+            </ui:define><!--
             <ui:define name="left">
                 <ui:include src="#{mbSessionController.left}"/>
             </ui:define>

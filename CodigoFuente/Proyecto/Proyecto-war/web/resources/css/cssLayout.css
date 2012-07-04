@@ -1,16 +1,18 @@
+div#wrapper_l {
+    min-width: 70%;
+    max-width: 95%;
+}
 
 #top {
     position: relative;
-    background-color: #ebf1f6;
-    color: black;
-    padding: 5px;
+    padding: 0px;
     margin: 0px 0px 10px 0px;
 }
 
 #bottom {
     position: relative;
-    background-color: #ebf1f6;;
-    padding: 5px;
+   /* background-color: #ebf1f6;;*/
+    padding: 0px;
     margin: 10px 0px 0px 0px;
 }
 
@@ -18,7 +20,9 @@
     float: left;
     background-color: #dddddd;
     padding: 5px;
-    width: 150px;
+    width: 200px;
+    min-height: 300px;
+   /* margin-left: 15px;*/
 }
 
 #right {
@@ -26,6 +30,18 @@
     background-color: #ece3a5;
     padding: 5px;
     width: 150px;
+}
+
+.center{
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-box-shadow: 0px 0px 2px #000000;
+    -webkit-box-shadow: 0px 0px 2px #000000;
+    box-shadow: 0px 0px 2px #000000;
+    background-color: #FFFFFF;
+    margin: 0px 20px 0px 20px;
+    padding: 5px;
 }
 
 .center_content {
@@ -37,7 +53,9 @@
 .left_content {
     background-color: #dddddd;
     padding: 5px;
-    margin-left: 170px;
+    margin-left: 250px;
+    margin-right: 15px;
+    min-height: 300px;
 }
 
 .right_content {
