@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:composition template="#{pages['layout.jpa']}">
+    <ui:composition template="#{pages.layout_jpa}">
         <ui:define name="title">
             <h:outputText value="#{bundle.ListComentarioSolicitudTitle}"></h:outputText>
         </ui:define>
@@ -74,7 +74,7 @@
                 <h:commandLink action="#{comentarioSolicitudController.prepareCreate}" value="#{bundle.ListComentarioSolicitudCreateLink}"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.ListComentarioSolicitudIndexLink}" action="/index" immediate="true" />
+                <h:commandLink value="#{bundle.ListComentarioSolicitudIndexLink}" action="/view/index.xhtml" immediate="true" />
             </h:form>
         </ui:define>
     </ui:composition>

@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:composition template="#{pages['layout.jpa']}">
+    <ui:composition template="#{pages.layout_jpa}">
         <ui:define name="title">
             <h:outputText value="#{bundle.EditFormularioImplementacionTitle}"></h:outputText>
         </ui:define>
@@ -44,7 +44,7 @@
                 <h:commandLink action="#{formularioImplementacionController.prepareList}" value="#{bundle.EditFormularioImplementacionShowAllLink}" immediate="true"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.EditFormularioImplementacionIndexLink}" action="/index" immediate="true" />
+                <h:commandLink value="#{bundle.EditFormularioImplementacionIndexLink}" action="/view/index.xhtml" immediate="true" />
             </h:form>
         </ui:define>
     </ui:composition>

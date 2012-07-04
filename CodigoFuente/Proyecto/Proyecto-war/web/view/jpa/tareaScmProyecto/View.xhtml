@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:composition template="#{pages['layout.jpa']}">
+    <ui:composition template="#{pages.layout_jpa}">
         <ui:define name="title">
             <h:outputText value="#{bundle.ViewTareaScmProyectoTitle}"></h:outputText>
         </ui:define>
@@ -41,7 +41,7 @@
                 <h:commandLink action="#{tareaScmProyectoController.prepareList}" value="#{bundle.ViewTareaScmProyectoShowAllLink}"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.ViewTareaScmProyectoIndexLink}" action="/index" immediate="true" />
+                <h:commandLink value="#{bundle.ViewTareaScmProyectoIndexLink}" action="/view/index.xhtml" immediate="true" />
 
             </h:form>
         </ui:define>

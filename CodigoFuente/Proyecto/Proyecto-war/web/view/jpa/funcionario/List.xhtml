@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:composition template="#{pages['layout.jpa']}">
+    <ui:composition template="#{pages.layout_jpa}">
         <ui:define name="title">
             <h:outputText value="#{bundle.ListFuncionarioTitle}"></h:outputText>
         </ui:define>
@@ -82,7 +82,7 @@
                 <h:commandLink action="#{funcionarioController.prepareCreate}" value="#{bundle.ListFuncionarioCreateLink}"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.ListFuncionarioIndexLink}" action="/index" immediate="true" />
+                <h:commandLink value="#{bundle.ListFuncionarioIndexLink}" action="/view/index.xhtml" immediate="true" />
             </h:form>
         </ui:define>
     </ui:composition>

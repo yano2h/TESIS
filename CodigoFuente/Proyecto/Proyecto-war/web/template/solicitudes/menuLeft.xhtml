@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    
     <h:body>
-    	
-    	<ui:composition>
-            <h1>Menu Left</h1>
-    	</ui:composition>
-    	
+        <ui:composition>
+            <h:outputStylesheet library="css" name="left.css"/>
+            <h:form>
+                <p:menu styleClass="menu_left"> 
+                    <p:submenu label="Solicitudes">  
+                        <p:menuitem value="Resumen" action="#"/>  
+                        <p:menuitem value="Crear Solicitud" action="#"/>  
+                        <p:menuitem value="Consultar Solicitud" action="#"/>  
+                        <p:menuitem value="FAQ" action="#"/>  
+                    </p:submenu>  
+                </p:menu>
+            </h:form>
+        </ui:composition>
     </h:body>
 
 </html>

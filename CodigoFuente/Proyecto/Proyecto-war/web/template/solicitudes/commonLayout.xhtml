@@ -10,42 +10,67 @@
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css"/>
         <h:outputStylesheet library="css" name="header.css"/>
+        <h:outputStylesheet library="css" name="footer.css"/>
+        
         <title> 
             <ui:insert name="title">Title</ui:insert>
         </title>
     </h:head>
 
     <h:body>
+        <div id="wrapper_l">
+        <div id="wrapper_r">
+            
+                <div id="top">
 
-        <div id="top">
-            <ui:insert name="top">
-               <!-- <ui:include src="#{pages['template.solicitud']}/menuTop.xhtml"/>-->
-                Top
-            </ui:insert>
-        </div>
-        
-        <div>
-            <div id="left">
-                <ui:insert name="left">
-   <!--                <ui:include src="#{pages['template.solicitud']}/menuLeft.xhtml"/>-->
-                    Left
-                </ui:insert>
-            </div>
-            <div id="content" class="left_content">
-                <ui:insert name="content">
-                    <!--<ui:include src="#{pages['template.solicitud']}/home.xhtml"/>-->
-                    Content
-                </ui:insert>
-            </div>
-        </div>
-        
-        <div id="bottom">
-            <ui:insert name="bottom">
-                <!--<ui:include src="#{pages['template.solicitud']}/menuBottom.xhtml"/>-->
-                Bottom
-            </ui:insert>
-        </div>
+                    <div id="header_c">
+                    <div id="header_l">
+                    <div id="header_r">
+                    <div id="content_header">
+                         <ui:insert name="top">
+                             <ui:include src="#{pages.template_solicitud}/menuTop.xhtml"/>
+                         </ui:insert>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    <div id="header_bc">
+                    <div id="header_bl">
+                    <div id="header_br">
+                    </div>
+                    </div>
+                    </div>
+                </div>
 
+            <div class="center">
+                    <div id="left">
+                        <ui:insert name="left">
+                           <ui:include src="#{pages.template_solicitud}/menuLeft.xhtml"/>
+                        </ui:insert>
+                    </div>
+                    <div id="content" class="left_content">
+                        <ui:insert name="content">
+                            <ui:include src="#{pages.template_solicitud}/home.xhtml"/>
+                        </ui:insert>
+                    </div>
+                </div>
+
+                <div id="bottom">
+                    <div id="footer_c">
+                    <div id="footer_l">
+                    <div id="footer_r">
+                    <div id="content_footer">
+                    <ui:insert name="bottom">
+                        <ui:include src="#{pages.template_solicitud}/menuBottom.xhtml"/>
+                    </ui:insert>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+            
+        </div>
+        </div>
     </h:body>
 
 </html>

@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:composition template="#{pages['layout.jpa']}">
+    <ui:composition template="#{pages.layout_jpa}">
         <ui:define name="title">
             <h:outputText value="#{bundle.ListEntregableTitle}"></h:outputText>
         </ui:define>
@@ -54,7 +54,7 @@
                 <h:commandLink action="#{entregableController.prepareCreate}" value="#{bundle.ListEntregableCreateLink}"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.ListEntregableIndexLink}" action="/index" immediate="true" />
+                <h:commandLink value="#{bundle.ListEntregableIndexLink}" action="/view/index.xhtml" immediate="true" />
             </h:form>
         </ui:define>
     </ui:composition>

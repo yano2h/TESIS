@@ -1,0 +1,41 @@
+/* 
+    Document   : footer
+    Created on : 04-jul-2012, 13:15:55
+    Author     : Alejandro
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+div#content_footer{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
+}
+
+div#footer_c {
+    background: url(../resources/imagenes/footer/mw_footer_b.png) 0 0 repeat-x;
+        
+}
+
+div#footer_l {
+    background: url(../resources/imagenes/footer/mw_footer_b_l.png) 0 0 no-repeat;
+    position: relative;
+}
+
+div#footer_r {
+    background: url(../resources/imagenes/footer/mw_footer_b_r.png) 100% 0 no-repeat;
+    height: 47px;
+    overflow: hidden;
+}
+
+div#footer_bc {
+    background: #F7F7F7 url(../resources/imagenes/footer/mw_footer_b.png) 0 0 repeat-x;
+    margin: 0 11px;
+        
+}
+
