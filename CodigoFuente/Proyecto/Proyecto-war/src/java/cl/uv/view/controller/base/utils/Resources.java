@@ -1,4 +1,4 @@
-package cl.uv.viewController.base.utils;
+package cl.uv.view.controller.base.utils;
 
 import java.util.*;
 

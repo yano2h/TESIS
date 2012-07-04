@@ -2,12 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:body>
-        <div id="header_c">
-            <div id="header_l">
-                <div id="header_r">
+        <ui:composition>
         <h:form>
+        <div id="header_c">
+        <div id="header_l">
+        <div id="header_r">
             <h:panelGrid id="header" columns="3" width="100%">
                 <h:graphicImage styleClass="logoUv" library="imagenes" name="logouv.gif"/>
                 <h:outputLabel value="SISTEMA X"/>
@@ -25,8 +27,12 @@
 
                 </h:panelGrid>
             </h:panelGrid>
+        </div>
+        </div>
+        </div>
         </h:form>
-       </div></div></div>
+      
+        </ui:composition>
     </h:body>
 </html>
 

@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.uv.viewController.base.jsf.mb;
+package cl.uv.view.controller.base.jsf.mb;
 
-import cl.uv.viewController.base.utils.Resources;
+import cl.uv.view.controller.base.utils.Resources;
 import java.util.HashMap;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;

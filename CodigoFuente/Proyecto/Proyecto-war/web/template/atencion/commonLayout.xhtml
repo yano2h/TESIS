@@ -6,29 +6,41 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:link type="image/png" rel="icon" hreflang="./resources/imagenes/logo_uv_favico.png"/>
+        <h:link type="image/png" rel="icon" hreflang="./../resources/imagenes/logo_uv_favico.png"/>
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css"/>
         <h:outputStylesheet library="css" name="header.css"/>
-        <title>Facelets Template</title>
+        <title> 
+            <ui:insert name="title">Title</ui:insert>
+        </title>
     </h:head>
 
     <h:body>
 
         <div id="top">
-            <ui:insert name="top">Top</ui:insert>
+            <ui:insert name="top">
+                <ui:include src="#{pages['template.atencion']}/menuTop.xhtml"/>
+            </ui:insert>
         </div>
         
         <div>
             <div id="left">
-                <ui:insert name="left">Left</ui:insert>
+                <ui:insert name="left">
+                   <ui:include src="#{pages['template.atencion']}/menuLeft.xhtml"/>
+                   
+                </ui:insert>
             </div>
             <div id="content" class="left_content">
-                <ui:insert name="content">Content</ui:insert>
+                <ui:insert name="content">
+                    <ui:include src="#{pages['template.atencion']}/home.xhtml"/>
+                </ui:insert>
             </div>
         </div>
+        
         <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
+            <ui:insert name="bottom">
+                <ui:include src="#{pages['template.atencion']}/menuBottom.xhtml"/>
+            </ui:insert>
         </div>
 
     </h:body>

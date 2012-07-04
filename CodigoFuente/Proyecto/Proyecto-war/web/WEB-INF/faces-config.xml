@@ -11,5 +11,9 @@
             <base-name>/cl/uv/proyecto/persistencia/jsf/properties/Bundle</base-name>
             <var>bundle</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/cl/uv/view/controller/proyecto/properties/Pages</base-name>
+            <var>pages</var>
+        </resource-bundle>
     </application>
 </faces-config>
