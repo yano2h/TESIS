@@ -1,0 +1,19 @@
+/* 
+    Document   : left
+    Created on : 04-jul-2012, 15:26:56
+    Author     : Alejandro
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.menu_left{
+    width: 190px;
+}
+
+.ui-widget-header {
+    background:  url(../resources/imagenes/menu.png);
+}

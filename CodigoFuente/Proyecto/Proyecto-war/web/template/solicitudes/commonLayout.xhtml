@@ -11,6 +11,7 @@
         <h:outputStylesheet library="css" name="cssLayout.css"/>
         <h:outputStylesheet library="css" name="header.css"/>
         <h:outputStylesheet library="css" name="footer.css"/>
+        
         <title> 
             <ui:insert name="title">Title</ui:insert>
         </title>
@@ -44,7 +45,7 @@
             <div class="center">
                     <div id="left">
                         <ui:insert name="left">
-                            <ui:include src="#{pages.template_solicitud}/menuLeft.xhtml"/>
+                           <ui:include src="#{pages.template_solicitud}/menuLeft.xhtml"/>
                         </ui:insert>
                     </div>
                     <div id="content" class="left_content">
