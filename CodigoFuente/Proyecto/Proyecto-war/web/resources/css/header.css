@@ -12,8 +12,8 @@ root {
 
 .logoUv { 
     border: none; 
-    width:165px; 
-    height:85px; 
+    width:161px; 
+    height:75px; 
     top:0;
    /* margin-left: 20px;
     margin-top: 20px; 
@@ -24,6 +24,12 @@ root {
 .basicInfo{
     float:right;
     /*padding: 10px;*/
+}
+
+.headerSolicitud{
+    width: 349px;
+    height: 58px;
+    float: right;
 }
 
 div#content_header{

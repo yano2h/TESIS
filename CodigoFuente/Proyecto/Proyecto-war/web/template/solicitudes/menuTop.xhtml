@@ -8,13 +8,13 @@
         <ui:composition>
         <h:form>
             <h:panelGrid id="header" columns="3" width="100%">
-                <h:graphicImage styleClass="logoUv" library="imagenes" name="logouv.gif"/>
-                <h:outputLabel value="SISTEMA X"/>
+                <h:graphicImage styleClass="logoUv" library="imagenes" name="#{img.logo_uv}"/>
+                <h:graphicImage styleClass="headerSolicitud" library="imagenes" name="#{img.header_solicitud}"/>
                 <h:panelGrid columns="1" styleClass="basicInfo">
                     <h:panelGrid columns="2" >     
-                        <h:outputLabel value="Usuario:" />  
+                        <h:outputLabel value="Usuario:" styleClass="label_blod" />  
                         <h:outputText value="Alejandro Alvarez" />  
-                        <h:outputLabel value="RUT:" />  
+                        <h:outputLabel value="RUT:" styleClass="label_blod" />  
                         <h:outputText value="16.775.578-K" />  
                     </h:panelGrid>
                     <h:panelGroup>

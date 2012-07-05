@@ -13,7 +13,3 @@ root {
 .menu_left{
     width: 190px;
 }
-
-.ui-widget-header {
-    background:  url(../resources/imagenes/menu.png);
-}
