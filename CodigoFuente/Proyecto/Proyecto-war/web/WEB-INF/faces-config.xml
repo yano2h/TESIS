@@ -15,5 +15,13 @@
             <base-name>/cl/uv/view/controller/proyecto/properties/Pages</base-name>
             <var>pages</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/cl/uv/view/controller/proyecto/properties/Imagenes</base-name>
+            <var>img</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/cl/uv/view/controller/proyecto/properties/BundleSolicitudes</base-name>
+            <var>msg_sol</var>
+        </resource-bundle>
     </application>
 </faces-config>

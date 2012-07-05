@@ -31,3 +31,31 @@ a:link:hover, a:visited:hover  {
   font-weight : bold;
   text-decoration : underline;
 }
+
+label{
+    font-family: Helvetica, Arial, sans-serif;
+    color: #18316D;
+}
+
+.label_blod{
+    font-weight: bold;
+}
+
+.ui-widget {
+    font-family: Helvetica, Arial, sans-serif;
+    color: #18316D;
+}
+
+.ui-button-text {
+    font-family: Helvetica, Arial, sans-serif;
+    color: #18316D;
+}
+
+.ui-menuitem-text{
+    font-family: Helvetica, Arial, sans-serif;
+    color: #18316D;
+}
+
+.ui-widget-header{
+    font-family: Helvetica, Arial, sans-serif;
+}
