@@ -17,6 +17,7 @@ import javax.faces.bean.ViewScoped;
 public class MbCrearSolicitud {
 
     private SolicitudRequerimiento solicitud;
+    private String value;
     
     public MbCrearSolicitud() {
     }
@@ -31,4 +32,21 @@ public class MbCrearSolicitud {
     public void setSolicitud(SolicitudRequerimiento solicitud) {
         this.solicitud = solicitud;
     }
+    
+    public void enviar(){}
+    public void cancelar(){}
+    
+    public void limpiar(){
+        solicitud = new SolicitudRequerimiento();
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+    
+    
 }

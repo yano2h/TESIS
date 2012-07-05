@@ -3,34 +3,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <ui:composition template="#{pages.layout_solicitud}">
         <ui:define name="content">
-
-            <h:form>
-                <p:panel header="Crear Solicitud">
+            <h:form id="formSol">
+                <p:panel id="crearSol" header="Crear Solicitud">
                     <h:panelGrid columns="2">
                         <h:outputLabel value="#{msg_sol.LabelTituloSol}:*" for="tituloSol" />
-                        <p:inputText id="tituloSol" value="#{mbCrearSolicitud.solicitud.asunto}" required="true" requiredMessage="Este campos es obligatorio"/>
+                        <p:inputText id="tituloSol" value="#{mbCrearSolicitud.solicitud.asunto}" required="true" requiredMessage="Este campos es obligatorio" maxlength="45" size="45"/>
 
                         <h:outputLabel value="#{msg_sol.LabelTipoSol}:*" for="tipoSol"/>
-                        <p:inputText id="tipoSol" value="#{mbCrearSolicitud.solicitud.tipoSolicitud}"/>
+                        <p:selectOneMenu id="tipoSol" value="#{mbCrearSolicitud.solicitud.tipoSolicitud}" required="true">
+                            <f:selectItem itemValue="" itemLabel="#{msg_sol.DefaulTipoSol}" noSelectionOption="true" />
+                            <f:selectItems value="#{tipoSolicitudRequerimientoController.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu>
 
                         <h:outputLabel value="#{msg_sol.LabelAreaSol}:*" for="areaSol"/>
-                        <p:inputText id="areaSol" value="#{mbCrearSolicitud.solicitud.areaResponsable}" required="true"/>                   
+                        <p:selectOneMenu id="areaSol" value="#{mbCrearSolicitud.solicitud.areaResponsable}" required="true">
+                            <f:selectItem itemValue="" itemLabel="#{msg_sol.DefaulAreaSol}" noSelectionOption="true"/>
+                            <f:selectItems value="#{areaController.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu> 
+
                     </h:panelGrid>
                     <br/>
                     <h:panelGrid>
                         <h:outputLabel value="#{msg_sol.LabelMensajeSol}:*" for="mensajeSol" style="margin-top: 10px;"/>
                         <p:editor id="mensajeSol" value="#{mbCrearSolicitud.solicitud.mensaje}" width="700" required="true"/>
+                        
                     </h:panelGrid>  
                     <br/>
                     <h:panelGrid columns="3">
-                        <p:commandButton value="Enviar" actionListener="#" />
-                        <p:commandButton value="Limpiar" actionListener="#" />
-                        <p:commandButton value="Cancelar" actionListener="#" />
+                        <p:commandButton value="Enviar" actionListener="mainPage" />
+                        <p:commandButton value="Cancelar" actionListener="#{mbCrearSolicitud.cancelar}" />
+                        <p:commandButton id="clear" value="Limpiar" type="reset" onclick="mensajeSol.clear()" />
                     </h:panelGrid>
-                </p:panel>
+                </p:panel>   
+
             </h:form>
         </ui:define>
     </ui:composition>
