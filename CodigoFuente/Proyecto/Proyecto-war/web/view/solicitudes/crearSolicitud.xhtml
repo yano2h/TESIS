@@ -2,16 +2,37 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Portal</title>
-    </h:head>
-    <h:body>
-        <ui:composition template="#{pages.layout_solicitud}">
-            <ui:define name="content">
-                <ui:include src="#{pages.solicitud_crear}"/>
-            </ui:define>
-        </ui:composition>
-    </h:body>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="#{pages.layout_solicitud}">
+        <ui:define name="content">
+
+            <h:form>
+                <p:panel header="Crear Solicitud">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{msg_sol.LabelTituloSol}:*" for="tituloSol" />
+                        <p:inputText id="tituloSol" value="#{mbCrearSolicitud.solicitud.asunto}" required="true" requiredMessage="Este campos es obligatorio"/>
+
+                        <h:outputLabel value="#{msg_sol.LabelTipoSol}:*" for="tipoSol"/>
+                        <p:inputText id="tipoSol" value="#{mbCrearSolicitud.solicitud.tipoSolicitud}"/>
+
+                        <h:outputLabel value="#{msg_sol.LabelAreaSol}:*" for="areaSol"/>
+                        <p:inputText id="areaSol" value="#{mbCrearSolicitud.solicitud.areaResponsable}" required="true"/>                   
+                    </h:panelGrid>
+                    <br/>
+                    <h:panelGrid>
+                        <h:outputLabel value="#{msg_sol.LabelMensajeSol}:*" for="mensajeSol" style="margin-top: 10px;"/>
+                        <p:editor id="mensajeSol" value="#{mbCrearSolicitud.solicitud.mensaje}" width="700" required="true"/>
+                    </h:panelGrid>  
+                    <br/>
+                    <h:panelGrid columns="3">
+                        <p:commandButton value="Enviar" actionListener="#" />
+                        <p:commandButton value="Limpiar" actionListener="#" />
+                        <p:commandButton value="Cancelar" actionListener="#" />
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
 </html>
 
