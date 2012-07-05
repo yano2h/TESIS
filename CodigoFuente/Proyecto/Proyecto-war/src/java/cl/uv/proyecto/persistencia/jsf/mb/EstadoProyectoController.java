@@ -1,12 +1,11 @@
 package cl.uv.proyecto.persistencia.jsf.mb;
 
+import cl.uv.proyecto.persistencia.ejb.EstadoProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.EstadoProyecto;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.EstadoProyectoFacadeLocal;
-
+import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
-import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -82,10 +81,10 @@ public class EstadoProyectoController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EstadoProyectoCreated"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle","EstadoProyectoCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle","PersistenceErrorOccured"));
             return null;
         }
     }
@@ -99,10 +98,10 @@ public class EstadoProyectoController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EstadoProyectoUpdated"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle","EstadoProyectoUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle","PersistenceErrorOccured"));
             return null;
         }
     }
@@ -132,9 +131,9 @@ public class EstadoProyectoController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EstadoProyectoDeleted"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle","EstadoProyectoDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle","PersistenceErrorOccured"));
         }
     }
 

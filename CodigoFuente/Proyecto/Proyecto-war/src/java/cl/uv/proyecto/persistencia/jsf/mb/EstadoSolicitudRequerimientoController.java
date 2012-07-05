@@ -4,6 +4,7 @@ import cl.uv.proyecto.persistencia.entidades.EstadoSolicitudRequerimiento;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
 import cl.uv.proyecto.persistencia.ejb.EstadoSolicitudRequerimientoFacadeLocal;
+import cl.uv.view.controller.base.utils.Resources;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -82,10 +83,10 @@ public class EstadoSolicitudRequerimientoController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EstadoSolicitudRequerimientoCreated"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle", "EstadoSolicitudRequerimientoCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle", "PersistenceErrorOccured"));
             return null;
         }
     }
@@ -99,10 +100,10 @@ public class EstadoSolicitudRequerimientoController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EstadoSolicitudRequerimientoUpdated"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle", "EstadoSolicitudRequerimientoUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle", "PersistenceErrorOccured"));
             return null;
         }
     }
@@ -132,9 +133,9 @@ public class EstadoSolicitudRequerimientoController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EstadoSolicitudRequerimientoDeleted"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle", "EstadoSolicitudRequerimientoDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle", "PersistenceErrorOccured"));
         }
     }
 

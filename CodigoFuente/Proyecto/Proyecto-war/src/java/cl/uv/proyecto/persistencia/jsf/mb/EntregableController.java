@@ -1,12 +1,11 @@
 package cl.uv.proyecto.persistencia.jsf.mb;
 
+import cl.uv.proyecto.persistencia.ejb.EntregableFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Entregable;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.EntregableFacadeLocal;
-
+import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
-import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -82,10 +81,10 @@ public class EntregableController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EntregableCreated"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle","EntregableCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle","PersistenceErrorOccured"));
             return null;
         }
     }
@@ -99,10 +98,10 @@ public class EntregableController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EntregableUpdated"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle","EntregableUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle","PersistenceErrorOccured"));
             return null;
         }
     }
@@ -132,9 +131,9 @@ public class EntregableController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EntregableDeleted"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle","EntregableDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle","PersistenceErrorOccured"));
         }
     }
 

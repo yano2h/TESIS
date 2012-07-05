@@ -1,12 +1,11 @@
 package cl.uv.proyecto.persistencia.jsf.mb;
 
+import cl.uv.proyecto.persistencia.ejb.EstadoSolicitudCambioFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.EstadoSolicitudCambio;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.EstadoSolicitudCambioFacadeLocal;
-
+import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
-import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -82,10 +81,10 @@ public class EstadoSolicitudCambioController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EstadoSolicitudCambioCreated"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle", "EstadoSolicitudCambioCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle", "PersistenceErrorOccured"));
             return null;
         }
     }
@@ -99,10 +98,10 @@ public class EstadoSolicitudCambioController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EstadoSolicitudCambioUpdated"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle", "EstadoSolicitudCambioUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle", "PersistenceErrorOccured"));
             return null;
         }
     }
@@ -132,9 +131,9 @@ public class EstadoSolicitudCambioController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EstadoSolicitudCambioDeleted"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle", "EstadoSolicitudCambioDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle", "PersistenceErrorOccured"));
         }
     }
 

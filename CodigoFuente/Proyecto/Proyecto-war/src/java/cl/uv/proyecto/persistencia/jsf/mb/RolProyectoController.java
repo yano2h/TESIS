@@ -1,12 +1,11 @@
 package cl.uv.proyecto.persistencia.jsf.mb;
 
+import cl.uv.proyecto.persistencia.ejb.RolProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.RolProyecto;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
-import cl.uv.proyecto.persistencia.ejb.RolProyectoFacadeLocal;
-
+import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
-import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -82,10 +81,10 @@ public class RolProyectoController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RolProyectoCreated"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle", "RolProyectoCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle", "PersistenceErrorOccured"));
             return null;
         }
     }
@@ -99,10 +98,10 @@ public class RolProyectoController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RolProyectoUpdated"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle", "RolProyectoUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle", "PersistenceErrorOccured"));
             return null;
         }
     }
@@ -132,9 +131,9 @@ public class RolProyectoController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RolProyectoDeleted"));
+            JsfUtil.addSuccessMessage(Resources.getValue("bundle", "RolProyectoDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, Resources.getValue("bundle", "PersistenceErrorOccured"));
         }
     }
 

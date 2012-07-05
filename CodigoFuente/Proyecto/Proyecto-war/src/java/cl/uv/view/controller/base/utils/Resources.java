@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Resources {
 
-    public static final String PATH_RESOURCES = "cl.uv.viewController.base.properties.Path";
+    public static final String PATH_RESOURCES = "cl.uv.view.controller.base.properties.Path";
     
     public static String getValue(String path, String key) {
         return PropertyResourceBundle.getBundle(Resources.getPropertiesPath(path)).getString(key);
