@@ -4,6 +4,7 @@ import cl.uv.proyecto.persistencia.ejb.AreaFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
+import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -184,9 +185,9 @@ public class AreaController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtils.getSelectItems(ejbFacade.findAll(), "getNombreArea");
     }
-
+    
     @FacesConverter(forClass = Area.class)
     public static class AreaControllerConverter implements Converter {
 

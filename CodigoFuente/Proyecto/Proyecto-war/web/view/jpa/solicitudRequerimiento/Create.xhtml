@@ -65,6 +65,7 @@
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_tipoSolicitud}" for="tipoSolicitud" />
                     <h:selectOneMenu id="tipoSolicitud" value="#{solicitudRequerimientoController.selected.tipoSolicitud}" title="#{bundle.CreateSolicitudRequerimientoTitle_tipoSolicitud}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_tipoSolicitud}">
+                        <f:selectItem itemValue="" itemLabel="Tipos"/>
                         <f:selectItems value="#{tipoSolicitudRequerimientoController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
