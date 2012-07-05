@@ -81,7 +81,7 @@ public class SolicitudRequerimiento implements Serializable {
     @ManyToOne(optional = false)
     private Funcionario solicitante;
     @JoinColumn(name = "responsable", referencedColumnName = "rut")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private FuncionarioDisico responsable;
     @JoinColumn(name = "area_responsable", referencedColumnName = "id_area")
     @ManyToOne(optional = false)

@@ -96,7 +96,7 @@ CREATE  TABLE IF NOT EXISTS SOLICITUD_REQUERIMIENTO (
   estado_solicitud TINYINT NOT NULL ,
   prioridad_solicitud TINYINT NOT NULL ,
   area_responsable TINYINT NOT NULL ,
-  responsable INT NOT NULL ,
+  responsable INT NULL ,
   solicitante INT NOT NULL ,
   fecha_envio DATETIME NOT NULL ,
   fecha_cierre DATETIME NULL ,
