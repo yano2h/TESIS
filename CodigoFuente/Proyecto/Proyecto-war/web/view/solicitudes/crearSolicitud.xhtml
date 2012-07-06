@@ -20,7 +20,7 @@
                         </p:selectOneMenu>
 
                         <h:outputLabel value="#{msg_sol.LabelAreaSol}:*" for="areaSol"/>
-                        <p:selectOneMenu id="areaSol" value="#{mbCrearSolicitud.solicitud.areaResponsable}" required="true">
+                        <p:selectOneMenu widgetVar="areaSol" id="areaSol" value="#{mbCrearSolicitud.solicitud.areaResponsable}" required="true">
                             <f:selectItem itemValue="" itemLabel="#{msg_sol.DefaulAreaSol}" noSelectionOption="true"/>
                             <f:selectItems value="#{areaController.itemsAvailableSelectOne}"/>
                         </p:selectOneMenu> 
@@ -29,17 +29,23 @@
                     <br/>
                     <h:panelGrid>
                         <h:outputLabel value="#{msg_sol.LabelMensajeSol}:*" for="mensajeSol" style="margin-top: 10px;"/>
-                        <p:editor id="mensajeSol" value="#{mbCrearSolicitud.solicitud.mensaje}" width="700" required="true"/>
+                        <p:editor id="mensajeSol" widgetVar="mensajeSol" value="#{mbCrearSolicitud.solicitud.mensaje}" width="700" required="true"/>
                         
                     </h:panelGrid>  
                     <br/>
                     <h:panelGrid columns="3">
-                        <p:commandButton value="Enviar" actionListener="mainPage" />
-                        <p:commandButton value="Cancelar" actionListener="#{mbCrearSolicitud.cancelar}" />
-                        <p:commandButton id="clear" value="Limpiar" type="reset" onclick="mensajeSol.clear()" />
+                        <p:commandButton value="Enviar" actionListener="#{mbCrearSolicitud.enviar}"  />
+                        <p:commandButton id="clear" value="Limpiar" type="button" onclick="mensajeSol.clear()" />
+                        <p:commandButton value="Cancelar" immediate="true" action="resumenSolicitante?faces-redirect=true" />      
                     </h:panelGrid>
                 </p:panel>   
-
+                
+                <p:dialog header="Selected Values" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg">  
+                <h:panelGrid columns="1" id="display">  
+                    <h:outputText value="Su solicitud ha sido enviada exitosamente" />  
+                    <h:outputText value="su numero de consulta es: #{mbCrearSolicitud.codigoConsulta}" /> 
+                </h:panelGrid>
+                </p:dialog>
             </h:form>
         </ui:define>
     </ui:composition>

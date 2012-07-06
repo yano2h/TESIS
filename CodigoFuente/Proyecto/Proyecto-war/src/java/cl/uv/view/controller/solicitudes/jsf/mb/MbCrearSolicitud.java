@@ -4,9 +4,14 @@
  */
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
+import cl.uv.proyecto.ejb.interfaces.EjbSolicitudRequerimientoLocal;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import java.io.Serializable;
+import java.util.Date;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 /**
  *
@@ -14,10 +19,13 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class MbCrearSolicitud {
+public class MbCrearSolicitud implements Serializable{
 
+    @EJB
+    private EjbSolicitudRequerimientoLocal ejbSolicitud;
+    
     private SolicitudRequerimiento solicitud;
-    private String value;
+    private String codigoConsulta;
     
     public MbCrearSolicitud() {
     }
@@ -32,21 +40,15 @@ public class MbCrearSolicitud {
     public void setSolicitud(SolicitudRequerimiento solicitud) {
         this.solicitud = solicitud;
     }
-    
-    public void enviar(){}
-    public void cancelar(){}
-    
-    public void limpiar(){
-        solicitud = new SolicitudRequerimiento();
-    }
 
-    public String getValue() {
-        return value;
+    public String getCodigoConsulta() {
+        return codigoConsulta;
     }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
+    
+    
+     public void enviar(ActionEvent event){
+         codigoConsulta = ejbSolicitud.enviarSolicitud(solicitud, null);
+     }
     
     
 }
