@@ -9,42 +9,54 @@
         <ui:define name="content">
             <h:form id="formSol">
                 <p:panel id="crearSol" header="Crear Solicitud">
-                    <h:panelGrid columns="2">
+                    <h:panelGrid columns="3">
                         <h:outputLabel value="#{msg_sol.LabelTituloSol}:*" for="tituloSol" />
-                        <p:inputText id="tituloSol" value="#{mbCrearSolicitud.solicitud.asunto}" required="true" requiredMessage="Este campos es obligatorio" maxlength="45" size="45"/>
-
+                        <p:inputText id="tituloSol" value="#{mbCrearSolicitud.solicitud.asunto}" required="true" requiredMessage="#{msg_sol.requiredMessageTituloSol}" maxlength="45" size="45"/>
+                        <p:message id="tituloSolMessage" for="tituloSol" />
+                        
                         <h:outputLabel value="#{msg_sol.LabelTipoSol}:*" for="tipoSol"/>
-                        <p:selectOneMenu id="tipoSol" value="#{mbCrearSolicitud.solicitud.tipoSolicitud}" required="true">
-                            <f:selectItem itemValue="" itemLabel="#{msg_sol.DefaulTipoSol}" noSelectionOption="true" />
+                        <p:selectOneMenu id="tipoSol" value="#{mbCrearSolicitud.solicitud.tipoSolicitud}" required="true" requiredMessage="#{msg_sol.requiredMessageTipoSol}">
+                            <f:selectItem itemValue="" itemLabel="#{msg_sol.DefaulTipoSol}" />
                             <f:selectItems value="#{tipoSolicitudRequerimientoController.itemsAvailableSelectOne}"/>
                         </p:selectOneMenu>
-
+                        <p:message id="tipoSolMessage" for="tipoSol" />
+                        
                         <h:outputLabel value="#{msg_sol.LabelAreaSol}:*" for="areaSol"/>
-                        <p:selectOneMenu widgetVar="areaSol" id="areaSol" value="#{mbCrearSolicitud.solicitud.areaResponsable}" required="true">
-                            <f:selectItem itemValue="" itemLabel="#{msg_sol.DefaulAreaSol}" noSelectionOption="true"/>
+                        <p:selectOneMenu id="areaSol" widgetVar="areaSol" value="#{mbCrearSolicitud.solicitud.areaResponsable}" required="true" requiredMessage="#{msg_sol.requiredMessageAreaSol}">
+                            <f:selectItem itemValue="" itemLabel="#{msg_sol.DefaulAreaSol}" />
                             <f:selectItems value="#{areaController.itemsAvailableSelectOne}"/>
                         </p:selectOneMenu> 
-
+                        <p:message id="areaSolMessage" for="areaSol" />
+                        
                     </h:panelGrid>
                     <br/>
-                    <h:panelGrid>
+                    
+                    <h:panelGrid columns="2">
                         <h:outputLabel value="#{msg_sol.LabelMensajeSol}:*" for="mensajeSol" style="margin-top: 10px;"/>
-                        <p:editor id="mensajeSol" widgetVar="mensajeSol" value="#{mbCrearSolicitud.solicitud.mensaje}" width="700" required="true"/>
-                        
-                    </h:panelGrid>  
+                        <p:message id="mensajeSolMessage" for="mensajeSol"/>
+                    </h:panelGrid> 
+                    <p:editor id="mensajeSol" widgetVar="mensajeSol" value="#{mbCrearSolicitud.solicitud.mensaje}" width="700" required="true" requiredMessage="#{msg_sol.requiredMessageMensajeSol}"/>
+                         
                     <br/>
+                    
                     <h:panelGrid columns="3">
-                        <p:commandButton value="Enviar" actionListener="#{mbCrearSolicitud.enviar}"  />
-                        <p:commandButton id="clear" value="Limpiar" type="button" onclick="mensajeSol.clear()" />
-                        <p:commandButton value="Cancelar" immediate="true" action="resumenSolicitante?faces-redirect=true" />      
+                        <p:commandButton id="btnEnviar" value="#{msg_sol.BtnEnviar}" actionListener="#{mbCrearSolicitud.enviar}" update="crearSol dlg" />
+                        <p:commandButton id="btnLimpiar" value="#{msg_sol.BtnLimpiar}" type="button" onclick="mensajeSol.clear()" />
+                        <p:commandButton id="btnCancelar" value="#{msg_sol.BtnCancelar}" immediate="true" action="resumenSolicitante?faces-redirect=true" />      
                     </h:panelGrid>
                 </p:panel>   
                 
-                <p:dialog header="Selected Values" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg">  
-                <h:panelGrid columns="1" id="display">  
-                    <h:outputText value="Su solicitud ha sido enviada exitosamente" />  
-                    <h:outputText value="su numero de consulta es: #{mbCrearSolicitud.codigoConsulta}" /> 
-                </h:panelGrid>
+                <p:dialog id="dlg" 
+                          header="Envio Exitoso" 
+                          modal="true" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          closable="false"
+                          visible="#{not empty mbCrearSolicitud.codigoConsulta}" >  
+                    <h:panelGrid columns="1" id="display">  
+                        <h:outputText value="Su numero de consulta es: #{mbCrearSolicitud.codigoConsulta}"/> 
+                        <p:commandButton value="Salir" action="#{mbCrearSolicitud.cerrarDialog}" update="dlg crearSol tituloSol"/>
+                    </h:panelGrid>
                 </p:dialog>
             </h:form>
         </ui:define>
