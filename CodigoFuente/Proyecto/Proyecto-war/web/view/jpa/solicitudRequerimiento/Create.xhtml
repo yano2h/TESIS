@@ -15,8 +15,7 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_idSolicitudRequerimiento}" for="idSolicitudRequerimiento" />
-                    <h:inputText id="idSolicitudRequerimiento" value="#{solicitudRequerimientoController.selected.idSolicitudRequerimiento}" title="#{bundle.CreateSolicitudRequerimientoTitle_idSolicitudRequerimiento}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_idSolicitudRequerimiento}"/>
+                    
                     <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_codigoConsulta}" for="codigoConsulta" />
                     <h:inputText id="codigoConsulta" value="#{solicitudRequerimientoController.selected.codigoConsulta}" title="#{bundle.CreateSolicitudRequerimientoTitle_codigoConsulta}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_codigoConsulta}"/>
                     <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_asunto}" for="asunto" />
@@ -52,7 +51,7 @@
                         <f:selectItems value="#{funcionarioController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_responsable}" for="responsable" />
-                    <h:selectOneMenu id="responsable" value="#{solicitudRequerimientoController.selected.responsable}" title="#{bundle.CreateSolicitudRequerimientoTitle_responsable}" required="true" requiredMessage="#{bundle.CreateSolicitudRequerimientoRequiredMessage_responsable}">
+                    <h:selectOneMenu id="responsable" value="#{solicitudRequerimientoController.selected.responsable}" title="#{bundle.CreateSolicitudRequerimientoTitle_responsable}" >
                         <f:selectItems value="#{funcionarioDisicoController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateSolicitudRequerimientoLabel_areaResponsable}" for="areaResponsable" />

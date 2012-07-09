@@ -17,7 +17,7 @@
                         <h:outputLabel value="#{msg_sol.LabelTipoSol}:*" for="tipoSol"/>
                         <p:selectOneMenu id="tipoSol" value="#{mbCrearSolicitud.solicitud.tipoSolicitud}" required="true" requiredMessage="#{msg_sol.requiredMessageTipoSol}">
                             <f:selectItem itemValue="" itemLabel="#{msg_sol.DefaulTipoSol}" />
-                            <f:selectItems value="#{tipoSolicitudRequerimientoController.itemsAvailableSelectOne}"/>
+                            <f:selectItems value="#{tipoSolicitudRequerimientoController.itemsAvailableSelectMany}"/>
                         </p:selectOneMenu>
                         <p:message id="tipoSolMessage" for="tipoSol" />
                         
