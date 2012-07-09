@@ -25,6 +25,7 @@ import javax.naming.NamingException;
  * @author Alejandro
  */
 public class JsfUtils {
+
     public static Context getInitialContext() throws NamingException {
         return new InitialContext();
     }
@@ -36,11 +37,11 @@ public class JsfUtils {
     public static ExternalContext getExternalContext() {
         return JsfUtils.getFacesContext().getExternalContext();
     }
-    
+
     public static Object getValue(String beanName) {
         FacesContext ctx = getFacesContext();
-        return ctx.getELContext().getELResolver().getValue(ctx.getELContext(),null, beanName);
-       // return ctx.getApplication().createValueBinding(el).getValue(ctx);
+        return ctx.getELContext().getELResolver().getValue(ctx.getELContext(), null, beanName);
+        // return ctx.getApplication().createValueBinding(el).getValue(ctx);
     }
 
     public static void handleNavigation(String action) {
@@ -52,7 +53,7 @@ public class JsfUtils {
     public static void logout() {
         getExternalContext().invalidateSession();
     }
-    
+
     public static void redirect(String url) {
         try {
             getFacesContext().getExternalContext().redirect(url);
@@ -62,8 +63,9 @@ public class JsfUtils {
 
     /**
      * Metodo para logout, invalida la sesion
+     *
      * @param page
-     * @return El string page concatenado con ?faces-redirect=true para 
+     * @return El string page concatenado con ?faces-redirect=true para
      * redireccionar correctamente a otra pagina
      */
     public static String logout(String page) {
@@ -72,10 +74,11 @@ public class JsfUtils {
     }
 
     /**
-     * Añade a page la cadena ?faces-redirect=true para utilizar 
-     * Page Redirection de JSF
+     * Añade a page la cadena ?faces-redirect=true para utilizar Page
+     * Redirection de JSF
+     *
      * @param page
-     * @return 
+     * @return
      */
     public static String redirectTo(String page) {
         if (!page.endsWith("?faces-redirect=true")) {
@@ -88,30 +91,62 @@ public class JsfUtils {
         UIViewRoot viewRoot = getFacesContext().getViewRoot();
         return viewRoot.getViewId();
     }
-    
+
     public static UIComponent findComponent(String id) {
         return getFacesContext().getViewRoot().findComponent(id);
     }
-    
-    public static SelectItem[] getSelectItems(List<?> entities, String nombreMetodo)  {
-        int size = entities.size();
+
+    public static SelectItem[] getSelectItems(List<?> entities, String nombreMetodo, boolean selectOne) {
+
+        int size = selectOne ? entities.size() + 1 : entities.size();
         SelectItem[] items = new SelectItem[size];
         int i = 0;
-        try {     
+        if (selectOne) {
+            items[i++] = new SelectItem("", "---");
+        }
+        try {
             Class clase = entities.get(0).getClass();
-            Method getLabel = clase.getMethod(nombreMetodo, null);   
+            Method getLabel = clase.getMethod(nombreMetodo, null);
             for (Object o : entities) {
                 Object labelSelectItem = getLabel.invoke(o, null);
                 items[i++] = new SelectItem(o, labelSelectItem.toString());
-            }    
+            }
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "No se pudo acceder al metodo "+nombreMetodo+" mediante reflexion", ex);
+            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "No se pudo acceder al metodo " + nombreMetodo + " mediante reflexion", ex);
         } catch (IllegalArgumentException ex) {
-            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "Los argumentos especificados no coinciden con los del metodo: "+nombreMetodo+"", ex);
+            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "Los argumentos especificados no coinciden con los del metodo: " + nombreMetodo + "", ex);
         } catch (InvocationTargetException ex) {
             Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchMethodException ex) {
-            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "El metodo "+nombreMetodo+" no pudo ser localizado", ex);
+            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "El metodo " + nombreMetodo + " no pudo ser localizado", ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return items;
+    }
+
+    public static SelectItem[] getFilterOptions(List<?> entities, String nombreMetodo) {
+
+        int size = entities.size() + 1;
+        SelectItem[] items = new SelectItem[size];
+        int i = 0;
+        items[i++] = new SelectItem("", "---");
+
+        try {
+            Class clase = entities.get(0).getClass();
+            Method getLabel = clase.getMethod(nombreMetodo, null);
+            for (Object o : entities) {
+                Object labelSelectItem = getLabel.invoke(o, null);
+                items[i++] = new SelectItem(labelSelectItem.toString(), labelSelectItem.toString());
+            }
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "No se pudo acceder al metodo " + nombreMetodo + " mediante reflexion", ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "Los argumentos especificados no coinciden con los del metodo: " + nombreMetodo + "", ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "El metodo " + nombreMetodo + " no pudo ser localizado", ex);
         } catch (SecurityException ex) {
             Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, null, ex);
         }

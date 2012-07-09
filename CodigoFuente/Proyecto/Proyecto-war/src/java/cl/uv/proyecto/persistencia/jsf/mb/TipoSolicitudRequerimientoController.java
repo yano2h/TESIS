@@ -181,14 +181,17 @@ public class TipoSolicitudRequerimientoController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        return JsfUtils.getSelectItems(ejbFacade.findAll(), "getNombreTipoSolicitud",false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        //return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
-        return JsfUtils.getSelectItems(ejbFacade.findAll(), "getNombreTipoSolicitud");
+        return JsfUtils.getSelectItems(ejbFacade.findAll(), "getNombreTipoSolicitud",true);
     }
-
+    
+    public SelectItem[] getFilterOptions() {
+        return JsfUtils.getFilterOptions(ejbFacade.findAll(), "getNombreTipoSolicitud");
+    }
+    
     @FacesConverter(forClass = TipoSolicitudRequerimiento.class)
     public static class TipoSolicitudRequerimientoControllerConverter implements Converter {
 
