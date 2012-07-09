@@ -32,7 +32,6 @@ public class SolicitudRequerimiento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_solicitud_req")
     private Long idSolicitudRequerimiento;
     @Basic(optional = false)

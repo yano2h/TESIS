@@ -30,7 +30,6 @@ public class ItemConfiguracion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_item_configuracion")
     private Integer idItemConfiguracion;
     @Basic(optional = false)

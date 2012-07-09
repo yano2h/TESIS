@@ -26,7 +26,6 @@ public class TareaScm implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_tarea_scm")
     private Integer idTareaScm;
     @Basic(optional = false)

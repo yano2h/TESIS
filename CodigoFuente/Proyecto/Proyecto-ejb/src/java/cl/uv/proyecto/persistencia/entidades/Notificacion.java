@@ -27,7 +27,6 @@ public class Notificacion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_notificacion")
     private Long idNotificacion;
     @Basic(optional = false)

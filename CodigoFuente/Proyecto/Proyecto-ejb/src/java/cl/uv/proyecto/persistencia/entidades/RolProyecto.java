@@ -25,7 +25,6 @@ public class RolProyecto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_rol")
     private Short idRol;
     @Basic(optional = false)

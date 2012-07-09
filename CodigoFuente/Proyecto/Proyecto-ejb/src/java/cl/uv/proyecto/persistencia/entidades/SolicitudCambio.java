@@ -30,7 +30,6 @@ public class SolicitudCambio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_solicitud_cambio")
     private Integer idSolicitudCambio;
     @Basic(optional = false)

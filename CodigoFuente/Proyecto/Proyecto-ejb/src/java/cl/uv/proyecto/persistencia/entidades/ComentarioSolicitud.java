@@ -26,7 +26,6 @@ public class ComentarioSolicitud implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_comentario")
     private Long idComentario;
     @Basic(optional = false)

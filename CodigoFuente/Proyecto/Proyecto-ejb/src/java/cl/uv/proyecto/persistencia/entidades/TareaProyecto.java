@@ -33,7 +33,6 @@ public class TareaProyecto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_tarea_proyecto")
     private Integer idTareaProyecto;
     @Basic(optional = false)
