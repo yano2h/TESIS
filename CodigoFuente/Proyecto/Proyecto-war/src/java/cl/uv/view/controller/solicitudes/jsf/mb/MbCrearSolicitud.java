@@ -54,7 +54,7 @@ public class MbCrearSolicitud implements Serializable{
     }
     
     public void enviar(ActionEvent event){
-        codigoConsulta = ejbSolicitud.enviarSolicitud(solicitud, mbUserInfo.getFuncionario());        
+        codigoConsulta = ejbSolicitud.enviarSolicitud(solicitud, mbUserInfo.getFuncionario());  
         ejbEmail.enviarEmail(mbUserInfo.getFuncionario().getCorreoUv(), "Mail de confirmacion", "Este es una prueba "+codigoConsulta);
     }
     

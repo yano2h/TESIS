@@ -18,25 +18,24 @@
                     </h:panelGrid>
                 </p:panel>
                 <br/>
-                
+
                 <p:panel id="panelMisSol" header="#{msg_sol.HeaderPanelMisSol}">
-                    
+
                     <p:dataTable id="tableMisSol" 
                                  var="sol" 
-                                 value="#{mbConsultarSolicitud.funcionario.solicitudesRequerimientoEnviadas}"
+                                 value="#{mbConsultarSolicitud.solicitudesEnviadas}"
                                  selectionMode="single"
                                  selection="#{mbConsultarSolicitud.selectedSolicitud}"
-                                 paginator="true" rows="20" paginatorPosition="bottom" >
+                                 rowKey="#{sol.codigoConsulta}"
+                                 paginator="true" rows="10" paginatorPosition="bottom" >
 
-                        
-                        <p:ajax event="rowSelect" listener="#{tableBean.onRowSelect}"    
-                                 />  
 
+                       
                         <p:column headerText="Codigo" 
                                   sortBy="#{sol.codigoConsulta}" 
                                   filterBy="#{sol.codigoConsulta}"
                                   filterMatchMode="startsWith">  
-                           
+
                             <h:outputText value="#{sol.codigoConsulta}" />  
                         </p:column> 
 
@@ -48,7 +47,7 @@
                                 <f:convertDateTime pattern="dd-MM-yyyy  HH:mm" />
                             </h:outputText>  
                         </p:column> 
-                        
+
                         <p:column headerText="Asunto" 
                                   sortBy="#{sol.asunto}"
                                   filterBy="#{sol.asunto}"
@@ -63,7 +62,7 @@
                                   filterMatchMode="exact">
                             <h:outputText value="#{sol.estadoSolicitud.nombreEstadoSolicitud}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Tipo"
                                   sortBy="#{sol.tipoSolicitud.nombreTipoSolicitud}"
                                   filterBy="#{sol.tipoSolicitud.nombreTipoSolicitud}"
@@ -71,7 +70,12 @@
                                   filterMatchMode="exact">
                             <h:outputText value="#{sol.tipoSolicitud.nombreTipoSolicitud}"/>
                         </p:column>
-                        
+
+                        <f:facet name="footer" >
+                            <p:commandButton value="Ver Detalle" icon="ui-icon-search" action="solicitud?faces-redirect=true">
+                                <f:param name="codigo" value="#{mbConsultarSolicitud.selectedSolicitud.codigoConsulta}" />
+                            </p:commandButton>
+                        </f:facet>
                     </p:dataTable>
                 </p:panel>
             </h:form>

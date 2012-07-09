@@ -5,19 +5,18 @@
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
+import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import cl.uv.view.controller.base.jsf.mb.MbUserInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceUtil;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -30,6 +29,8 @@ public class MbConsultarSolicitud implements Serializable{
     
     @EJB
     private FuncionarioFacadeLocal funcionarioFacade;
+    @EJB
+    private SolicitudRequerimientoFacadeLocal solicitudFacade;
     
     @ManagedProperty(value="#{mbUserInfo}")
     private MbUserInfo mbUserInfo;
@@ -43,14 +44,15 @@ public class MbConsultarSolicitud implements Serializable{
 
     @PostConstruct
     public void init(){
+        System.out.println("MMMM");
         funcionario = mbUserInfo.getFuncionario();
-        System.out.println("AAAA");
-        if(Persistence.getPersistenceUtil().isLoaded(funcionario, "solicitudesRequerimientoEnviadas")){
-            System.out.println("SI");
-        }else{
-            System.out.println("NO");
-            
-        }  
+//        System.out.println("AAAA");
+//        if(Persistence.getPersistenceUtil().isLoaded(funcionario, "solicitudesRequerimientoEnviadas")){
+//            System.out.println("SI");
+//        }else{
+//            System.out.println("NO");
+//            
+//        }  
     }
     
     public String getCodigoConsulta() {
@@ -69,6 +71,11 @@ public class MbConsultarSolicitud implements Serializable{
         return funcionario;
     }
 
+    public List<SolicitudRequerimiento> getSolicitudesEnviadas(){
+        System.out.println("AKA");
+        return solicitudFacade.buscarPorSolicitante(funcionario.getRut());
+    }
+    
     public SolicitudRequerimiento getSelectedSolicitud() {
         return selectedSolicitud;
     }

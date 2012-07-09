@@ -6,7 +6,9 @@ package cl.uv.view.controller.base.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
+import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -35,6 +37,5 @@ public class MbUserInfo implements Serializable{
     public Funcionario getFuncionario() {
         return funcionario;
     }
-    
     
 }

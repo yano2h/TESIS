@@ -24,7 +24,7 @@
                         <h:outputLabel value="#{msg_sol.LabelAreaSol}:*" for="areaSol"/>
                         <p:selectOneMenu id="areaSol" widgetVar="areaSol" value="#{mbCrearSolicitud.solicitud.areaResponsable}" required="true" requiredMessage="#{msg_sol.requiredMessageAreaSol}">
                             <f:selectItem itemValue="" itemLabel="#{msg_sol.DefaulAreaSol}" />
-                            <f:selectItems value="#{areaController.itemsAvailableSelectOne}"/>
+                            <f:selectItems value="#{areaController.itemsAvailableSelectMany}"/>
                         </p:selectOneMenu> 
                         <p:message id="areaSolMessage" for="areaSol" />
                         
