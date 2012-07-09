@@ -5,6 +5,7 @@
 package cl.uv.view.controller.base.jsf.mb;
 
 import cl.uv.view.controller.base.utils.Resources;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
@@ -16,7 +17,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class MbSessionController {
+public class MbSessionController implements Serializable{
     public static final String  NAVIGATE_PATH = "pages";
 
     private Map<String, String> pagesMap;

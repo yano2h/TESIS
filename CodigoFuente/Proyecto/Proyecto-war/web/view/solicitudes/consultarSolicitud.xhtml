@@ -2,10 +2,79 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <ui:composition template="#{pages.layout_solicitud}">
         <ui:define name="content">
-            <h1>Consultar Solicitud</h1>
+            <h:form id="consultarSol">
+                <p:panel id="panelConsultaSol" header="#{msg_sol.HeaderPanelConsultaSol}">
+                    <h:panelGrid columns="4">
+                        <p:outputLabel value="#{msg_sol.LabelCodigoConsulta}: " for="txtCodigoConsulta"/>
+                        <p:inputText id="txtCodigoConsulta" value="#{mbConsultarSolicitud.codigoConsulta}"/>
+                        <p:commandButton id="btnBuscar" value="#{msg_sol.BtnBuscar}"/>
+                        <p:message id="codigoConsultaMessage" for="txtCodigoConsulta"/>
+
+                    </h:panelGrid>
+                </p:panel>
+                <br/>
+                
+                <p:panel id="panelMisSol" header="#{msg_sol.HeaderPanelMisSol}">
+                    
+                    <p:dataTable id="tableMisSol" 
+                                 var="sol" 
+                                 value="#{mbConsultarSolicitud.funcionario.solicitudesRequerimientoEnviadas}"
+                                 selectionMode="single"
+                                 selection="#{mbConsultarSolicitud.selectedSolicitud}"
+                                 paginator="true" rows="20" paginatorPosition="bottom" >
+
+                        
+                        <p:ajax event="rowSelect" listener="#{tableBean.onRowSelect}"    
+                                 />  
+
+                        <p:column headerText="Codigo" 
+                                  sortBy="#{sol.codigoConsulta}" 
+                                  filterBy="#{sol.codigoConsulta}"
+                                  filterMatchMode="startsWith">  
+                           
+                            <h:outputText value="#{sol.codigoConsulta}" />  
+                        </p:column> 
+
+                        <p:column headerText="Fecha Envio" 
+                                  sortBy="#{sol.fechaEnvio}" 
+                                  filterBy="#{sol.fechaEnvio}"
+                                  filterMatchMode="startsWith">  
+                            <h:outputText value="#{sol.fechaEnvio}" >
+                                <f:convertDateTime pattern="dd-MM-yyyy  HH:mm" />
+                            </h:outputText>  
+                        </p:column> 
+                        
+                        <p:column headerText="Asunto" 
+                                  sortBy="#{sol.asunto}"
+                                  filterBy="#{sol.asunto}"
+                                  filterMatchMode="contains">  
+                            <h:outputText value="#{sol.asunto}" />  
+                        </p:column>  
+
+                        <p:column headerText="Estado"
+                                  sortBy="#{sol.estadoSolicitud.nombreEstadoSolicitud}"
+                                  filterBy="#{sol.estadoSolicitud.nombreEstadoSolicitud}"
+                                  filterOptions="#{estadoSolicitudRequerimientoController.filterOptions}"
+                                  filterMatchMode="exact">
+                            <h:outputText value="#{sol.estadoSolicitud.nombreEstadoSolicitud}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Tipo"
+                                  sortBy="#{sol.tipoSolicitud.nombreTipoSolicitud}"
+                                  filterBy="#{sol.tipoSolicitud.nombreTipoSolicitud}"
+                                  filterOptions="#{tipoSolicitudRequerimientoController.filterOptions}"
+                                  filterMatchMode="exact">
+                            <h:outputText value="#{sol.tipoSolicitud.nombreTipoSolicitud}"/>
+                        </p:column>
+                        
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
         </ui:define>
     </ui:composition>
 </html>
