@@ -7,7 +7,10 @@ package cl.uv.proyecto.persistencia.ejb;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
+import org.hibernate.Hibernate;
+import org.hibernate.validator.HibernateValidator;
 
 /**
  *
@@ -27,4 +30,10 @@ public class FuncionarioFacade extends AbstractFacade<Funcionario> implements Fu
         super(Funcionario.class);
     }
     
+    public void loadSolicitudesEnviadas(Funcionario f){
+        EntityTransaction t = getEntityManager().getTransaction();
+        t.begin();
+        Hibernate.initialize(f.getSolicitudesRequerimientoEnviadas());
+        em.close();
+    }
 }

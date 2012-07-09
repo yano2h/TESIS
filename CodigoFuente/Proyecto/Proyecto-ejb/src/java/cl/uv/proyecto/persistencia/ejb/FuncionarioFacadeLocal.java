@@ -28,5 +28,7 @@ public interface FuncionarioFacadeLocal {
     List<Funcionario> findRange(int[] range);
 
     int count();
+
+    public void loadSolicitudesEnviadas(Funcionario f);
     
 }
