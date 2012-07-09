@@ -20,4 +20,6 @@ public interface SolicitudRequerimientoEJBLocal {
     boolean validarCodigoConsulta(String codigoConsulta);
 
     String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante);
+
+    String generarCodigo(long num);
 }
