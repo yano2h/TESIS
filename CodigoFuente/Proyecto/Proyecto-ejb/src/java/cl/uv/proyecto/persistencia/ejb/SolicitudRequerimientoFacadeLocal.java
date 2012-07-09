@@ -28,5 +28,7 @@ public interface SolicitudRequerimientoFacadeLocal {
     List<SolicitudRequerimiento> findRange(int[] range);
 
     int count();
+
+    public java.util.List<cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento> buscarPorSolicitante(java.lang.Integer rutSolicitante);
     
 }

@@ -5,9 +5,11 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,6 +27,13 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     public SolicitudRequerimientoFacade() {
         super(SolicitudRequerimiento.class);
+    }
+    
+    @Override
+    public List<SolicitudRequerimiento> buscarPorSolicitante(Integer rutSolicitante){
+        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante.rut = :rut");
+        q.setParameter("rut", rutSolicitante);
+        return q.getResultList();
     }
     
 }
