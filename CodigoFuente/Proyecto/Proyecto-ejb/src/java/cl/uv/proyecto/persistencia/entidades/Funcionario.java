@@ -60,7 +60,7 @@ public class Funcionario implements Serializable {
     private Date fechaPrimerAcceso;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "destinatario")
     private List<Notificacion> notificaciones;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitante", fetch= FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitante", fetch= FetchType.LAZY)
     private List<SolicitudRequerimiento> solicitudesRequerimientoEnviadas;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "autor")
