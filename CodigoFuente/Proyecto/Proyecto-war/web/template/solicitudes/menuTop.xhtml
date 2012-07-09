@@ -13,9 +13,9 @@
                 <h:panelGrid columns="1" styleClass="basicInfo">
                     <h:panelGrid columns="2" >     
                         <h:outputLabel value="Usuario:" styleClass="label_blod" />  
-                        <h:outputText value="Alejandro Alvarez" />  
+                        <h:outputText value="#{mbUserInfo.funcionario.nombre}" />  
                         <h:outputLabel value="RUT:" styleClass="label_blod" />  
-                        <h:outputText value="16.775.578-K" />  
+                        <h:outputText value="#{mbUserInfo.funcionario.rut}" />  
                     </h:panelGrid>
                     <h:panelGroup>
                         <p:commandButton value="Ver Perfil"/>
