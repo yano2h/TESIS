@@ -8,6 +8,7 @@ import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -34,6 +35,19 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
         Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante.rut = :rut");
         q.setParameter("rut", rutSolicitante);
         return q.getResultList();
+    }
+    
+    @Override
+    public SolicitudRequerimiento buscarPorCodigo(String codigo){
+         Query q = em.createNamedQuery("SolicitudRequerimiento.findByCodigoConsulta");
+         q.setParameter("codigoConsulta", codigo);
+         SolicitudRequerimiento solicitud;
+         try{
+             solicitud = (SolicitudRequerimiento) q.getSingleResult();
+         }catch(NoResultException e){
+             solicitud = null;
+         }           
+         return solicitud;
     }
     
 }
