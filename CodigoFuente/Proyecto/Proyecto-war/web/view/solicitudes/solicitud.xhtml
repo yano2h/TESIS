@@ -6,18 +6,83 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
     <ui:composition template="#{pages.layout_solicitud}">
-        <ui:define name="content">
-            <h1>Solicitud</h1>
-            
-            <f:view>
+        <ui:define name="content">  
+
             <f:metadata>
-                <f:viewParam name="codigo" value="#{mbDetalleSolicitud.codigo}" required="true"/>
+                <f:viewParam id="codigo" name="codigo" value="#{mbDetalleSolicitud.codigo}" required="true" requiredMessage="Necesita especificar el codigo de la solicitud"/>
+                <f:event type="preRenderView" listener="#{mbDetalleSolicitud.init}" />
             </f:metadata>
-            </f:view>
-            
+
             <h:form>
-                <h:outputText value="#{mbDetalleSolicitud.codigo}"/>
+                <p:panel id="panelDetalleSolicitud" header="Detalle Solicitud">
+                    <p:messages id="messages" showDetail="true" autoUpdate="true"/>  
+
+                    <h:panelGrid id="detalle" rendered="#{mbDetalleSolicitud.solicitud != null}" columns="3">
+                        <h:panelGrid id="izq" columns="2" style="line-height: 1.5em;">
+                            <h:outputLabel value="Codigo de Consulta:" styleClass="label_blod" />
+                            <h:outputText id="codigoConsulta" value="#{mbDetalleSolicitud.solicitud.codigoConsulta}"/>
+                            <h:outputLabel value="Solicitante:" styleClass="label_blod"/>
+                            <h:outputText id="solicitante" value="#{mbDetalleSolicitud.solicitud.solicitante.nombre}"/>
+                            <h:outputLabel value="Tipo de Solicitud:" styleClass="label_blod"/>
+                            <h:outputText id="tipo" value="#{mbDetalleSolicitud.solicitud.tipoSolicitud.nombreTipoSolicitud}"/>
+                            <h:outputLabel value="Estado Actual" styleClass="label_blod"/>
+                            <h:outputText id="estado" value="#{mbDetalleSolicitud.solicitud.estadoSolicitud.nombreEstadoSolicitud}"/>
+                            <h:outputLabel value="Fecha de Envio:" styleClass="label_blod"/>
+                            <h:outputText id="fechaEnvio" value="#{mbDetalleSolicitud.solicitud.fechaEnvio}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+
+                        </h:panelGrid>
+
+                        <p:separator style="width:4px;height:100px;margin-left: 20px;margin-right: 20px;"/>
+
+                        <h:panelGrid id="der" columns="2" style="line-height: 1.5em;">
+                            <h:outputLabel value="Area Responsable:" styleClass="label_blod" />
+                            <h:outputText id="area" value="#{mbDetalleSolicitud.solicitud.areaResponsable.nombreArea}"/>
+                            <h:outputLabel value="Funcionario Responsable:" styleClass="label_blod"/>
+                            <h:outputText id="responsable" value="#{mbDetalleSolicitud.solicitud.responsable.nombre}" rendered="#{mbDetalleSolicitud.solicitud.responsable!=null}"/>
+                            <h:outputText id="sinResponsable" value="No Asignado" rendered="#{mbDetalleSolicitud.solicitud.responsable==null}"/>
+                            <h:outputLabel value="Fecha de Vencimiento:" styleClass="label_blod"/>
+                            <h:outputText id="fechaVencimiento" value="#{mbDetalleSolicitud.solicitud.fechaVencimiento}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                            <h:outputLabel value="Fecha Ultima Actualizacio:" styleClass="label_blod"/>
+                            <h:outputText id="fechaUltimaActualizacio" value="#{mbDetalleSolicitud.solicitud.fechaUltimaActualizacion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                            <h:outputLabel value="Fecha de Cierre:" styleClass="label_blod"/>
+                            <h:outputText id="fechaCierre" value="#{mbDetalleSolicitud.solicitud.fechaCierre}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:panelGrid>
+                    </h:panelGrid>
+
+                    <p:separator style="width:100%; height:4px; margin-bottom:20px;"/>
+
+                    <h:panelGrid columns="2">    
+                        <h:outputLabel value="Asunto:" styleClass="label_blod" />
+                        <h:outputText id="asunto" value="#{mbDetalleSolicitud.solicitud.asunto}"/>  
+                    </h:panelGrid>
+
+                    <br/>
+                    <p:panel header="Mensaje" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 750px;" >  
+                        <h:outputText id="mensaje" value="#{mbDetalleSolicitud.solicitud.mensaje}" escape="false"/>       
+                    </p:panel>
+
+                    <br/>
+                    <p:panel header="Respuesta" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 750px;" >  
+                        <h:outputText id="respuesta" value="#{mbDetalleSolicitud.solicitud.respuesta}" escape="false"/>       
+                    </p:panel>
+
+                    <br/>
+                    <p:panel header="Comentarios" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 750px;" >  
+
+                    </p:panel>
+                    
+                    <p:dataList value=""/>
+                </p:panel>
             </h:form>
+
         </ui:define>
     </ui:composition>
 </html>

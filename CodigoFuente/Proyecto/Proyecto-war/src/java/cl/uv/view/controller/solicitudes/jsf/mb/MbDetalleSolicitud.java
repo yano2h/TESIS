@@ -4,12 +4,14 @@
  */
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
+import cl.uv.proyecto.persistencia.ejb.ComentarioSolicitudFacadeLocal;
+import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
+import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -21,18 +23,27 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class MbDetalleSolicitud implements Serializable{
 
+    @EJB
+    private SolicitudRequerimientoFacadeLocal solicitudFacade;
+    @EJB
+    private ComentarioSolicitudFacadeLocal comentarioFacade;
+    
     private String codigo;
-    private SolicitudRequerimiento selectedSolicitud;
+    private SolicitudRequerimiento solicitud;
+    
     public MbDetalleSolicitud() {
         codigo="";
     }
     
-    @PostConstruct
+  //  @PostConstruct
     public void init(){
-//        Map<String,String> l = JsfUtils.getExternalContext().getRequestParameterMap();
-//        System.out.println("SIZE MAP:"+l.size());
-//        codigo = JsfUtils.getParam("codigo");
-//        System.out.println("CODIGO-->"+codigo);
+        solicitud = solicitudFacade.buscarPorCodigo(codigo);
+        FuncionarioDisico f = new FuncionarioDisico();
+        if(solicitud == null){
+            JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error:", "La solicitud con codigo "+codigo+" no pudo ser encontrada"));
+        }else{
+            solicitud.setComentarios(comentarioFacade.buscarComentariosPorSolicitud(solicitud.getIdSolicitudRequerimiento()));
+        }
     }
 
     public String getCodigo() {
@@ -43,12 +54,12 @@ public class MbDetalleSolicitud implements Serializable{
         this.codigo = codigo;
     }
 
-    public SolicitudRequerimiento getSelectedSolicitud() {
-        return selectedSolicitud;
+    public SolicitudRequerimiento getSolicitud() {
+        return solicitud;
     }
 
-    public void setSelectedSolicitud(SolicitudRequerimiento selectedSolicitud) {
-        this.selectedSolicitud = selectedSolicitud;
+    public void setSolicitud(SolicitudRequerimiento solicitud) {
+        this.solicitud = solicitud;
     }
     
     

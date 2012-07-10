@@ -44,6 +44,7 @@ label{
 .ui-widget {
     font-family: Helvetica, Arial, sans-serif;
     color: #18316D;
+    font-size: 12px;
 }
 
 .ui-button-text {
@@ -62,4 +63,9 @@ label{
 
 .text_disabled{
     color: #dddddd;
+}
+
+.separator_vertical{
+    margin-left: 20px;
+    margin-right: 20px;    
 }
