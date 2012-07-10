@@ -29,9 +29,9 @@
                                  selectionMode="single"
                                  selection="#{mbConsultarSolicitud.selectedSolicitud}"
                                  rowKey="#{sol.codigoConsulta}"
-                                 paginator="true" rows="10" paginatorPosition="bottom" >
+                                 paginator="true" rows="20" paginatorPosition="bottom" >
 
-                       
+                        <p:ajax event="rowSelect" listener="#{mbConsultarSolicitud.onRowSelect}"/>
                         <p:column headerText="Codigo" 
                                   sortBy="#{sol.codigoConsulta}" 
                                   filterBy="#{sol.codigoConsulta}"
@@ -43,12 +43,12 @@
                         <p:column headerText="Fecha Envio" 
                                   sortBy="#{sol.fechaEnvio}" 
                                   filterBy="#{sol.fechaEnvio}"
-                                  filterMatchMode="startsWith">  
+                                  filterMatchMode="contains">  
                             <h:outputText value="#{sol.fechaEnvio}" >
-                                <f:convertDateTime pattern="dd-MM-yyyy  HH:mm" />
+                                <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" />
                             </h:outputText>  
                         </p:column> 
-
+         
                         <p:column headerText="Asunto" 
                                   sortBy="#{sol.asunto}"
                                   filterBy="#{sol.asunto}"
@@ -71,12 +71,6 @@
                                   filterMatchMode="exact">
                             <h:outputText value="#{sol.tipoSolicitud.nombreTipoSolicitud}"/>
                         </p:column>
-
-                        <f:facet name="footer" >
-                            <p:commandButton value="Ver Detalle" icon="ui-icon-search" action="#{mbConsultarSolicitud.goDetalle()}">
-                                <f:param name="codigo" value="#{mbConsultarSolicitud.selectedSolicitud.codigoConsulta}" />
-                            </p:commandButton>
-                        </f:facet>
                         
                     </p:dataTable>
                     
