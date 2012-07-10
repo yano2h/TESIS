@@ -28,5 +28,7 @@ public interface ComentarioSolicitudFacadeLocal {
     List<ComentarioSolicitud> findRange(int[] range);
 
     int count();
+
+    public List<ComentarioSolicitud> buscarComentariosPorSolicitud(Long idSolicitudRequerimiento);
     
 }

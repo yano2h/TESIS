@@ -5,9 +5,11 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.ComentarioSolicitud;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,6 +27,13 @@ public class ComentarioSolicitudFacade extends AbstractFacade<ComentarioSolicitu
 
     public ComentarioSolicitudFacade() {
         super(ComentarioSolicitud.class);
+    }
+    
+    @Override
+    public List<ComentarioSolicitud> buscarComentariosPorSolicitud(Long idSolicitudRequerimiento){
+        Query q = em.createQuery("SELECT c FROM ComentarioSolicitud c WHERE c.solicitudRequerimiento.idSolicitudRequerimiento = :id");
+        q.setParameter("id", idSolicitudRequerimiento);
+        return q.getResultList();
     }
     
 }
