@@ -17,6 +17,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.persistence.Persistence;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -44,15 +45,10 @@ public class MbConsultarSolicitud implements Serializable{
 
     @PostConstruct
     public void init(){
-        System.out.println("MMMM");
         funcionario = mbUserInfo.getFuncionario();
-//        System.out.println("AAAA");
-//        if(Persistence.getPersistenceUtil().isLoaded(funcionario, "solicitudesRequerimientoEnviadas")){
-//            System.out.println("SI");
-//        }else{
-//            System.out.println("NO");
-//            
-//        }  
+        if(!Persistence.getPersistenceUtil().isLoaded(funcionario, "solicitudesRequerimientoEnviadas")){
+            funcionario.setSolicitudesRequerimientoEnviadas(solicitudFacade.buscarPorSolicitante(funcionario.getRut()));
+        }
     }
     
     public String getCodigoConsulta() {
@@ -72,8 +68,8 @@ public class MbConsultarSolicitud implements Serializable{
     }
 
     public List<SolicitudRequerimiento> getSolicitudesEnviadas(){
-        System.out.println("AKA");
-        return solicitudFacade.buscarPorSolicitante(funcionario.getRut());
+        //return solicitudFacade.buscarPorSolicitante(funcionario.getRut());
+        return funcionario.getSolicitudesRequerimientoEnviadas();
     }
     
     public SolicitudRequerimiento getSelectedSolicitud() {
@@ -85,6 +81,11 @@ public class MbConsultarSolicitud implements Serializable{
     }
     
     public void onRowSelect(SelectEvent event) {  
-        JsfUtils.redirect("solicitud");
+        JsfUtils.redirect("solicitud?faces-redirect=true");
     }  
+    
+    public String goDetalle(){
+        System.out.println("SELECTED: "+selectedSolicitud.getCodigoConsulta());
+        return "solicitud?faces-redirect=true&codigo="+selectedSolicitud.getCodigoConsulta();
+    }
 }

@@ -7,7 +7,9 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <ui:composition template="#{pages.layout_solicitud}">
         <ui:define name="content">
+            
             <h:form id="consultarSol">
+            
                 <p:panel id="panelConsultaSol" header="#{msg_sol.HeaderPanelConsultaSol}">
                     <h:panelGrid columns="4">
                         <p:outputLabel value="#{msg_sol.LabelCodigoConsulta}: " for="txtCodigoConsulta"/>
@@ -28,7 +30,6 @@
                                  selection="#{mbConsultarSolicitud.selectedSolicitud}"
                                  rowKey="#{sol.codigoConsulta}"
                                  paginator="true" rows="10" paginatorPosition="bottom" >
-
 
                        
                         <p:column headerText="Codigo" 
@@ -72,11 +73,13 @@
                         </p:column>
 
                         <f:facet name="footer" >
-                            <p:commandButton value="Ver Detalle" icon="ui-icon-search" action="solicitud?faces-redirect=true">
+                            <p:commandButton value="Ver Detalle" icon="ui-icon-search" action="#{mbConsultarSolicitud.goDetalle()}">
                                 <f:param name="codigo" value="#{mbConsultarSolicitud.selectedSolicitud.codigoConsulta}" />
                             </p:commandButton>
                         </f:facet>
+                        
                     </p:dataTable>
+                    
                 </p:panel>
             </h:form>
         </ui:define>

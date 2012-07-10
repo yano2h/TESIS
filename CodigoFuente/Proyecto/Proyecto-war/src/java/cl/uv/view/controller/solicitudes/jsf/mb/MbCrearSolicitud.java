@@ -5,9 +5,11 @@
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
 import cl.uv.proyecto.mensajeria.ejb.EmailEJBLocal;
+import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import cl.uv.proyecto.requerimientos.ejb.SolicitudRequerimientoEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbUserInfo;
+import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -25,9 +27,10 @@ public class MbCrearSolicitud implements Serializable{
 
     @EJB
     private SolicitudRequerimientoEJBLocal ejbSolicitud;
-    
     @EJB
     private EmailEJBLocal ejbEmail;
+    @EJB
+    private SolicitudRequerimientoFacadeLocal solicitudFacade;
     
     @ManagedProperty(value="#{mbUserInfo}")
     private MbUserInfo mbUserInfo;
@@ -55,7 +58,10 @@ public class MbCrearSolicitud implements Serializable{
     
     public void enviar(ActionEvent event){
         codigoConsulta = ejbSolicitud.enviarSolicitud(solicitud, mbUserInfo.getFuncionario());  
-        ejbEmail.enviarEmail(mbUserInfo.getFuncionario().getCorreoUv(), "Mail de confirmacion", "Este es una prueba "+codigoConsulta);
+        ejbEmail.enviarEmail(mbUserInfo.getFuncionario().getCorreoUv(), 
+                             Resources.getValue("email", "AsuntoConfirmacion"), 
+                             Resources.getValue("email", "CuerpoMensanje")+codigoConsulta+"\n\n"+Resources.getValue("email", "FirmaMensaje"));
+        mbUserInfo.getFuncionario().setSolicitudesRequerimientoEnviadas(solicitudFacade.buscarPorSolicitante(mbUserInfo.getFuncionario().getRut()));
     }
     
     public String cerrarDialog(){

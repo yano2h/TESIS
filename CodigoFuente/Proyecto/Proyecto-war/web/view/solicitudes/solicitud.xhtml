@@ -3,10 +3,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <ui:composition template="#{pages.layout_solicitud}">
         <ui:define name="content">
             <h1>Solicitud</h1>
+            
+            <f:view>
+            <f:metadata>
+                <f:viewParam name="codigo" value="#{mbDetalleSolicitud.codigo}" required="true"/>
+            </f:metadata>
+            </f:view>
+            
+            <h:form>
+                <h:outputText value="#{mbDetalleSolicitud.codigo}"/>
+            </h:form>
         </ui:define>
     </ui:composition>
 </html>
