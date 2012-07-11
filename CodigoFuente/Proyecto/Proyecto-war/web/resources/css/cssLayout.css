@@ -1,5 +1,5 @@
 div#wrapper_l {
-    min-width: 70%;
+    min-width: 900px;
     max-width: 95%;
 }
 
@@ -53,9 +53,10 @@ div#wrapper_l {
 .left_content {
     background-color: #dddddd;
     padding: 5px;
-    margin-left: 250px;
+    margin-left: 240px;
     margin-right: 15px;
     min-height: 300px;
+    min-width: 600px;
 }
 
 .right_content {

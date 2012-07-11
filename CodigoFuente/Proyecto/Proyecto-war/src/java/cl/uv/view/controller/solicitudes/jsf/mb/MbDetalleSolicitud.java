@@ -39,12 +39,18 @@ public class MbDetalleSolicitud implements Serializable{
     
     private String codigo;
     private String comentario;
+    private ComentarioSolicitud selectedComentario;
     private SolicitudRequerimiento solicitud;
     
     
     public MbDetalleSolicitud() {
         comentario="";
         codigo="";
+    }
+    
+    @PostConstruct
+    public void post(){
+        System.out.println("POST");
     }
     
     public void init(){
@@ -80,6 +86,15 @@ public class MbDetalleSolicitud implements Serializable{
     public void setSolicitud(SolicitudRequerimiento solicitud) {
         this.solicitud = solicitud;
     }
+
+    public ComentarioSolicitud getSelectedComentario() {
+        return selectedComentario;
+    }
+
+    public void setSelectedComentario(ComentarioSolicitud selectedComentario) {
+        this.selectedComentario = selectedComentario;
+    }
+
     
     public void comentar(ActionEvent event){
         if(!comentario.isEmpty()){
@@ -98,6 +113,15 @@ public class MbDetalleSolicitud implements Serializable{
         this.mbUserInfo = mbUserInfo;
     }
     
-    
+    public void eliminarComentario(ActionEvent event){
+        selectedComentario = (ComentarioSolicitud) event.getComponent().getAttributes().get("comentario");
+        selectedComentario.setVisible(false);
+        comentarioFacade.edit(selectedComentario);
+        System.out.println("ELIMINAR:"+selectedComentario.getComentario());
+        
+        for (ComentarioSolicitud object : solicitud.getComentarios()) {
+            System.out.println("Comentario: "+object.getComentario()+" - Visible:"+object.getVisible());
+        }
+    }
     
 }

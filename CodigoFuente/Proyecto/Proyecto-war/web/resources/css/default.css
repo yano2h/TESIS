@@ -104,3 +104,18 @@ dd {
     display: block;
     -webkit-margin-start: 10px;
 }
+
+.ui-datalist-content{
+    border: none;
+}
+
+.column_grid{
+    width: 100%;
+}
+
+a.small_link{
+    color: gray;
+    font-weight : normal;
+    text-decoration: none;
+    font-size: 11px;
+}

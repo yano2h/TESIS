@@ -8,7 +8,7 @@
     <ui:composition template="#{pages.layout_solicitud}">
         <ui:define name="content">  
 
-            <h:form>
+            <h:form id="detalleSol">
 
                 <f:metadata>
                     <f:viewParam id="codigo" name="codigo" value="#{mbDetalleSolicitud.codigo}"/>
@@ -66,36 +66,40 @@
                         </h:panelGrid>
 
                         <br/>
-                        <p:panel header="Mensaje" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 750px;" >  
+                        <p:panel header="Mensaje" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%" >  
                             <h:outputText id="mensaje" value="#{mbDetalleSolicitud.solicitud.mensaje}" escape="false"/>       
                         </p:panel>
 
                         <br/>
-                        <p:panel header="Respuesta" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 750px;" >  
+                        <p:panel header="Respuesta" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%;" >  
                             <h:outputText id="respuesta" value="#{mbDetalleSolicitud.solicitud.respuesta}" escape="false"/>       
                         </p:panel>
 
                         <br/>
-                        <p:panel header="Comentarios" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 750px;" >
+                        <p:panel id="comentarioPnl" header="Comentarios" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%;" >
 
-                            <h:panelGrid columns="2" rowClasses="row_align_bottom" >
-                                <p:inputTextarea id="nuevoComentario" value="#{mbDetalleSolicitud.comentario}" rows="3" cols="88"/>
-                                <p:commandButton value="Comentar" actionListener="#{mbDetalleSolicitud.comentar}" update="nuevoComentario comentarios"/>
+                            <h:panelGrid columns="2" rowClasses="row_align_bottom" style="width: 100%" columnClasses="column_grid">
+                                <p:inputTextarea id="nuevoComentario" value="#{mbDetalleSolicitud.comentario}" rows="3" style="width: 98%;"/>
+                                <p:commandButton value="Comentar" actionListener="#{mbDetalleSolicitud.comentar}" update="nuevoComentario comentarios" />
                             </h:panelGrid>
                             <br/>
 
-                            <p:dataList id="comentarios" value="#{mbDetalleSolicitud.solicitud.comentarios}" var="comentario" type="none" style="border: none;">
-                              <!--  <f:facet name="description"  class="-webkit-margin-start: 10px;"> -->
-                                    <h:panelGrid styleClass=" ui-corner-all ui-widget-content grid_comentario" width="550px">
+                            <p:dataList id="comentarios" value="#{mbDetalleSolicitud.solicitud.comentarios}" var="comentario" type="none" widgetVar="coment" >
+                                <p:column  >
+                                    <h:panelGrid id="gridComentario" styleClass=" ui-corner-all ui-widget-content grid_comentario" width="100%" rendered="#{comentario.visible}">
                                         <h:panelGrid  columns="2" width="100%">
                                             <h:outputText value="#{comentario.autor.nombre} #{comentario.autor.apellidoPaterno}" styleClass="text_blod_blue text_small" />
-                                            <h:outputText value="#{comentario.fecha}" styleClass="text_date_small" style="float: right">
+                                            <h:outputText value="#{comentario.fecha}" styleClass="text_date_small" style="float: right;">
                                                 <f:convertDateTime pattern="dd/MM/yyyy  HH:mm"/>
                                             </h:outputText>
                                         </h:panelGrid>
                                         <h:outputText value="#{comentario.comentario}" style="padding: 2px;"/>
+
+                                        <p:commandLink id="linkEliminar" value="Eliminar" actionListener="#{mbDetalleSolicitud.eliminarComentario}"  styleClass="small_link" style="float: right" update="@form" rendered="#{comentario.autor.rut == mbUserInfo.funcionario.rut}">
+                                            <f:attribute name="comentario" value="#{comentario}"/>
+                                        </p:commandLink>
                                     </h:panelGrid>
-                                <!--</f:facet>-->
+                                </p:column>
                             </p:dataList>
 
                         </p:panel>

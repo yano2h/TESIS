@@ -31,7 +31,7 @@ public class ComentarioSolicitudFacade extends AbstractFacade<ComentarioSolicitu
     
     @Override
     public List<ComentarioSolicitud> buscarComentariosPorSolicitud(Long idSolicitudRequerimiento){
-        Query q = em.createQuery("SELECT c FROM ComentarioSolicitud c WHERE c.solicitudRequerimiento.idSolicitudRequerimiento = :id");
+        Query q = em.createQuery("SELECT c FROM ComentarioSolicitud c WHERE c.solicitudRequerimiento.idSolicitudRequerimiento = :id ORDER BY c.fecha DESC");
         q.setParameter("id", idSolicitudRequerimiento);
         return q.getResultList();
     }
