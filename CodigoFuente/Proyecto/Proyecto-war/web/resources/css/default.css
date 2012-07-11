@@ -41,6 +41,32 @@ label{
     font-weight: bold;
 }
 
+.text_blod_blue{
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    color: #18316D;
+}
+
+.text_date_small{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size:  11px;
+    color: gray;
+}
+
+.text_small{
+    font-size:  11px;
+}
+
+.grid_comentario{
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 4px;
+}
+
+.data_list_sin_borde{
+    border: none;
+}
+
 .ui-widget {
     font-family: Helvetica, Arial, sans-serif;
     color: #18316D;
@@ -68,4 +94,13 @@ label{
 .separator_vertical{
     margin-left: 20px;
     margin-right: 20px;    
+}
+
+tr.row_align_bottom{
+    vertical-align: bottom;
+}
+
+dd {
+    display: block;
+    -webkit-margin-start: 10px;
 }
