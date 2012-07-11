@@ -84,7 +84,13 @@
                             </h:panelGrid>
                             <br/>
 
-                            <p:dataList id="comentarios" value="#{mbDetalleSolicitud.solicitud.comentarios}" var="comentario" type="none" widgetVar="coment" >
+
+                            <p:dataList id="comentarios" 
+                                        value="#{mbDetalleSolicitud.solicitud.comentarios}" 
+                                        var="comentario" 
+                                        type="none" 
+                                        paginator="true" rows="5" paginatorPosition="bottom" paginatorAlwaysVisible="false">
+  
                                 <p:column  >
                                     <h:panelGrid id="gridComentario" styleClass=" ui-corner-all ui-widget-content grid_comentario" width="100%" rendered="#{comentario.visible}">
                                         <h:panelGrid  columns="2" width="100%">
