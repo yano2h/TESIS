@@ -4,6 +4,7 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.Notificacion;
 import java.util.List;
 import javax.ejb.Local;
@@ -28,5 +29,8 @@ public interface NotificacionFacadeLocal {
     List<Notificacion> findRange(int[] range);
 
     int count();
+
+    public List<Notificacion> buscarNotificacionPorDestinatario(Funcionario destinatario);
+
     
 }

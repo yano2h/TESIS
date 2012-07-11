@@ -16,7 +16,7 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateNotificacionLabel_idNotificacion}" for="idNotificacion" />
-                    <h:inputText id="idNotificacion" value="#{notificacionController.selected.idNotificacion}" title="#{bundle.CreateNotificacionTitle_idNotificacion}" required="true" requiredMessage="#{bundle.CreateNotificacionRequiredMessage_idNotificacion}"/>
+                    <h:inputText id="idNotificacion" value="#{notificacionController.selected.idNotificacion}" title="#{bundle.CreateNotificacionTitle_idNotificacion}" />
                     <h:outputLabel value="#{bundle.CreateNotificacionLabel_fecha}" for="fecha" />
                     <h:inputText id="fecha" value="#{notificacionController.selected.fecha}" title="#{bundle.CreateNotificacionTitle_fecha}" required="true" requiredMessage="#{bundle.CreateNotificacionRequiredMessage_fecha}">
                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />

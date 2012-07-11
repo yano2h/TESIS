@@ -4,10 +4,13 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.Notificacion;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,4 +30,10 @@ public class NotificacionFacade extends AbstractFacade<Notificacion> implements 
         super(Notificacion.class);
     }
     
+    @Override
+    public List<Notificacion> buscarNotificacionPorDestinatario(Funcionario destinatario){
+        Query q = em.createQuery("SELECT n FROM Notificacion n WHERE n.destinatario = :destinatario");
+        q.setParameter("destinatario", destinatario);
+        return q.getResultList();
+    }
 }

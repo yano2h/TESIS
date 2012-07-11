@@ -3,10 +3,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <ui:composition template="#{pages.layout_solicitud}">
         <ui:define name="content">
-            <h1>Resumen</h1>
+            <h:form id="resumen">
+                <p:layout id="home_layout" styleClass="home_layout" >
+                    <p:layoutUnit position="center" header="Center">
+                        Centro
+                    </p:layoutUnit>
+                    <p:layoutUnit position="east" header="Notificaciones" resizable="true" collapsible="true" minSize="200" maxSize="400" size="300">  
+                        <p:scrollPanel style="height: 100%;">
+                            <p:dataList id="notificaciones" type="none" value="#{mbUserInfo.funcionario.notificaciones}" var="notificacion">
+                                <p:column>
+                                    <h:panelGrid id="gridComentario" styleClass=" ui-corner-all ui-widget-content grid_comentario" width="100%" >
+                                        <h:panelGrid  columns="2" width="100%">
+                                        <h:outputText value="#{notificacion.mensajeNotificacion}" style="padding: 2px;"/>
+      
+                                            <h:outputText value="#{notificacion.fecha}" styleClass="text_date_small" style="float: right;">
+                                                <f:convertDateTime pattern="dd/MM/yyyy  HH:mm"/>
+                                            </h:outputText>
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:dataList>
+                        </p:scrollPanel>
+                    </p:layoutUnit>
+                </p:layout>
+            </h:form>
         </ui:define>
     </ui:composition>
 </html>

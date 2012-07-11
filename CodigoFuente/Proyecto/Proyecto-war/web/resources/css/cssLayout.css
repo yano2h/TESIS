@@ -77,4 +77,7 @@ div#wrapper_l {
   text-decoration : underline;
 }
 
-
+.home_layout{
+     width:100%;
+     min-height:200px;
+}
