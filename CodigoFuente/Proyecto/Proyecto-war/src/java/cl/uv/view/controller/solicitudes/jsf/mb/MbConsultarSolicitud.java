@@ -81,12 +81,10 @@ public class MbConsultarSolicitud implements Serializable{
     }
     
     public void onRowSelect(SelectEvent event) {  
-        JsfUtils.getExternalContext().getRequestMap().put("jano", "este es");
         JsfUtils.redirect("solicitud.xhtml?codigo="+selectedSolicitud.getCodigoConsulta());
     }  
     
     public String goDetalle(){
-        System.out.println("SELECTED: "+selectedSolicitud.getCodigoConsulta());
         return "solicitud?faces-redirect=true&codigo="+selectedSolicitud.getCodigoConsulta();
     }
 }

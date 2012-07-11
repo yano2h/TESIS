@@ -29,24 +29,18 @@
                                  selectionMode="single"
                                  selection="#{mbConsultarSolicitud.selectedSolicitud}"
                                  rowKey="#{sol.codigoConsulta}"
-                                 paginator="true" rows="20" paginatorPosition="bottom" >
+                                 paginator="true" rows="20" paginatorPosition="bottom" 
+                                 sortBy="#{sol.fechaEnvio}" sortOrder="descending">
 
                         <p:ajax event="rowSelect" listener="#{mbConsultarSolicitud.onRowSelect}"/>
+                        
                         <p:column headerText="Codigo" 
                                   sortBy="#{sol.codigoConsulta}" 
                                   filterBy="#{sol.codigoConsulta}"
-                                  filterMatchMode="startsWith">  
+                                  filterMatchMode="startsWith"
+                                  filterMaxLength="4">  
 
                             <h:outputText value="#{sol.codigoConsulta}" />  
-                        </p:column> 
-
-                        <p:column headerText="Fecha Envio" 
-                                  sortBy="#{sol.fechaEnvio}" 
-                                  filterBy="#{sol.fechaEnvio}"
-                                  filterMatchMode="contains">  
-                            <h:outputText value="#{sol.fechaEnvio}" >
-                                <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" />
-                            </h:outputText>  
                         </p:column> 
          
                         <p:column headerText="Asunto" 
@@ -71,6 +65,13 @@
                                   filterMatchMode="exact">
                             <h:outputText value="#{sol.tipoSolicitud.nombreTipoSolicitud}"/>
                         </p:column>
+                        
+                        <p:column headerText="Fecha Envio" 
+                                  sortBy="#{sol.fechaEnvio}" >  
+                            <h:outputText value="#{sol.fechaEnvio}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" />
+                            </h:outputText>  
+                        </p:column> 
                         
                     </p:dataTable>
                     
