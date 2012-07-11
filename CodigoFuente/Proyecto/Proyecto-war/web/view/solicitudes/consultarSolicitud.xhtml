@@ -14,9 +14,8 @@
                     <h:panelGrid columns="4">
                         <p:outputLabel value="#{msg_sol.LabelCodigoConsulta}: " for="txtCodigoConsulta"/>
                         <p:inputText id="txtCodigoConsulta" value="#{mbConsultarSolicitud.codigoConsulta}"/>
-                        <p:commandButton id="btnBuscar" value="#{msg_sol.BtnBuscar}"/>
-                        <p:message id="codigoConsultaMessage" for="txtCodigoConsulta"/>
-
+                        <p:commandButton id="btnBuscar" value="#{msg_sol.BtnBuscar}" action="#{mbConsultarSolicitud.buscarCodigo}"/>                        
+                        <p:messages id="messages" showDetail="true" autoUpdate="true"/>  
                     </h:panelGrid>
                 </p:panel>
                 <br/>

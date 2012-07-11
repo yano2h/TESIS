@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -84,7 +85,17 @@ public class MbConsultarSolicitud implements Serializable{
         JsfUtils.redirect("solicitud.xhtml?codigo="+selectedSolicitud.getCodigoConsulta());
     }  
     
-    public String goDetalle(){
-        return "solicitud?faces-redirect=true&codigo="+selectedSolicitud.getCodigoConsulta();
+    public String buscarCodigo(){
+        if(codigoConsulta.isEmpty()){
+            return "";
+        }else{
+            if(solicitudFacade.buscarPorCodigo(codigoConsulta)!=null){
+                return "solicitud?faces-redirect=true&codigo="+codigoConsulta;
+            }else{
+                JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,null, "La solicitud con codigo \""+codigoConsulta+"\" no existe"));
+                return "";
+            }
+            
+        }
     }
 }
