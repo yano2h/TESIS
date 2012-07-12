@@ -79,5 +79,49 @@ div#wrapper_l {
 
 .home_layout{
      width:100%;
-     min-height:200px;
+     min-height:250px;
+     max-height: 600px;
+     height: 450px;
+}
+
+.scrollPanelNotificacion{
+    border: none;
+}
+
+.new_notificacion{
+    background: lightSkyBlue;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #A6C9E2;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 4px;
+}
+
+.hold_notificacion{
+    background: white;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #A6C9E2;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 4px;
+}
+
+.image_home{
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+}
+
+.txt_menu_home{
+    text-align: justify;
+    padding: 5px;
+    margin-right: 20px;
+    font-size: 12px;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #18316D;
+    
 }

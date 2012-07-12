@@ -32,7 +32,7 @@ public class NotificacionFacade extends AbstractFacade<Notificacion> implements 
     
     @Override
     public List<Notificacion> buscarNotificacionPorDestinatario(Funcionario destinatario){
-        Query q = em.createQuery("SELECT n FROM Notificacion n WHERE n.destinatario = :destinatario");
+        Query q = em.createQuery("SELECT n FROM Notificacion n WHERE n.destinatario = :destinatario ORDER BY n.fecha DESC");
         q.setParameter("destinatario", destinatario);
         return q.getResultList();
     }

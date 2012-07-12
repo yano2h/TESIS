@@ -9,26 +9,65 @@
         <ui:define name="content">
             <h:form id="resumen">
                 <p:layout id="home_layout" styleClass="home_layout" >
-                    <p:layoutUnit position="center" header="Center">
-                        Centro
+
+                    <p:layoutUnit position="center" header="Menu Principal">
+                        <h:panelGrid columns="2">
+                            <h:commandLink action="crearSolicitud?faces-redirect=true">
+                                <h:graphicImage library="imagenes" name="textedit.png" styleClass="image_home"/>
+                            </h:commandLink>
+                            <p class="txt_menu_home">
+                                En esta sección puede crear y enviar diferentes tipos de solicitudes de servicio, ya sea para la obtencion de acceso a alicacion, cambio de contraseña, solicitud de informaction, entre muchas otras
+                            </p>
+                        </h:panelGrid>
+                        
+                        <p:separator style="width: 90%;height: 2px;"/>
+                        
+                        <h:panelGrid columns="2">                            
+                            <h:commandLink action="consultarSolicitud?faces-redirect=true">
+                                <h:graphicImage library="imagenes" name="search.png" styleClass="image_home"/>
+                            </h:commandLink>
+                            <p class="txt_menu_home">
+                                Dentro de esta seccion podra ver el detalle de todas sus solicitudes o de buscar cualquier solicitud atravez de su codigo de consulta.
+                            </p>
+                        </h:panelGrid>
                     </p:layoutUnit>
-                    <p:layoutUnit position="east" header="Notificaciones" resizable="true" collapsible="true" minSize="200" maxSize="400" size="300">  
-                        <p:scrollPanel style="height: 100%;">
-                            <p:dataList id="notificaciones" type="none" value="#{mbUserInfo.funcionario.notificaciones}" var="notificacion">
-                                <p:column>
-                                    <h:panelGrid id="gridComentario" styleClass=" ui-corner-all ui-widget-content grid_comentario" width="100%" >
-                                        <h:panelGrid  columns="2" width="100%">
+
+                    <p:layoutUnit position="east" 
+                                  header="Notificaciones" 
+                                  resizable="true" 
+                                  collapsible="true" 
+                                  minSize="350" maxSize="400" size="300" style="min-width: 200px; ">  
+                        <p:scrollPanel id="scrollPanelNotificacion" styleClass="scrollPanelNotificacion">
+                            <p:dataList id="notificaciones" type="none" value="#{mbUserInfo.notificaciones}" var="notificacion" >
+                                <p:column >
+                                    
+                                    <h:panelGrid id="gridNotificacionNew" styleClass="new_notificacion" width="100%" rendered="#{not notificacion.revisada}" >
+                                        
+                                        <p:ajax event="mouseover" listener="#{mbUserInfo.marcarComoRevisada}">
+                                            <f:attribute name="notificacion" value="#{notificacion}"/>
+                                        </p:ajax>
                                         <h:outputText value="#{notificacion.mensajeNotificacion}" style="padding: 2px;"/>
-      
-                                            <h:outputText value="#{notificacion.fecha}" styleClass="text_date_small" style="float: right;">
-                                                <f:convertDateTime pattern="dd/MM/yyyy  HH:mm"/>
-                                            </h:outputText>
-                                        </h:panelGrid>
+                                        <h:outputText value="#{notificacion.fecha}" styleClass="text_date_small" style="float: right;">
+                                            <f:convertDateTime pattern="dd/MM/yyyy  HH:mm"/>
+                                        </h:outputText>
                                     </h:panelGrid>
+                                    
+                                    <h:panelGrid id="gridNotificacionHold" styleClass="hold_notificacion" width="100%" rendered="#{notificacion.revisada}">
+                                        <h:outputText value="#{notificacion.mensajeNotificacion}" style="padding: 2px;"/>
+                                        <h:outputText value="#{notificacion.fecha}" styleClass="text_date_small" style="float: right;">
+                                            <f:convertDateTime pattern="dd/MM/yyyy  HH:mm"/>
+                                        </h:outputText>
+                                    </h:panelGrid>
+                                    
                                 </p:column>
                             </p:dataList>
                         </p:scrollPanel>
                     </p:layoutUnit>
+                    
+                    
+                    <p:layoutUnit position="south" size="100" header="Ultimas Solicitudes" collapsible="true">  
+                            <h:outputText value="South unit content." />  
+                    </p:layoutUnit>  
                 </p:layout>
             </h:form>
         </ui:define>
