@@ -6,7 +6,36 @@
       xmlns:p="http://primefaces.org/ui">
     <ui:composition template="#{pages.layout_solicitud}">
         <ui:define name="content">
-            <h1>Ayuda</h1>
+            <p:panel header="Ayuda">
+                <p:panel header="Preguntas Frecuentes" toggleable="true" toggleSpeed="100" >
+                    <h:panelGrid style="line-height: 2em;">
+                        <h:panelGroup>
+                            <h:outputLabel value="1 .- ¿Pregunta N°1? " styleClass="label_blod"/><br/>
+                            <h:outputText value="Respuesta a la pregunta" style="padding-bottom: 20px;"/>
+                        </h:panelGroup><br/>
+                        <h:panelGroup>
+                            <h:outputLabel value="2 .- ¿Pregunta N°2? " styleClass="label_blod"/><br/>
+                            <h:outputText value="Respuesta a la pregunta"/>
+                        </h:panelGroup><br/>
+                        <h:panelGroup>
+                            <h:outputLabel value="3 .- ¿Pregunta N°3? " styleClass="label_blod"/><br/>
+                            <h:outputText value="Respuesta a la pregunta"/>
+                        </h:panelGroup><br/>
+                        <h:panelGroup>
+                            <h:outputLabel value="4 .- ¿Pregunta N°4? " styleClass="label_blod"/><br/>
+                            <h:outputText value="Respuesta a la pregunta"/>
+                        </h:panelGroup>
+
+                    </h:panelGrid>
+
+                </p:panel>
+
+                <br/>
+
+                <p:panel header="Manuales" ctoggleable="true" toggleSpeed="100">
+
+                </p:panel>
+            </p:panel>
         </ui:define>
     </ui:composition>
 </html>
