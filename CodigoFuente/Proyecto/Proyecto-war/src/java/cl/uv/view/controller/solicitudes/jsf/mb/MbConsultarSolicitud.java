@@ -40,7 +40,9 @@ public class MbConsultarSolicitud implements Serializable{
     private String codigoConsulta="";
     private Funcionario funcionario;
     private SolicitudRequerimiento selectedSolicitud;
-            
+    private List<SolicitudRequerimiento> ultimasSolicitudesEnviadas;
+    private List<SolicitudRequerimiento> ultimasSolicitudesCerradas;
+    
     public MbConsultarSolicitud() {
     }
 
@@ -98,4 +100,14 @@ public class MbConsultarSolicitud implements Serializable{
             
         }
     }
+
+    public List<SolicitudRequerimiento> getUltimasSolicitudesCerradas() {
+        return solicitudFacade.getUltimasSolicitudesCerradas(funcionario, 5);
+    }
+
+    public List<SolicitudRequerimiento> getUltimasSolicitudesEnviadas() {
+        return solicitudFacade.getUltimasSolicitudesEnviadas(funcionario, 5);
+    }
+    
+    
 }

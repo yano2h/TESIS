@@ -119,3 +119,8 @@ a.small_link{
     text-decoration: none;
     font-size: 11px;
 }
+
+.columnas_grid_ultimas_solicitudes{
+    margin-right: 20px;
+    margin-left: 20px; 
+}

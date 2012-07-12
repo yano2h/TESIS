@@ -32,12 +32,12 @@
                                  sortBy="#{sol.fechaEnvio}" sortOrder="descending">
 
                         <p:ajax event="rowSelect" listener="#{mbConsultarSolicitud.onRowSelect}"/>
-                        
+
                         <p:column headerText="Codigo" 
                                   sortBy="#{sol.codigoConsulta}" 
                                   filterBy="#{sol.codigoConsulta}"
                                   filterMatchMode="startsWith"
-                                  filterMaxLength="4">  
+                                  filterMaxLength="10">  
 
                             <h:outputText value="#{sol.codigoConsulta}" />  
                         </p:column> 

@@ -19,9 +19,9 @@
                                 En esta sección puede crear y enviar diferentes tipos de solicitudes de servicio, ya sea para la obtencion de acceso a alicacion, cambio de contraseña, solicitud de informaction, entre muchas otras
                             </p>
                         </h:panelGrid>
-                        
+
                         <p:separator style="width: 90%;height: 2px;"/>
-                        
+
                         <h:panelGrid columns="2">                            
                             <h:commandLink action="consultarSolicitud?faces-redirect=true">
                                 <h:graphicImage library="imagenes" name="search.png" styleClass="image_home"/>
@@ -37,36 +37,93 @@
                                   resizable="true" 
                                   collapsible="true" 
                                   minSize="350" maxSize="400" size="300" style="min-width: 200px; ">  
+
                         <p:scrollPanel id="scrollPanelNotificacion" styleClass="scrollPanelNotificacion">
                             <p:dataList id="notificaciones" type="none" value="#{mbUserInfo.notificaciones}" var="notificacion" >
+
                                 <p:column >
-                                    
-                                    <h:panelGrid id="gridNotificacionNew" styleClass="new_notificacion" width="100%" rendered="#{not notificacion.revisada}" >
-                                        
-                                        <p:ajax event="mouseover" listener="#{mbUserInfo.marcarComoRevisada}">
-                                            <f:attribute name="notificacion" value="#{notificacion}"/>
-                                        </p:ajax>
-                                        <h:outputText value="#{notificacion.mensajeNotificacion}" style="padding: 2px;"/>
-                                        <h:outputText value="#{notificacion.fecha}" styleClass="text_date_small" style="float: right;">
-                                            <f:convertDateTime pattern="dd/MM/yyyy  HH:mm"/>
-                                        </h:outputText>
-                                    </h:panelGrid>
-                                    
-                                    <h:panelGrid id="gridNotificacionHold" styleClass="hold_notificacion" width="100%" rendered="#{notificacion.revisada}">
-                                        <h:outputText value="#{notificacion.mensajeNotificacion}" style="padding: 2px;"/>
-                                        <h:outputText value="#{notificacion.fecha}" styleClass="text_date_small" style="float: right;">
-                                            <f:convertDateTime pattern="dd/MM/yyyy  HH:mm"/>
-                                        </h:outputText>
-                                    </h:panelGrid>
-                                    
+                                    <h:panelGrid id="grid_content" width="100%" >           
+                                        <p:ajax event="mouseout" listener="#{mbUserInfo.marcarComoRevisada(notificacion)}" immediate="true" update="@this gridNotificacionNew" disabled="#{notificacion.revisada}" />
+
+                                        <h:panelGrid id="gridNotificacionNew" styleClass="#{notificacion.revisada ? 'hold_notificacion':'new_notificacion'}" width="100%"  >
+                                            <h:outputText value="#{notificacion.mensajeNotificacion}" style="padding: 2px;"/>
+                                            <h:outputText value="#{notificacion.fecha}" styleClass="text_date_small" style="float: right;">
+                                                <f:convertDateTime pattern="dd/MM/yyyy  HH:mm"/>
+                                            </h:outputText>
+                                        </h:panelGrid>
+                                    </h:panelGrid>       
+
                                 </p:column>
                             </p:dataList>
                         </p:scrollPanel>
                     </p:layoutUnit>
-                    
-                    
-                    <p:layoutUnit position="south" size="100" header="Ultimas Solicitudes" collapsible="true">  
-                            <h:outputText value="South unit content." />  
+
+
+                    <p:layoutUnit id="south" position="south" header="Ultimas Solicitudes" collapsible="true" style="height: 300px;">  
+                        <h:panelGrid columns="2" style="vertical-align: central">
+                            <p:dataTable id="tableUltimasSolEnviadas" 
+                                         var="sol" 
+                                         value="#{mbConsultarSolicitud.ultimasSolicitudesEnviadas}"
+                                         selectionMode="single"
+                                         selection="#{mbConsultarSolicitud.selectedSolicitud}"
+                                         rowKey="#{sol.codigoConsulta}"
+                                         rows="5"  
+                                         sortBy="#{sol.fechaEnvio}" sortOrder="descending"
+                                         style="margin-left: 40px;margin-right: 40px; min-width:100% ">
+                                <p:ajax event="rowSelect" listener="#{mbConsultarSolicitud.onRowSelect}"/>
+
+                                <f:facet name="header">  
+                                    Ultimas solicitudes enviadas  
+                                </f:facet>  
+
+                                <p:column headerText="Codigo" >  
+                                    <h:outputText value="#{sol.codigoConsulta}" />  
+                                </p:column> 
+
+                                <p:column headerText="Asunto" >  
+                                    <h:outputText value="#{sol.asunto}" />  
+                                </p:column>
+
+                                <p:column headerText="Fecha Envio">  
+                                    <h:outputText value="#{sol.fechaEnvio}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" />
+                                    </h:outputText>  
+                                </p:column> 
+
+                            </p:dataTable>
+                            
+                            <p:dataTable id="tableUltimasSolCerradas" 
+                                         var="sol" 
+                                         value="#{mbConsultarSolicitud.ultimasSolicitudesCerradas}"
+                                         selectionMode="single"
+                                         selection="#{mbConsultarSolicitud.selectedSolicitud}"
+                                         rowKey="#{sol.codigoConsulta}"
+                                         rows="5"  
+                                         sortBy="#{sol.fechaEnvio}" sortOrder="descending"
+                                         style="margin-left: 40px;margin-right: 40px; min-width:100%">
+                                <p:ajax event="rowSelect" listener="#{mbConsultarSolicitud.onRowSelect}"/>
+
+                                <f:facet name="header">  
+                                    Ultimas solicitudes Cerradas  
+                                </f:facet>  
+
+                                <p:column headerText="Codigo" >  
+                                    <h:outputText value="#{sol.codigoConsulta}" />  
+                                </p:column> 
+
+                                <p:column headerText="Asunto" >  
+                                    <h:outputText value="#{sol.asunto}" />  
+                                </p:column>
+
+                                <p:column headerText="Fecha Cierre">  
+                                    <h:outputText value="#{sol.fechaCierre}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" />
+                                    </h:outputText>  
+                                </p:column> 
+
+                            </p:dataTable>
+                            
+                        </h:panelGrid>
                     </p:layoutUnit>  
                 </p:layout>
             </h:form>

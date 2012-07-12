@@ -34,6 +34,7 @@ public class NotificacionFacade extends AbstractFacade<Notificacion> implements 
     public List<Notificacion> buscarNotificacionPorDestinatario(Funcionario destinatario){
         Query q = em.createQuery("SELECT n FROM Notificacion n WHERE n.destinatario = :destinatario ORDER BY n.fecha DESC");
         q.setParameter("destinatario", destinatario);
+        q.setMaxResults(100);
         return q.getResultList();
     }
 }

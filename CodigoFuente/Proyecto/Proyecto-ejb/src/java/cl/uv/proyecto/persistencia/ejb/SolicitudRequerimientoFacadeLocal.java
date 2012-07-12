@@ -4,6 +4,7 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import java.util.List;
 import javax.ejb.Local;
@@ -32,5 +33,9 @@ public interface SolicitudRequerimientoFacadeLocal {
     public List<SolicitudRequerimiento> buscarPorSolicitante(Integer rutSolicitante);
 
     public SolicitudRequerimiento buscarPorCodigo(String codigo);
+    
+    public List<SolicitudRequerimiento> getUltimasSolicitudesEnviadas(Funcionario funcionario, Integer maxResults);
+    
+    public List<SolicitudRequerimiento> getUltimasSolicitudesCerradas(Funcionario funcionario, Integer maxResults);
     
 }

@@ -4,6 +4,7 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -21,6 +22,9 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
     @PersistenceContext(unitName = "Proyecto-ejbPU")
     private EntityManager em;
 
+    private short ESTADO_INICIAL = 0;
+    private short ESTADO_FINAL = 8;
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -48,6 +52,24 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
              solicitud = null;
          }           
          return solicitud;
+    }
+    
+    @Override
+    public List<SolicitudRequerimiento> getUltimasSolicitudesEnviadas(Funcionario funcionario, Integer maxResults){
+        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante = :solicitante AND s.estadoSolicitud.idEstadoSolicitudRequerimiento <> :idEstado");
+        q.setParameter("solicitante", funcionario);
+        q.setParameter("idEstado", new Short(ESTADO_FINAL));
+        q.setMaxResults(maxResults);
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<SolicitudRequerimiento> getUltimasSolicitudesCerradas(Funcionario funcionario, Integer maxResults){
+        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante = :solicitante AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado");
+        q.setParameter("solicitante", funcionario);
+        q.setParameter("idEstado", new Short(ESTADO_FINAL));
+        q.setMaxResults(maxResults);
+        return q.getResultList();
     }
     
 }
