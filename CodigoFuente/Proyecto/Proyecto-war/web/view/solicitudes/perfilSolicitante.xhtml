@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="#{pages.layout_solicitud}">
+        <ui:define name="title">
+            <h:outputText value="Mi Perfil"/>
+        </ui:define>
+        <ui:define name="content">
+            <h:form>
+                <p:panel id="perfil" header="Mi Perfil" style="width: 100%">
+                    <h:panelGrid columns="3" style="width: 100%">
+                        <h:panelGrid columns="2" style="line-height: 1.5em;" >
+                            <h:outputLabel value="Nombres: " styleClass="label_blod"/>
+                            <h:outputText value="#{mbUserInfo.funcionario.nombre}"/>
+
+                            <h:outputLabel value="Apellido Paterno: " styleClass="label_blod"/>
+                            <h:outputText value="#{mbUserInfo.funcionario.apellidoPaterno}"/>
+
+                            <h:outputLabel value="Apellido Materno: " styleClass="label_blod"/>
+                            <h:outputText value="#{mbUserInfo.funcionario.apellidoMaterno}"/>
+
+                        </h:panelGrid>
+
+                        <p:separator style="width: 2px;height: 100px;margin-left: 50px;margin-right: 20px;"/>
+
+                        <h:panelGrid columns="2" style="line-height: 1.5em;">
+
+                            <h:outputLabel value="Correo Instritucional: " styleClass="label_blod"/>
+                            <h:outputText value="#{mbUserInfo.funcionario.correoUv}"/>
+
+                            <h:outputLabel value="Fecha Primer Acceso: " styleClass="label_blod"/>
+                            <h:outputText value="#{mbUserInfo.funcionario.fechaPrimerAcceso}">
+                                <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" />
+                            </h:outputText>
+
+                            <h:outputLabel value="Fecha Ultimo Acceso: "  styleClass="label_blod"/>
+                            <h:outputText value="#{mbUserInfo.funcionario.fechaUltimoAcceso}">
+                                <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" />
+                            </h:outputText>
+
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
