@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    
+
     <h:body>
-    	
-    	<ui:composition>
-            <h1>Menu Left</h1>
-    	</ui:composition>
-    	
+
+        <ui:composition>
+            <h:outputStylesheet library="css" name="left.css"/>
+            <h:form>
+                <p:menu styleClass="menu_left"> 
+                    <p:submenu label="Solicitudes">  
+                        <p:menuitem value="Resumen Atencion de Solicitudes" action="resumenFuncionario?faces-redirect=true"/>
+                        <p:menuitem value="Solicitudes del Area" action="ayudaSolicitante?faces-redirect=true"/>  
+                        <p:menuitem value="Mis Solicitudes" action="crearSolicitud?faces-redirect=true"/>    
+                        <p:menuitem value="Buscar Solicitud" action="consultarSolicitud?faces-redirect=true"/>  
+                    </p:submenu> 
+                    
+                    <p:submenu label="Proyectos">  
+                        <p:menuitem value="Proyectos del Area" action="ayudaSolicitante?faces-redirect=true"/>
+                        <p:menuitem value="Crear Proyecto" action="resumenFuncionario?faces-redirect=true"/>  
+                        <p:menuitem value="Buscar Proyecto" action="crearSolicitud?faces-redirect=true"/>                  
+                    </p:submenu>   
+                    
+                    <p:submenu label="Gestion de SCM">    
+                        <p:menuitem value="Mis Tareas SCM" action="crearSolicitud?faces-redirect=true"/>  
+                        <p:menuitem value="Asignar Tareas SCM" action="consultarSolicitud?faces-redirect=true"/>  
+                        <p:menuitem value="Ayuda" action="ayudaSolicitante?faces-redirect=true"/>  
+                    </p:submenu>   
+                </p:menu>
+            </h:form>
+        </ui:composition>
+
     </h:body>
 
 </html>

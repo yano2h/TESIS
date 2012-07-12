@@ -3,24 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Portal</title>
-    </h:head>
-    <h:body>
-        <ui:composition template="#{pages['layout.atencion']}">
-           <!-- <ui:define name="top">
-                <ui:include src="#{mbSessionController.top}"/>
-            </ui:define>
-            <ui:define name="left">
-                <ui:include src="#{mbSessionController.left}"/>
-            </ui:define>
-            <ui:define name="content">
-                <ui:include src="#{mbSessionController.content}"/>
-            </ui:define>
-            <ui:define name="bottom">
-                <ui:include src="#{mbSessionController.footer}"/>
-            </ui:define> -->
-        </ui:composition>
-    </h:body>
-</html>
 
+      <ui:composition template="#{pages.layout_atencion}">
+           <ui:define name="title">
+               <h:outputText value="Titulo Solicitudes"/>
+           </ui:define>
+           <ui:define name="content">
+               <h1>
+                   HOME
+               </h1>
+            </ui:define>
+        </ui:composition>
+ </html>
