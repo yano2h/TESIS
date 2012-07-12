@@ -117,11 +117,6 @@ public class MbDetalleSolicitud implements Serializable{
         selectedComentario = (ComentarioSolicitud) event.getComponent().getAttributes().get("comentario");
         selectedComentario.setVisible(false);
         comentarioFacade.edit(selectedComentario);
-        System.out.println("ELIMINAR:"+selectedComentario.getComentario());
-        
-        for (ComentarioSolicitud object : solicitud.getComentarios()) {
-            System.out.println("Comentario: "+object.getComentario()+" - Visible:"+object.getVisible());
-        }
     }
     
 }

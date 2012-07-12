@@ -89,10 +89,10 @@
                                         value="#{mbDetalleSolicitud.solicitud.comentarios}" 
                                         var="comentario" 
                                         type="none" 
-                                        paginator="true" rows="5" paginatorPosition="bottom" paginatorAlwaysVisible="false">
+                                        paginator="true" rows="10" paginatorPosition="bottom" paginatorAlwaysVisible="false">
   
                                 <p:column  >
-                                    <h:panelGrid id="gridComentario" styleClass=" ui-corner-all ui-widget-content grid_comentario" width="100%" rendered="#{comentario.visible}">
+                                    <h:panelGrid id="gridComentario" styleClass="ui-corner-all ui-widget-content grid_comentario" width="100%" rendered="#{comentario.visible}">
                                         <h:panelGrid  columns="2" width="100%">
                                             <h:outputText value="#{comentario.autor.nombre} #{comentario.autor.apellidoPaterno}" styleClass="text_blod_blue text_small" />
                                             <h:outputText value="#{comentario.fecha}" styleClass="text_date_small" style="float: right;">
