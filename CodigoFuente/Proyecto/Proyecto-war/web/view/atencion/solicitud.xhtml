@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="content">  
+
+            <h:form id="detalleSol">
+                <h:outputScript library="js" name="calendar-localization.js" />
+                <f:metadata>
+                    <f:viewParam id="codigo" name="codigo" value="#{mbDetalleSolicitud.codigo}"/>
+                    <f:event type="preRenderView" listener="#{mbDetalleSolicitud.init}" />
+                </f:metadata>
+
+                <p:panel id="panelDetalleSolicitud" header="Detalle Solicitud">
+                    <p:messages id="messages" showDetail="true" autoUpdate="true"/>  
+                    <h:panelGroup rendered="#{mbDetalleSolicitud.solicitud != null}">
+                        <h:panelGrid id="detalle" columns="3">
+                            <h:panelGrid id="izq" columns="2" style="line-height: 1.5em;">
+                                <h:outputLabel value="Codigo de Consulta:" styleClass="label_blod" />
+                                <h:outputText id="codigoConsulta" value="#{mbDetalleSolicitud.solicitud.codigoConsulta}"/>
+                                <h:outputLabel value="Solicitante:" styleClass="label_blod"/>
+                                <h:outputText id="solicitante" value="#{mbDetalleSolicitud.solicitud.solicitante.nombre}"/>
+                                <h:outputLabel value="Tipo de Solicitud:" styleClass="label_blod"/>
+                                <h:outputText id="tipo" value="#{mbDetalleSolicitud.solicitud.tipoSolicitud.nombreTipoSolicitud}"/>
+                                <h:outputLabel value="Estado Actual" styleClass="label_blod"/>
+                                <h:outputText id="estado" value="#{mbDetalleSolicitud.solicitud.estadoSolicitud.nombreEstadoSolicitud}"/>
+                                <h:outputLabel value="Fecha de Envio:" styleClass="label_blod"/>
+                                <h:outputText id="fechaEnvio" value="#{mbDetalleSolicitud.solicitud.fechaEnvio}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                                </h:outputText>
+                                <h:outputLabel value="Fecha Ultima Actualizacio:" styleClass="label_blod"/>
+                                <h:outputText id="fechaUltimaActualizacio" value="#{mbDetalleSolicitud.solicitud.fechaUltimaActualizacion}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                                </h:outputText>
+                            </h:panelGrid>
+
+                            <p:separator style="width:4px;height:100px;margin-left: 20px;margin-right: 20px;"/>
+
+                            <h:panelGrid id="der" columns="3" style="line-height: 1.5em;">
+                                <h:outputLabel value="Area Responsable:" styleClass="label_blod" />
+                                <h:outputText id="area" value="#{mbDetalleSolicitud.solicitud.areaResponsable.nombreArea}"/>
+                                <p:commandButton value="Transferir"/>
+
+                                <h:outputLabel value="Funcionario Responsable:" styleClass="label_blod"/>
+                                <h:outputText id="responsable" value="#{mbDetalleSolicitud.solicitud.responsable.nombre}" rendered="#{mbDetalleSolicitud.solicitud.responsable!=null}"/>
+                                <h:outputText id="sinResponsable" value="No Asignado" rendered="#{mbDetalleSolicitud.solicitud.responsable==null}"/>
+                                <p:commandButton value="Asignar Responsable"/>
+
+                                <h:outputLabel value="Fecha de Vencimiento:" styleClass="label_blod"/>
+
+                                <p:inplace id="fechaVencimientoInplace">
+                                    <p:calendar id="calendar1"
+                                                value="#{mbDetalleSolicitud.solicitud.fechaVencimiento}" 
+                                                locale="es"
+                                                showOn="button"  
+                                                mindate="#{mbSolicitudesArea.minDate}" 
+                                                showButtonPanel="true"
+                                                pattern="MM/dd/yyyy HH:mm" 
+                                                rendered="#{mbDetalleSolicitud.solicitud.fechaVencimiento != null}"/>
+                                </p:inplace>
+                                <p:calendar id="calendar2"
+                                            value="#{mbDetalleSolicitud.solicitud.fechaVencimiento}" 
+                                            locale="es"
+                                            showOn="button"  
+                                            mindate="#{mbSolicitudesArea.minDate}" 
+                                            showButtonPanel="true"
+                                            pattern="MM/dd/yyyy HH:mm" 
+                                            rendered="#{mbDetalleSolicitud.solicitud.fechaVencimiento == null}"/>
+                                <br/>
+                                <h:outputLabel value="Fecha de Cierre:" styleClass="label_blod"/>
+                                <h:outputText id="fechaCierre" value="#{mbDetalleSolicitud.solicitud.fechaCierre}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                                </h:outputText>
+
+                            </h:panelGrid>
+
+                        </h:panelGrid>
+
+                        <p:commandButton value="Guardar Cambios" style="float: right;" actionListener="#{mbSolicitudesArea.guardarModificacion}" update="@form"/>
+                        <p:commandButton value="Convertir en Proyecto" style="float: right;" />
+
+                        <p:separator style="width:100%; height:4px; margin-bottom:20px;margin-top: 10px;"/>
+
+                        <h:panelGrid columns="2">    
+                            <h:outputLabel value="Asunto:" styleClass="label_blod" />
+                            <h:outputText id="asunto" value="#{mbDetalleSolicitud.solicitud.asunto}"/>  
+                        </h:panelGrid>
+
+                        <br/>
+                        <p:panel header="Mensaje" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%" >  
+                            <h:outputText id="mensaje" value="#{mbDetalleSolicitud.solicitud.mensaje}" escape="false"/>       
+                        </p:panel>
+
+                        <br/>
+                        <p:panel header="Respuesta" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%;" >  
+                            <h:outputText id="respuesta" value="#{mbDetalleSolicitud.solicitud.respuesta}" escape="false" rendered="#{not empty mbDetalleSolicitud.solicitud.respuesta}"/>
+                            <h:panelGrid columns="3" rendered="#{empty mbDetalleSolicitud.solicitud.respuesta}">
+                                <p:commandButton value="Respuesta Manual" onclick="dlgRespuestaManual.show()"/>
+                                <p:commandButton value="Respuesta Directa" onclick="dlgRespuestaDirecta.show()" />
+                                <p:commandButton value="Rechazar" actionListener="#{mbSolicitudesArea.rechazarSolcitiud}" update="@form"/>
+                            </h:panelGrid>
+                        </p:panel>
+
+                        <br/>
+                        <p:panel id="comentarioPnl" header="Comentarios" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%;" >
+
+                            <h:panelGrid columns="2" rowClasses="row_align_bottom" style="width: 100%" columnClasses="column_grid">
+                                <p:inputTextarea id="nuevoComentario" value="#{mbDetalleSolicitud.comentario}" rows="3" style="width: 98%;"/>
+                                <p:commandButton value="Comentar" actionListener="#{mbDetalleSolicitud.comentar}" update="nuevoComentario comentarios" />
+                            </h:panelGrid>
+                            <br/>
+
+
+                            <p:dataList id="comentarios" 
+                                        value="#{mbDetalleSolicitud.solicitud.comentarios}" 
+                                        var="comentario" 
+                                        type="none" 
+                                        paginator="true" rows="10" paginatorPosition="bottom" paginatorAlwaysVisible="false">
+
+                                <p:column  >
+                                    <h:panelGrid id="gridComentario" styleClass="ui-corner-all ui-widget-content grid_comentario" width="100%" rendered="#{comentario.visible}">
+                                        <h:panelGrid  columns="2" width="100%">
+                                            <h:outputText value="#{comentario.autor.nombre} #{comentario.autor.apellidoPaterno}" styleClass="text_blod_blue text_small" />
+                                            <h:outputText value="#{comentario.fecha}" styleClass="text_date_small" style="float: right;">
+                                                <f:convertDateTime pattern="dd/MM/yyyy  HH:mm"/>
+                                            </h:outputText>
+                                        </h:panelGrid>
+                                        <h:outputText value="#{comentario.comentario}" style="padding: 2px;"/>
+
+                                        <p:commandLink id="linkEliminar" value="Eliminar" actionListener="#{mbDetalleSolicitud.eliminarComentario}"  styleClass="small_link" style="float: right" update="@form" rendered="#{comentario.autor.rut == mbUserInfo.funcionario.rut}">
+                                            <f:attribute name="comentario" value="#{comentario}"/>
+                                        </p:commandLink>
+                                    </h:panelGrid>
+                                </p:column>
+                            </p:dataList>
+
+                        </p:panel>
+                    </h:panelGroup>
+
+                </p:panel>
+                <p:dialog id="respuesta_directa" header="Respuesta Directa" widgetVar="dlgRespuestaDirecta">
+                
+                    <p:panelGrid>
+                        <p:panelGrid columns="2">     
+                            <p:outputLabel value="Destinatario" styleClass="label_blod"/>
+                            
+                        </p:panelGrid>
+                        <p:editor>
+
+                        </p:editor>
+                    </p:panelGrid>
+                
+            </p:dialog>
+            <p:dialog id="respuesta_manual" header="Respuesta Manual" widgetVar="dlgRespuestaManual">
+                <h:form>
+                    <p:panelGrid>
+                        <p:panelGrid columns="2">     
+                            <p:outputLabel value="Destinatario" styleClass="label_blod"/>
+                            <h:outputText value="#{mbDetalleSolicitud.solicitud.solicitante.nombre} #{mbDetalleSolicitud.solicitud.solicitante.apellidoMaterno}"/>
+                        </p:panelGrid>
+                        <p:editor>
+
+                        </p:editor>
+                    </p:panelGrid>
+                </h:form>
+            </p:dialog>
+
+            </h:form>
+            
+
+            
+        </ui:define>
+    </ui:composition>
+</html>
+

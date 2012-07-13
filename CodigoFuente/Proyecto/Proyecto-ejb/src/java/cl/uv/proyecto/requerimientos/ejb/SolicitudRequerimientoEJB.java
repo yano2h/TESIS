@@ -29,6 +29,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     
     private short ESTADO_INICIAL = 0;
     private short PRIORIDAD_INICIAL = 0;
+    private short ESTADO_RECHAZADA = 1;
 
     @EJB
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
@@ -77,6 +78,12 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         return solicitud.getCodigoConsulta();
     }
 
+    public void rechazarSolicitud(SolicitudRequerimiento solicitud){
+        EstadoSolicitudRequerimiento estado = estadoSolicitudFacade.find(ESTADO_RECHAZADA);
+        solicitud.setEstadoSolicitud(estado);
+        solicitudFacade.edit(solicitud);
+    }
+    
     @Override
     public String generarCodigo(long num) {
         String code = "";

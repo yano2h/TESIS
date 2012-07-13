@@ -20,6 +20,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+import org.primefaces.event.DateSelectEvent;
 
 /**
  *
@@ -117,6 +118,12 @@ public class MbDetalleSolicitud implements Serializable{
         selectedComentario = (ComentarioSolicitud) event.getComponent().getAttributes().get("comentario");
         selectedComentario.setVisible(false);
         comentarioFacade.edit(selectedComentario);
+    }
+    
+    public void fijarFechaVencimento(DateSelectEvent event){
+
+        solicitud.setFechaVencimiento(event.getDate());
+        System.out.println(solicitud.getFechaVencimiento());
     }
     
 }

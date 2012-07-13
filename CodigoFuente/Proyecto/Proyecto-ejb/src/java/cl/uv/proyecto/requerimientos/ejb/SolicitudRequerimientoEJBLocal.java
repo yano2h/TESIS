@@ -22,4 +22,6 @@ public interface SolicitudRequerimientoEJBLocal {
     String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante);
 
     String generarCodigo(long num);
+    
+    public void rechazarSolicitud(SolicitudRequerimiento solicitud);
 }

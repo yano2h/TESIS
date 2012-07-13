@@ -11,9 +11,9 @@
             <h:outputText value="Solicitudes del Solicitudes"/>
         </ui:define>
         <ui:define name="content">
-            <h:form>                   
+            <h:form id="solArea">                   
                 <p:panel id="sol" header="Solicitudes del Area" style="min-height: 350px;">
-                    
+                    <p:poll interval="3" listener="#{mbSolicitudesArea.reload}" />
                     <p:dataTable id="tableSolicitudesArea" 
                                  var="solicitud" 
                                  value="#{mbSolicitudesArea.solicitudesArea}" 
@@ -25,14 +25,14 @@
                                  selectionMode="single"
                                  selection="#{mbSolicitudesArea.selectedSolicitud}"
                                  rowKey="#{solicitud.codigoConsulta}"
-                                 rowStyleClass="#{solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 0? 'row_solicitud_nueva':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 6? 'row_solicitud_vencida':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 8?'row_solicitud_cerrada':null))}">
+                                 rowStyleClass="#{solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 0? 'row_solicitud_nueva':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 6? 'row_solicitud_vencida':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 8?'row_solicitud_cerrada':null))}"
+                                 >
                         
                         <p:ajax event="rowSelect" listener="#{mbSolicitudesArea.onRowSelect}"/>
+                        
                         <p:column headerText="Codigo" 
                                   sortBy="#{solicitud.codigoConsulta}" 
-                                  filterBy="#{solicitud.codigoConsulta}"
-                                  filterMatchMode="startsWith"
-                                  filterMaxLength="10">  
+                                  style="width: 60px;">  
 
                             <h:outputText value="#{solicitud.codigoConsulta}" />  
                         </p:column>
@@ -60,20 +60,24 @@
                             <h:outputText value="#{solicitud.tipoSolicitud.nombreTipoSolicitud}"/>
                         </p:column>
                         
-                        <p:column headerText="Fecha Envio" 
+                        <p:column headerText="F.Envio" 
                                   sortBy="#{solicitud.fechaEnvio}" >  
                             <h:outputText value="#{solicitud.fechaEnvio}" >
-                                <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" />
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                             </h:outputText>  
                         </p:column>
                         
-                        <p:column headerText="Fecha Vencimiento" 
+                        <p:column headerText="F.Vencimiento" 
                                   sortBy="#{solicitud.fechaVencimiento}" >  
                             <h:outputText value="#{solicitud.fechaVencimiento}" >
-                                <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" />
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                             </h:outputText>  
                         </p:column>
                         
+                        <f:facet name="footer">
+                            <p:commandButton value="Recargar" icon="ui-icon-arrowrefresh-1-w" 
+                                             actionListener="#{mbSolicitudesArea.reload}" update="tableSolicitudesArea" style="text-align: left;"/>
+                        </f:facet>
                     </p:dataTable>
                 </p:panel>
             </h:form>
