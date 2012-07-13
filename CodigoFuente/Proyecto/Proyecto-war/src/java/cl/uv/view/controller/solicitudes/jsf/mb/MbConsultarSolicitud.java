@@ -30,8 +30,6 @@ import org.primefaces.event.SelectEvent;
 public class MbConsultarSolicitud implements Serializable{
     
     @EJB
-    private FuncionarioFacadeLocal funcionarioFacade;
-    @EJB
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
     
     @ManagedProperty(value="#{mbUserInfo}")
