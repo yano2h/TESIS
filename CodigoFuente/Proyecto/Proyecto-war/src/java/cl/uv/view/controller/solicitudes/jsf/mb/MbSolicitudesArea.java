@@ -6,11 +6,9 @@ package cl.uv.view.controller.solicitudes.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import cl.uv.proyecto.requerimientos.ejb.SolicitudRequerimientoEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
-import cl.uv.view.controller.base.jsf.mb.MbUserInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import java.io.Serializable;
 import java.util.Date;
@@ -19,9 +17,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
-import javax.persistence.Persistence;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -47,6 +43,8 @@ public class MbSolicitudesArea implements Serializable{
     
     private String codigoConsulta="";
     private SolicitudRequerimiento selectedSolicitud;
+    private Boolean enviarMail = false;
+    private String respuesta="";
     
     private int MEDIA_HORA = 1000 * 60 * 30;
     
@@ -104,9 +102,23 @@ public class MbSolicitudesArea implements Serializable{
         solicitudEJB.rechazarSolicitud(mbDetalleSolicitud.getSolicitud());
     }
 
-    
+    public Boolean getEnviarMail() {
+        return enviarMail;
+    }
+
+    public void setEnviarMail(Boolean enviarMail) {
+        this.enviarMail = enviarMail;
+    }
+
     public void guardarModificacion(){
-        System.out.println(mbDetalleSolicitud.getSolicitud().getFechaVencimiento());
         solicitudFacade.edit(mbDetalleSolicitud.getSolicitud());
+    }
+    
+    public void enviarRespuestaDirecta(){
+        if(!mbDetalleSolicitud.getSolicitud().getRespuesta().isEmpty()){
+             solicitudEJB.enviarRespuestaDirecta(mbDetalleSolicitud.getSolicitud(), enviarMail);
+        }
+        enviarMail=false;
+       
     }
 }

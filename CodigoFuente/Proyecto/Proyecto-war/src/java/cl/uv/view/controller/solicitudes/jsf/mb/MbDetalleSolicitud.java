@@ -121,9 +121,7 @@ public class MbDetalleSolicitud implements Serializable{
     }
     
     public void fijarFechaVencimento(DateSelectEvent event){
-
         solicitud.setFechaVencimiento(event.getDate());
-        System.out.println(solicitud.getFechaVencimiento());
     }
     
 }

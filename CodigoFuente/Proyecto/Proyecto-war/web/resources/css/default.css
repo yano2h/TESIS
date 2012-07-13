@@ -142,3 +142,7 @@ a.small_link{
     background-image: none !important;
     color: black !important;
 }
+
+.line_button{
+    hanging-punctuation: 1.2em;
+}

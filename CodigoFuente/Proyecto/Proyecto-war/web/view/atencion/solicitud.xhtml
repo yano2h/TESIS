@@ -38,39 +38,54 @@
                                 </h:outputText>
                             </h:panelGrid>
 
-                            <p:separator style="width:4px;height:100px;margin-left: 20px;margin-right: 20px;"/>
+                            <p:separator style="width:4px;height:150px;margin-left: 20px;margin-right: 20px;"/>
 
                             <h:panelGrid id="der" columns="3" style="line-height: 1.5em;">
                                 <h:outputLabel value="Area Responsable:" styleClass="label_blod" />
                                 <h:outputText id="area" value="#{mbDetalleSolicitud.solicitud.areaResponsable.nombreArea}"/>
-                                <p:commandButton value="Transferir"/>
+                                <p:commandButton value="Transferir" disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento ne 0}"/>
 
                                 <h:outputLabel value="Funcionario Responsable:" styleClass="label_blod"/>
                                 <h:outputText id="responsable" value="#{mbDetalleSolicitud.solicitud.responsable.nombre}" rendered="#{mbDetalleSolicitud.solicitud.responsable!=null}"/>
                                 <h:outputText id="sinResponsable" value="No Asignado" rendered="#{mbDetalleSolicitud.solicitud.responsable==null}"/>
-                                <p:commandButton value="Asignar Responsable"/>
+                                <p:commandButton value="Asignar Responsable" disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento ne 0}"/>
 
                                 <h:outputLabel value="Fecha de Vencimiento:" styleClass="label_blod"/>
-
-                                <p:inplace id="fechaVencimientoInplace">
-                                    <p:calendar id="calendar1"
+                                <h:panelGroup id="groupDate">
+                                    <p:inplace id="fechaVencimientoInplace">
+                                        <p:calendar id="calendar1" widgetVar="cal3"
+                                                    value="#{mbDetalleSolicitud.solicitud.fechaVencimiento}" 
+                                                    locale="es"    
+                                                    mindate="#{mbSolicitudesArea.minDate}" 
+                                                    showButtonPanel="true"
+                                                    pattern="dd/MM/yyyy HH:mm" 
+                                                    rendered="#{mbDetalleSolicitud.solicitud.fechaVencimiento != null and (mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == 0 or mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == 3 or mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == 4)}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                                        </p:calendar>
+                                    </p:inplace>
+                                    <p:calendar id="calendar2" widgetVar="cal2"
                                                 value="#{mbDetalleSolicitud.solicitud.fechaVencimiento}" 
                                                 locale="es"
-                                                showOn="button"  
                                                 mindate="#{mbSolicitudesArea.minDate}" 
                                                 showButtonPanel="true"
                                                 pattern="MM/dd/yyyy HH:mm" 
-                                                rendered="#{mbDetalleSolicitud.solicitud.fechaVencimiento != null}"/>
-                                </p:inplace>
-                                <p:calendar id="calendar2"
-                                            value="#{mbDetalleSolicitud.solicitud.fechaVencimiento}" 
-                                            locale="es"
-                                            showOn="button"  
-                                            mindate="#{mbSolicitudesArea.minDate}" 
-                                            showButtonPanel="true"
-                                            pattern="MM/dd/yyyy HH:mm" 
-                                            rendered="#{mbDetalleSolicitud.solicitud.fechaVencimiento == null}"/>
-                                <br/>
+                                                rendered="#{mbDetalleSolicitud.solicitud.fechaVencimiento == null and 
+                                                            mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == 0}" >
+                                    </p:calendar>
+                                    <h:outputText id="calendar3"
+                                                  value="#{mbDetalleSolicitud.solicitud.fechaVencimiento}" 
+                                                  rendered="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == 1 or
+                                                              mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento >= 5 }">
+                                        <f:convertDateTime pattern="dd/MM/yyyy  HH:mm"/>
+                                    </h:outputText>
+
+                                </h:panelGroup>
+                                <h:panelGrid columns="2">
+                                    <p:commandButton icon="ui-button-icon-left ui-icon ui-icon-check" styleClass="ui-button-text"/>
+                                    <p:commandButton icon="ui-button ui-inplace-save"/>
+                                </h:panelGrid>
+
+                               
                                 <h:outputLabel value="Fecha de Cierre:" styleClass="label_blod"/>
                                 <h:outputText id="fechaCierre" value="#{mbDetalleSolicitud.solicitud.fechaCierre}">
                                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
@@ -81,7 +96,7 @@
                         </h:panelGrid>
 
                         <p:commandButton value="Guardar Cambios" style="float: right;" actionListener="#{mbSolicitudesArea.guardarModificacion}" update="@form"/>
-                        <p:commandButton value="Convertir en Proyecto" style="float: right;" />
+                        <p:commandButton value="Convertir en Proyecto" style="float: right;" styleClass="line_button"/>
 
                         <p:separator style="width:100%; height:4px; margin-bottom:20px;margin-top: 10px;"/>
 
@@ -100,9 +115,29 @@
                             <h:outputText id="respuesta" value="#{mbDetalleSolicitud.solicitud.respuesta}" escape="false" rendered="#{not empty mbDetalleSolicitud.solicitud.respuesta}"/>
                             <h:panelGrid columns="3" rendered="#{empty mbDetalleSolicitud.solicitud.respuesta}">
                                 <p:commandButton value="Respuesta Manual" onclick="dlgRespuestaManual.show()"/>
-                                <p:commandButton value="Respuesta Directa" onclick="dlgRespuestaDirecta.show()" />
+                                <p:commandButton value="Respuesta Directa" onclick="respDirecta.show()" />
                                 <p:commandButton value="Rechazar" actionListener="#{mbSolicitudesArea.rechazarSolcitiud}" update="@form"/>
                             </h:panelGrid>
+                            <p:dialog id="dlg_resp_directa" header="Respuesta Directa" widgetVar="respDirecta" resizable="false" modal="true"> 
+                                <h:panelGrid>
+                                    <h:panelGroup>
+                                        <h:outputText value="Destinatario: " styleClass="label_blod"/>
+                                        <h:outputText value="#{mbDetalleSolicitud.solicitud.solicitante.nombre} #{mbDetalleSolicitud.solicitud.solicitante.apellidoPaterno} #{mbDetalleSolicitud.solicitud.solicitante.apellidoMaterno}"/>
+                                    </h:panelGroup>
+                                    <p:editor width="450" height="200" value="#{mbDetalleSolicitud.solicitud.respuesta}" />                  
+                                    <h:panelGroup style="vertical-align: top;">
+                                        <p:selectBooleanCheckbox id="checkBoxEmail" value="#{mbSolicitudesArea.enviarMail}"  />
+                                        <h:outputText value="Enviar una copia de la respuesat al correo del solicitante" styleClass="small_text"/>
+                                    </h:panelGroup>
+
+                                    <p:commandButton value="Aceptar" 
+                                                     style="float: right" 
+                                                     actionListener="#{mbSolicitudesArea.enviarRespuestaDirecta}"
+                                                     update="@form"
+                                                     oncomplete="dlg.hiden()"/>
+
+                                </h:panelGrid>
+                            </p:dialog>
                         </p:panel>
 
                         <br/>
@@ -142,37 +177,9 @@
                     </h:panelGroup>
 
                 </p:panel>
-                <p:dialog id="respuesta_directa" header="Respuesta Directa" widgetVar="dlgRespuestaDirecta">
-                
-                    <p:panelGrid>
-                        <p:panelGrid columns="2">     
-                            <p:outputLabel value="Destinatario" styleClass="label_blod"/>
-                            
-                        </p:panelGrid>
-                        <p:editor>
-
-                        </p:editor>
-                    </p:panelGrid>
-                
-            </p:dialog>
-            <p:dialog id="respuesta_manual" header="Respuesta Manual" widgetVar="dlgRespuestaManual">
-                <h:form>
-                    <p:panelGrid>
-                        <p:panelGrid columns="2">     
-                            <p:outputLabel value="Destinatario" styleClass="label_blod"/>
-                            <h:outputText value="#{mbDetalleSolicitud.solicitud.solicitante.nombre} #{mbDetalleSolicitud.solicitud.solicitante.apellidoMaterno}"/>
-                        </p:panelGrid>
-                        <p:editor>
-
-                        </p:editor>
-                    </p:panelGrid>
-                </h:form>
-            </p:dialog>
 
             </h:form>
-            
 
-            
         </ui:define>
     </ui:composition>
 </html>

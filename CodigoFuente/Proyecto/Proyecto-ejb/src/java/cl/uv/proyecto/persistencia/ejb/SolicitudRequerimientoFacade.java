@@ -8,6 +8,7 @@ import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -34,6 +35,12 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     public SolicitudRequerimientoFacade() {
         super(SolicitudRequerimiento.class);
+    }
+    
+    @Override
+    public void edit(SolicitudRequerimiento solicitud) {
+        solicitud.setFechaUltimaActualizacion(new Date());
+        getEntityManager().merge(solicitud);
     }
     
     @Override

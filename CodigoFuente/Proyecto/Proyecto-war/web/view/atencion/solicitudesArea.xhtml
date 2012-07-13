@@ -26,6 +26,7 @@
                                  selection="#{mbSolicitudesArea.selectedSolicitud}"
                                  rowKey="#{solicitud.codigoConsulta}"
                                  rowStyleClass="#{solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 0? 'row_solicitud_nueva':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 6? 'row_solicitud_vencida':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 8?'row_solicitud_cerrada':null))}"
+                                 style="min-width: 350px;"
                                  >
                         
                         <p:ajax event="rowSelect" listener="#{mbSolicitudesArea.onRowSelect}"/>
