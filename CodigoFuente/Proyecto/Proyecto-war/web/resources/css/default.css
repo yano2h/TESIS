@@ -124,3 +124,21 @@ a.small_link{
     margin-right: 20px;
     margin-left: 20px; 
 }
+
+.row_solicitud_nueva{
+    background-color: lightblue ;
+    background-image: none !important;
+    color: black !important;
+}
+
+.row_solicitud_vencida{
+    background-color: lightpink ;
+    background-image: none !important;
+    color: black !important;
+}
+
+.row_solicitud_cerrada{
+    background-color: lightgray ;
+    background-image: none !important;
+    color: black !important;
+}

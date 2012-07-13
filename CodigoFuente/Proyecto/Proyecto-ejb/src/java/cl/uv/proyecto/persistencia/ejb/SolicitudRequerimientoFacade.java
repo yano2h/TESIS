@@ -4,7 +4,9 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
+import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -72,4 +74,21 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
         return q.getResultList();
     }
     
+    @Override
+    public List<SolicitudRequerimiento> buscarSolicitudesPorArea(Area area){
+        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.areaResponsable = :area");
+        q.setParameter("area", area);
+        return q.getResultList();
+    }
+    
+    
+    @Override
+    public List<SolicitudRequerimiento> getSolicitudesAsignadas(FuncionarioDisico funcionarioDisico){
+        return funcionarioDisico.getSolicitudesRequerimientosAsignadas();
+    }
+    
+    @Override
+    public List<SolicitudRequerimiento> getSolicitudesEnviadas(Funcionario funcionario){
+        return funcionario.getSolicitudesRequerimientoEnviadas();
+    }
 }
