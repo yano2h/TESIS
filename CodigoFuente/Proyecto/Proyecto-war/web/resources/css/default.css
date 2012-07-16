@@ -41,6 +41,22 @@ label{
     font-weight: bold;
 }
 
+.title_italic{
+    font-weight: bold;
+    font-size: 13px;
+    text-decoration: underline;
+    font-style: italic;
+    line-height: 1.5em;
+}
+
+.title_asunto{
+    font-size: 14px;
+    text-decoration: underline;
+    font-style: italic;
+    line-height: 1.5em;
+}
+
+
 .text_blod_blue{
     font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
@@ -96,6 +112,12 @@ label{
     margin-right: 20px;    
 }
 
+.separator_horizontal{
+    margin-top: 10px;
+    margin-bottom: 10px;    
+}
+
+
 tr.row_align_bottom{
     vertical-align: bottom;
 }
@@ -146,3 +168,4 @@ a.small_link{
 .line_button{
     hanging-punctuation: 1.2em;
 }
+

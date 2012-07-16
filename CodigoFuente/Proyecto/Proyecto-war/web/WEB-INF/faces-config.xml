@@ -23,5 +23,9 @@
             <base-name>/cl/uv/view/controller/proyecto/properties/BundleSolicitudes</base-name>
             <var>msg_sol</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/cl/uv/view/controller/proyecto/properties/Constantes</base-name>
+            <var>const</var>
+        </resource-bundle>
     </application>
 </faces-config>
