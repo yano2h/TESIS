@@ -4,6 +4,7 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.proyecto.consts.EstadoSR;
 import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
@@ -67,7 +68,7 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
     public List<SolicitudRequerimiento> getUltimasSolicitudesEnviadas(Funcionario funcionario, Integer maxResults){
         Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante = :solicitante AND s.estadoSolicitud.idEstadoSolicitudRequerimiento <> :idEstado");
         q.setParameter("solicitante", funcionario);
-        q.setParameter("idEstado", new Short(ESTADO_FINAL));
+        q.setParameter("idEstado", EstadoSR.CERRADA);
         q.setMaxResults(maxResults);
         return q.getResultList();
     }
@@ -76,7 +77,7 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
     public List<SolicitudRequerimiento> getUltimasSolicitudesCerradas(Funcionario funcionario, Integer maxResults){
         Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante = :solicitante AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado");
         q.setParameter("solicitante", funcionario);
-        q.setParameter("idEstado", new Short(ESTADO_FINAL));
+        q.setParameter("idEstado", EstadoSR.CERRADA);
         q.setMaxResults(maxResults);
         return q.getResultList();
     }
@@ -88,7 +89,6 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
         return q.getResultList();
     }
     
-    
     @Override
     public List<SolicitudRequerimiento> getSolicitudesAsignadas(FuncionarioDisico funcionarioDisico){
         return funcionarioDisico.getSolicitudesRequerimientosAsignadas();
@@ -97,5 +97,24 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
     @Override
     public List<SolicitudRequerimiento> getSolicitudesEnviadas(Funcionario funcionario){
         return funcionario.getSolicitudesRequerimientoEnviadas();
+    }
+    
+    @Override
+    public void contarSolicitudes(FuncionarioDisico funcionario){
+        String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE s.responsable = :responsable AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado";
+        Query q = em.createQuery(query);
+        q.setParameter("responsable", funcionario);
+        
+        q.setParameter("idEstado", EstadoSR.ASIGNADA);
+        funcionario.setCantidadDeSolicitudesAsignadas(((Long)q.getSingleResult()).intValue());
+        
+        q.setParameter("idEstado", EstadoSR.PENDIENTE);
+        funcionario.setCantidadDeSolicitudesPendientes(((Long)q.getSingleResult()).intValue());
+
+        q.setParameter("idEstado", EstadoSR.INICIADA);
+        funcionario.setCantidadDeSolicitudesIniciadas(((Long)q.getSingleResult()).intValue());
+        
+        q.setParameter("idEstado", EstadoSR.VENCIDA);
+        funcionario.setCantidadDeSolicitudesVencidas(((Long)q.getSingleResult()).intValue());
     }
 }

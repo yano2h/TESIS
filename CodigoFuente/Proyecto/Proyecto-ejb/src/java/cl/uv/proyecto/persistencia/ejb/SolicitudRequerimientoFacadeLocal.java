@@ -46,4 +46,5 @@ public interface SolicitudRequerimientoFacadeLocal {
     
     public List<SolicitudRequerimiento> getSolicitudesEnviadas(Funcionario funcionario);
     
+    public void contarSolicitudes(FuncionarioDisico funcionario);
 }
