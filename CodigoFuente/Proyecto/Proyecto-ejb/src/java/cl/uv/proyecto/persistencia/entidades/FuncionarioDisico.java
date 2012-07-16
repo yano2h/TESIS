@@ -57,6 +57,16 @@ public class FuncionarioDisico extends Funcionario {
     private List<SolicitudCambio> solicitudesCambioEvaluadorImpacto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitante")
     private List<SolicitudCambio> solicitudesCambioEnviadas;
+    
+    /* Atributos no persistidos */
+    @Transient
+    private Integer cantidadDeSolicitudesAsignadas;
+    @Transient
+    private Integer cantidadDeSolicitudesPendientes;
+    @Transient
+    private Integer cantidadDeSolicitudesIniciadas;
+    @Transient
+    private Integer cantidadDeSolicitudesVencidas;
 
     public FuncionarioDisico() {
     }
@@ -178,6 +188,39 @@ public class FuncionarioDisico extends Funcionario {
         this.solicitudesCambioEnviadas = solicitudesCambioEnviadas;
     }
 
+    public Integer getCantidadDeSolicitudesAsignadas() {
+        return cantidadDeSolicitudesAsignadas;
+    }
+
+    public void setCantidadDeSolicitudesAsignadas(Integer cantidadDeSolicitudesAsignadas) {
+        this.cantidadDeSolicitudesAsignadas = cantidadDeSolicitudesAsignadas;
+    }
+
+    public Integer getCantidadDeSolicitudesIniciadas() {
+        return cantidadDeSolicitudesIniciadas;
+    }
+
+    public void setCantidadDeSolicitudesIniciadas(Integer cantidadDeSolicitudesIniciadas) {
+        this.cantidadDeSolicitudesIniciadas = cantidadDeSolicitudesIniciadas;
+    }
+
+    public Integer getCantidadDeSolicitudesPendientes() {
+        return cantidadDeSolicitudesPendientes;
+    }
+
+    public void setCantidadDeSolicitudesPendientes(Integer cantidadDeSolicitudesPendientes) {
+        this.cantidadDeSolicitudesPendientes = cantidadDeSolicitudesPendientes;
+    }
+
+    public Integer getCantidadDeSolicitudesVencidas() {
+        return cantidadDeSolicitudesVencidas;
+    }
+
+    public void setCantidadDeSolicitudesVencidas(Integer cantidadDeSolicitudesVencidas) {
+        this.cantidadDeSolicitudesVencidas = cantidadDeSolicitudesVencidas;
+    }
+
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
