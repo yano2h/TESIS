@@ -4,6 +4,8 @@
  */
 package cl.uv.proyecto.requerimientos.ejb;
 
+import cl.uv.proyecto.consts.EstadoSR;
+import cl.uv.proyecto.mensajeria.ejb.EmailEJBLocal;
 import cl.uv.proyecto.persistencia.ejb.EstadoSolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.TipoPrioridadFacadeLocal;
@@ -27,16 +29,6 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     private final long DESPLAZAMIENTO = 10000000000L;
     private final long TIME_INIT = 1341773584868L;
     
-    private final short ESTADO_INICIAL = 0;
-    private final short ESTADO_RECHAZADA = 1;
-    private final short ESTADO_TRANSFERIDA = 2;
-    private final short ESTADO_ASIGNADA = 3;
-    private final short ESTADO_PENDIENTE = 4;
-    private final short ESTADO_INICIADA = 5;
-    private final short ESTADO_VENCIDA = 6;
-    private final short ESTADO_EN_ESPERA_ARPOBACION = 7;
-    private final short ESTADO_CERRADA = 8;
-    
     private final short PRIORIDAD_INICIAL = 0;
 
     @EJB
@@ -45,7 +37,9 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     private EstadoSolicitudRequerimientoFacadeLocal estadoSolicitudFacade;
     @EJB
     private TipoPrioridadFacadeLocal tipoPrioridadFacade;
-
+    @EJB
+    private EmailEJBLocal emailEJB;
+    
     @Override
     public String generarCodigo(long num) {
         String code = "";
@@ -85,7 +79,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitud.setFechaUltimaActualizacion(fechaActual);
         solicitud.setSolicitante(solicitante);
         solicitud.setPrioridadSolicitud(tipoPrioridadFacade.find(PRIORIDAD_INICIAL));
-        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(ESTADO_INICIAL));
+        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(EstadoSR.ENVIADA));
         solicitud.setCodigoConsulta(generarCodigoConsulta(solicitud));
         solicitudFacade.create(solicitud);
         return solicitud.getCodigoConsulta();
@@ -93,17 +87,24 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
 
     @Override
     public void rechazarSolicitud(SolicitudRequerimiento solicitud){
-        EstadoSolicitudRequerimiento estado = estadoSolicitudFacade.find(ESTADO_RECHAZADA);
+        EstadoSolicitudRequerimiento estado = estadoSolicitudFacade.find(EstadoSR.RECHAZADA);
         solicitud.setEstadoSolicitud(estado);
         solicitudFacade.edit(solicitud);
     }
     
     @Override
     public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo){
-        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(ESTADO_CERRADA));
+        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(EstadoSR.CERRADA));
         solicitud.setFechaCierre(new Date());
         solicitudFacade.edit(solicitud);
-        if(enviarCopiaCorreo){}
+        if(enviarCopiaCorreo){
+            String email = solicitud.getSolicitante().getCorreoUv();
+            String asunto = "La solicitud "+solicitud.getCodigoConsulta()+" fue cerrada.";
+            String mensaje = "[Codigo:"+solicitud.getCodigoConsulta()+"]["+solicitud.getAsunto()+"]\n"
+                           + "Respuesta:"+solicitud.getRespuesta()+"\n\n"
+                           + "Para mayor informacion ingrese a su perfil dentro del sistema.";
+            emailEJB.enviarEmail(email, asunto, mensaje);
+        }
     }
     
     @Override
