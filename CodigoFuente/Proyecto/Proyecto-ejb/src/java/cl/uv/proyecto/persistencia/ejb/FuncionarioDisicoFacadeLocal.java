@@ -4,6 +4,7 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import java.util.List;
 import javax.ejb.Local;
@@ -28,5 +29,7 @@ public interface FuncionarioDisicoFacadeLocal {
     List<FuncionarioDisico> findRange(int[] range);
 
     int count();
+    
+    List<FuncionarioDisico> buscarFuncrionariosPorArea(Area area);
     
 }
