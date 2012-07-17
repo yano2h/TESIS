@@ -65,6 +65,9 @@ public class Funcionario implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "autor")
     private List<ComentarioSolicitud> comentarioSolicitudList;
+    
+    @Transient
+    private String rol;
 
     public Funcionario() {
     }
@@ -160,6 +163,15 @@ public class Funcionario implements Serializable {
         this.comentarioSolicitudList = comentarioSolicitudList;
     }
 
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;
