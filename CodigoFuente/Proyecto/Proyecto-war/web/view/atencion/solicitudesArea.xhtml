@@ -8,20 +8,17 @@
 
     <ui:composition template="#{pages.layout_atencion}">
         <ui:define name="title">
-            <h:outputText value="Solicitudes del Solicitudes"/>
+            <h:outputText value="Solicitudes del Area"/>
         </ui:define>
         <ui:define name="content">
             <h:form id="solArea">                   
                 <p:panel id="sol" header="Solicitudes del Area" style="min-height: 350px;">
-                    <p:poll interval="3" listener="#{mbSolicitudesArea.reload}" />
                     <p:dataTable id="tableSolicitudesArea" 
                                  var="solicitud" 
                                  value="#{mbSolicitudesArea.solicitudesArea}" 
                                  paginator="true"  
                                  rows="20" 
-                                 paginatorPosition="bottom"
-                                 sortBy="#{solicitud.fechaEnvio}"
-                                 sortOrder="descending"
+                                 paginatorPosition="bottom"           
                                  selectionMode="single"
                                  selection="#{mbSolicitudesArea.selectedSolicitud}"
                                  rowKey="#{solicitud.codigoConsulta}"

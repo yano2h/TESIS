@@ -179,6 +179,7 @@ public class MbSolicitudesArea implements Serializable {
     }
 
     public void reload() {
+        System.out.println("RELOAD");
         solicitudesArea = solicitudFacade.buscarSolicitudesPorArea(mbFuncionarioInfo.getFuncionario().getArea());
     }
 
@@ -193,7 +194,6 @@ public class MbSolicitudesArea implements Serializable {
             mbDetalleSolicitud.getSolicitud().setRespuesta(respuesta);
             solicitudEJB.rechazarSolicitud(mbDetalleSolicitud.getSolicitud());
         }
-        System.out.println("REXAZAR");
     }
 
     public void guardarModificacion() {

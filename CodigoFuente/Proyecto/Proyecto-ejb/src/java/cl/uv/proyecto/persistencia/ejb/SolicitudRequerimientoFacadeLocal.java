@@ -8,6 +8,7 @@ import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -47,4 +48,6 @@ public interface SolicitudRequerimientoFacadeLocal {
     public List<SolicitudRequerimiento> getSolicitudesEnviadas(Funcionario funcionario);
     
     public void contarSolicitudes(FuncionarioDisico funcionario);
+    
+    public List<SolicitudRequerimiento> buscarSolicitudPorFiltros(SolicitudRequerimiento solicitud,  Date minDate, Date maxDate);
 }
