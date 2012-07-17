@@ -153,7 +153,8 @@ public class MbBusquedaSolicitud implements Serializable {
         prototipoSolicitud.setEstadoSolicitud(estadoSolicitudRequerimiento);
         prototipoSolicitud.setTipoSolicitud(tipoSolicitudRequerimiento);
         prototipoSolicitud.setPrioridadSolicitud(prioridad);
-        
+        maxFechaEnvio = new Date(maxFechaEnvio.getTime()+86400000);
+        System.out.println(maxFechaEnvio);
         resultadosBusqueda = solicitudFacade.buscarSolicitudPorFiltros(prototipoSolicitud, minFechaEnvio, maxFechaEnvio);
     }
     
