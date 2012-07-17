@@ -14,5 +14,5 @@ import javax.ejb.Local;
 public interface EmailEJBLocal {
 
     void enviarEmail(String direccion, String asunto, String mensaje);
-    
+    void enviarEmail(String[] direcciones,String asunto, String mensaje);
 }
