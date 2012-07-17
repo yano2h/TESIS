@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="title">
+            <h:outputText value="Titulo Solicitudes"/>
+        </ui:define>
+        <ui:define name="content">
+            <h:form>
+
+                <p:tabView id="tabViewResumen">
+                    <p:tab id="tab1" title="Personal">  
+                        <h:panelGrid columns="2" width="100%"> 
+                            <p:panel header="Indicadores">
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="Cantidades y Totales" styleClass="title_italic" style="margin-top: 10px;"/>
+                                    <br/>
+
+                                    <p:panelGrid columns="2" style="width: 300px;">
+
+                                        <h:outputText value="N° Solicitudes Pendientes:" styleClass="label"/>
+                                        <h:outputText id="solPendientes" value="1"/>
+
+                                        <h:outputText value="N° Solicitudes Vencidas:" styleClass="label"/>
+                                        <h:outputText id="solVencidas" value="1"/>
+
+                                        <h:outputText value="N° Solicitudes Iniciadas:" styleClass="label"/>
+                                        <h:outputText id="solIniciadas" value="1"/>
+
+                                        <h:outputText value="N° Solicitudes Cerradas:" styleClass="label"/>
+                                        <h:outputText id="solCerradas" value="1"/>
+
+                                    </p:panelGrid>
+
+                                     <p:panelGrid columns="2" style="width: 300px;">
+                                        <h:outputText value="Total Solicitudes Asignadas:" styleClass="label"/>
+                                        <h:outputText id="solAsignadas" value="1"/>
+                                    </p:panelGrid>
+                                    
+                                    <p:separator style="height: 1px;margin-top: 10px; margin-bottom: 10px;"/>
+
+                                    <h:outputText value="Porcentajes" styleClass="title_italic" style="margin-top: 10px;"/>
+                                    <br/>
+                                    <p:panelGrid columns="2" style="width: 300px;">
+
+                                        <h:outputText value="Porcentaje de Solicitudes Asignadas:" styleClass="label"/>
+                                        <h:outputText id="porcentajeSolAsignadas" value="5%"/>
+
+                                        <h:outputText value="Porcentaje de Cumplimiento:" styleClass="label"/>
+                                        <h:outputText id="porcentajeCumplimiento" value="90%"/>
+
+                                        <h:outputText value="Porcentaje de Retrasos:" styleClass="label"/>
+                                        <h:outputText id="porcentajeRetrasos" value="10%"/>
+
+                                    </p:panelGrid>
+                                </h:panelGrid>
+                            </p:panel>
+                            <p:panel header="Graficos">
+
+                            </p:panel>
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab id="tab2" title="Area">  
+                        <h:panelGrid columns="2" cellpadding="10"> 
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab id="tab3" title="Departamento">  
+                        <h:panelGrid columns="2" cellpadding="10"> 
+                        </h:panelGrid>
+                    </p:tab>
+
+                </p:tabView>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
