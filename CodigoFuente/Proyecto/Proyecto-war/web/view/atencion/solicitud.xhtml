@@ -47,6 +47,14 @@
                                                     mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
                         </p:submenu>
                     </p:menubar>
+                    <p:menubar style="height: 30px;" rendered="#{mbFuncionarioInfo.funcionario.rut == mbDetalleSolicitud.solicitud.responsable.rut}"> 
+                        <p:menuitem value="Iniciar" icon="ui-icon-pin-s" onclick="dlgAsignarSolicitud.show();" 
+                                    disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ASIGNADA and
+                                                mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_PENDIENTE }"/>
+                        <p:menuitem value="Cerrar" icon="ui-icon-transferthick-e-w" onclick="dlgTranferencia.show();"
+                                    disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_CERRADA or
+                                                mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_FINALIZADA_SIN_RESPUESTA }"/>
+                    </p:menubar>
                     <br/>
 
                     <h:panelGrid columns="2" styleClass="title_asunto">    
