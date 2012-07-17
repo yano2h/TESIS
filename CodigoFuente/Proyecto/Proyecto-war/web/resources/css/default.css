@@ -37,6 +37,11 @@ label{
     color: #18316D;
 }
 
+.label{
+    font-family: Helvetica, Arial, sans-serif;
+    color: #18316D;
+}
+
 .label_blod{
     font-weight: bold;
 }
@@ -147,6 +152,9 @@ a.small_link{
     margin-left: 20px; 
 }
 
+.ui-tabs-nav{
+   height: 30px; 
+}
 .row_solicitud_nueva{
     background-color: lightblue ;
     background-image: none !important;

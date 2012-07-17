@@ -30,6 +30,6 @@ public interface FuncionarioDisicoFacadeLocal {
 
     int count();
     
-    List<FuncionarioDisico> buscarFuncrionariosPorArea(Area area);
+    List<FuncionarioDisico> buscarFuncrionariosPorArea(Area area); 
     
 }
