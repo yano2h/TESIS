@@ -5,6 +5,7 @@
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
+import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
 import java.util.List;
@@ -31,6 +32,9 @@ public class MbResumenesFuncionarios {
     private MbFuncionarioInfo mbFuncionarioInfo;
     
     private List<FuncionarioDisico> funcionariosArea;
+    private FuncionarioDisico funcionarioSelected;
+    private Area areaSelected;
+    
     private PieChartModel pieModel;
     private String tipoResumen;
 
@@ -47,6 +51,23 @@ public class MbResumenesFuncionarios {
         this.mbFuncionarioInfo = mbFuncionarioInfo;
     }
 
+    public FuncionarioDisico getFuncionarioSelected() {
+        return funcionarioSelected;
+    }
+
+    public void setFuncionarioSelected(FuncionarioDisico funcionarioSelected) {
+        this.funcionarioSelected = funcionarioSelected;
+    }
+
+    public Area getAreaSelected() {
+        return areaSelected;
+    }
+
+    public void setAreaSelected(Area areaSelected) {
+        this.areaSelected = areaSelected;
+    }
+
+    
     
     public PieChartModel getPieModel() {
         return pieModel;

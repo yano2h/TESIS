@@ -11,180 +11,218 @@
             <h:outputText value="Titulo Solicitudes"/>
         </ui:define>
         <ui:define name="content">
-            <p:tabView id="tabViewResumen">
-                <p:tab id="tab1" title="Personal">  
-                    <h:panelGrid columns="2" width="100%"> 
-                        <p:panel header="Indicadores">
-                            <h:panelGrid columns="1">
-                                <h:outputText value="Cantidades y Totales" styleClass="title_italic" style="margin-top: 10px;"/>
-                                <br/>
+            <h:form>
+                <p:tabView id="tabViewResumen">
+                    <p:tab id="tab1" title="Personal">  
+                        <h:panelGrid columns="2" width="100%"> 
+                            <p:panel header="Indicadores" style="min-height: 380px;">
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="Cantidades y Totales" styleClass="title_italic" style="margin-top: 10px;"/>
+                                    <br/>
 
-                                <p:panelGrid columns="2" style="width: 300px;">
+                                    <p:panelGrid columns="2" style="width: 300px;">
 
-                                    <h:outputText value="N° Solicitudes Pendientes:" styleClass="label"/>
-                                    <h:outputText id="solPendientes" value="1"/>
+                                        <h:outputText value="N° Solicitudes Pendientes:" styleClass="label"/>
+                                        <h:outputText id="solPendientes" value="1"/>
 
-                                    <h:outputText value="N° Solicitudes Vencidas:" styleClass="label"/>
-                                    <h:outputText id="solVencidas" value="1"/>
+                                        <h:outputText value="N° Solicitudes Vencidas:" styleClass="label"/>
+                                        <h:outputText id="solVencidas" value="1"/>
 
-                                    <h:outputText value="N° Solicitudes Iniciadas:" styleClass="label"/>
-                                    <h:outputText id="solIniciadas" value="1"/>
+                                        <h:outputText value="N° Solicitudes Iniciadas:" styleClass="label"/>
+                                        <h:outputText id="solIniciadas" value="1"/>
 
-                                    <h:outputText value="N° Solicitudes Cerradas:" styleClass="label"/>
-                                    <h:outputText id="solCerradas" value="1"/>
+                                        <h:outputText value="N° Solicitudes Cerradas:" styleClass="label"/>
+                                        <h:outputText id="solCerradas" value="1"/>
 
-                                </p:panelGrid>
+                                    </p:panelGrid>
 
-                                <p:panelGrid columns="2" style="width: 300px;">
-                                    <h:outputText value="Total Solicitudes Asignadas:" styleClass="label"/>
-                                    <h:outputText id="solAsignadas" value="1"/>
-                                </p:panelGrid>
+                                    <p:panelGrid columns="2" style="width: 300px;">
+                                        <h:outputText value="Total Solicitudes Asignadas:" styleClass="label"/>
+                                        <h:outputText id="solAsignadas" value="1"/>
+                                    </p:panelGrid>
 
-                                <p:separator style="height: 1px;margin-top: 10px; margin-bottom: 10px;"/>
+                                    <p:separator style="height: 1px;margin-top: 10px; margin-bottom: 10px;"/>
 
-                                <h:outputText value="Porcentajes" styleClass="title_italic" style="margin-top: 10px;"/>
-                                <br/>
-                                <p:panelGrid columns="2" style="width: 300px;">
+                                    <h:outputText value="Porcentajes" styleClass="title_italic" style="margin-top: 10px;"/>
+                                    <br/>
+                                    <p:panelGrid columns="2" style="width: 300px;">
 
-                                    <h:outputText value="Porcentaje de Solicitudes Asignadas:" styleClass="label"/>
-                                    <h:outputText id="porcentajeSolAsignadas" value="5%"/>
+                                        <h:outputText value="Porcentaje de Solicitudes Asignadas:" styleClass="label"/>
+                                        <h:outputText id="porcentajeSolAsignadas" value="5%"/>
 
-                                    <h:outputText value="Porcentaje de Cumplimiento:" styleClass="label"/>
-                                    <h:outputText id="porcentajeCumplimiento" value="90%"/>
+                                        <h:outputText value="Porcentaje de Cumplimiento:" styleClass="label"/>
+                                        <h:outputText id="porcentajeCumplimiento" value="90%"/>
 
-                                    <h:outputText value="Porcentaje de Retrasos:" styleClass="label"/>
-                                    <h:outputText id="porcentajeRetrasos" value="10%"/>
+                                        <h:outputText value="Porcentaje de Retrasos:" styleClass="label"/>
+                                        <h:outputText id="porcentajeRetrasos" value="10%"/>
 
-                                </p:panelGrid>
-                            </h:panelGrid>
-                        </p:panel>
-                        <p:panel header="Graficos">
-                            <p:pieChart id="sample" value="#{mbResumenesFuncionarios.pieModel}" legendPosition="w"  
-                                        title="Sample Pie Chart" style="width:400px;height:300px" showDataLabels="true"/>  
-                        </p:panel>
-                    </h:panelGrid>
-                </p:tab>
-
-
-                <p:tab id="tab2" title="Area">  
-                    <h:panelGrid columns="2" width="100%"> 
-                        <p:panel header="Indicadores">
-                            <h:panelGrid columns="1">
-                                <h:outputText value="Cantidades y Totales" styleClass="title_italic" style="margin-top: 10px;"/>
-                                <br/>
-
-                                <p:panelGrid columns="2" style="width: 300px;">
-
-                                    <h:outputText value="N° Solicitudes Pendientes:" styleClass="label"/>
-                                    <h:outputText id="solPendientesArea" value="1"/>
-
-                                    <h:outputText value="N° Solicitudes Vencidas:" styleClass="label"/>
-                                    <h:outputText id="solVencidasArea" value="1"/>
-
-                                    <h:outputText value="N° Solicitudes Iniciadas:" styleClass="label"/>
-                                    <h:outputText id="solIniciadasArea" value="1"/>
-
-                                    <h:outputText value="N° Solicitudes Cerradas:" styleClass="label"/>
-                                    <h:outputText id="solCerradasArea" value="1"/>
-
-                                </p:panelGrid>
-
-                                <p:panelGrid columns="2" style="width: 300px;">
-                                    <h:outputText value="Total Solicitudes Asignadas:" styleClass="label"/>
-                                    <h:outputText id="solAsignadasArea" value="1"/>
-                                </p:panelGrid>
-
-                                <p:separator style="height: 1px;margin-top: 10px; margin-bottom: 10px;"/>
-
-                                <h:outputText value="Porcentajes" styleClass="title_italic" style="margin-top: 10px;"/>
-                                <br/>
-                                <p:panelGrid columns="2" style="width: 300px;">
-
-                                    <h:outputText value="Porcentaje de Solicitudes Asignadas:" styleClass="label"/>
-                                    <h:outputText id="porcentajeSolAsignadasArea" value="5%"/>
-
-                                    <h:outputText value="Porcentaje de Cumplimiento:" styleClass="label"/>
-                                    <h:outputText id="porcentajeCumplimientoArea" value="90%"/>
-
-                                    <h:outputText value="Porcentaje de Retrasos:" styleClass="label"/>
-                                    <h:outputText id="porcentajeRetrasosArea" value="10%"/>
-
-                                </p:panelGrid>
-                            </h:panelGrid>
-                        </p:panel>
-                        <p:panel header="Graficos">
-                            <p:pieChart id="sampleArea" value="#{mbResumenesFuncionarios.pieModel}" legendPosition="w"  
-                                        title="Sample Pie Chart" style="width:400px;height:300px" showDataLabels="true"/>  
-                        </p:panel>
-                    </h:panelGrid>
-                </p:tab>
+                                    </p:panelGrid>
+                                </h:panelGrid>
+                            </p:panel>
+                            <p:panel header="Graficos" style="min-height: 380px;">
+                                <p:pieChart id="sample" value="#{mbResumenesFuncionarios.pieModel}" legendPosition="w"  
+                                            title="Sample Pie Chart" style="width:400px;height:300px" showDataLabels="true"/>  
+                            </p:panel>
+                        </h:panelGrid>
+                    </p:tab>
 
 
-                <p:tab id="tab3" title="Departamento">  
-                    <p:panel header="Tipo de Resumen">
-                        <h:panelGrid>
-                          <p:selectOneRadio id="tipoResumenDepto" value="#{mbResumenesFuncionarios.tipoResumen}" required="true" layout="custom">
-                                <f:selectItem itemLabel="Area Completa" itemValue="depto" />
+                    <p:tab id="tab2" title="Area">  
+                        <p:panel header="Tipo de Resumen" style="width: 100%">
+                            <p:selectOneRadio id="tipoResumenArea" value="#{mbResumenesFuncionarios.tipoResumen}" required="true" style="margin-right: 20px;" layout="custom">
+                                <f:selectItem itemLabel="Area Completa" itemValue="area" />
                                 <f:selectItem itemLabel="Por funcionario del Area" itemValue="personal" />    
                             </p:selectOneRadio>
-                            <p:selectOneMenu>
-                                <f:selectItems value="#{mbResumenesFuncionarios.itemsAvailableSelectManyNombreCompleto}"/>
-                            </p:selectOneMenu>
-                        </h:panelGrid>
-                    </p:panel>
-                    <h:panelGrid columns="2" width="100%"> 
-                        <p:panel header="Indicadores">
-                            <h:panelGrid columns="1">
-                                <h:outputText value="Cantidades y Totales" styleClass="title_italic" style="margin-top: 10px;"/>
+                            <h:panelGrid columns="3">
+                                <p:radioButton id="opt1Area" for="tipoResumenArea" itemIndex="0"/>  
+                                <h:outputLabel for="opt1Area" value="Area Completa" />  
                                 <br/>
 
-                                <p:panelGrid columns="2" style="width: 300px;">
-
-                                    <h:outputText value="N° Solicitudes Pendientes:" styleClass="label"/>
-                                    <h:outputText id="solPendientesDepto" value="1"/>
-
-                                    <h:outputText value="N° Solicitudes Vencidas:" styleClass="label"/>
-                                    <h:outputText id="solVencidasDepto" value="1"/>
-
-                                    <h:outputText value="N° Solicitudes Iniciadas:" styleClass="label"/>
-                                    <h:outputText id="solIniciadasDepto" value="1"/>
-
-                                    <h:outputText value="N° Solicitudes Cerradas:" styleClass="label"/>
-                                    <h:outputText id="solCerradasDepto" value="1"/>
-
-                                </p:panelGrid>
-
-                                <p:panelGrid columns="2" style="width: 300px;">
-                                    <h:outputText value="Total Solicitudes Asignadas:" styleClass="label"/>
-                                    <h:outputText id="solAsignadasDepto" value="1"/>
-                                </p:panelGrid>
-
-                                <p:separator style="height: 1px;margin-top: 10px; margin-bottom: 10px;"/>
-
-                                <h:outputText value="Porcentajes" styleClass="title_italic" style="margin-top: 10px;"/>
-                                <br/>
-                                <p:panelGrid columns="2" style="width: 300px;">
-
-                                    <h:outputText value="Porcentaje de Solicitudes Asignadas:" styleClass="label"/>
-                                    <h:outputText id="porcentajeSolAsignadasDepto" value="5%"/>
-
-                                    <h:outputText value="Porcentaje de Cumplimiento:" styleClass="label"/>
-                                    <h:outputText id="porcentajeCumplimientoDepto" value="90%"/>
-
-                                    <h:outputText value="Porcentaje de Retrasos:" styleClass="label"/>
-                                    <h:outputText id="porcentajeRetrasosDepto" value="10%"/>
-
-                                </p:panelGrid>
+                                <p:radioButton id="opt2Area" for="tipoResumenArea" itemIndex="1"/>  
+                                <h:outputLabel for="opt2Area" value="Por Funcionario del area" />  
+                                <p:selectOneMenu id="funcioncionarioArea" value="#{mbResumenesFuncionarios.funcionarioSelected}"  style="width: 250px;">
+                                    <f:selectItems value="#{mbResumenesFuncionarios.itemsAvailableSelectManyNombreCompleto}"/>
+                                </p:selectOneMenu>
                             </h:panelGrid>
+                            <p:commandButton value="Ver Resumen"/>
                         </p:panel>
-                        <p:panel header="Graficos">
-                            <p:pieChart id="sampleDepto" value="#{mbResumenesFuncionarios.pieModel}" legendPosition="w"  
-                                        title="Sample Pie Chart" style="width:400px;height:300px" showDataLabels="true"/>  
-                        </p:panel>
-                    </h:panelGrid>
-                </p:tab>
+                        <h:panelGrid columns="2" width="100%"> 
+                            <p:panel header="Indicadores" style="min-height: 380px;">
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="Cantidades y Totales" styleClass="title_italic" style="margin-top: 10px;"/>
+                                    <br/>
 
-            </p:tabView>          
+                                    <p:panelGrid columns="2" style="width: 300px;">
+
+                                        <h:outputText value="N° Solicitudes Pendientes:" styleClass="label"/>
+                                        <h:outputText id="solPendientesArea" value="1"/>
+
+                                        <h:outputText value="N° Solicitudes Vencidas:" styleClass="label"/>
+                                        <h:outputText id="solVencidasArea" value="1"/>
+
+                                        <h:outputText value="N° Solicitudes Iniciadas:" styleClass="label"/>
+                                        <h:outputText id="solIniciadasArea" value="1"/>
+
+                                        <h:outputText value="N° Solicitudes Cerradas:" styleClass="label"/>
+                                        <h:outputText id="solCerradasArea" value="1"/>
+
+                                    </p:panelGrid>
+
+                                    <p:panelGrid columns="2" style="width: 300px;">
+                                        <h:outputText value="Total Solicitudes Asignadas:" styleClass="label"/>
+                                        <h:outputText id="solAsignadasArea" value="1"/>
+                                    </p:panelGrid>
+
+                                    <p:separator style="height: 1px;margin-top: 10px; margin-bottom: 10px;"/>
+
+                                    <h:outputText value="Porcentajes" styleClass="title_italic" style="margin-top: 10px;"/>
+                                    <br/>
+                                    <p:panelGrid columns="2" style="width: 300px;">
+
+                                        <h:outputText value="Porcentaje de Solicitudes Asignadas:" styleClass="label"/>
+                                        <h:outputText id="porcentajeSolAsignadasArea" value="5%"/>
+
+                                        <h:outputText value="Porcentaje de Cumplimiento:" styleClass="label"/>
+                                        <h:outputText id="porcentajeCumplimientoArea" value="90%"/>
+
+                                        <h:outputText value="Porcentaje de Retrasos:" styleClass="label"/>
+                                        <h:outputText id="porcentajeRetrasosArea" value="10%"/>
+
+                                    </p:panelGrid>
+                                </h:panelGrid>
+                            </p:panel>
+                            <p:panel header="Graficos" style="min-height: 380px;">
+                                <p:pieChart id="sampleArea" value="#{mbResumenesFuncionarios.pieModel}" legendPosition="w"  
+                                            title="Sample Pie Chart" style="width:400px;height:300px" showDataLabels="true"/>  
+                            </p:panel>
+                        </h:panelGrid>
+                    </p:tab>
+
+
+                    <p:tab id="tab3" title="Departamento"> 
+
+                        <p:panel header="Tipo de Resumen" style="width: 100%">
+                            <p:selectOneRadio id="tipoResumenDepto" value="#{mbResumenesFuncionarios.tipoResumen}" required="true" style="margin-right: 20px;" layout="custom" >
+                                <f:selectItem itemLabel="Departamento Completo" itemValue="depto" />
+                                <f:selectItem itemLabel="Por Area" itemValue="area" />
+                                <f:selectItem itemLabel="Por Funcionario" itemValue="personal" />    
+                            </p:selectOneRadio>
+
+                            <h:panelGrid id="grid" columns="3">
+                                <p:radioButton id="opt1" for="tipoResumenDepto" itemIndex="0"/>  
+                                <h:outputLabel for="opt1" value="Departamento Completo" />  
+                                <br/>
+
+                                <p:radioButton id="opt2" for="tipoResumenDepto" itemIndex="1"/>  
+                                <h:outputLabel for="opt2" value="Por Area" />  
+                                <p:selectOneMenu id="areaDepto" value="#{mbResumenesFuncionarios.areaSelected}" style="width: 150px;" >
+                                    <f:selectItems value="#{areaController.itemsAvailableSelectMany}"/>
+                                </p:selectOneMenu>
+
+                                <p:radioButton id="opt3" for="tipoResumenDepto" itemIndex="2"/>  
+                                <h:outputLabel for="opt3" value="Por Funcionario" />  
+
+                                <p:selectOneMenu id="funcioncionarioDepto" value="#{mbResumenesFuncionarios.funcionarioSelected}" style="width: 250px;">
+                                    <f:selectItems value="#{mbResumenesFuncionarios.itemsAvailableSelectManyNombreCompleto}"/>
+                                </p:selectOneMenu>
+                            </h:panelGrid>
+                            <p:commandButton value="Ver Resumen"/>
+                        </p:panel>
+
+                        <h:panelGrid columns="2" width="100%" > 
+                            <p:panel header="Indicadores" style="min-height: 380px;">
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="Cantidades y Totales" styleClass="title_italic" style="margin-top: 10px;"/>
+                                    <br/>
+
+                                    <p:panelGrid columns="2" style="width: 300px;">
+
+                                        <h:outputText value="N° Solicitudes Pendientes:" styleClass="label"/>
+                                        <h:outputText id="solPendientesDepto" value="1"/>
+
+                                        <h:outputText value="N° Solicitudes Vencidas:" styleClass="label"/>
+                                        <h:outputText id="solVencidasDepto" value="1"/>
+
+                                        <h:outputText value="N° Solicitudes Iniciadas:" styleClass="label"/>
+                                        <h:outputText id="solIniciadasDepto" value="1"/>
+
+                                        <h:outputText value="N° Solicitudes Cerradas:" styleClass="label"/>
+                                        <h:outputText id="solCerradasDepto" value="1"/>
+
+                                    </p:panelGrid>
+
+                                    <p:panelGrid columns="2" style="width: 300px;">
+                                        <h:outputText value="Total Solicitudes Asignadas:" styleClass="label"/>
+                                        <h:outputText id="solAsignadasDepto" value="1"/>
+                                    </p:panelGrid>
+
+                                    <p:separator style="height: 1px;margin-top: 10px; margin-bottom: 10px;"/>
+
+                                    <h:outputText value="Porcentajes" styleClass="title_italic" style="margin-top: 10px;"/>
+                                    <br/>
+                                    <p:panelGrid columns="2" style="width: 300px;">
+
+                                        <h:outputText value="Porcentaje de Solicitudes Asignadas:" styleClass="label"/>
+                                        <h:outputText id="porcentajeSolAsignadasDepto" value="5%"/>
+
+                                        <h:outputText value="Porcentaje de Cumplimiento:" styleClass="label"/>
+                                        <h:outputText id="porcentajeCumplimientoDepto" value="90%"/>
+
+                                        <h:outputText value="Porcentaje de Retrasos:" styleClass="label"/>
+                                        <h:outputText id="porcentajeRetrasosDepto" value="10%"/>
+
+                                    </p:panelGrid>
+                                </h:panelGrid>
+                            </p:panel>
+                            <p:panel header="Graficos" style="min-height: 380px;">
+                                <p:pieChart id="sampleDepto" value="#{mbResumenesFuncionarios.pieModel}" legendPosition="w"  
+                                            title="Sample Pie Chart" style="width:400px;height:300px" showDataLabels="true"/>  
+                            </p:panel>
+                        </h:panelGrid>
+                    </p:tab>
+
+                </p:tabView>
+            </h:form>
         </ui:define>
     </ui:composition>
 </html>
