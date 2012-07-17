@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="title">
+            <h:outputText value="Mis Solicitudes"/>
+        </ui:define>
+        <ui:define name="content">  
+            <h:form>
+            <p:panel id="sol" header="Solicitudes del Area" style="min-height: 350px;">
+             <p:dataTable id="tableMisSolicitudes" 
+                                 var="solicitud" 
+                                 value="#{mbMisSolicitudes.misSolicitudes}" 
+                                 paginator="true"  
+                                 rows="20" 
+                                 paginatorPosition="bottom"           
+                                 selectionMode="single"
+                                 emptyMessage="Ninguna solicitud asignada"
+                                 selection="#{mbMisSolicitudes.selectedSolicitud}"
+                                 rowKey="#{solicitud.codigoConsulta}"
+                                 rowStyleClass="#{solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq const.EstadoSR_ASIGNADA ? 'row_solicitud_nueva':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq const.EstadoSR_VENCIDA ? 'row_solicitud_vencida':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq EstadoSR_CERRADA?'row_solicitud_cerrada':null))}"
+                                 style="min-width: 350px;"
+                                 >
+                        
+                 <p:ajax event="rowSelect" listener="#{mbMisSolicitudes.onRowSelect}"/>
+                        
+                        <p:column headerText="Codigo" 
+                                  sortBy="#{solicitud.codigoConsulta}" 
+                                  style="width: 60px;">  
+
+                            <h:outputText value="#{solicitud.codigoConsulta}" />  
+                        </p:column>
+                        
+                        <p:column headerText="Asunto" 
+                                  sortBy="#{solicitud.asunto}"
+                                  filterBy="#{solicitud.asunto}"
+                                  filterMatchMode="contains">  
+                            <h:outputText value="#{solicitud.asunto}" />  
+                        </p:column>  
+
+                        <p:column headerText="Estado"
+                                  sortBy="#{solicitud.estadoSolicitud.nombreEstadoSolicitud}"
+                                  filterBy="#{solicitud.estadoSolicitud.nombreEstadoSolicitud}"
+                                  filterOptions="#{estadoSolicitudRequerimientoController.filterOptions}"
+                                  filterMatchMode="exact">
+                            <h:outputText value="#{solicitud.estadoSolicitud.nombreEstadoSolicitud}"/>
+                        </p:column>
+
+                        <p:column headerText="Tipo"
+                                  sortBy="#{solicitud.tipoSolicitud.nombreTipoSolicitud}"
+                                  filterBy="#{solicitud.tipoSolicitud.nombreTipoSolicitud}"
+                                  filterOptions="#{tipoSolicitudRequerimientoController.filterOptions}"
+                                  filterMatchMode="exact">
+                            <h:outputText value="#{solicitud.tipoSolicitud.nombreTipoSolicitud}"/>
+                        </p:column>
+                        
+                        <p:column headerText="F.Envio" 
+                                  sortBy="#{solicitud.fechaEnvio}" >  
+                            <h:outputText value="#{solicitud.fechaEnvio}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>  
+                        </p:column>
+                        
+                        <p:column headerText="F.Vencimiento" 
+                                  sortBy="#{solicitud.fechaVencimiento}" >  
+                            <h:outputText value="#{solicitud.fechaVencimiento}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>  
+                        </p:column>
+                        
+                        <f:facet name="footer">
+                            <p:commandButton value="Recargar" icon="ui-icon-arrowrefresh-1-w" 
+                                             actionListener="#{mbMisSolicitudes.reload}" update="tableMisSolicitudes" style="text-align: left;"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
