@@ -4,6 +4,7 @@
  */
 package cl.uv.proyecto.requerimientos.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import javax.ejb.Local;
@@ -25,5 +26,7 @@ public interface SolicitudRequerimientoEJBLocal {
     
     public void rechazarSolicitud(SolicitudRequerimiento solicitud);
     public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo);
-    public void enviarRespuestaManual(SolicitudRequerimiento solicitud);
+    public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto);
+    public void transferirSolicitud(SolicitudRequerimiento solicitud, Area nuevaAreaResponsable, String motivoTransferencia);
+    public void asignarSolicitud(SolicitudRequerimiento solicitud);
 }

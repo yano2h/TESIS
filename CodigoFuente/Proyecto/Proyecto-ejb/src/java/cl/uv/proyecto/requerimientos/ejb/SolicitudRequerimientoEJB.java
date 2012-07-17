@@ -9,10 +9,7 @@ import cl.uv.proyecto.mensajeria.ejb.EmailEJBLocal;
 import cl.uv.proyecto.persistencia.ejb.EstadoSolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.TipoPrioridadFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.EstadoSolicitudRequerimiento;
-import cl.uv.proyecto.persistencia.entidades.Funcionario;
-import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
-import cl.uv.proyecto.persistencia.entidades.TipoPrioridad;
+import cl.uv.proyecto.persistencia.entidades.*;
 import java.util.Date;
 import java.util.Random;
 import javax.ejb.EJB;
@@ -28,8 +25,9 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     private final long MOD = 1000L;
     private final long DESPLAZAMIENTO = 10000000000L;
     private final long TIME_INIT = 1341773584868L;
-    
     private final short PRIORIDAD_INICIAL = 0;
+    private final int CIERRE = 0;
+
 
     @EJB
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
@@ -92,25 +90,77 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitudFacade.edit(solicitud);
     }
     
-    @Override
-    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo){
+    private void cerrarSolicitud(SolicitudRequerimiento solicitud){
         solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(EstadoSR.CERRADA));
         solicitud.setFechaCierre(new Date());
         solicitudFacade.edit(solicitud);
+    }
+    
+    @Override
+    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo){
+        cerrarSolicitud(solicitud);
         if(enviarCopiaCorreo){
             String email = solicitud.getSolicitante().getCorreoUv();
-            String asunto = "La solicitud "+solicitud.getCodigoConsulta()+" fue cerrada.";
-            String mensaje = "[Codigo:"+solicitud.getCodigoConsulta()+"]["+solicitud.getAsunto()+"]\n"
-                           + "Respuesta:"+solicitud.getRespuesta()+"\n\n"
-                           + "Para mayor informacion ingrese a su perfil dentro del sistema.";
+            String asunto = crearAsunto(solicitud, CIERRE);
+            String mensaje = crearMensaje(solicitud, CIERRE);
             emailEJB.enviarEmail(email, asunto, mensaje);
         }
     }
     
     @Override
-    public void enviarRespuestaManual(SolicitudRequerimiento solicitud){
+    public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto){
+        cerrarSolicitud(solicitud);
+        asunto = (asunto.isEmpty())?crearAsunto(solicitud, CIERRE): asunto;
+        String mensaje = crearMensaje(solicitud, CIERRE);
+        emailEJB.enviarEmail(direcciones, asunto, mensaje);
     
     }
+    
+    @Override
+    public void transferirSolicitud(SolicitudRequerimiento solicitud, Area nuevaAreaResponsable, String motivoTransferencia){
+        solicitud.setJustificacionTrasnferencia(motivoTransferencia);
+        solicitud.setAreaResponsable(nuevaAreaResponsable);
+        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(EstadoSR.TRANSFERIDA));
+        solicitudFacade.edit(solicitud);
+    }
+    
+    @Override
+    public void asignarSolicitud(SolicitudRequerimiento solicitud){
+        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(EstadoSR.ASIGNADA));
+        solicitudFacade.edit(solicitud);
+    }
+    
+    private String crearMensaje(SolicitudRequerimiento solicitud, int tipoMensaje){
+        String mensaje = "";
+        switch (tipoMensaje) {
+            case CIERRE:
+                mensaje = "<strong>[Codigo: "+solicitud.getCodigoConsulta()+" ]["+solicitud.getAsunto()+"]</strong>"+
+                          "<div><br/><strong>Respuesta:</strong><br/></div>"+
+                           solicitud.getRespuesta()+
+                           "<br/><div>Para mayor información ingrese al sistema</div>";
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
+       return mensaje;
+    }
+    
+    private String crearAsunto(SolicitudRequerimiento solicitud, int tipoAsunto){
+        String asunto = "";
+        switch (tipoAsunto) {
+            case CIERRE:
+                asunto = "La solicitud "+solicitud.getCodigoConsulta()+" fue cerrada.";
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
+       return asunto;
+    }
+    
+    
+    
    
 }
 
