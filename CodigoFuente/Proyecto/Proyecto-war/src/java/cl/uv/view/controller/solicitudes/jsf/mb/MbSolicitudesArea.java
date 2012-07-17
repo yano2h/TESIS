@@ -4,7 +4,8 @@
  */
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
-import cl.uv.proyecto.persistencia.ejb.*;
+import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
+import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
@@ -17,10 +18,10 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import org.primefaces.event.SelectEvent;
 
@@ -78,7 +79,7 @@ public class MbSolicitudesArea implements Serializable {
         for (FuncionarioDisico f: funcionariosArea) {
             solicitudFacade.contarSolicitudes(f);
         }
-
+        
     }
 
     public void setMbDetalleSolicitud(MbDetalleSolicitud mbDetalleSolicitud) {
@@ -118,6 +119,10 @@ public class MbSolicitudesArea implements Serializable {
     }
 
     public String getEmailsRespuestaManual() {
+        if(emailsRespuestaManual.isEmpty()){
+            emailsRespuestaManual = mbDetalleSolicitud.getSolicitud().getSolicitante().getCorreoUv();
+        }
+
         return emailsRespuestaManual;
     }
 
@@ -188,20 +193,45 @@ public class MbSolicitudesArea implements Serializable {
             mbDetalleSolicitud.getSolicitud().setRespuesta(respuesta);
             solicitudEJB.rechazarSolicitud(mbDetalleSolicitud.getSolicitud());
         }
+        System.out.println("REXAZAR");
     }
 
     public void guardarModificacion() {
         solicitudFacade.edit(mbDetalleSolicitud.getSolicitud());
     }
 
-    public void enviarRespuestaDirecta(ActionEvent event) {
-        System.out.println("0 - Respuesta:"+respuesta);
+    public void enviarRespuestaDirecta() {
         if (!respuesta.isEmpty()) {
-            System.out.println("Respuesta:"+respuesta);
             mbDetalleSolicitud.getSolicitud().setRespuesta(respuesta);
             solicitudEJB.enviarRespuestaDirecta(mbDetalleSolicitud.getSolicitud(), enviarMail);
         }
         respuesta="";
         enviarMail = false;
+    }
+    
+    public void enviarRespuestaManual(){
+        if(!respuesta.isEmpty()){
+            String[] direcciones = emailsRespuestaManual.replaceAll(" ", "").split(",");
+            mbDetalleSolicitud.getSolicitud().setRespuesta(respuesta);
+            solicitudEJB.enviarRespuestaManual(mbDetalleSolicitud.getSolicitud(), direcciones,asuntoRespuestaManual);
+        }
+        
+    }
+    
+    public void transferirSolicitud(){
+        if(!motivoTransferencia.isEmpty()){
+            solicitudEJB.transferirSolicitud(mbDetalleSolicitud.getSolicitud(), nuevaArea, motivoTransferencia);
+        }
+        motivoTransferencia="";
+    }
+    
+    public void asignarSolicitud(){
+        if(mbDetalleSolicitud.getSolicitud().getResponsable() == null){
+            JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al asignar responsable solicitud", "Debe seleccionar un funcionario para poder asignar la solicitud "));  
+        }else{
+            JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignacion Exitosa", "La solicitud fue asignada exitosamente a: "+mbDetalleSolicitud.getSolicitud().getResponsable().getNombre()+" "+mbDetalleSolicitud.getSolicitud().getResponsable().getApellidoPaterno()+" "+mbDetalleSolicitud.getSolicitud().getResponsable().getApellidoMaterno()));  
+            solicitudEJB.asignarSolicitud(mbDetalleSolicitud.getSolicitud());
+        }
+        
     }
 }
