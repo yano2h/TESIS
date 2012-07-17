@@ -13,10 +13,7 @@ import java.awt.Stroke;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.*;
 
 /**
  *
@@ -92,7 +89,9 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @Override
     public List<SolicitudRequerimiento> getSolicitudesAsignadas(FuncionarioDisico funcionarioDisico) {
-        return funcionarioDisico.getSolicitudesRequerimientosAsignadas();
+        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.responsable = :responsable ORDER BY s.fechaEnvio DESC");
+        q.setParameter("responsable", funcionarioDisico);
+        return q.getResultList();
     }
 
     @Override
@@ -201,11 +200,11 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
         }
         
         if (minDate != null) {
-            q.setParameter("minFechaEnvio", minDate);
+            q.setParameter("minFechaEnvio", minDate, TemporalType.DATE);
         }
         
         if (maxDate != null) {
-            q.setParameter("maxFechaEnvio", maxDate);
+            q.setParameter("maxFechaEnvio", maxDate, TemporalType.DATE);
         }
         
         return q.getResultList();
