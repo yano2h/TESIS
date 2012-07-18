@@ -38,8 +38,43 @@ INSERT INTO FUNCIONARIO (`rut`, `nombre`, `apellido_paterno`, `apellido_materno`
 (17010101, 'Alberto Felipe', 'Alvarez', 'Gonzales', 'alberto.felipe@uv.cl', NULL, NULL),
 (15409873, 'Carlos Gillermo', 'Villalon', 'Gonzales', 'felipe.villalon@uv.cl', NULL, NULL),
 (15409873, 'Andres Mauricio', 'Plaza', 'Rivera', 'andres.plaza@uv.cl', NULL, NULL);
+(18000000, 'Alejandro Andres', 'Alvarez', 'Ahumada', 'yano2h@gmail.com', '2012-07-18 16:53:56', '2012-07-12 16:42:20'),
+(19000000, 'Rodrigo', 'Cabrera', 'Muñoz', 'rodrigo.cabrera@uv.cl', NULL, NULL),
+(20000000, 'Sergio', 'Valdivia', 'Castro', 'sergio.valdivia@uv.cl', NULL, NULL);
+
 
 INSERT INTO FUNCIONARIO_DISICO (`rut`, `area`, `cargo`, `anexo`)VALUES 
-(16775578, 1, 'Ayudante', '0000');
+(16775578, 1, 'Ayudante', '0000'),
+(18000000, 1, 'Ayudante', '2145'),
+(19000000, 1, 'Analista/Desarrollo de Sistemas', '2546'),
+(20000000, 1, 'Analista/Desarrollo de Sistemas', '3569');
 
+
+INSERT INTO NOTIFICACION values
+(null,CURRENT_TIMESTAMP,'Notificacion 11', false,16775578),
+(null,CURRENT_TIMESTAMP,'Notificacion 12', false,16775578),
+(null,CURRENT_TIMESTAMP,'Notificacion 13', false,16775578),
+(null,CURRENT_TIMESTAMP,'Notificacion 14', false,16775578),
+(null,CURRENT_TIMESTAMP,'Notificacion 15', false,16775578),
+(null,CURRENT_TIMESTAMP,'Notificacion 16', false,16775578),
+(null,CURRENT_TIMESTAMP,'Notificacion 17', false,16775578),
+(null,CURRENT_TIMESTAMP,'Notificacion 18', false,16775578),
+(null,CURRENT_TIMESTAMP,'Notificacion 19', false,16775578),
+(null,CURRENT_TIMESTAMP,'Notificacion 20', false,16775578);
+
+INSERT INTO ESTADO_PROYECTO values
+(1, 'Activo'),
+(2, 'Espera HH disponible'),
+(3, 'Consulta'),
+(4, 'Detenido por Prioridad'),
+(5, 'Detenido por Cambio de contraparte'),
+(6, 'Detenido por Requerimiento'),
+(7, 'Espera Por revisión Unidad'),
+(8, 'Espera Reunión coordinación'),
+(9, 'Finalizado');
+
+INSERT INTO TIPO_PROYECTO values
+(1, 'Desarrollo'),
+(2, 'Investigacion'),
+(3, 'Migracion de Datos');
 
