@@ -6,6 +6,7 @@ import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
 import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -187,6 +188,27 @@ public class FuncionarioDisicoController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
+    public SelectItem[] getItemsAvailableSelectManyNombreCompleto() {
+        List<FuncionarioDisico> entities = ejbFacade.findAll();
+        SelectItem[] listaItems = new SelectItem[entities.size()];
+        int i = 0;
+        for (FuncionarioDisico f : entities) {
+            listaItems[i++] = new SelectItem(f, f.getNombre()+" "+f.getApellidoPaterno()+" "+f.getApellidoMaterno());
+        }
+        return listaItems;
+    }
+
+    public SelectItem[] getItemsAvailableSelectOneNombreCompleto() {
+        List<FuncionarioDisico> entities = ejbFacade.findAll();
+        SelectItem[] listaItems = new SelectItem[entities.size()];
+        int i = 0;
+        listaItems[i++] = new SelectItem("","---");
+        for (FuncionarioDisico f : entities) {
+            listaItems[i++] = new SelectItem(f, f.getNombre()+" "+f.getApellidoPaterno()+" "+f.getApellidoMaterno());
+        }
+        return listaItems;
+    }
+    
     @FacesConverter(forClass = FuncionarioDisico.class)
     public static class FuncionarioDisicoControllerConverter implements Converter {
 

@@ -5,8 +5,15 @@
 package cl.uv.view.controller.proyecto.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
+import cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacadeLocal;
+import cl.uv.proyecto.persistencia.ejb.ProyectoFacadeLocal;
+import cl.uv.proyecto.persistencia.ejb.RolProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.*;
+import cl.uv.proyecto.persistencia.jsf.mb.RolProyectoController;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
+import cl.uv.view.controller.base.utils.JsfUtils;
+import cl.uv.view.controller.base.utils.Resources;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -22,20 +29,27 @@ import javax.faces.model.SelectItem;
  */
 @ManagedBean
 @ViewScoped
-public class MbProyecto {
+public class MbProyecto implements Serializable{
 
     @EJB
     private FuncionarioDisicoFacadeLocal funcionarioDisicoFacade;
+    @EJB
+    private RolProyectoFacadeLocal rolProyectoFacade;
+    @EJB
+    private ProyectoFacadeLocal proyectoFacade;
+    @EJB
+    private ParticipanteProyectoFacadeLocal participanteProyectoFacade;
+    
     @ManagedProperty(value = "#{mbFuncionarioInfo}")
     private MbFuncionarioInfo mbFuncionarioInfo;
     
     private List<FuncionarioDisico> funcionariosArea;
-    private List<FuncionarioDisico> funcionariosAreaDisponibles;
     private List<ParticipanteProyecto> participantes;
     private ParticipanteProyecto nuevoParticipanteProyecto;
-    private ParticipanteProyecto participanteSelected;
     private FuncionarioDisico jefeProyecto;
-    private RolProyecto rolProyecto;
+    private List<RolProyecto> rolesProyecto;
+    private RolProyecto rolJefeProyecto;
+    
     private Proyecto nuevoProyecto;
     
     public MbProyecto() {
@@ -47,13 +61,15 @@ public class MbProyecto {
         nuevoParticipanteProyecto =  new ParticipanteProyecto();
         participantes = new ArrayList<ParticipanteProyecto>();
         funcionariosArea = funcionarioDisicoFacade.buscarFuncrionariosPorArea(mbFuncionarioInfo.getFuncionario().getArea());
+        rolJefeProyecto = rolProyectoFacade.find(new Short(Resources.getValue("const", "RolProyecto_JP")));
+        rolesProyecto = rolProyectoFacade.findAll();
+        rolesProyecto.remove(rolJefeProyecto);
     }
 
     public void setMbFuncionarioInfo(MbFuncionarioInfo mbFuncionarioInfo) {
         this.mbFuncionarioInfo = mbFuncionarioInfo;
     }
 
-    
     public Proyecto getNuevoProyecto() {
         return nuevoProyecto;
     }
@@ -86,13 +102,11 @@ public class MbProyecto {
         this.jefeProyecto = jefeProyecto;
     }
 
-    public RolProyecto getRolProyecto() {
-        return rolProyecto;
+    public SelectItem[] getRolesDisponibles() {
+        return JsfUtils.getSelectItems(rolesProyecto, "getNombreRol", false);
     }
 
-    public void setRolProyecto(RolProyecto rolProyecto) {
-        this.rolProyecto = rolProyecto;
-    }
+  
 
     public List<ParticipanteProyecto> getParticipantes() {
         return participantes;
@@ -100,23 +114,6 @@ public class MbProyecto {
 
     public void setParticipantes(List<ParticipanteProyecto> participantes) {
         this.participantes = participantes;
-    }
-
-    public ParticipanteProyecto getParticipanteSelected() {
-        return participanteSelected;
-    }
-
-    public void setParticipanteSelected(ParticipanteProyecto participanteSelected) {
-        this.participanteSelected = participanteSelected;
-    }
-    
-    
-    public List<FuncionarioDisico> getFuncionariosAreaDisponibles() {
-        return funcionariosAreaDisponibles;
-    }
-
-    public void setFuncionariosAreaDisponibles(List<FuncionarioDisico> funcionariosAreaDisponibles) {
-        this.funcionariosAreaDisponibles = funcionariosAreaDisponibles;
     }
     
     public SelectItem[] getItemsAvailableSelectManyNombreCompleto() {
@@ -128,17 +125,41 @@ public class MbProyecto {
         return listaItems;
     }
     
-    public void agregarParticipante(){
-        System.out.println("::"+nuevoParticipanteProyecto.getParticipante());
-        funcionariosArea.remove(nuevoParticipanteProyecto.getParticipante());
-        nuevoParticipanteProyecto.setProyecto(nuevoProyecto);
-        participantes.add(nuevoParticipanteProyecto);
-        nuevoParticipanteProyecto = new ParticipanteProyecto();
-    }
+//    public void agregarParticipante(){
+//        System.out.println("::"+nuevoParticipanteProyecto.getParticipante());
+//        System.out.println("::"+nuevoParticipanteProyecto.getRol());
+//        funcionariosArea.remove(nuevoParticipanteProyecto.getParticipante());
+//     //   nuevoParticipanteProyecto.setProyecto(nuevoProyecto);
+//        nuevoParticipanteProyecto.setParticipanteProyectoPK(new ParticipanteProyectoPK());
+//        participantes.add(nuevoParticipanteProyecto);
+//     //   nuevoParticipanteProyecto = new ParticipanteProyecto();
+//    }
+//    
+//    public void quitarParticipante(ParticipanteProyecto p){
+//        System.out.println("Eliminar"+p);
+//        funcionariosArea.add(p.getParticipante());
+//        System.out.println("Size"+participantes.size());
+//        participantes.remove(p);
+//        System.out.println("Size"+participantes.size());
+//    }
+//    
+//    public void fijarJefeProyecto(){
+//        System.out.println("Jefe:"+jefeProyecto);
+//        
+//        ParticipanteProyecto p = new ParticipanteProyecto();
+//        p.setRol(rolJefeProyecto);
+//        p.setParticipante(jefeProyecto);
+//        participantes.add(p);
+//        funcionariosArea.remove(jefeProyecto);
+//    }
     
-    public void quitarParticipante(){
-        funcionariosArea.add(participanteSelected.getParticipante());
-        participantes.remove(participanteSelected);
+    public void crearProyecto(){
+        System.out.println("CREAR");
+        proyectoFacade.create(nuevoProyecto);
+        ParticipanteProyecto p = new ParticipanteProyecto(jefeProyecto.getRut(), nuevoProyecto.getIdProyecto());
+        p.setProyecto(nuevoProyecto);
+        p.setParticipante(jefeProyecto);
+        p.setRol(rolJefeProyecto);
+        participanteProyectoFacade.create(p);
     }
-    
 }

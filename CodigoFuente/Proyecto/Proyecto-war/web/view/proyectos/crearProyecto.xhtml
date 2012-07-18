@@ -11,69 +11,56 @@
             <h:outputText value="Crear Proyecto"/>
         </ui:define>
         <ui:define name="content">
+            <h:outputScript library="js" name="calendar-localization.js" />
+
             <h:form id="form_crear_proyecto">
                 <p:panel id="pnl_crear_proyecto" header="Crear Nuevo Proyecto">
                     <h:panelGrid id="grid_crear_proyecto" columns="4">
                         <p:outputLabel value="Codigo Interno:" for="itxt_codigo_interno" styleClass="label_blod"/>
                         <p:inputText id="itxt_codigo_interno" value="#{mbProyecto.nuevoProyecto.codigoInterno}" required="true" maxlength="6" size="6"/>
 
-                        <p:outputLabel value="Nuevo Proyecto:" for="itxt_nombre_proyecto" styleClass="label_blod" style="margin-left: 25px;"/>
+                        <p:outputLabel value="Nombre Proyecto:" for="itxt_nombre_proyecto" styleClass="label_blod" style="margin-left: 25px;"/>
                         <p:inputText id="itxt_nombre_proyecto" value="#{mbProyecto.nuevoProyecto.nombre}" required="true" maxlength="45" size="45"/>
                     </h:panelGrid>
-                    <h:panelGrid columns="2" style="margin-top: 5px;">
+                    <h:panelGrid columns="2" style="margin-top: 5px;line-height: 1.4em;">
                         <p:outputLabel value="Tipo Proyecto:" for="slct_tipo_proyecto" styleClass="label_blod"/>
-                        <p:selectOneMenu id="slct_tipo_proyecto" value="#{mbProyecto.nuevoProyecto.tipoProyecto}" required="true" style="min-width: 200px;margin-left: 5px;">
+                        <p:selectOneMenu id="slct_tipo_proyecto" value="#{mbProyecto.nuevoProyecto.tipoProyecto}" required="true" style="min-width: 250px;margin-left: 5px;">
                             <f:selectItem itemValue="" itemLabel="Seleccione un tipo Proyecto"/>
                             <f:selectItems value="#{tipoProyectoController.itemsAvailableSelectMany}"/>
                         </p:selectOneMenu>
-                    </h:panelGrid>
-                    <br/>
-                    <h:panelGrid>
-                        <p:outputLabel value="Descripción:" for="itxta_descripcion" styleClass="label_blod"/>
-                        <p:inputTextarea id="itxta_descripcion" value="#{mbProyecto.nuevoProyecto.descripcion}" maxlength="255" rows="3" cols="76"/>
-                    </h:panelGrid>
-                    
-                    <p:separator style="height: 1px;margin-top: 10px;margin-bottom: 10px;"/>
-                    
-                    <h:panelGrid columns="2">
+
+                        <p:outputLabel value="Estado Proyecto:" for="slct_estado_proyecto" styleClass="label_blod"/>
+                        <p:selectOneMenu id="slct_estado_proyecto" value="#{mbProyecto.nuevoProyecto.estadoProyecto}" required="true" style="min-width: 250px;margin-left: 5px;">
+                            <f:selectItem itemValue="" itemLabel="Seleccione un Estado Proyecto"/>
+                            <f:selectItems value="#{estadoProyectoController.itemsAvailableSelectMany}"/>
+                        </p:selectOneMenu>
+
                         <p:outputLabel value="Jefe de Proyecto:" for="slct_jefe_proyecto" styleClass="label_blod"/>
-                        <p:selectOneMenu id="slct_jefe_proyecto" value="#{mbProyecto.jefeProyecto}" required="true">
+                        <p:selectOneMenu id="slct_jefe_proyecto" value="#{mbProyecto.jefeProyecto}" required="true" style="min-width: 250px;margin-left: 5px;">
                             <f:selectItem itemLabel="Seleccione un Jefe de Proyecto"/>
                             <f:selectItems value="#{mbProyecto.itemsAvailableSelectManyNombreCompleto}"/>
                         </p:selectOneMenu>
+
+                        <p:outputLabel value="Fecha de Inicio:" for="cal_fecha_ini" styleClass="label_blod"/>
+                        <p:calendar id="cal_fecha_ini" showOn="button" pattern="dd/MM/yyyy" locale="es" navigator="true" required="true" value="#{mbProyecto.nuevoProyecto.fechaInicio}"/>
                     </h:panelGrid>
-                    
-                    <h:outputText value="Otroa Participantes" styleClass="label label_blod"/>
-                    
-                    <h:panelGrid id="grid_participante" columns="3" >
-                        <p:selectOneMenu id="slct_participante" value="#{mbProyecto.nuevoParticipanteProyecto.participante}">
-                            <f:selectItems value="#{mbProyecto.itemsAvailableSelectManyNombreCompleto}"/>
-                        </p:selectOneMenu>
-                        
-                        <p:selectOneMenu id="slct_rol" value="#{mbProyecto.nuevoParticipanteProyecto.rol}">
-                            <f:selectItems value="#{rolProyectoController.itemsAvailableSelectMany}"/>
-                        </p:selectOneMenu>
-                        <p:commandButton value="Agregar" actionListener="#{mbProyecto.agregarParticipante}" update="table_participantes grid_participante" process="grid_participante"/>
+                    <br/>
+                    <h:panelGrid columns="1">
+                        <p:outputLabel value="Descripción:" for="itxta_descripcion" styleClass="label_blod"/>
+                        <p:inputTextarea id="itxta_descripcion" value="#{mbProyecto.nuevoProyecto.descripcion}" maxlength="255" rows="3" cols="76" required="true"/>
                     </h:panelGrid>
-                    
-                    <p:dataTable id="table_participantes" 
-                                 var="participante"
-                                 value="#{mbProyecto.participantes}"
-                                 rows="20" 
-                                 emptyMessage="Ninguna participante"
-                                 selectionMode="single"
-                                 selection="#{mbProyecto.participanteSelected}"
-                                 rowKey="#{participante.participanteProyectoPK}">
-                        
-                        <p:column headerText="Nombre Participante">
-                            <h:outputText value="#{participante.participante.nombre} #{participante.participante.apellidoPaterno} #{participante.participante.apellidoMaterno}" />
-                        </p:column>
-                        <p:column headerText="Rol">
-                            <h:outputText value="#{participante.rol.nombreRol}"/>
-                        </p:column>
-                    </p:dataTable>
+                    <h:panelGrid>
+                        <p:commandButton value="Crear" actionListener="#{mbProyecto.crearProyecto}" update="@form" oncomplete="if(!args.validationFailed){dlgExito.show();}"/>
+                    </h:panelGrid>
                 </p:panel>
+                <p:dialog id="dlg_creacion_exitosa" widgetVar="dlgExito" closable="false" resizable="false" modal="true">
+                    <h:outputText value="El proyecto #{mbProyecto.nuevoProyecto.nombre} fue creado exitosamente. Si desea agregar mas participantes puede hacerlo en el menu de edución"/>
+                    <p:commandButton value="Salir"/>
+                    <p:commandButton value="Crear Otro Proyecto"/>
+                    <p:commandButton value="Ir al menu de edicion"/>
+                </p:dialog>
             </h:form>
+
         </ui:define>
     </ui:composition>
 </html>
