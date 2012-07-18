@@ -5,6 +5,7 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.ParticipanteProyecto;
+import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -28,5 +29,6 @@ public interface ParticipanteProyectoFacadeLocal {
     List<ParticipanteProyecto> findRange(int[] range);
 
     int count();
-    
+ 
+    public List<ParticipanteProyecto> buscarParticipantesProyecto(Proyecto proyecto);
 }

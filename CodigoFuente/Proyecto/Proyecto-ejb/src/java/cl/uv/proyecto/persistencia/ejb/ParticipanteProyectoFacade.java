@@ -5,9 +5,12 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.ParticipanteProyecto;
+import cl.uv.proyecto.persistencia.entidades.Proyecto;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,4 +30,10 @@ public class ParticipanteProyectoFacade extends AbstractFacade<ParticipanteProye
         super(ParticipanteProyecto.class);
     }
     
+    @Override
+    public List<ParticipanteProyecto> buscarParticipantesProyecto(Proyecto proyecto){
+        Query q = em.createQuery("SELECT p FROM ParticipanteProyecto p WHERE p.proyecto = :proyecto");
+        q.setParameter("proyecto", proyecto);
+        return q.getResultList();
+    }
 }

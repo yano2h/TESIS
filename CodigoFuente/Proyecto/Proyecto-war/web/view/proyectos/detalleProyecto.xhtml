@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="title">
+            <h:outputText value="Detalle Proyecto"/>
+        </ui:define>
+        <ui:define name="content">  
+
+            <f:metadata>
+                <f:viewParam id="idProyecto" name="idProyecto" value="#{mbDetalleProyecto.idProyecto}" />
+                <f:event type="preRenderView" listener="#{mbDetalleProyecto.init}" />
+            </f:metadata>
+            <p:messages id="messages" showDetail="true"/>  
+
+            <h:form id="detalleProy" rendered="#{mbDetalleProyecto.proyecto != null}">
+                <h:outputScript library="js" name="calendar-localization.js" />
+
+                <p:panel id="panelDetalleProyecto" header="Detalle Proyecto" >
+                    <p:menubar style="height: 30px;" rendered="#{mbFuncionarioInfo.funcionario.rol eq const.Rol_JA}"> 
+                        <p:menuitem value="Editar" icon="ui-icon-pencil" />
+                        <p:menuitem value="Eliminar" icon="ui-icon-closethick" />
+                        <p:menuitem value="Ver Resumen Avance" icon="ui-icon-search" />
+                    </p:menubar>
+                    <br/>
+
+                    <h:panelGrid columns="2" styleClass="title_asunto">    
+                        <h:outputLabel value="Proyecto:" styleClass="label_blod" />
+                        <h:outputText id="nombreProy" value="#{mbDetalleProyecto.proyecto.codigoInterno}"/>    
+                    </h:panelGrid>
+                    <br/>
+
+                    <h:panelGroup>
+
+                        <h:panelGrid columns="2" >
+                            <h:outputText value="Nombre Proyecto:" styleClass="label_blod label" />
+                            <h:outputText id="itxt_nombre_proyecto" value="#{mbDetalleProyecto.proyecto.nombre}" style="width: 350px;"/>
+
+                            <h:outputText value="Codigo Interno:" styleClass="label_blod label"/>
+                            <h:outputText id="itxt_codigo_interno" value="#{mbDetalleProyecto.proyecto.codigoInterno}"/>
+
+                            <h:outputText value="Tipo Proyecto:" styleClass="label_blod label"/>
+                            <h:outputText id="slct_tipo_proyecto" value="#{mbDetalleProyecto.proyecto.tipoProyecto.nombreTipoProyecto}"/>
+
+                            <h:outputText value="Estado Proyecto:" styleClass="label_blod label"/>
+                            <h:outputText id="slct_estado_proyecto" value="#{mbDetalleProyecto.proyecto.estadoProyecto.nombreEstadoProyecto}"/>
+
+                            <h:outputText value="Fecha de Inicio:" styleClass="label_blod label"/>
+                            <h:outputText id="fecha_ini" value="#{mbDetalleProyecto.proyecto.fechaInicio}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+
+                            <h:outputText value="Fecha de Termino:" styleClass="label_blod label"/>
+                            <h:outputText id="fecha_ter" value="#{mbDetalleProyecto.proyecto.fechaTermino}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </h:panelGrid>
+                        <br/>
+                        <h:panelGrid columns="1">
+                            <h:outputText value="Descripción del Proyecto:" styleClass="label_blod label"/>
+                            <h:outputText id="itxta_descripcion" value="#{mbDetalleProyecto.proyecto.descripcion}"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                    <br/>
+                    <h:outputText value="Participantes del Proyecto:" styleClass="label label_blod"/>
+                    <p:dataTable id="tabla_participantes"
+                                 value="#{mbDetalleProyecto.proyecto.participantes}"
+                                 var="part">
+                        
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{part.participante.nombre}"/>
+                        </p:column>
+                        <p:column headerText="Apellido Paterno">
+                            <h:outputText value="#{part.participante.apellidoPaterno}"/>
+                        </p:column>
+                        <p:column headerText="Apellido Materno">
+                            <h:outputText value="#{part.participante.apellidoPaterno}"/>
+                        </p:column>
+                        <p:column headerText="Rol">
+                            <h:outputText value="#{part.rol.nombreRol}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

@@ -42,7 +42,7 @@
                         </p:selectOneMenu>
 
                         <p:outputLabel value="Fecha de Inicio:" for="cal_fecha_ini" styleClass="label_blod"/>
-                        <p:calendar id="cal_fecha_ini" showOn="button" pattern="dd/MM/yyyy" locale="es" navigator="true" required="true" value="#{mbProyecto.nuevoProyecto.fechaInicio}"/>
+                        <p:calendar id="cal_fecha_ini" showOn="button" pattern="dd/MM/yyyy" locale="es" navigator="true" required="true" value="#{mbProyecto.nuevoProyecto.fechaInicio}" style="margin-left: 5px;"/>
                     </h:panelGrid>
                     <br/>
                     <h:panelGrid columns="1">
@@ -53,11 +53,16 @@
                         <p:commandButton value="Crear" actionListener="#{mbProyecto.crearProyecto}" update="@form" oncomplete="if(!args.validationFailed){dlgExito.show();}"/>
                     </h:panelGrid>
                 </p:panel>
-                <p:dialog id="dlg_creacion_exitosa" widgetVar="dlgExito" closable="false" resizable="false" modal="true">
-                    <h:outputText value="El proyecto #{mbProyecto.nuevoProyecto.nombre} fue creado exitosamente. Si desea agregar mas participantes puede hacerlo en el menu de edución"/>
-                    <p:commandButton value="Salir"/>
-                    <p:commandButton value="Crear Otro Proyecto"/>
-                    <p:commandButton value="Ir al menu de edicion"/>
+                <p:dialog id="dlg_creacion_exitosa" widgetVar="dlgExito" closable="false" resizable="false" modal="true" width="390" header="Creacion Exitosa">
+                    <h:panelGrid>
+                        <h:outputText value="El proyecto \'#{mbProyecto.nuevoProyecto.nombre}\' fue creado exitosamente. Si desea agregar mas participantes puede hacerlo en el menu de edución"/>
+                        <br/>
+                        <h:panelGroup style="float: right;">
+                            <p:commandButton value="Crear Otro Proyecto" oncomplete="dlgExito.hide();" update="@all" action="crearProyecto"/>
+                            <p:commandButton value="Ir al menu de edicion" action="#"/>
+                            <p:commandButton value="Salir" action="#"/>
+                        </h:panelGroup>
+                    </h:panelGrid>
                 </p:dialog>
             </h:form>
 
