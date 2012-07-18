@@ -130,6 +130,19 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitudFacade.edit(solicitud);
     }
     
+    @Override
+    public void iniciarSolicitud(SolicitudRequerimiento solicitud){
+        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(EstadoSR.INICIADA));
+        solicitudFacade.edit(solicitud);
+    }
+    
+    @Override
+    public void enviarRespuestaJefeArea(SolicitudRequerimiento solicitud){
+        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(EstadoSR.FINALIZADA_SIN_RESPUESTA));
+        solicitudFacade.edit(solicitud);
+    }
+    
+    
     private String crearMensaje(SolicitudRequerimiento solicitud, int tipoMensaje){
         String mensaje = "";
         switch (tipoMensaje) {

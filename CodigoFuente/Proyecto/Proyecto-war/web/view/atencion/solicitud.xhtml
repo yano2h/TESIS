@@ -21,7 +21,7 @@
                 <h:outputScript library="js" name="calendar-localization.js" />
 
                 <p:panel id="panelDetalleSolicitud" header="Detalle Solicitud" >
-                    <p:menubar style="height: 30px;"> 
+                    <p:menubar style="height: 30px;" rendered="#{mbFuncionarioInfo.funcionario.rol eq const.Rol_JA and mbFuncionarioInfo.funcionario.area == mbDetalleSolicitud.solicitud.areaResponsable}"> 
                         <p:menuitem value="Asignar Responsable" icon="ui-icon-pin-s" onclick="dlgAsignarSolicitud.show();" 
                                     disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
                                                 mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA }"/>
@@ -34,7 +34,11 @@
                         <p:menuitem value="Convertir en Proyecto" icon="ui-icon-note" onclick="convProyecto.show();"
                                     disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
                                                 mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA }"/>
-                        <p:submenu label="Responder" icon="ui-icon-mail-closed">
+                        <p:menuitem value="Iniciar" icon="ui-icon-play" actionListener="#{mbMisSolicitudes.iniciarSolicitud}" process="@this" update="detalleSol" 
+                                    disabled="#{(mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ASIGNADA and
+                                                mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_PENDIENTE) or
+                                                mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
+                        <p:submenu label="Cerrar y Responder" icon="ui-icon-mail-closed">
                             <p:menuitem value="Respuesta Directa" onclick="respDirecta.show(); editorRespDirecta.focus();"
                                         disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
                                                     mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA and
@@ -47,13 +51,22 @@
                                                     mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
                         </p:submenu>
                     </p:menubar>
-                    <p:menubar style="height: 30px;" rendered="#{mbFuncionarioInfo.funcionario.rut == mbDetalleSolicitud.solicitud.responsable.rut}"> 
-                        <p:menuitem value="Iniciar" icon="ui-icon-pin-s" onclick="dlgAsignarSolicitud.show();" 
-                                    disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ASIGNADA and
-                                                mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_PENDIENTE }"/>
-                        <p:menuitem value="Cerrar" icon="ui-icon-transferthick-e-w" onclick="dlgTranferencia.show();"
-                                    disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_CERRADA or
-                                                mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_FINALIZADA_SIN_RESPUESTA }"/>
+
+                    <p:menubar style="height: 30px;" rendered="#{mbFuncionarioInfo.funcionario.rut == mbDetalleSolicitud.solicitud.responsable.rut and mbFuncionarioInfo.funcionario.rol eq const.Rol_FD}"> 
+                        <p:menuitem value="Iniciar" icon="ui-icon-play" actionListener="#{mbMisSolicitudes.iniciarSolicitud}"  
+                                    disabled="#{(mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ASIGNADA and
+                                                mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_PENDIENTE) or
+                                                mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
+                        <p:submenu label="Cerrar y Responder" icon="ui-icon-mail-closed">
+                            <p:menuitem value="Respuesta Directa" onclick="respDirecta.show(); editorRespDirecta.focus();"
+                                        disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_CERRADA or
+                                                    mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_FINALIZADA_SIN_RESPUESTA}"/>
+
+                            <p:menuitem value="Respuesta al Jefe de Area" onclick="respJA.show();"
+                                        disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_CERRADA or
+                                                    mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_FINALIZADA_SIN_RESPUESTA }"/>
+                        </p:submenu>
+
                     </p:menubar>
                     <br/>
 
@@ -102,7 +115,7 @@
                                     </h:outputText>
                                 </h:panelGrid>
                             </h:panelGroup>
-                            
+
                             <p:separator style="width:1px;height: 250px;margin-left: 20px;margin-right: 20px;"/>
 
                             <h:panelGroup>
@@ -155,7 +168,7 @@
 
                             <h:panelGrid columns="2" rowClasses="row_align_bottom" style="width: 100%" columnClasses="column_grid">
                                 <p:inputTextarea id="nuevoComentario" value="#{mbDetalleSolicitud.comentario}" rows="3" style="width: 98%;"/>
-                                <p:commandButton value="Comentar" actionListener="#{mbDetalleSolicitud.comentar}" update="nuevoComentario comentarios" icon="ui-icon-comment" process="comentarioPnl"/>
+                                <p:commandButton value="Comentar" actionListener="#{mbDetalleSolicitud.comentarFuncionario}" update="nuevoComentario comentarios" icon="ui-icon-comment" process="comentarioPnl"/>
                             </h:panelGrid>
                             <br/>
 
@@ -254,6 +267,23 @@
                     </h:panelGroup>
                 </p:dialog>
 
+                <!-- DIALOG RESPUESTA AL JEFE DE AREA -->
+                
+                <p:dialog id="dlg_repuesta_ja" modal="true" closable="false" resizable="false" width="500" widgetVar="respJA" header="Responder al Jefe de Area">
+                    <p class="label">
+                        Esta opcion le permite delegar al Jefe de Area la responsabilidad de enviar una respuesta al solicitante.
+                        ¿Por favor confirme que realmente deseara realizar esta acción?
+                    </p>
+                    <h:panelGroup style="float: right;margin-top: 10px;">
+                        <p:commandButton value="Confirmar" 
+                                         process="dlg_repuesta_ja"
+                                         update="panelDetalleSolicitud"
+                                         actionListener="#{mbMisSolicitudes.respuestaAlJefeDeArea}"
+                                         oncomplete="respJA.hide();"/>
+                        <p:commandButton value="Cancelar" onclick="respJA.hide();"/>
+                    </h:panelGroup>
+                </p:dialog>
+
                 <!-- DIALOG TRANSFERENCIA -->
 
                 <p:dialog id="dlg_transferir" header="Transferir Solicitud" widgetVar="dlgTranferencia" modal="true" closable="false" resizable="false">
@@ -294,6 +324,8 @@
                     </h:panelGroup>
                 </p:dialog>
 
+                <!-- DIALOG CONVERTIR EN PROYECTO -->
+                
                 <p:dialog id="dlg_convertir_proyecto" modal="true" closable="false" resizable="false" width="500" widgetVar="convProyecto" header="Convertir Solicitud en Proyecto">
                     <p class="label">
                         Esta opcion le permite crear un nuevo proyecto a partir de esta solicitud y dar por cerrada automaticamente esta solicitud.
@@ -306,7 +338,7 @@
                         <p:commandButton value="Cancelar" onclick="convProyecto.hide();"/>
                     </h:panelGroup>
                 </p:dialog>
-                
+
                 <!-- DIALOG ASIGNAR -->
                 <p:growl id="growlAsignacion" showDetail="true" sticky="false" /> 
                 <p:dialog id="dlg_asignarSolicitud" header="Asignar Solicitud" widgetVar="dlgAsignarSolicitud" modal="true" closable="false" resizable="false" width="640">
@@ -315,12 +347,12 @@
                         <p:selectOneMenu id="prioridadMenu" value="#{mbDetalleSolicitud.solicitud.prioridadSolicitud}">
                             <f:selectItems value="#{tipoPrioridadController.itemsAvailableSelectMany}"/>
                         </p:selectOneMenu>
-                        
+
                         <p:outputLabel value="Fecha de Vencimiento:" for="fechaVencimientoCalendar" styleClass="label_blod" style="margin-left: 40px;"/>
                         <p:calendar id="fechaVencimientoCalendar" locale="es" 
                                     value="#{mbDetalleSolicitud.solicitud.fechaVencimiento}" 
                                     mindate="#{mbSolicitudesArea.minDate}" showOn="button" pattern="dd/MM/yyyy  HH:mm"/>
-                        
+
                     </h:panelGrid>
 
                     <p:dataTable value="#{mbSolicitudesArea.funcionariosArea}" 

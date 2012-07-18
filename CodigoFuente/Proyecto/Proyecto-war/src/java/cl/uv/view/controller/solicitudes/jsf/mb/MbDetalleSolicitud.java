@@ -9,6 +9,7 @@ import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.ComentarioSolicitud;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
 import cl.uv.view.controller.base.jsf.mb.MbUserInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import java.io.Serializable;
@@ -28,40 +29,42 @@ import org.primefaces.event.DateSelectEvent;
  */
 @ManagedBean
 @ViewScoped
-public class MbDetalleSolicitud implements Serializable{
+public class MbDetalleSolicitud implements Serializable {
 
     @EJB
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
     @EJB
     private ComentarioSolicitudFacadeLocal comentarioFacade;
-    
-    @ManagedProperty(value="#{mbUserInfo}")
+    @ManagedProperty(value = "#{mbUserInfo}")
     private MbUserInfo mbUserInfo;
-    
+    @ManagedProperty(value = "#{mbFuncionarioInfo}")
+    private MbFuncionarioInfo mbFuncionarioInfo;
     private String codigo;
     private String comentario;
     private ComentarioSolicitud selectedComentario;
     private SolicitudRequerimiento solicitud;
-    
-    
+
     public MbDetalleSolicitud() {
-        comentario="";
-        codigo="";
+        comentario = "";
+        codigo = "";
     }
-    
-    @PostConstruct
-    public void post(){
-        System.out.println("POST");
-    }
-    
-    public void init(){
+
+    public void init() {
         solicitud = solicitudFacade.buscarPorCodigo(codigo);
         FuncionarioDisico f = new FuncionarioDisico();
-        if(solicitud == null){
-            JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error:", "La solicitud con codigo "+codigo+" no pudo ser encontrada"));
-        }else{
+        if (solicitud == null) {
+            JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error:", "La solicitud con codigo " + codigo + " no pudo ser encontrada"));
+        } else {
             solicitud.setComentarios(comentarioFacade.buscarComentariosPorSolicitud(solicitud.getIdSolicitudRequerimiento()));
         }
+    }
+
+    public void setMbUserInfo(MbUserInfo mbUserInfo) {
+        this.mbUserInfo = mbUserInfo;
+    }
+
+    public void setMbFuncionarioInfo(MbFuncionarioInfo mbFuncionarioInfo) {
+        this.mbFuncionarioInfo = mbFuncionarioInfo;
     }
 
     public String getCodigo() {
@@ -96,9 +99,8 @@ public class MbDetalleSolicitud implements Serializable{
         this.selectedComentario = selectedComentario;
     }
 
-    
-    public void comentar(ActionEvent event){
-        if(!comentario.isEmpty()){
+    public void comentar(ActionEvent event) {
+        if (!comentario.isEmpty()) {
             ComentarioSolicitud c = new ComentarioSolicitud();
             c.setAutor(mbUserInfo.getFuncionario());
             c.setFecha(new Date());
@@ -107,21 +109,29 @@ public class MbDetalleSolicitud implements Serializable{
             c.setSolicitudRequerimiento(solicitud);
             comentarioFacade.create(c);
         }
-        comentario="";
+        comentario = "";
     }
 
-    public void setMbUserInfo(MbUserInfo mbUserInfo) {
-        this.mbUserInfo = mbUserInfo;
+    public void comentarFuncionario(ActionEvent event) {
+        if (!comentario.isEmpty()) {
+            ComentarioSolicitud c = new ComentarioSolicitud();
+            c.setAutor(mbFuncionarioInfo.getFuncionario());
+            c.setFecha(new Date());
+            c.setVisible(true);
+            c.setComentario(comentario);
+            c.setSolicitudRequerimiento(solicitud);
+            comentarioFacade.create(c);
+        }
+        comentario = "";
     }
-    
-    public void eliminarComentario(ActionEvent event){
+
+    public void eliminarComentario(ActionEvent event) {
         selectedComentario = (ComentarioSolicitud) event.getComponent().getAttributes().get("comentario");
         selectedComentario.setVisible(false);
         comentarioFacade.edit(selectedComentario);
     }
-    
-    public void fijarFechaVencimento(DateSelectEvent event){
+
+    public void fijarFechaVencimento(DateSelectEvent event) {
         solicitud.setFechaVencimiento(event.getDate());
     }
-    
 }

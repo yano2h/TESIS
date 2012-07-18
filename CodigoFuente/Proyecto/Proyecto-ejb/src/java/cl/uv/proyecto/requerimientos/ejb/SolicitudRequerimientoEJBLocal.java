@@ -29,4 +29,6 @@ public interface SolicitudRequerimientoEJBLocal {
     public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto);
     public void transferirSolicitud(SolicitudRequerimiento solicitud, Area nuevaAreaResponsable, String motivoTransferencia);
     public void asignarSolicitud(SolicitudRequerimiento solicitud);
+    public void iniciarSolicitud(SolicitudRequerimiento solicitud);
+    public void enviarRespuestaJefeArea(SolicitudRequerimiento solicitud);
 }

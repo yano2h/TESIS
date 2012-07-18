@@ -6,7 +6,6 @@ package cl.uv.view.controller.base.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
-import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
 import java.util.Date;

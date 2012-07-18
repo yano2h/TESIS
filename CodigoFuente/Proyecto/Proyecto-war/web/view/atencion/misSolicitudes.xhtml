@@ -11,8 +11,8 @@
         </ui:define>
         <ui:define name="content">  
             <h:form>
-            <p:panel id="sol" header="Solicitudes del Area" style="min-height: 350px;">
-             <p:dataTable id="tableMisSolicitudes" 
+                <p:panel id="sol" header="Solicitudes del Area" style="min-height: 350px;">
+                    <p:dataTable id="tableMisSolicitudes" 
                                  var="solicitud" 
                                  value="#{mbMisSolicitudes.misSolicitudes}" 
                                  paginator="true"  
@@ -25,16 +25,16 @@
                                  rowStyleClass="#{solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq const.EstadoSR_ASIGNADA ? 'row_solicitud_nueva':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq const.EstadoSR_VENCIDA ? 'row_solicitud_vencida':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq EstadoSR_CERRADA?'row_solicitud_cerrada':null))}"
                                  style="min-width: 350px;"
                                  >
-                        
-                 <p:ajax event="rowSelect" listener="#{mbMisSolicitudes.onRowSelect}"/>
-                        
+
+                        <p:ajax event="rowSelect" listener="#{mbMisSolicitudes.onRowSelect}"/>
+
                         <p:column headerText="Codigo" 
                                   sortBy="#{solicitud.codigoConsulta}" 
                                   style="width: 60px;">  
 
                             <h:outputText value="#{solicitud.codigoConsulta}" />  
                         </p:column>
-                        
+
                         <p:column headerText="Asunto" 
                                   sortBy="#{solicitud.asunto}"
                                   filterBy="#{solicitud.asunto}"
@@ -57,21 +57,21 @@
                                   filterMatchMode="exact">
                             <h:outputText value="#{solicitud.tipoSolicitud.nombreTipoSolicitud}"/>
                         </p:column>
-                        
+
                         <p:column headerText="F.Envio" 
                                   sortBy="#{solicitud.fechaEnvio}" >  
                             <h:outputText value="#{solicitud.fechaEnvio}" >
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                             </h:outputText>  
                         </p:column>
-                        
+
                         <p:column headerText="F.Vencimiento" 
                                   sortBy="#{solicitud.fechaVencimiento}" >  
                             <h:outputText value="#{solicitud.fechaVencimiento}" >
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                             </h:outputText>  
                         </p:column>
-                        
+
                         <f:facet name="footer">
                             <p:commandButton value="Recargar" icon="ui-icon-arrowrefresh-1-w" 
                                              actionListener="#{mbMisSolicitudes.reload}" update="tableMisSolicitudes" style="text-align: left;"/>
