@@ -13,22 +13,22 @@
             <h:form>
                 <p:menu styleClass="menu_left"> 
                     <p:submenu label="Solicitudes">  
-                        <p:menuitem value="Resumen Atencion de Solicitudes" action="resumen?faces-redirect=true"/>
-                        <p:menuitem value="Solicitudes del Area" action="solicitudesArea?faces-redirect=true"/>  
-                        <p:menuitem value="Mis Solicitudes" action="misSolicitudes?faces-redirect=true"/>    
-                        <p:menuitem value="Buscar Solicitud" action="buscarSolicitud?faces-redirect=true"/>  
+                        <p:menuitem value="Resumen Atencion de Solicitudes" action="/view/atencion/resumen?faces-redirect=true"/>
+                        <p:menuitem value="Solicitudes del Area" action="/view/atencion/solicitudesArea?faces-redirect=true"/>  
+                        <p:menuitem value="Mis Solicitudes" action="/view/atencion/misSolicitudes?faces-redirect=true"/>    
+                        <p:menuitem value="Buscar Solicitud" action="/view/atencion/buscarSolicitud?faces-redirect=true"/>  
                     </p:submenu> 
                     
                     <p:submenu label="Proyectos">  
-                        <p:menuitem value="Proyectos del Area" action="ayudaSolicitante?faces-redirect=true"/>
-                        <p:menuitem value="Crear Proyecto" action="resumenFuncionario?faces-redirect=true"/>  
-                        <p:menuitem value="Buscar Proyecto" action="crearSolicitud?faces-redirect=true"/>                  
+                        <p:menuitem value="Proyectos del Area" action="/view/proyectos/proyectosArea?faces-redirect=true"/>
+                        <p:menuitem value="Crear Proyecto" action="/view/proyectos/crearProyecto?faces-redirect=true" rendered="#{mbFuncionarioInfo.funcionario.rol eq const.Rol_JA}"/>
+                        <p:menuitem value="Buscar Proyecto" action="/view/proyectos/buscarProyecto?faces-redirect=true"/>                  
                     </p:submenu>   
                     
                     <p:submenu label="Gestion de SCM">    
-                        <p:menuitem value="Mis Tareas SCM" action="crearSolicitud?faces-redirect=true"/>  
-                        <p:menuitem value="Asignar Tareas SCM" action="consultarSolicitud?faces-redirect=true"/>  
-                        <p:menuitem value="Ayuda" action="ayudaSolicitante?faces-redirect=true"/>  
+                        <p:menuitem value="Mis Tareas SCM" action="/view/scm/crearSolicitud?faces-redirect=true"/>  
+                        <p:menuitem value="Asignar Tareas SCM" action="/view/scm/consultarSolicitud?faces-redirect=true"/>  
+                        <p:menuitem value="Ayuda" action="/view/scm/ayudaSolicitante?faces-redirect=true"/>  
                     </p:submenu>   
                 </p:menu>
             </h:form>

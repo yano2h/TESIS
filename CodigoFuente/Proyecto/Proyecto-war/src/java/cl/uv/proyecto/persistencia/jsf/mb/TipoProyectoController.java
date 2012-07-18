@@ -4,6 +4,7 @@ import cl.uv.proyecto.persistencia.ejb.TipoProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.TipoProyecto;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
+import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -180,11 +181,11 @@ public class TipoProyectoController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        return JsfUtils.getSelectItems(ejbFacade.findAll(), "getNombreTipoProyecto",false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtils.getSelectItems(ejbFacade.findAll(), "getNombreTipoProyecto",true);
     }
 
     @FacesConverter(forClass = TipoProyecto.class)
