@@ -4,6 +4,8 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
+import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.persistencia.entidades.TareaScmProyecto;
 import java.util.List;
 import javax.ejb.Local;

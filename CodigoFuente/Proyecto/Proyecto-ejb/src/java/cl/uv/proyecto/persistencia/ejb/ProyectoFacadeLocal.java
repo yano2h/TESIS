@@ -5,6 +5,7 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.Area;
+import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import java.util.Date;
 import java.util.List;
@@ -35,4 +36,5 @@ public interface ProyectoFacadeLocal {
 
     public List<Proyecto> buscarProyectoPorFiltros(Proyecto proyecto, Date minDate, Date maxDate);
     
+    public List<Proyecto> buscarProyectoPorTareaFuncionario(FuncionarioDisico funcionarioDisico, Integer idTarea);
 }

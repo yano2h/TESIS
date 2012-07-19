@@ -5,6 +5,7 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.Area;
+import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import java.util.Date;
 import java.util.List;
@@ -114,5 +115,13 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
         }
         
         return q.getResultList();
+    }
+    
+    @Override
+    public List<Proyecto> buscarProyectoPorTareaFuncionario(FuncionarioDisico funcionarioDisico, Integer idTarea){
+        Query q = em.createQuery("SELECT t.proyecto FROM TareaScmProyecto t WHERE t.responsable = :funcionario AND t.tareaScm.idTareaScm = :idTareScm ");
+        q.setParameter("funcionario", funcionarioDisico);
+        q.setParameter("idTareScm", idTarea);
+        return q.getResultList(); 
     }
 }

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="title">
+            <h:outputText value="Identificacion de la Configuracion"/>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form>
+
+
+                <p:panel header="Identificacion de la Configuracion">       
+                    <p:panel header="Informacion Nuevo Item">
+                        <h:panelGrid columns="4" cellspacing="10">
+                            <p:outputLabel value="Identificador: " for="itxt_ident"/>
+                            <p:inputText id="itxt_ident" value="#{mbIdentificacionConfiguracion.nuevoItem.codigoIdentificadorIc}" required="true"/>
+
+                            <p:outputLabel value="Nombre Item: " for="itxt_nombre"/>
+                            <p:inputText id="itxt_nombre" value="#{mbIdentificacionConfiguracion.nuevoItem.nombreItemConfiguracion}" style="width: 200px;" required="true"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="4" cellspacing="10">
+                            <p:outputLabel value="Version Item: " for="itxt_version"/>
+                            <p:inputText id="itxt_version" value="#{mbIdentificacionConfiguracion.nuevoItem.version}" required="true"/>
+
+                            <p:outputLabel value="Fecha Ultima Modificación: " for="cal_fecha_modificacion"/>
+                            <p:calendar id="cal_fecha_modificacion" value="#{mbIdentificacionConfiguracion.nuevoItem.fechaUltimaModificacion}" required="true"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2" cellspacing="10">
+                            <p:outputLabel value="Ubicacion en la Biblioteca: " for="itxt_ubic_bibl"/>
+                            <p:inputText id="itxt_ubic_bibl" value="#{mbIdentificacionConfiguracion.nuevoItem.ubicacionEnBiblioteca}" style="width: 350px;" required="true"/>
+
+                            <p:outputLabel value="Responsable Item:" for="selct_resp"/>
+                            <p:selectOneMenu id="selct_resp" value="#{mbIdentificacionConfiguracion.nuevoItem.responsableItem}" required="true">
+                                <f:selectItem itemValue="" itemLabel="Selecciones un Responsable"/>
+                                <f:selectItems value="#{mbProyecto.itemsAvailableSelectManyNombreCompleto}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        
+                        <p:commandButton value="Añadir Item" actionListener="#{mbIdentificacionConfiguracion.addItem}" update="@form"/>
+                        
+                    </p:panel>
+
+                    
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
