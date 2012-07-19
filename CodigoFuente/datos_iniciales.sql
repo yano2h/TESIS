@@ -78,3 +78,25 @@ INSERT INTO TIPO_PROYECTO values
 (2, 'Investigacion'),
 (3, 'Migracion de Datos');
 
+INSERT INTO TAREAS_SCM values
+('1', 'Identificar y Nombrar Items de Configuracion', ''),
+('2', 'Solicitar un Cambio', ''),
+('3', 'Analizar Solicitudes de Cambio', ''),
+('4', 'Aprobar o Desaprobar las Solicitudes de Cambio', ''),
+('5', 'Implementar el Cambio', ''),
+('6', 'Actualizar Documentación en la Biblioteca de Software', ''),
+('7', 'Actualizar Codigo en la Biblioteca de Software', ''),
+('8', 'Completar Check-List', '');
+
+INSERT INTO ENTREGABLE values
+('1', 'Documento de Identificación de la Configuración', '1'),
+('2', 'Solicitud de Cambio', '2'),
+('3', 'Analisis de Solicitud de Cambio', '3'),
+('4', 'Documento del Usuario', '4'),
+('5', 'Documento de Implementacion de Cambios', '5'),
+('6', 'Actualización Biblioteca de Software', '6'),
+('7', 'Actualización Biblioteca de Software', '7'),
+('8', 'Check-List', '8');
+
+
+

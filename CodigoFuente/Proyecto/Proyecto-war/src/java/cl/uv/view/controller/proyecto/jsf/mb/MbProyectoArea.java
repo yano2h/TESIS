@@ -62,5 +62,10 @@ public class MbProyectoArea implements Serializable{
         JsfUtils.redirect("detalleProyecto.xhtml?idProyecto=" + proyectoSelected.getIdProyecto());
     }
     
+     public void onRowSelectSCM(){
+        JsfUtils.addParametro("proyecto", proyectoSelected);
+        JsfUtils.redirect("tareasScm.xhtml");
+    }
+    
     
 }

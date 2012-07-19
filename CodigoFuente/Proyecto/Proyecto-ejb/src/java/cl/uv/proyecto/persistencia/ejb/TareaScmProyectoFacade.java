@@ -4,10 +4,13 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.persistencia.entidades.TareaScmProyecto;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,6 +28,24 @@ public class TareaScmProyectoFacade extends AbstractFacade<TareaScmProyecto> imp
 
     public TareaScmProyectoFacade() {
         super(TareaScmProyecto.class);
+    }
+    
+    @Override
+    public List<TareaScmProyecto> buscarTareasSCMPorIdProyecto(Integer idProyecto){
+        Query q = em.createNamedQuery("TareaScmProyecto.findByIdProyecto");
+        q.setParameter("idProyecto", idProyecto);
+        return q.getResultList();
+    }
+    
+    @Override
+    public void guardarListaDeTareas(List<TareaScmProyecto> tareasScmProyecto){
+    for (TareaScmProyecto t : tareasScmProyecto) {
+           if( find(t.getTareaScmProyectoPK()) != null  ){
+               edit(t);
+           }else{
+               create(t);
+           }
+       }
     }
     
 }

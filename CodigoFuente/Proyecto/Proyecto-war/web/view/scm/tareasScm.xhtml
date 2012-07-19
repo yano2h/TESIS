@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="title">
+            <h:outputText value="Detalle Proyecto"/>
+        </ui:define>
+        <ui:define name="content">  
+
+            <h:form id="form_tareas_scm" rendered="#{mbTareasScm.proyecto != null}">
+                <h:outputScript library="js" name="calendar-localization.js" />
+                <p:panel id="pnl_tareas_scm" header="Definir Tareas SCM">
+
+                    <h:panelGrid columns="2">
+                        <p:selectOneMenu id="slct_tarea" value="#{mbTareasScm.tareaSelected}" style="width: 220px;" > 
+                            <f:selectItem itemValue="z" itemLabel="Seleccionar" itemDisabled="true"/>
+                            <f:selectItems value="#{mbTareasScm.selectItemsTareasScm}"  />  
+                        </p:selectOneMenu>
+                        <p:commandButton id="btn_add" value="Añadir Tarea" actionListener="#{mbTareasScm.addTarea}" update="tbl_tareas_scm_proyecto slct_tarea btn_add" 
+                                         disabled="#{empty mbTareasScm.tareasScm}"/>
+                    </h:panelGrid>
+                    <p:dataTable id="tbl_tareas_scm_proyecto"
+                                 value="#{mbTareasScm.tareasScmProyecto}"
+                                 var="tarea"
+                                 editable="true"
+                                 emptyMessage="No hay tareas añadidas">
+
+                        <p:column headerText="Tarea" style="width:200px">  
+                            <h:outputText value="#{tarea.tareaScm.nombreTarea}" />  
+                        </p:column> 
+
+                        <p:column headerText="Responsable" style="width:200px">  
+                            <p:cellEditor >  
+                                <f:facet name="output">
+                                    <h:outputText value="#{tarea.responsable.nombre} #{tarea.responsable.apellidoPaterno} #{tarea.responsable.apellidoMaterno}" />  
+                                </f:facet>   
+                                <f:facet name="input"> 
+                                    <p:selectOneMenu value="#{tarea.responsable}" style="width:225px">
+                                        <f:selectItems value="#{mbProyecto.itemsAvailableSelectManyNombreCompleto}"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>  
+                        </p:column> 
+
+                        <p:column headerText="F.Inicio" style="width:50px">  
+                            <p:cellEditor >  
+                                <f:facet name="output">
+                                    <h:outputText value="#{tarea.fechaInicio}">  
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </f:facet>   
+                                <f:facet name="input"> 
+                                    <p:calendar value="#{tarea.fechaInicio}" pattern="dd/MM/yyyy"/>
+                                </f:facet>
+                            </p:cellEditor>  
+                        </p:column>
+                         <p:column headerText="F.Termino" style="width:50px">  
+                            <p:cellEditor >  
+                                <f:facet name="output">
+                                    <h:outputText value="#{tarea.fechaTermino}">  
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </f:facet>   
+                                <f:facet name="input"> 
+                                    <p:calendar value="#{tarea.fechaTermino}" pattern="dd/MM/yyyy"/>
+                                </f:facet>
+                            </p:cellEditor>  
+                        </p:column>
+                        
+                        <p:column headerText="Opciones" style="width:30px">  
+                            <p:rowEditor />  
+                        </p:column>  
+                    </p:dataTable>
+                    
+                    <h:panelGrid columns="2">
+                        <p:commandButton value="Guardar Cambios" actionListener="#{mbTareasScm.guardarCambios}" />
+                        <p:commandButton value="Cancelar" action="tareasScm?faces-redirect=true"/>
+                    </h:panelGrid>
+
+
+
+                </p:panel>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

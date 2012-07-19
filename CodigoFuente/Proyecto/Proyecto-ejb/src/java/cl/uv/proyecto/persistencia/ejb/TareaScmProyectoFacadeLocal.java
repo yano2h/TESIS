@@ -28,5 +28,8 @@ public interface TareaScmProyectoFacadeLocal {
     List<TareaScmProyecto> findRange(int[] range);
 
     int count();
-    
+
+    public List<TareaScmProyecto> buscarTareasSCMPorIdProyecto(Integer idProyecto);
+
+    public void guardarListaDeTareas(List<TareaScmProyecto> tareasScmProyecto);
 }
