@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="title">
+            <h:outputText value="Proyecto del Area"/>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form>
+                <p:poll id="poll" onstart="proggresBar.start()" interval="5" listener="#{mbTareasProyecto.listener}"/>
+                <p:panel header="Proyectos del Area">
+                    <h:panelGrid>
+                        <h:outputText id="titulo" value="Avance Proyecto:[#{mbTareasProyecto.proyecto.codigoInterno}] #{mbTareasProyecto.proyecto.nombre}" styleClass="title_italic"/>
+                        <br/>
+                        <h:panelGrid columns="2">
+                            <h:outputText id="label_avance" value="Avance General del Proyecto: "/>
+
+                            <p:progressBar id="proggres_bar_avance" value="#{mbTareasProyecto.porcetajeAvance}" style="width: 400px;"
+                                           labelTemplate="{value}%" ajax="true" widgetVar="proggresBar" interval="1000" styleClass="animated"/>
+                        </h:panelGrid>
+                        <br/>
+                    </h:panelGrid>
+
+                    <p:dataTable id="table_sol_area"
+                                 value="#{mbTareasProyecto.tareasProyecto}"
+                                 var="tarea" 
+                                 paginator="true" rows="20"
+                                 paginatorPosition="bottom"
+                                 >
+
+                        <p:ajax event="rowSelect" listener="#{mbTareasProyecto.onRowSelect}"/>
+
+                        <p:column headerText="F. Inicio Propuesta" style="width: 90px;">
+                            <h:outputText value="#{tarea.fechaInicioPropuesta}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Tarea" style="min-width: 250px;">
+                            <h:outputText value="#{tarea.tarea}"/>
+                        </p:column>
+
+                        <p:column headerText="Responsable" style="max-width: 250px;">
+                            <h:outputText value="#{tarea.responsableTarea.nombre} #{tarea.responsableTarea.apellidoPaterno} #{tarea.responsableTarea.apellidoMaterno}"/>
+                        </p:column>
+
+                        <p:column headerText="Avance" style="max-width: 90px;">
+                            <h:outputText value="#{tarea.nivelAvance}%"/>
+                        </p:column>
+
+                    </p:dataTable> 
+
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

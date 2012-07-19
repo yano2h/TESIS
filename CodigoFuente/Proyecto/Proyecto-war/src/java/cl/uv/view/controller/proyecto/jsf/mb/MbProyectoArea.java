@@ -8,6 +8,7 @@ import cl.uv.proyecto.persistencia.ejb.ProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -21,7 +22,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class MbProyectoArea {
+public class MbProyectoArea implements Serializable{
 
     @EJB
     private ProyectoFacadeLocal proyectoFacade;

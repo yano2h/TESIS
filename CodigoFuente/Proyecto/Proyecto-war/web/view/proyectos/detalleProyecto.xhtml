@@ -23,8 +23,8 @@
                 <p:panel id="panelDetalleProyecto" header="Detalle Proyecto" >
                     <p:menubar style="height: 30px;" rendered="#{mbFuncionarioInfo.funcionario.rol eq const.Rol_JA}"> 
                         <p:menuitem value="Editar" icon="ui-icon-pencil" />
-                        <p:menuitem value="Eliminar" icon="ui-icon-closethick" />
-                        <p:menuitem value="Ver Resumen Avance" icon="ui-icon-search" />
+                        <p:menuitem value="Eliminar" icon="ui-icon-closethick" onclick="confirmarEliminacion.show()"/>
+                        <p:menuitem value="Ver Resumen Avance" icon="ui-icon-search" action="#{mbDetalleProyecto.verResumenAvance}"/>
                     </p:menubar>
                     <br/>
 
@@ -70,7 +70,7 @@
                     <p:dataTable id="tabla_participantes"
                                  value="#{mbDetalleProyecto.proyecto.participantes}"
                                  var="part">
-                        
+
                         <p:column headerText="Nombre">
                             <h:outputText value="#{part.participante.nombre}"/>
                         </p:column>
@@ -85,6 +85,14 @@
                         </p:column>
                     </p:dataTable>
                 </p:panel>
+
+                <p:confirmDialog id="confirm_dlg_eliminacion" message="¿Esta seguro que realmente desea eliminar este proyecto del sistema?"  
+                                 header="Eliminar Proyecto" severity="info" widgetVar="confirmarEliminacion">
+                    <p:commandButton id="btn_confirmar" value="Si" oncomplete="confirmarEliminacion.hide()"  
+                                     actionListener="#{mbDetalleProyecto.eliminarProyecto}" action="proyectosArea?faces-redirect=true" />  
+                    <p:commandButton id="btn_cancelar" value="No" onclick="confirmarEliminacion.hide()" type="button" />
+
+                </p:confirmDialog>
 
             </h:form>
 

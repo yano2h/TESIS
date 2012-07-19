@@ -50,6 +50,17 @@ public class JsfUtils {
         nh.handleNavigation(ctx, null, action);
     }
 
+    public static void addParametro(String key, Object v){
+        getExternalContext().getSessionMap().put(key, v);
+    }
+    
+    public static Object getParametro(String key){
+        return getExternalContext().getSessionMap().get(key);
+    }
+    
+    public static Object removerParametro(String key){
+        return getExternalContext().getSessionMap().remove(key);
+    }
     public static void logout() {
         getExternalContext().invalidateSession();
     }

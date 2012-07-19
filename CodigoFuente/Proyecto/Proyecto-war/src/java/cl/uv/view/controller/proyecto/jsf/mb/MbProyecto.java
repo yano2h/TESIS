@@ -8,8 +8,10 @@ import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.RolProyectoFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.*;
-import cl.uv.proyecto.persistencia.jsf.mb.RolProyectoController;
+import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
+import cl.uv.proyecto.persistencia.entidades.ParticipanteProyecto;
+import cl.uv.proyecto.persistencia.entidades.Proyecto;
+import cl.uv.proyecto.persistencia.entidades.RolProyecto;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
@@ -154,7 +156,6 @@ public class MbProyecto implements Serializable{
 //    }
     
     public void crearProyecto(){
-        System.out.println("CREAR");
         proyectoFacade.create(nuevoProyecto);
         ParticipanteProyecto p = new ParticipanteProyecto(jefeProyecto.getRut(), nuevoProyecto.getIdProyecto());
         p.setProyecto(nuevoProyecto);

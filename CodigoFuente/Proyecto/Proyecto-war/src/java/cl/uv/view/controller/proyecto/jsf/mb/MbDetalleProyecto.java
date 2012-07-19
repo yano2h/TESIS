@@ -6,10 +6,10 @@ package cl.uv.view.controller.proyecto.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ProyectoFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -22,7 +22,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class MbDetalleProyecto {
+public class MbDetalleProyecto implements Serializable{
 
     @EJB 
     private ProyectoFacadeLocal proyectoFacade;
@@ -67,5 +67,12 @@ public class MbDetalleProyecto {
         this.proyecto = proyecto;
     }
     
+    public void eliminarProyecto(){
+        proyectoFacade.remove(proyecto);
+    }
     
+    public String verResumenAvance(){
+        JsfUtils.addParametro("proyecto", proyecto);
+        return "avanceProyecto?faces-redirect=true";
+    }
 }
