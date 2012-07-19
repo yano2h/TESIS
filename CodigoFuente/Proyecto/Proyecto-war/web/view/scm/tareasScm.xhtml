@@ -13,11 +13,11 @@
 
             <h:form id="form_tareas_scm" rendered="#{mbTareasScm.proyecto != null}">
                 <h:outputScript library="js" name="calendar-localization.js" />
+                <p:growl id="growl" showDetail="true" sticky="true" />  
                 <p:panel id="pnl_tareas_scm" header="Definir Tareas SCM">
 
                     <h:panelGrid columns="2">
                         <p:selectOneMenu id="slct_tarea" value="#{mbTareasScm.tareaSelected}" style="width: 220px;" > 
-                            <f:selectItem itemValue="z" itemLabel="Seleccionar" itemDisabled="true"/>
                             <f:selectItems value="#{mbTareasScm.selectItemsTareasScm}"  />  
                         </p:selectOneMenu>
                         <p:commandButton id="btn_add" value="Añadir Tarea" actionListener="#{mbTareasScm.addTarea}" update="tbl_tareas_scm_proyecto slct_tarea btn_add" 
@@ -77,7 +77,7 @@
                     </p:dataTable>
                     
                     <h:panelGrid columns="2">
-                        <p:commandButton value="Guardar Cambios" actionListener="#{mbTareasScm.guardarCambios}" />
+                        <p:commandButton value="Guardar Cambios" actionListener="#{mbTareasScm.guardarCambios}" update="growl"/>
                         <p:commandButton value="Cancelar" action="tareasScm?faces-redirect=true"/>
                     </h:panelGrid>
 

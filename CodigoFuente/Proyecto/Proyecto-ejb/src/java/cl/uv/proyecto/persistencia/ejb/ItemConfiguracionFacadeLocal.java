@@ -5,6 +5,7 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.ItemConfiguracion;
+import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -28,5 +29,9 @@ public interface ItemConfiguracionFacadeLocal {
     List<ItemConfiguracion> findRange(int[] range);
 
     int count();
+
+    public List<ItemConfiguracion> buscarItemsPorProyecto(Proyecto proyecto);
+
+    public void guardarItems(List<ItemConfiguracion> listaItemsConfiguracion);
     
 }

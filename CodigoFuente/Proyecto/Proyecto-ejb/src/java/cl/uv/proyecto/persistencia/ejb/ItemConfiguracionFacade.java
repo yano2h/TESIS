@@ -5,9 +5,13 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.ItemConfiguracion;
+import cl.uv.proyecto.persistencia.entidades.Proyecto;
+import cl.uv.proyecto.persistencia.entidades.TareaScmProyecto;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,4 +31,21 @@ public class ItemConfiguracionFacade extends AbstractFacade<ItemConfiguracion> i
         super(ItemConfiguracion.class);
     }
     
+    @Override
+    public List<ItemConfiguracion> buscarItemsPorProyecto(Proyecto proyecto){
+        Query q = em.createQuery("SELECT i FROM ItemConfiguracion i WHERE i.proyecto = :proyecto");
+        q.setParameter("proyecto", proyecto);
+        return q.getResultList();
+    }
+    
+    @Override
+    public void guardarItems(List<ItemConfiguracion> listaItemsConfiguracion){
+        for (ItemConfiguracion ic : listaItemsConfiguracion) {
+           if( ic.getIdItemConfiguracion() != null  ){
+               edit(ic);
+           }else{
+               create(ic);
+           }
+       }
+    }
 }

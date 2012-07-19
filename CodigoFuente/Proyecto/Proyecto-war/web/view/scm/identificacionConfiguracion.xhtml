@@ -13,9 +13,9 @@
 
         <ui:define name="content">
             <h:form>
-
-
-                <p:panel header="Identificacion de la Configuracion">       
+                <p:growl id="growl" showDetail="true" sticky="true" /> 
+                
+                <p:panel id="pnl_items_config" header="Identificacion de la Configuracion">       
                     <p:panel header="Informacion Nuevo Item">
                         <h:panelGrid columns="4" cellspacing="10">
                             <p:outputLabel value="Identificador: " for="itxt_ident"/>
@@ -42,12 +42,47 @@
                                 <f:selectItems value="#{mbProyecto.itemsAvailableSelectManyNombreCompleto}"/>
                             </p:selectOneMenu>
                         </h:panelGrid>
-                        
-                        <p:commandButton value="Añadir Item" actionListener="#{mbIdentificacionConfiguracion.addItem}" update="@form"/>
-                        
+
+                        <p:commandButton value="Añadir Item" actionListener="#{mbIdentificacionConfiguracion.addItem}" update="pnl_items_config"/>
+
+                        <h:panelGrid columns="2"  style="float: right;">
+                            <p:commandButton value="Guardar" actionListener="#{mbIdentificacionConfiguracion.guardarItems}" update="growl" process="@this"/>
+                            <p:commandButton value="Cancelar" action="identificacionConfiguracion?faces-redirect=true"/>
+                        </h:panelGrid>
+
                     </p:panel>
 
-                    
+                    <p:dataTable id="tbl_items_configuracion"  
+                                 value="#{mbIdentificacionConfiguracion.listaItemConfiguracion}"
+                                 var="item"
+                                 paginator="true"
+                                 rows="20"
+                                 emptyMessage="No hay Items de Configuracion"
+                                 paginatorPosition="bottom">
+
+                        <p:column headerText="Codigo" sortBy="#{item.codigoIdentificadorIc}">
+                            <h:outputText value="#{item.codigoIdentificadorIc}"/>
+                        </p:column>
+
+                        <p:column headerText="Nombre Item" sortBy="#{item.nombreItemConfiguracion}">
+                            <h:outputText value="#{item.nombreItemConfiguracion}"/>
+                        </p:column>
+
+                        <p:column headerText="Version" sortBy="#{item.version}">
+                            <h:outputText value="#{item.version}"/>
+                        </p:column>
+
+                        <p:column headerText="Responsable" sortBy="#{item.responsableItem.nombre}">
+                            <h:outputText value="#{item.responsableItem.nombre} #{item.responsableItem.apellidoPaterno} #{item.responsableItem.apellidoMaterno}"/>
+                        </p:column>
+
+                        <p:column headerText="F. Actualizacion" sortBy="#{item.fechaUltimaModificacion}">
+                            <h:outputText value="#{item.fechaUltimaModificacion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                    </p:dataTable>
+
                 </p:panel>
             </h:form>
         </ui:define>

@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -106,8 +107,7 @@ public class MbTareasScm implements Serializable{
    
    public void guardarCambios(){
        tareaScmProyectoFacade.guardarListaDeTareas(tareasScmProyecto);
-       System.out.println("PASE");
-         
+       JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Guardado Exitoso", "Sus cambios han sido guardados satisfactoriamente"));  
    }
    
    public Boolean isDisabledAddTarea(){
