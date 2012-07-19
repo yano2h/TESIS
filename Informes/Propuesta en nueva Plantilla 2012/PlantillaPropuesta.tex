@@ -70,8 +70,9 @@ solicitudes de cambios, para las cuales ya se han diseñado procedimientos y
 metodologías, sin embargo se carece de una herramienta que permita la 
 automatización de estas. El propósito de este trabajo de título es dar solución 
 a dicho problema mediante el desarrollo de una plataforma que permita 
-automatizar los procedimientos actuales. Los principales resultados que se 
-esperan son disminuir el tiempo y esfuerzo invertido en la aplicación de las metodologías que existen actualmente.
+automatizar los procedimientos actuales de solicitud de requerimientos y SCM. 
+Los principales resultados que se esperan son disminuir el tiempo y esfuerzo 
+invertido en la aplicación de las metodologías que existen actualmente.
 \end{abstract}
 
 \newpage
@@ -140,10 +141,10 @@ algunos problemas, los cuales se nombran y detallan a continuación:
 	\label{prob1}
 	Las solicitudes de requerimientos que se reciben en DISICO, actualmente deben 
 	ser enviadas a través del correo electrónico institucional al Jefe de Área, quien revisa y evalúa 
-	cada solicitud para determinar quien realizara la tarea correspondiente, luego reenvía el 
+	cada solicitud para determinar quien realizará la tarea correspondiente, luego reenvía el 
 	correo original a dicha persona, en algunos casos adjuntando información adicional 
 	sobre como completar la tarea o en caso que la solicitud enviada en el correo este
-	incompleta como para poder comprender o resolver completamente el requerimiento, 
+	incompleta como para poder comprender o resolver completamente el requerimiento, luego
 	se reenvía al funcionario el correo que ha enviado junto con las observaciones correspondientes
 	\\\\
 	Aunque a primera vista parece simple, esto conlleva los siguientes problemas:
@@ -291,18 +292,19 @@ Por lo que el proceso se estructurara de la siguiente forma:
 \begin{itemize}
 	\item\textbf{Fase de Análisis:} Esta fase estará netamente enfocada a la investigación del marco conceptual, 
 	situación actual, búsqueda y análisis de herramientas y soluciones existentes, como también la definición 
-	de la mayor parte de los requerimientos.  Al final de esta fase se debe tener un documento de definición 
-	de requerimientos y el Informe 2 del Seminario de Titulo 1. 	
+	de la mayor parte de los requerimientos.  Como se observa en la Figura \ref{analisisFig} al final de esta fase se debe tener un documento de definición 
+	de requerimientos y el Informe 2 del Seminario de Titulo 1. 
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[width=11cm]{FaseAnalisis.png}
 			\caption{Esquema de la Fase de Análisis}
+			\label{analisisFig}
 		\end{center}
 	\end{figure}
 	
 	\item\textbf{Fase de Diseño:} En esta fase se trabajara principalmente en generar un diseño lógico, 
 	arquitectónico, de presentación, de datos y de pruebas para la aplicación. 
-	La forma en que se llevara a cabo esto será la siguiente:
+	La forma en que se llevara a cabo esto se presenta la Figura \ref{disenoFig} y se detalla a continuación:
 		\begin{itemize}
 			\item Se genera una versión inicial de los modelos requeridos.
 			\item Se implementa un prototipo, que permitirá dar un primer vistazo al cliente,
@@ -323,12 +325,13 @@ Por lo que el proceso se estructurara de la siguiente forma:
 		\begin{center}
 			\includegraphics[width=11cm]{FaseDiseno.png}
 			\caption{Esquema de la Fase de Diseño}
+			\label{disenoFig}
 		\end{center}
 	\end{figure}
 	
 	\item\textbf{Fase de Implementación:} En esta fase se comenzará a desarrollar todas las funcionalidades 
-	necesarias. La codificación se organizará de forma incremental, para lo cual se definen 3 incrementos
-	los cuales son:
+	necesarias. La codificación se organizará de forma incremental como se observa en la Figura \ref{implFig}, 
+	para lo cual se definen 3 incrementos los cuales son:
 	\begin{itemize}
 		\item\textbf{Manejo de Tareas Diarias:} Consiste en implementar, todas las funcionalidades relacionados al
 		manejo de las tareas diarias, tanto creación, envió y seguimiento.
@@ -346,16 +349,19 @@ Por lo que el proceso se estructurara de la siguiente forma:
 		\begin{center}
 			\includegraphics[width=10cm]{FaseImplementacion.png}
 			\caption{Esquema de la Fase de Implementación}
+			\label{implFig}
 		\end{center}
 	\end{figure}
 	
 	\item\textbf{Fase de Pruebas:} En esta ultima fase se concentrara netamente el desarrollo de todo tipo de pruebas, 
 	esto incluye la ejecución y automatización de estas, junto con la documentación, el análisis de los resultados, 
-	y la aplicación de las correcciones correspondientes en el caso de encontrar errores o bugs.
+	y la aplicación de las correcciones correspondientes en el caso de encontrar errores o bugs. Una representación gráfica de 
+	esta fase se presenta en le Figura \ref{pruebasFig}.
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[width=10cm]{FasePruebas.png}
 			\caption{Esquema de la Fase de Pruebas}
+			\label{pruebasFig}
 		\end{center}
 	\end{figure}
 \end{itemize}
@@ -490,8 +496,8 @@ largo del proyecto. \\
 
 \subsection{Recursos Humanos}
 	\begin{itemize}
-		\item \textbf{Carlos Becerra:} Quien cumple el rol de Profesor Guía, con quien se realizan reuniones semanales, 
-		para evaluar el estado de avance del proyecto,	realiza correcciones y resolver diferentes tipos de dudas.
+		\item \textbf{Carlos Becerra:} Profesor Guía del Trabajo de Titulo, con el cual se realizaran semanalmente reuniones, 
+		para evaluar el estado de avance del proyecto, realizar correcciones y resolver diferentes tipos de dudas acerca del trabajo.
 		\item \textbf{Andres Ramos:} Jefe de Desarrollo de DISICO, quien cumple el rol de cliente para quien se desarrolla el producto, 
 		y que colaborara en la definición de los requerimientos y resolverá todo tipo de dudas respecto a los mismos. 
 		\item \textbf{Area de Desarrollo de DISICO:} Estos cumplen el rol de usuario, quienes colaboran en el diseño de interfaz y 
