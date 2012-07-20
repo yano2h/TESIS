@@ -32,7 +32,7 @@
 
                         <p:outputLabel value="Prioridad: " for="slct_p"/>
                         <p:selectOneMenu id="slct_p" value="#{mbSolicitudCambio.nuevaSolicitud.prioridadSolicitud}" required="true" style="min-width: 200px;">
-                            <f:selectItems value="#{tipoPrioridadController.itemsAvailableSelectOne}" />
+                            <f:selectItems value="#{tipoPrioridadController.itemsAvailableSelectMany}" />
                         </p:selectOneMenu>
                     </h:panelGrid>
 

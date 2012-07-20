@@ -13,6 +13,7 @@
         <ui:define name="content">
 
             <h:form>
+                <p:growl id="growl" showDetail="true"/>
                 <p:panel header="Detalle Solicitud de Cambio">
 
                     <h:panelGrid columns="2" styleClass="title_asunto">    
@@ -36,7 +37,9 @@
                             <h:outputText id="priridad" value="#{mbDetalleSolicitudCambio.solicitudCambio.proyecto.nombre}"/>
 
                             <h:outputLabel value="Fecha Envio:" styleClass="label_blod"/>
-                            <h:outputText id="fechaEnvio" value="#{mbDetalleSolicitudCambio.solicitudCambio.fechaEnvio}"/>
+                            <h:outputText id="fechaEnvio" value="#{mbDetalleSolicitudCambio.solicitudCambio.fechaEnvio}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
                         </h:panelGrid>
 
                         <p:separator style="width:1px;height: 150px;margin-left: 20px;margin-right: 20px;"/>
@@ -51,9 +54,9 @@
                             <h:outputLabel value="Version:" styleClass="label_blod"/>
                             <h:outputText id="version" value="#{mbDetalleSolicitudCambio.solicitudCambio.itemConfiguracion.version}"/>
                             
-                            <h:outputLabel value="Version:" styleClass="label_blod"/>
+                            <h:outputLabel value="Fecha Ultima Actualizacion:" styleClass="label_blod"/>
                             <h:outputText id="fechaUltimaActualizacion" value="#{mbDetalleSolicitudCambio.solicitudCambio.itemConfiguracion.fechaUltimaModificacion}">
-                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                             </h:outputText>
                         </h:panelGrid>
                     </h:panelGrid>
@@ -72,7 +75,7 @@
                                          cols="70" rows="5"/>
                         
                         <h:panelGrid columns="2">
-                            <p:commandButton value="Guardar Analisis" />
+                            <p:commandButton value="Guardar Analisis" actionListener="#{mbDetalleSolicitudCambio.guardarAnalisis}" update="growl"/>
                             <p:commandButton value="Salir" />
                         </h:panelGrid>
                     </h:panelGrid>

@@ -44,7 +44,16 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
         sc.setEstadoSolicitud(estadoSolicitudCambioFacade.find(EstadoSC.ENVIADA));
         create(sc);
     }
+    
+    @Override
+    public void guardarAnalisisImpacto(SolicitudCambio sc, FuncionarioDisico funcionario){
+        sc.setEvaluadorImpacto(funcionario);
+        sc.setFechaAnalisis(new Date());
+        sc.setEstadoSolicitud(estadoSolicitudCambioFacade.find(EstadoSC.ANALISADA));
+        edit(sc);
+    }
 
+    @Override
     public List<SolicitudCambio> buscarSolicitudPorProyecto(Proyecto proyecto) {
         Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.proyecto = :proyecto");
         q.setParameter("proyecto", proyecto);
@@ -53,9 +62,10 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
 
     @Override
     public List<SolicitudCambio> buscarSolicitudAnalisisPendiente(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto");
+        Query q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado");
         q.setParameter("responsable", funcionario);
         q.setParameter("idTarea", (Integer)3);
+        q.setParameter("estado", estadoSolicitudCambioFacade.find(EstadoSC.ENVIADA));
         return q.getResultList();
     }
 

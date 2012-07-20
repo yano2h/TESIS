@@ -81,8 +81,7 @@ public class MbIdentificacionConfiguracion implements Serializable{
         }else{
             itemConfiguracionFacade.guardarItems(listaItemConfiguracion);
             JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Guardado Exitoso", "Sus cambios han sido guardados satisfactoriamente"));  
-        }
-        
+        }   
     }
     
 }

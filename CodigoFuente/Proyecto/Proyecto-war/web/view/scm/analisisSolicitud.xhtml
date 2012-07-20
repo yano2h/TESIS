@@ -40,7 +40,9 @@
                     </p:column>
                     
                     <p:column headerText="Fecha Envio">
-                        <h:outputText value="#{solicitud_p.fechaEnvio}"/>
+                        <h:outputText value="#{solicitud_p.fechaEnvio}">
+                            <f:convertDateTime parent="dd/MM/yyyy HH:mm:ss"/>
+                        </h:outputText>
                     </p:column>
                     
                     <p:column headerText="Solicitante">
@@ -81,11 +83,15 @@
                     </p:column>
                     
                     <p:column headerText="Fecha Envio">
-                        <h:outputText value="#{solicitud_a.fechaEnvio}"/>
+                        <h:outputText value="#{solicitud_a.fechaEnvio}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
                     </p:column>
                     
                     <p:column headerText="Fecha Analisis">
-                        <h:outputText value="#{solicitud_a.fechaAnalisis}"/>
+                        <h:outputText value="#{solicitud_a.fechaAnalisis}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
                     </p:column>
                     
                 </p:dataTable>
