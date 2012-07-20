@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="title">
+            <h:outputText value="Crear Solicitud"/>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form>
+                <p:growl id="growl"  showDetail="true" /> 
+                <p:panel id="pnl_crear_sol_cambio" header="Crear Solicitud de Cambio">    
+                    <h:panelGrid columns="2" cellspacing="10">
+                        <p:outputLabel value="Titulo:" for="itxt_titulo"/>
+                        <p:inputText id="itxt_titulo" value="#{mbSolicitudCambio.nuevaSolicitud.titulo}" required="true" maxlength="45" size="45"/>
+                        
+                        <p:outputLabel value="Proyecto: " for="slct_proyecto"/>
+                        <p:selectOneMenu id="slct_proyecto" value="#{mbSolicitudCambio.nuevaSolicitud.proyecto}" required="true" style="min-width: 200px;">
+                            <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}" />
+                            <p:ajax update="slct_ic"  listener="#{mbSolicitudCambio.changeProyecto}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Item Configuración: " for="slct_ic"/>
+                        <p:selectOneMenu id="slct_ic" value="#{mbSolicitudCambio.nuevaSolicitud.itemConfiguracion}" required="true" style="min-width: 200px;">
+                            <f:selectItems value="#{mbSolicitudCambio.selectItemsItemsConfiguracion}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Prioridad: " for="slct_p"/>
+                        <p:selectOneMenu id="slct_p" value="#{mbSolicitudCambio.nuevaSolicitud.prioridadSolicitud}" required="true" style="min-width: 200px;">
+                            <f:selectItems value="#{tipoPrioridadController.itemsAvailableSelectOne}" />
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1">
+                        <p:outputLabel value="Necesidad del Cambio:" for="itxta_necesidad" />
+                        <p:inputTextarea id="itxta_necesidad" value="#{mbSolicitudCambio.nuevaSolicitud.descripcionNecesidadCambio}" cols="60" rows="6" required="true"/>
+
+                        <p:outputLabel value="Descripción del Cambio:" for="itxta_descripcion" />
+                        <p:inputTextarea id="itxta_descripcion" value="#{mbSolicitudCambio.nuevaSolicitud.descripcionCambio}" cols="60" rows="6" required="true"/>
+                    </h:panelGrid>
+
+                    <p:commandButton value="Enviar" actionListener="#{mbSolicitudCambio.enviarSolicitud}" update="pnl_crear_sol_cambio growl"/>
+                    <p:commandButton value="Cancelar" action="crearSolicitudCambio" />
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+
+

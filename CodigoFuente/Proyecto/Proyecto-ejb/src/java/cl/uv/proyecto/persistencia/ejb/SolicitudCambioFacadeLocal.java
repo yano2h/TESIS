@@ -4,6 +4,7 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudCambio;
 import java.util.List;
 import javax.ejb.Local;
@@ -28,5 +29,11 @@ public interface SolicitudCambioFacadeLocal {
     List<SolicitudCambio> findRange(int[] range);
 
     int count();
+
+    public void enviarSolicitudCambio(SolicitudCambio sc, FuncionarioDisico solicitante);
+
+    public List<SolicitudCambio> buscarSolicitudAnalisadas(FuncionarioDisico funcionario);
+            
+    public List<SolicitudCambio> buscarSolicitudAnalisisPendiente(FuncionarioDisico funcionario);
     
 }

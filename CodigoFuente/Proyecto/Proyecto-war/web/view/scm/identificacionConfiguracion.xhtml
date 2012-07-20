@@ -13,7 +13,7 @@
 
         <ui:define name="content">
             <h:form>
-                <p:growl id="growl" showDetail="true" sticky="true" /> 
+                <p:growl id="growl" showDetail="true" /> 
                 
                 <p:panel id="pnl_items_config" header="Identificacion de la Configuracion">       
                     <p:panel header="Informacion Nuevo Item">
@@ -38,7 +38,7 @@
 
                             <p:outputLabel value="Responsable Item:" for="selct_resp"/>
                             <p:selectOneMenu id="selct_resp" value="#{mbIdentificacionConfiguracion.nuevoItem.responsableItem}" required="true">
-                                <f:selectItem itemValue="" itemLabel="Selecciones un Responsable"/>
+                                <f:selectItem itemValue="" itemLabel="Seleccione un Responsable"/>
                                 <f:selectItems value="#{mbProyecto.itemsAvailableSelectManyNombreCompleto}"/>
                             </p:selectOneMenu>
                         </h:panelGrid>

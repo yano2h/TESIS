@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="title">
+            <h:outputText value="Crear Solicitud"/>
+        </ui:define>
+
+        <ui:define name="content">
+            <p:panel id="pnl_solicitud_analisar" header="Analisis de Solicitudes">
+                
+                <p:dataTable id="tbl_sol_pendientes" 
+                             value="#{mbAnalisisSolicitud.listaSolicitudesPendientes}" 
+                             var="solicitud_p" 
+                             selectionMode="single"
+                             selection="#{mbAnalisisSolicitud.solicitudCambioSelected}"
+                             rowKey="#{solicitud_p.idSolicitudCambio}"
+                             paginator="true"
+                             paginatorPosition="bottom"
+                             rows="15"
+                             emptyMessage="No hay solicitudes por analisar">
+                    
+                    <p:ajax event="rowSelect" listener="#{mbAnalisisSolicitud.redirctToDetalle}"/>
+                    
+                    <f:facet name="header">
+                        <h:outputText value="Solicitudes de Cambio Pendientes"/>
+                    </f:facet>
+                    
+                    <p:column headerText="Nº">
+                        <h:outputText value="#{solicitud_p.idSolicitudCambio}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Titulo">
+                        <h:outputText value="#{solicitud_p.titulo}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Fecha Envio">
+                        <h:outputText value="#{solicitud_p.fechaEnvio}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Solicitante">
+                        <h:outputText value="#{solicitud_p.solicitante.nombre} #{solicitud_p.solicitante.apellidoPaterno} #{solicitud_p.solicitante.apellidoMaterno}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Prioridad">
+                        <h:outputText value="#{solicitud_p.prioridadSolicitud.nombrePrioridad}"/>
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <br/>
+                <p:dataTable id="tbl_sol_analisadas" 
+                             value="#{mbAnalisisSolicitud.listaSolicitudesAnalisadas}" 
+                             var="solicitud_a" 
+                             selectionMode="single"
+                             selection="#{mbAnalisisSolicitud.solicitudCambioSelected}"
+                             rowKey="#{solicitud_a.idSolicitudCambio}"
+                             paginator="true"
+                             paginatorPosition="bottom"
+                             rows="10"
+                             emptyMessage="No hay solicitudes analisada">
+                    
+                    <f:facet name="header">
+                        <h:outputText value="Solicitudes de Cambio Analisadas"/>
+                    </f:facet>
+                    
+                    <p:column headerText="Nº">
+                        <h:outputText value="#{solicitud_a.idSolicitudCambio}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Titulo">
+                        <h:outputText value="#{solicitud_a.titulo}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Solicitante">
+                        <h:outputText value="#{solicitud_a.solicitante.nombre} #{solicitud_a.solicitante.apellidoPaterno} #{solicitud_a.solicitante.apellidoMaterno}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Fecha Envio">
+                        <h:outputText value="#{solicitud_a.fechaEnvio}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Fecha Analisis">
+                        <h:outputText value="#{solicitud_a.fechaAnalisis}"/>
+                    </p:column>
+                    
+                </p:dataTable>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>

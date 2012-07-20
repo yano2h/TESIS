@@ -48,5 +48,12 @@ public class TareaScmProyectoFacade extends AbstractFacade<TareaScmProyecto> imp
            }
        }
     }
+    
+    @Override
+    public List<TareaScmProyecto> buscarTareasSCMPorResponsable(FuncionarioDisico responsable){
+        Query q = em.createQuery("SELECT t FROM TareaScmProyecto t WHERE t.responsable = :responsable");
+        q.setParameter("responsable", responsable);
+        return q.getResultList();
+    }
  
 }

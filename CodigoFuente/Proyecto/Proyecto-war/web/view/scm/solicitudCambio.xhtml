@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="title">
+            <h:outputText value="Crear Solicitud"/>
+        </ui:define>
+        <ui:define name="content">
+
+            <h:form>
+                <p:panel header="Detalle Solicitud de Cambio">
+
+                    <h:panelGrid columns="2" styleClass="title_asunto">    
+                        <h:outputLabel value="Titulo:" styleClass="label_blod" />
+                        <h:outputText id="titulo" value="#{mbDetalleSolicitudCambio.solicitudCambio.titulo}"/>    
+                    </h:panelGrid>
+                    
+                    
+                    <h:panelGrid columns="3">
+                        <h:panelGrid columns="2" cellspacing="10">
+                            <h:outputLabel value="Nº de Solicitud:" styleClass="label_blod" />
+                            <h:outputText id="codigo" value="#{mbDetalleSolicitudCambio.solicitudCambio.idSolicitudCambio}"/>
+
+                            <h:outputLabel value="Nombre Proyecto:" styleClass="label_blod"/>
+                            <h:outputText id="nombreProy" value="#{mbDetalleSolicitudCambio.solicitudCambio.proyecto.nombre}"/>
+
+                            <h:outputLabel value="Nombre Solicitnate:" styleClass="label_blod"/>
+                            <h:outputText id="nombreSol" value="#{mbDetalleSolicitudCambio.solicitudCambio.solicitante.nombre} #{mbDetalleSolicitudCambio.solicitudCambio.solicitante.apellidoPaterno}"/>
+
+                            <h:outputLabel value="Prioridad:" styleClass="label_blod"/>
+                            <h:outputText id="priridad" value="#{mbDetalleSolicitudCambio.solicitudCambio.proyecto.nombre}"/>
+
+                            <h:outputLabel value="Fecha Envio:" styleClass="label_blod"/>
+                            <h:outputText id="fechaEnvio" value="#{mbDetalleSolicitudCambio.solicitudCambio.fechaEnvio}"/>
+                        </h:panelGrid>
+
+                        <p:separator style="width:1px;height: 150px;margin-left: 20px;margin-right: 20px;"/>
+
+                        <h:panelGrid columns="2" cellspacing="10">
+                            <h:outputLabel value="Codigo Item" styleClass="label_blod"/>
+                            <h:outputText id="codigoItem" value="#{mbDetalleSolicitudCambio.solicitudCambio.itemConfiguracion.codigoIdentificadorIc}"/>
+                            
+                            <h:outputLabel value="Nombre Item" styleClass="label_blod"/>
+                            <h:outputText id="nombreItemConfiguracion" value="#{mbDetalleSolicitudCambio.solicitudCambio.itemConfiguracion.nombreItemConfiguracion}"/>
+
+                            <h:outputLabel value="Version:" styleClass="label_blod"/>
+                            <h:outputText id="version" value="#{mbDetalleSolicitudCambio.solicitudCambio.itemConfiguracion.version}"/>
+                            
+                            <h:outputLabel value="Version:" styleClass="label_blod"/>
+                            <h:outputText id="fechaUltimaActualizacion" value="#{mbDetalleSolicitudCambio.solicitudCambio.itemConfiguracion.fechaUltimaModificacion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                    
+                    <p:separator style="height: 1px;margin-top: 10px;margin-bottom: 10px;"/>
+                    
+                    <h:panelGrid columns="1" cellspacing="10">
+                        <h:outputLabel value="Necesidad de Cambio:" styleClass="label_blod"/>
+                        <h:outputText value="#{mbDetalleSolicitudCambio.solicitudCambio.descripcionNecesidadCambio}"/>
+                        <br/>
+                        <h:outputLabel value="Descripcion del Cambio:" styleClass="label_blod"/>
+                        <h:outputText value="#{mbDetalleSolicitudCambio.solicitudCambio.descripcionCambio}"/>
+                        <br/>
+                        <p:outputLabel value="Analisis de Impacto:" for="itxta" styleClass="label_blod"/>
+                        <p:inputTextarea id="itxta" value="#{mbDetalleSolicitudCambio.solicitudCambio.descripcionImpactoCambio}" 
+                                         cols="70" rows="5"/>
+                        
+                        <h:panelGrid columns="2">
+                            <p:commandButton value="Guardar Analisis" />
+                            <p:commandButton value="Salir" />
+                        </h:panelGrid>
+                    </h:panelGrid>
+                    
+                    
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -34,4 +34,6 @@ public interface TareaScmProyectoFacadeLocal {
     public List<TareaScmProyecto> buscarTareasSCMPorIdProyecto(Integer idProyecto);
 
     public void guardarListaDeTareas(List<TareaScmProyecto> tareasScmProyecto);
+    
+    public List<TareaScmProyecto> buscarTareasSCMPorResponsable(FuncionarioDisico responsable);
 }
