@@ -15,7 +15,12 @@
             <h:form>
                 <p:growl id="growl" showDetail="true"/>
                 <p:panel header="Detalle Solicitud de Cambio">
-
+                    <p:menubar id="mnu_solicitud_cambio">
+                        <p:menuitem value="Analisar"/>
+                        <p:menuitem value="Aprovar/Rechazar"/>
+                        <p:menuitem value="Implementar"/>
+                    </p:menubar>
+                    
                     <h:panelGrid columns="2" styleClass="title_asunto">    
                         <h:outputLabel value="Titulo:" styleClass="label_blod" />
                         <h:outputText id="titulo" value="#{mbDetalleSolicitudCambio.solicitudCambio.titulo}"/>    

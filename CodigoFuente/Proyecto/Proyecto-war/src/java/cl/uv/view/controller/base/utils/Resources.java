@@ -10,6 +10,18 @@ public class Resources {
         return PropertyResourceBundle.getBundle(Resources.getPropertiesPath(path)).getString(key);
     }
 
+    public static Short getValueShort(String path, String key) {
+        return Short.parseShort(getValue(path, key));
+    }
+    
+    public static Integer getValueInteger(String path, String key) {
+        return Integer.parseInt(getValue(path, key));
+    }
+    
+    public static Long getValueLong(String path, String key) {
+        return Long.parseLong(getValue(path, key));
+    }
+    
     public static String getPropertiesPath(String key) {
         return PropertyResourceBundle.getBundle(Resources.PATH_RESOURCES).getString(key);
     }
