@@ -24,7 +24,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "SolicitudCambio.findByFechaAnalisis", query = "SELECT s FROM SolicitudCambio s WHERE s.fechaAnalisis = :fechaAnalisis"),
     @NamedQuery(name = "SolicitudCambio.findByFechaCierre", query = "SELECT s FROM SolicitudCambio s WHERE s.fechaCierre = :fechaCierre"),
     @NamedQuery(name = "SolicitudCambio.findByModuloAfectado", query = "SELECT s FROM SolicitudCambio s WHERE s.moduloAfectado = :moduloAfectado"),
-    @NamedQuery(name = "SolicitudCambio.findByDescripcionResolucion", query = "SELECT s FROM SolicitudCambio s WHERE s.descripcionResolucion = :descripcionResolucion")})
+    @NamedQuery(name = "SolicitudCambio.findByDescripcionResolucion", query = "SELECT s FROM SolicitudCambio s WHERE s.descripcionResolucion = :descripcionResolucion"),
+    @NamedQuery(name = "SolicitudCambio.findByAprobada", query = "SELECT s FROM SolicitudCambio s WHERE s.aprobada = :aprobada")})
 public class SolicitudCambio implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -68,6 +69,8 @@ public class SolicitudCambio implements Serializable {
     @Size(max = 255)
     @Column(name = "descripcion_resolucion")
     private String descripcionResolucion;
+    @Column(name = "aprobada")
+    private Boolean aprobada;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "solicitudCambio")
     private FormularioImplementacion formularioImplementacion;
     @JoinColumn(name = "item_configuracion", referencedColumnName = "id_item_configuracion")
@@ -185,6 +188,14 @@ public class SolicitudCambio implements Serializable {
 
     public void setDescripcionResolucion(String descripcionResolucion) {
         this.descripcionResolucion = descripcionResolucion;
+    }
+
+    public Boolean getAprobada() {
+        return aprobada;
+    }
+
+    public void setAprobada(Boolean aprobada) {
+        this.aprobada = aprobada;
     }
 
     public FormularioImplementacion getFormularioImplementacion() {
