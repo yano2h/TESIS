@@ -490,3 +490,5 @@ CREATE  TABLE ESTADISTICA_PERSONAL (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ;
+
+ALTER TABLE `sistema_solicitudes`.`solicitud_cambio` ADD COLUMN `aprobada` TINYINT(1)  NULL DEFAULT NULL  AFTER `descripcion_resolucion` ;
