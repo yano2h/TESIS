@@ -41,4 +41,6 @@ public interface SolicitudCambioFacadeLocal {
 
     public void guardarAnalisisImpacto(SolicitudCambio sc, FuncionarioDisico funcionario);
     
+    public void guardarEvaluacionSolicitud(SolicitudCambio sc, FuncionarioDisico funcionario);
+    
 }

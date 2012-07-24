@@ -14,19 +14,18 @@
 
             <h:form>
                 <p:growl id="growl" showDetail="true"/>
-                <p:panel header="Detalle Solicitud de Cambio">
-                    <p:menubar id="mnu_solicitud_cambio">
-                        <p:menuitem value="Analisar"/>
-                        <p:menuitem value="Aprovar/Rechazar"/>
-                        <p:menuitem value="Implementar"/>
+                <p:panel id="panelDetalleSolicitud" header="Detalle Solicitud de Cambio">
+                    <p:menubar id="mnu_solicitud_cambio" style="height: 30px;">
+                        <p:menuitem value="Analisar" icon="ui-icon-pencil" onclick="dlgAnalisis.show();"  disabled="#{not mbDetalleSolicitudCambio.enabledAnalisis}"/>
+                        <p:menuitem value="Aprobar/Rechazar" icon="ui-icon-check" onclick="dlgEvaluacion.show();" disabled="#{not mbDetalleSolicitudCambio.enabledEvaluacion}"/>
+                        <p:menuitem value="Implementar" icon="ui-icon-document" disabled="#{not mbDetalleSolicitudCambio.enabledFormularioImpl}"/>
                     </p:menubar>
-                    
+
                     <h:panelGrid columns="2" styleClass="title_asunto">    
                         <h:outputLabel value="Titulo:" styleClass="label_blod" />
                         <h:outputText id="titulo" value="#{mbDetalleSolicitudCambio.solicitudCambio.titulo}"/>    
                     </h:panelGrid>
-                    
-                    
+
                     <h:panelGrid columns="3">
                         <h:panelGrid columns="2" cellspacing="10">
                             <h:outputLabel value="Nº de Solicitud:" styleClass="label_blod" />
@@ -52,41 +51,108 @@
                         <h:panelGrid columns="2" cellspacing="10">
                             <h:outputLabel value="Codigo Item" styleClass="label_blod"/>
                             <h:outputText id="codigoItem" value="#{mbDetalleSolicitudCambio.solicitudCambio.itemConfiguracion.codigoIdentificadorIc}"/>
-                            
+
                             <h:outputLabel value="Nombre Item" styleClass="label_blod"/>
                             <h:outputText id="nombreItemConfiguracion" value="#{mbDetalleSolicitudCambio.solicitudCambio.itemConfiguracion.nombreItemConfiguracion}"/>
 
                             <h:outputLabel value="Version:" styleClass="label_blod"/>
                             <h:outputText id="version" value="#{mbDetalleSolicitudCambio.solicitudCambio.itemConfiguracion.version}"/>
-                            
+
                             <h:outputLabel value="Fecha Ultima Actualizacion:" styleClass="label_blod"/>
                             <h:outputText id="fechaUltimaActualizacion" value="#{mbDetalleSolicitudCambio.solicitudCambio.itemConfiguracion.fechaUltimaModificacion}">
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                             </h:outputText>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <p:separator style="height: 1px;margin-top: 10px;margin-bottom: 10px;"/>
-                    
+
                     <h:panelGrid columns="1" cellspacing="10">
                         <h:outputLabel value="Necesidad de Cambio:" styleClass="label_blod"/>
                         <h:outputText value="#{mbDetalleSolicitudCambio.solicitudCambio.descripcionNecesidadCambio}"/>
                         <br/>
                         <h:outputLabel value="Descripcion del Cambio:" styleClass="label_blod"/>
                         <h:outputText value="#{mbDetalleSolicitudCambio.solicitudCambio.descripcionCambio}"/>
-                        <br/>
-                        <p:outputLabel value="Analisis de Impacto:" for="itxta" styleClass="label_blod"/>
-                        <p:inputTextarea id="itxta" value="#{mbDetalleSolicitudCambio.solicitudCambio.descripcionImpactoCambio}" 
-                                         cols="70" rows="5"/>
-                        
-                        <h:panelGrid columns="2">
-                            <p:commandButton value="Guardar Analisis" actionListener="#{mbDetalleSolicitudCambio.guardarAnalisis}" update="growl"/>
-                            <p:commandButton value="Salir" />
-                        </h:panelGrid>
                     </h:panelGrid>
-                    
-                    
+
+                    <p:separator style="height: 1px;margin-top: 10px;margin-bottom: 10px;"/>
+
+                    <h:panelGrid columns="1" cellspacing="10">
+                        <h:outputLabel value="Analisis de Impacto:" styleClass="label_blod"/>
+                        <h:outputText value="#{mbDetalleSolicitudCambio.solicitudCambio.descripcionImpactoCambio}" />
+                    </h:panelGrid>
+
+                    <p:separator style="height: 1px;margin-top: 10px;margin-bottom: 10px;"/>
+
+                    <h:panelGrid columns="1" cellspacing="10">
+                        <h:outputLabel value="Aprobacion" styleClass="label_blod"/>
+                        <h:panelGrid columns="2" cellspacing="10">
+                            <h:outputLabel value="Resolución:" styleClass="label_blod"/>
+                            <h:outputText value="Aprobada" rendered="#{mbDetalleSolicitudCambio.solicitudCambio.aprobada}"/>
+                            <h:outputText value="Desaprobada" rendered="#{not mbDetalleSolicitudCambio.solicitudCambio.aprobada}"/>  
+
+                            <h:outputLabel value="Modulo Afectado:" styleClass="label_blod"/>
+                            <h:outputText value="#{mbDetalleSolicitudCambio.solicitudCambio.moduloAfectado}"/>
+
+                            <h:outputLabel value="Respuesta:" styleClass="label_blod"/>
+                            <h:outputText value="#{mbDetalleSolicitudCambio.solicitudCambio.descripcionResolucion}"/>
+                        </h:panelGrid>
+
+
+                        <h:outputText value="#{mbDetalleSolicitudCambio.solicitudCambio.descripcionResolucion}"/>
+                        <h:outputText value="#{mbDetalleSolicitudCambio.solicitudCambio.descripcionResolucion}"/>
+                    </h:panelGrid>
                 </p:panel>
+
+                <p:dialog id="dlg_analisis" widgetVar="dlgAnalisis" header="Ingresar Analisis Solicitud" modal="true" closable="false" resizable="false">
+                    <h:panelGrid columns="1">
+                        <p:outputLabel for="intxta_analisis" value="Analisis del Impacto"/>
+                        <p:inputTextarea id="intxta_analisis" value="#{mbDetalleSolicitudCambio.solicitudCambio.descripcionImpactoCambio}" required="true" cols="50" rows="5"/>
+
+                        <h:panelGroup style="float: right;margin-top: 10px;">
+                            <p:commandButton value="Aceptar" 
+                                             process="dlg_analisis"
+                                             update="dlg_analisis panelDetalleSolicitud" 
+                                             oncomplete="validarDialog(xhr, status, args, dlgAnalisis)"
+                                             actionListener="#{mbDetalleSolicitudCambio.guardarAnalisis}"/>
+                            <p:commandButton value="Cancelar" onclick="dlgAnalisis.hide();"/>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </p:dialog>
+
+                <p:dialog id="dlg_evaluacion" widgetVar="dlgEvaluacion" header="Evaluacion Solicitud" modal="true" closable="false" resizable="false">
+                    <h:panelGrid columns="2" cellspacing="5">
+                        <p:outputLabel value="Resolucion:" for="bol_resolucion"/>
+                        <p:selectBooleanButton id="bol_resolucion" onLabel="Aprobada" onIcon="ui-icon-check" 
+                                               offLabel="Desaprobada" offIcon="ui-icon-close"
+                                               value="#{mbDetalleSolicitudCambio.solicitudCambio.aprobada}" required="true"/>
+                        
+                        <p:outputLabel value="Modulo Afectado" for="itxt_mod"/>
+                        <p:inputText id="itxt_mod" value="#{mbDetalleSolicitudCambio.solicitudCambio.moduloAfectado}" required="true" size="45"/>
+
+                        <p:outputLabel value="Justificacion Resolucion:" for="itxta_justf"/>
+                        <p:inputTextarea id="itxta_justf" value="#{mbDetalleSolicitudCambio.solicitudCambio.descripcionResolucion}" required="true" cols="45" rows="5"/>
+                        <br/>
+                        <h:panelGroup style="float: right;margin-top: 10px;">
+                            <p:commandButton value="Aceptar" 
+                                             process="dlg_evaluacion"
+                                             update="dlg_evaluacion panelDetalleSolicitud" 
+                                             oncomplete="validarDialog(xhr, status, args, dlgEvaluacion)"
+                                             actionListener="#{mbDetalleSolicitudCambio.guardarEvaluacion}"/>
+                            <p:commandButton value="Cancelar" onclick="dlgEvaluacion.hide();"/>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </p:dialog>
+
+                <script type="text/javascript">  
+                    function validarDialog(xhr, status, args, component) {  
+                        if(args.validationFailed) {
+                            component.show();
+                        } else {  
+                            component.hide();  
+                        }  
+                    }  
+                </script> 
             </h:form>
         </ui:define>
     </ui:composition>

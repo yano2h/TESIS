@@ -53,6 +53,17 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
         edit(sc);
     }
 
+    public void guardarEvaluacionSolicitud(SolicitudCambio sc, FuncionarioDisico funcionario){
+        sc.setEvaluadorFinal(funcionario);
+        sc.setFechaCierre(new Date());
+        if(sc.getAprobada()){
+            sc.setEstadoSolicitud(estadoSolicitudCambioFacade.find(EstadoSC.APROBADA));
+        }else{
+            sc.setEstadoSolicitud(estadoSolicitudCambioFacade.find(EstadoSC.RECHAZADA));
+        }
+        edit(sc);
+        
+    }
     @Override
     public List<SolicitudCambio> buscarSolicitudPorProyecto(Proyecto proyecto) {
         Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.proyecto = :proyecto");

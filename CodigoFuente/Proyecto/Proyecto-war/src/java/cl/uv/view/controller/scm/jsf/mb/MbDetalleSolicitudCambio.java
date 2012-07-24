@@ -27,26 +27,24 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class MbDetalleSolicitudCambio implements Serializable{
+public class MbDetalleSolicitudCambio implements Serializable {
 
     @EJB
     private SolicitudCambioFacadeLocal solicitudCambioFacade;
     @EJB
     private TareaScmProyectoFacadeLocal tareaScmProyectoFacade;
-    
     @ManagedProperty(value = "#{mbFuncionarioInfo}")
     private MbFuncionarioInfo mbFuncionarioInfo;
-
     private SolicitudCambio solicitudCambio;
-    
+
     public MbDetalleSolicitudCambio() {
     }
 
     @PostConstruct
-    private void init(){
+    private void init() {
         solicitudCambio = (SolicitudCambio) JsfUtils.getValue("solicitudCambio");
     }
-    
+
     public void setMbFuncionarioInfo(MbFuncionarioInfo mbFuncionarioInfo) {
         this.mbFuncionarioInfo = mbFuncionarioInfo;
     }
@@ -58,32 +56,38 @@ public class MbDetalleSolicitudCambio implements Serializable{
     public void setSolicitudCambio(SolicitudCambio solicitudCambio) {
         this.solicitudCambio = solicitudCambio;
     }
-    
-    public void guardarAnalisis(){
+
+    public void guardarAnalisis() {
         solicitudCambioFacade.guardarAnalisisImpacto(solicitudCambio, mbFuncionarioInfo.getFuncionario());
-        JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Analisis del Impacto", "Fue guardado exitosamente"));
+        JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Analisis del Impacto", "Fue guardado exitosamente"));
     }
-    
-    public Boolean isEnabledAnalisis(){
-        TareaScmProyecto t = tareaScmProyectoFacade.find(new TareaScmProyectoPK(Resources.getValueInteger("const", "Tarea_Analisis"), 
-                                                                                solicitudCambio.getProyecto().getIdProyecto()));
-        
-        return ( solicitudCambio.getEstadoSolicitud().getIdEstadoSolicitudCambio() == Resources.getValueShort("const", "EstadoSC_ENVIADA") &&
-                 t.getResponsable().getRut() == mbFuncionarioInfo.getFuncionario().getRut());
-    }    
-    
-    public Boolean isEnabledEvaluacion(){
-        TareaScmProyecto t = tareaScmProyectoFacade.find(new TareaScmProyectoPK(Resources.getValueInteger("const", "Tarea_Evaluacion"), 
-                                                                                solicitudCambio.getProyecto().getIdProyecto()));
-        return ( solicitudCambio.getEstadoSolicitud().getIdEstadoSolicitudCambio() == Resources.getValueShort("const", "EstadoSC_ANALISADA") && 
-                 t.getResponsable().getRut() == mbFuncionarioInfo.getFuncionario().getRut());
+
+    public void guardarEvaluacion() {
+        solicitudCambioFacade.guardarEvaluacionSolicitud(solicitudCambio, mbFuncionarioInfo.getFuncionario());
+        JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Evaluación Solicitud", "Fue guardado exitosamente"));
     }
-    
-    public Boolean isEnabledFormularioImpl(){
+
+    public Boolean getEnabledAnalisis() {
+        TareaScmProyecto t = tareaScmProyectoFacade.find(new TareaScmProyectoPK(Resources.getValueInteger("const", "Tarea_Analisis"),
+                solicitudCambio.getProyecto().getIdProyecto()));
+        return (solicitudCambio.getEstadoSolicitud().getIdEstadoSolicitudCambio().equals(Resources.getValueShort("const", "EstadoSC_ENVIADA"))
+                && t != null
+                && t.getResponsable().getRut().equals(mbFuncionarioInfo.getFuncionario().getRut()));
+    }
+
+    public Boolean getEnabledEvaluacion() {
+        TareaScmProyecto t = tareaScmProyectoFacade.find(new TareaScmProyectoPK(Resources.getValueInteger("const", "Tarea_Evaluacion"),
+                solicitudCambio.getProyecto().getIdProyecto()));
+        return (solicitudCambio.getEstadoSolicitud().getIdEstadoSolicitudCambio().equals(Resources.getValueShort("const", "EstadoSC_ANALISADA"))
+                && t != null
+                && t.getResponsable().getRut().equals(mbFuncionarioInfo.getFuncionario().getRut()));
+    }
+
+    public Boolean getEnabledFormularioImpl() {
         TareaScmProyecto t = tareaScmProyectoFacade.find(new TareaScmProyectoPK(Resources.getValueInteger("const", "Tarea_Implementar"),
-                                                                                solicitudCambio.getProyecto().getIdProyecto()));
-        return (solicitudCambio.getEstadoSolicitud().getIdEstadoSolicitudCambio() == Resources.getValueShort("const", "EstadoSC_APROBADA") &&
-                t.getResponsable().getRut() == mbFuncionarioInfo.getFuncionario().getRut());
+                solicitudCambio.getProyecto().getIdProyecto()));
+        return (solicitudCambio.getEstadoSolicitud().getIdEstadoSolicitudCambio().equals(Resources.getValueShort("const", "EstadoSC_APROBADA"))
+                && t != null
+                && t.getResponsable().getRut().equals(mbFuncionarioInfo.getFuncionario().getRut()));
     }
-    
 }
