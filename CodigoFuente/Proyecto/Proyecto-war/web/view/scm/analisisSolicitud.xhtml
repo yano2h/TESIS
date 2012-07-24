@@ -31,30 +31,32 @@
                         <h:outputText value="Solicitudes de Cambio Pendientes"/>
                     </f:facet>
                     
-                    <p:column headerText="Nº">
+                    <p:column headerText="Nº" style="width: 20px;" sortBy="#{solicitud_p.idSolicitudCambio}">
                         <h:outputText value="#{solicitud_p.idSolicitudCambio}"/>
                     </p:column>
                     
-                    <p:column headerText="Titulo">
-                        <h:outputText value="#{solicitud_p.titulo}"/>
-                    </p:column>
-                    
-                    <p:column headerText="Fecha Envio">
+                    <p:column headerText="F.Envio" style="width: 25px;" sortBy="#{solicitud_p.fechaEnvio}">
                         <h:outputText value="#{solicitud_p.fechaEnvio}">
-                            <f:convertDateTime parent="dd/MM/yyyy HH:mm:ss"/>
+                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
                     
-                    <p:column headerText="Solicitante">
+                    <p:column headerText="Titulo" style="width: 350px;" sortBy="#{solicitud_p.titulo}">
+                        <h:outputText value="#{solicitud_p.titulo}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Solicitante" style="width: 250px;" sortBy="#{solicitud_p.solicitante.nombre}">
                         <h:outputText value="#{solicitud_p.solicitante.nombre} #{solicitud_p.solicitante.apellidoPaterno} #{solicitud_p.solicitante.apellidoMaterno}"/>
                     </p:column>
                     
-                    <p:column headerText="Prioridad">
+                    <p:column headerText="Prioridad" sortBy="#{solicitud_p.prioridadSolicitud.nombrePrioridad}">
                         <h:outputText value="#{solicitud_p.prioridadSolicitud.nombrePrioridad}"/>
                     </p:column>
                 </p:dataTable>
+                
                 <br/>
                 <br/>
+                
                 <p:dataTable id="tbl_sol_analisadas" 
                              value="#{mbAnalisisSolicitud.listaSolicitudesAnalisadas}" 
                              var="solicitud_a" 
@@ -65,36 +67,36 @@
                              paginatorPosition="bottom"
                              rows="10"
                              emptyMessage="No hay solicitudes analisada">
-                    
+                    <p:ajax event="rowSelect" listener="#{mbAnalisisSolicitud.redirctToDetalle}"/>
                     <f:facet name="header">
                         <h:outputText value="Solicitudes de Cambio Analisadas"/>
                     </f:facet>
                     
-                    <p:column headerText="Nº">
+                    <p:column headerText="Nº" style="width: 20px;" sortBy="#{solicitud_a.idSolicitudCambio}">
                         <h:outputText value="#{solicitud_a.idSolicitudCambio}"/>
                     </p:column>
                     
-                    <p:column headerText="Titulo">
+                    <p:column headerText="F.Envio" style="width: 25px;" sortBy="#{solicitud_a.fechaEnvio}">
+                        <h:outputText value="#{solicitud_a.fechaEnvio}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="F.Analisis" style="width: 25px;" sortBy="#{solicitud_a.fechaAnalisis}">
+                        <h:outputText value="#{solicitud_a.fechaAnalisis}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Titulo" style="width: 350px;" sortBy="#{solicitud_a.titulo}">
                         <h:outputText value="#{solicitud_a.titulo}"/>
                     </p:column>
                     
-                    <p:column headerText="Solicitante">
+                    <p:column headerText="Solicitante" style="width: 250px;" sortBy="#{solicitud_a.solicitante.nombre}">
                         <h:outputText value="#{solicitud_a.solicitante.nombre} #{solicitud_a.solicitante.apellidoPaterno} #{solicitud_a.solicitante.apellidoMaterno}"/>
                     </p:column>
-                    
-                    <p:column headerText="Fecha Envio">
-                        <h:outputText value="#{solicitud_a.fechaEnvio}">
-                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-                        </h:outputText>
-                    </p:column>
-                    
-                    <p:column headerText="Fecha Analisis">
-                        <h:outputText value="#{solicitud_a.fechaAnalisis}">
-                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-                        </h:outputText>
-                    </p:column>
-                    
                 </p:dataTable>
+                
             </p:panel>
         </ui:define>
     </ui:composition>
