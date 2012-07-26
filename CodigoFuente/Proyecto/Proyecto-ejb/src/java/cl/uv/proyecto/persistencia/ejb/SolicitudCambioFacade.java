@@ -4,6 +4,7 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.consts.EstadoSC;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
@@ -67,24 +68,56 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
     }
     @Override
     public List<SolicitudCambio> buscarSolicitudPorProyecto(Proyecto proyecto) {
-        Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.proyecto = :proyecto");
+        Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.proyecto = :proyecto ORDER BY s.fechaEnvio DESC");
         q.setParameter("proyecto", proyecto);
         return q.getResultList();
     }
 
     @Override
     public List<SolicitudCambio> buscarSolicitudAnalisisPendiente(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado");
+        Query q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
         q.setParameter("responsable", funcionario);
-        q.setParameter("idTarea", (Integer)3);
-        q.setParameter("estado", estadoSolicitudCambioFacade.find(EstadoSC.ENVIADA));
+        q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_ANALIZAR_SC") );
+        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "ESC_ENVIADA") ));
         return q.getResultList();
     }
 
     @Override
     public List<SolicitudCambio> buscarSolicitudAnalisadas(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.evaluadorImpacto = :evaluador");
+        Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.evaluadorImpacto = :evaluador ORDER BY s.fechaEnvio DESC");
         q.setParameter("evaluador", funcionario);
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<SolicitudCambio> buscarSolicitudEvaluacionPendiente(FuncionarioDisico funcionario) {
+        Query q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
+        q.setParameter("responsable", funcionario);
+        q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_APROBAR_SC"));
+        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "ESC_ANALISADA") ));
+        return q.getResultList();
+    }
+
+    @Override
+    public List<SolicitudCambio> buscarSolicitudEvaluadas(FuncionarioDisico funcionario) {
+        Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.evaluadorFinal = :evaluador ORDER BY s.fechaEnvio DESC");
+        q.setParameter("evaluador", funcionario);
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<SolicitudCambio> buscarSolicitudImplementacionPendiente(FuncionarioDisico funcionario) {
+        Query q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
+        q.setParameter("responsable", funcionario);
+        q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_IMPLEMENTAR_SC"));
+        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "ESC_APROBADA") ));
+        return q.getResultList();
+    }
+
+    @Override
+    public List<SolicitudCambio> buscarSolicitudImplementadas(FuncionarioDisico funcionario) {
+        Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.formularioImplementacion.implementador = :implementador ORDER BY s.fechaEnvio DESC");
+        q.setParameter("implementador", funcionario);
         return q.getResultList();
     }
 }

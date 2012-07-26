@@ -42,5 +42,13 @@ public interface SolicitudCambioFacadeLocal {
     public void guardarAnalisisImpacto(SolicitudCambio sc, FuncionarioDisico funcionario);
     
     public void guardarEvaluacionSolicitud(SolicitudCambio sc, FuncionarioDisico funcionario);
+
+    public List<SolicitudCambio> buscarSolicitudEvaluacionPendiente(FuncionarioDisico funcionario);
+    
+    public List<SolicitudCambio> buscarSolicitudEvaluadas(FuncionarioDisico funcionario);
+
+    public List<SolicitudCambio> buscarSolicitudImplementacionPendiente(FuncionarioDisico funcionario);
+    
+    public List<SolicitudCambio> buscarSolicitudImplementadas(FuncionarioDisico funcionario);
     
 }
