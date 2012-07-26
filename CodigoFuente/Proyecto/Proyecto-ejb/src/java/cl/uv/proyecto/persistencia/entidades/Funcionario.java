@@ -171,6 +171,9 @@ public class Funcionario implements Serializable {
         this.rol = rol;
     }
 
+    public String getNombreCompleto(){
+        return nombre+" "+apellidoPaterno+" "+apellidoMaterno;
+    }
     
     @Override
     public int hashCode() {
