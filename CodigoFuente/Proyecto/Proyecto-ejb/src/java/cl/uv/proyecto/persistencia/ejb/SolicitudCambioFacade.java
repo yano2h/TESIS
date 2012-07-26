@@ -53,6 +53,7 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
         edit(sc);
     }
 
+    @Override
     public void guardarEvaluacionSolicitud(SolicitudCambio sc, FuncionarioDisico funcionario){
         sc.setEvaluadorFinal(funcionario);
         sc.setFechaCierre(new Date());
