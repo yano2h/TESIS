@@ -12,7 +12,7 @@
         </ui:define>
 
         <ui:define name="content">
-            <p:panel id="pnl_solicitud_lnalisar" header="Analisis de Solicitudes">
+            <p:panel id="pnl_solicitud_lnalisar" header="Evaluacion de Solicitudes">
                 
                 <p:dataTable id="tbl_sol_pendientes" 
                              value="#{mbSolicitudesPorTarea.solicitudesPendientes}" 
@@ -23,12 +23,12 @@
                              paginator="true"
                              paginatorPosition="bottom"
                              rows="15"
-                             emptyMessage="No hay solicitudes por analisar">
+                             emptyMessage="No hay solicitudes por evaluar">
                     
                     <p:ajax event="rowSelect" listener="#{mbSolicitudesPorTarea.redirctToDetalle}"/>
                     
                     <f:facet name="header">
-                        <h:outputText value="Solicitudes de Cambio Pendientes de Analisis"/>
+                        <h:outputText value="Solicitudes de Cambio Pendientes de Evaluacion"/>
                     </f:facet>
                     
                     <p:column headerText="Nº" style="width: 20px;" sortBy="#{solicitud_p.idSolicitudCambio}">
@@ -57,7 +57,7 @@
                 <br/>
                 <br/>
                 
-                <p:dataTable id="tbl_sol_analisadas" 
+                <p:dataTable id="tbl_sol_evaluadas" 
                              value="#{mbSolicitudesPorTarea.solicitudesListas}" 
                              var="solicitud_l" 
                              selectionMode="single"
@@ -66,10 +66,12 @@
                              paginator="true"
                              paginatorPosition="bottom"
                              rows="10"
-                             emptyMessage="No hay solicitudes analisada">
+                             emptyMessage="No hay solicitudes evaluadas">
+                    
                     <p:ajax event="rowSelect" listener="#{mbSolicitudesPorTarea.redirctToDetalle}"/>
+                    
                     <f:facet name="header">
-                        <h:outputText value="Solicitudes de Cambio Analisadas"/>
+                        <h:outputText value="Solicitudes de Cambio Evaluadas"/>
                     </f:facet>
                     
                     <p:column headerText="Nº" style="width: 20px;" sortBy="#{solicitud_l.idSolicitudCambio}">
@@ -82,8 +84,8 @@
                         </h:outputText>
                     </p:column>
                     
-                    <p:column headerText="F.Analisis" style="width: 25px;" sortBy="#{solicitud_l.fechaAnalisis}">
-                        <h:outputText value="#{solicitud_l.fechaAnalisis}">
+                    <p:column headerText="F.Evaluacion" style="width: 25px;" sortBy="#{solicitud_l.fechaAnalisis}">
+                        <h:outputText value="#{solicitud_l.fechaCierre}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>

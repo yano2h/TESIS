@@ -23,12 +23,12 @@
                              paginator="true"
                              paginatorPosition="bottom"
                              rows="15"
-                             emptyMessage="No hay solicitudes por analisar">
+                             emptyMessage="No hay solicitudes por implementar">
                     
                     <p:ajax event="rowSelect" listener="#{mbSolicitudesPorTarea.redirctToDetalle}"/>
                     
                     <f:facet name="header">
-                        <h:outputText value="Solicitudes de Cambio Pendientes de Analisis"/>
+                        <h:outputText value="Solicitudes de Cambio Pendientes de Implementar"/>
                     </f:facet>
                     
                     <p:column headerText="Nº" style="width: 20px;" sortBy="#{solicitud_p.idSolicitudCambio}">
@@ -69,7 +69,7 @@
                              emptyMessage="No hay solicitudes analisada">
                     <p:ajax event="rowSelect" listener="#{mbSolicitudesPorTarea.redirctToDetalle}"/>
                     <f:facet name="header">
-                        <h:outputText value="Solicitudes de Cambio Analisadas"/>
+                        <h:outputText value="Solicitudes de Cambio Implementadas"/>
                     </f:facet>
                     
                     <p:column headerText="Nº" style="width: 20px;" sortBy="#{solicitud_l.idSolicitudCambio}">
@@ -82,8 +82,8 @@
                         </h:outputText>
                     </p:column>
                     
-                    <p:column headerText="F.Analisis" style="width: 25px;" sortBy="#{solicitud_l.fechaAnalisis}">
-                        <h:outputText value="#{solicitud_l.fechaAnalisis}">
+                    <p:column headerText="F.Implmentacion" style="width: 25px;" sortBy="#{solicitud_l.fechaAnalisis}">
+                        <h:outputText value="#{solicitud_l.formularioImplementacion.fechaVerificacion}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
