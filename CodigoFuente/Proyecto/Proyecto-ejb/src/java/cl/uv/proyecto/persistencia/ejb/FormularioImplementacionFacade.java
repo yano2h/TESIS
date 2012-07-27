@@ -4,7 +4,10 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.model.base.utils.Resources;
+import cl.uv.proyecto.consts.EstadoSC;
 import cl.uv.proyecto.persistencia.entidades.FormularioImplementacion;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,6 +21,9 @@ public class FormularioImplementacionFacade extends AbstractFacade<FormularioImp
     @PersistenceContext(unitName = "Proyecto-ejbPU")
     private EntityManager em;
 
+    @EJB
+    private EstadoSolicitudCambioFacadeLocal estadoSolicitudCambioFacade;
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -27,4 +33,10 @@ public class FormularioImplementacionFacade extends AbstractFacade<FormularioImp
         super(FormularioImplementacion.class);
     }
     
+    @Override
+    public void create(FormularioImplementacion f){
+          f.getSolicitudCambio().setEstadoSolicitud(estadoSolicitudCambioFacade.find(Resources.getValueShort("Estados", "ESC_IMPLEMENTADA")));
+          getEntityManager().merge(f.getSolicitudCambio());
+          getEntityManager().persist(f);
+    }
 }
