@@ -13,12 +13,13 @@
         <ui:define name="content">
 
             <h:form id="form_solicitud_camb">
-                <p:growl id="growl" showDetail="true"/>
+                <h:outputScript library="js" name="calendar-localization.js" />
+                
                 <p:panel id="panelDetalleSolicitud" header="Solicitud de Cambio">
                     <p:menubar id="mnu_solicitud_cambio" styleClass="menu_bar">
                         <p:menuitem value="Analisar" icon="ui-icon-pencil" onclick="dlgAnalisis.show();"  disabled="#{not mbDetalleSolicitudCambio.enabledAnalisis}"/>
                         <p:menuitem value="Aprobar/Rechazar" icon="ui-icon-check" onclick="dlgEvaluacion.show();" disabled="#{not mbDetalleSolicitudCambio.enabledEvaluacion}"/>
-                        <p:menuitem value="Implementar" icon="ui-icon-document" disabled="#{not mbDetalleSolicitudCambio.enabledFormularioImpl}"/>
+                        <p:menuitem value="Implementar" icon="ui-icon-document" onclick="dlgImplmentacion.show();" disabled="#{not mbDetalleSolicitudCambio.enabledFormularioImpl}"/>
                     </p:menubar>
 
                     <br/>
@@ -30,17 +31,17 @@
                         </h:panelGrid>
                         <h:panelGrid id="grid_datos_solicitud" columns="3" styleClass="header_panelgrid" style="filter:alpha(opacity=60);">
                             <h:panelGrid columns="2" cellspacing="10">
-                                <h:outputLabel value="Nº de Solicitud:" styleClass="label_blod" />
-                                <h:outputText id="codigo" value="#{mbDetalleSolicitudCambio.solicitudCambio.idSolicitudCambio}"/>
-
                                 <h:outputLabel value="Nombre Proyecto:" styleClass="label_blod"/>
                                 <h:outputText id="nombreProy" value="#{mbDetalleSolicitudCambio.solicitudCambio.proyecto.nombre}"/>
 
-                                <h:outputLabel value="Nombre Solicitnate:" styleClass="label_blod"/>
+                                <h:outputLabel value="Nombre Solicitante:" styleClass="label_blod"/>
                                 <h:outputText id="nombreSol" value="#{mbDetalleSolicitudCambio.solicitudCambio.solicitante.nombreCompleto}"/>
 
                                 <h:outputLabel value="Prioridad:" styleClass="label_blod"/>
                                 <h:outputText id="priridad" value="#{mbDetalleSolicitudCambio.solicitudCambio.prioridadSolicitud.nombrePrioridad}"/>
+                                
+                                <h:outputLabel value="Estado:" styleClass="label_blod" />
+                                <h:outputText id="estado" value="#{mbDetalleSolicitudCambio.solicitudCambio.estadoSolicitud.nombreEstadoSolicitud}"/>
                             </h:panelGrid>
 
                             <p:separator style="height: 10em;width: 1px;margin-left: 1em;margin-right: 1em;"/>
@@ -134,7 +135,7 @@
                             <p:commandButton value="Aceptar" 
                                              process="dlg_analisis"
                                              update="grid_dlg_analisis panelDetalleSolicitud" 
-                                             oncomplete="if(!args.validationFailed) {dlgAnalisis.hide();}"
+                                             oncomplete="if(!args.validationFailed) {dlgAnalisis.hide(); }"
                                              actionListener="#{mbDetalleSolicitudCambio.guardarAnalisis}"/>
                             <p:commandButton value="Cancelar" onclick="dlgAnalisis.hide();"/>
                         </h:panelGroup>
@@ -159,10 +160,55 @@
                             <p:commandButton value="Aceptar" 
                                              process="dlg_evaluacion"
                                              update="grid_dlg_ev panelDetalleSolicitud" 
-                                             oncomplete="if(!args.validationFailed){dlgEvaluacion.hide();}"
+                                             oncomplete="if(!args.validationFailed){dlgEvaluacion.hide(); }"
                                              actionListener="#{mbDetalleSolicitudCambio.guardarEvaluacion}"/>
                             <p:commandButton value="Cancelar" onclick="dlgEvaluacion.hide();"/>
                         </h:panelGroup>
+                    </h:panelGrid>
+                </p:dialog>
+
+                <p:dialog id="dlg_implementacion" widgetVar="dlgImplmentacion" header="Implementacion Solicitud" modal="true" closable="false" resizable="false">
+                    <h:panelGrid id="grid_dlg_implementacion" columns="1">
+                        <h:outputText value="Datos Verificacion" styleClass="label_blod"/>
+                        <h:panelGrid columns="4" >
+                            <p:outputLabel value="Fecha Verificacion:" for="cal_fecha_verific"/>
+                            <p:calendar id="cal_fecha_verific"
+                                        value="#{mbDetalleSolicitudCambio.formularioImplementacion.fechaVerificacion}"
+                                        showOn="button" pattern="dd/MM/yyyy" locale="es" >
+                            </p:calendar>
+                            
+                            <p:outputLabel value="Nombre Evaluador:" for="slct_evaluador"/>
+                            <p:selectOneMenu id="slct_evaluador" value="#{mbDetalleSolicitudCambio.formularioImplementacion.verificador}">
+                                <f:selectItems value="#{mbProyecto.itemsAvailableSelectManyNombreCompleto}"/>
+                            </p:selectOneMenu>
+
+                            <h:outputText value="Datos del Cambio" styleClass="label_blod"/>
+                            <p:spacer width="20"/><p:spacer width="20"/><p:spacer height="30"/>
+
+                            <p:outputLabel value="Nueva Version:" for="itxt_nueva_version"/>
+                            <p:inputText id="itxt_nueva_version" value="#{mbDetalleSolicitudCambio.formularioImplementacion.nuevaVersion}" maxlength="10"/> 
+
+                            <p:outputLabel value="Responsable del Cambio:" for="slct_implementador"/>
+                            <p:selectOneMenu id="slct_implementador" value="#{mbDetalleSolicitudCambio.formularioImplementacion.implementador}">
+                                <f:selectItems value="#{mbProyecto.itemsAvailableSelectManyNombreCompleto}"/>
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel value="Nuevo Identificador:" for="itxt_nuevo_identificador"/>
+                            <p:inputText id="itxt_nuevo_identificador" value="#{mbDetalleSolicitudCambio.formularioImplementacion.nuevoIdentificador}" maxlength="5"/>                            
+
+                        </h:panelGrid>
+                        
+                        <h:outputText value="Observaciones" styleClass="label_blod"/>
+                        <p:inputTextarea value="#{mbDetalleSolicitudCambio.formularioImplementacion.observaciones}" style="width: 98%;" required="true" />
+                        <h:panelGroup style="float: right;margin-top: 10px;">
+                            <p:commandButton value="Aceptar" 
+                                             process="dlg_implementacion"
+                                             update="grid_dlg_implementacion panelDetalleSolicitud" 
+                                             oncomplete="if(!args.validationFailed){dlgImplmentacion.hide(); }"
+                                             actionListener="#{mbDetalleSolicitudCambio.guardarFormularioImpl}"/>
+                            <p:commandButton value="Cancelar" onclick="dlgImplmentacion.hide();"/>
+                        </h:panelGroup>
+
                     </h:panelGrid>
                 </p:dialog>
 
