@@ -122,7 +122,7 @@ public class MbProyecto implements Serializable{
         SelectItem[] listaItems = new SelectItem[funcionariosArea.size()];
         int i = 0;
         for (FuncionarioDisico f : funcionariosArea) {
-            listaItems[i++] = new SelectItem(f, f.getNombre() + " " + f.getApellidoPaterno() + " " + f.getApellidoMaterno());
+            listaItems[i++] = new SelectItem(f, f.getNombreCompleto());
         }
         return listaItems;
     }
