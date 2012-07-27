@@ -10,6 +10,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.application.NavigationHandler;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
@@ -71,7 +73,12 @@ public class JsfUtils {
         } catch (IOException ex) {
         }
     }
+    
+    public static void addMessage(Severity severity, String summary, String detail){
+        getFacesContext().addMessage(null, new FacesMessage(severity, summary, detail));
+    }
 
+    
     /**
      * Metodo para logout, invalida la sesion
      *
@@ -99,8 +106,7 @@ public class JsfUtils {
     }
 
     public String getViewId() {
-        UIViewRoot viewRoot = getFacesContext().getViewRoot();
-        return viewRoot.getViewId();
+        return getFacesContext().getViewRoot().getViewId();
     }
 
     public static UIComponent findComponent(String id) {
