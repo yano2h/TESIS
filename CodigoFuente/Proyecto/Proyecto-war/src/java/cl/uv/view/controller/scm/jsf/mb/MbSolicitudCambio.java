@@ -71,7 +71,7 @@ public class MbSolicitudCambio implements Serializable{
     
     public void enviarSolicitud(){
         solicitudCambioFacade.enviarSolicitudCambio(nuevaSolicitud, mbFuncionarioInfo.getFuncionario());
-        JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Envio Exitoso", "Su solicitud han sido enviada con exito."));  
+        JsfUtils.addMessage(FacesMessage.SEVERITY_INFO, "Envio Exitoso", "Su solicitud han sido enviada con exito.");
         nuevaSolicitud = new SolicitudCambio();
     }
     
