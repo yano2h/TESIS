@@ -492,3 +492,7 @@ CREATE  TABLE ESTADISTICA_PERSONAL (
 ;
 
 ALTER TABLE `sistema_solicitudes`.`solicitud_cambio` ADD COLUMN `aprobada` TINYINT(1)  NULL DEFAULT NULL  AFTER `descripcion_resolucion` ;
+
+ALTER TABLE `sistema_solicitudes`.`formulario_implementacion` ADD COLUMN `nueva_version` VARCHAR(10) NOT NULL  AFTER `implementador` , ADD COLUMN `nuevo_identificador` VARCHAR(5) NOT NULL  AFTER `nueva_version` ;
+
+
