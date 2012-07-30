@@ -14,7 +14,7 @@
 
             <h:form id="form_solicitud_camb">
                 <h:outputScript library="js" name="calendar-localization.js" />
-                
+
                 <p:panel id="panelDetalleSolicitud" header="Solicitud de Cambio">
                     <p:menubar id="mnu_solicitud_cambio" styleClass="menu_bar">
                         <p:menuitem value="Analisar" icon="ui-icon-pencil" onclick="dlgAnalisis.show();"  disabled="#{not mbDetalleSolicitudCambio.enabledAnalisis}"/>
@@ -39,7 +39,7 @@
 
                                 <h:outputLabel value="Prioridad:" styleClass="label_blod"/>
                                 <h:outputText id="priridad" value="#{mbDetalleSolicitudCambio.solicitudCambio.prioridadSolicitud.nombrePrioridad}"/>
-                                
+
                                 <h:outputLabel value="Estado:" styleClass="label_blod" />
                                 <h:outputText id="estado" value="#{mbDetalleSolicitudCambio.solicitudCambio.estadoSolicitud.nombreEstadoSolicitud}"/>
                             </h:panelGrid>
@@ -124,6 +124,42 @@
                         </h:panelGrid>
                     </p:panel>
 
+                    <p:panel id="pnl_form_impl" header="Datos de Implementacion del Cambio" styleClass="panel_info_sol" rendered="#{mbDetalleSolicitudCambio.solicitudCambio.formularioImplementacion != null}">
+                        <h:panelGrid columns="4" cellspacing="10" styleClass="column_5m" >
+                            <h:outputText value="Datos Verificacion" styleClass="label_blod"/>
+                            <p:spacer width="20"/><p:spacer width="20"/><p:spacer height="30"/>
+
+                            <h:outputLabel value="Fecha Verificacion:" styleClass="label_blod"/>
+                            <h:outputText value="#{mbDetalleSolicitudCambio.formularioImplementacion.fechaVerificacion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+
+                            <h:outputLabel value="Nombre Evaluador:" styleClass="label_blod"/>
+                            <h:outputText value="#{mbDetalleSolicitudCambio.formularioImplementacion.verificador.nombreCompleto}"/>
+                        </h:panelGrid>
+                        <p:separator style="height: 1px;margin-top: 1em;margin-bottom: 1em;"/>
+                        
+                        <h:panelGrid columns="4" cellspacing="10" styleClass="column_5m" >
+                            <h:outputText value="Datos del Cambio" styleClass="label_blod"/>
+                            <p:spacer width="20"/><p:spacer width="20"/><p:spacer height="30"/>
+
+                            <h:outputLabel value="Nueva Version:" styleClass="label_blod"/>
+                            <h:outputText value="#{mbDetalleSolicitudCambio.formularioImplementacion.nuevaVersion}" style="width: 130px;"  /> 
+
+                            <h:outputLabel value="Responsable del Cambio:" styleClass="label_blod"/>
+                            <h:outputText value="#{mbDetalleSolicitudCambio.formularioImplementacion.implementador.nombreCompleto}"/>
+
+                            <h:outputLabel value="Nuevo Identificador:" styleClass="label_blod"/>
+                            <h:outputText value="#{mbDetalleSolicitudCambio.formularioImplementacion.nuevoIdentificador}"/>                            
+
+                        </h:panelGrid>
+                        <p:separator style="height: 1px;margin-top: 1em;margin-bottom: 1em;"/>
+                        <h:panelGrid columns="1" cellspacing="10">
+                            <h:outputLabel value="Observaciones" styleClass="label_blod"/>
+                            <h:outputText value="#{mbDetalleSolicitudCambio.formularioImplementacion.observaciones}" />
+                        </h:panelGrid>
+                    </p:panel>
+
                 </p:panel>
 
                 <p:dialog id="dlg_analisis" widgetVar="dlgAnalisis" header="Ingresar Analisis Solicitud" modal="true" closable="false" resizable="false" >
@@ -176,7 +212,7 @@
                                         value="#{mbDetalleSolicitudCambio.formularioImplementacion.fechaVerificacion}"
                                         showOn="button" pattern="dd/MM/yyyy" locale="es" >
                             </p:calendar>
-                            
+
                             <p:outputLabel value="Nombre Evaluador:" for="slct_evaluador"/>
                             <p:selectOneMenu id="slct_evaluador" value="#{mbDetalleSolicitudCambio.formularioImplementacion.verificador}">
                                 <f:selectItems value="#{mbProyecto.itemsAvailableSelectManyNombreCompleto}"/>
@@ -192,12 +228,12 @@
                             <p:selectOneMenu id="slct_implementador" value="#{mbDetalleSolicitudCambio.formularioImplementacion.implementador}">
                                 <f:selectItems value="#{mbProyecto.itemsAvailableSelectManyNombreCompleto}"/>
                             </p:selectOneMenu>
-                            
+
                             <p:outputLabel value="Nuevo Identificador:" for="itxt_nuevo_identificador"/>
                             <p:inputText id="itxt_nuevo_identificador" value="#{mbDetalleSolicitudCambio.formularioImplementacion.nuevoIdentificador}" maxlength="5"/>                            
 
                         </h:panelGrid>
-                        
+
                         <h:outputText value="Observaciones" styleClass="label_blod"/>
                         <p:inputTextarea value="#{mbDetalleSolicitudCambio.formularioImplementacion.observaciones}" style="width: 98%;" required="true" />
                         <h:panelGroup style="float: right;margin-top: 10px;">

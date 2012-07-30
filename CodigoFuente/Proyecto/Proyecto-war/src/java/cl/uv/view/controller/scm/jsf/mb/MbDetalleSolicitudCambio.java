@@ -89,6 +89,8 @@ public class MbDetalleSolicitudCambio implements Serializable {
         formularioImplementacion.setIdFormularioImplementacion(solicitudCambio.getIdSolicitudCambio());
         formularioImplementacion.setSolicitudCambio(solicitudCambio);
         formularioImplementacionFacade.create(formularioImplementacion);
+        solicitudCambio.setFormularioImplementacion(formularioImplementacion);
+        
       //  JsfUtils.addMessage(FacesMessage.SEVERITY_INFO, "Guardado Exitoso", "El formulario de implmentacion fue guardado exitosamente");
     }
 
