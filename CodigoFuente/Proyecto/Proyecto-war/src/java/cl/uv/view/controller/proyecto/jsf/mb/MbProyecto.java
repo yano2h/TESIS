@@ -119,12 +119,13 @@ public class MbProyecto implements Serializable{
     }
     
     public SelectItem[] getItemsAvailableSelectManyNombreCompleto() {
-        SelectItem[] listaItems = new SelectItem[funcionariosArea.size()];
-        int i = 0;
-        for (FuncionarioDisico f : funcionariosArea) {
-            listaItems[i++] = new SelectItem(f, f.getNombreCompleto());
-        }
-        return listaItems;
+//        SelectItem[] listaItems = new SelectItem[funcionariosArea.size()];
+//        int i = 0;
+//        for (FuncionarioDisico f : funcionariosArea) {
+//            listaItems[i++] = new SelectItem(f, f.getNombreCompleto());
+//        }
+//        return listaItems;
+        return JsfUtils.getSelectItems(funcionariosArea, "getNombreCompleto", false);
     }
     
 //    public void agregarParticipante(){
