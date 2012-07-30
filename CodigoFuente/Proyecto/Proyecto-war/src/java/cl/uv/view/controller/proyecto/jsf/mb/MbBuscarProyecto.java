@@ -11,6 +11,7 @@ import cl.uv.proyecto.persistencia.entidades.TipoProyecto;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -38,6 +39,11 @@ public class MbBuscarProyecto implements Serializable{
     
     public MbBuscarProyecto() {
         prototipoProyecto = new Proyecto();
+    }
+    
+    @PostConstruct
+    public void init(){
+        resultadosBusqueda = proyectoFacade.findAll();
     }
 
     public String getCodigo() {
