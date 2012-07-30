@@ -200,3 +200,7 @@ a.small_link{
     min-height: 10em;
     margin-bottom: 1em;
 }
+
+.column_5m td{
+    min-width: 5em;
+}
