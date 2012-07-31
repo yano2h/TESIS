@@ -37,4 +37,6 @@ public interface ProyectoFacadeLocal {
     public List<Proyecto> buscarProyectoPorFiltros(Proyecto proyecto, Date minDate, Date maxDate);
     
     public List<Proyecto> buscarProyectoPorTareaFuncionario(FuncionarioDisico funcionarioDisico, Integer idTarea);
+    
+    public List<Proyecto> buscarProyectosPorParticipante(FuncionarioDisico funcionarioDisico);
 }
