@@ -13,7 +13,41 @@
         <ui:define name="content">
             <h:outputScript library="js" name="calendar-localization.js" />
             <h:form>
-                
+                <p:panel header="Proyectos del Area">
+                <p:dataTable id="table_sol_area"
+                             value="#{mbMisProyectos.listaProyectos}"
+                             var="proyecto" 
+                             paginator="true" rows="20"
+                             paginatorPosition="bottom"
+                             selectionMode="single"
+                             selection="#{mbMisProyectos.proyectoSelected}"
+                             rowKey="#{proyecto.idProyecto}">
+
+                    <p:ajax event="rowSelect" listener="#{mbMisProyectos.onRowSelect}" />
+
+                    <p:column headerText="Codigo Interno" style="max-width: 90px;">
+                        <h:outputText value="#{proyecto.codigoInterno}"/>
+                    </p:column>
+
+                    <p:column headerText="Fecha Inicio" style="max-width: 90px;">
+                        <h:outputText value="#{proyecto.fechaInicio}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Nombre" style="min-width: 250px;">
+                        <h:outputText value="#{proyecto.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Tipo">
+                        <h:outputText value="#{proyecto.tipoProyecto.nombreTipoProyecto}"/>
+                    </p:column>
+
+                    <p:column headerText="Estado">
+                        <h:outputText value="#{proyecto.estadoProyecto.nombreEstadoProyecto}"/>
+                    </p:column>
+                </p:dataTable> 
+                </p:panel>
             </h:form>
         </ui:define>
     </ui:composition>
