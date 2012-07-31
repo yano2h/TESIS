@@ -4,8 +4,10 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.persistencia.entidades.TareaProyecto;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -31,9 +33,22 @@ public class TareaProyectoFacade extends AbstractFacade<TareaProyecto> implement
     }
     
     @Override
+    public void create(TareaProyecto t){
+        t.setFechaCreacion(new Date());
+        getEntityManager().persist(t);
+    }
+    
+    @Override
     public List<TareaProyecto> buscarTareasPorProyecto(Proyecto proyecto){
-        Query q = em.createQuery("SELECT t FROM TareaProyecto t WHERE t.proyecto = :proyecto AND t.visible = TRUE");
+        Query q = em.createQuery("SELECT t FROM TareaProyecto t WHERE t.proyecto = :proyecto AND t.visible = TRUE ORDER BY t.fechaInicioPropuesta");
         q.setParameter("proyecto", proyecto);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<TareaProyecto> buscarTareasPorResponsable(FuncionarioDisico responsable) {
+        Query q = em.createQuery("SELECT t FROM TareaProyecto t WHERE t.responsableTarea = :responsableTarea AND t.visible = TRUE ORDER BY t.fechaInicioPropuesta DESC");
+        q.setParameter("responsableTarea", responsable);
         return q.getResultList();
     }
     
