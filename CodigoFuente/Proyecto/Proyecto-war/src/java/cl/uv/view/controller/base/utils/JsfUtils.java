@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.application.NavigationHandler;
@@ -51,6 +52,16 @@ public class JsfUtils {
         NavigationHandler nh = ctx.getApplication().getNavigationHandler();
         nh.handleNavigation(ctx, null, action);
     }
+    
+    public static void performNavigation(String action, Boolean addRedirect){
+        ConfigurableNavigationHandler handler = (ConfigurableNavigationHandler) getFacesContext().getApplication().getNavigationHandler();
+        if(addRedirect){
+            handler.performNavigation(redirectTo(action));
+        }else{
+            handler.performNavigation(action);
+        }        
+    }
+
 
     public static void addParametro(String key, Object v){
         getExternalContext().getSessionMap().put(key, v);
