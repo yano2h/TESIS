@@ -10,23 +10,60 @@
             <h:outputText value="Detalle Tarea"/>
         </ui:define>
         <ui:define name="content">  
-           <h:form>
-               <p:panel header="Detalle Tarea">
-                   <h:outputScript library="js" name="calendar-localization.js" />
-                   <h:panelGrid columns="4" cellspacing="10">
-                       <p:outputLabel value="Tarea:" for=""/>
-                       
-                       <p:outputLabel value="Responsable:" for=""/>
-                       
-                       <p:outputLabel value="Proyecto:" for=""/>
-                       
-                       <p:outputLabel value="Fecha de Inicio:" for=""/>
-                       
-                       <p:outputLabel value="Fecha de Termino:" for=""/>
-                       
-                   </h:panelGrid>
-               </p:panel>
-           </h:form>
+            <h:form id="detalle_tarea">
+                <p:panel header="Detalle Tarea">
+                    <h:outputScript library="js" name="calendar-localization.js" />
+                    <h:panelGrid columns="4" cellspacing="10" columnClasses="width:100px,width:250px, width:100px, width:250px">
+
+                        <h:outputLabel value="Tarea:" styleClass="label_blod"/>
+                        <h:outputText  value="#{mbDetalleTarea.tarea.tarea}"/>
+
+                        <h:outputLabel value="Responsable:" styleClass="label_blod"/>
+                        <h:outputText value="#{mbDetalleTarea.tarea.responsableTarea.nombreCompleto}"/>
+
+                        <h:outputLabel value="Proyecto:" styleClass="label_blod"/>
+                        <h:outputText value="#{mbDetalleTarea.tarea.proyecto.nombre}"/>
+
+                        <h:outputLabel value="Avance:" styleClass="label_blod"/>
+                        <h:panelGrid id="grid_avance" columns="2">                                                        
+                            <p:inplace widgetVar="inpAvance">
+                                <p:spinner value="#{mbDetalleTarea.tarea.nivelAvance}" max="100" min="#{mbDetalleTarea.minAvance}" size="5"/>
+                            </p:inplace>
+                            <h:outputText value="%"/>
+                        </h:panelGrid>
+
+                        <h:outputLabel value="Fecha de Inicio:" styleClass="label_blod"/>
+                        <h:outputText value="#{mbDetalleTarea.tarea.fechaInicioPropuesta}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+
+                        <h:outputLabel value="Fecha de Termino:" styleClass="label_blod"/>
+                        <h:outputText value="#{mbDetalleTarea.tarea.fechaTerminoPropuesta}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+
+                        <h:outputLabel value="Fecha de Inicio Real:" styleClass="label_blod"/>
+                        <h:outputText value="#{mbDetalleTarea.tarea.fechaInicioReal}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+
+                        <h:outputLabel value="Fecha de Termino Real:" styleClass="label_blod"/>
+                        <h:outputText value="#{mbDetalleTarea.tarea.fechaTerminoReal}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </h:panelGrid>
+
+                    <h:panelGrid id="grid_desc" columns="1" cellspacing="10">
+                        <p:outputLabel value="Descripcion:" styleClass="label_blod" for="itxt_desc"/>
+                        <p:inplace  widgetVar="inpDesc">
+                            <p:inputTextarea id="itxt_desc" value="#{mbDetalleTarea.tarea.descripcionTarea}" cols="80" rows="3"/>
+                        </p:inplace>  
+                    </h:panelGrid>
+
+                    <p:commandButton value="Modificar" oncomplete="inpAvance.show();inpDesc.show();" />
+                    <p:commandButton value="Guardar Cambios" oncomplete="if(!args.validationFailed){inpAvance.save();inpDesc.save();}" update="grid_desc grid_avance" actionListener="#{mbDetalleTarea.guardarCambios}"/>
+                </p:panel>
+            </h:form>
         </ui:define>
     </ui:composition>
 </html>
