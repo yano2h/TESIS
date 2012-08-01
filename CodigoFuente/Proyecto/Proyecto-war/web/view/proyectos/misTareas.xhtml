@@ -22,11 +22,15 @@
                                  selectionMode="single"
                                  selection="#{mbTareas.tareaSelected}"
                                  rowKey="#{tarea.idTareaProyecto}"
+                                 rowIndexVar="index"
                                  emptyMessage="No posee tareas"
                                  >
 
                         <p:ajax event="rowSelect" listener="#{mbTareas.onRowSelect}"/>
-
+                        <p:column headerText="#">
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        
                         <p:column headerText="Tarea" style="min-width: 250px;">
                             <h:outputText value="#{tarea.tarea}"/>
                         </p:column>
