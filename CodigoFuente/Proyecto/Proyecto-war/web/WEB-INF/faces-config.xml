@@ -3,9 +3,9 @@
 <!-- =========== FULL CONFIGURATION FILE ================================== -->
 
 <faces-config version="2.0"
-    xmlns="http://java.sun.com/xml/ns/javaee" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+              xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
     <application>
         <resource-bundle>
             <base-name>/cl/uv/proyecto/persistencia/jsf/properties/Bundle</base-name>
@@ -27,5 +27,9 @@
             <base-name>/cl/uv/view/controller/proyecto/properties/Constantes</base-name>
             <var>const</var>
         </resource-bundle>
+        <lifecycle>
+            <phase-listener>cl.uv.view.controller.proyecto.jsf.core.CachePhaseListener</phase-listener>
+        </lifecycle>
     </application>
+    
 </faces-config>

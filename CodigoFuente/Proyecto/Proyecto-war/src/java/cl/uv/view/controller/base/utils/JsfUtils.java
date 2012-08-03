@@ -4,6 +4,7 @@
  */
 package cl.uv.view.controller.base.utils;
 
+import cl.uv.view.controller.proyecto.jsf.mb.MbSSOUtils;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -41,10 +42,11 @@ public class JsfUtils {
         return JsfUtils.getFacesContext().getExternalContext();
     }
 
-    public static Object getValue(String beanName) {
+    public static Object getValue(String el) {
         FacesContext ctx = getFacesContext();
-        return ctx.getELContext().getELResolver().getValue(ctx.getELContext(), null, beanName);
+        //return ctx.getELContext().getELResolver().getValue(ctx.getELContext(), null, beanName);
         // return ctx.getApplication().createValueBinding(el).getValue(ctx);
+        return getFacesContext().getApplication().getELResolver().getValue(ctx.getELContext(), null, el);
     }
 
     public static void handleNavigation(String action) {
