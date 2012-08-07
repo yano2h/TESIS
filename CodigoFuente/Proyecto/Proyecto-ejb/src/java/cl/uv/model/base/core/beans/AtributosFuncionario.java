@@ -5,67 +5,76 @@ import java.util.List;
 
 public class AtributosFuncionario {
 
-	private String sn;
-	private String cn;
-	private String correouv;
-	private String givenname;
-	private String rut;
-	private String mail;
-	private List <String> listaRoles = new ArrayList<String>();
+    private String uid;
+    private String sn;
+    private String cn;
+    private String correouv;
+    private String givenname;
+    private String rut;
+    private String mail;
+    private List<String> listaRoles = new ArrayList<String>();
 
-	public String getCn() {
-		return cn;
-	}
+    public String getUid() {
+        return uid;
+    }
 
-	public void setCn(String cn) {
-		this.cn = cn;
-	}
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
-	public String getCorreouv() {
-		return correouv;
-	}
+    public String getCn() {
+        return cn;
+    }
 
-	public void setCorreouv(String correouv) {
-		this.correouv = correouv;
-	}
+    public void setCn(String cn) {
+        this.cn = cn;
+    }
 
-	public String getGivenname() {
-		return givenname;
-	}
+    public String getCorreouv() {
+        return correouv;
+    }
 
-	public void setGivenname(String givenname) {
-		this.givenname = givenname;
-	}
+    public void setCorreouv(String correouv) {
+        this.correouv = correouv;
+    }
 
-	public List<String> getListaRoles() {
-		return listaRoles;
-	}
+    public String getGivenname() {
+        return givenname;
+    }
 
-	public void setListaRoles(List<String> listaRoles) {
-		this.listaRoles = listaRoles;
-	}
+    public void setGivenname(String givenname) {
+        this.givenname = givenname;
+    }
 
-	public String getMail() {
-		return mail;
-	}
+    public List<String> getListaRoles() {
+        return listaRoles;
+    }
 
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
+    public void setListaRoles(List<String> listaRoles) {
+        this.listaRoles = listaRoles;
+    }
 
-	public String getRut() {
-		return rut;
-	}
+    public String getMail() {
+        return mail;
+    }
 
-	public void setRut(String rut) {
-		this.rut = rut;
-	}
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
 
-	public String getSn() {
-		return sn;
-	}
+    public String getRut() {
+        return rut;
+    }
 
-	public void setSn(String sn) {
-		this.sn = sn;
-	}
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
+
+    public String getSn() {
+        return sn;
+    }
+
+    public void setSn(String sn) {
+        this.sn = sn;
+    }
 }
