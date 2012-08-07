@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/security
+                           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+   <!-- <security:global-method-security
+        secured-annotations="enabled">
+		
+			AspectJ pointcut expression that locates our "post" method and
+			applies security that way <protect-pointcut expression="execution(*
+			bigbank.*Service.post*(..))" access="ROLE_TELLER"/>
+		
+    </security:global-method-security>
+       -->
+    <security:http entry-point-ref="openAMAuthenticationEntryPoint">
+        <security:custom-filter position="PRE_AUTH_FILTER" ref="openAMFilter" />
+        <security:intercept-url pattern="/**"
+                                access="IS_AUTHENTICATED_FULLY" />
+    </security:http>
+    
+    
+    <!-- Definicion el authentication entry point -->
+    <bean id="openAMAuthenticationEntryPoint" class="cl.uv.security.openam.OpenAMAuthenticationEntryPoint">
+        <property name="openAMLogin"
+                  value="http://test.uv.cl:8080/Login-war/mainPage.jspx" />
+
+    </bean>
+    
+    <!--  Definicion del filtro -->
+    <bean id="openAMFilter"
+          class="cl.uv.security.openam.OpenAMPreAuthenticatedProcessingFilter">
+	<property name="cookieNameToken" value="iPlanetDirectoryPro" />
+	<property name="authenticationManager" ref="authenticationManager" />
+    </bean>
+    
+    <bean id="preauthAuthProvider"
+          class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">     
+	  <property name="preAuthenticatedUserDetailsService" ref="openAMUserDetailsService" />
+    </bean>
+    
+    <bean id="openAMUserDetailsService"
+          class="cl.uv.security.openam.OpenAMUserDetailsService">
+    </bean>
+    
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="preauthAuthProvider" /> 
+    </security:authentication-manager>
+</beans>
+  

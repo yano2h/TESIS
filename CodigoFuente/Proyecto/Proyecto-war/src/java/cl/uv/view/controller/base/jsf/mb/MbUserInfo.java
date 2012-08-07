@@ -15,6 +15,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -41,6 +42,8 @@ public class MbUserInfo implements Serializable {
         }
         funcionario.setFechaUltimoAcceso(new Date());
         funcionarioFacade.edit(funcionario);
+        System.out.println("Principal:"+
+        SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
 
     public Funcionario getFuncionario() {

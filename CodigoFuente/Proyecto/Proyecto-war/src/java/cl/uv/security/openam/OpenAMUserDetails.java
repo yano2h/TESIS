@@ -21,7 +21,9 @@ public class OpenAMUserDetails implements UserDetails{
     private boolean credentialsNonExpired;
     private boolean enabled;
     private Set<GrantedAuthority> authorities;
-
+    
+    /**/
+    
     public OpenAMUserDetails(String username, String password, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled, Set<GrantedAuthority> authorities) {
         this.username = username;
         this.password = password;
@@ -35,37 +37,37 @@ public class OpenAMUserDetails implements UserDetails{
     
     @Override
     public Set<GrantedAuthority> getAuthorities() {
-        return authorities.;
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return password;
     }
 
     @Override
     public String getUsername() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return accountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return accountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return credentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return enabled;
     }
     
 }

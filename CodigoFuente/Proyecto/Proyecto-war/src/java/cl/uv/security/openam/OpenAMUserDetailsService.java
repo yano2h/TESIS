@@ -6,7 +6,9 @@ package cl.uv.security.openam;
 
 import cl.uv.model.base.core.beans.AtributosFuncionario;
 import cl.uv.model.base.core.ejb.AuthEJBBeanLocal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -33,20 +35,21 @@ public class OpenAMUserDetailsService implements AuthenticationUserDetailsServic
         
         String tokenOpenAM = (String) token.getCredentials();
         AtributosFuncionario attr = authEJBBean.getAtributosFuncionarios(tokenOpenAM);
-        OpenAMUserDetails user = new OpenAMUserDetails(attr.getUid(), tokenOpenAM);
-        user
+        OpenAMUserDetails user = createUser(attr,tokenOpenAM);
         
+        return user;
     }
 
-    private OpenAMUserDetails createUser(AtributosFuncionario attr){
-        return new OpenAMUserDetails(attr.getUid(), null, true, true, true, true, createGrantedAuthority(attr.getListaRoles()));
+    private OpenAMUserDetails createUser(AtributosFuncionario attr, String token){
+        return new OpenAMUserDetails(attr.getUid(), token, 
+                                     true, true, true, true, 
+                                     createGrantedAuthority(attr.getListaRoles()));
     }
     
-    private GrantedAuthority[] createGrantedAuthority(List<String> roles){
-        GrantedAuthority[] authoritys = new GrantedAuthority[roles.size()];
-        int i=0;
+    private Set<GrantedAuthority> createGrantedAuthority(List<String> roles){
+        Set<GrantedAuthority> authoritys = new HashSet<GrantedAuthority>();
         for (String rol : roles) {
-            authoritys[i++] = new SimpleGrantedAuthority(rol);
+            authoritys.add( new SimpleGrantedAuthority(rol) );
         }
         
         return authoritys;

@@ -19,6 +19,16 @@ import org.springframework.security.web.AuthenticationEntryPoint;
  */
 public class OpenAMAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
+    private String openAMLogin = null;
+
+    public String getOpenAMLogin() {
+        return openAMLogin;
+    }
+
+    public void setOpenAMLogin(String openAMLogin) {
+        this.openAMLogin = openAMLogin;
+    }
+    
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -37,7 +47,7 @@ public class OpenAMAuthenticationEntryPoint implements AuthenticationEntryPoint 
             redirectToUrl = request.getRequestURL().toString();
         }
         
-        String redirectUrl = "http://test.uv.cl:8080/Login-war/mainPage.jspx?goto=" + redirectToUrl;
+        String redirectUrl = openAMLogin+"?goto=" + redirectToUrl;
         return redirectUrl;
     }
 }

@@ -15,6 +15,14 @@ public class OpenAMPreAuthenticatedProcessingFilter extends AbstractPreAuthentic
     
     private String cookieNameToken = null;//"iPlanetDirectoryPro";
     
+    public String getCookieNameToken() {
+        return cookieNameToken;
+    }
+
+    public void setCookieNameToken(String cookieNameToken) {
+        this.cookieNameToken = cookieNameToken;
+    }
+
     @Override
     protected Object getPreAuthenticatedPrincipal(HttpServletRequest request) {
         return "N/A";
@@ -24,14 +32,5 @@ public class OpenAMPreAuthenticatedProcessingFilter extends AbstractPreAuthentic
     protected Object getPreAuthenticatedCredentials(HttpServletRequest request) {
         return OpenAMUtil.getToken(cookieNameToken, request);
     }
-
-    public String getCookieNameToken() {
-        return cookieNameToken;
-    }
-
-    public void setCookieNameToken(String cookieNameToken) {
-        this.cookieNameToken = cookieNameToken;
-    }
-    
     
 }
