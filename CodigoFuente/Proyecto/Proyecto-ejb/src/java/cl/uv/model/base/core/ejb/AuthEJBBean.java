@@ -35,7 +35,7 @@ public class AuthEJBBean implements AuthEJBBeanLocal {
             Iterator<Attribute> items = attrs.iterator();
             ArrayList<String> listaRoles = (ArrayList<String>) results.getRoles();
             atributosFuncionario = new AtributosFuncionario();
-            String Cn = "", Sn = "", Correouv = "", Mail = "", Rut = "", Givenname = "";
+            String Cn = "", Sn = "", Correouv = "", Mail = "", Rut = "", Givenname = "", Uid = "";
             while (items.hasNext()) {
                 Attribute attr = items.next();
                 if (attr.getName().equals("cn")) {
@@ -56,7 +56,11 @@ public class AuthEJBBean implements AuthEJBBeanLocal {
                 if (attr.getName().equals("givenname")) {
                     Givenname = (attr.getValues().get(0));
                 }
+                if (attr.getName().equals("uid")){
+                    Uid = (attr.getValues().get(0));
+                }
             }
+            atributosFuncionario.setUid(Uid);
             atributosFuncionario.setCn(Cn);
             atributosFuncionario.setSn(Sn);
             atributosFuncionario.setCorreouv(Correouv);

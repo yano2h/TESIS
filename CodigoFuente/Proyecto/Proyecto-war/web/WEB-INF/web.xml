@@ -4,10 +4,11 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Production</param-value>
     </context-param>
-    <context-param>  
-        <param-name>primefaces.THEME</param-name>  
-        <param-value>redmond</param-value>  
-    </context-param> 
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <!--<param-value>temaUV</param-value>-->
+        <param-value>redmond</param-value>
+    </context-param>
     <context-param>
         <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
         <param-value>true</param-value>
@@ -27,7 +28,13 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-       <!-- <welcome-file>faces/solicitudes/mainPage.xhtml</welcome-file> -->
-       <welcome-file>faces/view/index.xhtml</welcome-file>
+        <!-- <welcome-file>faces/solicitudes/mainPage.xhtml</welcome-file> -->
+        <welcome-file>faces/view/index.xhtml</welcome-file>
     </welcome-file-list>
+    <ejb-local-ref>
+        <ejb-ref-name>AuthEJBBean</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>cl.uv.model.base.core.ejb.AuthEJBBeanLocal</local>
+        <ejb-link>Proyecto-ejb.jar#AuthEJBBean</ejb-link>
+    </ejb-local-ref>
 </web-app>
