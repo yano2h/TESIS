@@ -8,6 +8,11 @@ import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.NotificacionFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.Notificacion;
+import cl.uv.security.openam.OpenAMUserDetails;
+import cl.uv.security.openam.OpenAMUserDetailsService;
+import cl.uv.view.controller.base.utils.JsfUtils;
+import com.sun.identity.authentication.AuthContext;
+import com.sun.identity.authentication.spi.AuthLoginException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +20,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
@@ -44,6 +50,14 @@ public class MbUserInfo implements Serializable {
         funcionarioFacade.edit(funcionario);
         System.out.println("Principal:"+
         SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        
+        OpenAMUserDetails user = (OpenAMUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        
+        for (GrantedAuthority a : user.getAuthorities()) {
+            String tempRol = a.getAuthority().split(",")[0].split("=")[1];
+            System.out.println("ROL:"+tempRol);
+        }
+        
     }
 
     public Funcionario getFuncionario() {
@@ -61,4 +75,10 @@ public class MbUserInfo implements Serializable {
             notificacionFacade.edit(notificacion);
         }
     }
+    
+    public void logout(){
+        JsfUtils.redirect(JsfUtils.getExternalContext().getRequestContextPath()+"/j_spring_security_logout");
+        System.out.println("AKA");
+    }
+    
 }

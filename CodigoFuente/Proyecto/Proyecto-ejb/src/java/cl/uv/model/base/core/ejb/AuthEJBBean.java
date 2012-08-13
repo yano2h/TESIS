@@ -13,6 +13,8 @@ import cl.uv.model.base.ws.funcionarios.UserDetails;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 
 @Stateless
@@ -98,5 +100,16 @@ public class AuthEJBBean implements AuthEJBBeanLocal {
         IdentityServicesImplService service = new IdentityServicesImplService();
         IdentityServicesImpl port = service.getIdentityServicesImplPort();
         return port;
+    }
+
+    @Override
+    public void logout(String tokenCookie) {
+        Token token = new Token();
+        token.setId(tokenCookie);
+        try {
+            getPort().logout(token);
+        } catch (GeneralFailure_Exception ex) {
+            Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

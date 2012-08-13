@@ -9,4 +9,6 @@ public interface AuthEJBBeanLocal {
     public boolean validateToken(String tokenCookie);
 
     public AtributosFuncionario getAtributosFuncionarios(String tokenCookie);
+    
+    public void logout(String tokenCookie);
 }
