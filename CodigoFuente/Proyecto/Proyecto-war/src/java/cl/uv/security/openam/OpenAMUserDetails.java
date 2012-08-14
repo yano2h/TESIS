@@ -4,6 +4,7 @@
  */
 package cl.uv.security.openam;
 
+import cl.uv.model.base.core.beans.AtributosFuncionario;
 import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +23,8 @@ public class OpenAMUserDetails implements UserDetails{
     private boolean enabled;
     private Set<GrantedAuthority> authorities;
     
-    /**/
+    /*Para uso de la aplicacion*/
+    private AtributosFuncionario funcionario;
     
     public OpenAMUserDetails(String username, String password, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled, Set<GrantedAuthority> authorities) {
         this.username = username;
@@ -33,7 +35,6 @@ public class OpenAMUserDetails implements UserDetails{
         this.enabled = enabled;
         this.authorities = authorities;
     }
-
     
     @Override
     public Set<GrantedAuthority> getAuthorities() {
@@ -68,6 +69,14 @@ public class OpenAMUserDetails implements UserDetails{
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+    
+    public AtributosFuncionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(AtributosFuncionario funcionario) {
+        this.funcionario = funcionario;
     }
     
 }

@@ -6,6 +6,7 @@ package cl.uv.security.openam;
 
 import cl.uv.model.base.core.beans.AtributosFuncionario;
 import cl.uv.model.base.core.ejb.AuthEJBBeanLocal;
+import cl.uv.view.controller.base.utils.Resources;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,11 +33,10 @@ public class OpenAMUserDetailsService implements AuthenticationUserDetailsServic
     
     @Override
     public UserDetails loadUserDetails(Authentication token) throws UsernameNotFoundException {
-        
         String tokenOpenAM = (String) token.getCredentials();
         AtributosFuncionario attr = authEJBBean.getAtributosFuncionarios(tokenOpenAM);
         OpenAMUserDetails user = createUser(attr,tokenOpenAM);
-        
+        user.setFuncionario(attr);
         return user;
     }
 
@@ -48,8 +48,16 @@ public class OpenAMUserDetailsService implements AuthenticationUserDetailsServic
     
     private Set<GrantedAuthority> createGrantedAuthority(List<String> roles){
         Set<GrantedAuthority> authoritys = new HashSet<GrantedAuthority>();
+        
+        String prefixApp = Resources.getValue("security", "prefix_app");
+        String prefixRol = Resources.getValue("security", "prefix_rol_spring");
+                
         for (String rol : roles) {
-            authoritys.add( new SimpleGrantedAuthority(rol) );
+            if(rol.startsWith(prefixApp)){
+                String tempRol = rol.split(",")[0].split("=")[1];
+                tempRol.replaceFirst(prefixApp, prefixRol);
+                authoritys.add( new SimpleGrantedAuthority(rol) );
+            }
         }
         
         return authoritys;

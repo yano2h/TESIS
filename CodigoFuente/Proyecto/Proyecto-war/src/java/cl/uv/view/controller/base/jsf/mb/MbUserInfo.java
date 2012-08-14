@@ -4,15 +4,12 @@
  */
 package cl.uv.view.controller.base.jsf.mb;
 
+import cl.uv.model.base.core.ejb.AuthEJBBeanLocal;
 import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.NotificacionFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.Notificacion;
 import cl.uv.security.openam.OpenAMUserDetails;
-import cl.uv.security.openam.OpenAMUserDetailsService;
-import cl.uv.view.controller.base.utils.JsfUtils;
-import com.sun.identity.authentication.AuthContext;
-import com.sun.identity.authentication.spi.AuthLoginException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +27,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @ManagedBean
 @SessionScoped
 public class MbUserInfo implements Serializable {
+    @EJB
+    private AuthEJBBeanLocal authEJBBean;
 
     @EJB
     private FuncionarioFacadeLocal funcionarioFacade;
@@ -77,8 +76,10 @@ public class MbUserInfo implements Serializable {
     }
     
     public void logout(){
-        JsfUtils.redirect(JsfUtils.getExternalContext().getRequestContextPath()+"/j_spring_security_logout");
-        System.out.println("AKA");
+       // JsfUtils.redirect(JsfUtils.getExternalContext().getRequestContextPath()+"/j_spring_security_logout");
+        System.out.println("LOGOUT");
+        OpenAMUserDetails user = (OpenAMUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        authEJBBean.logout(user.getPassword());
     }
     
 }

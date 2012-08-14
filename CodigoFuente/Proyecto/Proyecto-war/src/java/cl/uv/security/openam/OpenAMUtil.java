@@ -4,22 +4,8 @@
  */
 package cl.uv.security.openam;
 
-import cl.uv.view.controller.base.utils.JsfUtils;
-import com.iplanet.dpro.session.Session;
-import com.iplanet.dpro.session.SessionException;
-import com.iplanet.dpro.session.SessionID;
-import com.iplanet.sso.SSOException;
-import com.iplanet.sso.SSOToken;
-import com.iplanet.sso.SSOTokenManager;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -47,6 +33,5 @@ public class OpenAMUtil {
         
         return valueCookie;
     }
-    
    
 }

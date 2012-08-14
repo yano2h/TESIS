@@ -39,7 +39,6 @@ public class OpenAMAuthenticationEntryPoint implements AuthenticationEntryPoint 
     }
 
     protected String buildRedirectUrlToLoginPage(HttpServletRequest request) {
-
         String redirectToUrl;
         try {
             redirectToUrl = URLEncoder.encode(request.getRequestURL().toString(), "UTF-8");
@@ -47,7 +46,7 @@ public class OpenAMAuthenticationEntryPoint implements AuthenticationEntryPoint 
             redirectToUrl = request.getRequestURL().toString();
         }
         
-        String redirectUrl = openAMLogin+"?goto=" + redirectToUrl;
-        return redirectUrl;
+        redirectToUrl = openAMLogin+"?goto=" + redirectToUrl;
+        return redirectToUrl;
     }
 }

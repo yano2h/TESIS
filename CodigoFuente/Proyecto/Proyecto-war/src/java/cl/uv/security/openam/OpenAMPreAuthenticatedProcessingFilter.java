@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.preauth.AbstractPreAuthen
  */
 public class OpenAMPreAuthenticatedProcessingFilter extends AbstractPreAuthenticatedProcessingFilter{
     
-    private String cookieNameToken = null;//"iPlanetDirectoryPro";
+    private String cookieNameToken = null;
     
     public String getCookieNameToken() {
         return cookieNameToken;
