@@ -56,7 +56,7 @@ public class OpenAMUserDetailsService implements AuthenticationUserDetailsServic
             if(rol.startsWith(prefixApp)){
                 String tempRol = rol.split(",")[0].split("=")[1];
                 tempRol.replaceFirst(prefixApp, prefixRol);
-                authoritys.add( new SimpleGrantedAuthority(rol) );
+                authoritys.add( new SimpleGrantedAuthority(tempRol) );
             }
         }
         
