@@ -38,6 +38,16 @@ public class FormularioImplementacion implements Serializable {
     @Column(name = "fecha_verificacion")
     @Temporal(TemporalType.DATE)
     private Date fechaVerificacion;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "nueva_version")
+    private String nuevaVersion;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 5)
+    @Column(name = "nuevo_identificador")
+    private String nuevoIdentificador;
     @JoinColumn(name = "id_formulario_implementacion", referencedColumnName = "id_solicitud_cambio", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private SolicitudCambio solicitudCambio;
@@ -83,6 +93,22 @@ public class FormularioImplementacion implements Serializable {
 
     public void setFechaVerificacion(Date fechaVerificacion) {
         this.fechaVerificacion = fechaVerificacion;
+    }
+
+    public String getNuevaVersion() {
+        return nuevaVersion;
+    }
+
+    public void setNuevaVersion(String nuevaVersion) {
+        this.nuevaVersion = nuevaVersion;
+    }
+
+    public String getNuevoIdentificador() {
+        return nuevoIdentificador;
+    }
+
+    public void setNuevoIdentificador(String nuevoIdentificador) {
+        this.nuevoIdentificador = nuevoIdentificador;
     }
 
     public SolicitudCambio getSolicitudCambio() {

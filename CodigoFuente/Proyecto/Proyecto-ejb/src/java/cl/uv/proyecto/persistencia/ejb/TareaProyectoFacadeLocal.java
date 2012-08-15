@@ -4,6 +4,7 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.persistencia.entidades.TareaProyecto;
 import java.util.List;
@@ -31,4 +32,6 @@ public interface TareaProyectoFacadeLocal {
     int count();
     
     public List<TareaProyecto> buscarTareasPorProyecto(Proyecto proyecto);
+    
+    public List<TareaProyecto> buscarTareasPorResponsable(FuncionarioDisico responsable);
 }

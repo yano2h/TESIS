@@ -19,11 +19,13 @@
                     </h:panelGrid>
                     <h:panelGroup>
                         <p:commandButton value="Ver Perfil" action="perfilSolicitante?faces-redirect=true"/>
-                        <p:commandButton value="Cerrar Sesión"/>
+                        <p:commandButton value="Cerrar Sesión" actionListener="#{mbUserInfo.logout}"/>
+                       
                     </h:panelGroup>
 
                 </h:panelGrid>
             </h:panelGrid>
+            
          </h:form>
       
         </ui:composition>

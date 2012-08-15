@@ -4,12 +4,16 @@
  */
 package cl.uv.view.controller.base.utils;
 
+import cl.uv.view.controller.proyecto.jsf.mb.MbSSOUtils;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.ConfigurableNavigationHandler;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.application.NavigationHandler;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
@@ -38,10 +42,11 @@ public class JsfUtils {
         return JsfUtils.getFacesContext().getExternalContext();
     }
 
-    public static Object getValue(String beanName) {
+    public static Object getValue(String el) {
         FacesContext ctx = getFacesContext();
-        return ctx.getELContext().getELResolver().getValue(ctx.getELContext(), null, beanName);
+        //return ctx.getELContext().getELResolver().getValue(ctx.getELContext(), null, beanName);
         // return ctx.getApplication().createValueBinding(el).getValue(ctx);
+        return getFacesContext().getApplication().getELResolver().getValue(ctx.getELContext(), null, el);
     }
 
     public static void handleNavigation(String action) {
@@ -49,6 +54,16 @@ public class JsfUtils {
         NavigationHandler nh = ctx.getApplication().getNavigationHandler();
         nh.handleNavigation(ctx, null, action);
     }
+    
+    public static void performNavigation(String action, Boolean addRedirect){
+        ConfigurableNavigationHandler handler = (ConfigurableNavigationHandler) getFacesContext().getApplication().getNavigationHandler();
+        if(addRedirect){
+            handler.performNavigation(redirectTo(action));
+        }else{
+            handler.performNavigation(action);
+        }        
+    }
+
 
     public static void addParametro(String key, Object v){
         getExternalContext().getSessionMap().put(key, v);
@@ -71,7 +86,12 @@ public class JsfUtils {
         } catch (IOException ex) {
         }
     }
+    
+    public static void addMessage(Severity severity, String summary, String detail){
+        getFacesContext().addMessage(null, new FacesMessage(severity, summary, detail));
+    }
 
+    
     /**
      * Metodo para logout, invalida la sesion
      *
@@ -99,8 +119,7 @@ public class JsfUtils {
     }
 
     public String getViewId() {
-        UIViewRoot viewRoot = getFacesContext().getViewRoot();
-        return viewRoot.getViewId();
+        return getFacesContext().getViewRoot().getViewId();
     }
 
     public static UIComponent findComponent(String id) {

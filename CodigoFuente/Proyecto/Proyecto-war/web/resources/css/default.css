@@ -177,3 +177,30 @@ a.small_link{
     hanging-punctuation: 1.2em;
 }
 
+.p_panelgrid_sin_borde tr, .p_panelgrid_sin_borde td{
+    border: none !important;
+}
+
+.header_panelgrid thead tr th{
+    border: 1px solid #18316D ;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: #A6C9E2;
+    text-align: left;
+    font-size: 13px;
+    height: 2em;
+}
+
+.menu_bar{
+    height: 2.5em;
+    background: #EFFFFF;
+}
+
+.panel_info_sol{
+    min-height: 10em;
+    margin-bottom: 1em;
+}
+
+.column_5m td{
+    min-width: 5em;
+}

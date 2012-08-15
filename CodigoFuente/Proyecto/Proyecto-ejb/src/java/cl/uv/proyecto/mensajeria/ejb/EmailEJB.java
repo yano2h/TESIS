@@ -17,9 +17,9 @@ import javax.mail.internet.MimeMessage;
 @Stateless
 public class EmailEJB implements EmailEJBLocal {
     
-    @Resource(lookup = "javaMail/correoUv")
+    //@Resource(lookup = "javaMail/correoUv")
     //@Resource(name = "email/uv")
-    //@Resource(lookup = "email/Sistema")
+    @Resource(lookup = "email/Sistema")
     private Session mailSession;
 
     @Override

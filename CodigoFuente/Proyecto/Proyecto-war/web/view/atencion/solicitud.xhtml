@@ -21,7 +21,7 @@
                 <h:outputScript library="js" name="calendar-localization.js" />
 
                 <p:panel id="panelDetalleSolicitud" header="Detalle Solicitud" >
-                    <p:menubar style="height: 30px;" rendered="#{mbFuncionarioInfo.funcionario.rol eq const.Rol_JA and mbFuncionarioInfo.funcionario.area == mbDetalleSolicitud.solicitud.areaResponsable}"> 
+                    <p:menubar styleClass="menu_bar" rendered="#{mbFuncionarioInfo.funcionario.rol eq const.Rol_JA and mbFuncionarioInfo.funcionario.area == mbDetalleSolicitud.solicitud.areaResponsable}"> 
                         <p:menuitem value="Asignar Responsable" icon="ui-icon-pin-s" onclick="dlgAsignarSolicitud.show();" 
                                     disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
                                                 mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA }"/>
@@ -52,7 +52,7 @@
                         </p:submenu>
                     </p:menubar>
 
-                    <p:menubar style="height: 30px;" rendered="#{mbFuncionarioInfo.funcionario.rut == mbDetalleSolicitud.solicitud.responsable.rut and mbFuncionarioInfo.funcionario.rol eq const.Rol_FD}"> 
+                    <p:menubar styleClass="menu_bar" rendered="#{mbFuncionarioInfo.funcionario.rut == mbDetalleSolicitud.solicitud.responsable.rut and mbFuncionarioInfo.funcionario.rol eq const.Rol_FD}"> 
                         <p:menuitem value="Iniciar" icon="ui-icon-play" actionListener="#{mbMisSolicitudes.iniciarSolicitud}"  
                                     disabled="#{(mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ASIGNADA and
                                                 mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_PENDIENTE) or
@@ -204,20 +204,10 @@
 
                 <!-- Dialogs para el Menu Bar -->
 
-                <script type="text/javascript">  
-                    function validarDialog(xhr, status, args, component) {  
-                        if(args.validationFailed) {
-                            component.show();
-                        } else {  
-                            component.hide();  
-                        }  
-                    }  
-                </script> 
-
                 <!-- DIALOG RESPUESTA DIRECTA -->
 
                 <p:dialog id="dlg_resp_directa" header="Respuesta Directa" widgetVar="respDirecta" resizable="false" modal="true" closable="false"> 
-                    <h:panelGrid>
+                    <h:panelGrid id="grid_resp_directa">
                         <h:panelGroup>
                             <h:outputText value="Destinatario: " styleClass="label label_blod"/>
                             <h:outputText value="#{mbDetalleSolicitud.solicitud.solicitante.nombre} #{mbDetalleSolicitud.solicitud.solicitante.apellidoPaterno} #{mbDetalleSolicitud.solicitud.solicitante.apellidoMaterno}"/>
@@ -234,9 +224,9 @@
                         <br/>
                         <h:panelGroup style="float: right">
                             <p:commandButton value="Enviar" 
-                                             update="dlg_resp_directa panelDetalleSolicitud" 
+                                             update="grid_resp_directa panelDetalleSolicitud" 
                                              process="dlg_resp_directa"
-                                             oncomplete="validarDialog(xhr, status, args,respDirecta)"
+                                             oncomplete="if(!args.validationFailed) {respDirecta.hide();}"
                                              actionListener="#{mbSolicitudesArea.enviarRespuestaDirecta}"  />
                             <p:commandButton value="Cancelar"  onclick="editorRespDirecta.clear();respDirecta.hide();"/>
                         </h:panelGroup>
@@ -246,7 +236,7 @@
                 <!-- DIALOG RESPUESTA MANUAL -->
 
                 <p:dialog id="dlg_resp_manual" header="Respuesta Manual" widgetVar="respManual" resizable="false" modal="true" closable="false">  
-                    <h:panelGrid columns="2">
+                    <h:panelGrid id="grid_delg_resp_m" columns="2">
                         <p:outputLabel value="Para:" for="emails" styleClass="label_blod"/>
                         <p:inputText id="emails" value="#{mbSolicitudesArea.emailsRespuestaManual}" style="width: 200px;" required="true"/>
 
@@ -254,14 +244,14 @@
                         <p:inputText id="asuntoRespManual" value="#{mbSolicitudesArea.asuntoRespuestaManual}" style="width: 350px;" required="true" />
                     </h:panelGrid>                    
                     <p:separator styleClass="separator_horizontal"/>
-                    <p:outputLabel value="Mensaje de Respuesta:" styleClass="label_blod" for="editorRespManual"/>
+                    <p:outputLabel id="lbl_mensaje" value="Mensaje de Respuesta:" styleClass="label_blod" for="editorRespManual"/>
                     <p:editor id="editorRespManual" widgetVar="editorRespManual" width="450" height="200" value="#{mbSolicitudesArea.respuesta}" required="true"/>
 
                     <h:panelGroup style="float: right;margin-top: 10px;">
                         <p:commandButton value="Enviar" 
-                                         update="dlg_resp_manual panelDetalleSolicitud"
+                                         update="grid_delg_resp_m lbl_mensaje panelDetalleSolicitud"
                                          process="dlg_resp_manual"
-                                         oncomplete="validarDialog(xhr, status, args,respManual)"
+                                         oncomplete="if(!args.validationFailed) {respManual.hide();}"
                                          actionListener="#{mbSolicitudesArea.enviarRespuestaManual}" />
                         <p:commandButton value="Cancelar" onclick="editorRespManual.clear();respManual.hide();"/>
                     </h:panelGroup>
@@ -287,7 +277,7 @@
                 <!-- DIALOG TRANSFERENCIA -->
 
                 <p:dialog id="dlg_transferir" header="Transferir Solicitud" widgetVar="dlgTranferencia" modal="true" closable="false" resizable="false">
-                    <h:panelGrid columns="2">
+                    <h:panelGrid id="grid_transferir" columns="2">
                         <p:outputLabel value="Nueva Area:" for="areaDestino" styleClass="label_blod"/>
                         <p:selectOneMenu id="areaDestino" value="#{mbSolicitudesArea.nuevaArea}" required="true">
                             <f:selectItems value="#{mbSolicitudesArea.areasParaTransferencia}" />
@@ -295,13 +285,13 @@
                     </h:panelGrid>
                     <p:separator styleClass="separator_horizontal"/>
 
-                    <p:outputLabel value="Motivo de la Transferencia:" styleClass="label_blod" for="editorMotivoTransferencia"/>
+                    <p:outputLabel id="lbl_editorMotivoTransferencia" value="Motivo de la Transferencia:" styleClass="label_blod" for="editorMotivoTransferencia"/>
                     <p:editor id="editorMotivoTransferencia" widgetVar="editorMotivoTransferencia" width="450" height="200" value="#{mbSolicitudesArea.motivoTransferencia}" required="true"/>
 
                     <h:panelGroup style="float: right;margin-top: 10px;">
                         <p:commandButton value="Transferir" 
-                                         update="dlg_transferir panelDetalleSolicitud" 
-                                         oncomplete="validarDialog(xhr, status, args, dlgTranferencia)"
+                                         update="grid_transferir lbl_editorMotivoTransferencia panelDetalleSolicitud" 
+                                         oncomplete="if(!args.validationFailed) {dlgTranferencia.hide();}"
                                          actionListener="#{mbSolicitudesArea.transferirSolicitud}"
                                          process="dlg_transferir"/>
                         <p:commandButton value="Cancelar" onclick="editorMotivoTransferencia.clear();dlgTranferencia.hide();"/>
@@ -311,14 +301,14 @@
                 <!-- DIALOG RECHAZAR -->
 
                 <p:dialog id="dlg_rechazar" header="Rechazar Solicitud" widgetVar="dlgRechazar" modal="true" closable="false" resizable="false">  
-                    <p:outputLabel value="Motivo del Rechazo:" styleClass="label_blod" for="editorMotivoRechazo"/>
+                    <p:outputLabel id="lbl_editorMotivoRechazo" value="Motivo del Rechazo:" styleClass="label_blod" for="editorMotivoRechazo"/>
                     <p:editor id="editorMotivoRechazo" widgetVar="editorMotivoRechazo" width="450" height="200" value="#{mbSolicitudesArea.respuesta}" required="true"/>
 
                     <h:panelGroup style="float: right;margin-top: 10px;">
                         <p:commandButton value="Rechazar" 
                                          process="dlg_rechazar"
-                                         update="dlg_rechazar panelDetalleSolicitud" 
-                                         oncomplete="validarDialog(xhr, status, args, dlgRechazar)"
+                                         update="lbl_editorMotivoRechazo panelDetalleSolicitud" 
+                                         oncomplete="if(!args.validationFailed) {dlgRechazar.hide();}"
                                          actionListener="#{mbSolicitudesArea.rechazarSolcitiud}"/>
                         <p:commandButton value="Cancelar" onclick="editorMotivoRechazo.clear();dlgRechazar.hide();"/>
                     </h:panelGroup>

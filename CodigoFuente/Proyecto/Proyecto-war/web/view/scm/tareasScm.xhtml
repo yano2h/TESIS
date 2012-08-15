@@ -17,7 +17,7 @@
                 <p:panel id="pnl_tareas_scm" header="Definir Tareas SCM">
 
                     <h:panelGrid columns="2">
-                        <p:selectOneMenu id="slct_tarea" value="#{mbTareasScm.tareaSelected}" style="width: 220px;" > 
+                        <p:selectOneMenu id="slct_tarea" value="#{mbTareasScm.tareaSelected}" style="width: 300px;" > 
                             <f:selectItems value="#{mbTareasScm.selectItemsTareasScm}"  />  
                         </p:selectOneMenu>
                         <p:commandButton id="btn_add" value="Añadir Tarea" actionListener="#{mbTareasScm.addTarea}" update="tbl_tareas_scm_proyecto slct_tarea btn_add" 

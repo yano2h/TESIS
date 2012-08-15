@@ -124,4 +124,11 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
         q.setParameter("idTareScm", idTarea);
         return q.getResultList(); 
     }
+
+    @Override
+    public List<Proyecto> buscarProyectosPorParticipante(FuncionarioDisico funcionarioDisico) {
+        Query q = em.createQuery("SELECT DISTINCT p.proyecto FROM ParticipanteProyecto p WHERE p.participanteProyectoPK.rutParticipante = :rutParticipant");
+        q.setParameter("rutParticipant", funcionarioDisico.getRut());
+        return q.getResultList();
+    }
 }

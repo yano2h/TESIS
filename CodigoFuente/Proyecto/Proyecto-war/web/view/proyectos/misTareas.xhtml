@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="title">
+            <h:outputText value="Mis Tareas"/>
+        </ui:define>
+        <ui:define name="content">
+            <h:outputScript library="js" name="calendar-localization.js" />
+            <h:form>
+                <p:panel header="Mis Tareas">
+                    <p:dataTable id="table_sol_area"
+                                 value="#{mbTareas.listaDeTareas}"
+                                 var="tarea" 
+                                 paginator="true" rows="20"
+                                 paginatorPosition="bottom"
+                                 selectionMode="single"
+                                 selection="#{mbTareas.tareaSelected}"
+                                 rowKey="#{tarea.idTareaProyecto}"
+                                 rowIndexVar="index"
+                                 emptyMessage="No posee tareas"
+                                 >
+
+                        <p:ajax event="rowSelect" listener="#{mbTareas.onRowSelect}"/>
+                        <p:column headerText="#">
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Tarea" style="min-width: 250px;">
+                            <h:outputText value="#{tarea.tarea}"/>
+                        </p:column>
+
+                        <p:column headerText="Proyecto" style="min-width: 250px;">
+                            <h:outputText value="#{tarea.proyecto.nombre}"/>
+                        </p:column>
+
+                        <p:column headerText="F. Inicio Propuesta" style="width: 90px;">
+                            <h:outputText value="#{tarea.fechaInicioPropuesta}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="F. Termino Propuesta" style="width: 90px;">
+                            <h:outputText value="#{tarea.fechaTerminoPropuesta}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Avance" style="max-width: 50px;">
+                            <h:outputText value="#{tarea.nivelAvance}%" style="vertical-align: central;"/>
+                        </p:column>
+
+                    </p:dataTable> 
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -15,14 +15,14 @@
 
             <h:form id="form_crear_proyecto">
                 <p:panel id="pnl_crear_proyecto" header="Crear Nuevo Proyecto">
-                    <h:panelGrid id="grid_crear_proyecto" columns="4">
+                    <h:panelGrid id="grid_crear_proyecto" columns="4" cellspacing="10">
                         <p:outputLabel value="Codigo Interno:" for="itxt_codigo_interno" styleClass="label_blod"/>
                         <p:inputText id="itxt_codigo_interno" value="#{mbProyecto.nuevoProyecto.codigoInterno}" required="true" maxlength="6" size="6"/>
 
                         <p:outputLabel value="Nombre Proyecto:" for="itxt_nombre_proyecto" styleClass="label_blod" style="margin-left: 25px;"/>
                         <p:inputText id="itxt_nombre_proyecto" value="#{mbProyecto.nuevoProyecto.nombre}" required="true" maxlength="45" size="45"/>
                     </h:panelGrid>
-                    <h:panelGrid columns="2" style="margin-top: 5px;line-height: 1.4em;">
+                    <h:panelGrid columns="2" cellspacing="10" style="line-height: 1.4em;">
                         <p:outputLabel value="Tipo Proyecto:" for="slct_tipo_proyecto" styleClass="label_blod"/>
                         <p:selectOneMenu id="slct_tipo_proyecto" value="#{mbProyecto.nuevoProyecto.tipoProyecto}" required="true" style="min-width: 250px;margin-left: 5px;">
                             <f:selectItem itemValue="" itemLabel="Seleccione un tipo Proyecto"/>
