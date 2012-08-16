@@ -11,8 +11,10 @@
             <h:outputText value="Titulo Solicitudes"/>
         </ui:define>
         <ui:define name="content">
-            <h:form>
-                <p:tabView id="tabViewResumen">
+            <h:form id="form">
+                <p:growl id="growl" showDetail="true" />
+                <p:tabView id="tabViewResumen" dynamic="true">
+                    <p:ajax event="tabChange" listener="#{mbResumenesFuncionarios.onTabChange}" update=":form:growl"/>
                     <p:tab id="tab1" title="Personal">  
                         <h:panelGrid columns="2" width="100%"> 
                             <p:panel header="Indicadores" style="min-height: 380px;">

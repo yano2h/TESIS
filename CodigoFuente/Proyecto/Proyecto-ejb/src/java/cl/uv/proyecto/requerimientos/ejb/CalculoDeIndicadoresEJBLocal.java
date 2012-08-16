@@ -4,6 +4,8 @@
  */
 package cl.uv.proyecto.requerimientos.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.Area;
+import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import javax.ejb.Local;
 
 /**
@@ -12,5 +14,10 @@ import javax.ejb.Local;
  */
 @Local
 public interface CalculoDeIndicadoresEJBLocal {
+
+     Long contarSolicitudes(FuncionarioDisico funcionario, Short idEstado);
     
+     Long contarSolicitudes(Area area, Short idEstado);
+     
+     Long contarSolicitudes(Short idEstado);
 }
