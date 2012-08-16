@@ -48,7 +48,7 @@ manteniéndose al tanto del estado de sus solicitudes de requerimiento en todo mo
 		considerada informalmente como un estándar debido a que los proveedores deben cumplir ciertos requisitos de conformidad para declarar 
 		que sus productos son conformes a Java EE; estandarizado por The Java Community Process / JCP.
 
-		\item \textbf{JPQL:}El Java Persistence Query Language (JPQL) es un lenguaje de consulta independiente de 
+		\item \textbf{JPQL:} El Java Persistence Query Language (JPQL) es un lenguaje de consulta independiente de 
 		plataforma orientado a objetos definidos como parte de la especificación Java Persistence API. JPQL se utiliza 
 		para hacer consultas en entidades almacenadas en basesde datos relacionales. Está fuertemente inspirado en 
 		SQL, y sus consultas se asemejan a la sintaxis de las consultas SQL, solo que operan contra objetos entidad JPA 
@@ -98,3 +98,105 @@ el esquema de integración de estos.
 		\end{center}
 	\end{figure}
 
+A continuación se muestran y explican algunas de las principales pantallas del sistema,
+para un mayor detalle puede revisar el Apendice \ref{anexo3} donde se encuentran 
+descrito en detalle los Casos de Uso Reales.
+
+\begin{enumerate}
+
+	\item La implementación del sistema de autenticación, no posee interfaces, ya
+	que conciste en integrar el sistema con el sistema de autenticación de funcionarios
+	que se utiliza para acceder al resto de las aplicaciones de la Universidad de Valparaíso.
+	El cual esta compuesto principalmente de por dos pantallas. La de la Figura \ref{login01}
+	la cual permite a los usuarios autenticarse y la de la Figura \ref{login02} que le muestra 
+	a los usuarios las a aplicaciones a las que tiene acceso y les brinda el acceso directo a estas.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.9]{imagenes/ITF/ITF_Login01.png}
+			\caption{Portal de Login}
+			\label{login01}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.8]{imagenes/ITF/ITF_Login02.png}
+			\caption{Panel de Control}
+			\label{login02}
+		\end{center}
+	\end{figure}
+
+	\item Se implementa el sistema de envío de solicitudes de requerimientos
+	donde los usuarios crean, envian y buscan solicitudes de requerimientos. 
+	La creación y envío se observa en la Figura \ref{itf_envioSol}.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/ITF/ITF_EnvioSol.png}
+			\caption{Envío de Solicitudes}
+			\label{itf_envioSol}
+		\end{center}
+	\end{figure}
+
+	\item Se implementa un subsistema de mensajeria que permite enviar 
+	correos electrónicos de con notificaciones o respuestas, ya sea de forma
+	automática o manual a los usuarios, este no posee interfaz, ya que su fin
+	es proporcionar servicios que luego serán consumidos por el resto de los 
+	sistemas.
+
+	\item Luego para atender y gestionar las solicitudes de requerimiento por 
+	parte de DISICO se implementa el sistema de atención, en la Figura \ref{itf_atencion}
+	se muestra la interfaz de recepción de Solicitudes del Área. Y en la 
+	Figura \ref{itf_atencion02} se muestra la vista en detalle de la solicitud.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.37]{imagenes/ITF/ITF_Atencion.png}
+			\caption{Solicitudes del Área}
+			\label{itf_atencion}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/ITF/ITF_Atencion02.png}
+			\caption{Detalle de Solicitud}
+			\label{itf_atencion02}
+		\end{center}
+	\end{figure}
+
+	\item Posteriormente se Implementa y se integra el sistema de proyectos.
+	En la Figura \ref{itf_proyecto} se presenta la interfaz para la creación de 
+	proyectos.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/ITF/ITF_Proyecto.png}
+			\caption{Creación de Proyecto}
+			\label{itf_proyecto}
+		\end{center}
+	\end{figure}
+
+	\item Por ultimo se implementa el sistema de gestión de SCM para dar soporte
+	a la metodología de SCM de DISICO. En la Figura \ref{itf_scm} se muestra la
+	interfaz de asignación de tareas de SCM. Y en la Figura \ref{itf_scm02} se muestra
+	la interfaz  para agregar Items de Configuración en un proyecto.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.37]{imagenes/ITF/ITF_Scm.png}
+			\caption{Asignación de Tareas de SCM}
+			\label{itf_scm}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.37]{imagenes/ITF/ITF_Scm02.png}
+			\caption{Identificación de la Configuración}
+			\label{itf_scm02}
+		\end{center}
+	\end{figure}
+
+\end{enumerate}

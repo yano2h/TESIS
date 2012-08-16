@@ -1,6 +1,6 @@
 \chapter{Diseño}
 Este capitulo contiene toda la documentación generada correspondiente
-a la fase de diseño del sistema, en concreto aquí se encuentra:
+a la fase de diseño del sistema:
 \begin{itemize}
 	\item Diseño Arquitectónico.
 	\item Diseño Lógico.
@@ -32,12 +32,14 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 	\subsection{Estructura del Sistema}
 	Para satisfacer los requerimientos y restricciones del cliente, se utilizara la
 	arquitectura Cliente-Servidor separada en Múltiples-Capas como lo plantea el 
-	estándar definido por Java EE 6\cite{javaee}.
+	estándar definido por Java EE 6\cite{javaee}. En la Figura \ref{arqSistema} se
+	puede observar la Arquitectura propuesta.
 
 	\begin{figure}[H]
 		\begin{center}
 			\includegraphics[scale=1]{imagenes/Arquitecturaj2EE.png}
 			\caption{Interfaz de Arquitectura}
+			\label{arqSistema}
 		\end{center}
 	\end{figure}	
 	
@@ -75,7 +77,7 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 		aplicaciones Java EE. Las dos sub-capas que componen esta capa son:
 		\begin{itemize}
 		 	\item \textbf{Capa de Servicio:} Esta capa contiene toda la lógica
-		 	de negocio y procesamiento de datos, y se se comunica con la capa 
+		 	de negocio y procesamiento de datos, y se comunica con la capa 
 		 	de persistencia para acceder a los datos.
 			\item \textbf{Capa de Persistencia:} Esta capa contiene toda la lógica
 			para el manejo y uso de API de persistencia de Java 
@@ -85,9 +87,9 @@ a la fase de diseño del sistema, en concreto aquí se encuentra:
 		\end{itemize}
 		
 		\item \textbf{Capa de Datos:} Es un mecanismo de almacenamiento
-		persistente, donde residen la información relevante para el sistema y es
-		la encargada de acceder los mismos. En este caso esta formada
-		por un gestor de base de datos relacional. Esta recibe solicitudes de 
+		persistente, donde se almacena toda la información del sistema, ademas de
+		proporcionar acceso a los mismos. En este caso, la capa de datos esta compuesta
+		por un gestor de base de datos relacional. La cual recibe solicitudes de 
 		almacenamiento o recuperación de información desde la capa de negocio.
 	\end{enumerate}
 	
