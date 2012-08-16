@@ -11,10 +11,11 @@ root {
 }
 
 div#content_footer{
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 0px;
+        padding-bottom: 0px;
         padding-left: 30px;
         padding-right: 30px;
+        line-height: .95em;
 }
 
 div#footer_c {
@@ -37,5 +38,16 @@ div#footer_bc {
     background: #F7F7F7 url(../resources/imagenes/footer/mw_footer_b.png) 0 0 repeat-x;
     margin: 0 11px;
         
+}
+
+.text_footer{
+    color: #777;
+    font-size: 10px;
+}
+
+.grid_footer{
+    margin-left: auto;
+    margin-right: auto; 
+    text-align: center;
 }
 
