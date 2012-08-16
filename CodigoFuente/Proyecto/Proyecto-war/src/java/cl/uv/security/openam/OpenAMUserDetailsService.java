@@ -33,8 +33,7 @@ public class OpenAMUserDetailsService implements AuthenticationUserDetailsServic
     @Override
     public UserDetails loadUserDetails(Authentication token) throws UsernameNotFoundException {
         String tokenOpenAM = (String) token.getCredentials();
-        AtributosFuncionario attr = (tokenOpenAM.equals("N/A")) ? OpenAMUtil.createFalseUser()
-                : authEJBBean.getAtributosFuncionarios(tokenOpenAM);
+        AtributosFuncionario attr = (tokenOpenAM.equals("N/A")) ? OpenAMUtil.createFalseUser() : authEJBBean.getAtributosFuncionarios(tokenOpenAM);
         OpenAMUserDetails user = createUser(attr, tokenOpenAM);
         user.setFuncionario(attr);
         return user;

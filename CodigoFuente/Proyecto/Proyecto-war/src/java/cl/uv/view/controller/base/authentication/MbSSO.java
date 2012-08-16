@@ -11,7 +11,6 @@ import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.security.openam.OpenAMUserDetails;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
-import java.security.Principal;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -63,13 +62,17 @@ public class MbSSO {
         f.setNombre( u.getFuncionario().getGivenname() );
         
         String[] apellidos = u.getFuncionario().getSn().split(" ");
-        if(apellidos.length > 0){
+        String[] nombreCompleto = u.getFuncionario().getCn().split(" ");
+        
+        if(apellidos.length > 0 && apellidos[0].equals(nombreCompleto[0])){
             f.setApellidoPaterno(apellidos[0]);
         }else{
             f.setApellidoPaterno("");
         }
         
-        if (apellidos.length > 1) {
+        if (apellidos.length > 1 && nombreCompleto.length >= 3 && apellidos[1].equals(nombreCompleto[1])) {
+               f.setApellidoMaterno(apellidos[1]);          
+        }else if(apellidos.length==2){
             f.setApellidoMaterno(apellidos[1]);
         }else{
             f.setApellidoMaterno("");
@@ -81,6 +84,12 @@ public class MbSSO {
      
     
     public void redirectHomePage(){
+        System.out.println("Username:"+user.getUsername());
+        System.out.println("Cn:"+user.getFuncionario().getCn());
+        System.out.println("Givename:"+user.getFuncionario().getGivenname());
+        System.out.println("Sn:"+user.getFuncionario().getSn());
+        System.out.println("Rut:"+user.getFuncionario().getRut());
+        System.out.println("Rol:"+user.getFuncionario().getListaRoles().get(0).toString());
         if (JsfUtils.getExternalContext().isUserInRole(Resources.getValue("security", "R_JAREA")) 
             || JsfUtils.getExternalContext().isUserInRole(Resources.getValue("security", "R_JDEPTO")) 
             || JsfUtils.getExternalContext().isUserInRole(Resources.getValue("security", "R_FDISICO")) 

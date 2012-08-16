@@ -71,7 +71,7 @@ public class OpenAMUtil {
         String postfix  = ",cn=aaaa,sn=bbbb";
         
         List<String> roles = new ArrayList<String>();
-        roles.add(prefix_app+"ADM"+postfix);//
+        roles.add(prefix_app+"ADMIN"+postfix);//
         roles.add(prefix_app+"JEFE_AREA"+postfix);
         roles.add(prefix_app+"JEFE_DEPTO"+postfix);
         roles.add(prefix_app+"FUNC_DISICO"+postfix);
