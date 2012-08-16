@@ -91,7 +91,7 @@ public class MbTareas extends MbBase{
     }
     
     public SelectItem[] getProyectosEnQueParticipa(){
-        return JsfUtils.getSelectItems(listaProyectosEnQueParticipa, "getNombre", false);
+        return JsfUtils.getSelectItems(listaProyectosEnQueParticipa, "getNombre", "Seleccione un Proyecto");
     }
     
     public void onRowSelect(){

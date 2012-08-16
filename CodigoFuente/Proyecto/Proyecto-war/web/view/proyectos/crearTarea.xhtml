@@ -17,8 +17,7 @@
                     <h:panelGrid columns="2" cellspacing="10">
                         <p:outputLabel value="Proyecto:" styleClass="label_blod" for="itxt_proyecto"/>
                         <p:selectOneMenu id="itxt_proyecto" value="#{mbTareas.nuevaTarea.proyecto}" required="true" style="min-width: 200px;">
-                            <f:selectItem itemValue="" itemLabel="Seleccione un Proyecto"/>
-                            <f:selectItems value="${mbTareas.proyectosEnQueParticipa}"/>
+                            <f:selectItems value="#{mbTareas.proyectosEnQueParticipa}"/>
                         </p:selectOneMenu>
                         
                         <p:outputLabel value="Nombre Tarea:" for="itxt_nombre_tarea" styleClass="label_blod"/>

@@ -54,28 +54,28 @@ public class JsfUtils {
         NavigationHandler nh = ctx.getApplication().getNavigationHandler();
         nh.handleNavigation(ctx, null, action);
     }
-    
-    public static void performNavigation(String action, Boolean addRedirect){
+
+    public static void performNavigation(String action, Boolean addRedirect) {
         ConfigurableNavigationHandler handler = (ConfigurableNavigationHandler) getFacesContext().getApplication().getNavigationHandler();
-        if(addRedirect){
+        if (addRedirect) {
             handler.performNavigation(redirectTo(action));
-        }else{
+        } else {
             handler.performNavigation(action);
-        }        
+        }
     }
 
-
-    public static void addParametro(String key, Object v){
+    public static void addParametro(String key, Object v) {
         getExternalContext().getSessionMap().put(key, v);
     }
-    
-    public static Object getParametro(String key){
+
+    public static Object getParametro(String key) {
         return getExternalContext().getSessionMap().get(key);
     }
-    
-    public static Object removerParametro(String key){
+
+    public static Object removerParametro(String key) {
         return getExternalContext().getSessionMap().remove(key);
     }
+
     public static void logout() {
         getExternalContext().invalidateSession();
     }
@@ -86,12 +86,11 @@ public class JsfUtils {
         } catch (IOException ex) {
         }
     }
-    
-    public static void addMessage(Severity severity, String summary, String detail){
+
+    public static void addMessage(Severity severity, String summary, String detail) {
         getFacesContext().addMessage(null, new FacesMessage(severity, summary, detail));
     }
 
-    
     /**
      * Metodo para logout, invalida la sesion
      *
@@ -129,17 +128,20 @@ public class JsfUtils {
     public static SelectItem[] getSelectItems(List<?> entities, String nombreMetodo, boolean selectOne) {
 
         int size = selectOne ? entities.size() + 1 : entities.size();
+
         SelectItem[] items = new SelectItem[size];
         int i = 0;
         if (selectOne) {
             items[i++] = new SelectItem("", "---");
         }
         try {
-            Class clase = entities.get(0).getClass();
-            Method getLabel = clase.getMethod(nombreMetodo, null);
-            for (Object o : entities) {
-                Object labelSelectItem = getLabel.invoke(o, null);
-                items[i++] = new SelectItem(o, labelSelectItem.toString());
+            if (entities.size() > 0) {
+                Class clase = entities.get(0).getClass();
+                Method getLabel = clase.getMethod(nombreMetodo, null);
+                for (Object o : entities) {
+                    Object labelSelectItem = getLabel.invoke(o, null);
+                    items[i++] = new SelectItem(o, labelSelectItem.toString());
+                }
             }
         } catch (IllegalAccessException ex) {
             Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "No se pudo acceder al metodo " + nombreMetodo + " mediante reflexion", ex);
@@ -151,14 +153,45 @@ public class JsfUtils {
             Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "El metodo " + nombreMetodo + " no pudo ser localizado", ex);
         } catch (SecurityException ex) {
             Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return items;
         }
-        return items;
+    }
+
+    public static SelectItem[] getSelectItems(List<?> entities, String nombreMetodo, String mensajeInicial) {
+
+        int size = entities.size() + 1;
+        SelectItem[] items = new SelectItem[size];
+        int i = 0;
+        items[i++] = new SelectItem("", mensajeInicial);
+        try {
+            if (entities.size() > 0) {
+                Class clase = entities.get(0).getClass();
+                Method getLabel = clase.getMethod(nombreMetodo, null);
+                for (Object o : entities) {
+                    Object labelSelectItem = getLabel.invoke(o, null);
+                    items[i++] = new SelectItem(o, labelSelectItem.toString());
+                }
+            }
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "No se pudo acceder al metodo " + nombreMetodo + " mediante reflexion", ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "Los argumentos especificados no coinciden con los del metodo: " + nombreMetodo + "", ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "El metodo " + nombreMetodo + " no pudo ser localizado", ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return items;
+        }
+
     }
 
     public static SelectItem[] getFilterOptions(List<?> entities, String nombreMetodo) {
 
-        int size = entities.size() + 1;
-        SelectItem[] items = new SelectItem[size];
+        SelectItem[] items = new SelectItem[entities.size() + 1];
         int i = 0;
         items[i++] = new SelectItem("", "---");
 
@@ -179,7 +212,9 @@ public class JsfUtils {
             Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, "El metodo " + nombreMetodo + " no pudo ser localizado", ex);
         } catch (SecurityException ex) {
             Logger.getLogger(JsfUtils.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return items;
         }
-        return items;
+
     }
 }

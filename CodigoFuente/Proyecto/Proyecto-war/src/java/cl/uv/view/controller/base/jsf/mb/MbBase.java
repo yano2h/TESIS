@@ -40,6 +40,14 @@ public class MbBase implements Serializable{
     public void setFlash(Flash flash) {
         this.flash = flash;
     }
+
+    public MbSSO getMbSSO() {
+        return mbSSO;
+    }
+
+    public void setMbSSO(MbSSO mbSSO) {
+        this.mbSSO = mbSSO;
+    }
     
     public Object getValueOfFlashContext(String key){
         Object v = getFlash().get(key);
