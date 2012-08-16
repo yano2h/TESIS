@@ -9,6 +9,10 @@ import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.security.openam.OpenAMUserDetails;
+import cl.uv.view.controller.base.utils.JsfUtils;
+import cl.uv.view.controller.base.utils.Resources;
+import java.security.Principal;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -38,7 +42,68 @@ public class MbSSO {
     @PostConstruct
     private void init(){
         user = (OpenAMUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("USERNAME::::::::::"+user.getUsername());
+        Integer rut = Integer.parseInt( user.getUsername() );
         
+        funcionario = funcionarioFacade.find(rut);
+        funcionarioDisico = funcionarioDisicoFacade.find(rut);
+        
+        if(funcionario == null){
+           funcionario = saveUser(user);
+        }
+        
+        funcionario.setFechaUltimoAcceso(new Date());
+        funcionarioFacade.edit(funcionario);
     }
+    
+    private Funcionario saveUser(OpenAMUserDetails u){
+        Funcionario f = new Funcionario();
+        f.setRut(Integer.parseInt( u.getUsername() ));
+        f.setCorreoUv( u.getFuncionario().getCorreouv() );
+        f.setFechaPrimerAcceso(new Date());
+        f.setNombre( u.getFuncionario().getGivenname() );
+        
+        String[] apellidos = u.getFuncionario().getSn().split(" ");
+        if(apellidos.length > 0){
+            f.setApellidoPaterno(apellidos[0]);
+        }else{
+            f.setApellidoPaterno("");
+        }
+        
+        if (apellidos.length > 1) {
+            f.setApellidoMaterno(apellidos[1]);
+        }else{
+            f.setApellidoMaterno("");
+        }
+        
+        funcionarioFacade.create(f);
+        return f;
+    }
+     
+    
+    public void redirectHomePage(){
+        if (JsfUtils.getExternalContext().isUserInRole(Resources.getValue("security", "R_JAREA")) 
+            || JsfUtils.getExternalContext().isUserInRole(Resources.getValue("security", "R_JDEPTO")) 
+            || JsfUtils.getExternalContext().isUserInRole(Resources.getValue("security", "R_FDISICO")) 
+            || JsfUtils.getExternalContext().isUserInRole(Resources.getValue("security", "R_ADM")) ) {
+            
+            JsfUtils.performNavigation( Resources.getValue("pages", "home_page_funcionario"), true);
+            
+        }else if(JsfUtils.getExternalContext().isUserInRole(Resources.getValue("security", "R_SOLICITANTE"))){
+            JsfUtils.performNavigation( Resources.getValue("pages", "home_page_solicitante"), true);
+        }   
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public FuncionarioDisico getFuncionarioDisico() {
+        return funcionarioDisico;
+    }
+
+    public OpenAMUserDetails getUser() {
+        return user;
+    }
+    
+    
 }

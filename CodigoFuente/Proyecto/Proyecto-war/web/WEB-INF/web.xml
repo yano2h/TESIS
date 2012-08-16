@@ -28,8 +28,8 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <!-- <welcome-file>faces/solicitudes/mainPage.xhtml</welcome-file> -->
-        <welcome-file>faces/view/index.xhtml</welcome-file>
+        <welcome-file>faces/view/mainPage.xhtml</welcome-file>
+        <!-- <welcome-file>faces/view/index.xhtml</welcome-file> -->
     </welcome-file-list>
     <ejb-local-ref>
         <ejb-ref-name>AuthEJBBean</ejb-ref-name>

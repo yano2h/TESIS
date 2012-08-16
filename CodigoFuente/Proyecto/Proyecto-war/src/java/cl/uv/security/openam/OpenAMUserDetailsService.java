@@ -22,47 +22,51 @@ import org.springframework.security.core.userdetails.AuthenticationUserDetailsSe
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-
 /**
  *
  * @author Alejandro
  */
 public class OpenAMUserDetailsService implements AuthenticationUserDetailsService<Authentication> {
-    
-    private AuthEJBBeanLocal authEJBBean = lookupAuthEJBBeanLocal();    
-    
+
+    private AuthEJBBeanLocal authEJBBean = lookupAuthEJBBeanLocal();
+
     @Override
     public UserDetails loadUserDetails(Authentication token) throws UsernameNotFoundException {
         String tokenOpenAM = (String) token.getCredentials();
-        AtributosFuncionario attr = authEJBBean.getAtributosFuncionarios(tokenOpenAM);
-        OpenAMUserDetails user = createUser(attr,tokenOpenAM);
+        AtributosFuncionario attr = (tokenOpenAM.equals("N/A")) ? OpenAMUtil.createFalseUser()
+                : authEJBBean.getAtributosFuncionarios(tokenOpenAM);
+        OpenAMUserDetails user = createUser(attr, tokenOpenAM);
         user.setFuncionario(attr);
         return user;
     }
 
-    private OpenAMUserDetails createUser(AtributosFuncionario attr, String token){
-        return new OpenAMUserDetails(attr.getUid(), token, 
-                                     true, true, true, true, 
-                                     createGrantedAuthority(attr.getListaRoles()));
+    private OpenAMUserDetails createUser(AtributosFuncionario attr, String token) {
+        return new OpenAMUserDetails(attr.getUid(), token,
+                true, true, true, true,
+                createGrantedAuthority(attr.getListaRoles()));
     }
-    
-    private Set<GrantedAuthority> createGrantedAuthority(List<String> roles){
+
+    private Set<GrantedAuthority> createGrantedAuthority(List<String> roles) {
         Set<GrantedAuthority> authoritys = new HashSet<GrantedAuthority>();
-        
-        String prefixApp = Resources.getValue("security", "prefix_app");
-        String prefixRol = Resources.getValue("security", "prefix_rol_spring");
-                
-        for (String rol : roles) {
-            if(rol.startsWith(prefixApp)){
-                String tempRol = rol.split(",")[0].split("=")[1];
-                tempRol.replaceFirst(prefixApp, prefixRol);
-                authoritys.add( new SimpleGrantedAuthority(tempRol) );
-            }
+
+        /*
+         * String prefixApp = Resources.getValue("security", "prefix_app");
+         * String prefixRol = Resources.getValue("security",
+         * "prefix_rol_spring");
+         *
+         * for (String rol : roles) { String tempRol =
+         * rol.split(",")[0].split("=")[1]; if(tempRol.startsWith(prefixApp)){
+         * tempRol = tempRol.replaceFirst(prefixApp, prefixRol); authoritys.add(
+         * new SimpleGrantedAuthority(tempRol) ); } }
+         */
+
+        for (String rol : OpenAMUtil.parseRoles(roles)) {
+            authoritys.add(new SimpleGrantedAuthority(rol));
+            System.out.println("ROL="+rol);
         }
-        
         return authoritys;
     }
-    
+
     private AuthEJBBeanLocal lookupAuthEJBBeanLocal() {
         try {
             Context c = new InitialContext();
@@ -72,5 +76,4 @@ public class OpenAMUserDetailsService implements AuthenticationUserDetailsServic
             throw new RuntimeException(ne);
         }
     }
-    
 }

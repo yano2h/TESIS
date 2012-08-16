@@ -47,14 +47,11 @@ public class MbUserInfo implements Serializable {
         }
         funcionario.setFechaUltimoAcceso(new Date());
         funcionarioFacade.edit(funcionario);
-        System.out.println("Principal:"+
-        SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         
         OpenAMUserDetails user = (OpenAMUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         
         for (GrantedAuthority a : user.getAuthorities()) {
-            String tempRol = a.getAuthority().split(",")[0].split("=")[1];
-            System.out.println("ROL:"+tempRol);
+            String tempRol = a.getAuthority();
         }
         
     }

@@ -7,6 +7,7 @@ package cl.uv.security.openam;
 import cl.uv.model.base.core.beans.AtributosFuncionario;
 import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -79,4 +80,7 @@ public class OpenAMUserDetails implements UserDetails{
         this.funcionario = funcionario;
     }
     
+    public Boolean isUserInRole(String rol){
+        return authorities.contains(new SimpleGrantedAuthority(rol));
+    }
 }

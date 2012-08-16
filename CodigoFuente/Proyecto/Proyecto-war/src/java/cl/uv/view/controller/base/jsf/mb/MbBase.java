@@ -5,6 +5,9 @@
 package cl.uv.view.controller.base.jsf.mb;
 
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
+import cl.uv.view.controller.base.authentication.MbSSO;
+import cl.uv.view.controller.base.utils.JsfUtils;
+import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.Flash;
@@ -16,6 +19,9 @@ public class MbBase implements Serializable{
     
     @ManagedProperty("#{flash}")
     private Flash flash;
+    
+    @ManagedProperty(value = "#{mbSSO}")
+    private MbSSO mbSSO;
     
     public MbBase(){}
     
@@ -47,5 +53,9 @@ public class MbBase implements Serializable{
     
     public FuncionarioDisico getFuncionario(){
         return mbFuncionarioInfo.getFuncionario();
+    }
+    
+    public boolean isUserInRole(String rol){
+        return JsfUtils.getExternalContext().isUserInRole(rol);
     }
 }

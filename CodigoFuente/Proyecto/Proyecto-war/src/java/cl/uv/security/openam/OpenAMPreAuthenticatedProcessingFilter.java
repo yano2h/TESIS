@@ -4,6 +4,7 @@
  */
 package cl.uv.security.openam;
 
+import cl.uv.view.controller.base.utils.Resources;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 
@@ -30,7 +31,7 @@ public class OpenAMPreAuthenticatedProcessingFilter extends AbstractPreAuthentic
 
     @Override
     protected Object getPreAuthenticatedCredentials(HttpServletRequest request) {
-        return OpenAMUtil.getToken(cookieNameToken, request);
+        return (Resources.getValue("security", "enviroment").equals("testMacBook"))?"N/A":OpenAMUtil.getToken(cookieNameToken, request);
     }
     
 }
