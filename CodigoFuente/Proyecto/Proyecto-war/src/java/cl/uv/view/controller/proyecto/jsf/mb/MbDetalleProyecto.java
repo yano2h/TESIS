@@ -75,4 +75,8 @@ public class MbDetalleProyecto implements Serializable{
         JsfUtils.addParametro("proyecto", proyecto);
         return "avanceProyecto?faces-redirect=true";
     }
+    
+    public void guardarCambios(){
+        proyectoFacade.edit(proyecto);
+    }
 }

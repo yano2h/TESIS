@@ -22,8 +22,11 @@
 
                 <p:panel id="panelDetalleProyecto" header="Detalle Proyecto" >
                     <p:menubar style="height: 30px;" rendered="#{mbFuncionarioInfo.funcionario.rol eq const.Rol_JA}"> 
-                        <p:menuitem value="Editar" icon="ui-icon-pencil" />
-                        <p:menuitem value="Eliminar" icon="ui-icon-closethick" onclick="confirmarEliminacion.show()"/>
+                        <p:menuitem value="Editar" icon="ui-icon-pencil"  onclick="inpNombre.show();inpCodigo.show(); inpTipo.show(); inpEstado.show(); inpFechaIni.show();inpDesc.show();"/>
+                        <p:menuitem value="Guardar Cambios" icon="ui-icon-disk" 
+                                    oncomplete="if(!args.validationFailed){inpNombre.save();inpCodigo.save(); inpTipo.save(); inpEstado.save(); inpFechaIni.save();inpDesc.save();}"
+                                    actionListener="#{mbDetalleProyecto.guardarCambios}" update="datosProy"/>
+                        <p:menuitem value="Eliminar" icon="ui-icon-closethick" onclick="confirmarEliminacion.show()" rendered="false"/>
                         <p:menuitem value="Ver Resumen Avance" icon="ui-icon-search" action="#{mbDetalleProyecto.verResumenAvance}"/>
                     </p:menubar>
                     <br/>
@@ -34,25 +37,41 @@
                     </h:panelGrid>
                     <br/>
 
-                    <h:panelGroup>
+                    <h:panelGroup id="datosProy">
 
-                        <h:panelGrid columns="2" cellspacing="10" style="margin-left: 0px;">
+                        <h:panelGrid columns="2" cellspacing="10" style="margin-left: 0px;">                             
                             <h:outputText value="Nombre Proyecto:" styleClass="label_blod label" />
-                            <h:outputText id="itxt_nombre_proyecto" value="#{mbDetalleProyecto.proyecto.nombre}" style="width: 350px;"/>
+                            <p:inplace widgetVar="inpNombre">
+                                <p:inputText id="itxt_nombre_proyecto" value="#{mbDetalleProyecto.proyecto.nombre}" style="width: 350px;" required="true"/>
+                            </p:inplace>
 
                             <h:outputText value="Codigo Interno:" styleClass="label_blod label"/>
-                            <h:outputText id="itxt_codigo_interno" value="#{mbDetalleProyecto.proyecto.codigoInterno}"/>
+                            <p:inplace widgetVar="inpCodigo">
+                                <p:inputText id="itxt_codigo_interno" value="#{mbDetalleProyecto.proyecto.codigoInterno}" required="true"/>
+                            </p:inplace>
 
                             <h:outputText value="Tipo Proyecto:" styleClass="label_blod label"/>
-                            <h:outputText id="slct_tipo_proyecto" value="#{mbDetalleProyecto.proyecto.tipoProyecto.nombreTipoProyecto}"/>
+                            <p:inplace widgetVar="inpTipo">
+                                <h:inputHidden value="#{mbDetalleProyecto.proyecto.tipoProyecto.nombreTipoProyecto}" />  
+                                <p:selectOneMenu id="slct_tipo_proyecto" value="#{mbDetalleProyecto.proyecto.tipoProyecto}" required="true" style="min-width: 250px;margin-left: 5px;">
+                                    <f:selectItems value="#{tipoProyectoController.itemsAvailableSelectMany}"/>
+                                </p:selectOneMenu>
+                            </p:inplace>
 
-                            <h:outputText value="Estado Proyecto:" styleClass="label_blod label"/>
-                            <h:outputText id="slct_estado_proyecto" value="#{mbDetalleProyecto.proyecto.estadoProyecto.nombreEstadoProyecto}"/>
+                            <h:outputText value="Estado Proyecto:" styleClass="label_blod label"/>    
+                            <p:inplace widgetVar="inpEstado">
+                                <h:inputHidden value="#{mbDetalleProyecto.proyecto.estadoProyecto.nombreEstadoProyecto}" />  
+                                <p:selectOneMenu id="slct_estado_proyecto" value="#{mbDetalleProyecto.proyecto.estadoProyecto}" required="true" style="min-width: 250px;margin-left: 5px;" >
+                                    <f:selectItems value="#{estadoProyectoController.itemsAvailableSelectMany}"/>
+                                </p:selectOneMenu>
+                            </p:inplace>
 
                             <h:outputText value="Fecha de Inicio:" styleClass="label_blod label"/>
-                            <h:outputText id="fecha_ini" value="#{mbDetalleProyecto.proyecto.fechaInicio}" >
+                            <p:inplace widgetVar="inpFechaIni">                                
+                                <p:calendar id="cal_fecha_ini" showOn="button" pattern="dd/MM/yyyy" locale="es" navigator="true" required="true" value="#{mbDetalleProyecto.proyecto.fechaInicio}" style="margin-left: 5px;">
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
-                            </h:outputText>
+                                </p:calendar>
+                            </p:inplace>
 
                             <h:outputText value="Fecha de Termino:" styleClass="label_blod label"/>
                             <h:outputText id="fecha_ter" value="#{mbDetalleProyecto.proyecto.fechaTermino}" >
@@ -62,7 +81,9 @@
                         <br/>
                         <h:panelGrid columns="1">
                             <h:outputText value="Descripción del Proyecto:" styleClass="label_blod label"/>
-                            <h:outputText id="itxta_descripcion" value="#{mbDetalleProyecto.proyecto.descripcion}"/>
+                            <p:inplace widgetVar="inpDesc">
+                                <p:inputTextarea id="itxta_descripcion" value="#{mbDetalleProyecto.proyecto.descripcion}"/>
+                            </p:inplace>
                         </h:panelGrid>
                     </h:panelGroup>
                     <br/>
