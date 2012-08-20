@@ -40,13 +40,12 @@ public class MbResumenesFuncionarios implements Serializable {
     @ManagedProperty(value = "#{mbFuncionarioInfo}")
     private MbFuncionarioInfo mbFuncionarioInfo;
     private List<FuncionarioDisico> funcionariosArea;
+
+    private String tipoResumen;
+    private PieChartModel pieModel;
+    private String tituloGrafico = "";
     private FuncionarioDisico funcionarioSelected;
     private Area areaSelected;
-    private PieChartModel pieModel;
-    private String tipoResumen;
-    private static final String TIPO_AREA = "area";
-    private static final String TIPO_DEPTO = "depto";
-    private static final String TIPO_PERSONAL = "personal";
     
     private Long cantidadSolicitudesPendientes;
     private Long cantidadSolicitudesVencidas;
@@ -58,7 +57,14 @@ public class MbResumenesFuncionarios implements Serializable {
     private Long cantidadSolicitudesAsignadas;
     private Long cantidadSolicitudesFinalizadaSinRespuesta;
     private Long totalSolicitudes;
+    private Long porcentajeSolicitudesAsignadas;
+    private Long porcentajeCumplimiento;
+    private Long porcentajeRetrasos;
 
+    public static final String TIPO_AREA = "area";
+    public static final String TIPO_DEPTO = "depto";
+    public static final String TIPO_PERSONAL = "personal";
+    
     public MbResumenesFuncionarios() {
     }
 
@@ -176,6 +182,30 @@ public class MbResumenesFuncionarios implements Serializable {
         this.cantidadSolicitudesVencidas = cantidadSolicitudesVencidas;
     }
 
+    public Long getPorcentajeCumplimiento() {
+        return porcentajeCumplimiento;
+    }
+
+    public void setPorcentajeCumplimiento(Long porcentajeCumplimiento) {
+        this.porcentajeCumplimiento = porcentajeCumplimiento;
+    }
+
+    public Long getPorcentajeRetrasos() {
+        return porcentajeRetrasos;
+    }
+
+    public void setPorcentajeRetrasos(Long porcentajeRetrasos) {
+        this.porcentajeRetrasos = porcentajeRetrasos;
+    }
+
+    public Long getPorcentajeSolicitudesAsignadas() {
+        return porcentajeSolicitudesAsignadas;
+    }
+
+    public void setPorcentajeSolicitudesAsignadas(Long porcentajeSolicitudesAsignadas) {
+        this.porcentajeSolicitudesAsignadas = porcentajeSolicitudesAsignadas;
+    }
+
     public Long getTotalSolicitudes() {
         return totalSolicitudes;
     }
@@ -184,6 +214,15 @@ public class MbResumenesFuncionarios implements Serializable {
         this.totalSolicitudes = totalSolicitudes;
     }
 
+    public String getTituloGrafico() {
+        return tituloGrafico;
+    }
+
+    public void setTituloGrafico(String tituloGrafico) {
+        this.tituloGrafico = tituloGrafico;
+    }
+
+    
     
     public SelectItem[] getItemsAvailableSelectManyNombreCompleto() {
         SelectItem[] listaItems = new SelectItem[funcionariosArea.size()];
@@ -196,14 +235,14 @@ public class MbResumenesFuncionarios implements Serializable {
 
     private void createPieModel() {
         pieModel = new PieChartModel();
-        
-        pieModel.set("Iniciadas", cantidadSolicitudesIniciadas);
+        pieModel.set("Asignadas", cantidadSolicitudesAsignadas);
         pieModel.set("Pendientes", cantidadSolicitudesPendientes);
         pieModel.set("Vencidas", cantidadSolicitudesVencidas);
+        pieModel.set("Iniciadas", cantidadSolicitudesIniciadas);
         pieModel.set("Cerradas", cantidadSolicitudesCerradas);
         
         if(!tipoResumen.equals(TIPO_PERSONAL)){
-            pieModel.set("Asignadas", cantidadSolicitudesAsignadas);
+            pieModel.set("Enviadas", cantidadSolicitudesEnviadas);
             pieModel.set("Finalizada sin Respuesta", cantidadSolicitudesFinalizadaSinRespuesta);
             pieModel.set("Rechazada", cantidadSolicitudesRechazadas);
             pieModel.set("Transferida", cantidadSolicitudesTransferida);
@@ -237,6 +276,7 @@ public class MbResumenesFuncionarios implements Serializable {
     public void crearResumen(){
         calcularIndicadores();
         createPieModel();
+        setTituloGrafico(crearTituloGrafico());
     }
 
     private void calcularIndicadores() {
@@ -250,11 +290,16 @@ public class MbResumenesFuncionarios implements Serializable {
     }
 
     private void calcularIndicadoresPersonal(FuncionarioDisico f) {
+        cantidadSolicitudesAsignadas = calculoDeIndicadoresEJB.contarSolicitudes(f, Resources.getValueShort("const", "EstadoSR_ASIGNADA"));
         cantidadSolicitudesCerradas = calculoDeIndicadoresEJB.contarSolicitudes(f, Resources.getValueShort("const", "EstadoSR_CERRADA"));
         cantidadSolicitudesIniciadas = calculoDeIndicadoresEJB.contarSolicitudes(f, Resources.getValueShort("const", "EstadoSR_INICIADA"));
         cantidadSolicitudesPendientes = calculoDeIndicadoresEJB.contarSolicitudes(f, Resources.getValueShort("const", "EstadoSR_PENDIENTE"));
         cantidadSolicitudesVencidas = calculoDeIndicadoresEJB.contarSolicitudes(f, Resources.getValueShort("const", "EstadoSR_VENCIDA"));
-        totalSolicitudes = cantidadSolicitudesCerradas + cantidadSolicitudesIniciadas + cantidadSolicitudesPendientes + cantidadSolicitudesVencidas;
+        totalSolicitudes = cantidadSolicitudesCerradas + cantidadSolicitudesIniciadas + cantidadSolicitudesPendientes + cantidadSolicitudesVencidas + cantidadSolicitudesAsignadas;
+        
+        porcentajeRetrasos = calculoDeIndicadoresEJB.porcentajeRetrasos(f);
+        porcentajeSolicitudesAsignadas = calculoDeIndicadoresEJB.porcentajeSolicitudesAsignadas(f);
+        porcentajeCumplimiento = 100 - porcentajeRetrasos;
     }
 
     private void calcularIndicadoresArea(Area a) {
@@ -269,6 +314,10 @@ public class MbResumenesFuncionarios implements Serializable {
         cantidadSolicitudesFinalizadaSinRespuesta = calculoDeIndicadoresEJB.contarSolicitudes(a, Resources.getValueShort("const", "EstadoSR_FINALIZADA_SIN_RESPUESTA"));
         totalSolicitudes = cantidadSolicitudesCerradas + cantidadSolicitudesIniciadas + cantidadSolicitudesPendientes + cantidadSolicitudesVencidas
                            + cantidadSolicitudesEnviadas + cantidadSolicitudesRechazadas + cantidadSolicitudesTransferida + cantidadSolicitudesAsignadas + cantidadSolicitudesFinalizadaSinRespuesta;
+        
+        porcentajeRetrasos = calculoDeIndicadoresEJB.porcentajeRetrasos(a);
+        porcentajeSolicitudesAsignadas = calculoDeIndicadoresEJB.porcentajeSolicitudesAsignadas(a);
+        porcentajeCumplimiento = 100 - porcentajeRetrasos;
     }
 
     private void calcularIndicadoresDepto() {
@@ -283,5 +332,21 @@ public class MbResumenesFuncionarios implements Serializable {
         cantidadSolicitudesFinalizadaSinRespuesta = calculoDeIndicadoresEJB.contarSolicitudes(Resources.getValueShort("const", "EstadoSR_FINALIZADA_SIN_RESPUESTA"));
         totalSolicitudes = cantidadSolicitudesCerradas + cantidadSolicitudesIniciadas + cantidadSolicitudesPendientes + cantidadSolicitudesVencidas
                            + cantidadSolicitudesEnviadas + cantidadSolicitudesRechazadas + cantidadSolicitudesTransferida + cantidadSolicitudesAsignadas + cantidadSolicitudesFinalizadaSinRespuesta;
+        
+        porcentajeRetrasos = calculoDeIndicadoresEJB.porcentajeRetrasos();
+        //
+        porcentajeCumplimiento = 100 - porcentajeRetrasos;
+    }
+    
+    private String crearTituloGrafico(){
+        if(tipoResumen.equals(TIPO_AREA)){
+            return "Area: "+areaSelected.getNombreArea();
+        }else if (tipoResumen.equals(TIPO_DEPTO)){
+            return "DISICO";
+        }else if(tipoResumen.equals(TIPO_PERSONAL)){
+            return "Funcionario: "+funcionarioSelected.getNombreCompleto();
+        }else{
+            return "";
+        }
     }
 }

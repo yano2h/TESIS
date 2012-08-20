@@ -15,9 +15,19 @@ import javax.ejb.Local;
 @Local
 public interface CalculoDeIndicadoresEJBLocal {
 
-     Long contarSolicitudes(FuncionarioDisico funcionario, Short idEstado);
-    
-     Long contarSolicitudes(Area area, Short idEstado);
-     
-     Long contarSolicitudes(Short idEstado);
+    Long contarSolicitudes(FuncionarioDisico funcionario, Short idEstado);
+
+    Long contarSolicitudes(Area area, Short idEstado);
+
+    Long contarSolicitudes(Short idEstado);
+
+    Long porcentajeRetrasos(FuncionarioDisico f);
+
+    Long porcentajeRetrasos(Area a);
+
+    Long porcentajeRetrasos();
+
+    Long porcentajeSolicitudesAsignadas(FuncionarioDisico f);
+
+    Long porcentajeSolicitudesAsignadas(Area a);
 }
