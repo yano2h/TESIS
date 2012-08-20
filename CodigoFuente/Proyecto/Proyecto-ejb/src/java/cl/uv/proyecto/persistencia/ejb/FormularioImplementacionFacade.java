@@ -35,7 +35,7 @@ public class FormularioImplementacionFacade extends AbstractFacade<FormularioImp
     
     @Override
     public void create(FormularioImplementacion f){
-          f.getSolicitudCambio().setEstadoSolicitud(estadoSolicitudCambioFacade.find(Resources.getValueShort("Estados", "ESC_IMPLEMENTADA")));
+          f.getSolicitudCambio().setEstadoSolicitud(estadoSolicitudCambioFacade.find(Resources.getValueShort("Estados", "EstadoSC_IMPLEMENTADA")));
           getEntityManager().merge(f.getSolicitudCambio());
           getEntityManager().persist(f);
     }

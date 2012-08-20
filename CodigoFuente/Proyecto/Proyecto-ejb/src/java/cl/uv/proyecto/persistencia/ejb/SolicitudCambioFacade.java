@@ -78,7 +78,7 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
         Query q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
         q.setParameter("responsable", funcionario);
         q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_ANALIZAR_SC") );
-        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "ESC_ENVIADA") ));
+        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_ENVIADA") ));
         return q.getResultList();
     }
 
@@ -94,7 +94,7 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
         Query q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
         q.setParameter("responsable", funcionario);
         q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_APROBAR_SC"));
-        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "ESC_ANALISADA") ));
+        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_ANALISADA") ));
         return q.getResultList();
     }
 
@@ -110,7 +110,7 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
         Query q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
         q.setParameter("responsable", funcionario);
         q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_IMPLEMENTAR_SC"));
-        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "ESC_APROBADA") ));
+        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_APROBADA") ));
         return q.getResultList();
     }
 
