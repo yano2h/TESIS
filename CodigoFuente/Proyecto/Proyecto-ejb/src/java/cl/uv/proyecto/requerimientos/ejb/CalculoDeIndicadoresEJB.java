@@ -33,7 +33,7 @@ public class CalculoDeIndicadoresEJB implements CalculoDeIndicadoresEJBLocal {
     public Long contarSolicitudes(Area area, Short idEstado) {
         String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE s.areaResponsable = :area AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado";
         Query q = em.createQuery(query);
-        q.setParameter("area", idEstado);
+        q.setParameter("area", area);
         q.setParameter("idEstado", idEstado);
         return (Long)q.getSingleResult();
     }
@@ -46,6 +46,41 @@ public class CalculoDeIndicadoresEJB implements CalculoDeIndicadoresEJBLocal {
         return (Long)q.getSingleResult();
     }
 
-   
+    
+//    public Integer porcentajeSolicitudesAsignadas(FuncionarioDisico f){
+//    
+//    }
+//    
+//    public Integer porcentajeSolicitudesAsignadas(Area a){
+//    
+//    }
+//    
+//    public Integer porcentajeSolicitudesAsignadas(){
+//    
+//    }
+//    
+//    public Integer porcentajeCumplimiento(FuncionarioDisico f){
+//    
+//    }
+//    
+//    public Integer porcentajeCumplimiento(Area a){
+//    
+//    }
+//    
+//    public Integer porcentajeCumplimiento(){
+//    
+//    }
+//    
+//    public Integer porcentajeRetrasos(FuncionarioDisico f){
+//    
+//    }
+//    
+//    public Integer porcentajeRetrasos(Area a){
+//    
+//    }
+//    
+//    public Integer porcentajeRetrasos(){
+//    
+//    }
     
 }

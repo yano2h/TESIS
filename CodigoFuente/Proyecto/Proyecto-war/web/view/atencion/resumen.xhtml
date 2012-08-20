@@ -12,9 +12,9 @@
         </ui:define>
         <ui:define name="content">
             <h:form id="form">
-                <p:growl id="growl" showDetail="true" />
+
                 <p:tabView id="tabViewResumen" dynamic="true">
-                    <p:ajax event="tabChange" listener="#{mbResumenesFuncionarios.onTabChange}" update=":form:growl"/>
+                    <p:ajax event="tabChange" listener="#{mbResumenesFuncionarios.onTabChange}" />
                     <p:tab id="tab1" title="Personal">  
                         <h:panelGrid columns="2" width="100%"> 
                             <p:panel header="Indicadores" style="min-height: 380px;">
@@ -25,22 +25,22 @@
                                     <p:panelGrid columns="2" style="width: 300px;">
 
                                         <h:outputText value="N° Solicitudes Pendientes:" styleClass="label"/>
-                                        <h:outputText id="solPendientes" value="1"/>
+                                        <h:outputText id="solPendientes" value="#{mbResumenesFuncionarios.cantidadSolicitudesPendientes}"/>
 
                                         <h:outputText value="N° Solicitudes Vencidas:" styleClass="label"/>
-                                        <h:outputText id="solVencidas" value="1"/>
+                                        <h:outputText id="solVencidas" value="#{mbResumenesFuncionarios.cantidadSolicitudesVencidas}"/>
 
                                         <h:outputText value="N° Solicitudes Iniciadas:" styleClass="label"/>
-                                        <h:outputText id="solIniciadas" value="1"/>
+                                        <h:outputText id="solIniciadas" value="#{mbResumenesFuncionarios.cantidadSolicitudesIniciadas}"/>
 
                                         <h:outputText value="N° Solicitudes Cerradas:" styleClass="label"/>
-                                        <h:outputText id="solCerradas" value="1"/>
+                                        <h:outputText id="solCerradas" value="#{mbResumenesFuncionarios.cantidadSolicitudesCerradas}"/>
 
                                     </p:panelGrid>
 
                                     <p:panelGrid columns="2" style="width: 300px;">
                                         <h:outputText value="Total Solicitudes Asignadas:" styleClass="label"/>
-                                        <h:outputText id="solAsignadas" value="1"/>
+                                        <h:outputText id="solAsignadas" value="#{mbResumenesFuncionarios.totalSolicitudes}"/>
                                     </p:panelGrid>
 
                                     <p:separator style="height: 1px;margin-top: 10px; margin-bottom: 10px;"/>
@@ -86,10 +86,10 @@
                                     <f:selectItems value="#{mbResumenesFuncionarios.itemsAvailableSelectManyNombreCompleto}"/>
                                 </p:selectOneMenu>
                             </h:panelGrid>
-                            <p:commandButton value="Ver Resumen"/>
+                            <p:commandButton value="Ver Resumen" actionListener="#{mbResumenesFuncionarios.verResumen}" update="indicadoresPnl2 graficosPnl2"/>
                         </p:panel>
                         <h:panelGrid columns="2" width="100%"> 
-                            <p:panel header="Indicadores" style="min-height: 380px;">
+                            <p:panel id="indicadoresPnl2" header="Indicadores" style="min-height: 380px;">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="Cantidades y Totales" styleClass="title_italic" style="margin-top: 10px;"/>
                                     <br/>
@@ -97,22 +97,22 @@
                                     <p:panelGrid columns="2" style="width: 300px;">
 
                                         <h:outputText value="N° Solicitudes Pendientes:" styleClass="label"/>
-                                        <h:outputText id="solPendientesArea" value="1"/>
+                                        <h:outputText id="solPendientesArea" value="#{mbResumenesFuncionarios.cantidadSolicitudesPendientes}"/>
 
                                         <h:outputText value="N° Solicitudes Vencidas:" styleClass="label"/>
-                                        <h:outputText id="solVencidasArea" value="1"/>
+                                        <h:outputText id="solVencidasArea" value="#{mbResumenesFuncionarios.cantidadSolicitudesVencidas}"/>
 
                                         <h:outputText value="N° Solicitudes Iniciadas:" styleClass="label"/>
-                                        <h:outputText id="solIniciadasArea" value="1"/>
+                                        <h:outputText id="solIniciadasArea" value="#{mbResumenesFuncionarios.cantidadSolicitudesIniciadas}"/>
 
                                         <h:outputText value="N° Solicitudes Cerradas:" styleClass="label"/>
-                                        <h:outputText id="solCerradasArea" value="1"/>
+                                        <h:outputText id="solCerradasArea" value="#{mbResumenesFuncionarios.cantidadSolicitudesCerradas}"/>
 
                                     </p:panelGrid>
 
                                     <p:panelGrid columns="2" style="width: 300px;">
                                         <h:outputText value="Total Solicitudes Asignadas:" styleClass="label"/>
-                                        <h:outputText id="solAsignadasArea" value="1"/>
+                                        <h:outputText id="solAsignadasArea" value="#{mbResumenesFuncionarios.totalSolicitudes}"/>
                                     </p:panelGrid>
 
                                     <p:separator style="height: 1px;margin-top: 10px; margin-bottom: 10px;"/>
@@ -133,7 +133,7 @@
                                     </p:panelGrid>
                                 </h:panelGrid>
                             </p:panel>
-                            <p:panel header="Graficos" style="min-height: 380px;">
+                            <p:panel id="graficosPnl2" header="Graficos" style="min-height: 380px;">
                                 <p:pieChart id="sampleArea" value="#{mbResumenesFuncionarios.pieModel}" legendPosition="w"  
                                             title="Sample Pie Chart" style="width:400px;height:300px" showDataLabels="true"/>  
                             </p:panel>
@@ -168,11 +168,11 @@
                                     <f:selectItems value="#{mbResumenesFuncionarios.itemsAvailableSelectManyNombreCompleto}"/>
                                 </p:selectOneMenu>
                             </h:panelGrid>
-                            <p:commandButton value="Ver Resumen"/>
+                            <p:commandButton value="Ver Resumen" actionListener="#{mbResumenesFuncionarios.verResumen}" update="indicadoresPnl3 graficosPnl3"/>
                         </p:panel>
 
                         <h:panelGrid columns="2" width="100%" > 
-                            <p:panel header="Indicadores" style="min-height: 380px;">
+                            <p:panel id="indicadoresPnl3" header="Indicadores" style="min-height: 380px;">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="Cantidades y Totales" styleClass="title_italic" style="margin-top: 10px;"/>
                                     <br/>
@@ -180,22 +180,22 @@
                                     <p:panelGrid columns="2" style="width: 300px;">
 
                                         <h:outputText value="N° Solicitudes Pendientes:" styleClass="label"/>
-                                        <h:outputText id="solPendientesDepto" value="1"/>
+                                        <h:outputText id="solPendientesDepto" value="#{mbResumenesFuncionarios.cantidadSolicitudesPendientes}"/>
 
                                         <h:outputText value="N° Solicitudes Vencidas:" styleClass="label"/>
-                                        <h:outputText id="solVencidasDepto" value="1"/>
+                                        <h:outputText id="solVencidasDepto" value="#{mbResumenesFuncionarios.cantidadSolicitudesVencidas}"/>
 
                                         <h:outputText value="N° Solicitudes Iniciadas:" styleClass="label"/>
-                                        <h:outputText id="solIniciadasDepto" value="1"/>
+                                        <h:outputText id="solIniciadasDepto" value="#{mbResumenesFuncionarios.cantidadSolicitudesIniciadas}"/>
 
                                         <h:outputText value="N° Solicitudes Cerradas:" styleClass="label"/>
-                                        <h:outputText id="solCerradasDepto" value="1"/>
+                                        <h:outputText id="solCerradasDepto" value="#{mbResumenesFuncionarios.cantidadSolicitudesCerradas}"/>
 
                                     </p:panelGrid>
 
                                     <p:panelGrid columns="2" style="width: 300px;">
                                         <h:outputText value="Total Solicitudes Asignadas:" styleClass="label"/>
-                                        <h:outputText id="solAsignadasDepto" value="1"/>
+                                        <h:outputText id="solAsignadasDepto" value="#{mbResumenesFuncionarios.totalSolicitudes}"/>
                                     </p:panelGrid>
 
                                     <p:separator style="height: 1px;margin-top: 10px; margin-bottom: 10px;"/>
@@ -216,7 +216,7 @@
                                     </p:panelGrid>
                                 </h:panelGrid>
                             </p:panel>
-                            <p:panel header="Graficos" style="min-height: 380px;">
+                            <p:panel id="graficosPnl3" header="Graficos" style="min-height: 380px;">
                                 <p:pieChart id="sampleDepto" value="#{mbResumenesFuncionarios.pieModel}" legendPosition="w"  
                                             title="Sample Pie Chart" style="width:400px;height:300px" showDataLabels="true"/>  
                             </p:panel>

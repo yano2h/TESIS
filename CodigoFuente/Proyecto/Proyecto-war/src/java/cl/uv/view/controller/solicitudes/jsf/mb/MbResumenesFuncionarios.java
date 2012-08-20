@@ -47,6 +47,7 @@ public class MbResumenesFuncionarios implements Serializable {
     private static final String TIPO_AREA = "area";
     private static final String TIPO_DEPTO = "depto";
     private static final String TIPO_PERSONAL = "personal";
+    
     private Long cantidadSolicitudesPendientes;
     private Long cantidadSolicitudesVencidas;
     private Long cantidadSolicitudesIniciadas;
@@ -63,11 +64,12 @@ public class MbResumenesFuncionarios implements Serializable {
 
     @PostConstruct
     private void init() {
-        createPieModel();
+        
         tipoResumen = TIPO_PERSONAL;
         funcionarioSelected = mbFuncionarioInfo.getFuncionario();
         areaSelected = funcionarioSelected.getArea();
         funcionariosArea = funcionarioDisicoFacade.buscarFuncrionariosPorArea(mbFuncionarioInfo.getFuncionario().getArea());
+        crearResumen();
     }
 
     public void setMbFuncionarioInfo(MbFuncionarioInfo mbFuncionarioInfo) {
@@ -102,6 +104,87 @@ public class MbResumenesFuncionarios implements Serializable {
         this.tipoResumen = tipoResumen;
     }
 
+    public Long getCantidadSolicitudesAsignadas() {
+        return cantidadSolicitudesAsignadas;
+    }
+
+    public void setCantidadSolicitudesAsignadas(Long cantidadSolicitudesAsignadas) {
+        this.cantidadSolicitudesAsignadas = cantidadSolicitudesAsignadas;
+    }
+
+    public Long getCantidadSolicitudesCerradas() {
+        return cantidadSolicitudesCerradas;
+    }
+
+    public void setCantidadSolicitudesCerradas(Long cantidadSolicitudesCerradas) {
+        this.cantidadSolicitudesCerradas = cantidadSolicitudesCerradas;
+    }
+
+    public Long getCantidadSolicitudesEnviadas() {
+        return cantidadSolicitudesEnviadas;
+    }
+
+    public void setCantidadSolicitudesEnviadas(Long cantidadSolicitudesEnviadas) {
+        this.cantidadSolicitudesEnviadas = cantidadSolicitudesEnviadas;
+    }
+
+    public Long getCantidadSolicitudesFinalizadaSinRespuesta() {
+        return cantidadSolicitudesFinalizadaSinRespuesta;
+    }
+
+    public void setCantidadSolicitudesFinalizadaSinRespuesta(Long cantidadSolicitudesFinalizadaSinRespuesta) {
+        this.cantidadSolicitudesFinalizadaSinRespuesta = cantidadSolicitudesFinalizadaSinRespuesta;
+    }
+
+    public Long getCantidadSolicitudesIniciadas() {
+        return cantidadSolicitudesIniciadas;
+    }
+
+    public void setCantidadSolicitudesIniciadas(Long cantidadSolicitudesIniciadas) {
+        this.cantidadSolicitudesIniciadas = cantidadSolicitudesIniciadas;
+    }
+
+    public Long getCantidadSolicitudesPendientes() {
+        return cantidadSolicitudesPendientes;
+    }
+
+    public void setCantidadSolicitudesPendientes(Long cantidadSolicitudesPendientes) {
+        this.cantidadSolicitudesPendientes = cantidadSolicitudesPendientes;
+    }
+
+    public Long getCantidadSolicitudesRechazadas() {
+        return cantidadSolicitudesRechazadas;
+    }
+
+    public void setCantidadSolicitudesRechazadas(Long cantidadSolicitudesRechazadas) {
+        this.cantidadSolicitudesRechazadas = cantidadSolicitudesRechazadas;
+    }
+
+    public Long getCantidadSolicitudesTransferida() {
+        return cantidadSolicitudesTransferida;
+    }
+
+    public void setCantidadSolicitudesTransferida(Long cantidadSolicitudesTransferida) {
+        this.cantidadSolicitudesTransferida = cantidadSolicitudesTransferida;
+    }
+
+    public Long getCantidadSolicitudesVencidas() {
+        return cantidadSolicitudesVencidas;
+    }
+
+    public void setCantidadSolicitudesVencidas(Long cantidadSolicitudesVencidas) {
+        this.cantidadSolicitudesVencidas = cantidadSolicitudesVencidas;
+    }
+
+    public Long getTotalSolicitudes() {
+        return totalSolicitudes;
+    }
+
+    public void setTotalSolicitudes(Long totalSolicitudes) {
+        this.totalSolicitudes = totalSolicitudes;
+    }
+
+    
     public SelectItem[] getItemsAvailableSelectManyNombreCompleto() {
         SelectItem[] listaItems = new SelectItem[funcionariosArea.size()];
         int i = 0;
@@ -113,14 +196,19 @@ public class MbResumenesFuncionarios implements Serializable {
 
     private void createPieModel() {
         pieModel = new PieChartModel();
-        pieModel.set("Asignadas", cantidadSolicitudesAsignadas);
-        pieModel.set("Cerradas", cantidadSolicitudesCerradas);
-        pieModel.set("Finalizada sin Respuesta", cantidadSolicitudesFinalizadaSinRespuesta);
+        
         pieModel.set("Iniciadas", cantidadSolicitudesIniciadas);
         pieModel.set("Pendientes", cantidadSolicitudesPendientes);
-        pieModel.set("Rechazada", cantidadSolicitudesRechazadas);
-        pieModel.set("Transferida", cantidadSolicitudesTransferida);
         pieModel.set("Vencidas", cantidadSolicitudesVencidas);
+        pieModel.set("Cerradas", cantidadSolicitudesCerradas);
+        
+        if(!tipoResumen.equals(TIPO_PERSONAL)){
+            pieModel.set("Asignadas", cantidadSolicitudesAsignadas);
+            pieModel.set("Finalizada sin Respuesta", cantidadSolicitudesFinalizadaSinRespuesta);
+            pieModel.set("Rechazada", cantidadSolicitudesRechazadas);
+            pieModel.set("Transferida", cantidadSolicitudesTransferida);
+        }
+        
     }
 
     public void onTabChange(TabChangeEvent event) {
@@ -134,11 +222,21 @@ public class MbResumenesFuncionarios implements Serializable {
             tipoResumen = TIPO_PERSONAL;
             funcionarioSelected = mbFuncionarioInfo.getFuncionario();
         }
-        calcularIndicadores();
+        crearResumen();
+    }
+    
+    public void verResumen(){
+        System.out.println("Resumen");
+        System.out.println("Tipo:"+tipoResumen);
+        System.out.println("Fselected:"+funcionarioSelected.getNombreCompleto());
+        System.out.println("AreaS:"+areaSelected.getNombreArea());
+        
+        crearResumen();
     }
     
     public void crearResumen(){
         calcularIndicadores();
+        createPieModel();
     }
 
     private void calcularIndicadores() {
