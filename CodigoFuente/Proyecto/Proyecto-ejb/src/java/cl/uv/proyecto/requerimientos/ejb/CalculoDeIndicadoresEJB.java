@@ -4,6 +4,7 @@
  */
 package cl.uv.proyecto.requerimientos.ejb;
 
+import cl.uv.model.base.utils.MathUtils;
 import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
@@ -48,25 +49,24 @@ public class CalculoDeIndicadoresEJB implements CalculoDeIndicadoresEJBLocal {
     }
 
     @Override
-    public Long porcentajeSolicitudesAsignadas(FuncionarioDisico f){
+    public Float porcentajeSolicitudesAsignadas(FuncionarioDisico f){
         String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
                      + "s.responsable = :responsable";
         Query q = em.createQuery(query);
         q.setParameter("responsable", f);
         Long cantidadSolAsignadas = (Long)q.getSingleResult();
-        
+
         query  = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
                + "s.areaResponsable = :area";
         q = em.createQuery(query);
         q.setParameter("area", f.getArea());
         Long cantidadSolArea = (Long)q.getSingleResult();
-        
-        Long psa = cantidadSolAsignadas / cantidadSolArea;
-        return psa * 100;
+
+        return MathUtils.calcularPorcentajeRedondeado(cantidadSolAsignadas, cantidadSolArea, 1) ;
     }
     
     @Override
-    public Long porcentajeSolicitudesAsignadas(Area a){
+    public Float porcentajeSolicitudesAsignadas(Area a){
         String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
                      + "s.areaResponsable = :area";
         Query q = em.createQuery(query);
@@ -77,50 +77,11 @@ public class CalculoDeIndicadoresEJB implements CalculoDeIndicadoresEJBLocal {
         q = em.createQuery(query);
         Long cantidadSolDpto = (Long)q.getSingleResult();
         
-        Long psa = cantidadSolAsignadas / cantidadSolDpto;
-        return psa * 100;
+        return MathUtils.calcularPorcentajeRedondeado(cantidadSolAsignadas, cantidadSolDpto, 1) ;
     }
     
-//    public Integer porcentajeCumplimiento(FuncionarioDisico f){
-//        String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-//                     + "s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado AND "
-//                     + "s.fechaCierre > s.fechaVencimiento AND"
-//                     + "s.responsable = :responsable";
-//        Query q = em.createQuery(query);
-//        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
-//        q.setParameter("responsable", f);
-//        
-//        Long cantidadSolCerradasVencidas = (Long)q.getSingleResult();
-//        
-//        query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-//              + "s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado AND"
-//              + "s.responsable = :responsable";
-//        q = em.createQuery(query);
-//        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
-//        q.setParameter("responsable", f);
-//        Long cantidadSolVencidas = (Long)q.getSingleResult();
-//        
-//        query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-//              + "s.responsable = :responsable";
-//        q = em.createQuery(query);
-//        q.setParameter("responsable", f);
-//        Long totalSolicitudesResponsable = (Long)q.getSingleResult();
-//        
-//        Long pr = (cantidadSolCerradasVencidas + cantidadSolVencidas) / totalSolicitudesResponsable;
-//        
-//        return (pr*100);
-//    }
-//    
-//    public Integer porcentajeCumplimiento(Area a){
-//    
-//    }
-//    
-//    public Integer porcentajeCumplimiento(){
-//    
-//    }
-    
     @Override
-    public Long porcentajeRetrasos(FuncionarioDisico f){
+    public Float porcentajeRetrasos(FuncionarioDisico f){
         String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
                      + "s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado AND "
                      + "s.fechaCierre > s.fechaVencimiento AND "
@@ -145,13 +106,11 @@ public class CalculoDeIndicadoresEJB implements CalculoDeIndicadoresEJBLocal {
         q.setParameter("responsable", f);
         Long totalSolicitudesResponsable = (Long)q.getSingleResult();
         
-        Long pr = (totalSolicitudesResponsable>0)?(cantidadSolCerradasVencidas + cantidadSolVencidas) / totalSolicitudesResponsable : 0;
-        
-        return (pr*100);
+        return MathUtils.calcularPorcentajeRedondeado(cantidadSolCerradasVencidas, totalSolicitudesResponsable, 1) ;
     }
     
     @Override
-    public Long porcentajeRetrasos(Area a){
+    public Float porcentajeRetrasos(Area a){
         String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
                      + "s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado AND "
                      + "s.fechaCierre > s.fechaVencimiento AND "
@@ -176,13 +135,11 @@ public class CalculoDeIndicadoresEJB implements CalculoDeIndicadoresEJBLocal {
         q.setParameter("area", a);
         Long totalSolicitudesArea = (Long)q.getSingleResult();
         
-        Long pr = (totalSolicitudesArea>0)?(cantidadSolCerradasVencidas + cantidadSolVencidas) / totalSolicitudesArea :0;
-        
-        return (pr*100);
+        return MathUtils.calcularPorcentajeRedondeado(cantidadSolCerradasVencidas, totalSolicitudesArea, 1) ;
     }
     
     @Override
-    public Long porcentajeRetrasos(){
+    public Float porcentajeRetrasos(){
         String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
                      + "s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado AND "
                      + "s.fechaCierre > s.fechaVencimiento";
@@ -202,9 +159,7 @@ public class CalculoDeIndicadoresEJB implements CalculoDeIndicadoresEJBLocal {
         q = em.createQuery(query);
         Long totalSolicitudesDpto = (Long)q.getSingleResult();
         
-        Long pr = (totalSolicitudesDpto >0)?(cantidadSolCerradasVencidas + cantidadSolVencidas) / totalSolicitudesDpto : 0;
-        
-        return (pr*100);
+        return MathUtils.calcularPorcentajeRedondeado(cantidadSolCerradasVencidas, totalSolicitudesDpto, 1) ;
     }
     
 }

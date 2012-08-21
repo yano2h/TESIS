@@ -9,17 +9,14 @@ import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.requerimientos.ejb.CalculoDeIndicadoresEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
-import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import org.primefaces.event.TabChangeEvent;
 import org.primefaces.model.chart.PieChartModel;
@@ -57,9 +54,9 @@ public class MbResumenesFuncionarios implements Serializable {
     private Long cantidadSolicitudesAsignadas;
     private Long cantidadSolicitudesFinalizadaSinRespuesta;
     private Long totalSolicitudes;
-    private Long porcentajeSolicitudesAsignadas;
-    private Long porcentajeCumplimiento;
-    private Long porcentajeRetrasos;
+    private Float porcentajeSolicitudesAsignadas;
+    private Float porcentajeCumplimiento;
+    private Float porcentajeRetrasos;
 
     public static final String TIPO_AREA = "area";
     public static final String TIPO_DEPTO = "depto";
@@ -182,27 +179,27 @@ public class MbResumenesFuncionarios implements Serializable {
         this.cantidadSolicitudesVencidas = cantidadSolicitudesVencidas;
     }
 
-    public Long getPorcentajeCumplimiento() {
+    public Float getPorcentajeCumplimiento() {
         return porcentajeCumplimiento;
     }
 
-    public void setPorcentajeCumplimiento(Long porcentajeCumplimiento) {
+    public void setPorcentajeCumplimiento(Float porcentajeCumplimiento) {
         this.porcentajeCumplimiento = porcentajeCumplimiento;
     }
 
-    public Long getPorcentajeRetrasos() {
+    public Float getPorcentajeRetrasos() {
         return porcentajeRetrasos;
     }
 
-    public void setPorcentajeRetrasos(Long porcentajeRetrasos) {
+    public void setPorcentajeRetrasos(Float porcentajeRetrasos) {
         this.porcentajeRetrasos = porcentajeRetrasos;
     }
 
-    public Long getPorcentajeSolicitudesAsignadas() {
+    public Float getPorcentajeSolicitudesAsignadas() {
         return porcentajeSolicitudesAsignadas;
     }
 
-    public void setPorcentajeSolicitudesAsignadas(Long porcentajeSolicitudesAsignadas) {
+    public void setPorcentajeSolicitudesAsignadas(Float porcentajeSolicitudesAsignadas) {
         this.porcentajeSolicitudesAsignadas = porcentajeSolicitudesAsignadas;
     }
 

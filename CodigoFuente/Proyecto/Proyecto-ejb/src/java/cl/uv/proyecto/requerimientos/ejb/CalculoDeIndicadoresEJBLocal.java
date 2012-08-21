@@ -21,13 +21,13 @@ public interface CalculoDeIndicadoresEJBLocal {
 
     Long contarSolicitudes(Short idEstado);
 
-    Long porcentajeRetrasos(FuncionarioDisico f);
+    Float porcentajeRetrasos(FuncionarioDisico f);
 
-    Long porcentajeRetrasos(Area a);
+    Float porcentajeRetrasos(Area a);
 
-    Long porcentajeRetrasos();
+    Float porcentajeRetrasos();
 
-    Long porcentajeSolicitudesAsignadas(FuncionarioDisico f);
+    Float porcentajeSolicitudesAsignadas(FuncionarioDisico f);
 
-    Long porcentajeSolicitudesAsignadas(Area a);
+    Float porcentajeSolicitudesAsignadas(Area a);
 }
