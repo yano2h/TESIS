@@ -109,5 +109,5 @@ INSERT INTO FUNCIONARIO_DISICO (`rut`, `area`, `cargo`, `anexo`)VALUES
 (22222222, 1, 'Tester', '2145');
 
 --Solicitud que debe cambiarse a vencida para test
-INSERT INTO `test_sistema_solicitudes`.`solicitud_requerimiento` (`id_solicitud_req`, `asunto`, `codigo_consulta`, `fecha_envio`, `fecha_ultima_actualizacion`, `fecha_vencimiento`, `mensaje`, `respuesta`, `area_responsable`, `estado_solicitud`, `prioridad_solicitud`, `responsable`, `solicitante`, `tipo_solicitud`) VALUES (1, 'Asunto', 'ABCDEF', '2012-07-09 09:51:23', '2012-07-09 09:51:23', '2012-07-19 09:51:23', 'Mensaje', 'Respuesta', 1, 0, 0, , 11111111, 1);
+INSERT INTO `test_sistema_solicitudes`.`solicitud_requerimiento` (`id_solicitud_req`, `asunto`, `codigo_consulta`, `fecha_envio`, `fecha_ultima_actualizacion`, `fecha_vencimiento`, `mensaje`, `respuesta`, `area_responsable`, `estado_solicitud`, `prioridad_solicitud`, `responsable`, `solicitante`, `tipo_solicitud`) VALUES (1, 'Asunto', 'ABCDEF', '2012-07-09 09:51:23', '2012-07-09 09:51:23', '2012-07-19 09:51:23', 'Mensaje', 'Respuesta', 1, 0, 0, NULL, 11111111, 1);
 
