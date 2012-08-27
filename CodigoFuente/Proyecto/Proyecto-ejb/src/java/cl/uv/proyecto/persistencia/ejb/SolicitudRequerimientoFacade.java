@@ -9,7 +9,6 @@ import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
-import java.awt.Stroke;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
