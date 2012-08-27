@@ -41,6 +41,7 @@ public class BaseTestEJB {
     @AfterClass
     public static void tearDownClass() throws Exception {
         container.close();
+        FileUtils.cleanDirectory(new File(TARGET_DIR));
     }
     
     private static File prepareModuleDirectory() throws IOException {
