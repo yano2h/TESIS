@@ -46,7 +46,7 @@ public class AreaFacadeTest extends BaseTestEJB{
     
     @Test
     public void testCount() throws Exception {
-        int expResult = 0;
+        int expResult = 3;
         int result = ejb.count();
         assertEquals(expResult, result);
     }
@@ -57,6 +57,8 @@ public class AreaFacadeTest extends BaseTestEJB{
         ejb.create(a);
         Area areaTest = ejb.find(a.getIdArea());
         assertEquals(areaTest, a);
+        
+        //Restaurar estado bd
         ejb.remove(a);
     }
 

@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 import javax.naming.NamingException;
+import javax.persistence.EntityManager;
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -54,5 +55,9 @@ public class BaseTestEJB {
 
     protected <T> T lookupBy(Class<T> type) throws NamingException {
         return (T) ctx.lookup("java:global/" + MODULE_NAME + "/" + type.getSimpleName());
+    }
+    
+    protected EntityManager lookupEntityManager() throws NamingException{
+        return (EntityManager) ctx.lookup("java:global/EntityManager/Proyecto-ejbPU");
     }
 }
