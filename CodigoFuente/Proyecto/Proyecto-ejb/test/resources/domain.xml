@@ -16,15 +16,15 @@
       <property name="connectionAttributes" value=";create=true"></property>
     </jdbc-connection-pool>
     <jdbc-connection-pool connection-validation-method="auto-commit" datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" wrap-jdbc-objects="false" res-type="javax.sql.DataSource" name="mysql_SISTEMA_SOLICITUDES_rootPool">
-      <property name="URL" value="jdbc:mysql://localhost:3306/SISTEMA_SOLICITUDES"></property>
+      <property name="URL" value="jdbc:mysql://localhost:3306/TEST_SISTEMA_SOLICITUDES"></property>
       <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
       <property name="Password" value=""></property>
       <property name="portNumber" value="3306"></property>
-      <property name="databaseName" value="SISTEMA_SOLICITUDES"></property>
+      <property name="databaseName" value="TEST_SISTEMA_SOLICITUDES"></property>
       <property name="User" value="root"></property>
       <property name="serverName" value="localhost"></property>
     </jdbc-connection-pool>
-    <jdbc-resource pool-name="mysql_SISTEMA_SOLICITUDES_rootPool" jndi-name="jdbc/poolProyecto"></jdbc-resource>
+    <jdbc-resource pool-name="mysql_SISTEMA_SOLICITUDES_rootPool" jndi-name="jdbc/poolTest"></jdbc-resource>
     <mail-resource host="smtp.gmail.com" jndi-name="javaMail/correoUv" from="yano2h@gmail.com" user="yano2h">
       <property name="mail.smtp.password" value="hiphophiphop"></property>
       <property name="mail.smtp.auth" value="true"></property>
