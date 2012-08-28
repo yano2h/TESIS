@@ -45,7 +45,7 @@
   <servers>
     <server name="server" config-ref="server-config">
       <resource-ref ref="jdbc/__TimerPool"></resource-ref>
-      <resource-ref ref="jdbc/poolProyecto"></resource-ref>
+      <resource-ref ref="jdbc/poolTest"></resource-ref>
       <resource-ref ref="javaMail/correoUv"></resource-ref>
       <resource-ref ref="email/Sistema"></resource-ref>
       <resource-ref ref="email/uv"></resource-ref>
