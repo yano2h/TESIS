@@ -39,10 +39,15 @@ public class OpenAMUserDetailsService implements AuthenticationUserDetailsServic
         return user;
     }
 
-    private OpenAMUserDetails createUser(AtributosFuncionario attr, String token) {
-        return new OpenAMUserDetails(attr.getUid(), token,
-                true, true, true, true,
-                createGrantedAuthority(attr.getListaRoles()));
+    private OpenAMUserDetails createUser(AtributosFuncionario attr, String token) {        
+        if(attr != null){
+            return new OpenAMUserDetails(attr.getUid(), token,
+                                         true, true, true, true,
+                                         createGrantedAuthority(attr.getListaRoles()));
+        }else{
+           return new OpenAMUserDetails("", token);
+        }
+        
     }
 
     private Set<GrantedAuthority> createGrantedAuthority(List<String> roles) {

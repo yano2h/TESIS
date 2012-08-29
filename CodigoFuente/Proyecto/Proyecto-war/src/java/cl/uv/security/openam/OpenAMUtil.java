@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 /**
  *
@@ -45,6 +44,7 @@ public class OpenAMUtil {
         String prefixRol = Resources.getValue("security", "prefix_rol_spring");
         
         for (String rol : roles) {
+            System.out.println("ROLES:"+rol);
             rol = rol.split(",")[0].split("=")[1];
             if(rol.startsWith(prefixApp)){
                 rol = rol.replaceFirst(prefixApp, prefixRol);
@@ -53,6 +53,13 @@ public class OpenAMUtil {
         }
         
         return rolesParseados;
+    }
+    
+    public static String convertRolToFormatLDAP(String rol){
+        rol = (rol.startsWith(Resources.getValue("security", "prefix_rol_spring")))? 
+               rol.replaceFirst(Resources.getValue("security", "prefix_rol_spring"), Resources.getValue("security", "prefix_app")) : 
+               Resources.getValue("security", "prefix_app")+rol;
+        return rol;
     }
     
     public static AtributosFuncionario createFalseUser() {

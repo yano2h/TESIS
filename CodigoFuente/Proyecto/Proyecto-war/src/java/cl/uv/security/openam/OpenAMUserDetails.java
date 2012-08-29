@@ -26,6 +26,13 @@ public class OpenAMUserDetails implements UserDetails{
     
     /*Para uso de la aplicacion*/
     private AtributosFuncionario funcionario;
+
+    public OpenAMUserDetails(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.credentialsNonExpired = false;
+    }
+    
     
     public OpenAMUserDetails(String username, String password, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled, Set<GrantedAuthority> authorities) {
         this.username = username;

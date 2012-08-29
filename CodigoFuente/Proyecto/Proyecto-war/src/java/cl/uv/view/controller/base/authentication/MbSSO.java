@@ -42,10 +42,12 @@ public class MbSSO {
     private void init(){
         user = (OpenAMUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Integer rut = Integer.parseInt( user.getUsername() );
-        
+        System.out.println("RUT SSO:"+rut);
         funcionario = funcionarioFacade.find(rut);
         funcionarioDisico = funcionarioDisicoFacade.find(rut);
-        
+        if (funcionarioDisico == null) {
+            System.out.println("Funcionario:"+rut+" not found");
+        }
         if(funcionario == null){
            funcionario = saveUser(user);
         }
@@ -84,12 +86,6 @@ public class MbSSO {
      
     
     public void redirectHomePage(){
-        System.out.println("Username:"+user.getUsername());
-        System.out.println("Cn:"+user.getFuncionario().getCn());
-        System.out.println("Givename:"+user.getFuncionario().getGivenname());
-        System.out.println("Sn:"+user.getFuncionario().getSn());
-        System.out.println("Rut:"+user.getFuncionario().getRut());
-        System.out.println("Rol:"+user.getFuncionario().getListaRoles().get(0).toString());
         if (JsfUtils.getExternalContext().isUserInRole(Resources.getValue("security", "R_JAREA")) 
             || JsfUtils.getExternalContext().isUserInRole(Resources.getValue("security", "R_JDEPTO")) 
             || JsfUtils.getExternalContext().isUserInRole(Resources.getValue("security", "R_FDISICO")) 

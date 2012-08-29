@@ -33,7 +33,7 @@ public class MbMisProyectos extends MbBase{
     
     @PostConstruct
     private void init(){
-        listaProyectos = proyectoFacade.buscarProyectosPorParticipante(getFuncionario());
+        listaProyectos = proyectoFacade.buscarProyectosPorParticipante(getFuncionarioDisico());
     }
 
     public List<Proyecto> getListaProyectos() {
