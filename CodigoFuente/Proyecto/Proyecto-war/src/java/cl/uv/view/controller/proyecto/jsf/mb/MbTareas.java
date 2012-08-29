@@ -41,14 +41,14 @@ public class MbTareas extends MbBase{
 
     @PostConstruct
     private void init(){
-        listaProyectosEnQueParticipa = proyectoFacade.buscarProyectosPorParticipante(getFuncionario());
-        listaDeTareas = tareaProyectoFacade.buscarTareasPorResponsable(getFuncionario());
+        listaProyectosEnQueParticipa = proyectoFacade.buscarProyectosPorParticipante(getFuncionarioDisico());
+        listaDeTareas = tareaProyectoFacade.buscarTareasPorResponsable(getFuncionarioDisico());
         nuevaTarea = generarNuevaTarea();
     }
     
     private TareaProyecto generarNuevaTarea(){
         TareaProyecto t = new TareaProyecto();
-        t.setResponsableTarea(getFuncionario());
+        t.setResponsableTarea(getFuncionarioDisico());
         t.setFechaCreacion(new Date());
         t.setFechaInicioPropuesta(new Date());
         t.setVisible(true);
@@ -81,7 +81,7 @@ public class MbTareas extends MbBase{
     }
     
     public void guardarTarea(){
-        nuevaTarea.setResponsableTarea(getFuncionario());
+        nuevaTarea.setResponsableTarea(getFuncionarioDisico());
         tareaProyectoFacade.create(nuevaTarea);
         JsfUtils.performNavigation("misTareas", true);
     }
