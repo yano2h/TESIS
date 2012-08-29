@@ -5,7 +5,6 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.model.base.utils.Resources;
-import cl.uv.proyecto.consts.EstadoSC;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.persistencia.entidades.SolicitudCambio;
@@ -42,7 +41,7 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
     public void enviarSolicitudCambio(SolicitudCambio sc, FuncionarioDisico solicitante) {
         sc.setSolicitante(solicitante);
         sc.setFechaEnvio(new Date());
-        sc.setEstadoSolicitud(estadoSolicitudCambioFacade.find(EstadoSC.ENVIADA));
+        sc.setEstadoSolicitud( estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_ENVIADA") ));
         create(sc);
     }
     
@@ -50,7 +49,7 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
     public void guardarAnalisisImpacto(SolicitudCambio sc, FuncionarioDisico funcionario){
         sc.setEvaluadorImpacto(funcionario);
         sc.setFechaAnalisis(new Date());
-        sc.setEstadoSolicitud(estadoSolicitudCambioFacade.find(EstadoSC.ANALISADA));
+        sc.setEstadoSolicitud(estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_ANALISADA") ));
         edit(sc);
     }
 
@@ -59,13 +58,13 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
         sc.setEvaluadorFinal(funcionario);
         sc.setFechaCierre(new Date());
         if(sc.getAprobada()){
-            sc.setEstadoSolicitud(estadoSolicitudCambioFacade.find(EstadoSC.APROBADA));
+            sc.setEstadoSolicitud(estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_APROBADA") ));
         }else{
-            sc.setEstadoSolicitud(estadoSolicitudCambioFacade.find(EstadoSC.RECHAZADA));
+            sc.setEstadoSolicitud(estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_RECHAZADA") ));
         }
         edit(sc);
-        
     }
+    
     @Override
     public List<SolicitudCambio> buscarSolicitudPorProyecto(Proyecto proyecto) {
         Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.proyecto = :proyecto ORDER BY s.fechaEnvio DESC");

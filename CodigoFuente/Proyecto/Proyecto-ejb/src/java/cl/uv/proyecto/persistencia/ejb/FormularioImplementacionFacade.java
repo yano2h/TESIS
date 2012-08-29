@@ -5,7 +5,6 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.model.base.utils.Resources;
-import cl.uv.proyecto.consts.EstadoSC;
 import cl.uv.proyecto.persistencia.entidades.FormularioImplementacion;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

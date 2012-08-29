@@ -4,16 +4,17 @@
  */
 package cl.uv.proyecto.requerimientos.ejb;
 
-import cl.uv.proyecto.consts.EstadoSR;
+import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.mensajeria.ejb.EmailEJBLocal;
 import cl.uv.proyecto.persistencia.ejb.EstadoSolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.TipoPrioridadFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.*;
+import cl.uv.proyecto.persistencia.entidades.Area;
+import cl.uv.proyecto.persistencia.entidades.EstadoSolicitudRequerimiento;
+import cl.uv.proyecto.persistencia.entidades.Funcionario;
+import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import java.util.Date;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -27,8 +28,8 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     private final long MOD = 1000L;
     private final long DESPLAZAMIENTO = 10000000000L;
     private final long TIME_INIT = 1341773584868L;
-    private final short PRIORIDAD_INICIAL = 0;
     private final int CIERRE = 0;
+    
     @EJB
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
     @EJB
@@ -78,8 +79,8 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitud.setFechaEnvio(fechaActual);
         solicitud.setFechaUltimaActualizacion(fechaActual);
         solicitud.setSolicitante(solicitante);
-        solicitud.setPrioridadSolicitud(tipoPrioridadFacade.find(PRIORIDAD_INICIAL));
-        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(EstadoSR.ENVIADA));
+        solicitud.setPrioridadSolicitud(tipoPrioridadFacade.find( Resources.getValueShort("Estados", "Prioridad_Inicial") ));
+        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_ENVIADA") ));
         solicitud.setCodigoConsulta(generarCodigoConsulta(solicitud));
         solicitudFacade.create(solicitud);
         return solicitud.getCodigoConsulta();
@@ -87,13 +88,13 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
 
     @Override
     public void rechazarSolicitud(SolicitudRequerimiento solicitud) {
-        EstadoSolicitudRequerimiento estado = estadoSolicitudFacade.find(EstadoSR.RECHAZADA);
+        EstadoSolicitudRequerimiento estado = estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_RECHAZADA") );
         solicitud.setEstadoSolicitud(estado);
         solicitudFacade.edit(solicitud);
     }
 
     private void cerrarSolicitud(SolicitudRequerimiento solicitud) {
-        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(EstadoSR.CERRADA));
+        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_CERRADA") ));
         solicitud.setFechaCierre(new Date());
         solicitudFacade.edit(solicitud);
     }
@@ -122,25 +123,25 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     public void transferirSolicitud(SolicitudRequerimiento solicitud, Area nuevaAreaResponsable, String motivoTransferencia) {
         solicitud.setJustificacionTrasnferencia(motivoTransferencia);
         solicitud.setAreaResponsable(nuevaAreaResponsable);
-        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(EstadoSR.TRANSFERIDA));
+        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_TRANSFERIDA") ));
         solicitudFacade.edit(solicitud);
     }
 
     @Override
     public void asignarSolicitud(SolicitudRequerimiento solicitud) {
-        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(EstadoSR.ASIGNADA));
+        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_ASIGNADA") ));
         solicitudFacade.edit(solicitud);
     }
 
     @Override
     public void iniciarSolicitud(SolicitudRequerimiento solicitud) {
-        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(EstadoSR.INICIADA));
+        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_INICIADA") ));
         solicitudFacade.edit(solicitud);
     }
 
     @Override
     public void enviarRespuestaJefeArea(SolicitudRequerimiento solicitud) {
-        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find(EstadoSR.FINALIZADA_SIN_RESPUESTA));
+        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_FINALIZADA_SIN_RESPUESTA") ));
         solicitudFacade.edit(solicitud);
     }
 

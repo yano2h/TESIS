@@ -4,7 +4,7 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
-import cl.uv.proyecto.consts.EstadoSR;
+import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
@@ -23,8 +23,6 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @PersistenceContext(unitName = "Proyecto-ejbPU")
     private EntityManager em;
-    private short ESTADO_INICIAL = 0;
-    private short ESTADO_FINAL = 8;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -65,7 +63,7 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
     public List<SolicitudRequerimiento> getUltimasSolicitudesEnviadas(Funcionario funcionario, Integer maxResults) {
         Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante = :solicitante AND s.estadoSolicitud.idEstadoSolicitudRequerimiento <> :idEstado");
         q.setParameter("solicitante", funcionario);
-        q.setParameter("idEstado", EstadoSR.CERRADA);
+        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
         q.setMaxResults(maxResults);
         return q.getResultList();
     }
@@ -74,7 +72,7 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
     public List<SolicitudRequerimiento> getUltimasSolicitudesCerradas(Funcionario funcionario, Integer maxResults) {
         Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante = :solicitante AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado");
         q.setParameter("solicitante", funcionario);
-        q.setParameter("idEstado", EstadoSR.CERRADA);
+        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
         q.setMaxResults(maxResults);
         return q.getResultList();
     }
@@ -104,16 +102,16 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
         Query q = em.createQuery(query);
         q.setParameter("responsable", funcionario);
 
-        q.setParameter("idEstado", EstadoSR.ASIGNADA);
+        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_ASIGNADA"));
         funcionario.setCantidadDeSolicitudesAsignadas(((Long) q.getSingleResult()).intValue());
 
-        q.setParameter("idEstado", EstadoSR.PENDIENTE);
+        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_PENDIENTE"));
         funcionario.setCantidadDeSolicitudesPendientes(((Long) q.getSingleResult()).intValue());
 
-        q.setParameter("idEstado", EstadoSR.INICIADA);
+        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_INICIADA"));
         funcionario.setCantidadDeSolicitudesIniciadas(((Long) q.getSingleResult()).intValue());
 
-        q.setParameter("idEstado", EstadoSR.VENCIDA);
+        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
         funcionario.setCantidadDeSolicitudesVencidas(((Long) q.getSingleResult()).intValue());
     }
 
