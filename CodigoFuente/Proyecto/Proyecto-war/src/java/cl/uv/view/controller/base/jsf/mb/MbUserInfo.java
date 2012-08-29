@@ -16,6 +16,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,6 +35,7 @@ public class MbUserInfo implements Serializable {
     private FuncionarioFacadeLocal funcionarioFacade;
     @EJB
     private NotificacionFacadeLocal notificacionFacade;
+    
     private Funcionario funcionario;
 
     public MbUserInfo() {

@@ -11,4 +11,6 @@ public interface AuthEJBBeanLocal {
     public AtributosFuncionario getAtributosFuncionarios(String tokenCookie);
     
     public void logout(String tokenCookie);
+
+    public void addUser(AtributosFuncionario atributosFuncionario);
 }

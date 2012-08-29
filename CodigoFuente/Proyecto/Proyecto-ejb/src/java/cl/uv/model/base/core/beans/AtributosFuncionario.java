@@ -12,6 +12,7 @@ public class AtributosFuncionario {
     private String givenname;
     private String rut;
     private String mail;
+    private String password;
     private List<String> listaRoles = new ArrayList<String>();
 
     public String getUid() {
@@ -77,4 +78,14 @@ public class AtributosFuncionario {
     public void setSn(String sn) {
         this.sn = sn;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    
 }
