@@ -14,7 +14,7 @@
                 <p:menu styleClass="menu_left"> 
                     <p:submenu label="Solicitudes">  
                         <p:menuitem value="Resumen Atencion de Solicitudes" action="/view/atencion/resumen?faces-redirect=true"/>
-                        <p:menuitem value="Solicitudes del Area" action="/view/atencion/solicitudesArea?faces-redirect=true"/>  
+                        <p:menuitem value="Solicitudes del Area ()" action="/view/atencion/solicitudesArea?faces-redirect=true"/>  
                         <p:menuitem value="Mis Solicitudes" action="/view/atencion/misSolicitudes?faces-redirect=true"/>    
                         <p:menuitem value="Buscar Solicitud" action="/view/atencion/buscarSolicitud?faces-redirect=true"/>  
                     </p:submenu> 
@@ -37,6 +37,11 @@
                         <p:menuitem value="Evaluar Solicitud" action="/view/scm/evaluacionSolicitud?faces-redirect=true"/> 
                         <p:menuitem value="Formulario Implementación" action="/view/scm/implementacionSolicitud?faces-redirect=true"/> 
                     </p:submenu>   
+                    
+                    <p:submenu label="Opciones de Administracion" rendered="#{p:ifGranted(security.R_ADM)}">  
+                        <p:menuitem value="Agregar nuevos funcionarios" action="#"/>
+                        <p:menuitem value="Solicitudes del Area" action="/view/atencion/solicitudesArea?faces-redirect=true"/>  
+                    </p:submenu> 
                 </p:menu>
             </h:form>
         </ui:composition>
