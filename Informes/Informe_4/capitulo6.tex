@@ -1,0 +1,613 @@
+\chapter{Pruebas}
+
+	En esta sección se describen los tipos de pruebas a realizar, el proceso,
+	los casos de pruebas y las herramientas para su automatización.
+
+	\section{Pruebas Unitarias}
+	
+
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{4cm} | m{4cm}|m{6cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Modulo}} & \textbf{Test} & \textbf{Proposito del Test}\\
+		\hline
+		\multirow{3}{*}{Login} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+		\multirow{3}{*}{Modulo de Mensajeria} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+		\multirow{3}{*}{Modulo de Requerimientos} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+		\multirow{3}{*}{Modulo de Proyectos} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+		\multirow{3}{*}{Modulo de SCM} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+		\multirow{3}{*}{Modulo de Persistencia} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+
+	\end{tabular}
+		\caption{Test unitarios}
+		\label{testUnit}
+	\end{table}
+
+	Para el desarrollo y automatización de los test unitarios se utilizara JUnit \cite{junit},
+	que es un Framework Open Source para la automatización de las pruebas en 
+	los proyectos Software. El framework provee de herramientas, clases y métodos 
+	que facilitan la tarea de realizar pruebas unitarias en una aplicación.\\
+	
+	Dado que para el desarrollo se utiliza la tecnología de Java EE, muchas de las
+	pruebas sobre clases como EJBs por ejemplo requieren ser desplegadas en el
+	contenedor para poder ejecutarse correctamente, esto puede llegar a tomar 
+	bastante tiempo lo que dificulta la tarea de hacer las pruebas. Para resolver
+	esto se utilizara Arrquillian \cite{arquillian} , este es un framework de JBoos que ademas de 
+	proveer de herramientas, clases y métodos para la creación y automatización
+	de pruebas, utiliza contenedores embebidos que le permiten simular la ejecución
+	de los componentes como si estuviesen en el contenedor real,  la diferencia 
+	es que el despliegue en este tipo de contenedores es mucho mas rapido
+	y nos permite simular un ambiente mas real en nuestras pruebas.
+	Permite probar EJBs, CDI, Percistencia (JPA) entre otros, ademas entre los
+	contenedores con los que es compatible se encuentra Glassfish Embedded por 
+	lo que proporciona completa compatibilidad con el servidor de aplicaciones a utilizar.\\
+	
+
+	Estas pruebas se diseñaran y escribirán idealmente en conjunto con la implementación
+	de la aplicación, pero con el fin de cumplir con las fechas de entrega esta actividad 
+	podra ser postergada asta la fase de pruebas.\\
+			
+
+	\subsection{Pruebas de Integración}
+	Las pruebas de integración se realizan una vez terminadas las pruebas unitarias,
+	es decir una vez que no aseguramos que todo funciona bien individualmente,
+	debemos asegurarnos que cuando juntemos los módulos todo siga funcionando
+	correctamente \cite{disenoTDD}.\\
+	
+	Estas pruebas son similares a las pruebas unitarias, con la salvedad que pueden
+	romper las reglas mencionadas anteriormente, ya que como su nombre indica, 
+	integración significa que ayuda a unir distintas partes del sistema. Por tanto, 
+	estas pruebas serán de granularidad más gruesa y más frágiles que
+	los tests unitarios, por lo que el número de tests de integración sera menor que 
+	el número de tests unitarios \cite{disenoTDD}.\\
+	
+	Al igual que en el caso anterior esta pueden ser automatizadas a través
+	de un framework de pruebas. Para integrar los componentes se debe hacer
+	uso intensivo de los servicios del contenedor, por lo que es conveniente
+	hacer solo uso de Arquillian para las pruebas de integración.\\
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/PruebasIntegracion.png}
+			\caption{Esquema de Integración}
+			\label{integracion}
+		\end{center}
+	\end{figure}
+	
+	El proceso de integración del sistema implica construir este a partir de sus
+	componentes y probar el sistema resultante para encontrar problemas que 
+	pueden surgir debido a la integración de los componentes \cite{sommerville}. 
+	Por este motivo las pruebas de integración se diseñaran e implementaran acorde 
+	al orden indicado en la Figura \ref{integracion}, donde las primeros niveles son
+	lo que presentan menos dependencia y los superiores mayor dependencia.\\
+
+	Al igual que en el caso anterior, las pruebas deben quedar debidamente documentadas
+	por el código que las implementa. Y ademas se completara la Tabla \ref{testIntegracion} 
+	la cual es similar a la la Tabla \ref{testUnit} y en la que se deben indicar las pruebas que se implementaron 
+	y su propósito.
+	
+	
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{2.5cm} | m{4cm}|m{7.5cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Identificador}} & {\textbf{Prueba de Integración}} & \textbf{Propósito} \\
+		\hline
+		& {} & {}\\
+		\hline
+		& {} & {}\\
+		\hline
+		& {} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Formato para la documentación de los test de Integración}
+		\label{testIntegracion}
+	\end{table}
+	
+	Ademas como cada prueba afecta a mas de un modulo se completara la Tabla 
+	\ref{coberturaIntegracion} indicando los módulos a los que afecta cada prueba.
+	
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} l | m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|}
+		\hline
+		%\rowcolor[gray]{0.7} \backslashbox{Modulo}{Prueba}& {PI-1}  & {PI-2} & {PI-3} & {PI-4} & {PI-5} \\
+\rowcolor[gray]{0.7} {Modulo/Prueba}& {PI-1}  & {PI-2} & {PI-3} & {PI-4} & {PI-5} \\
+		\hline
+		{Modulo 1} & {x}  & {} & {} & {} & {} \\
+		\hline
+		{Modulo 2} & {x}  & {x} & {x} & {x} & {} \\
+		\hline
+		{Modulo 3} & {}  & {x} & {x} & {} & {x} \\
+		\hline
+		{Modulo 4} & {}  & {} & {x} & {x} & {x} \\
+		\hline
+		{Modulo 5} & {}  & {} & {} & {} & {x} \\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Formato Tabla de Cobertura de las Pruebas de Integración}
+		\label{coberturaIntegracion}
+	\end{table}
+
+	\subsection{Pruebas de Rendimiento}
+	Una vez el sistema se ha integrado completamente, es posible probar las propiedades
+	emergentes del sistema, en este caso el rendimiento es nuestra principal preocupación
+	dado que es la única propiedad que el cliente menciono en los requerimientos no funcionales. \\
+	
+	Para el desarrollo de estas pruebas se utilizaran 2 herramientas:
+	\begin{itemize}
+		\item \textbf{JMeter:} Es una herramienta Open Source diseñada 100\% en Java, que puede 
+		ser utilizada como una herramienta de prueba de carga para analizar y medir el desempeño
+		de una variedad de servicios, con énfasis en aplicaciones web \cite{jmeter}.
+		\item \textbf{VisualVM:} Es una herramienta que proporciona una interfaz visual para ver 
+		información detallada sobre las aplicaciones Java que están ejecutandoce en una Maquina 
+		Virtual de Java (JVM), normalmente se distribuye junto con el Java Development Kit (JDK) 
+		\cite{visualvm}.
+	\end{itemize}
+
+	El objetivo de estas pruebas es asegurar que el sistema podrá soportar la carga esperada.
+	Para esto se diseñaran y ejecutaran un conjunto reducido de pruebas que ejerciten las tareas 
+	que debiesen ser accedidas con mayor frecuencia por los usuarios, el procedimiento para estas
+	pruebas sera el siguiente.
+	
+	\begin{enumerate}
+		\item Se seleccionara un escenario de ejecución frecuente del sistema.
+		\item Se ingresara al sistema y se grabara el escenario con JMeter, creando así un escenario 
+		de prueba.
+		\item Se ejecutara el escenario de prueba simulando 1 solo usuario, para tener una medición 
+		base y corroborar que la prueba funciona correctamente.
+		\item Se ejecutara el escenario de prueba simulando 100 usuarios.
+		\item Se continuara ejecutando el escenario de prueba incrementando la cantidad de usuarios
+		en 100, deteniéndose cuando el rendimiento del sistema se vea degradado.
+	\end{enumerate}
+	
+	\textbf{Nota:} Antes de ejecutar un escenario de prueba, se debe reiniciar el servidor para 
+	liberar todos los recursos que pueden haber quedado reservados por ejecución de la prueba 
+	anterior, de esta manera no afectar las mediciones de la siguiente prueba.\\
+	
+ 	Se debe documentar tanto los escenarios de prueba en la Tabla \ref{escenarioPR} como las mediciones obtenidas en sus 
+	ejecuciones en la Tabla \ref{medicionPR}.
+	
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{| m{2cm}| m{5cm}|m{7cm}|}
+		\hline
+		\rowcolor[gray]{0.8}\textbf{Id-Prueba} & \textbf{Nombre archivo (.jmx)} & \textbf{Descripción del Escenario} \\
+		\hline
+		{} & {} & {} \\
+		\hline
+		{} & {} & {} \\
+		\hline
+		{} & {} & {} \\
+		\hline
+		{} & {} & {} \\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Documentación de los escenarios de pruebas de rendimiento}
+		\label{escenarioPR}
+	\end{table}
+		
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|m{3cm}| m{3cm}|m{4cm}|m{2.5cm}|}
+		\hline
+			\multicolumn{4}{|c|}{\cellcolor[gray]{0.8}\textbf{Configuración de la Prueba}}\\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Id-Prueba} & {} & \cellcolor[gray]{0.9}\textbf{Fecha Ejecución} & {}\\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Hilos} & {} & \cellcolor[gray]{0.9}\textbf{Ciclos} & {} \\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Rand Up} & {} & \cellcolor[gray]{0.9}\textbf{Retardo} & {} \\
+		\hline
+			\multicolumn{4}{|c|}{\cellcolor[gray]{0.8} \textbf{Resultados}}\\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Duración} & {} & \cellcolor[gray]{0.9}\textbf{Rendimiento} & {} \\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Errores} & {} & \cellcolor[gray]{0.9}\textbf{Tasa de Transferencia} & {} \\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Documentación de las mediciones de las pruebas de rendimiento}
+		\label{medicionPR}
+	\end{table}
+	
+	Ademas adjunto a la Tabla \ref{medicionPR} deben ir los graficos del uso de CPU y el uso de RAM, obtenidos con VisualVM.\\
+	
+	Con todo esto ademas de demostrar que la aplicación satisface los
+	requisitos de rendimiento impuestos por el cliente. Se debe determinar 
+	cual es la capacidad máxima del sistema, antes de ver degradado el rendimiento.
+
+	\subsection{Pruebas de Aceptación}
+	Las pruebas de aceptación tienen como propósito demostrar al cliente el 
+	cumplimiento total o parcial de los requisitos del software\cite{reqPA}. Las características 
+	fundamentales de una Prueba de Aceptación son:
+	\begin{itemize}
+		\item Una Prueba de Aceptación describe un escenario (secuencia
+		de pasos) de ejecución o un uso del sistema desde la perspectiva del
+		cliente. Las Pruebas de Aceptación cubren desde escenarios típicos/frecuentes
+		hasta los mas excepcionales.
+		\item Puede estar asociada a un requisito funcional o requisito no funcional.
+		Un requisito tiene una o mas Pruebas de Aceptación asociadas.
+		\item Una Prueba de Aceptación puede tener infinitas instanciaciones 
+		(ejecuciones con valores concretos).
+	\end{itemize}
+	
+	Estas pruebas se realizaran una vez finalizadas las pruebas de integración y se ha 
+	descubierto y corregido los errores. Y antes de ser puesta en el ambiente de producción.
+	A diferencia de las pruebas anteriores estas serán desarrolladas y ejecutadas por
+	el cliente en compañía del desarrollador quien sera el encargado de:
+	\begin{itemize}
+		\item Guiar al cliente en la ejecución de las pruebas.
+		\item Indicarle cual o cuales de sus requerimientos son ejercitados por cada prueba.
+		\item Registrar el nivel de satisfacción del cliente, sus observaciones, errores 
+		detectados.
+		\item Negociar con el cliente un método para satisfacer las deficiencias encontradas
+		por el cliente.
+	\end{itemize}
+
+	Basándose en estas pruebas es que el cliente decidirá finalmente si acepta o rechaza el 
+	sistema, el criterio de aprobación de estas se alcanza cuando el software funciona de tal
+	manera que satisface las expectativas razonables del cliente, las cuales están definidas por
+	la Especificación de Requerimientos de software \cite{sommerville}.\\
+	
+	Para esto se diseñaron una seria de casos de prueba basados en los casos de uso con los
+	cuales se intenta demostrar que el sistema ha implementado los requerimientos en forma 
+	adecuada. Las pruebas consistirán en ejercitar cada caso de uso, probando cada uno de estos
+	para un conjunto de valores que permitan seguir el flujo normal y luego para otro conjunto
+	que permitan seguir el flujo alternativo del caso de uso.\\
+
+	El formato con el que se especifican las pruebas es el que se muestra en la Tabla
+	\ref{fpa}. 
+	
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {}\\
+		\hline
+		{\textbf{Requerimiento}} & {} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{l|}{}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{l|}{}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{l|}{}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{l|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Formato Pruebas de Aceptación}
+		\label{fpa}
+	\end{table} 
+	
+	La descripción del contenido de cada campo de la Tabla \ref{fpa} se detalla a continuación.
+
+	\begin{itemize}
+		\item \textbf{Id-Prueba:} Establece un numero identificador con el cual identificar
+		inequívocamente a dicha prueba. 
+		\item \textbf{Nombre:} Da un nombre que resume y representa el caso de prueba.
+		\item \textbf{Requerimiento:} Identifica cuales son el o los requerimientos validados
+		por la prueba de aceptación en cuestión.
+		\item \textbf{Caso de Uso:} Identifica el o los casos de uso involucrados en la prueba.
+		\item \textbf{Condición:} Es opcional, y se utiliza para establecer condiciones previas
+		antes de aplicar los pasos de la prueba. Normalmente se refieren al estado de la BD 
+		antes de ejecutar la prueba y/o la navegación necesaria en la IU para localizarse en el 
+		punto adecuado para realizar la prueba (cuando no sea obvio).
+		\item \textbf{Pasos:} Son las acciones de interacción del actor con el sistema. Cuando 
+		son varias acciones, éstas pueden ponerse en una lista numerada. Deben ser simples, 
+		del estilo "seleccionar...", "introducir...", evitando hacer referencia explícita a controles 
+		de interfaz o cualquier tecnicismo que dificulte su validación con el cliente.
+		\item \textbf{Resultado Esperado:} Es el efecto de las acciones de interacción del actor. 
+		Cada acción puede provocar uno o más resultados. Es importante que cuando se trate de 
+		mensajes al usuario se incluya el texto como parte del resultado esperado.
+		\item \textbf{Observaciones:} Es un apartado opcional que contiene recomendaciones
+		que se estiman convenientes tener en cuenta al momento de ejecutar el test.
+	\end{itemize}
+	
+	Ademas una vez ejecutadas las pruebas los resultados de estas deben ser documentados 
+	completando la Tabla \ref{coberturaAceptacion} que muestra cuyos campos son descritos a continuación.
+
+	\begin{itemize}
+		\item \textbf{Id-Prueba:} Identificador de la prueba ejecutada.
+		\item \textbf{Fecha Ejecución:} Fecha en la que fue ejecutada la prueba.
+		\item \textbf{Completación:} Indica el nivel de satisfacción del cliente ante
+		la ejecución de la prueba. Los valores pueden ser:
+		\begin{itemize}
+			\item \textbf{Completamente Conforme:} Cuando los resultados se acercan 
+			completamente a la expectativas del cliente, y este no presenta ninguna
+			observación.
+			\item \textbf{Conforme:} Cuando el resultado obtenido en la prueba no alcanza
+			a satisfacer completamente todas las expectativas del cliente, sin embargo el nivel
+			de adecuación es suficiente como para darse por satisfecho y el resultado de la
+			prueba es el esperado, puede presentar alguna observaciones con indicaciones 
+			que no estaban en la especificación de requerimientos por lo que no es obligación 
+			implementarlas.
+			\item \textbf{Medianamente Conforme:} Cuando el cliente presenta observaciones
+			que deben ser resueltas antes de aprobar el sistema, puede ser debido a una mala
+			interpretación o definición de un requerimiento.
+			\item \textbf{Disconforme:} Cuando se encuentran errores grabes en la ejecución
+			de a prueba o las funcionalidades no se encuentra implementada completamente.
+		\end{itemize}
+		\item \textbf{Observaciones del Cliente:} Sección opcional donde el cliente
+		indica que es lo que falta para estar Conforme o Completamente Conforme de manera
+		de poder aprobar el sistema.
+		\item \textbf{Descripción Error:} Detalla un error detectado durante la 
+		ejecución de la prueba.
+		\item \textbf{Condiciones de Replicación:} Es una sección opcional donde se añade
+		información relevante que permita la replicación del error y que no se encuentra 
+		explicito en la descripción de la prueba.
+	\end{itemize}
+	
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{3cm} | m{3cm}|m{3cm}|m{5cm}|}
+		\hline
+		\multicolumn{4}{|c|}{\cellcolor[gray]{0.8}\textbf{Caso de Prueba}}\\
+		\hline
+		{\textbf{Id-Prueba}} & {} & {\cellcolor[gray]{0.9}\textbf{Fecha Ejecución}} & {}\\
+		\hline
+		{\textbf{Completación}} & \multicolumn{3}{l|}{}\\
+		\hline
+		{\textbf{Observaciones del Cliente}} & \multicolumn{3}{l|}{}\\
+		\hline
+		\multicolumn{4}{|c|}{\cellcolor[gray]{0.8}\textbf{Error}}\\
+		\hline
+		{\textbf{Descripción Error}} & \multicolumn{3}{l|}{}\\
+		\hline
+		{\textbf{Condiciones de Replicación}} & \multicolumn{3}{l|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Formato del resultado de una Prueba de Aceptación}
+		\label{coberturaAceptacion}
+	\end{table}
+
+	
+	\subsection{Pruebas Beta}
+	Por ultimo una vez que se hayan aprobado todas las pruebas diseñadas
+	el sistema pasara a las pruebas betas, donde el objetivo es estar preparado
+	para todos los tipos de usuarios. \\
+	
+	Estas pruebas se realizan en un ambiente de producción real, y son ejecutadas 
+	por los usuarios reales del sistema sin la supervisión del desarrollador. En este 
+	caso no existen casos de pruebas, por lo que los mismos usuarios serán los encargados
+	de documentar los problemas encontrados y comunicarlos de manera regular al 
+	desarrollador \cite{sommerville}. \\
+
+	Como resultado de los problemas informados durante las pruebas beta el desarrollador 
+	corrige los problemas y prepara el sistema para su liberación final.\\
+
+	Para la ejecución de estas pruebas se liberara la aplicación para una conjunto reducido de 
+	usuarios reales, a los cuales se les crearan las cuentas de usuarios reales con los permisos
+	correspondientes. El conjunto de usuarios estara compuesto por:
+	\begin{itemize}
+		\item El Jefe de Departamento de DISICO.
+		\item 1 Jefe de Área, el Jefe del Área de Desarrollo.
+		\item El área de desarrollo de DISICO.
+		\item 2 Jefes de Carreras.
+		\item 4 Secretarias.
+	\end{itemize}
+
+	Dicho conjunto de usuario ejercitara con el sistema durante un periodo de 4 semanas
+	durante la cuales reportaran mediante correos electrónicos al desarrollador los problemas
+	detectados detallando:
+	\begin{itemize}
+		\item Fecha y Hora aproximada del error o problema.
+		\item Descripción del error o problema.
+		\item Información que permita la replicación del error o problema. Como
+		datos de entrada, pasos que realizo, opciones que selecciono, etc
+	\end{itemize}
+
+	Finalmente una vez terminadas la fase de pruebas beta, los usuario que participaron
+	de estas pruebas, deben contestar una encuesta, con el objetivo de obtener información
+	sobre:
+	\begin{itemize}
+		\item La percepción que tienen los usuarios acerca del sistema después de haber 
+		interactuado con el.
+		\item Los aspectos del sistema que requieren ser mejorados. 
+		\item Saber que tan dispuestos están los usuarios a utilizar el nuevo sistema.
+	\end{itemize}
+	
+	Para esto se diseñaron las siguientes encuestas, las cuales se encuentran separadas por 
+	perfil de usuario. La escala de respuestas va de 1 a 5, donde 1 es \textit{Muy en desacuerdo}
+	y 5 es \textit{Muy de acuerdo}.
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta General para todos los Usuarios }}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{Los nombres de los menús y botones son representativos} & {} & {} & {} & {} & {}\\
+		\hline
+		{Los mensajes de error ayudan a entender la causa y la solución de estos} & {} & {} & {} & {} & {}\\
+		\hline
+		{El estilo visual del sistema sigue el estilo del resto de los portales de la UV} & {} & {} & {} & {} & {}\\
+		\hline
+		{Es simple aprender a utilizar el sistema} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema mejora la comunicación entre los diferentes usuarios} & {} & {} & {} & {} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta General para todos los Usuarios}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Solicitante}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{Es fácil enviar una solicitud de requerimiento} & {} & {} & {} & {} & {}\\
+		\hline
+		{Es fácil buscar una solicitud de requerimiento} & {} & {} & {} & {} & {}\\
+		\hline
+		{Las solicitudes quedan mejor documentadas que en correos electrónicos} & {} & {} & {} & {} & {}\\
+		\hline
+		{Los mensajes de notificación son lo suficientemente breves y claros} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema envía una cantidad prudente de correos electrónicos} & {} & {} & {} & {} & {}\\
+		\hline
+		{La información de las solicitudes se presentan de forma clara y entendible } & {} & {} & {} & {} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Solicitante }
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Funcionario}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{La presentación de las solicitudes asignadas esta claramente ordenada} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica claramente cuando se le a asignado una nueva solicitud	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica claramente cuando una solicitud esta vencidas (retrasadas)	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica oportunamente cuando se le a asignado una nueva solicitud	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica oportunamente cuando una solicitud esta vencidas (retrasadas)	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema ayuda a que no olvide las solicitudes que dejo pendientes	} & {} &{} &{} & {} & {} \\
+		\hline
+		{Los gráficos en los resumen permiten una mejor visualización de la información} & {} &{} &{} & {} & {} \\
+		\hline
+		{Las mediciones que se muestran en el Resumen Personal se entiend claramente} & {} &{} &{} & {} & {} \\
+		\hline
+		{Es rápido y sencillo responder las solicitudes de los usuarios} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica claramente cuando se le a asignado una nueva tarea de SCM	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema alerta oportunamente ante retrasos en las tareas de SCM} & {} &{} &{} & {} & {} \\
+		\hline
+		{Se entiende claramente la relacion las opciones del subsistema de SCM y la metodología de SCM de DISICO} & {} &{} &{} & {} & {} \\
+		\hline
+		{Es mas fácil mantener actualizada la información sobre los cambios} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema documenta de forma clara el historial de cambios de los items de configuración} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema permite administrar fácilmente los items de configuración de un proyecto} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema permite agendar de forma fácil nuevas tareas	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema alerta oportunamente cuando existen retraso en las tareas} & {} &{} &{} & {} & {} \\
+		\hline
+		{La opción de actualizar el avance de una tarea le brinda un mayor expresividad} & {} &{} &{} & {} & {} \\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Funcionario}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Jefe de Área}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{El sistema mantiene organizadas las solicitudes de su área} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema le permite dar seguimiento completo cada solicitud} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema le ayuda a decidir a quien asignar una solicitud} & {} & {} & {} & {} & {}\\
+		\hline
+		{Los gráficos en los resumen permiten una mejor visualización de la información} & {} & {} & {} & {} & {}\\
+		\hline
+		{Las mediciones del área son de utilidad para la toma de decisiones} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema lo mantiene informado del estado de cada solicitud de su área} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema notifica claramente cuando llega una nueva solicitud al área} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema notifica claramente cuando existen retrasos en las solicitudes} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema notifica oportunamente cuando  llega una nueva solicitud al área} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema notifica oportunamente cuando existen retrasos en las solicitudes} & {} & {} & {} & {} & {}\\
+		\hline
+		{Es útil la opción de respuesta manual} & {} & {} & {} & {} & {}\\
+		\hline
+		{Las solicitudes quedan debidamente documentadas} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema mejora el monitorio de avance en los proyectos} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema facilita la documentación de los proyectos existentes} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema facilita mantener documentado los participantes de cada proyecto y sus tareas} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema facilita la tareas de gestión de cambios} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema permite asignar fácilmente responsables de las tareas de SCM} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema permite documentar correctamente los templates de la metodologia de SCM} & {} & {} & {} & {} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Jefe de Área}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Jefe de Departamento}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{El sistema permite tener un mayor control de las actividades que se realizan en el departamento} & {} & {} & {} & {} & {}\\
+		\hline
+		{EL sistema documenta correctamente las solicitudes de requerimientos} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema facilita la tarea de buscar solicitudes de requerimientos} & {} & {} & {} & {} & {}\\
+		\hline
+		{Las mediciones mostradas son de utilidad} & {} & {} & {} & {} & {}\\
+		\hline
+		{Los gráficos en los resumen permiten una mejor visualización de la información} & {} & {} & {} & {} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Jefe de Departamento}
+	\end{table}
