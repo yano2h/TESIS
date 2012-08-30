@@ -26,7 +26,6 @@ public class TimerSolicitudRequerimientosUpdateTest extends BaseTestEJB {
     private static final long IDSOL_FINALIZADA_SIN_RESPUESTA = 3L;
     private static final long IDSOL_CERRADA = 4L;
     private static final long IDSOL_SIN_FECHA_VENCIMIENTO = 5L;
-    
     private TimerSolicitudRequerimientosUpdate ejb;
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
 
@@ -42,7 +41,8 @@ public class TimerSolicitudRequerimientosUpdateTest extends BaseTestEJB {
     @After
     public void tearDown() {
         /*
-         * Se restaura el estado de la solicitud que el procedimiento devio modificar
+         * Se restaura el estado de la solicitud que el procedimiento devio
+         * modificar
          */
         SolicitudRequerimiento s = solicitudFacade.find(IDSOL_ASIGNADA_VENCIDA);
         s.getEstadoSolicitud().setIdEstadoSolicitudRequerimiento(Resources.getValueShort("Estados", "EstadoSR_ENVIADA"));
@@ -60,7 +60,8 @@ public class TimerSolicitudRequerimientosUpdateTest extends BaseTestEJB {
     public void testBuscarSolicitudesVencidasVerificarCambio() throws Exception {
         ejb.buscarSolicitudesVencidas();
         SolicitudRequerimiento s = solicitudFacade.find(IDSOL_ASIGNADA_VENCIDA);
-        assertEquals(s.getEstadoSolicitud().getIdEstadoSolicitudRequerimiento(), Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
+        assertEquals(s.getEstadoSolicitud().getIdEstadoSolicitudRequerimiento(),
+                Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
     }
 
     /*
@@ -71,7 +72,8 @@ public class TimerSolicitudRequerimientosUpdateTest extends BaseTestEJB {
     public void testBuscarSolicitudesVencidasVerificarNoCambioVencida() throws Exception {
         ejb.buscarSolicitudesVencidas();
         SolicitudRequerimiento s = solicitudFacade.find(IDSOL_VENCIDA);
-        assertEquals(s.getEstadoSolicitud().getIdEstadoSolicitudRequerimiento(), Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
+        assertEquals(s.getEstadoSolicitud().getIdEstadoSolicitudRequerimiento(),
+                Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
     }
 
     /*
@@ -82,7 +84,8 @@ public class TimerSolicitudRequerimientosUpdateTest extends BaseTestEJB {
     public void testBuscarSolicitudesVencidasVerificarNoCambioCerrada() throws Exception {
         ejb.buscarSolicitudesVencidas();
         SolicitudRequerimiento s = solicitudFacade.find(IDSOL_CERRADA);
-        assertEquals(s.getEstadoSolicitud().getIdEstadoSolicitudRequerimiento(), Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
+        assertEquals(s.getEstadoSolicitud().getIdEstadoSolicitudRequerimiento(),
+                Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
     }
 
     /*
@@ -94,7 +97,8 @@ public class TimerSolicitudRequerimientosUpdateTest extends BaseTestEJB {
     public void testBuscarSolicitudesVencidasVerificarNoCambioFinalizadaSinRespuesta() throws Exception {
         ejb.buscarSolicitudesVencidas();
         SolicitudRequerimiento s = solicitudFacade.find(IDSOL_FINALIZADA_SIN_RESPUESTA);
-        assertEquals(s.getEstadoSolicitud().getIdEstadoSolicitudRequerimiento(), Resources.getValueShort("Estados", "EstadoSR_FINALIZADA_SIN_RESPUESTA"));
+        assertEquals(s.getEstadoSolicitud().getIdEstadoSolicitudRequerimiento(),
+                Resources.getValueShort("Estados", "EstadoSR_FINALIZADA_SIN_RESPUESTA"));
     }
 
     /*
@@ -105,7 +109,7 @@ public class TimerSolicitudRequerimientosUpdateTest extends BaseTestEJB {
     public void testBuscarSolicitudesVencidasVerificarNoCambioSolicitudSinFechaVencimiento() throws Exception {
         SolicitudRequerimiento s = solicitudFacade.find(IDSOL_SIN_FECHA_VENCIMIENTO);
         short idEstadoInicial = s.getEstadoSolicitud().getIdEstadoSolicitudRequerimiento();
-        
+
         ejb.buscarSolicitudesVencidas();
         s = solicitudFacade.find(IDSOL_SIN_FECHA_VENCIMIENTO);
         assertTrue((s.getEstadoSolicitud().getIdEstadoSolicitudRequerimiento() == idEstadoInicial));

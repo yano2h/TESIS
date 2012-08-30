@@ -169,7 +169,7 @@ public class MathUtilsTest {
     }
 
     @Test
-    public void testRedondearParaAbajoConDecimal5() {
+    public void testRedondearParaArribaConDecimal5() {
         System.out.println("redondearParaAbajoConUnDecimal");
         double v = 10.15;
         int i = 1;
@@ -235,7 +235,7 @@ public class MathUtilsTest {
     }
 
     @Test
-    public void testRedondearFloatParaAbajoConDecimal5() {
+    public void testRedondearFloatParaArribaConDecimal5() {
         System.out.println("redondearFloatParaAbajoConUnDecimal");
         double v = 10.15;
         int i = 1;
