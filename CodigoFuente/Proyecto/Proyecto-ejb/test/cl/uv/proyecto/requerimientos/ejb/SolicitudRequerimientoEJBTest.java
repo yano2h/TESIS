@@ -4,9 +4,9 @@
  */
 package cl.uv.proyecto.requerimientos.ejb;
 
-import cl.uv.proyecto.persistencia.entidades.Area;
-import cl.uv.proyecto.persistencia.entidades.Funcionario;
-import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacade;
+import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
+import cl.uv.proyecto.persistencia.entidades.*;
 import cl.uv.test.junit.base.BaseTestEJB;
 import java.util.Date;
 import javax.ejb.embeddable.EJBContainer;
@@ -23,6 +23,7 @@ public class SolicitudRequerimientoEJBTest extends BaseTestEJB{
     private final static String CODIGO_INEXISTENTE = "ZZZZ";
     
     private SolicitudRequerimientoEJBLocal solicitudEJB;
+    private SolicitudRequerimientoFacadeLocal solicitudFacade;
     
     public SolicitudRequerimientoEJBTest() {
     }
@@ -30,6 +31,7 @@ public class SolicitudRequerimientoEJBTest extends BaseTestEJB{
     @Before
     public void setUp() throws NamingException {
         solicitudEJB = lookupBy(SolicitudRequerimientoEJB.class);
+        solicitudFacade = lookupBy(SolicitudRequerimientoFacade.class);
     }
     
     @After
@@ -110,22 +112,20 @@ public class SolicitudRequerimientoEJBTest extends BaseTestEJB{
         boolean result = solicitudEJB.validarCodigoConsulta(CODIGO_INEXISTENTE);
         assertTrue(result);
     }
-//
-//    /**
-//     * Test of enviarSolicitud method, of class SolicitudRequerimientoEJB.
-//     */
-//    @Test
-//    public void testEnviarSolicitud() throws Exception {
-//        System.out.println("enviarSolicitud");
-//        SolicitudRequerimiento solicitud = null;
-//        Funcionario solicitante = null;
-//        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-//        SolicitudRequerimientoEJBLocal instance = (SolicitudRequerimientoEJBLocal)container.getContext().lookup("java:global/classes/SolicitudRequerimientoEJB");
-//        String expResult = "";
-//        String result = instance.enviarSolicitud(solicitud, solicitante);
-//        assertEquals(expResult, result);
-//
-//    }
+
+    @Test
+    public void testEnviarSolicitud() throws Exception {
+        SolicitudRequerimiento s = new SolicitudRequerimiento(99L);
+        s.setAreaResponsable(new Area((short)1));;
+        s.setAsunto("Asunto Junit");
+        s.setMensaje("Mensaje Junit");
+        s.setCodigoConsulta("AbCdEe");
+        
+        solicitudEJB.enviarSolicitud(s, new Funcionario(11111111));
+        
+        assertNotNull(solicitudFacade.find(99L));
+
+    }
 //
 //    /**
 //     * Test of rechazarSolicitud method, of class SolicitudRequerimientoEJB.
