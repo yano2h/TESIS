@@ -1,6 +1,11 @@
 package cl.uv.model.base.utils;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
+import java.util.Enumeration;
+
 
 public class Resources {
 
@@ -13,11 +18,11 @@ public class Resources {
     public static Short getValueShort(String path, String key) {
         return Short.parseShort(getValue(path, key));
     }
-    
+
     public static Integer getValueInteger(String path, String key) {
         return Integer.parseInt(getValue(path, key));
     }
-    
+
     public static Long getValueLong(String path, String key) {
         return Long.parseLong(getValue(path, key));
     }

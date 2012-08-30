@@ -42,7 +42,7 @@ public class BaseTestEJB {
     @AfterClass
     public static void tearDownClass() throws Exception {
         container.close();
-        //FileUtils.cleanDirectory(new File(TARGET_DIR));
+        FileUtils.cleanDirectory(new File(TARGET_DIR));
     }
     
     private static File prepareModuleDirectory() throws IOException {
@@ -57,7 +57,4 @@ public class BaseTestEJB {
         return (T) ctx.lookup("java:global/" + MODULE_NAME + "/" + type.getSimpleName());
     }
     
-    protected EntityManager lookupEntityManager() throws NamingException{
-        return (EntityManager) ctx.lookup("java:global/EntityManager/Proyecto-ejbPU");
-    }
 }
