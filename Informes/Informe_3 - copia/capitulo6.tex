@@ -1,0 +1,167 @@
+\chapter{Pruebas}
+	En este capitulo se detallan las pruebas realizadas, junto con los resultados 
+	obtenidos durante la realización de estas.
+	Las pruebas realizadas se dividen en:
+	\begin{itemize}
+		\item Pruebas Unitarias.
+		\item Pruebas de Integración.
+		\item Pruebas de Rendimiento.
+		\item Pruebas de Aceptación.
+		\item Pruebas Beta.
+	\end{itemize}
+
+	El principal enfoque de las pruebas es la detección de errores.
+	
+	\section{Pruebas Unitarias}
+	Las pruebas unitarias están enfocadas en probar unidades pequeñas de código. Para esto se
+	diseñaron test automatizados, los cuales fueron desarrollados haciendo uso de la JUnit y de 
+	Glassfih Embedded, dentro del cual se despliegan los EJB para ser utilizados durante la ejecución de las
+	pruebas.
+
+	En la Tabla \ref{docTestUnit} se encuentran documentadas las pruebas realizadas junto con el
+	propósito de cada una.
+	
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{6cm}|m{5cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Modulo}} & \textbf{Test} & \textbf{Proposito del Test}\\
+		\hline
+		\multirow{3}{*}{Resources} & {testGetValue} & {Verificar que el método getValue es 
+		capas de recuperar la cadena "ABCD" desde un archivo de propiedades.}\\
+						\cline{2-3}
+						& {testGetValueConEspacios} & {Verificar que el método getValue es 
+		capas de recuperar la cadena "A B C   D" desde un archivo de propiedades sin verse 
+		afectado por la cantidad de espacios entre los caracteres.}\\
+						\cline{2-3}
+						& {testGetValueShort} & {Verificar que el método getValueShort es 
+						capas de recuperar cadena desde un archivo de propiedades y convertirla a Short siempre que cumpla 
+						con el formato de este.}\\
+						\cline{2-3}
+						& {testGetValueShortNegativo} & {Verificar que el método getValueShort es 
+						capas de recuperar cadena desde un archivo de propiedades y convertirla a Short aunque este sea
+						negativo.}\\
+						\cline{2-3}
+						& {testGetValueShortErrorEnString} & {Verificar que el método getValueShort dispara la excepción
+						NumberFormatException al leer un String desde el archivo de propiedades.}\\
+						\cline{2-3}
+						& {testGetValueShortErrorValorMayorAShort} & {Verificar que el método getValueShort dispara la 		
+						expeción NumberFormatException al leer un numero entero que excede el valor máximo de un Short.}\\
+						\cline{2-3}
+						& {testGetValueShortErrorValorDecimal} & {Verificar que el método getValueShort dispara la excepción
+						NumberFormatException al leer un valor con decimales desde el archivo de propiedades.}\\
+						\cline{2-3}
+						& {testGetValueInteger} & {Verificar que el método getValueInteger es 
+						capas de recuperar cadena desde un archivo de propiedades y convertirla a Integer siempre que cumpla 
+						con el formato de este.}\\
+	\end{tabular}
+	\end{table}		
+	
+\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{6cm}|m{5cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Modulo}} & \textbf{Test} & \textbf{Proposito del Test}\\		
+		\hline
+		\multirow{3}{*}{Resources} 
+						& {testGetValueIntegerNegativo} & {Verificar que el método getValueInteger es 
+						capas de recuperar cadena desde un archivo de propiedades y convertirla a Integer aunque este sea
+						negativo.}\\
+						\cline{2-3}
+						& {testGetValueIntegerErrorEnString} & {Verificar que el método getValueInteger dispara la excepción
+						NumberFormatException al leer un String desde el archivo de propiedades.}\\
+						\cline{2-3}
+						& {testGetValueIntegerErrorValorMayorAInteger} & {Verificar que el método getValueInteger dispara la 	
+						expeción NumberFormatException al leer un numero entero que excede el valor máximo de un Integer.}\\
+						\cline{2-3}
+						& {testGetValueIntegerErrorValorDecimal} & {Verificar que el método getValueInteger dispara la excepción
+						NumberFormatException al leer un valor con decimales desde el archivo de propiedades.}\\
+						\cline{2-3}
+						& {testGetValueLong} & {Verificar que el método getValueLong es 
+						capas de recuperar cadena desde un archivo de propiedades y convertirla a Long siempre que cumpla 
+						con el formato de este.}\\
+						\cline{2-3}
+						& {testGetValueLongNegativo} & {Verificar que el método getValueLong es 
+						capas de recuperar cadena desde un archivo de propiedades y convertirla a Long aunque este sea
+						negativo.}\\
+						\cline{2-3}
+						& {testGetValueLongErrorEnString} & {Verificar que el método getValueLong dispara la excepción
+						NumberFormatException al leer un String desde el archivo de propiedades.}\\
+						\cline{2-3}
+						& {testGetValueLongErrorValorMayorALong} & {Verificar que el método getValueLong dispara la 		
+						expeción NumberFormatException al leer un numero entero que excede el valor máximo de un Long.}\\
+						\cline{2-3}
+						& {testGetValueLongErrorValorDecimal} & {Verificar que el método getValueLong dispara la excepción
+						NumberFormatException al leer un valor con decimales desde el archivo de propiedades.}\\
+						\cline{2-3}
+						& {testGetPropertiesPath} & {}\\
+						\cline{2-3}
+						& {testGetPropertiesPathNotFound} & {}\\
+						\cline{2-3}
+						& {testGetPageList} & {}\\
+						\cline{2-3}
+						& {testGetMapPageList} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+
+		\hline
+		\multirow{3}{*}{Modulo de Mensajeria} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+		\multirow{3}{*}{Modulo de Requerimientos} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+		\multirow{3}{*}{Modulo de Proyectos} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+		\multirow{3}{*}{Modulo de SCM} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+		\multirow{3}{*}{Modulo de Persistencia} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+
+	\end{tabular}
+		\caption{Test unitarios}
+		\label{docTestUnit}
+	\end{table}

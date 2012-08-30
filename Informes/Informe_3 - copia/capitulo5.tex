@@ -1,0 +1,3279 @@
+\chapter{Diseño}
+Este capitulo contiene toda la documentación generada correspondiente
+a la fase de diseño del sistema, en concreto aquí se encuentra:
+\begin{itemize}
+	\item Diseño Arquitectónico.
+	\item Diseño Lógico.
+	\item Diseño de Datos.
+	\item Diseño de Interfaces.
+	\item Diseño de Pruebas.
+\end{itemize}
+
+\section{Diseño Arquitectónico}
+%	Explicar que es arquitectura
+%	\subsection{Requerimientos Arquitecturales}
+	
+	\subsection{Restricciones Arquitecturales}
+	Antes de comenzar a definir la arquitectura del sistema es importante,
+	identificar de forma explicita cuales son las restricciones arquitecturales
+	que existen, las cuales se pueden deducir desde los requerimientos
+	impuestos por el cliente, estas restricciones son:
+	\begin{itemize}
+		\item La aplicación debe ser desarrollada en lenguaje de programación Java.
+		\item La aplicación debe ser desarrollada siguiendo los estándar Java EE, 
+		para mantener la compatibilidad con el servidor de aplicaciones del cliente
+		(GlassFish).
+		\item El acceso y guardado de los datos deben ser manejados con 
+		persistencia, específicamente haciendo uso del framework Hibernate.
+		\item La autenticación de usuario debe realizarse a través de SSO, he 
+		integrase con el sistema actual de login que hace uso de esta tecnología.
+	\end{itemize}
+	
+	\subsection{Estructura del Sistema}
+	Para satisfacer los requerimientos y restricciones del cliente, se utilizara la
+	arquitectura Cliente-Servidor separada en Múltiples-Capas como lo plantea el 
+	estándar definido por Java EE 6\cite{javaee}.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=1]{imagenes/Arquitecturaj2EE.png}
+			\caption{Interfaz de Arquitectura}
+		\end{center}
+	\end{figure}	
+	
+	A continuación se describe el propósito de cada una de las capas definidas en el
+	diagrama:
+	\begin{enumerate}
+		\item \textbf{Capa de Presentación:} Es la capa destinada a la mostrar la
+		parte gráfica de la aplicación, que se descompone en 2 sub-capas:
+		\begin{itemize}
+			\item \textbf{Capa del Cliente:} Es la capa destinada a interpretar y 
+			mostrar la interfaz gráfica de usuario del lado del cliente. Esta capa 
+			se encuentra compuesta por: 
+
+			\begin{itemize}
+				\item Paginas web dinámicas que contienen varios tipos de lenguajes 
+				de marcas (HTML, XML u otros), las cuales son generadas por la capa 
+				web.
+				\item Un Navegador Web que interpreta las paginas enviadas por el 
+				servidor.\\
+			\end{itemize} 
+			
+			\item \textbf{Capa Web:} Representa los componentes web creados con la
+			tecnología Java Server Faces, los cuales se ejecutan dentro del contenedor 
+			web del servidor de aplicaciones Java EE. Estos componentes generan
+			paginas web dinámicas, las cuales son enviadas en respuestas a las
+			peticiones HTTP del clientes e interpretadas por el navegador web del 
+			mismo.
+		\end{itemize}
+		
+		\item \textbf{Capa de Negocio:} Es la capa intermedia, la cual comunica la 	
+		capa de datos con la capa web, contiene toda la lógica particular del dominio 
+		del negoció y también envía y recupera información desde la capa de datos. 
+		Esta capa a su ves se compone por dos sub-capas, las cuales se almacenan 
+		y trabajan conjuntamente dentro del contenedor EJB del servidor de 
+		aplicaciones Java EE. Las dos sub-capas que componen esta capa son:
+		\begin{itemize}
+		 	\item \textbf{Capa de Servicio:} Esta capa contiene toda la lógica
+		 	de negocio y procesamiento de datos, y se se comunica con la capa 
+		 	de persistencia para acceder a los datos.
+			\item \textbf{Capa de Persistencia:} Esta capa contiene toda la lógica
+			para el manejo y uso de API de persistencia de Java 
+			(implementada con Hibernate), se encarga de mapear
+			las tablas de la base de datos a entidades Java, maneja transacciones,
+			inserta y recupera de datos desde esta.
+		\end{itemize}
+		
+		\item \textbf{Capa de Datos:} Es un mecanismo de almacenamiento
+		persistente, donde residen la información relevante para el sistema y es
+		la encargada de acceder los mismos. En este caso esta formada
+		por un gestor de base de datos relacional. Esta recibe solicitudes de 
+		almacenamiento o recuperación de información desde la capa de negocio.
+	\end{enumerate}
+	
+	\subsection{Estilo de Descomposición Modular}
+
+	En esta sección se describe como se descompone el sistema en diferentes modulos,
+	esto se realizara utilizando el enfoque Orientado a Objetos (OO), para este caso 
+	este enfoque es el mas adecuado, ya que el sistema debe ser implementado 
+	haciendo uso de un lenguaje OO (particularmente java), así se mantendrá la 
+	correcta correspondencia entre los modelos y la implementación.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.5]{imagenes/DescomposicionModular2.png}
+			\caption{Interfaz de Descomposición Modular del Sistema}
+		\end{center}
+	\end{figure}	
+
+	A continuación se describen las responsabilidades de cada modulo:
+	\begin{itemize}
+		\item \textbf{Identity Services:} Servicio web proporcionado por
+		la Universidad de Valparaiso, que proporciona servicios de acceso a la
+		información de todas las cuentas de los funcionarios de la 
+		Universidad, que se encuentran almacenadas en LDAP.
+
+		\item \textbf{Login:}
+		\begin{enumerate}	
+			\item \textbf{Acceso SSO:} Componente que se conecta con el 
+			servicio \textit{Identity Services} para recuperar la información de los 
+			usuarios, también se encarga de administrar las cookies generadas 
+			por el sistema de acceso de SSO de la Universidad.
+			
+			\item \textbf{Gestor de Sesiones de Usuarios:} Mantiene el registro 
+			de todos los usuarios conectados a la aplicación, proporciona acceso a 
+			la información de los perfiles de usuarios y da la autorización para acceder
+			a diferentes funcionalidades a los usuarios según sus roles.
+		\end{enumerate}
+			
+		\item \textbf{Modulo de Mensajeria:}
+		\begin{enumerate}	
+			\item \textbf{Generador de Notificaciones y Alertas:} Se encarga de detectar
+			los diferentes eventos ocurridos dentro del sistema que producen algún tipo 
+			de notificación o alerta y a la vez se preocupa de enviar dichas notificaciones y 
+			alertas a los usuarios que corresponde.
+			
+			\item \textbf{Envió de Emails:} Proporciona funciones para la creación y envió
+			de emails de manera manual o automática.
+		\end{enumerate}
+		
+		\item \textbf{Modulo de Requerimientos:}
+		\begin{enumerate}	
+			\item \textbf{Gestor de Solicitudes de Requerimientos:} Permite administrar la 
+			creación, envió y respuesta de las solicitudes de requerimientos.
+			
+			\item \textbf{Generador de Indicadores:} Este componente calcula los valores
+			de los diferentes indicadores, y las medidas necesarias para generar los 
+			diferentes gráficos, que son necesarios en los resúmenes que ven
+			los Jefes de Área y Departamento.
+			
+			\item \textbf{Buscador de Solicitudes de Requerimientos:} Permite buscar 
+			solicitudes de requerimientos, según los diferentes criterios de búsqueda
+			existentes.
+		\end{enumerate}
+		
+		\item \textbf{Modulo de Proyectos:}
+		\begin{enumerate}	
+			\item \textbf{Gestor de Proyectos:} Proporciona acceso a las funciones de 
+			creación, eliminación y modificación de los proyectos, y la información de 
+			estos como sus tareas, responsables, avance.
+	
+			\item \textbf{Medidor de Avance:} Este componente es el encargado de 
+			calcula las medidas de avance de cualquier proyecto.
+			
+			\item \textbf{Buscador de Proyectos:} Permite la búsqueda de proyectos
+			bajo diferentes criterios.
+			
+			\item \textbf{Calendarizador de Tareas de Proyectos:} Este permite agregar, 
+			eliminar y editar tareas en un proyecto.
+		\end{enumerate}
+
+		\item \textbf{Modulo de SCM:}
+		\begin{enumerate}
+			\item \textbf{Gestor de Tareas SCM:} Permite editar las información de las
+			tareas de SCM y definir responsables para estas.
+	
+			\item \textbf{Administrador de Items de Configuración:} Proporciona funciones
+			para agregar, eliminar, editar y buscar Items de configuración de un proyecto.
+			
+			\item \textbf{Gestor de Solicitudes de Cambio:} Permite crear, eliminar, 
+			responder solicitudes de cambio y gestiona el ciclo de vida de estas.
+		\end{enumerate}
+		
+		\item \textbf{Modulo de Persistencia:}
+		\begin{enumerate}
+			\item \textbf{Manejador de Objetos Persistentes:} Es una fachada a la que 
+			accede cualquiera de los componente de la capa de negocio, que proporciona 
+			acceso a las entidades persistentes utilizadas en el sistema.
+			
+			\item \textbf{Entidades Persistentes:} Contiene todas las entidades 
+			persistentes del sistema y las cuales están mapeadas directamente a la
+			base de datos a trabes de hibernate, solo pueden ser accedidas a través
+			del \textit{Manejador de Objetos Persistentes}.
+		\end{enumerate}
+	\end{itemize}
+	
+	\subsection{Modelo de Control}
+	Para que el sistema trabaje como tal, se deben controlar los diferentes módulos o 
+	subsistemas de este de manera tal que sus servicios se entregue en el lugar 
+	correcto en el momento preciso. Para este caso el modelo de control seleccionado 
+	es el control Basado en Eventos de Broadcast, esta decisión se justifica 
+	principalmente en el echo que el sistema debe generar notificaciones 
+	o alertas en las pantallas de los diferentes usuarios en respuesta a algún evento de
+	tiempo o generado por otro usuario, de esta manera mantener a los usuarios 
+	comunicados y con la información actualizada.
+
+\section{Diseño de Interfaz}
+	En esta sección se mencionan los criterios básicos que serán considerados al
+	momento de implementar la interfaz con la que interactúaran los usuarios finales.
+	Para esto se definen:
+	\begin{itemize}
+		\item Estilo de Interacción.
+		\item Pautas de Estilo.
+		\item Esquemas de Navegación.
+	\end{itemize}
+	
+	\subsection{Estilo de Interacción}
+	Los estilos de interacción determinan la forma en que el usuario se comunicara con
+	el sistema, antiguamente la única forma era a través de una interfaz de linea de comandos,
+	por lo que los usuarios quedaban restringidos solo expertos, pero actualmente existen
+	varios enfoques los cuales son mas fáciles de utilizar, estos fueron clasificados en cinco 
+	estilos principales de interacción en 1998 por Shniederman \cite{sommerville}. \\
+	
+	Para el desarrollo de este sistema se utilizara el estilo de rellenado de formularios,
+	donde el usuario puede rellenar los campos de un formulario. Algunos campos pueden
+	llevar menús asociados y el formulario puede tener botones de acción que, cuando
+	cuando se presionan, hacen que se de inicio a alguna acción. Este es el enfoque mas
+	se adecua a este sistema, ya que las principales operaciones del sistema como envio de 
+	solicitudes, asignación y respuesta de las mismas, etc. se basan en el ingreso de información 
+	y la presentación de la misma en pantalla, y este estilo proporciona una forma sencilla de 
+	introducir datos. 
+	
+	\subsection{Pautas de Estilo}
+	Dado que el sistema a desarrollar, es un sistema tanto para DISICO, como para diferentes 
+	funcionarios de la Universidad de Valparaíso, este debe mantener la uniformidad con el resto
+	de los sistema de la universidad, tanto en el uso de la marca, símbolos, colores 
+	institucionales, tipografías, etc. Cumpliendo así con la normativa existente, definida en el 
+	Decreto Exento N° 03301 \cite{decreto03301}, el cual indica que todas las reparticiones de la 
+	universidad deben dar cumplimiento a lo dispuesto por el \textit{"Manual de Normas Gráficas 
+	de la Universidad de Valparaíso"} \cite{normasGraficas}. En resumen de este documento y de 
+	los portales de la Universidad se extrae lo siguiente.
+
+	\begin{itemize}
+		\item \textbf{Tipografía:} La tipografia recomendada en el Manual para la aplicaciones 
+		institucionales es "Swiss 721 Condensed BT", sin embargo por motivos de compatibilidad 
+		el tipo de fuente utilizado normalmente por los sistemas de la universidad es "Arial, 
+		Helvetica, sans-serif". Y es este el que se utilizara en la interfaz del diseño del sistema.
+		
+		\item \textbf{Marca Institucional:} Se recomienda utilizar el logo institucional 
+		especialmente, preparado para paginas Web (en formato jpg, png o gif). Este debe
+		estar ubicada en la esquina superior izquierda.
+			\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=0.5]{imagenes/uv_logo_baja_rgba.png}
+			\end{center}
+			\end{figure}	
+		
+		\item \textbf{Colores:} Se establece que el uso de los colores institucionales es 
+		obligatorio para toda aplicación con la excepción de limitaciones técnicas. Estos 
+		básicamente son dos:
+			\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=0.5]{imagenes/coloresInstitucionales.png}
+			\end{center}
+			\end{figure}	
+		Aparte de estos dos colores, comunmente los portales de la universidad hacen uso de 
+		los siguientes colores.
+
+		\begin{itemize}
+			\item \textbf{Blanco [\#FFFFFF]:} Para el fondo, para texto sobre fondos oscuros, 
+			para enlaces con el mouse sobre ellos en fondos oscuros.
+			\item \textbf{Gris [\#DDDDDD]:} Para enlaces sobre fondos oscuro.
+			\item \textbf{Café [\#695002]:} Para enlaces sobre fondos claros.
+		\end{itemize}
+		
+		\item \textbf{Tamaños:} Los tamaños de las fuentes no están definidos por el Manual de 
+		Normas Gráficas, sin embargo en los portales de se utilizan los siguientes tamaños.
+
+		\begin{itemize}
+			\item \textbf{Títulos:} 16px
+			\item \textbf{Texto en general:} 12px.
+		\end{itemize}
+	\end{itemize}
+	
+	Estas son las pautas mínimas que se deben seguir para mantener un estilo uniforme
+	con el resto de los portales institucionales. 
+	
+
+	\subsection{Esquemas de Navegación}
+	A continuación se presentan los esquemas de navegación, los cuales muestran
+	los posibles flujos de navegación que pueden realizar los usuarios, acorde a su perfil
+	de usuario. Existen 5 perfiles, Administrador, Jefe de Departamento (Figura \ref{mnJd}),
+	 Jefe de Área (Figura \ref{mnJa}), Funcionario Disico (Figura \ref{mnFunc}), y solicitante
+	(Figura \ref{mnSol}).  El esquema de navegación para el perfil de administrador, no se
+	diseño ya que no es mas que la combinación de todos los esquemas de navegación.\\
+
+	Ademas es de esperarse que existan usuarios con mas de uno de los perfiles
+	de usuarios, para estos usuarios se sigue el principio de que su esquema de navegación
+	es la combinación de los esquemas de navegación de sus perfiles.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.48]{imagenes/MN/MN_JA.png}
+			\caption{Esquema de Navegación Perfil Jefe de Área}
+			\label{mnJa}
+		\end{center}
+	\end{figure}	
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.52]{imagenes/MN/MN_Solicitante.png}
+			\caption{Esquema de Navegación Perfil Solicitante}
+			\label{mnSol}
+		\end{center}
+	\end{figure}	
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.48]{imagenes/MN/MN_Funcionario.png}
+			\caption{Esquema de Navegación Perfil Funcionario Disico}
+			\label{mnFunc}
+		\end{center}
+	\end{figure}	
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.52]{imagenes/MN/MN_JD.png}
+			\caption{Esquema de Navegación Perfil Jefe Departamento}
+			\label{mnJd}
+		\end{center}
+	\end{figure}	
+
+	
+\section{Diseño Lógico}
+	Como se menciono anteriormente, se utilizara un paradigma Orientado a Objetos por
+	lo que en esta sección, se presenta el diagrama de clases correspondiente al sistema a 
+	desarrollar.
+	
+	\subsection{Diseño de Clases}
+	A continuación se presenta el diagrama de clases del sistema.
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.35, angle=90]{imagenes/DiagramaDeClases.png}
+			\caption{Diagrama de Clases}
+			\label{dgClases}
+		\end{center}
+	\end{figure}
+	
+	Para una mayor comprensión del diagrama anterior, es que se presenta una breve 
+	explicación de cada clase y los atributos y/o métodos que la componen.
+
+	\begin{enumerate}
+
+		\item \textbf{Clase Funcionario:} Es la clase que representa a los 
+		usuarios del sistema, principalmente a los que se dedican a enviar
+		solicitudes de requerimiento a DISICO.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{rut:} Es el rut de la persona en formato entero sin 
+			puntos guiones ni dígito verificador, que sirve para identificar a un 
+			usuario de manera unequivoca.
+			\item \textbf{nombre:} Cadena que contiene el nombre o nombres 
+			del funcionario.
+			\item \textbf{apellidoPaterno:} Cadena que almacena el apellido 
+			paterno (o primer apellido) del funcionario.
+			\item \textbf{apellidoMaterno:} Cadena que almacena el apellido 
+			materno (o segundo apellido) del funcionario.
+			\item \textbf{correoUV:} Cadena que almacena el correo 
+			institucional (con dominio @uv.cl) del funcionario.
+			\item \textbf{fechaPrimerAcceso:} Fecha y hora en que accedió por
+			primera vez el funcionario al sistema.
+			\item \textbf{fechaUltimoAcceso:} Fecha y hora en que accedió por
+			ultima vez el funcionario al sistema.
+			\item \textbf{notificaciones:} Lista del tipo Notificacion con todas las notificaciones
+			del usuario.
+		\end{itemize}
+		
+		\item \textbf{Clase FuncionarioDisico:} Esta clase extiende a de la 
+		clase Funcionario y representa a los funcionarios de la universidad que
+		trabajan en el departamento de DISICO.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item Hereda todos los atributos de la clase Funcionario.
+			\item \textbf{cargo:} Cadena con el cargo que tiene el funcionario
+			dentro de disico.
+			\item \textbf{anexo:} Cadena con el anexo si es que posee para comunicarse
+			por teléfono con el funcionario.
+			\item \textbf{estadisticasPersonales:} Un lista (del tipo EstadisticaPersonalDiaria) que 
+			contiene todas las mediciones estadísticas del usuario que se han tomado desde que fue 
+			registrado en el sistema.
+			\item \textbf{area:} Area de disisco a la que pertenece el funcionario.
+		\end{itemize}
+
+		\item \textbf{Clase Area:} Esta clase representa a un área de DISICO.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{codigoArea:} Entero con el código numero identificador del área.
+			\item \textbf{nombreArea:} Cadena con el nombre del área.
+			\item \textbf{descripcionArea:} Cadena con la descripción del área y sus funciones.
+		\end{itemize}
+
+		\item \textbf{Clase SolicitudDeRequerimiento:} Clase que representa representa a
+		las solicitudes de requerimientos enviadas por los usuarios del sistema.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idSolicitud:} Entero con un numero identificador para la solicitud.
+			\item \textbf{codigoConsulta:} Cadena con un código único, utilizado para que
+			los usuario puedan buscar solicitudes a través de este código, a diferencia del
+			idSolicitud esta cadena no es secuencial, es un conjunto de caracteres mas un dígito 
+			verificador que permite corroborar la valides del código.
+			\item \textbf{asunto:} Cadena con una descripción corta pero representativa de lo que trata
+			la solicitud.
+			\item \textbf{mensaje:} Cadena que contiene el mensaje completo explicando de que 
+			consiste la solicitud. 
+			\item \textbf{justificacionTransferencia:} Cadena utilizada en caso de que el Jefe de Área 
+			transfiera una solicitud a otra área, para justificar el motivo de esta transferencia.
+			\item \textbf{respuesta:} Cadena que contiene el mensaje de respuesta ingresado una vez 
+			que se da por cerrada la solicitud.
+			\item \textbf{fechaEnvio:} Fecha y hora en la que fue enviada la solicitud.
+			\item \textbf{fechaCierre:} Fecha y hora en la que fue cerrada la solicitud.
+			\item \textbf{fechaVencimiento:} Fecha y hora que se a definido como plazo máximo
+			para que el responsable resuelva la solicitud.
+			\item \textbf{fechaUltimaActualizacion:} Fecha y hora en que fue modificada por ultima vez 
+			la solicitud ya sea por creación, edición, transferencia, comentario, cierre de esta.
+			\item \textbf{areaResponsable:} Objeto de la clase Area que contiene la información del 
+			área a la que fue enviada la solicitud.
+			\item \textbf{solicitante:} Objeto de la clase Funcionario que contiene la información del
+			funcionario que envió la solicitud a DISICO.
+			\item \textbf{responsable:} Objeto de la clase FuncionarioDisico que contiene información 
+			sobre el funcionario al que fue asignada la solicitud.
+			\item \textbf{tipoSolicitud:} Objeto del tipo TipoSolicitudRequerimiento con información 
+			sobre el tipo de solicitud que corresponde.
+			\item \textbf{estadoSolicitud:} Objeto del tipo EstadoSolicitudRequerimiento con 
+			información del estado actual de la solicitud.
+			\item \textbf{prioridadSolicitud:} Objeto de la clase Prioridad con información sobre la 
+			prioridad que se le a asignado a la solicitud.
+			\item \textbf{comentarios:} Lista del tipo ComentarioSolicitud que contiene todos
+			los comentarios que se han echo sobre la solicitud.
+		\end{itemize}
+
+		\item \textbf{Clase Notificacion:} Esta clase contiene las notificaciones que son mostradas
+		en la pantalla de cada usuario de manera automática.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idNotificacion:} Entero con el numero identificador de la solicitud.
+			\item \textbf{fechaNotificacion:} Fecha y hora en la que se genero la notificación.
+			\item \textbf{mensajeNotificacion:} Cadena que contiene el mensaje que se muestra en
+			la notificación.
+			\item \textbf{revisada:} Variable booleana que indica si la notificación ya a sido revisada
+			por el usuario.
+		\end{itemize}
+
+		\item \textbf{Clase EstadisticaPersonalDiaria:} Esta clase contiene mediciones de diferentes
+		indicadores, los cuales son calculados de manera automática al final de cada día para cada
+		funcionario de DISICO.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEstadistica:} Entero identificador de la estadística.
+			\item \textbf{fechaMedicion:} Fecha en la que se tomo la medición.
+			\item \textbf{totalSolicitudesAsegnadas:} Entero con la cantidad total de solicitudes que
+			han sido asignadas al funcionario, desde que se registro al funcionario en el sistema
+			a la fecha de la medición.
+			\item \textbf{cantidadSolicitudesPendientes:} Entero con la cantidad de solicitudes 
+			que han sido asignadas al funcionario y que se encuentran pendientes (pero no vencidas)
+			a la fecha de la medición. 
+			\item \textbf{cantidadSolicitudesVencidas:} Entero con la cantidad de solicitudes 
+			vencidas (que han excedido su fecha de vencimiento y no se encuentran cerradas) 
+			a la fecha de la medición.
+			\item \textbf{cantidadSolicitudesIniciadas:} Entero con la cantidad de solicitudes que
+			que el funcionario mantiene en estado iniciado a la fecha de la medición (no incluye 
+			solicitudes vencidas).
+			\item \textbf{cantidadProyectosAcargo:} Entero con la cantidad de proyectos en los que
+			el funcionario participa como jefe de proyecto.
+			\item \textbf{cantidadProyectosQueParticipa:} Entero con la cantidad de proyectos
+			en los que participa el funcionario con un rol distinto al de jefe de proyecto.
+			\item \textbf{cantidadTareasProyecto:} Entero con la cantidad de tareas de proyecto
+			que el funcionario tiene abiertas a la fecha de la medición.
+			\item \textbf{cantidadTareasSCM:}  Entero con la cantidad de tareas de SCM
+			que el funcionario tiene abiertas a la fecha de la medición.
+		\end{itemize}
+
+		\item \textbf{Clase ComentarioSolicitud:} Clase que almacena los comentarios que los usuarios
+		realizan sobre las solicitudes de requerimientos.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idComentario:} Entero identificador de un comentario.
+			\item \textbf{fechaComentario:} Fecha y hora en la que se realizo el comentario.
+			\item \textbf{comentario:} Cadena con el contenido del comentario.
+			\item \textbf{visible:} Variable booleana que indica si el comentario debe ser mostrado
+			o no.
+			\item \textbf{autor:} Objeto de la clase Funcionario que tiene la información del
+			autor del comentario.
+		\end{itemize}
+
+		\item \textbf{Clase TipoSolicitudRequerimiento:} Clase utilizada para representar tipos de 
+		solicitudes de requerimientos.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idTipoSolicitud:} Entero con el identificador del tipo de solicitud.
+			\item \textbf{nombreTipoSolicitud:} Cadena de con el nombre del tipo de solicitud.
+		\end{itemize}
+\pagebreak
+		\item \textbf{Clase EstadoSolicitudRequerimiento:} Clase utilizada para representar los estados
+		que puede tener una solicitud de requerimiento.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEstadoSolicitud:} Entero con el identificador del estado de la solicitud de 
+			requerimiento.
+			\item \textbf{nombreEstadoSolicitud:} Cadena con el nombre del estado de la solicitud de 
+			cambio.
+		\end{itemize}
+
+		\item \textbf{Clase Prioridad:} Clase utilizada para representar los tipos de prioridad que 
+		puede tener una solicitud de requerimiento o cambio.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idPrioridad:} Entero con el identificador de la prioridad.
+			\item \textbf{nombrePrioridad:} Cadena con el nombre de la prioridad.
+		\end{itemize}
+
+		\item \textbf{Clase SolicitudDeCambio:}\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idSolicitud:} Entero identificador de la solicitud de cambio.
+			\item \textbf{fechaEnvio:} Fecha y hora en que fue enviada la solicitud de cambio.
+			\item \textbf{descripcionNecesidadDelCambio:} Cadena en la que se describe el motivo
+			por el cual es necesario realizar el cambio.
+			\item \textbf{descripcionCambio:} Cadena con la descripción del cambio concreto que 
+			debe ser implementado.
+			\item \textbf{fechaAnalisis:} Fecha y hora en la que se ingreso el análisis del impacto
+			al sistema.
+			\item \textbf{descripcionImpactoDelCambio:} Cadena que contiene el análisis del impacto
+			realizado.
+			\item \textbf{fechaCierre:} Fecha y hora en la que fue cerrada la solicitud.
+			\item \textbf{moduloAfectado:} Cadena con la descripción del modulo o módulos
+			afectados por el cambio.
+			\item \textbf{descripcionResolucion:} Cadena que contiene una descripción sobre
+			el motivo de la resolución que se tomo ya sea esta aprobación e rechazo.
+			\item \textbf{prioridadSolicitud:} Objeto de la clase PrioridadSolicitud que contiene la 
+			información de la prioridad asignada a la solicitud de cambio.
+			\item \textbf{estadoSolicitud:} Objeto de la clase EstadoSolicitudDeCambio que contiene
+			la información del estado actual de la solicitud.
+			\item \textbf{formularioImpl:} Objeto de la clase FormularioDeImplementacion que contiene
+			la información del formulario de implementación que debe completarse en caso de 
+			ser aprobada la solicitud.
+			\item \textbf{solicitante:} Objeto de la clase FuncionarioDisico con los datos del funcionario
+			que envió la solicitud de cambio.
+			\item \textbf{evaluadorImpacto:} Objeto de la clase FuncionarioDisico con los datos del 
+			funcionario que realizo la evaluación del impacto de la solicitud.
+			\item \textbf{evaluadorFinal:} Objeto de la clase FuncionarioDisico que realizo la evaluación
+			final de la solicitud.
+		\end{itemize}
+
+		\item \textbf{Clase EstadoSolicitudDeCambio:} Clase utilizada para representar los estados
+		que puede tener una solicitud de requerimiento.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEstadoSolicitud:} Entero con el identificador del estado de la solicitud de 
+			cambio.
+			\item \textbf{nombreEstadoSolicitud:} Cadena con el nombre del estado de la solicitud de 
+			cambio.
+		\end{itemize}
+
+		\item \textbf{Clase FormularioDeImplementacion:} Esta clase contiene la información del
+		formulario de implementación que debe completarse una vez que una solicitud de cambio
+		es aprobada.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idFormulario:} Entero identificador del formulario.
+			\item \textbf{observaciones:} Cadena que contiene observaciones sobre la implementación
+			del cambio.
+			\item \textbf{fechaVerificacion:} Fecha en la que se debe llevar a cabo la verificación del
+			cambio.
+			\item \textbf{verificador:} Objeto de la clase FuncionarioDisico que contiene información 
+			del funcionario que de verificar la implementación del cambio.
+			\item \textbf{implementador:} Objeto de la clase FuncionarioDisico que contiene 
+			información del funcionario que debe implementar el cambio.
+		\end{itemize}
+
+		\item \textbf{Clase TareaSCM:} Clase que contiene la información de una tarea de SCM que
+		debe llevarse a cabo en un proyecto determinado.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idTareaSCM:} Entero con el identificador de la tarea de SCM.
+			\item \textbf{nombreTarea:} Cadena con el nombre de la terea de SCM a realizar.
+			\item \textbf{descripcion:} Cadena con una descripción mas detallada de los objetivos
+			y alcanse de la tarea.
+			\item \textbf{entregablesAsociados:} Lista de la clase Entregable que contiene información
+			de todos los entregables asociados a dicha tarea.
+			\item \textbf{responsable:} Objeto de la clase FuncionarioDisico con la información del
+			responsable de la tarea.
+		\end{itemize}
+
+		\item \textbf{Clase Entregable:} Clase que contiene la información básica de un entregable.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEntregable:} Entero con el identificador del entregable.
+			\item \textbf{nombreEntregable:} Cadena con el nombre del entregable.
+		\end{itemize}
+
+		\item \textbf{Clase Proyecto:} Esta clase representa los proyectos que se realizan en DISICO.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idProyecto:} Entero con el numero identificador del proyecto.
+			\item \textbf{codigoInterno:} Cadena utilizada para definir un codigo interno 
+			para el proyecto que sera mostrado en pantalla en vez del id.
+			\item \textbf{nombre:} Cadena con el nombre del proyecto.
+			\item \textbf{descripcion:} Cadena con una descripción de los objetivos y alcances del 
+			proyecto.
+			\item \textbf{fechaInicio:} Fecha en la que se inicio el proyecto.
+			\item \textbf{fechaTermino:} Fecha en la que se cerro el proyecto.
+			\item \textbf{tipoProyecto:} Objeto de la clase TipoProyecto con información del
+			tipo de proyecto.
+			\item \textbf{estadoProyecto:} Objeto de la clase EstadoProyecto que contiene información
+			del estado actual del proyecto.
+			\item \textbf{tareasSCM:} Lista de la clase TareaSCM que contiene todas las tareas scm del
+			proyecto.
+			\item \textbf{participantes:} Lista de la clase Participante que contiene información de los
+			participantes del proyecto y su rol dentro de este.
+			\item \textbf{itemsDeConfiguracion:} Lista de la clase ItemDeConfiguracion que contiene
+			información de todos los items de configuración asociados al proyecto.
+			\item \textbf{tareasAgendadas:} Lista de la clase TareaProyecto con información de todas
+			las tareas agendadas en el proyecto. 
+		\end{itemize}
+
+		\item \textbf{Clase RolProyecto:} Esta clase representa los roles que puede tener un funcionario
+		dentro de un proyecto.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idRol:} Entero con el numero identificador del rol.
+			\item \textbf{nombreRol:} Cadena con el nombre del rol.
+		\end{itemize}
+
+		\item \textbf{Clase Participante:} Esta clase contiene información de un funcionario que
+		participa en un proyecto y rol que desempeña dentro de este.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{rol:} Objeto de la clase RolProyecto con información del rol del funcionario
+			dentro del proyecto.
+			\item \textbf{funcionario:} Objeto de la clase FuncionarioDisico con información del 
+			funcionario que participa dentro del proyecto.
+		\end{itemize}
+
+		\item \textbf{Clase EstadoProyecto:} Esta clase representa los estados que puede tener un 
+		proyecto.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEstadoProyecto:} Entero con el identificador del estado del proyecto.
+			\item \textbf{nombreEstadoProyecto:} Cadena con el nombre del estado del proyecto.
+		\end{itemize}
+
+		\item \textbf{Clase TipoProyecto:} Esta clase representa los tipos de proyectos que
+		pueden existir.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idTipoProyecto:} Entero identificador del tipo de proyecto.
+			\item \textbf{nombreTipoProyecto:} Cadena con el nombre del tipo de proyecto.
+		\end{itemize}
+
+		\item \textbf{Clase ItemConfiguracion:} Clase que contiene la información de un item de 
+		configuración.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idItemConfiguracion:} Entero con un numero identificador del item dentro de
+			la base de datos.
+			\item \textbf{codigoIdentificador:} Cadena con un codigo identificador del item dentro
+			del proyecto, este debe ser unico dentro del proyecto.
+			\item \textbf{nombreItemConfiguracion:} Cadena con el nombre del item de configuración.
+			\item \textbf{version:} Cadena con el identificador de la versión del item en el sistema de
+			de control de versiones.
+			\item \textbf{ubicacionEnBiblioteca:} Cadena con una ruta que permite localizar el item
+			de configuración dentro de la biblioteca.
+			\item \textbf{fechaUltimaModificacion:} Fecha y hora en la que se realizo el ultimo
+			cambio al item de configuración.
+			\item \textbf{responsableDelItem:} Objeto de la clase FuncionarioDisico que contiene 
+			información del responsable de la solicitud.
+		\end{itemize}
+
+		\item \textbf{Clase TareaProyecto:} Esta clase contiene información de una tarea clendarizada
+		en un proyecto.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idTareaProyecto:} Entero identificador de la tarea.
+			\item \textbf{descripcionTarea:} Cadena con una breve descripción de la tarea.
+			\item \textbf{fechaCreacion:} Fecha y hora en que se agrego la tarea al proyecto.
+			\item \textbf{fechaInicioPropuesta:} Fecha y hora en la que se estima debe iniciarse
+			la ejecución de la tarea.
+			\item \textbf{fechaInicioReal:} Fecha y hora en la que realmente se dio inició a la tarea.
+			\item \textbf{fechaTerminoPropuesta:} Fecha y hora en la que se estima debe estar
+			finalizada la tarea.
+			\item \textbf{fechaTerminoReal:} Fecha y hora en la que realmente se dio fin a la tarea.
+			\item \textbf{nivelAvance:} Entero que describe el nivel de avance de una tarea (representa
+			un porcentaje entero entre 0 y 100)
+			\item \textbf{visible:} Variable booleana que determina si una tarea debe ser mostrada
+			o no entre las tareas del proyecto.
+			\item \textbf{responsableTarea:} Objeto de la clase FuncionarioDisico que contiene 
+			información del responsable de la tarea.
+		\end{itemize}
+
+		\item \textbf{Clase EjbSolicitudRequerimeinto:} Es una clase que implementa un Ejb con 
+		métodos dedicados a la gestión de solicitudes de requerimientos.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{generarCodigoConsulta:} Método que genera una cadena con un código de 
+			consulta unico.
+			\item \textbf{validarCodigoConsulta:} Método que verifica si un código de consulta es 
+			valido.
+			\item \textbf{buscarSolicitudPorCodigo:} Método para buscar solicitudes a través de un 
+			código de consulta.
+			\item \textbf{buscarSolicitudPorSolicitante:} Método para buscar solicitudes por solicitante.
+			\item \textbf{buscarSolicitudPorResponsable:} Método para buscar solicitudes por 
+			responsable.
+			\item \textbf{buscarSolicitudPorArea:} Método para buscar solicitudes por área.
+			\item \textbf{enviarSolicitud:} Método para enviar solicitudes a un área de DISICO.
+			\item \textbf{cerrarSolicitud:} Método para cerrar una solicitud.
+			\item \textbf{respuestaDirecta:} Método para enviar una respuesta directa al usuario que
+			envió la solicitud.
+			\item \textbf{respuestaJefeArea:} Método para derivar la responsabilidad de responder la 
+			solicitud al jefe de area.
+			\item \textbf{respuestaManual:} Método para enviar una respuesta manualmente.
+			\item \textbf{asignarResponsable:} Método para asignar responsable a una solicitud.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbEmail:} Es una clase que implementa un Ejb con métodos para la creación 
+		y envió de emails.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{crearEmail:} Método que permite crear la estructura de un correo electrónico.
+			\item \textbf{enviarEmail:} Método que permite enviar el correo generado a una lista de 
+			destinatarios.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbSSO:} Es una clase que implementa un Ejb con métodos para el manejo
+		de cookies SSO y recuperación de información desde el servicio de conexión a LDAP.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{obtenerDatosUsuario:} Método que permite recuperar la información del
+			usuario desde el servidor de LDAP:
+			\item \textbf{cerrarSesion:} Método para cerrar una sesión de usuario.
+			\item \textbf{validarSesion:} Método para validar que existe una sesión SSO activa para
+			el usuario.
+		\end{itemize}
+		
+		
+		\item \textbf{Clase EjbGeneradorDeIndicadores:} Es una clase que implementa un Ejb 
+		con métodos para el calculo de indicadores y estadísticas.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{calcularEstadisticaPersonal:} Método que calcula estadísticas por persona.
+			\item \textbf{calcularEstadisticaArea:} Método que calcula estadísticas po Area.
+			\item \textbf{calcularEstadisticaDepartamento:} Método estadísticas por Departamento.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbGestorNotificaciones:} Es una clase que implementa un Ejb con métodos
+		para la generación de notificaciones y alertas.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{listarNotificacionesUsuario:} Método que entrega una lista con las 
+			notificaciones que deben ser mostradas al usuario.
+			\item \textbf{generarNotificación:} Método que genera una notificación y la enviá al
+			usuario correspondiente.
+			\item \textbf{generarAlerta:} Método que genera una alerta cuando se produce algun 
+			evento como el retraso de una solicitud o tarea.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbCalendarizadorDeTareas:} Es una clase que implementa un Ejb con 
+		métodos para gestionar las tareas de un proyecto.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{agendarTarea:} Método para agregar tareas a un proyecto. 
+			\item \textbf{editarTarea:} Método para editar la información de una tarea.
+			\item \textbf{listarTareasProyecto:} Método para listar todas las tareas visibles de un 
+			proyecto.
+			\item \textbf{buscarTareasPorResponsable:} Método para buscar tareas por responsable.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbMedidorAvanceProyecto:} Es una clase que implementa un Ejb con 
+		métodos para medir y actualizar el avance de las tareas de un proyecto.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{actualizarAvanceTarea:} Método para actualizar el estado de avance de una 
+			tarea.
+			\item \textbf{buscarTareasRetrasadas:} Método para buscar tareas retrasadas en un 
+			proyecto.
+			\item \textbf{generarIndicadoresDeAvanceProyecto:} Método para calcular el avance general
+			de un proyecto.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbItemsConfiguracion:} Es una clase que implementa un Ejb con 
+		métodos para gestionar los items de configuración de un proyecto.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{agregarItemConfiguracion:} Método que permite agregar un item de 
+			configuración a un proyecto.
+			\item \textbf{listarItemsConfiguracion:} Método para listar los items de configuración de un 
+			proyecto.
+			\item \textbf{editarItemConfiguracion:} Método para editar la información de un item de
+			configuración.
+			\item \textbf{asignarResponsableItemConfiguracion:} Método para asignar responsable a
+			un item de configuración.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbProyectos:} Es una clase que implementa un Ejb con 
+		métodos para manejar la información de los proyectos.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{crearProyecto:} Método para crear nuevos proyectos.
+			\item \textbf{editarProyecto:} Método para editar la información de los proyectos.
+			\item \textbf{buscarProyectoPorArea:} Método para buscar proyectos por área.
+			\item \textbf{asignarParticipantes:} Método para agregar participantes a un proyecto.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbTareasSCM:} Es una clase que implementa un Ejb con 
+		métodos para administrar las tareas de SCM de un proyecto.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{listarTareasSCM:} Método que lista las tareas de SCM básicas de todo 
+			proyecto.
+			\item \textbf{asignarResponsableTarea:} Método para asignar responsable a una tarea.
+			\item \textbf{buscarTareasSCMPorProyecto:} Método para buscar las tareas de SCM de un 
+			proyecto.
+			\item \textbf{buscarTareasSCMPorResponsable:} Método para buscar tareas de SCM de un
+			cierto responsable.
+			\item \textbf{iniciarTarea:} Método para iniciar una tarea de SCM.
+			\item \textbf{cerrarTarea:} Método para cerrar una tarea de SCM.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbSolicitudDeCambio:} Es una clase que implementa un Ejb con 
+		métodos para gestionar las solicitudes de cambio.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{enviarSolicitudCambio:} Método para crear y enviar solicitudes de cambio.
+			\item \textbf{analisarImpacto:} Método para ingresar el análisis de impacto en una
+			solicitud de cambio.
+			\item \textbf{evaluarSolicitud:} Método para ingresar la evaluación final de una solicitud.
+			\item \textbf{guardarFormularioImplementacion:} Método para completar la información
+			del formulario de implementación de una solicitud de cambio.
+			\item \textbf{buscarSolicitudesDeCambioPorProyecto:} Método para buscar solicitudes de 
+			cambio relacionadas a un proyecto.
+		\end{itemize}
+
+	\end{enumerate}
+%	\subsection{Patrones de Diseño}
+\newpage
+\section{Diseño de Datos}
+	Dado que los datos serán almacenados dentro de una base de datos relacional,
+	en esta sección se presenta el diagrama de entidad relación que se implementara y
+	un diccionario de datos de este.
+	
+	\subsection{Modelo Entidad Relación}
+	En esta sección se presenta el modelo de entidad-relación que se utilizara para el 
+	sistema, el cual muestra en detalle las cada tabla, junto con las columnas que estas 
+	poseen y el tipo de dato de las mismas. \\
+	
+	Cada una de estas estas tablas se encuentra mepeada ha una clase java por el
+	framework de persistencia (JPA e Hibernate), por lo que no se entrara en detalle 
+	acerca del significado de cada campo, ya que este se subentiende es el mismo que
+	el del atributo de la clase que le corresponde.\\
+	
+	El modelo cuenta de 23 tablas, todas relacionadas. En la Sección \ref{dicDatos} se 
+	muestra en detalle los tipos de datos y cuales de los campos son claves primarias 
+	o foráneas. A continuación una breve explicación sobre el modelo y su relación con 
+	las clases.\\
+	
+	Para representar la relación de herencia que existe en el diagrama de clases 
+	Figura \ref{dgClases} entre la clase Funcionario y la clase FuncionarioDisico, se utilizo 
+	una relación fuerte uno a uno donde entre las tablas FUNCIONARIO y  FUNCIONARIO\_DISICO, 
+	donde la los atributos de la clase padre quedan en la tabla FUNCIONARIO y la clase 
+	FuncionarioDisico dado que hereda los atributos de la clase Funcionario, almacena sus atributos 
+	propios en la tabla de FUNCIONARIO\_DISICO y los heredados en la tabla FUNCIONARIO.\\
+	
+	Dado que existe una serie de tareas de SCM por defecto, definidas por la metodología de SCM de 
+	disico \cite{paloma}, se utilizo una tabla tabla llamada TAREA\_SCM la cual almacena dichas tareas
+	y aparte se creo una tabla llamada TAREAS\_SCM\_PROYECTO la cual establece una triple relación 
+	entre las tablas FUNCIONARIO\_DISICO, TAREA\_SCM y PROYECTO, estableciendo así las tareas 
+	de SCM de cada proyecto y el responsable de esta.\\
+	
+	Para registrar los funcionarios que participan en cada proyecto, se creo la tabla PARTICIPANTE\_PROYECTO
+	la cual relaciona tres tablas FUNCIONARIO\_DISICO, PROYECTO y ROL\_PROYECTO, definiendo de 
+	esta manera que funcionario participa en que proyecto y con que rol, dado que la clave primaria solo 
+	se compone del id del proyecto y del rut del funcionario, un funcionario puede participar solo con un 
+	rol en el proyecto.\\
+	
+	Por ultimo existe una relación uno a uno entre las tablas SOLICITUD\_CAMBIO y FORMULARIO\_IMPLEMENTACION
+	donde se relaciona cual es el formulario de implementación completado para cada solicitud de 
+	cambio aprobada, por ende se estableció una relación uno a uno entre ambas dado que una solicitud de 
+	cambio no debiese tener asociada mas de un formulario.\\
+	
+	El resto de las relaciones del diagrama no requieren mucha explicación dado que no son mas que
+	simples relaciones uno a muchos principalmente utilizadas para registrar campos cuyos valores
+	están restringidos a un conjunto pequeño de valores como son tipos, estados posibles, roles, etc.\\
+	
+	Las claves de acceso y permisos de los usuarios no son almacenadas en la base de datos, 
+	estos son gestionadas almacenadas haciendo uso del protocolo LDAP, que es el que se utiliza
+	para todos los sistemas de la Universidad de Valparaíso, y que es lo que se utilizara en 
+	para este sistema.
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.37]{imagenes/ModeloBD.png}
+			\caption{Modelo Físico de la Base de Datos}
+		\end{center}
+	\end{figure}
+	
+	\subsection{Diccionario de Datos}
+	\label{dicDatos}
+	Para dar un mayor nivel de detalle a continuación se presenta el diccionario de datos, 
+	en la cual se describe cada tabla con sus atributos, el tipo de estos
+	y se indica si aceptan valores nulo y si tienen algún tipo de restricción como clave primaria
+	o foránea.
+	
+	\begin{table}[H]
+		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
+		\hline
+		\rowcolor[gray]{0.9}\textbf{Entidad} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Null} & \textbf{Clave}  \\
+		\hline
+		\multirow{7}{*}{FUNCIONARIO} & {rut} & {INT} & {NO} & {PK} \\
+									\cline{2-5}
+									& {nombre} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {apellido\_paterno} & {VARCHAR(25)} & {NO} & {} \\
+									\cline{2-5}
+									& {apellido\_materno} & {VARCHAR(25)} & {NO} & {} \\
+									\cline{2-5}
+									& {correo\_uv} & {VARCHAR(45)} & {SI} & {}  \\
+									\cline{2-5}
+									& {fecha\_primer\_acceso} & {DATETIME} & {SI} & {} \\
+									\cline{2-5}
+									& {fecha\_ultimo\_acceso} & {DATETIME} & {SI} & {}  \\
+		\hline
+		\multirow{4}{*}{FUNCIONARIO\_DISICO} & {rut} & {INT} & {NO} & {PK,FK}  \\
+									\cline{2-5}
+									& {id\_area} & {SAMLLINT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {cargo} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {anexo} & {VARCHAR(5)} & {NO} & {} \\
+		\hline
+		\multirow{3}{*}{AREA} & {id\_area} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {nombre} & {SAMLLINT} & {NO} & {} \\
+									\cline{2-5}
+									& {descripcion\_area} & {TEXT} & {SI} & {} \\
+		\hline
+		\multirow{3}{*}{TIPO\_SOLICITUD\_REQ} & {id\_tipo\_solicitud\_req} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {tipo\_solicitud} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {descripcion\_tipo} & {VARCHAR(255)} & {SI} & {} \\
+		\hline
+		\multirow{7}{*}{} & {id\_solicitud\_req} & {BIGINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {codigo\_consulta} & {VARCHAR(9)} & {NO} & {} \\
+									\cline{2-5}
+									& {asunto} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {mensaje} & {TEXT} & {NO} & {} \\
+									\cline{2-5}
+									& {id\_tipo\_solicitud\_req} & {TINYINT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {id\_estado\_solicitud\_req} & {TINYINT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {id\_area} & {TINYINT} & {NO} & {FK} \\
+									\cline{2-5}
+	{SOLICITUD\_REQUERI-}			& {rut\_responsable} & {INT} & {NO} & {FK} \\
+									\cline{2-5}
+	{MIENTO}						& {rut\_solicitante} & {INT} & {NO} & {FK} \\
+									\cline{2-5}
+	\multirow{7}{*}{}				& {id\_tipo\_prioridad} & {TINYINT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {fecha\_envio} & {DATETIME} & {NO} & {} \\
+									\cline{2-5}
+									& {fecha\_cierre} & {DATETIME} & {SI} & {} \\
+									\cline{2-5}
+									& {fecha\_vencimiento} & {DATETIME} & {SI} & {} \\
+									\cline{2-5}
+									& {fecha\_ultima\_actualizacion} & {DATETIME} & {NO} & {} \\
+									\cline{2-5}
+									& {justificacion\_transferencia} & {VARCHAR(255)} & {SI} & {} \\
+									\cline{2-5}
+									& {respuesta} & {TEXT} & {SI} & {} \\
+		\hline
+
+		\end{tabular}
+	\end{table}
+
+	\begin{table}[H]
+		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
+		\hline
+		\rowcolor[gray]{0.9}\textbf{Entidad} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Null} & \textbf{Clave}  \\
+		\hline
+		\multirow{2}{*}{TIPO\_PRIORIDAD} & {id\_tipo\_prioridad} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {prioridad} & {VARCHAR(45)} & {NO} & {} \\
+		\hline
+		\multirow{3}{*}{ESTADO\_SOLICITUD\_REQ} & {id\_estado\_solicitud\_req} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {estado\_solicitud\_req} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {descripcion\_estado} & {VARCHAR(255)} & {SI} & {} \\
+		\hline
+		\multirow{6}{*}{COMENTARIO\_SOLICITUD} & {id\_comentario} & {BIGINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {id\_solicitud\_req} & {BIGINT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {rut\_autor} & {INT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {comentario} & {TEXT} & {NO} & {} \\
+									\cline{2-5}
+									& {fecha} & {DATETIME} & {NO} & {} \\
+									\cline{2-5}
+									& {visible} & {BOOLEAN} & {NO} & {} \\
+		\hline
+		\multirow{5}{*}{NOTIFICACION} & {id\_notificacion} & {BIGINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {fecha} & {DATETIME} & {NO} & {} \\
+									\cline{2-5}
+									& {mensaje\_notificacion} & {VARCHAR(90)} & {NO} & {} \\
+									\cline{2-5}
+									& {revisada} & {BOOLEAN} & {NO} & {} \\
+									\cline{2-5}
+									& {rut\_destinatario} & {INT} & {NO} & {FK} \\
+		\hline		
+		\multirow{8}{*}{PROYECTO} & {id\_proyecto} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {codigo\_interno} & {VARCHAR(6)} & {NO} & {} \\
+									\cline{2-5}
+									& {nombre} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {descripcion} & {VARCHAR(255)} & {NO} & {} \\
+									\cline{2-5}
+									& {fecha\_inicio} & {DATETIME} & {NO} & {} \\
+									\cline{2-5}
+									& {fecha\_termino} & {DATETIME} & {SI} & {} \\
+									\cline{2-5}
+									 & {id\_tipo\_proyecto} & {TINYINT} & {NO} & {FK}  \\
+									\cline{2-5}
+									 & {id\_estado\_proyecto} & {TINYINT} & {NO} & {FK}  \\
+		\hline
+		\multirow{2}{*}{TIPO\_PROYECTO} & {id\_tipo\_proyecto} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {tipo\_proyecto} & {VARCHAR(45)} & {NO} & {} \\
+		\hline
+		\multirow{2}{*}{ESTADO\_PROYECTO} & {id\_estado\_proyecto} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {estado\_proyecto} & {VARCHAR(45)} & {NO} & {} \\
+		\hline
+		\multirow{3}{*}{PARTICIPANTE\_PROYECTO} & {rut\_participante} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {id\_proyecto} & {INT} & {NO} & {PK} \\
+									\cline{2-5}
+									& {id\_rol} & {TINYINT} & {NO} & {FK} \\
+		\hline
+		\multirow{2}{*}{ROL\_PROYECTO} & {id\_rol} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {nombre\_rol} & {VARCHAR(45)} & {NO} & {} \\
+		\hline
+		\multirow{8}{*}{ITEM\_CONFIGURACION} & {id\_item\_configuracion} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {codigo\_identificador\_ic} & {VARCHAR(5)} & {NO} & {} \\
+									\cline{2-5}
+									& {nombre\_ic} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {version} & {VARCHAR(10)} & {NO} & {} \\
+									\cline{2-5}
+									& {ubicacion\_en\_biblioteca} & {VARCHAR(100)} & {NO} & {} \\
+									\cline{2-5}
+									& {fecha\_ultima\_modificacion} & {DATETIME} & {NO} & {} \\
+									\cline{2-5}
+									& {id\_proyecto} & {INT} & {NO} & {FK}  \\
+									\cline{2-5}
+									& {rut\_responsable\_ic} & {INT} & {NO} & {FK} \\		
+		\hline		
+
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[H]
+		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
+		\hline
+		\rowcolor[gray]{0.9}\textbf{Entidad} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Null} & \textbf{Clave}  \\
+		\hline
+		\multirow{13}{*}{ESTADISTICA\_PERSONAL} & {id} & {BIGINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {rut\_funcionario} & {INT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {fecha} & {DATE} & {NO} & {} \\
+									\cline{2-5}
+									& {cantidad\_total\_solicitudes} & \multirow{2}{*}{BIGINT} & \multirow{2}{*}{NO} & {} \\
+									& {\_asignadas}  & & & \\
+									\cline{2-5}
+									& {cantidad\_solicitudes} & \multirow{2}{*}{INT} & \multirow{2}{*}{NO} & \multirow{2}{*}{} \\
+									& {\_pendientes} &  &  &  \\
+									\cline{2-5}
+									& {cantidad\_solicitudes\_vencidas} & {INT} & {NO} & {} \\
+									& {\_vencidas} & {INT} & {NO} & {} \\
+									\cline{2-5}
+									& {cantidad\_solicitudes\_iniciadas} & {INT} & {NO} & {} \\
+									\cline{2-5}
+									& {cantidad\_solicitudes\_cerradas} & {INT} & {NO} & {} \\
+									\cline{2-5}
+									& {cantidad\_proyectos\_acargo} & {INT} & {NO} & {} \\
+									\cline{2-5}
+									& {cantidad\_proyectos\_en\_que} & \multirow{2}{*}{INT} & \multirow{2}{*}{NO} & \multirow{2}{*}{} \\
+									& {\_participa} & & & \\
+									\cline{2-5}
+									& {cantidad\_tareas\_proyecto} & \multirow{2}{*}{INT} & \multirow{2}{*}{NO} & \multirow{2}{*}{} \\
+									& {\_asociadas} & & & \\
+									\cline{2-5}
+									& {cantidad\_tareas\_scm\_asociadas} & {INT} & {NO} & {} \\		
+		\hline		
+		\multirow{11}{*}{TREA\_PROYECTO} & {id\_tarea\_proyecto} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {id\_proyecto} & {INT} & {NO} & {FK}  \\
+									\cline{2-5}
+									& {rut\_responsable} & {INT} & {NO} & {FK}  \\
+									\cline{2-5}
+									& {tarea} & {VARCHAR(45)} & {NO} & {}  \\
+									\cline{2-5}
+									& {fecha\_creacion} & {DATE} & {NO} & {}  \\
+									\cline{2-5}
+									& {fecha\_inicio\_propuesta} & {DATETIME} & {NO} & {}  \\
+									\cline{2-5}
+									& {fecha\_inicio\_real} & {DATETIME} & {SI} & {}  \\
+									\cline{2-5}
+									& {fecha\_termino\_propuesta} & {DATETIME} & {NO} & {}  \\
+									\cline{2-5}
+									& {fecha\_termino\_real} & {DATETIME} & {SI} & {}  \\
+									\cline{2-5}
+									& {nivel\_avance} & {SMALLINT} & {NO} & {}  \\
+									\cline{2-5}
+									& {visible} & {BOOLEAN} & {NO} & {}  \\
+		\hline
+		\multirow{3}{*}{TREA\_SCM} & {id\_tarea\_scm} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
+									   & {nombre\_tarea} & {VARCHAR(45)} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {descripcion\_tarea} & {VARCHAR(255)} & {NO} & {}  \\
+									  \cline{2-5}
+		\hline
+		\multirow{3}{*}{ENTREGABLE} & {id\_entregable} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
+									   & {nombre\_entregable} & {VARCHAR(45)} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {id\_tarea\_scm} & {INT} & {NO} & {FK}  \\
+									  \cline{2-5}
+		\hline
+		\multirow{6}{*}{TAREA\_SCM\_PROYECTO} & {id\_tarea\_scm\_proyecto} & {INT} & {NO} & {PK}  \\
+									   \cline{2-5}
+									   & {id\_tarea\_scm} & {INT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {id\_proyecto} & {INT} & {NO} & {FK}  \\
+									  \cline{2-5}
+									   & {rut\_responsable} & {INT} & {NO} & {FK}  \\
+									  \cline{2-5}
+									   & {fecha\_inicio} & {DATE} & {NO} & {}  \\
+									  \cline{2-5}
+									   & {id\_termino} & {DATE} & {NO} & {}  \\
+		\hline
+
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[H]
+		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
+		\hline
+		\rowcolor[gray]{0.9}\textbf{Entidad} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Null} & \textbf{Clave}  \\
+		\hline
+		\multirow{2}{*}{ESTADO\_SOLICITUD} & {id\_estado\_solicitud\_cambio} & {TINYINT} & {NO} & {PK}  \\
+									   \cline{2-5}
+									   & {estado\_solicitud\_cambio} & {VARCHAR(45)} & {NO} & {}  \\
+									   \cline{2-5}
+       	{\_CAMBIO}						   & {descripcion} & {VARCHAR(255)} & {SI} & {}  \\		\hline
+		\multirow{17}{*}{SOLICITUD\_CAMBIO} & {id\_solicitud\_cambio} & {INT} & {NO} & {PK}  \\
+									   \cline{2-5}
+									   & {id\_proyecto} & {INT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {rut\_solicitante} & {INT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {titulo} & {VARCHAR(50)} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {fecha\_solicitud} & {DATETIME} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {descripcion\_necesidad\_cambio} & {TEXT} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {id\_tipo\_prioridad} & {TINYINT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {id\_estado\_solicitud\_cambio} & {TINYINT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {id\_item\_configuracion} & {INT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {descripcion\_cambio} & {TEXT} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {rut\_evaluador\_impacto} & {INT} & {SI} & {FK}  \\
+									   \cline{2-5}
+									   & {fecha\_analisis} & {DATETIME} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {descripcion\_impacto\_cambio} & {TEXT} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {fecha\_cierre} & {DATETIME} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {modulo\_afectado} & {VARCHAR(60)} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {rut\_evaluador\_final} & {INT} & {SI} & {FK}  \\
+									   \cline{2-5}
+									   & {descripcion\_resolucion} & {VARCHAR(255)} & {SI} & {}  \\
+		\hline
+\multirow{2}{*}{} & {id\_formulario\_implementación} & {INT} & {NO} & {PK}  \\
+									 \cline{2-5}
+									 & {observaciones} & {TEXT} & {NO} & {}  \\
+									 \cline{2-5}
+				{FORMULARIO}		 & {fecha\_verificacion} & {DATE} & {SI} & {}  \\
+\cline{2-5}
+				{\_IMPLEMENTACION}	& {rut\_verificador} & {INT} & {NO} & {FK}  \\
+									\cline{2-5}
+\multirow{2}{*}{}						& {rut\_implementador} & {INT} & {NO} & {FK}  \\
+									 \cline{2-5}
+									& {id\_solicitud\_cambio} & {INT} & {NO} & {FK}  \\
+									 \cline{2-5}
+	\hline
+									  								  
+		\end{tabular}
+	\end{table}
+	
+	
+\section{Casos de Uso Reales}
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Crear Solicitud de Requerimiento.}\\
+		\hline
+		{\textbf{Actores}} & {Solicitante.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al solicitante el enviar
+		solicitudes de requerimientos a algún área de DISICO.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario
+		desea enviar alguna solicitud de requerimiento a cualquiera de las áreas
+		de DISICO, esto se hace ingresando la información de la solicitud y el 
+		área a la que esta va dirigida.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario selecciona la opción Nueva Solicitud (campo A Figura \ref{CrearSolicitud}).} & {}\\
+		{} & {2. El sistema despliega un formulario para el ingreso de los datos requeridos (seccion B de la Figura \ref{CrearSolicitud}).}\\
+		{3. El usuario completa la información de la solicitud.} & {}\\
+		{4. El usuario selecciona el Área a la que desea dirigir su solicitud.} & {}\\
+		{5. El usuario envía la solicitud (campo C Figura \ref{CrearSolicitud}).} & {}\\
+		{} & {6. El sistema registra la solicitud.}\\
+		{} & {7. El sistema envía un correo electrónico al usuario con el numero de su solicitud.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la solicitud (campo D Figura \ref{CrearSolicitud}).} & {}\\
+		{} & {6. El sistema vuelve al menú principal (Figura \ref{resumen}).}\\
+		\hline
+	\end{tabular}
+	\caption{Caso de Uso Real de Crear Solicitud de Requerimiento}
+	\end{table}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.45]{imagenes/CUR/S_NuevaSolicitud.png}
+			\caption{Interfaz Crear Nueva Solicitud}
+			\label{CrearSolicitud}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.45]{imagenes/CUR/S_Resumen.png}
+			\caption{Interfaz Menú de Inicio}
+			\label{resumen}
+		\end{center}
+	\end{figure}
+	
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Consultar Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Solicitante.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir a un usuario consultar una solicitud a través de 
+		un numero de consulta.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario desea 
+		consultar el estado de una solicitud, esto puede hacerlo a través del numero de consulta de 
+		la solicitud, lo que le permitirá ver la solicitud aunque esta no haya sido enviada por el,
+		o por fecha o asunto lo que le permitirá encontrar solo solicitudes enviadas por el mismo.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa la opción Consultar Solicitud (botón A de la Figura \ref{consultarSol}).} & {} \\
+		{} & {2. El sistema despliega una lista con todas las solicitudes del usuario
+		ordenadas por fecha de la mas reciente a la menos reciente (sección B Figura \ref{consultarSol}).} \\
+		{3. El usuario tiene las siguientes opciones:} & {}\\
+		{a. Ingresar un filtro de búsqueda: \textit{Ver sección Filtrar Búsqueda}} & {}\\
+		{b. Consultar a través del numero de consulta: \textit{Ver sección Consultar 
+		a través de numero de consulta.}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Consultar Solicitud.}
+	\end{table}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.46]{imagenes/CUR/S_ConsultarSolicitud.png}
+			\caption{Interfaz Consultar Solicitud}
+			\label{consultarSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Filtrar Búsqueda}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa los filtros de búsqueda (campos A Figura \ref{filtrarSol}).} & {}\\
+		{} & {2. El sistema actualiza la lista de solicitudes desplegadas, mostrando solo las
+		que coinciden con los filtros (sección B).}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.46]{imagenes/CUR/S_FiltrarSolicitud.png}
+			\caption{Interfaz Filtrar Solicitudes}
+			\label{filtrarSol}
+		\end{center}
+	\end{figure}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Consultar a través de numero de consulta}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa el numero de consulta (campo A de la Figura \ref{numConsulta}) y selecciona la opción consultar (campo B de la Figura \ref{numConsulta}).} & {}\\
+		{} & {2. El sistema encuentra la solicitud.}\\
+		{} & {3. El sistema despliega la información de la solicitud (Figura \ref{detSol}).}\\
+		{4. El usuario tiene la opción Comentar Solicitud (campo A Figura \ref{detSol}): \textit{Consultar caso de uso Comentar Solicitud.}} & {}\\		
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {2. El sistema no encuentra la solicitud.}\\
+		{} & {3. El sistema despliega un mensaje indicando que no se encontró la solicitud (Figura \ref{noEncontrada}) .}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.448]{imagenes/CUR/S_NumConsulta.png}
+			\caption{Interfaz Consultar Solicitud}
+			\label{numConsulta}
+		\end{center}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.448]{imagenes/CUR/S_DetalleSolicitud.png}
+			\caption{Interfaz Detalle Solicitud}
+			\label{detSol}
+		\end{center}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/S_SolicitudNoEncontrada.png}
+			\caption{Interfaz Solicitud no encontrada}
+			\label{noEncontrada}
+		\end{center}
+	\end{figure}
+	
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Comentar Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Solicitante, Jefe de Área, Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Añadir información, preguntas y respuestas a la solicitud.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario 
+		visualiza una solicitud y  selecciona la opción comentar y agrega un comentario.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge una solicitud y la opción Comentar Solicitud  (campo A Figura \ref{detSol}).} & {}\\
+		{} & {2. El sistema despliega el campo para el ingreso de texto (campo A Figura \ref{comSolicitud}).}\\
+		{3. El usuario ingresa su comentario y lo enviá (campo B Figura \ref{comSolicitud}).} & {}\\
+		{} & {4. El sistema registra el comentario.}\\
+		{} & {5. El sistema notifica a los involucrados.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{3. El usuario cancela la acción (campo C Figura \ref{comSolicitud}).} & {}\\
+		{} & {4. El sistema oculta el campo de texto.}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Comentar Solicitud.}
+	\end{table}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/S_ComentarSolicitud.png}
+			\caption{Interfaz de Comentar Solicitud}
+			\label{comSolicitud}
+		\end{center}
+	\end{figure}
+
+	
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Gestionar Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al Jefe de área gestionar una solicitud que 
+		ha sido enviada a su área.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea 
+		indicar que se debe hacer con una solicitud que ha sido enviada a su área, 
+		para lo cual debe seleccionarla e indicar una opciones de gestión de solicitud, 
+		permitiendo Asignar, Transferir, Rechazar, Convertir en Proyecto, Comentar, Responder.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario selecciona una solicitud (campo A Figura \ref{gestSolicitud}).} & {}\\
+		{} & {2. El sistema muestra el detalle de la solicitud.}\\
+		{3. El usuario tiene las siguientes opciones:} & {}\\
+		{a. Asignar Responsable (campo A Figura \ref{detSolJa}):  \textit{Ver sección Asignar Responsable Solicitud} } & {}\\
+		{b. Transferir Solicitud (campo B Figura \ref{detSolJa}): \textit{Ver sección Transferir Solicitud} } & {}\\
+		{c. Rechazar (campo C Figura \ref{detSolJa}):  \textit{Ver sección Rechazar Solicitud} } & {}\\
+		{d. Convertir en proyecto (campo D Figura \ref{detSolJa}):  \textit{Ver sección Convertir Solicitud en Proyecto} } & {}\\
+		{e. Comentar (campo E Figura \ref{detSolJa}):  \textit{Ver Caso de Uso Comentar Solicitud} } & {}\\
+		{f. Respuesta Directa (campo F Figura \ref{detSolJa}):  \textit{Ver Caso de Uso Enviar Respuesta Directa.} } & {}\\
+		{g. Respuesta Manual (campo G Figura \ref{detSolJa}):  \textit{Ver sección Enviar Respuesta Manual} } & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Gestionar Solicitud.}
+	\end{table}
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.43]{imagenes/CUR/R_GestionarSolicitud.png}
+			\caption{Interfaz de Gestionar Solicitud}
+			\label{gestSolicitud}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/CUR/R_DetalleSolicitudJA.png}
+			\caption{Interfaz de Detalle Solicitud del Jefe de Área}
+			\label{detSolJa}
+		\end{center}
+	\end{figure}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Asignar Responsable Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Asignar Responsable (campo A Figura \ref{detSolJa})} & {}\\
+		{} & {2. El sistema despliega un menú de selección, con el nombre de
+		todos los miembros del Área (Figura \ref{asigSol}).}\\
+		{3. El usuario selecciona un responsable dentro de la lista (campo A Figura \ref{asigSol}).} & {}\\
+		{4. El usuario presiona confirmar (campo B Figura \ref{asigSol}).} & {}\\
+		{} & {5. El sistema registra la actualización y cambia el estado de la 
+		solicitud a asignada.}\\
+		{} & {6. El sistema muestra una notificación en la pantalla del responsable.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{4. El usuario presiona cancelar (campo C Figura \ref{asigSol}), se vuelve al paso 3.} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.56]{imagenes/CUR/R_AsignarResponsable.png}
+			\caption{Interfaz Asignar Responsable Solicitud}
+			\label{asigSol}
+		\end{center}
+	\end{figure}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Transferir Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Transferir Solicitud (campo B Figura \ref{detSolJa})} & {}\\
+		{} & {2. El sistema despliega una lista con el nombre de todas las Áreas, 
+		del departamento exceptuando el Área actual.}\\
+		{3. El usuario selecciona un área  (campo A Figura \ref{transSol})} & {}\\
+		{} & {4. El sistema solicita ingresar el motivo de la transferencia.}\\
+		{5. El usuario ingresa el motivo de la transferencia  (campo B Figura \ref{transSol}) y confirma la acción  (campo C Figura \ref{transSol})} & {}\\
+		{} & {6. El sistema registra la transferencia y muestra notificación en el
+		perfil del Jefe de Área al cual se transfirió la solicitud.}\\
+		{} & {7. El sistema vuelve a la pantalla principal.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. Cancelar acción  (campo D Figura \ref{transSol}).} & {}\\
+		{} & {6. El sistema regresa al paso 2.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_TransferirSolicitud.png}
+			\caption{Interfaz Transferir Solicitud}
+			\label{transSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Rechazar Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario selecciona la opción rechazar solicitud  (campo C Figura \ref{detSolJa}).} & {}\\
+		{} & {2. El sistema solicita el ingreso del motivo del rechazo.}\\
+		{3. El usuario ingresa el motivo del rechazo  (campo A Figura \ref{rechSol}) y confirma la acción  (campo B Figura \ref{rechSol}).} & {}\\
+		{} & {4. El sistema registra el motivo del rechazo y cambia el estado de la solicitud 
+		a rechazada.}\\
+		{} & {5. El sistema enviá un correo electrónico al solicitante indicando el motivo
+		por el cual su solicitud fue rechazada.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{3. El usuario cancela la acción  (campo C Figura \ref{rechSol}).} & {}\\
+		{} & {4. El sistema vuelve al paso 2 del Caso de Uso Gestionar Solicitud. }\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/R_RechazarSolicitud.png}
+			\caption{Interfaz Rechazar Solicitud}
+			\label{rechSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Convertir Solicitud en Proyecto}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción  Convertir en Proyecto  (campo D Figura \ref{detSolJa})} & {}\\
+		{} & {2. El sistema solicitara confirmación.}\\
+		{3. El usuario confirma la acción  (campo A Figura \ref{convSol})} & {}\\
+		{} & {4. El sistema modifica el estado de la solicitud a 
+		convertida en proyecto.}\\
+		{} & {5. El sistema da inicio al caso de uso Crear Proyecto}\\ 
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{3. El usuario cancela la acción  (campo B Figura \ref{convSol}).} & {}\\
+		{} & {4. El sistema vuelve al paso 2 del Caso de Uso Gestionar Solicitud. }\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.5]{imagenes/CUR/R_ConvertirEnProyecto.png}
+			\caption{Interfaz Convertir Solicitud en Proyecto}
+			\label{convSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Enviar Respuesta Manual}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario selecciona la opción de Respuesta Manual  (campo G Figura \ref{detSolJa}).} & {}\\
+		{} & {2. El sistema solicita el ingreso de la dirección de correo
+		de las personas a las que deberá ser respondida la solicitud.}\\
+		{3. El usuario ingresa las direcciones de correo  (campo A Figura \ref{resManual}).} & {}\\
+		{} & {4. El sistema solicita el ingreso del contenido del correo.}\\
+		{5. El usuario ingresa el contenido del correo  (campos B y C Figura \ref{resManual}) y confirma el envío  (campo D Figura \ref{resManual}).} & {}\\
+		{} & {6. El sistema envía el correo a los destinatarios especificados.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la acción  (campo E Figura \ref{resManual})} & {}\\
+		{} & {6. El sistema vuelve al paso 2 del Caso de Uso Gestionar Solicitud.} \\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_RespuestaManual.png}
+			\caption{Interfaz Enviar Respuesta Manual}
+			\label{resManual}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Respuesta Directa.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO, Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Enviar la respuesta de una solicitud directamente al solicitante.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea responder directamente
+		una solicitud, para lo cual ingresa un mensaje que sera enviado por correo electrónico al solicitante.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción respuesta directa  (campo F Figura \ref{detSolJa}).} & {}\\
+		{} & {2. El sistema solicita ingresar un mensaje de respuesta.}\\
+		{3. El usuario ingresa el mensaje  (campo A Figura \ref{resDirecta}).} & {}\\
+		{} & {4. El sistema solicita confirmación.} \\
+		{5. El usuario confirma la acción  (campo B Figura \ref{resDirecta}).} & {} \\
+		{} & {6. El sistema enviá el mensaje al correo electrónico del solicitante 
+		y cambia el estado de la solicitud a Finalizada.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la acción  (campo C Figura \ref{resDirecta}).} & {}\\
+		{} & {6. El sistema vuelve a mostrar la solicitud.}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Respuesta Directa}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_RespuestaDirecta.png}
+			\caption{Interfaz de Respuesta Directa}
+			\label{resDirecta}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Buscar Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área, Jefe de Departamento.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir a un usuario encontrar una solicitud.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario desea 
+		consultar una solicitud sin importar el autor o área, esto puede realizarse
+		filtrando por numero de consulta, estado, fecha, asunto, solicitante, responsable,
+		área.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa la opción Buscar Solicitud  (campo A Figura \ref{buscSol}).} & {} \\
+		{} & {2. El sistema despliega una lista con todas las solicitudes existentes
+		ordenadas por fecha de la mas reciente a la menos reciente  (sección B Figura \ref{buscSol}).} \\
+		{3. El usuario ingresa los filtros de búsqueda  (campos C Figura \ref{buscSol}).} & {}\\
+		{} & {4. El sistema actualiza la lista de solicitudes desplegadas, mostrando solo las
+		que coinciden con los filtros.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Buscar Solicitud.}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_BuscarSolicitud.png}
+			\caption{Interfaz Buscar Solicitud}
+			\label{buscSol}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Ver Resumen Personal.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al usuario ver un resumen con indicadores
+		y gráficos sobre todas las solicitudes que le han sido asignadas.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un funcionario desea ver
+		indicadores y gráficos que resumen todas las solicitudes que alguna ves le fueron asignadas,
+		para esto el sistema recupera todas las solicitudes del usuario y calcula los indicadores
+		y se construyen los gráficos para ser mostrados al usuario.}\\
+		\hline
+		{\textbf{Tipo}} & {Opcional.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción  Ver Resumen Personal (campo A y luego B Figura \ref{resPersonal}). } & {}\\
+		{} & {2. El sistema recupera todas las solicitudes alguna ves e fueron asignadas.}\\
+		{} & {3. Se calculan los indicadores correspondientes.}\\
+		{} & {4. El sistema muestra los indicadores (sección C Figura \ref{resPersonal})  y los gráficos (sección D Figura \ref{resPersonal}) .}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Ver Resumen Personal}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_ResumenPersonal.png}
+			\caption{Interfaz Ver Resumen Personal}
+			\label{resPersonal}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Ver Resumen Área.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al usuario ver un resumen con indicadores
+		y gráficos sobre todas las solicitudes que le han sido asignadas a algún funcionario 
+		del área o en general de toda el área.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea ver indicadores
+		y gráficos sobre las solicitudes del área o por funcionario del área, para lo cual
+		el usuario indica si desea ver el resumen completo del área o filtrando por persona.}\\
+		\hline
+		{\textbf{Tipo}} & {Opcional.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Ver Resumen Área (campo A y luego B Figura \ref{resArea}).} & {}\\
+		{} & {2. El sistema solicita escoger el tipo de resumen (campo C Figura \ref{resArea}).}\\
+		{3. El usuario escoge el tipo de resumen} & {}\\
+		{} & {4. El sistema recupera las solicitudes correspondientes y calcula los indicadores.}\\
+		{} & {5. El sistema muestra los indicadores (sección D Figura \ref{resArea}) y los gráficos (sección E Figura \ref{resArea}).}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Ver Resumen Área}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_ResumenArea.png}
+			\caption{Interfaz Ver Resumen Área}
+			\label{resArea}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso }} & {Ver Resumen Departamento.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Departamento.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al usuario ver un resumen con indicadores
+		y gráficos sobre todas las solicitudes que le han sido asignadas a algún funcionario, 
+		a un área o en general de todo el departamento.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea ver indicadores
+		y gráficos sobre las solicitudes del departamento, por área o por funcionario, para lo cual
+		el usuario indica el tipo de resumen que desea ver, y el sistema calcula y muestra los gráficos
+		e indicadores correspondientes.}\\
+		\hline
+		{\textbf{Tipo}} & {Opcional.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Ver Resumen Departamento (campo A y luego B Figura \ref{resDepto})} & {}\\
+		{} & {2. El sistema solicita escoger el tipo de resumen (campo C Figura \ref{resDepto}).}\\
+		{3. El usuario escoge el tipo de resumen} & {}\\
+		{} & {4. El sistema recupera las solicitudes correspondientes y calcula los indicadores.}\\
+		{} & {5. El sistema muestra los indicadores (campo D Figura \ref{resDepto}) y los gráficos (campo E Figura \ref{resDepto}).}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Ver Resumen Departamento}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_ResumenDepartamento.png}
+			\caption{Interfaz Ver Resumen Departamento}
+			\label{resDepto}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Atender Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al usuario atender una solicitud que
+		le ha sido asignada.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario
+		desea atender una solicitud que le fue asignada, para lo cual debe 
+		indicar una opción de atención de solicitud, Iniciar, Finalizar, Comentar.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge una solicitud (campo A Figura \ref{misSol}).} & {}\\
+		{} & {2. El sistema muestra el detalle de la solicitud (Figura \ref{atenSol}).}\\
+		{3. El usuario tiene las siguientes opciones.} & {}\\
+		{a. Iniciar (campo A Figura \ref{atenSol}): \textit{Ver sección Iniciar Solicitud}} & {}\\
+		{b. Comentar (campo B Figura \ref{atenSol}): \textit{Ver caso de uso Comentar Solicitud}} & {}\\
+		{c. Cerrar (campo C Figura \ref{atenSol}): \textit{Ver sección Cerrar Solicitud}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Atender Solicitud}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/R_ListarSolicitudes.png}
+			\caption{Interfaz de Mis Solicitud}
+			\label{misSol}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/R_AtenderSolicitud.png}
+			\caption{Interfaz Atender Solicitud}
+			\label{atenSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Iniciar Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Iniciar (campo A Figura \ref{atenSol}).} & {}\\
+		{} & {2. El sistema cambia el estado de la solicitud a Iniciada.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Cerrar Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción cerrar solicitud (campo C Figura \ref{atenSol}).} & {}\\
+		{} & {2. El sistema solicita seleccionar un tipo de respuesta}\\
+		{3. El usuario escoge tipo de respuesta:} & {}\\
+		{a. Respuesta Directa (campo A Figura \ref{cerrarSol}): \textit{Ver Caso de Uso Respuesta Directa}} & {}\\
+		{b. Respuesta al Jefe de Área (campo B Figura \ref{cerrarSol}): \textit{Ver sección Respuesta al Jefe de Área}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.52]{imagenes/CUR/R_CerrarSolicitud.png}
+			\caption{Interfaz Cerrar Solicitud}
+			\label{cerrarSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Respuesta al Jefe de Área}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Respuesta la Jefe de Área (campo A Figura \ref{cerrarSol}).} & {}\\
+		{} & {2. El sistema solicita confirmación.} \\
+		{3. El usuario confirma la acción (campo A Figura \ref{resJa}).} & {} \\
+		{} & {4. El sistema cambia el estado de la solicitud a Finalizada y notifica al jefe de área
+		que es el quien debe responder la solicitud.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{3. El usuario cancela la acción (campo B Figura \ref{resJa}).} & {}\\
+		{} & {4. El sistema vuelve a mostrar la solicitud.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.53]{imagenes/CUR/R_RespuestaJA.png}
+			\caption{Interfaz de Respuesta al Jefe de Área}
+			\label{resJa}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Gestionar Proyectos.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al jefe de área gestionar los proyectos que se 
+		manejan dentro del área.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el jefe de área desea escoger una
+		una acción que le permita gestionar los proyectos de su área, para lo cual el sistema le 
+		muestra una lista con los proyectos, donde puede escoger alguna opción de gestión.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción gestionar Proyectos (campo A Figura \ref{gestPro})} & {}\\
+		{} & {2. El sistema despliega una lista con todos los proyectos}\\
+		{3. El usuario puede escoger entre:} & {}\\
+		{a. Crear Proyecto (campo B Figura \ref{gestPro}): \textit{Ver caso se uso Crear Proyecto}} & {}\\
+		{b. Eliminar Proyecto (campo C Figura \ref{gestPro}): \textit{Ver sección Eliminar Proyecto}} & {}\\
+		{c. Modificar Proyecto (campo D Figura \ref{gestPro}): \textit{Ver sección Modificar Proyecto}} & {}\\
+		{d. Ver Resumen Avance (campo E Figura \ref{gestPro}): \textit{Ver sección Ver Resumen Avance Proyecto}} & {}\\
+		{e. Buscar Proyecto (campo F Figura \ref{gestPro}): \textit{Ver caso se uso Buscar Proyecto}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Gestionar Proyectos}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.61]{imagenes/CUR/P_GestionProyectos.png}
+			\caption{Interfaz Gestionar Proyectos}
+			\label{gestPro}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Crear Proyecto.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Crear un nuevo proyecto junto con la definición de sus
+		involucrados.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso puede comenzar por que el usuario a escogido
+		la opción Crear Proyecto o Convertir Solicitud en Proyecto, donde el usuario ingresa la
+		información del proyecto y define a lo menos el Jefe de Proyecto de Proyecto.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Crear Proyecto (campo A Figura \ref{crearPro}) o Convertir Solicitud en Proyecto} & {}\\
+		{} & {2. El sistema solicita la información del proyecto.}\\
+		{3. El usuario ingresa los datos del proyecto (sección B Figura \ref{crearPro}).} & {}\\
+		{} & {4. El sistema solicita el nombre del jefe de proyecto.}\\
+		{5. El usuario ingresa el nombre del jefe de proyecto (campo C Figura \ref{crearPro})} & {}\\
+		{} & {6. El sistema solicita el ingreso de otros involucrados en el Proyecto.}\\
+		{7. El usuario ingresa el nombre del resto de los involucrados en el proyecto (sección D Figura \ref{crearPro}).} & {}\\
+		{} & {8. El sistema solicita confirmación.}\\
+		{9. El usuario confirma la acción (campo E Figura \ref{crearPro}).} & {}\\
+		{} & {10. El sistema registra la información del proyecto.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{7. El usuario omite este paso.} & {}\\
+		\hline
+		{9. El usuario cancela la acción (campo F Figura \ref{crearPro}).} & {}\\
+		{} & {10. El sistema regresa al caso de uso Gestionar Proyecto.}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Crear Proyecto}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/P_CrearProyecto.png}
+			\caption{Interfaz Crear Proyecto}
+			\label{crearPro}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Buscar Proyecto.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área, Funcionario.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir a un usuario encontrar un proyecto.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario desea 
+		consultar un Proyecto sin importar el autor o área, esto puede realizarse
+		filtrando por nombre, estado, fecha, responsable, área.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa la opción Buscar Proyecto (campo A Figura \ref{buscPro}).} & {} \\
+		{} & {2. El sistema despliega una lista con todos los proyectos
+		ordenados por fecha del mas reciente al menos reciente (sección D Figura \ref{buscPro}).} \\
+		{3. El usuario ingresa los filtros de búsqueda (sección B Figura \ref{buscPro}) y confirma (campo C Figura \ref{buscPro}).} & {}\\
+		{} & {4. El sistema actualiza la lista de proyectos desplegados, mostrando solo las
+		que coinciden con los filtros (sección D Figura \ref{buscPro}).}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Buscar Proyecto.}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.46]{imagenes/CUR/P_BuscarProyecto.png}
+			\caption{Interfaz Buscar Proyecto}
+			\label{buscPro}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Eliminar Proyecto.}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge un proyecto.} & {}\\
+		{} & {2. El sistema muestra el detalle del proyecto (Figura \ref{detPro}).}\\
+		{3. El usuario escoge la opción Eliminar Proyecto (campo B Figura \ref{detPro}).} & {}\\
+		{} & {4. El sistema solicita la confirmación de la acción.}\\
+		{5. El usuario confirma (campo A Figura \ref{elimPro}).} & {}\\
+		{} & {6. El sistema elimina la información del proyecto.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la acción (campo B Figura \ref{elimPro}).} & {}\\
+		{} & {6. El sistema regresa al caso de uso Gestionar Proyecto.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.39]{imagenes/CUR/P_DetalleProyecto.png}
+			\caption{Interfaz Detalle Proyecto}
+			\label{detPro}
+		\end{center}
+	\end{figure}	
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.41]{imagenes/CUR/P_EliminarProyecto.png}
+			\caption{Interfaz Eliminar Proyecto}
+			\label{elimPro}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Modificar Proyecto}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge un proyecto.} & {}\\
+		{} & {2. El sistema muestra el detalle del proyecto (Figura \ref{detPro}).}\\
+		{3. El usuario escoge la opción Modificar Proyecto (campo A Figura \ref{detPro}).} & {}\\
+		{} & {4. El sistema solicita el ingreso de modificaciones.}\\
+		{5. El usuario ingresa las modificación e los datos del proyecto (sección A Figura \ref{editPro}) y confirma los cambios (campo B Figura \ref{editPro}).} & {}\\
+		{} & {6. El sistema registra los cambios.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la acción (campo C Figura \ref{editPro}).} & {}\\
+		{} & {6. El sistema regresa al caso de uso Gestionar Proyecto.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.5]{imagenes/CUR/P_EditarProyecto.png}
+			\caption{Interfaz Modificar Proyecto}
+			\label{editPro}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Ver Resumen Avance Proyecto.}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge un proyecto.} & {}\\
+		{} & {2. El sistema muestra el detalle del proyecto.}\\
+		{3. El usuario la opción Ver Resumen Avance (campo C Figura \ref{detPro}).} & {}\\
+		{} & {4. El sistema muestra el detalle de todas las actividades del proyecto y su estado (Figura \ref{resAvance}).}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/P_ResumenAvance.png}
+			\caption{Interfaz Resumen Avance Proyecto}
+			\label{resAvance}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Definir Tareas SCM.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Definir responsables para las tareas de SCM de un proyecto.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea definir responsables para
+		las tareas de SCM, el sistema despliega la lista de tareas de SCM y el usuario define el responsable de
+		cada una.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Definir Tareas SCM (campo A Figura \ref{defTareasSCM}} & {}\\
+		{} & {2. El sistema muestra la lista de proyectos (sección B Figura \ref{defTareasSCM}.}\\
+		{3. El usuario escoge un proyecto} & {}\\
+		{} & {4. El sistema despliega la lista de tareas de SCM.}\\
+		{5. El usuario ingresa el responsable para cada una (campo A Figura \ref{asigTareasSCM}.} & {}\\
+		{} & {6. El sistema solicita confirmación de los cambios.}\\
+		{7. El usuario ingresa confirmación (campo B Figura \ref{asigTareasSCM}.} & {}\\
+		{} & {8. El sistema registra los cambios.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{7. El usuario cancela los cambios (campo C Figura \ref{asigTareasSCM}.} & {}\\
+		{} & {8. El sistema regresa a la pantalla de inicio.}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Definir Tareas SCM}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_TareasSCM.png}
+			\caption{Interfaz Definir Tareas SCM}
+			\label{defTareasSCM}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_DefinirTareasSCM.png}
+			\caption{Interfaz Asignar Tareas SCM}
+			\label{asigTareasSCM}
+		\end{center}
+	\end{figure}	
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Gestionar Tareas Proyecto.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Gestionar las Tareas de un Proyecto.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un
+		usuario desea gestionar sus tareas en un proyecto, esto le permite
+		crear nuevas tareas, eliminar tareas y actualizar el estado de avance de las mismas.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Gestionar Tareas del Proyecto (campo A Figura \ref{gestTareasPro}} & {}\\
+		{} & {2. El sistema despliega la lista de tareas del proyecto (sección B Figura \ref{gestTareasPro}.}\\
+		{3. El usuario escoge entre:} & {}\\
+		{a. Crear Tarea (campo C Figura \ref{gestTareasPro}: \textit{Ver sección Crear Tarea}} & {}\\
+		{b. Eliminar Tarea (campo D Figura \ref{gestTareasPro}: \textit{Ver sección Eliminar Tarea}} & {}\\
+		{c. Actualizar Estado de Avance (campo E Figura \ref{gestTareasPro}: \textit{Ver sección Actualizar estado de avance}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Gestionar Tareas Proyecto}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/P_GestionarTareas.png}
+			\caption{Interfaz Gestionar Tareas Proyecto}
+			\label{gestTareasPro}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Crear Tarea}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Crear Tarea  (campo C Figura \ref{gestTareasPro}.} & {}\\
+		{} & {2. El sistema solicita el ingreso de la información de la tarea.}\\
+		{3. El usuario ingresa la tarea  (sección A Figura \ref{crearTarea}.} & {}\\
+		{} & {4. El sistema solicita confirmación.}\\
+		{5. El usuario confirma  (campo B Figura \ref{crearTarea}.} & {}\\
+		{} & {6. El sistema registra la tarea.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{6. El usuario cancela la acción  (campo C Figura \ref{crearTarea}.} & {}\\
+		{} & {7. El sistema regresa al caso de uso Gestionar Tareas Proyecto.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.55]{imagenes/CUR/P_NuevaTarea.png}
+			\caption{Interfaz Crear Tarea}
+			\label{crearTarea}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Eliminar Tarea}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge una Tarea  (sección B Figura \ref{gestTareasPro}.} & {}\\
+		%{} & {2. El sistema muestra el detalle de la tarea.}\\
+		{2. El usuario escoge la opción Eliminar Tarea  (campo D Figura \ref{gestTareasPro}.} & {}\\
+		{} & {3. El sistema solicita confirmación.}\\
+		{4. El usuario confirma la acción  (campo A Figura \ref{delTarea}.} & {}\\
+		{} & {6. El sistema elimina la tarea.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{4. El usuario cancela la acción  (campo B Figura \ref{delTarea}.} & {}\\
+		{} & {5. El sistema regresa al paso 2.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.55]{imagenes/CUR/P_EliminarTarea.png}
+			\caption{Interfaz Eliminar Tarea}
+			\label{delTarea}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Actualizar estado de avance}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge una Tarea .} & {}\\
+		%{} & {2. El sistema muestra el detalle de la tarea  (Figura \ref{upAvance}.}\\
+		{2. El usuario escoge la opción Actualizar estado de avance (campo E Figura \ref{gestTareasPro}).} & {}\\
+		{} & {3. El sistema solicita que ingrese el nivel de avance de la tarea.}\\
+		{4. El usuario ingresa el nivel de avance (campo A Figura \ref{upAvance}) y confirma el cambió (campo B Figura \ref{upAvance}).} & {}\\
+		{} & {5. El sistema valida que el nivel de avance sea mayor al actual.}\\
+		{} & {6. El sistema registra el nuevo nivel de avance.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {5. El nivel de avance es erróneo (campo A Figura \ref{errorAvance}).}\\
+		{} & {6. El sistema despliega un mensaje indicando el error.}\\
+		\hline
+		{4. El usuario cancela la acción (campo C Figura \ref{upAvance})} & {}\\
+		{} & {5. El sistema vuelve al menú de gestión de tareas}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.52]{imagenes/CUR/P_ActualizarAvance.png}
+			\caption{Interfaz Actualizar estado de avance Tarea}
+			\label{upAvance}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.52]{imagenes/CUR/P_ActualizarAvanceError.png}
+			\caption{Interfaz Error al Actualizar estado de avance Tarea}
+			\label{errorAvance}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Gestión de Cambios.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Que los usuarios puedan llevar a cabo 
+		cualquiera de las tareas de SCM.}\\
+		\hline
+		{\textbf{Resumen}} & {El usuario selecciona esta opción y el sistema muestra la 
+		lista de opciones disponibles de gestión de cambio en cada proyecto.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Gestión de Cambios (campo A Figura \ref{gestCamb}).} & {}\\
+		{} & {2. El sistema solicita escoger una opción.}\\
+		{3. El usuario escoge una de las siguientes opciones:} & {}\\
+		{a. Identificación de Configuración (campo E Figura \ref{gestCamb}): \textit{Ver sección Identificar Configuración}} & {}\\
+		{b. Crear Solicitud de Cambio (campo B Figura \ref{gestCamb}): \textit{Ver sección Crear Solicitud de Cambio}} & {}\\
+		{c. Aprobar/Rechazar Solicitud (campo D Figura \ref{gestCamb}): \textit{Ver sección Aprobar/Rechazar Solicitud}} & {}\\
+		{d. Análisis de Impacto (campo C Figura \ref{gestCamb}): \textit{Ver sección Analizar Impacto del Cambio} } & {}\\
+		{e. Implementación de Cambio (campo F Figura \ref{gestCamb}): \text{Ver sección Implementación del Cambio}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Gestión de Cambios}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_GestionCambios.png}
+			\caption{Interfaz de Gestión de Cambios}
+			\label{gestCamb}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Identificar Configuración}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Identificación de Configuración (campo E Figura \ref{gestCamb}).} & {}\\
+		{} & {2. El sistema despliega la lista de Proyectos en los que el usuario tiene permitido
+		realizar esta tarea (sección A Figura \ref{identIC}).}\\
+		{3. El usuario escoge un proyecto.} & {}\\
+		{} & {4. El sistema solicita el ingreso de nuevos items de configuración.}\\
+		{5. El usuario ingresa la información de los nuevos items de configuración (sección A Figura \ref{addIC}).} & {} \\
+		{} & {6. El sistema solicita confirmación.}\\
+		{7. El usuario confirma los cambios (campo B Figura \ref{addIC}).} & {}\\
+		{} & {8. El sistema registra los nuevos items de configuración}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{7. El usuario cancela la acción (campo C Figura \ref{addIC}).} & {}\\
+		{} & {8. El sistema regresa al Caso de uso Gestión de Cambio}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/CUR/SCM_IdentificacionConfiguracion.png}
+			\caption{Interfaz de Identificación de la Configuración}
+			\label{identIC}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/CUR/SCM_AgregarIC.png}
+			\caption{Interfaz para agregar Item de Configuración}
+			\label{addIC}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Crear Solicitud de Cambio}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Crear Solicitud (campo A Figura \ref{newSol}).} & {}\\
+		{} & {2. El sistema solicita el ingreso de los datos de la solicitud.}\\
+		{3. El usuario ingresa los datos de la solicitud (sección B Figura \ref{newSol}).} & {}\\
+		{} & {4. El sistema solicita confirmación.}\\
+		{5. El usuario confirma la acción (campo C Figura \ref{newSol}).} & {}\\
+		{} & {6. El sistema registra la solicitud y notifica al encargado de analizar la solicitud.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la acción (campo B Figura \ref{newSol}).} & {}\\
+		{} & {6. El sistema regresa al Caso de uso Gestión de Cambio}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/CUR/SCM_CrearSolicitudDeCambio.png}
+			\caption{Interfaz Crear Solicitud de Cambio}
+			\label{newSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Analizar Impacto del Cambio}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Análisis de Impacto (campo A Figura \ref{anImpacto}).} & {}\\
+		{} & {2. El sistema despliega lista de solicitudes que el usuario debe analisar (sección B Figura \ref{anImpacto}).}\\
+		{3. El usuario escoge solicitud.} & {}\\
+		{} & {4. El sistema solicita el ingreso del analisis del impacto.}\\
+		{5. El usuario ingresa su analisis del impacto (campo A Figura \ref{ingresoImpacto}) y confirma los cambios (campo B Figura \ref{ingresoImpacto}).} & {}\\
+		{} & {6. El sistema registra los cambios.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la acción (campo C Figura \ref{ingresoImpacto}).} & {}\\
+		{} & {6. El sistema regresa al paso 2}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.42]{imagenes/CUR/SCM_MenuAnalizarSolicitudes.png}
+			\caption{Interfaz Analizar Impacto del Cambio}
+			\label{anImpacto}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.4]{imagenes/CUR/SCM_AnalisisDeImpacto.png}
+			\caption{Interfaz de Ingreso del Análisis del Impacto del Cambio}
+			\label{ingresoImpacto}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Aprobar/Rechazar Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Aprobar/Rechazar Solicitud (campo A Figura \ref{evSol}).} & {}\\
+		{} & {2. El sistema despliega la lista de solicitudes que el usuario
+		esta autorizado a Aprobar o Rechazar (sección B Figura \ref{evSol}).}\\
+		{3. El usuario escoge una solicitud.} & {}\\
+		{} & {4. El sistema despliega el detalle de la solicitud junto con el análisis de impacto}\\
+		{5. El usuario escoge si Aprobar o Rechazar la solicitud (campo A Figura \ref{ingresoEvSol})} & {}\\
+		{6. El usuario ingresa el motivo de la resolución (campo B Figura \ref{ingresoEvSol}).} & {}\\
+		{} & {7. El sistema solicita confirmación.}\\
+		{8. El usuario confirma la acción (campo C Figura \ref{ingresoEvSol}).} & {}\\
+		{} & {9. El sistema registra el cambio y notifica al encargado de la implementación del cambio.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{8. El usuario cancela la acción (campo D Figura \ref{ingresoEvSol}).} & {}\\
+		{} & {9. El sistema regresa al paso 2}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_MenuEvaluarSolicitud.png}
+			\caption{Interfaz para Aprobar/Rechazar Solicitud}
+			\label{evSol}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_EvaluarSolicitud.png}
+			\caption{Interfaz de ingreso de la Aprobación/Rechazo de la Solicitud}
+			\label{ingresoEvSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Implementación del Cambio}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Implementación de Cambio (campo A Figura \ref{impCamb}).} & {}\\
+		{} & {2. El sistema despliega lista de solicitudes que el usuario esta a autorizado para 
+		completar el formulario de implementación de cambio (sección B Figura \ref{impCamb}).}\\
+		{3. El usuario escoge una solicitud.} & {}\\
+		{} & {4. El sistema solicita completar los datos del formulario de implementación.}\\
+		{5. El usuario completa el formulario (sección A Figura \ref{formImpCamb}).} & {}\\
+		{} & {6. El sistema solicita confirmación.}\\
+		{7. El usuario confirma la acción (campo B Figura \ref{formImpCamb}).} & {}\\
+		{} & {8. El sistema registra el cambio y cierra la solicitud.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{7. El usuario cancela la acción (campo C Figura \ref{formImpCamb}).} & {}\\
+		{} & {8. El sistema regresa al paso 2}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.37]{imagenes/CUR/SCM_MenuFormImplement.png}
+			\caption{Interfaz de Implementación del Cambio}
+			\label{impCamb}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.37]{imagenes/CUR/SCM_FormImplement.png}
+			\caption{Interfaz del Formulario de Implementación del Cambio}
+			\label{formImpCamb}
+		\end{center}
+	\end{figure}
+
+\section{Diseño de Pruebas}
+	En esta sección se describen los tipos de pruebas a realizar, el proceso,
+	los casos de pruebas y las herramientas para su automatización.
+
+	\subsection{Pruebas Unitarias}
+	Las pruebas unitarias concentran su esfuerzo en la verificación de la 
+	unidad mas pequeña del diseño de software, ya sea un componente o 
+	un modulo de software \cite{ing_soft_ep}. Permite asegurar que estos 
+	funcionan correctamente de forma independiente (o por separado).\\
+	
+	Para este trabajo mas que desarrollar documentación exhaustiva de cada test,
+	se pretende generar un set de pruebas unitarias automatizadas, dichas pruebas
+	se ejecutaran cada vez que se vuelva a compilar la aplicación, esto nos permitirá
+	estar seguros cada vez que se compile la aplicación que se han superado todas las
+	pruebas o en caso de falla nos permitirá detectar rápidamente que parte es la 
+	que esta fallando.\\
+	
+	Esto es de mas valor para el cliente, ya que al ser la unidad de desarrollo de sistemas
+	de la universidad, continuamente deben estar actualizando, modificando o agregando
+	nuevas funcionalidades a las aplicaciones y un set de pruebas automatizadas
+	les facilitara el trabajo de tener probar nuevamente la aplicación en el futuro.\\
+	
+	Para obtener un buen set de pruebas se deberá respetar lo siguiente, todo test unitario debe ser \cite{disenoTDD}: 
+	\begin{itemize}
+		\item \textbf{Atómico:} Prueba la mínima cantidad de funcionalidades posibles.
+		\item \textbf{Independiente:} No debe depender de otros test para producir un
+		resultado satisfactorio.
+		\item \textbf{Inocuo:} No debe alterar el estado del sistema (no altera la BD,
+		no enviá emails y no crear archivos ni los borra).
+		\item \textbf{Rápido:} Deben ser rápidos porque se ejecutan muchos test cada 
+		pocos minutos.
+	\end{itemize}
+	
+	
+	Ademas cada test deberá ser \textit{auto-explicativo}, de manera tal que cada prueba 
+	diseñada quede debidamente documentado por el mismo test unitario que la implementa.
+	Sin perjuicio de esto, se completara la Tabla \ref{testUnit}, en la que deberá detallar
+	el nombre de cada modulo, el nombre de las pruebas que cubren dicho modulo
+	y el propósito de la prueba.\\
+
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{4cm} | m{4cm}|m{6cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Modulo}} & \textbf{Test} & \textbf{Proposito del Test}\\
+		\hline
+		\multirow{3}{*}{} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+		\multirow{3}{*}{} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+		\multirow{3}{*}{} & {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+						\cline{2-3}
+						& {} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Formato para la documentación de los test unitarios}
+		\label{testUnit}
+	\end{table}
+
+	Para el desarrollo y automatización de los test unitarios se utilizara JUnit \cite{junit},
+	que es un Framework Open Source para la automatización de las pruebas en 
+	los proyectos Software. El framework provee de herramientas, clases y métodos 
+	que facilitan la tarea de realizar pruebas unitarias en una aplicación.\\
+	
+	Dado que para el desarrollo se utiliza la tecnología de Java EE, muchas de las
+	pruebas sobre clases como EJBs por ejemplo requieren ser desplegadas en el
+	contenedor para poder ejecutarse correctamente, esto puede llegar a tomar 
+	bastante tiempo lo que dificulta la tarea de hacer las pruebas. Para resolver
+	esto se utilizara Arrquillian \cite{arquillian} , este es un framework de JBoos que ademas de 
+	proveer de herramientas, clases y métodos para la creación y automatización
+	de pruebas, utiliza contenedores embebidos que le permiten simular la ejecución
+	de los componentes como si estuviesen en el contenedor real,  la diferencia 
+	es que el despliegue en este tipo de contenedores es mucho mas rapido
+	y nos permite simular un ambiente mas real en nuestras pruebas.
+	Permite probar EJBs, CDI, Percistencia (JPA) entre otros, ademas entre los
+	contenedores con los que es compatible se encuentra Glassfish Embedded por 
+	lo que proporciona completa compatibilidad con el servidor de aplicaciones a utilizar.\\
+	
+
+	Estas pruebas se diseñaran y escribirán idealmente en conjunto con la implementación
+	de la aplicación, pero con el fin de cumplir con las fechas de entrega esta actividad 
+	podra ser postergada asta la fase de pruebas.\\
+			
+
+	\subsection{Pruebas de Integración}
+	Las pruebas de integración se realizan una vez terminadas las pruebas unitarias,
+	es decir una vez que no aseguramos que todo funciona bien individualmente,
+	debemos asegurarnos que cuando juntemos los módulos todo siga funcionando
+	correctamente \cite{disenoTDD}.\\
+	
+	Estas pruebas son similares a las pruebas unitarias, con la salvedad que pueden
+	romper las reglas mencionadas anteriormente, ya que como su nombre indica, 
+	integración significa que ayuda a unir distintas partes del sistema. Por tanto, 
+	estas pruebas serán de granularidad más gruesa y más frágiles que
+	los tests unitarios, por lo que el número de tests de integración sera menor que 
+	el número de tests unitarios \cite{disenoTDD}.\\
+	
+	Al igual que en el caso anterior esta pueden ser automatizadas a través
+	de un framework de pruebas. Para integrar los componentes se debe hacer
+	uso intensivo de los servicios del contenedor, por lo que es conveniente
+	hacer solo uso de Arquillian para las pruebas de integración.\\
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/PruebasIntegracion.png}
+			\caption{Esquema de Integración}
+			\label{integracion}
+		\end{center}
+	\end{figure}
+	
+	El proceso de integración del sistema implica construir este a partir de sus
+	componentes y probar el sistema resultante para encontrar problemas que 
+	pueden surgir debido a la integración de los componentes \cite{sommerville}. 
+	Por este motivo las pruebas de integración se diseñaran e implementaran acorde 
+	al orden indicado en la Figura \ref{integracion}, donde las primeros niveles son
+	lo que presentan menos dependencia y los superiores mayor dependencia.\\
+
+	Al igual que en el caso anterior, las pruebas deben quedar debidamente documentadas
+	por el código que las implementa. Y ademas se completara la Tabla \ref{testIntegracion} 
+	la cual es similar a la la Tabla \ref{testUnit} y en la que se deben indicar las pruebas que se implementaron 
+	y su propósito.
+	
+	
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{2.5cm} | m{4cm}|m{7.5cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Identificador}} & {\textbf{Prueba de Integración}} & \textbf{Propósito} \\
+		\hline
+		& {} & {}\\
+		\hline
+		& {} & {}\\
+		\hline
+		& {} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Formato para la documentación de los test de Integración}
+		\label{testIntegracion}
+	\end{table}
+	
+	Ademas como cada prueba afecta a mas de un modulo se completara la Tabla 
+	\ref{coberturaIntegracion} indicando los módulos a los que afecta cada prueba.
+	
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} l | m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|}
+		\hline
+		%\rowcolor[gray]{0.7} \backslashbox{Modulo}{Prueba}& {PI-1}  & {PI-2} & {PI-3} & {PI-4} & {PI-5} \\
+\rowcolor[gray]{0.7} {Modulo/Prueba}& {PI-1}  & {PI-2} & {PI-3} & {PI-4} & {PI-5} \\
+		\hline
+		{Modulo 1} & {x}  & {} & {} & {} & {} \\
+		\hline
+		{Modulo 2} & {x}  & {x} & {x} & {x} & {} \\
+		\hline
+		{Modulo 3} & {}  & {x} & {x} & {} & {x} \\
+		\hline
+		{Modulo 4} & {}  & {} & {x} & {x} & {x} \\
+		\hline
+		{Modulo 5} & {}  & {} & {} & {} & {x} \\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Formato Tabla de Cobertura de las Pruebas de Integración}
+		\label{coberturaIntegracion}
+	\end{table}
+
+	\subsection{Pruebas de Rendimiento}
+	Una vez el sistema se ha integrado completamente, es posible probar las propiedades
+	emergentes del sistema, en este caso el rendimiento es nuestra principal preocupación
+	dado que es la única propiedad que el cliente menciono en los requerimientos no funcionales. \\
+	
+	Para el desarrollo de estas pruebas se utilizaran 2 herramientas:
+	\begin{itemize}
+		\item \textbf{JMeter:} Es una herramienta Open Source diseñada 100\% en Java, que puede 
+		ser utilizada como una herramienta de prueba de carga para analizar y medir el desempeño
+		de una variedad de servicios, con énfasis en aplicaciones web \cite{jmeter}.
+		\item \textbf{VisualVM:} Es una herramienta que proporciona una interfaz visual para ver 
+		información detallada sobre las aplicaciones Java que están ejecutandoce en una Maquina 
+		Virtual de Java (JVM), normalmente se distribuye junto con el Java Development Kit (JDK) 
+		\cite{visualvm}.
+	\end{itemize}
+
+	El objetivo de estas pruebas es asegurar que el sistema podrá soportar la carga esperada.
+	Para esto se diseñaran y ejecutaran un conjunto reducido de pruebas que ejerciten las tareas 
+	que debiesen ser accedidas con mayor frecuencia por los usuarios, el procedimiento para estas
+	pruebas sera el siguiente.
+	
+	\begin{enumerate}
+		\item Se seleccionara un escenario de ejecución frecuente del sistema.
+		\item Se ingresara al sistema y se grabara el escenario con JMeter, creando así un escenario 
+		de prueba.
+		\item Se ejecutara el escenario de prueba simulando 1 solo usuario, para tener una medición 
+		base y corroborar que la prueba funciona correctamente.
+		\item Se ejecutara el escenario de prueba simulando 100 usuarios.
+		\item Se continuara ejecutando el escenario de prueba incrementando la cantidad de usuarios
+		en 100, deteniéndose cuando el rendimiento del sistema se vea degradado.
+	\end{enumerate}
+	
+	\textbf{Nota:} Antes de ejecutar un escenario de prueba, se debe reiniciar el servidor para 
+	liberar todos los recursos que pueden haber quedado reservados por ejecución de la prueba 
+	anterior, de esta manera no afectar las mediciones de la siguiente prueba.\\
+	
+ 	Se debe documentar tanto los escenarios de prueba en la Tabla \ref{escenarioPR} como las mediciones obtenidas en sus 
+	ejecuciones en la Tabla \ref{medicionPR}.
+	
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{| m{2cm}| m{5cm}|m{7cm}|}
+		\hline
+		\rowcolor[gray]{0.8}\textbf{Id-Prueba} & \textbf{Nombre archivo (.jmx)} & \textbf{Descripción del Escenario} \\
+		\hline
+		{} & {} & {} \\
+		\hline
+		{} & {} & {} \\
+		\hline
+		{} & {} & {} \\
+		\hline
+		{} & {} & {} \\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Documentación de los escenarios de pruebas de rendimiento}
+		\label{escenarioPR}
+	\end{table}
+		
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|m{3cm}| m{3cm}|m{4cm}|m{2.5cm}|}
+		\hline
+			\multicolumn{4}{|c|}{\cellcolor[gray]{0.8}\textbf{Configuración de la Prueba}}\\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Id-Prueba} & {} & \cellcolor[gray]{0.9}\textbf{Fecha Ejecución} & {}\\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Hilos} & {} & \cellcolor[gray]{0.9}\textbf{Ciclos} & {} \\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Rand Up} & {} & \cellcolor[gray]{0.9}\textbf{Retardo} & {} \\
+		\hline
+			\multicolumn{4}{|c|}{\cellcolor[gray]{0.8} \textbf{Resultados}}\\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Duración} & {} & \cellcolor[gray]{0.9}\textbf{Rendimiento} & {} \\
+		\hline
+			\cellcolor[gray]{0.9}\textbf{Errores} & {} & \cellcolor[gray]{0.9}\textbf{Tasa de Transferencia} & {} \\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Documentación de las mediciones de las pruebas de rendimiento}
+		\label{medicionPR}
+	\end{table}
+	
+	Ademas adjunto a la Tabla \ref{medicionPR} deben ir los graficos del uso de CPU y el uso de RAM, obtenidos con VisualVM.\\
+	
+	Con todo esto ademas de demostrar que la aplicación satisface los
+	requisitos de rendimiento impuestos por el cliente. Se debe determinar 
+	cual es la capacidad máxima del sistema, antes de ver degradado el rendimiento.
+
+	\subsection{Pruebas de Aceptación}
+	Las pruebas de aceptación tienen como propósito demostrar al cliente el 
+	cumplimiento total o parcial de los requisitos del software\cite{reqPA}. Las características 
+	fundamentales de una Prueba de Aceptación son:
+	\begin{itemize}
+		\item Una Prueba de Aceptación describe un escenario (secuencia
+		de pasos) de ejecución o un uso del sistema desde la perspectiva del
+		cliente. Las Pruebas de Aceptación cubren desde escenarios típicos/frecuentes
+		hasta los mas excepcionales.
+		\item Puede estar asociada a un requisito funcional o requisito no funcional.
+		Un requisito tiene una o mas Pruebas de Aceptación asociadas.
+		\item Una Prueba de Aceptación puede tener infinitas instanciaciones 
+		(ejecuciones con valores concretos).
+	\end{itemize}
+	
+	Estas pruebas se realizaran una vez finalizadas las pruebas de integración y se ha 
+	descubierto y corregido los errores. Y antes de ser puesta en el ambiente de producción.
+	A diferencia de las pruebas anteriores estas serán desarrolladas y ejecutadas por
+	el cliente en compañía del desarrollador quien sera el encargado de:
+	\begin{itemize}
+		\item Guiar al cliente en la ejecución de las pruebas.
+		\item Indicarle cual o cuales de sus requerimientos son ejercitados por cada prueba.
+		\item Registrar el nivel de satisfacción del cliente, sus observaciones, errores 
+		detectados.
+		\item Negociar con el cliente un método para satisfacer las deficiencias encontradas
+		por el cliente.
+	\end{itemize}
+
+	Basándose en estas pruebas es que el cliente decidirá finalmente si acepta o rechaza el 
+	sistema, el criterio de aprobación de estas se alcanza cuando el software funciona de tal
+	manera que satisface las expectativas razonables del cliente, las cuales están definidas por
+	la Especificación de Requerimientos de software \cite{sommerville}.\\
+	
+	Para esto se diseñaron una seria de casos de prueba basados en los casos de uso con los
+	cuales se intenta demostrar que el sistema ha implementado los requerimientos en forma 
+	adecuada. Las pruebas consistirán en ejercitar cada caso de uso, probando cada uno de estos
+	para un conjunto de valores que permitan seguir el flujo normal y luego para otro conjunto
+	que permitan seguir el flujo alternativo del caso de uso.\\
+
+	El formato con el que se especifican las pruebas es el que se muestra en la Tabla
+	\ref{fpa}. 
+	
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {}\\
+		\hline
+		{\textbf{Requerimiento}} & {} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{l|}{}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{l|}{}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{l|}{}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{l|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Formato Pruebas de Aceptación}
+		\label{fpa}
+	\end{table} 
+	
+	La descripción del contenido de cada campo de la Tabla \ref{fpa} se detalla a continuación.
+
+	\begin{itemize}
+		\item \textbf{Id-Prueba:} Establece un numero identificador con el cual identificar
+		inequívocamente a dicha prueba. 
+		\item \textbf{Nombre:} Da un nombre que resume y representa el caso de prueba.
+		\item \textbf{Requerimiento:} Identifica cuales son el o los requerimientos validados
+		por la prueba de aceptación en cuestión.
+		\item \textbf{Caso de Uso:} Identifica el o los casos de uso involucrados en la prueba.
+		\item \textbf{Condición:} Es opcional, y se utiliza para establecer condiciones previas
+		antes de aplicar los pasos de la prueba. Normalmente se refieren al estado de la BD 
+		antes de ejecutar la prueba y/o la navegación necesaria en la IU para localizarse en el 
+		punto adecuado para realizar la prueba (cuando no sea obvio).
+		\item \textbf{Pasos:} Son las acciones de interacción del actor con el sistema. Cuando 
+		son varias acciones, éstas pueden ponerse en una lista numerada. Deben ser simples, 
+		del estilo "seleccionar...", "introducir...", evitando hacer referencia explícita a controles 
+		de interfaz o cualquier tecnicismo que dificulte su validación con el cliente.
+		\item \textbf{Resultado Esperado:} Es el efecto de las acciones de interacción del actor. 
+		Cada acción puede provocar uno o más resultados. Es importante que cuando se trate de 
+		mensajes al usuario se incluya el texto como parte del resultado esperado.
+		\item \textbf{Observaciones:} Es un apartado opcional que contiene recomendaciones
+		que se estiman convenientes tener en cuenta al momento de ejecutar el test.
+	\end{itemize}
+	
+	Ademas una vez ejecutadas las pruebas los resultados de estas deben ser documentados 
+	completando la Tabla \ref{coberturaAceptacion} que muestra cuyos campos son descritos a continuación.
+
+	\begin{itemize}
+		\item \textbf{Id-Prueba:} Identificador de la prueba ejecutada.
+		\item \textbf{Fecha Ejecución:} Fecha en la que fue ejecutada la prueba.
+		\item \textbf{Completación:} Indica el nivel de satisfacción del cliente ante
+		la ejecución de la prueba. Los valores pueden ser:
+		\begin{itemize}
+			\item \textbf{Completamente Conforme:} Cuando los resultados se acercan 
+			completamente a la expectativas del cliente, y este no presenta ninguna
+			observación.
+			\item \textbf{Conforme:} Cuando el resultado obtenido en la prueba no alcanza
+			a satisfacer completamente todas las expectativas del cliente, sin embargo el nivel
+			de adecuación es suficiente como para darse por satisfecho y el resultado de la
+			prueba es el esperado, puede presentar alguna observaciones con indicaciones 
+			que no estaban en la especificación de requerimientos por lo que no es obligación 
+			implementarlas.
+			\item \textbf{Medianamente Conforme:} Cuando el cliente presenta observaciones
+			que deben ser resueltas antes de aprobar el sistema, puede ser debido a una mala
+			interpretación o definición de un requerimiento.
+			\item \textbf{Disconforme:} Cuando se encuentran errores grabes en la ejecución
+			de a prueba o las funcionalidades no se encuentra implementada completamente.
+		\end{itemize}
+		\item \textbf{Observaciones del Cliente:} Sección opcional donde el cliente
+		indica que es lo que falta para estar Conforme o Completamente Conforme de manera
+		de poder aprobar el sistema.
+		\item \textbf{Descripción Error:} Detalla un error detectado durante la 
+		ejecución de la prueba.
+		\item \textbf{Condiciones de Replicación:} Es una sección opcional donde se añade
+		información relevante que permita la replicación del error y que no se encuentra 
+		explicito en la descripción de la prueba.
+	\end{itemize}
+	
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{3cm} | m{3cm}|m{3cm}|m{5cm}|}
+		\hline
+		\multicolumn{4}{|c|}{\cellcolor[gray]{0.8}\textbf{Caso de Prueba}}\\
+		\hline
+		{\textbf{Id-Prueba}} & {} & {\cellcolor[gray]{0.9}\textbf{Fecha Ejecución}} & {}\\
+		\hline
+		{\textbf{Completación}} & \multicolumn{3}{l|}{}\\
+		\hline
+		{\textbf{Observaciones del Cliente}} & \multicolumn{3}{l|}{}\\
+		\hline
+		\multicolumn{4}{|c|}{\cellcolor[gray]{0.8}\textbf{Error}}\\
+		\hline
+		{\textbf{Descripción Error}} & \multicolumn{3}{l|}{}\\
+		\hline
+		{\textbf{Condiciones de Replicación}} & \multicolumn{3}{l|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Formato del resultado de una Prueba de Aceptación}
+		\label{coberturaAceptacion}
+	\end{table}
+
+	
+	\subsection{Pruebas Beta}
+	Por ultimo una vez que se hayan aprobado todas las pruebas diseñadas
+	el sistema pasara a las pruebas betas, donde el objetivo es estar preparado
+	para todos los tipos de usuarios. \\
+	
+	Estas pruebas se realizan en un ambiente de producción real, y son ejecutadas 
+	por los usuarios reales del sistema sin la supervisión del desarrollador. En este 
+	caso no existen casos de pruebas, por lo que los mismos usuarios serán los encargados
+	de documentar los problemas encontrados y comunicarlos de manera regular al 
+	desarrollador \cite{sommerville}. \\
+
+	Como resultado de los problemas informados durante las pruebas beta el desarrollador 
+	corrige los problemas y prepara el sistema para su liberación final.\\
+
+	Para la ejecución de estas pruebas se liberara la aplicación para una conjunto reducido de 
+	usuarios reales, a los cuales se les crearan las cuentas de usuarios reales con los permisos
+	correspondientes. El conjunto de usuarios estara compuesto por:
+	\begin{itemize}
+		\item El Jefe de Departamento de DISICO.
+		\item 1 Jefe de Área, el Jefe del Área de Desarrollo.
+		\item El área de desarrollo de DISICO.
+		\item 2 Jefes de Carreras.
+		\item 4 Secretarias.
+	\end{itemize}
+
+	Dicho conjunto de usuario ejercitara con el sistema durante un periodo de 4 semanas
+	durante la cuales reportaran mediante correos electrónicos al desarrollador los problemas
+	detectados detallando:
+	\begin{itemize}
+		\item Fecha y Hora aproximada del error o problema.
+		\item Descripción del error o problema.
+		\item Información que permita la replicación del error o problema. Como
+		datos de entrada, pasos que realizo, opciones que selecciono, etc
+	\end{itemize}
+
+	Finalmente una vez terminadas la fase de pruebas beta, los usuario que participaron
+	de estas pruebas, deben contestar una encuesta, con el objetivo de obtener información
+	sobre:
+	\begin{itemize}
+		\item La percepción que tienen los usuarios acerca del sistema después de haber 
+		interactuado con el.
+		\item Los aspectos del sistema que requieren ser mejorados. 
+		\item Saber que tan dispuestos están los usuarios a utilizar el nuevo sistema.
+	\end{itemize}
+	
+	Para esto se diseñaron las siguientes encuestas, las cuales se encuentran separadas por 
+	perfil de usuario. La escala de respuestas va de 1 a 5, donde 1 es \textit{Muy en desacuerdo}
+	y 5 es \textit{Muy de acuerdo}.
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta General para todos los Usuarios }}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{Los nombres de los menús y botones son representativos} & {} & {} & {} & {} & {}\\
+		\hline
+		{Los mensajes de error ayudan a entender la causa y la solución de estos} & {} & {} & {} & {} & {}\\
+		\hline
+		{El estilo visual del sistema sigue el estilo del resto de los portales de la UV} & {} & {} & {} & {} & {}\\
+		\hline
+		{Es simple aprender a utilizar el sistema} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema mejora la comunicación entre los diferentes usuarios} & {} & {} & {} & {} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta General para todos los Usuarios}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Solicitante}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{Es fácil enviar una solicitud de requerimiento} & {} & {} & {} & {} & {}\\
+		\hline
+		{Es fácil buscar una solicitud de requerimiento} & {} & {} & {} & {} & {}\\
+		\hline
+		{Las solicitudes quedan mejor documentadas que en correos electrónicos} & {} & {} & {} & {} & {}\\
+		\hline
+		{Los mensajes de notificación son lo suficientemente breves y claros} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema envía una cantidad prudente de correos electrónicos} & {} & {} & {} & {} & {}\\
+		\hline
+		{La información de las solicitudes se presentan de forma clara y entendible } & {} & {} & {} & {} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Solicitante }
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Funcionario}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{La presentación de las solicitudes asignadas esta claramente ordenada} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica claramente cuando se le a asignado una nueva solicitud	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica claramente cuando una solicitud esta vencidas (retrasadas)	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica oportunamente cuando se le a asignado una nueva solicitud	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica oportunamente cuando una solicitud esta vencidas (retrasadas)	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema ayuda a que no olvide las solicitudes que dejo pendientes	} & {} &{} &{} & {} & {} \\
+		\hline
+		{Los gráficos en los resumen permiten una mejor visualización de la información} & {} &{} &{} & {} & {} \\
+		\hline
+		{Las mediciones que se muestran en el Resumen Personal se entiend claramente} & {} &{} &{} & {} & {} \\
+		\hline
+		{Es rápido y sencillo responder las solicitudes de los usuarios} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema notifica claramente cuando se le a asignado una nueva tarea de SCM	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema alerta oportunamente ante retrasos en las tareas de SCM} & {} &{} &{} & {} & {} \\
+		\hline
+		{Se entiende claramente la relacion las opciones del subsistema de SCM y la metodología de SCM de DISICO} & {} &{} &{} & {} & {} \\
+		\hline
+		{Es mas fácil mantener actualizada la información sobre los cambios} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema documenta de forma clara el historial de cambios de los items de configuración} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema permite administrar fácilmente los items de configuración de un proyecto} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema permite agendar de forma fácil nuevas tareas	} & {} &{} &{} & {} & {} \\
+		\hline
+		{El sistema alerta oportunamente cuando existen retraso en las tareas} & {} &{} &{} & {} & {} \\
+		\hline
+		{La opción de actualizar el avance de una tarea le brinda un mayor expresividad} & {} &{} &{} & {} & {} \\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Funcionario}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Jefe de Área}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{El sistema mantiene organizadas las solicitudes de su área} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema le permite dar seguimiento completo cada solicitud} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema le ayuda a decidir a quien asignar una solicitud} & {} & {} & {} & {} & {}\\
+		\hline
+		{Los gráficos en los resumen permiten una mejor visualización de la información} & {} & {} & {} & {} & {}\\
+		\hline
+		{Las mediciones del área son de utilidad para la toma de decisiones} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema lo mantiene informado del estado de cada solicitud de su área} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema notifica claramente cuando llega una nueva solicitud al área} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema notifica claramente cuando existen retrasos en las solicitudes} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema notifica oportunamente cuando  llega una nueva solicitud al área} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema notifica oportunamente cuando existen retrasos en las solicitudes} & {} & {} & {} & {} & {}\\
+		\hline
+		{Es útil la opción de respuesta manual} & {} & {} & {} & {} & {}\\
+		\hline
+		{Las solicitudes quedan debidamente documentadas} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema mejora el monitorio de avance en los proyectos} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema facilita la documentación de los proyectos existentes} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema facilita mantener documentado los participantes de cada proyecto y sus tareas} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema facilita la tareas de gestión de cambios} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema permite asignar fácilmente responsables de las tareas de SCM} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema permite documentar correctamente los templates de la metodologia de SCM} & {} & {} & {} & {} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Jefe de Área}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{10cm} | m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|}
+		\hline
+		\multicolumn{6}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Jefe de Departamento}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Pregunta}} & {\textbf{1}} & {\textbf{2}} & {\textbf{3}} & {\textbf{4}} & \textbf{5}\\
+		\hline
+		{El sistema permite tener un mayor control de las actividades que se realizan en el departamento} & {} & {} & {} & {} & {}\\
+		\hline
+		{EL sistema documenta correctamente las solicitudes de requerimientos} & {} & {} & {} & {} & {}\\
+		\hline
+		{El sistema facilita la tarea de buscar solicitudes de requerimientos} & {} & {} & {} & {} & {}\\
+		\hline
+		{Las mediciones mostradas son de utilidad} & {} & {} & {} & {} & {}\\
+		\hline
+		{Los gráficos en los resumen permiten una mejor visualización de la información} & {} & {} & {} & {} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Jefe de Departamento}
+	\end{table}
