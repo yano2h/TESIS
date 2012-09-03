@@ -6,10 +6,12 @@ package cl.uv.proyecto.requerimientos.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
+import cl.uv.test.junit.base.BaseTestEJB;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import javax.ejb.embeddable.EJBContainer;
+import javax.naming.NamingException;
 import static org.junit.Assert.assertEquals;
 import org.junit.*;
 
@@ -17,10 +19,9 @@ import org.junit.*;
  *
  * @author Alejandro
  */
-public class CalculoDeIndicadoresEJBTest {
+public class CalculoDeIndicadoresEJBTest extends BaseTestEJB{
     
-    private static EJBContainer ejbContainer;
-    private static CalculoDeIndicadoresEJBLocal ejb;
+    private static CalculoDeIndicadoresEJBLocal ejbCalculoDeIndicadores;
 
     private static FuncionarioDisico funcionario;
     private static Area area;
@@ -28,26 +29,11 @@ public class CalculoDeIndicadoresEJBTest {
     public CalculoDeIndicadoresEJBTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-        Map<String, Object> properties = new HashMap<String, Object>();  
-      //  properties.put(EJBContainer.MODULES, new File("build/classes"));
-        properties.put("org.glassfish.ejb.embedded.glassfish.installation.root", "C:\\glassfish3\\glassfish");
-        ejbContainer = javax.ejb.embeddable.EJBContainer.createEJBContainer(properties);
-        ejb = (CalculoDeIndicadoresEJBLocal)ejbContainer.getContext().lookup("java:global/classes/CalculoDeIndicadoresEJB");
-        System.out.println("Opening the container");
+    @Before
+    public void setUp() throws NamingException {
+        ejbCalculoDeIndicadores = lookupBy(CalculoDeIndicadoresEJB.class);
         funcionario = new FuncionarioDisico(16775578, "");
         area = new Area((short)1);
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-        ejbContainer.close();
-        System.out.println("Closing the container");
-    }
-    
-    @Before
-    public void setUp() {
     }
     
     @After
@@ -63,7 +49,7 @@ public class CalculoDeIndicadoresEJBTest {
         Short idEstado = 1;
         Long expResult = 2L;
         
-        Long result = ejb.contarSolicitudes(funcionario, idEstado);
+        Long result = ejbCalculoDeIndicadores.contarSolicitudes(funcionario, idEstado);
         assertEquals(expResult, result);
     }
 

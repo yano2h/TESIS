@@ -18,9 +18,10 @@ public class EntityUtils {
     private static short idEstadoProyecto = 20;
     private static short idEstadoSolCambio = 20;
     private static short idEstadoSolReq = 20;
+    private static short idTipoSolReq = 20;
     private static long idComentarioSol = 0;
     private static long idSolicitudReq = 100L;
-    private static int rutFunctionario = 11222333;
+    private static int rutFunctionario = 123;
     private static int idItemConfig = 1;
     private static Random r = new Random((new Date()).getTime());
     
@@ -126,6 +127,25 @@ public class EntityUtils {
         s.setSolicitante(solicitante);
         s.setTipoSolicitud(ts);
         return s;
+    }
+    
+    public static SolicitudRequerimiento createSolicitudReq(Area a, TipoSolicitudRequerimiento ts){
+        SolicitudRequerimiento s = new SolicitudRequerimiento();
+        s.setAreaResponsable(a);
+        s.setAsunto("Asunto Solicitud ");
+        s.setFechaEnvio(new Date());
+        s.setFechaUltimaActualizacion(new Date());
+        s.setMensaje("Mensaje");
+        s.setRespuesta("Respuesta");
+        s.setTipoSolicitud(ts);
+        return s;
+    }
+    
+    public static TipoSolicitudRequerimiento createTipoSolicitudRequerimiento(){
+        TipoSolicitudRequerimiento t = new TipoSolicitudRequerimiento(idTipoSolReq++);
+        t.setDescripcionTipo("Descripcion - "+t.getIdTipoSolicitudRequerimiento());
+        t.setNombreTipoSolicitud("Nombre - "+t.getIdTipoSolicitudRequerimiento());
+        return t;
     }
     
     private static String generateCodeRandom(long idSol){
