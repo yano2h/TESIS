@@ -38,7 +38,7 @@ public class EstadoSolicitudRequerimiento implements Serializable {
     private String descripcionEstado;
     
     /* Ver si borrar */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoSolicitud")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoSolicitud", orphanRemoval=true)
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
 
     public EstadoSolicitudRequerimiento() {

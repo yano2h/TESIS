@@ -41,7 +41,7 @@ public class FuncionarioDisico extends Funcionario {
     private List<TareaProyecto> tareasProyectoAgendadas;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
     private List<EstadisticaPersonal> estadisticasPersonales;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsable")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsable",orphanRemoval=true)
     private List<SolicitudRequerimiento> solicitudesRequerimientosAsignadas;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsable")
     private List<TareaScmProyecto> tareasScmAsignadas;

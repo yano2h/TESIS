@@ -32,7 +32,7 @@ public class TipoPrioridad implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombre_prioridad")
     private String nombrePrioridad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prioridadSolicitud")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prioridadSolicitud", orphanRemoval=true)
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prioridadSolicitud")
     private List<SolicitudCambio> solicitudCambioList;
