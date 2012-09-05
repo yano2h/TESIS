@@ -480,29 +480,17 @@ exists or setup the property manually. For example like this:
     </target>
     <target depends="compile,-library-inclusion-in-archive-weblogic,-library-inclusion-in-archive-by-user" name="library-inclusion-in-archive"/>
     <target if="is.jars.in.ejbjar" name="-library-inclusion-in-archive-by-user">
-        <copyfiles files="${file.reference.jtds-1.2.5.jar}" todir="${build.classes.dir}"/>
         <copyfiles files="${libs.MySQLDriver.classpath}" todir="${build.classes.dir}"/>
-        <copyfiles files="${libs.hibernate-support.classpath}" todir="${build.classes.dir}"/>
     </target>
     <target if="is.server.weblogic" name="-library-inclusion-in-archive-weblogic">
-        <basename file="${file.reference.jtds-1.2.5.jar}" property="manifest.file.reference.jtds-1.2.5.jar"/>
         <basename file="${libs.MySQLDriver.classpath}" property="manifest.libs.MySQLDriver.classpath"/>
-        <basename file="${libs.hibernate-support.classpath}" property="manifest.libs.hibernate-support.classpath"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Extension-List" value="jar-1 jar-2 "/>
-<<<<<<< HEAD
+            <attribute name="Extension-List" value="jar-1 "/>
             <attribute name="jar-1-Extension-Name" value="${manifest.libs.MySQLDriver.classpath}"/>
-            <attribute name="jar-2-Extension-Name" value="${manifest.libs.hibernate-support.classpath}"/>
-=======
-            <attribute name="jar-1-Extension-Name" value="${manifest.file.reference.jtds-1.2.5.jar}"/>
-            <attribute name="jar-2-Extension-Name" value="${manifest.libs.MySQLDriver.classpath}"/>
->>>>>>> 7b8d49bddb500c1c663b48ba26553ca8a5d0c9e8
         </manifest>
     </target>
     <target depends="compile" name="library-inclusion-in-manifest">
-        <copyfiles files="${file.reference.jtds-1.2.5.jar}" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${libs.MySQLDriver.classpath}" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${libs.hibernate-support.classpath}" todir="${dist.ear.dir}/lib"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
     <target name="-copy-meta-inf">
