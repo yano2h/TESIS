@@ -13,154 +13,275 @@
 	El principal enfoque de las pruebas es la detección de errores.
 	
 	\section{Pruebas Unitarias}
-	Las pruebas unitarias están enfocadas en probar unidades pequeñas de código. Para esto se
-	diseñaron test automatizados, los cuales fueron desarrollados haciendo uso de la JUnit y de 
-	Glassfih Embedded, dentro del cual se despliegan los EJB para ser utilizados durante la ejecución de las
-	pruebas.
-
-	En la Tabla \ref{docTestUnit} se encuentran documentadas las pruebas realizadas junto con el
-	propósito de cada una.
+	Las pruebas unitarias están enfocadas en probar unidades pequeñas de código. 
+	Para llevarlas a cabo se diseño un set de pruebas automatizados, las cuales 
+	fueron implementadas con el framework de pruebas JUnit y de Glassfih 
+	Embedded, dentro del cual se despliegan los EJB para ser utilizados durante 
+	la ejecución de las pruebas.
+	
+	El procedimiento para ejecutar los test dentro del contenedor de Glassfih
+	Embedded es el siguiente:
+	\begin{itemize}
+		\item Se copian los archivos del directorio build/classes a un directorio 
+		temporal para el despliegue de los EJB en build/embedded.
+		\item Ademas se copia el archivo test-percistence.xml (que contiene una 
+		configuración diferente para la ejecución de las pruebas en una base de 
+		datos diferente a la de producción) dentro del directorio 
+		build/embedded/META-INF/ y se renombra como percistence.xml.
+		\item Antes de levantar Glassfish Embedded se le indica que se crea un 
+		properties que le indica a Glassfish donde se encuentran los módulos a 
+		desplegar y el archivo de configuración domain.xml que debe utilizar (en 
+		este caso es un archivo aparte que contiene la configuración necesaria para 
+		la ejecución del test).
+		\item Luego se inicia el Glassfish Embedded.
+		\item Se ejecutan los test necesarios.
+		\item Por ultimo se cierra Glassfish Embedded y se borra el directorio 
+		temporal build/embedded.
+	\end{itemize}
+	
+	Para esto gestionar todo ese proceso se implemento una nueva clase 
+	denominada BaseTestEJB de la cual extienden todos los test que hacen uso de
+	los EJB.	En el caso de clases java comunes no se requiere de ninguna 
+	configuración especial para ejecutar los test, basta simplemente ejecutarlos.
+	
+	En la Tabla \ref{docTestUnit} se encuentran documentadas todas las pruebas   
+	unitarias diseñadas, con su nombre y propósito.
 	
 	\begin{table}[H]
-	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{6cm}|m{5cm}|}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.5cm}|m{8cm}|}
 		\hline
-		\rowcolor[gray]{0.7} {\textbf{Modulo}} & \textbf{Test} & \textbf{Proposito del Test}\\
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
 		\hline
-		\multirow{3}{*}{Resources} & {testGetValue} & {Verificar que el método getValue es 
-		capas de recuperar la cadena "ABCD" desde un archivo de propiedades.}\\
-						\cline{2-3}
-						& {testGetValueConEspacios} & {Verificar que el método getValue es 
-		capas de recuperar la cadena "A B C   D" desde un archivo de propiedades sin verse 
-		afectado por la cantidad de espacios entre los caracteres.}\\
-						\cline{2-3}
-						& {testGetValueShort} & {Verificar que el método getValueShort es 
-						capas de recuperar cadena desde un archivo de propiedades y convertirla a Short siempre que cumpla 
-						con el formato de este.}\\
-						\cline{2-3}
-						& {testGetValueShortNegativo} & {Verificar que el método getValueShort es 
-						capas de recuperar cadena desde un archivo de propiedades y convertirla a Short aunque este sea
-						negativo.}\\
-						\cline{2-3}
-						& {testGetValueShortErrorEnString} & {Verificar que el método getValueShort dispara la excepción
-						NumberFormatException al leer un String desde el archivo de propiedades.}\\
-						\cline{2-3}
-						& {testGetValueShortErrorValorMayorAShort} & {Verificar que el método getValueShort dispara la 		
-						expeción NumberFormatException al leer un numero entero que excede el valor máximo de un Short.}\\
-						\cline{2-3}
-						& {testGetValueShortErrorValorDecimal} & {Verificar que el método getValueShort dispara la excepción
-						NumberFormatException al leer un valor con decimales desde el archivo de propiedades.}\\
-						\cline{2-3}
-						& {testGetValueInteger} & {Verificar que el método getValueInteger es 
-						capas de recuperar cadena desde un archivo de propiedades y convertirla a Integer siempre que cumpla 
-						con el formato de este.}\\
+		& {testGetValue} & {Verificar que el método 	
+		getValue es capas de recuperar la cadena "ABCD" desde un archivo de 
+		propiedades.}\\
+		\cline{2-3}
+		& {testGetValueCon Espacios} & {Verificar que el método getValue es 
+		capas de recuperar la cadena "A B C   D" desde un archivo de propiedades 
+		sin verse afectado por la cantidad de espacios entre los caracteres.}\\
+		\cline{2-3}
+		& {testGetValueShort} & {Verificar que el método getValueShort es capas de 
+		recuperar cadena desde un archivo de propiedades y convertirla a Short 
+		siempre que cumpla con el formato de este.} \\
+		\cline{2-3}
+		& {testGetValueShort Negativo} & {Verificar que el método getValueShort es 
+		capas de recuperar cadena desde un archivo de propiedades y convertirla a 
+		Short aunque este sea negativo.} \\
+		\cline{2-3}
+		\multirow{3}{*}{Resources} & {testGetValueShort ErrorEnString} & {Verificar que el método getValueShort 
+		dispara la excepción NumberFormatException al leer un String desde el 
+		archivo de propiedades.} \\	
+		\cline{2-3}
+		& {testGetValueShort ErrorValorMayor AShort} & {Verificar que el método 
+		getValueShort dispara la expeción NumberFormatException al leer un numero 
+		entero que excede el valor máximo de un Short.} \\	
+		\cline{2-3}
+		& {testGetValueShort ErrorValorDecima} & {Verificar que el método 
+		getValueShort dispara la excepción NumberFormatException al leer un valor 
+		con decimales desde el archivo de propiedades.} \\	
+		\cline{2-3}
+		& {testGetValueInteger} & {Verificar que el método getValueInteger es capas 
+		de recuperar cadena desde un archivo de propiedades y convertirla a Integer 
+		siempre que cumpla con el formato de este.} \\	
+		\cline{2-3}
+		& {testGetValueInteger Negativo} & {Verificar que el método getValueInteger 
+		es capas de recuperar cadena desde un archivo de propiedades y convertirla 
+		a Integer aunque este sea negativo.} \\
+		\cline{2-3}
+		& {testGetValueInteger ErrorValorMayorAInteger} & {Verificar que el método 
+		getValueInteger dispara la expeción NumberFormatException al leer un 
+		numero entero que excede el valor máximo de un Integer.} \\		
+		\hline
 	\end{tabular}
-	\end{table}		
+	\end{table}	
 	
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.5cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
+		\hline
+		 & {testGetValueInteger ErrorValorMayorAInteger} & {Verificar 
+		que el método getValueInteger dispara la expeción NumberFormatException al leer un 
+		numero entero que excede el valor máximo de un Integer.} \\
+		\cline{2-3}
+		& {testGetValueInteger ErrorValorDecimal} & {Verificar que el método 
+		getValueInteger dispara la excepción NumberFormatException al leer un 
+		valor con decimales desde el archivo de propiedades.} \\
+		\cline{2-3}
+		& {testGetValueLong} & {Verificar que el método getValueLong es capas de 
+		recuperar cadena desde un archivo de propiedades y convertirla a Long 
+		siempre que cumpla con el formato de este.} \\		
+		\cline{2-3}
+		& {testGetValueLong Negativo} & {Verificar que el método getValueLong es 
+		capas de recuperar cadena desde un archivo de propiedades y convertirla a 
+		Long aunque este sea negativo.} \\
+		\cline{2-3}
+		\multirow{3}{*}{Resources} & {testGetValueLong ErrorValorMayor ALong} & {Verificar que el método 
+		getValueLong dispara la excepción NumberFormatException al leer un 
+		numero entero que excede el valor máximo de un Long.} \\
+		\cline{2-3}
+		& {testGetValueLong ErrorValorDecimal} & {Verificar que el método getValueLong dispara la 
+		excepción NumberFormatException al leer un valor con decimales desde el archivo de 
+		propiedades.} \\		
+		\cline{2-3}
+		& {testGetPropertiesPath} & {Verifica que el metodo getPropertiesPath obtenga la ruta de un 
+		archivo properties correctamente.} \\
+		\cline{2-3}
+		& {testGetPropertiesPath NotFound} & {Verfica que el metodo getPropertiesPath dispare la 
+		excepcion MissingResourceException al intentar obtener la ruta de un propertie que no existe.} \\		
+		\cline{2-3}
+		& {testGetPageList} & {Verifica que el metodo getPageList obtenga una lista con todas las 
+		propiedades contenidas en el archivo propertie especificado.} \\
+		\cline{2-3}
+		& {testGetMapPageList} & {Verifica que el metodo getMapPageList obtenga un Map con todas las 
+		propiedades contenidas en el archivo propertie especificado.} \\		
+		\hline
+	\end{tabular}
+	\end{table}	
+		
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.7cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
+		\hline
+		& {testCalcularPorcentaje Redondeado} & {Verifica que el calculo del 
+		porcentaje entero sin decimal.} \\
+		\cline{2-3}
+		& {testCalcularPorcentaje RedondeadoParaArriba} & {Verifica que el porcentaje 
+		sea 	redondeado hacia arriba cuando el decimal es mayor o igual a 5.} \\
+		\cline{2-3}
+		& {testCalcularPorcentaje RedondeadoParaAbajo} & {Verifica que el porcentaje 
+		sea redondeado hacia abajo cuando el decimal es menor a 5.} \\
+		\cline{2-3}
+		& {testCalcularRegla DeTres} & {Verifica el calculo de una regla de tres.} \\
+		\cline{2-3}
+		& {testCalcularReglaDe TresParaDenominadorCero} & {Verifica que se 
+		devuelva un 0 en caso que el denominador sea 0.} \\
+		\cline{2-3}
+		& {testCalcularReglaDe TresParaNumeradorCero} & {Verifica que se devuelva 
+		un 0 en caso que el numerador sea 0.} \\
+		\cline{2-3}
+		\multirow{3}{*}{MathUtils} & {testCalcularReglaDe TresParaCien} & {Verifica el caso en que se debe 
+		devolver cien.} \\
+		\cline{2-3}
+		& {testCalcularReglaDe TresParaPorcentaje MayorACien} & {Verifica que 
+		funcione cuando el numerador es mayor a cien.} \\
+		\cline{2-3}
+		& {testRedondearCero} & {Verifica la funcion redondear cuando el numero es
+		 cero.} \\
+		\cline{2-3}
+		& {testRedondearPara ArribaSinDecimal} & {Verifica que el numero sea 
+		redondeado hacia arriba cuando el decimal es mayor o igual a 5 y el resultado 
+		no debe tener ningún decimal.} \\
+		\cline{2-3}
+		& {testRedondearPara AbajoSinDecimal} & {Verifica que el numero sea 
+		redondeado hacia abajo cuando el decimal es menor a 5 y el resultado 
+		no debe tener ningún decimal.} \\
+		\cline{2-3}
+		& {testRedondearPara ArribaConUnDecimal} & {Verifica que el numero 
+		sea redondeado hacia arriba cuando el decimal es mayor o igual a 5 y el 
+		resultado no debe tener un decimal.} \\
+		\cline{2-3}
+		& {testRedondearPara AbajoConUnDecimal} & {Verifica que el numero sea 
+		redondeado hacia abajo cuando el decimal es menor a 5 y el resultado no debe 
+		tener un decimal.} \\
+		\cline{2-3}
+		& {testRedondearPara ArribaConDecimal5} & {Verifica el caso en que el
+		 decimal es 5.} \\
+		\cline{2-3}
+		& {testRedondearFloat Cero} & {Verifica la función redondear cuando 
+		el numero es cero. Cuando el resultado es convertido de BigDecimal a Float.} \\
+		\hline
+	\end{tabular}
+	\end{table}	
+		
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.7cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
+		\hline
+		& {testRedondearFloat ParaArribaSinDecimal} & {Verifica que el numero 
+		sea redondeado hacia arriba cuando el decimal es mayor o igual a 5 y el 
+		resultado no debe tener ningún decimal. Cuando el resultado es convertido 
+		de BigDecimal a Float.} \\
+		\cline{2-3}
+		& {testRedondearFloat ParaAbajoSinDecimal} & {Verifica que el numero 
+		sea redondeado hacia abajo cuando el decimal es menor a 5 y el resultado 
+		no debe tener ningún decimal. Cuando el resultado es convertido de 
+		BigDecimal a Float.} \\
+		\cline{2-3}
+		\multirow{1}{*}{MathUtils}& {testRedondearFloa tParaArribaConUn 
+		Decimal} & {Verifica que el numero sea redondeado hacia arriba cuando 
+		el decimal es mayor o igual a 5 y el resultado no debe tener un decimal.
+		Cuando el resultado es convertido de BigDecimal a Float.} \\
+		\cline{2-3}
+		& {testRedondearFloat ParaAbajoConUn Decimal} & {Verifica que el
+		numero sea redondeado hacia abajo cuando el decimal es menor a 5 y el 
+		resultado no debe tener un decimal. Cuando el resultado es convertido de 
+		BigDecimal a Float.} \\
+		\cline{2-3}
+		& {testRedondearFloat ParaArribaCon Decimal5} & {Verifica el caso en que 
+		el decimal es 5. Cuando el resultado es convertido de BigDecimal a Float.} \\
+		\hline
+		& {testBuscarSolicitudes VencidasVerificar Cambio} & {Verifica que el 
+		método buscarSolicitudesVencidas haya cambiado el estado de una 
+		solicitud enviada cuya fecha de vencimiento ya fue superada.}\\
+		\cline{2-3}
+		& {testBuscarSolicitudes VencidasVerificar NoCambioVencida} & {Verifica 
+		que el método buscarSolicitudesVencidas no haya cambiado el estado de 
+		solicitudes que ya se encontraban en estado vencida.}\\
+		\cline{2-3}
+		{TimerSolicitud Requerimientos UpdateTest} & {testBuscarSolicitudes 
+		VencidasVerificar NoCambioCerrada} & {Verifica que el método 
+		buscarSolicitudesVencidas no haya cambiado el estado de 
+		solicitudes que se Cerraron después de la fecha de vencimiento.}\\
+		\cline{2-3}
+		& {testBuscarSolicitudes VencidasVerificar NoCambioFinalizada 
+		SinRespuesta} & {Verifica que el método buscarSolicitudesVencidas no 
+		haya cambiado el estado de solicitudes que se Finalizaron sin respuesta 
+		después de la fecha de vencimiento.}\\
+		\cline{2-3}
+		&{testBuscarSolicitudes VencidasVerificar NoCambioSolicitud 
+		SinFechaVencimiento} & {Verifica que el método buscarSolicitudesVencidas
+		no haya cambiado el estado de solicitudes que no poseen fecha de 
+		vencimiento}\\
+		\hline
+	\end{tabular}
+	\end{table}	
+
 \begin{table}[H]
-	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{6cm}|m{5cm}|}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.7cm}|m{8cm}|}
 		\hline
-		\rowcolor[gray]{0.7} {\textbf{Modulo}} & \textbf{Test} & \textbf{Proposito del Test}\\		
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
 		\hline
-		\multirow{3}{*}{Resources} 
-						& {testGetValueIntegerNegativo} & {Verificar que el método getValueInteger es 
-						capas de recuperar cadena desde un archivo de propiedades y convertirla a Integer aunque este sea
-						negativo.}\\
-						\cline{2-3}
-						& {testGetValueIntegerErrorEnString} & {Verificar que el método getValueInteger dispara la excepción
-						NumberFormatException al leer un String desde el archivo de propiedades.}\\
-						\cline{2-3}
-						& {testGetValueIntegerErrorValorMayorAInteger} & {Verificar que el método getValueInteger dispara la 	
-						expeción NumberFormatException al leer un numero entero que excede el valor máximo de un Integer.}\\
-						\cline{2-3}
-						& {testGetValueIntegerErrorValorDecimal} & {Verificar que el método getValueInteger dispara la excepción
-						NumberFormatException al leer un valor con decimales desde el archivo de propiedades.}\\
-						\cline{2-3}
-						& {testGetValueLong} & {Verificar que el método getValueLong es 
-						capas de recuperar cadena desde un archivo de propiedades y convertirla a Long siempre que cumpla 
-						con el formato de este.}\\
-						\cline{2-3}
-						& {testGetValueLongNegativo} & {Verificar que el método getValueLong es 
-						capas de recuperar cadena desde un archivo de propiedades y convertirla a Long aunque este sea
-						negativo.}\\
-						\cline{2-3}
-						& {testGetValueLongErrorEnString} & {Verificar que el método getValueLong dispara la excepción
-						NumberFormatException al leer un String desde el archivo de propiedades.}\\
-						\cline{2-3}
-						& {testGetValueLongErrorValorMayorALong} & {Verificar que el método getValueLong dispara la 		
-						expeción NumberFormatException al leer un numero entero que excede el valor máximo de un Long.}\\
-						\cline{2-3}
-						& {testGetValueLongErrorValorDecimal} & {Verificar que el método getValueLong dispara la excepción
-						NumberFormatException al leer un valor con decimales desde el archivo de propiedades.}\\
-						\cline{2-3}
-						& {testGetPropertiesPath} & {}\\
-						\cline{2-3}
-						& {testGetPropertiesPathNotFound} & {}\\
-						\cline{2-3}
-						& {testGetPageList} & {}\\
-						\cline{2-3}
-						& {testGetMapPageList} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-
+		& {testGenerarCodigo NumCero} & {Verifica que el código es vacío cuando 
+		el numero es cero.}\\
+		\cline{2-3}
+		& {testGenerarCodigo NumNegativo} & {Verifica que el código es vacío 
+		cuando el numero es negativo.}\\
+		\cline{2-3}
+		& {testGenerarCodigo NumUno} & {Verifica que el código es "q" cuando el 
+		numero es 1.}\\
+		\cline{2-3}
+		{SolicitudRequeri- mientoEJB} & {testGenerarCodigo MaxLong} & {Verifica 
+		que el código es "2teCogGBXee" cuando el numero es el máximo valor de 
+		un Long.}\\
+		\cline{2-3}
+		& {testGenerarCodigo ConsultaNoDuplicados} & {Verifica que el código no 
+		se repite aunque sea generado en instantes de tiempo casi iguales y con 
+		ruts similares.}\\
+		\cline{2-3}
+		& {testValidarCodigo ConsultaExistente} & {Verifica que un código de 
+		consulta sea invalido cuando ya existe.}\\
+		\cline{2-3}
+		& {testValidarCodigo ConsultaInexistente} & {Verifica que un código de 
+		consulta es invalido cuando no existe.}\\
+		\cline{2-3}
+		& {testEnviarSolicitud} & {}\\
+		\cline{2-3}
+		& {} & {}\\
+		\cline{2-3}
 		\hline
-		\multirow{3}{*}{Modulo de Mensajeria} & {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-		\hline
-		\multirow{3}{*}{Modulo de Requerimientos} & {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-		\hline
-		\multirow{3}{*}{Modulo de Proyectos} & {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-		\hline
-		\multirow{3}{*}{Modulo de SCM} & {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-		\hline
-		\multirow{3}{*}{Modulo de Persistencia} & {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-						\cline{2-3}
-						& {} & {}\\
-
 	\end{tabular}
 		\caption{Test unitarios}
 		\label{docTestUnit}
