@@ -13,39 +13,60 @@
 	El principal enfoque de las pruebas es la detección de errores.
 	
 	\section{Pruebas Unitarias}
-	Las pruebas unitarias están enfocadas en probar unidades pequeñas de código. 
-	Para llevarlas a cabo se diseño un set de pruebas automatizados, las cuales 
-	fueron implementadas con el framework de pruebas JUnit y de Glassfih 
-	Embedded, dentro del cual se despliegan los EJB para ser utilizados durante 
-	la ejecución de las pruebas.
+	Para llevar a cabo las pruebas unitarias se diseño un set de pruebas 
+	automatizadas, las cuales fueron implementadas aciendo uso del 
+	framework de pruebas JUnit y de Glassfish Embedded (dentro del cual se 
+	despliegan los EJB para ser utilizados durante la ejecución de las 
+	pruebas).\\
+
+	Hacer pruebas JUnit en clases java corrientes, es bastante simple
+	y no presenta mayor dificultad, sin embargo cuando se desea realizar
+	pruebas, ya sea unitarias o de integración, en clases java que son
+	Enterprise Java Beans (EJBs), se presentan algunas dificultades las
+	cuales radican principalmente en el echo que los EJB son componentes
+	gestionados por en servidor de aplicaciones y por ende no pueden  
+	funcionar fuera de este, esto significa que para poder probar los EJB
+	debemos desplegar los componentes dentro de un servidor de 
+	aplicaciones, junto con las configuraciones de persistencia y 
+	datasources correspondientes, para solucionar este inconveniente
+	es que se utiliza Glassfish Embedded, que actúa como contenedor 
+	embebido el cual es mas rápido y ligero.\\
 	
-	El procedimiento para ejecutar los test dentro del contenedor de Glassfih
+	El procedimiento utilizado para ejecutar los test dentro Glassfish
 	Embedded es el siguiente:
 	\begin{itemize}
-		\item Se copian los archivos del directorio build/classes a un directorio 
-		temporal para el despliegue de los EJB en build/embedded.
-		\item Ademas se copia el archivo test-percistence.xml (que contiene una 
-		configuración diferente para la ejecución de las pruebas en una base de 
-		datos diferente a la de producción) dentro del directorio 
-		build/embedded/META-INF/ y se renombra como percistence.xml.
-		\item Antes de levantar Glassfish Embedded se le indica que se crea un 
-		properties que le indica a Glassfish donde se encuentran los módulos a 
-		desplegar y el archivo de configuración domain.xml que debe utilizar (en 
-		este caso es un archivo aparte que contiene la configuración necesaria para 
-		la ejecución del test).
+		\item Copiar los archivos del directorio \textit{build/classes} a un 
+		directorio temporal \textit{build/embedded} para el despliegue de los 
+		EJB.
+		\item Ademas se copia el archivo test-percistence.xml (que contiene 
+		una configuración diferente para la ejecución de las pruebas en una 
+		base de datos diferente a la de producción) dentro del directorio 
+		\textit{build/embedded/META-INF/} y se renombra como 	
+		\textit{percistence.xml}.
+		\item Antes de levantar Glassfish Embedded se crea un 
+		properties de configuración que le indica a Glassfish donde se 
+		encuentran los módulos a desplegar y el archivo de configuración 
+		\textit{domain.xml} que debe utilizar (en este caso es un archivo 
+		aparte que contiene la configuración necesaria para 	la ejecución del 
+		test).
 		\item Luego se inicia el Glassfish Embedded.
 		\item Se ejecutan los test necesarios.
 		\item Por ultimo se cierra Glassfish Embedded y se borra el directorio 
-		temporal build/embedded.
+		temporal \textit{build/embedded}.
 	\end{itemize}
 	
 	Para esto gestionar todo ese proceso se implemento una nueva clase 
-	denominada BaseTestEJB de la cual extienden todos los test que hacen uso de
-	los EJB.	En el caso de clases java comunes no se requiere de ninguna 
-	configuración especial para ejecutar los test, basta simplemente ejecutarlos.
-	
-	En la Tabla \ref{docTestUnit} se encuentran documentadas todas las pruebas   
-	unitarias diseñadas, con su nombre y propósito.
+	denominada BaseTestEJB de la cual extienden todos los test que hacen uso 
+	de los EJB.\\
+
+	De acuerdo a lo que se especifico en la fase de diseño de pruebas, se 
+	opto por no realizar una documentación extensiva de los test unitarios
+	ya que estos deben ser auto-explicativos y de manera tal que el mismo
+	código documenta la prueba, sus entradas y salidas esperadas.\\
+
+	Sin embargo a continuación en la Tabla \ref{docTestUnit} se presenta 
+	un resumen las pruebas unitarias diseñadas y ejecutadas, con su nombre y 
+	propósito.
 	
 	\begin{table}[H]
 	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.5cm}|m{8cm}|}
@@ -68,9 +89,9 @@
 		capas de recuperar cadena desde un archivo de propiedades y convertirla a 
 		Short aunque este sea negativo.} \\
 		\cline{2-3}
-		\multirow{3}{*}{Resources} & {testGetValueShort ErrorEnString} & {Verificar que el método getValueShort 
-		dispara la excepción NumberFormatException al leer un String desde el 
-		archivo de propiedades.} \\	
+		\multirow{3}{*}{Resources} & {testGetValueShort ErrorEnString} & {Verificar que el 
+		método getValueShort dispara la excepción NumberFormatException al leer un 
+		String desde el archivo de propiedades.} \\	
 		\cline{2-3}
 		& {testGetValueShort ErrorValorMayor AShort} & {Verificar que el método 
 		getValueShort dispara la expeción NumberFormatException al leer un numero 
@@ -101,8 +122,8 @@
 		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
 		\hline
 		 & {testGetValueInteger ErrorValorMayorAInteger} & {Verificar 
-		que el método getValueInteger dispara la expeción NumberFormatException al leer un 
-		numero entero que excede el valor máximo de un Integer.} \\
+		que el método getValueInteger dispara la expeción NumberFormatException al 
+		leer un numero entero que excede el valor máximo de un Integer.} \\
 		\cline{2-3}
 		& {testGetValueInteger ErrorValorDecimal} & {Verificar que el método 
 		getValueInteger dispara la excepción NumberFormatException al leer un 
@@ -120,21 +141,22 @@
 		getValueLong dispara la excepción NumberFormatException al leer un 
 		numero entero que excede el valor máximo de un Long.} \\
 		\cline{2-3}
-		& {testGetValueLong ErrorValorDecimal} & {Verificar que el método getValueLong dispara la 
-		excepción NumberFormatException al leer un valor con decimales desde el archivo de 
-		propiedades.} \\		
+		& {testGetValueLong ErrorValorDecimal} & {Verificar que el método getValueLong 
+		dispara la excepción NumberFormatException al leer un valor con decimales 
+		desde el archivo de propiedades.} \\		
 		\cline{2-3}
-		& {testGetPropertiesPath} & {Verifica que el metodo getPropertiesPath obtenga la ruta de un 
-		archivo properties correctamente.} \\
+		& {testGetPropertiesPath} & {Verifica que el metodo getPropertiesPath obtenga la 
+		ruta de un archivo properties correctamente.} \\
 		\cline{2-3}
-		& {testGetPropertiesPath NotFound} & {Verfica que el metodo getPropertiesPath dispare la 
-		excepcion MissingResourceException al intentar obtener la ruta de un propertie que no existe.} \\		
+		& {testGetPropertiesPath NotFound} & {Verfica que el metodo getPropertiesPath 
+		dispare la excepcion MissingResourceException al intentar obtener la ruta de un 
+		propertie que no existe.} \\		
 		\cline{2-3}
-		& {testGetPageList} & {Verifica que el metodo getPageList obtenga una lista con todas las 
-		propiedades contenidas en el archivo propertie especificado.} \\
+		& {testGetPageList} & {Verifica que el metodo getPageList obtenga una lista con 
+		todas las propiedades contenidas en el archivo propertie especificado.} \\
 		\cline{2-3}
-		& {testGetMapPageList} & {Verifica que el metodo getMapPageList obtenga un Map con todas las 
-		propiedades contenidas en el archivo propertie especificado.} \\		
+		& {testGetMapPageList} & {Verifica que el metodo getMapPageList obtenga un 
+		Map con todas las propiedades contenidas en el archivo propertie especificado.} \\		
 		\hline
 	\end{tabular}
 	\end{table}	
@@ -161,8 +183,8 @@
 		& {testCalcularReglaDe TresParaNumeradorCero} & {Verifica que se devuelva 
 		un 0 en caso que el numerador sea 0.} \\
 		\cline{2-3}
-		\multirow{3}{*}{MathUtils} & {testCalcularReglaDe TresParaCien} & {Verifica el caso en que se debe 
-		devolver cien.} \\
+		\multirow{3}{*}{MathUtils} & {testCalcularReglaDe TresParaCien} & {Verifica el caso 
+		en que se debe devolver 100.} \\
 		\cline{2-3}
 		& {testCalcularReglaDe TresParaPorcentaje MayorACien} & {Verifica que 
 		funcione cuando el numerador es mayor a cien.} \\
@@ -249,7 +271,7 @@
 	\end{tabular}
 	\end{table}	
 
-\begin{table}[H]
+	\begin{table}[H]
 	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.7cm}|m{8cm}|}
 		\hline
 		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
@@ -276,13 +298,51 @@
 		\cline{2-3}
 		& {testValidarCodigo ConsultaInexistente} & {Verifica que un código de 
 		consulta es invalido cuando no existe.}\\
-		\cline{2-3}
-		& {testEnviarSolicitud} & {}\\
-		\cline{2-3}
-		& {} & {}\\
-		\cline{2-3}
+		%\cline{2-3}
+		%& {testEnviarSolicitud} & {}\\
+		%\cline{2-3}
+		%& {} & {}\\
+		%\cline{2-3}
 		\hline
 	\end{tabular}
 		\caption{Test unitarios}
 		\label{docTestUnit}
 	\end{table}
+
+	\subsection{Análisis de Resultados}
+	Todas las pruebas han sido implementadas y ejecutadas satisfactoriamente, y 
+	todas han sido superadas, es decir luz verde. Todos aquellos que no fueron 
+	superados, fueron corregidos y solucionados a la brevedad. Y ante cualquier
+	modificación del código fuente en el futuro, debe volver a ser probadas con 
+	este mismo set de pruebas y corregido hasta volver a lograr un 100\%
+      de aprobación de los tests.
+
+	\subsection{Problemas detectados}
+	Durante el desarrollo de los tests, los principales problemas que existieron
+	fueron principalmente debido a la incorrecta configuración de los frameworks
+	de pruebas, pero una vez superado aquello, no se encontraron demasiados
+	problemas. Los principales problemas que se detectaron y corrigieron.
+
+	\begin{itemize}
+		\item Problemas en el calculo de porcentajes, cuando existía un denominador 0.
+		\item Duplicación de códigos de consulta en lapsos de tiempos muy cercanos,
+		al no existir variación en la semilla del generador de números aleatorios utilizado
+		en una parte del algoritmo.
+	\end{itemize}
+
+	\section{Pruebas Integración}
+	Una vez completada la fase de pruebas unitarias, se realizaron las pruebas de 
+	integración, las cuales a diferencia de los especificado en la fase de diseño,
+	se opto por no utilizar Arquillian ya que solo era necesario para utilizar
+	inyección de dependencia en los test. Y presenta algunos problemas en proyectos
+	que no gestionan sus dependencias con maven.\\
+
+	Las pruebas realizadas en esta fase se separaron en 2 tipos, las que prueban 
+	directamente la capa de persistencia (ya que probarlas requiere modificar el
+	estado de la base de datos y normalmente de a lo menos las funciones crear, 
+	buscar y eliminar, para poder agrega nuevos datos al inicio del test, buscar para 
+	verificar la correcta creación o modificación de algo y la eliminación para restaurar el 
+	estado de la bd, a su estado original). Y ademas un conjunto de pruebas acorde al
+	esquema de integración definido.
+
+	
