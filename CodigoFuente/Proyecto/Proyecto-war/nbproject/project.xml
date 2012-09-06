@@ -10,14 +10,6 @@
                     <file>${reference.Proyecto-ejb.dist}</file>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.redmond-1.0.6.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.temaUV.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
                     <file>${libs.PrimeFaces_3.3.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
@@ -30,11 +22,7 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.aopalliance-alpha1.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.openssoclientsdk.jar}</file>
+                    <file>${file.reference.redmond-1.0.6.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
@@ -56,12 +44,5 @@
                 <id>dist</id>
             </reference>
         </references>
-        <spring-data xmlns="http://www.netbeans.org/ns/spring-data/1">
-            <config-files>
-                <config-file>web/WEB-INF/security-config.xml</config-file>
-                <config-file>web/WEB-INF/newSpringXMLConfig.xml</config-file>
-            </config-files>
-            <config-file-groups/>
-        </spring-data>
     </configuration>
 </project>
