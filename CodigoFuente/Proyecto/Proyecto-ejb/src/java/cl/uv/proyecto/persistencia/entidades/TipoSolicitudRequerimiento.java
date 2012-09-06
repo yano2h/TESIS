@@ -36,7 +36,7 @@ public class TipoSolicitudRequerimiento implements Serializable {
     @Size(max = 255)
     @Column(name = "descripcion_tipo")
     private String descripcionTipo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoSolicitud")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoSolicitud", orphanRemoval=true)
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
 
     public TipoSolicitudRequerimiento() {

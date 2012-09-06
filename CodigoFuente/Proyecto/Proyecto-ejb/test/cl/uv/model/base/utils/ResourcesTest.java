@@ -51,7 +51,7 @@ public class ResourcesTest {
     @Test
     public void testGetValueConEspacios() {
         System.out.println("testGetValueConEspacios");
-        String expResult = "A B C D";
+        String expResult = "A B C   D";
         String result = Resources.getValue(TEST_PROPERTIES, "stringConEspacios");
         assertEquals(expResult, result);
     }

@@ -5,10 +5,7 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.model.base.utils.Resources;
-import cl.uv.proyecto.persistencia.entidades.Area;
-import cl.uv.proyecto.persistencia.entidades.Funcionario;
-import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
-import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import cl.uv.proyecto.persistencia.entidades.*;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -38,12 +35,17 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
         solicitud.setFechaUltimaActualizacion(new Date());
         getEntityManager().merge(solicitud);
     }
-
+    
+    @Override
+    public void remove(SolicitudRequerimiento solicitud){
+        super.remove(find(solicitud.getIdSolicitudRequerimiento()));
+    }
+    
     @Override
     public List<SolicitudRequerimiento> buscarPorSolicitante(Integer rutSolicitante) {
         Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante.rut = :rut");
         q.setParameter("rut", rutSolicitante);
-        return q.getResultList();
+        return q.getResultList(); 
     }
 
     @Override

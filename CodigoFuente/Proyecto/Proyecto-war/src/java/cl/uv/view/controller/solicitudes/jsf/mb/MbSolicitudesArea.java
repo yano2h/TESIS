@@ -76,6 +76,7 @@ public class MbSolicitudesArea implements Serializable {
         }
         
         funcionariosArea = funcionarioDisicoFacade.buscarFuncrionariosPorArea(mbFuncionarioInfo.getFuncionario().getArea());
+        
         for (FuncionarioDisico f: funcionariosArea) {
             solicitudFacade.contarSolicitudes(f);
         }

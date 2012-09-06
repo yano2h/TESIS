@@ -30,8 +30,8 @@ public class MathUtilsTest {
     }
 
     @Test
-    public void testCalcularPorcentajeRedondeadoParaArraiba() {
-        System.out.println("calcularPorcentajeRedondeadoParaArraiba");
+    public void testCalcularPorcentajeRedondeadoParaArriba() {
+        System.out.println("calcularPorcentajeRedondeadoParaArriba");
         Long b = 55L;
         Long a = 99L;
         int cantDecimales = 1;
@@ -169,8 +169,8 @@ public class MathUtilsTest {
     }
 
     @Test
-    public void testRedondearParaAbajoConDecimal5() {
-        System.out.println("redondearParaAbajoConUnDecimal");
+    public void testRedondearParaArribaConDecimal5() {
+        System.out.println("testRedondearParaArribaConDecimal5");
         double v = 10.15;
         int i = 1;
         double bg = 10.2;
@@ -235,8 +235,8 @@ public class MathUtilsTest {
     }
 
     @Test
-    public void testRedondearFloatParaAbajoConDecimal5() {
-        System.out.println("redondearFloatParaAbajoConUnDecimal");
+    public void testRedondearFloatParaArribaConDecimal5() {
+        System.out.println("testRedondearFloatParaArribaConDecimal5");
         double v = 10.15;
         int i = 1;
         Float expResult = 10.2F;

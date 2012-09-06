@@ -113,19 +113,19 @@ public class SolicitudRequerimientoEJBTest extends BaseTestEJB{
         assertTrue(result);
     }
 
-    @Test
-    public void testEnviarSolicitud() throws Exception {
-        SolicitudRequerimiento s = new SolicitudRequerimiento(99L);
-        s.setAreaResponsable(new Area((short)1));;
-        s.setAsunto("Asunto Junit");
-        s.setMensaje("Mensaje Junit");
-        s.setCodigoConsulta("AbCdEe");
-        
-        solicitudEJB.enviarSolicitud(s, new Funcionario(11111111));
-        
-        assertNotNull(solicitudFacade.find(99L));
-
-    }
+//    @Test
+//    public void testEnviarSolicitud() throws Exception {
+//        SolicitudRequerimiento s = new SolicitudRequerimiento(99L);
+//        s.setAreaResponsable(new Area((short)1));;
+//        s.setAsunto("Asunto Junit");
+//        s.setMensaje("Mensaje Junit");
+//        s.setCodigoConsulta("AbCdEe");
+//        
+//        solicitudEJB.enviarSolicitud(s, new Funcionario(11111111));
+//        
+//        assertNotNull(solicitudFacade.find(99L));
+//
+//    }
 //
 //    /**
 //     * Test of rechazarSolicitud method, of class SolicitudRequerimientoEJB.

@@ -91,7 +91,8 @@ public class SolicitudRequerimiento implements Serializable {
     @JoinColumn(name = "tipo_solicitud", referencedColumnName = "id_tipo_solicitud_req")
     @ManyToOne(optional = false)
     private TipoSolicitudRequerimiento tipoSolicitud;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudRequerimiento")
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudRequerimiento", orphanRemoval=true)
     private List<ComentarioSolicitud> comentarios;
 
     public SolicitudRequerimiento() {
