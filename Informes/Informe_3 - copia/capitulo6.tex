@@ -343,6 +343,53 @@
 	buscar y eliminar, para poder agrega nuevos datos al inicio del test, buscar para 
 	verificar la correcta creación o modificación de algo y la eliminación para restaurar el 
 	estado de la bd, a su estado original). Y ademas un conjunto de pruebas acorde al
-	esquema de integración definido.
+	esquema de integración definido. En la Tabla \ref{docTestIntegracion} se presentan
+	las pruebas de integración realizadas.
 
-	
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{1cm} | m{5cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Nº}} & \textbf{Objetivo} & \textbf{Prueba}\\
+		\hline
+		{1} & {Comprobar la integración entre el Portal de Login institucional y el sistema
+		interno de Autenticación.} & {Ingresar con una cuenta registrada (rut  
+		11111111), a través del portal de Login institucional y verificar que al 
+		autenticarse el usuario es redireccionado a la aplicación.} \\
+		\hline
+		{2} & {Comprobar la integración entre el modulo de Autenticación y el de Envío
+		de Solicitudes.} & {Ingresar al sistema a través del portal de Login Institucional
+		con el usuario 11111111, y corroborar que los datos personales del usuario 
+		mostrados en la aplicación son los mismo proporcionados por LDAP.} \\
+		\hline
+		{3} & {Comprobar la integración entre el modulo de Envío de Solicitudes  y el
+		modulo de Mensajería.} & { Crear una solicitud de requerimiento y verificar que 
+		esta aya sido creada, que un correo electrónico aya sido enviada al mail del
+		solicitante y que el código enviado sea el mismo de la solicitud.} \\
+		\hline
+		{4} & {Comprobar la integración entre el modulo de Envío de Solicitudes y
+		el modulo de Atención de solicitudes.} & {Crear una nueva solicitud de 
+		requerimiento para el Área de Desarrollo y posteriormente ingresar con la
+		cuenta correspondiente al jefe del área de desarrollo y corroborar que la
+		solicitud creada aparezca como una nueva solicitud entre la lista de solicitudes
+		del área.} \\
+		\hline
+		{5} & {Comprobar la integración entre el modulo de Atención de solicitudes
+		y el modulo de Gestión de Proyectos} & {Seleccionar una solicitud previamente 
+		creada y escoger la opción convertir en proyecto. Verificar que al seleccionar esta 
+		opción la solicitud quede cerrada y se haya redireccionado al usuario al
+		formulario de creación de proyecto.} \\
+		\hline
+		{6} & {Comprobar la integración entre el modulo de Gestión de Proyectos y el 
+		modulo de SCM} & {Crear un nuevo Proyecto, luego ingresar al modulo de SCM
+		y verificar que el proyecto aparece entre la lista de proyectos del área y se
+		puedan definir tareas de SCM para este.} \\
+		\hline
+	\end{tabular}
+		\caption{Test Integración}
+		\label{docTestIntegracion}
+	\end{table}	
+
+	\subsection{Análisis de Resultados}
+	Esta pruebas fueron realizadas y superadas en su totalidad. Verificando así que 
+	existe una correcta integración de los módulos diseñados. Estas pruebas fueron
+	ejecutadas manualmente dado la dificultad de automatizarlas. 
