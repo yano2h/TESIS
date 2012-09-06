@@ -44,7 +44,7 @@ public class AreaFacadeTest extends BaseTestEJB{
     @Test
     public void testCount() throws Exception {
         List<Area> areas = new ArrayList<Area>();
-        int expResult = 3;
+        int expResult = 3; //Desarrollo, Redes, Fincom
         
         for (int i = 0; i < expResult; i++) {
             Area a = EntityUtils.createArea();
