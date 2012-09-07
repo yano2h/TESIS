@@ -7,6 +7,7 @@ package cl.uv.proyecto.persistencia.ejb;
 import cl.uv.proyecto.persistencia.entidades.*;
 import cl.uv.test.junit.base.BaseTestEJB;
 import cl.uv.test.junit.base.EntityUtils;
+import cl.uv.test.junit.base.GenericTestEJB;
 import java.util.List;
 import javax.naming.NamingException;
 import org.junit.*;
@@ -16,57 +17,41 @@ import static org.junit.Assert.*;
  *
  * @author Jano
  */
-public class ComentarioSolicitudFacadeTest extends BaseTestEJB {
-    
-    private ComentarioSolicitudFacadeLocal comentariosFacade;
+public class ComentarioSolicitudFacadeTest extends GenericTestEJB<ComentarioSolicitudFacade, ComentarioSolicitudFacadeLocal> {
     
     public ComentarioSolicitudFacadeTest() {
+        super(ComentarioSolicitudFacade.class);
     }
     
-    @Before
-    public void setUp() throws NamingException {
-        comentariosFacade = lookupBy(ComentarioSolicitudFacade.class);
-    }
-    
-    @After
-    public void tearDown() {
-        comentariosFacade = null;
-    }
-
-    @Test
-    public void testLookup(){
-        assertNotNull(comentariosFacade);
-    }
-
-    @Test
+    @Override
     public void testCRUD() {
         // Test Insert y Find
         ComentarioSolicitud c = EntityUtils.createComentarioSolicitud();
-        comentariosFacade.create(c);        
-        assertEquals(c, comentariosFacade.find(c.getIdComentario()));
+        ejb.create(c);        
+        assertEquals(c, ejb.find(c.getIdComentario()));
         
         // Test Edit
         String commentEdit = "Comentario Editado";
         c.setComentario(commentEdit);
-        comentariosFacade.edit(c);
-        assertEquals( commentEdit, (comentariosFacade.find(c.getIdComentario())).getComentario() );
+        ejb.edit(c);
+        assertEquals( commentEdit, (ejb.find(c.getIdComentario())).getComentario() );
         
         // Test Remove
-        comentariosFacade.remove(c);
-        assertNull(comentariosFacade.find(c.getIdComentario()));
+        ejb.remove(c);
+        assertNull(ejb.find(c.getIdComentario()));
     }
 
     @Test
     public void testFindAll() throws Exception {
         long sizeExp = 0;
-        List<ComentarioSolicitud> listaComentarios = comentariosFacade.findAll();
+        List<ComentarioSolicitud> listaComentarios = ejb.findAll();
         assertEquals(listaComentarios.size(), sizeExp);
     }
 
-    @Test
-    public void testCount() throws Exception {
+    @Override
+    public void testCount()  {
         int expResult = 0;
-        int result = comentariosFacade.count();
+        int result = ejb.count();
         assertEquals(expResult, result);
     }
 
@@ -76,17 +61,16 @@ public class ComentarioSolicitudFacadeTest extends BaseTestEJB {
         
         for (int i = 0; i < sizeExp; i++) {
             ComentarioSolicitud c = EntityUtils.createComentarioSolicitud();
-            comentariosFacade.create(c);  
+            ejb.create(c);  
         }
         
-        List<ComentarioSolicitud> lc = comentariosFacade.buscarComentariosPorSolicitud(EntityUtils.ID_SOLICITUD_TEST);
+        List<ComentarioSolicitud> lc = ejb.buscarComentariosPorSolicitud(EntityUtils.ID_SOLICITUD_TEST);
         
         assertEquals(sizeExp, lc.size());
         
         for (ComentarioSolicitud comentarioSolicitud : lc) {
             assertEquals( EntityUtils.ID_SOLICITUD_TEST, comentarioSolicitud.getSolicitudRequerimiento().getIdSolicitudRequerimiento());
-            comentariosFacade.remove(comentarioSolicitud);
-        }
-        
+            ejb.remove(comentarioSolicitud);
+        }     
     }
 }

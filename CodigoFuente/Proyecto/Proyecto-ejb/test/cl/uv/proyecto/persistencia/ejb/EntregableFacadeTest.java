@@ -7,9 +7,6 @@ package cl.uv.proyecto.persistencia.ejb;
 import cl.uv.proyecto.persistencia.entidades.Entregable;
 import cl.uv.test.junit.base.EntityUtils;
 import cl.uv.test.junit.base.GenericTestEJB;
-import java.util.List;
-import javax.ejb.embeddable.EJBContainer;
-import org.junit.*;
 import static org.junit.Assert.*;
 
 /**
