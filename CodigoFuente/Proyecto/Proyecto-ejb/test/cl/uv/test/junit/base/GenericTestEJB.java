@@ -61,7 +61,6 @@ public abstract class GenericTestEJB <T,I>{
     }
     
     protected <T> I lookupBy(Class<T> type) throws NamingException {
-        System.out.println("Test Loookup");
         return (I) ctx.lookup("java:global/" + MODULE_NAME + "/" + type.getSimpleName());
     }
     
@@ -75,6 +74,7 @@ public abstract class GenericTestEJB <T,I>{
     
     @Test
     public void testLookup(){
+        System.out.println("Test Loookup");
         assertNotNull(ejb);
     }
     
