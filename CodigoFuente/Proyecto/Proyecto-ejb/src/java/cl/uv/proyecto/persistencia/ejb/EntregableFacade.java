@@ -27,4 +27,9 @@ public class EntregableFacade extends AbstractFacade<Entregable> implements Entr
         super(Entregable.class);
     }
     
+    @Override
+    public void remove(Entregable e){
+        super.remove(find(e.getIdEntregable()));
+    }
+    
 }

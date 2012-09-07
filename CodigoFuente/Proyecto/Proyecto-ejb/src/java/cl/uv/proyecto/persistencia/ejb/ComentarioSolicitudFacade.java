@@ -30,6 +30,11 @@ public class ComentarioSolicitudFacade extends AbstractFacade<ComentarioSolicitu
     }
     
     @Override
+    public void remove(ComentarioSolicitud c){
+        super.remove(find(c.getIdComentario()));
+    }
+    
+    @Override
     public List<ComentarioSolicitud> buscarComentariosPorSolicitud(Long idSolicitudRequerimiento){
         Query q = em.createQuery("SELECT c FROM ComentarioSolicitud c WHERE c.solicitudRequerimiento.idSolicitudRequerimiento = :id ORDER BY c.fecha DESC");
         q.setParameter("id", idSolicitudRequerimiento);
