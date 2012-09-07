@@ -14,13 +14,15 @@ import java.util.Random;
  * @author Alejandro
  */
 public class EntityUtils {
+    public static final Long ID_SOLICITUD_TEST = 1L;
+    public static final Integer RUT_FUNCIONARIO_TEST = 11111111;
+    public static final Integer ID_TAREA_SCM_TEST = 1;
     
     private static short idArea = 4;
     private static short idEstadoProyecto = 20;
     private static short idEstadoSolCambio = 20;
     private static short idEstadoSolReq = 20;
     private static short idTipoSolReq = 20;
-    private static long idComentarioSol = 0;
     private static long idSolicitudReq = 100L;
     private static int rutFunctionario = 123;
     private static int idItemConfig = 1;
@@ -95,7 +97,7 @@ public class EntityUtils {
     }
     
     public static ComentarioSolicitud createComentarioSolicitud(Funcionario auth, SolicitudRequerimiento s){
-        ComentarioSolicitud c = new ComentarioSolicitud(idComentarioSol++);
+        ComentarioSolicitud c = new ComentarioSolicitud();
         c.setAutor(auth);
         c.setComentario("Comentario - "+c.getIdComentario());
         c.setFecha(new Date());
@@ -105,12 +107,22 @@ public class EntityUtils {
     }
     
     public static ComentarioSolicitud createComentarioSolicitud(SolicitudRequerimiento s){
-        ComentarioSolicitud c = new ComentarioSolicitud(idComentarioSol++);
-        c.setAutor(EntityUtils.createFuncionario());
+        ComentarioSolicitud c = new ComentarioSolicitud();
+        c.setAutor(new Funcionario(RUT_FUNCIONARIO_TEST));
         c.setComentario("Comentario - "+c.getIdComentario());
         c.setFecha(new Date());
         c.setVisible(true);
         c.setSolicitudRequerimiento(s);
+        return c;
+    }
+    
+    public static ComentarioSolicitud createComentarioSolicitud(){
+        ComentarioSolicitud c = new ComentarioSolicitud();
+        c.setAutor(new Funcionario(RUT_FUNCIONARIO_TEST));
+        c.setComentario("Comentario - "+c.getIdComentario());
+        c.setFecha(new Date());
+        c.setVisible(true);
+        c.setSolicitudRequerimiento(new SolicitudRequerimiento(ID_SOLICITUD_TEST));
         return c;
     }
     
@@ -180,5 +192,12 @@ public class EntityUtils {
         int n = (int) (r.nextInt() % length);
         n = (n<0)? n*-1:n;
         return String.valueOf(seed.charAt(n));
+    }
+
+    public static Entregable createEntregable() {
+        Entregable e = new Entregable();
+        e.setNombreEntregable("Entregable Test");
+        e.setTareaScm(new TareaScm(ID_TAREA_SCM_TEST));
+        return e;
     }
 }
