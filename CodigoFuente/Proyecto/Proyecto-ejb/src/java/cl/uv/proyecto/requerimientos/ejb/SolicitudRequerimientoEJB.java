@@ -79,7 +79,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitud.setFechaEnvio(fechaActual);
         solicitud.setFechaUltimaActualizacion(fechaActual);
         solicitud.setSolicitante(solicitante);
-        solicitud.setPrioridadSolicitud(tipoPrioridadFacade.find( Resources.getValueShort("Estados", "Prioridad_Inicial") ));
+        solicitud.setPrioridadSolicitud(tipoPrioridadFacade.find( Resources.getValueShort("Tipos", "Prioridad_Inicial") ));
         solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_ENVIADA") ));
         solicitud.setCodigoConsulta(generarCodigoConsulta(solicitud));
         solicitudFacade.create(solicitud);

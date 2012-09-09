@@ -4,6 +4,7 @@
  */
 package cl.uv.test.junit.base;
 
+import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.persistencia.entidades.*;
 import java.util.Date;
 import java.util.Random;
@@ -13,13 +14,15 @@ import java.util.Random;
  * @author Alejandro
  */
 public class EntityUtils {
+    public static final Long ID_SOLICITUD_TEST = 1L;
+    public static final Integer RUT_FUNCIONARIO_TEST = 11111111;
+    public static final Integer ID_TAREA_SCM_TEST = 1;
     
     private static short idArea = 4;
     private static short idEstadoProyecto = 20;
     private static short idEstadoSolCambio = 20;
     private static short idEstadoSolReq = 20;
     private static short idTipoSolReq = 20;
-    private static long idComentarioSol = 0;
     private static long idSolicitudReq = 100L;
     private static int rutFunctionario = 123;
     private static int idItemConfig = 1;
@@ -94,7 +97,7 @@ public class EntityUtils {
     }
     
     public static ComentarioSolicitud createComentarioSolicitud(Funcionario auth, SolicitudRequerimiento s){
-        ComentarioSolicitud c = new ComentarioSolicitud(idComentarioSol++);
+        ComentarioSolicitud c = new ComentarioSolicitud();
         c.setAutor(auth);
         c.setComentario("Comentario - "+c.getIdComentario());
         c.setFecha(new Date());
@@ -104,12 +107,22 @@ public class EntityUtils {
     }
     
     public static ComentarioSolicitud createComentarioSolicitud(SolicitudRequerimiento s){
-        ComentarioSolicitud c = new ComentarioSolicitud(idComentarioSol++);
-        c.setAutor(EntityUtils.createFuncionario());
+        ComentarioSolicitud c = new ComentarioSolicitud();
+        c.setAutor(new Funcionario(RUT_FUNCIONARIO_TEST));
         c.setComentario("Comentario - "+c.getIdComentario());
         c.setFecha(new Date());
         c.setVisible(true);
         c.setSolicitudRequerimiento(s);
+        return c;
+    }
+    
+    public static ComentarioSolicitud createComentarioSolicitud(){
+        ComentarioSolicitud c = new ComentarioSolicitud();
+        c.setAutor(new Funcionario(RUT_FUNCIONARIO_TEST));
+        c.setComentario("Comentario - "+c.getIdComentario());
+        c.setFecha(new Date());
+        c.setVisible(true);
+        c.setSolicitudRequerimiento(new SolicitudRequerimiento(ID_SOLICITUD_TEST));
         return c;
     }
     
@@ -141,6 +154,22 @@ public class EntityUtils {
         return s;
     }
     
+    public static SolicitudRequerimiento createSolicitudReq(Funcionario sol){
+        SolicitudRequerimiento s = new SolicitudRequerimiento(idSolicitudReq++);
+        s.setAreaResponsable( new Area(Resources.getValueShort("Tipos", "Area_Desarrollo")) );
+        s.setAsunto("Asunto Solicitud "+s.getIdSolicitudRequerimiento());
+        s.setCodigoConsulta(generateCodeRandom(s.getIdSolicitudRequerimiento()));
+        s.setEstadoSolicitud(new EstadoSolicitudRequerimiento(Resources.getValueShort("Estados", "EstadoSR_ENVIADA")) );
+        s.setFechaEnvio(new Date());
+        s.setFechaUltimaActualizacion(new Date());
+        s.setMensaje("Mensaje");
+        s.setPrioridadSolicitud(new TipoPrioridad(Resources.getValueShort("Estados", "EstadoSR_ENVIADA")));
+        s.setRespuesta("Respuesta");
+        s.setSolicitante(sol);
+        s.setTipoSolicitud(new TipoSolicitudRequerimiento(Resources.getValueShort("Tipos", "TiposSol_CorreoUV")));
+        return s;
+    }
+    
     public static TipoSolicitudRequerimiento createTipoSolicitudRequerimiento(){
         TipoSolicitudRequerimiento t = new TipoSolicitudRequerimiento(idTipoSolReq++);
         t.setDescripcionTipo("Descripcion - "+t.getIdTipoSolicitudRequerimiento());
@@ -150,7 +179,7 @@ public class EntityUtils {
     
     private static String generateCodeRandom(long idSol){
         String s = ""+idSol;
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             s += keyRamdom();
         }
         
@@ -161,7 +190,14 @@ public class EntityUtils {
         String seed =  "1qQaAzZ2wWsSxX3eEdDcC4rRfFvV5TtgGbB6yYhHnN7uUjJmM8iIkK9oOlpP0";
         int length = seed.length() - 1;
         int n = (int) (r.nextInt() % length);
-        
-        return seed.substring(n);
+        n = (n<0)? n*-1:n;
+        return String.valueOf(seed.charAt(n));
+    }
+
+    public static Entregable createEntregable() {
+        Entregable e = new Entregable();
+        e.setNombreEntregable("Entregable Test");
+        e.setTareaScm(new TareaScm(ID_TAREA_SCM_TEST));
+        return e;
     }
 }

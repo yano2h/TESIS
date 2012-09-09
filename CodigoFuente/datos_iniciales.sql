@@ -77,7 +77,7 @@ INSERT INTO TIPO_PROYECTO values
 (2, 'Investigacion'),
 (3, 'Migracion de Datos');
 
-INSERT INTO TAREAS_SCM values
+INSERT INTO TAREA_SCM values
 ('1', 'Identificar y Nombrar Items de Configuracion', ''),
 ('2', 'Solicitar un Cambio', ''),
 ('3', 'Analizar Solicitudes de Cambio', ''),
