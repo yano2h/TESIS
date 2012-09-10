@@ -61,6 +61,13 @@ public class Notificacion implements Serializable {
         this.revisada = revisada;
     }
 
+    public Notificacion(String mensajeNotificacion, Funcionario destinatario) {
+        this.mensajeNotificacion = mensajeNotificacion;
+        this.destinatario = destinatario;
+        this.revisada = false;
+        this.fecha = new Date();
+    }
+
     public Long getIdNotificacion() {
         return idNotificacion;
     }

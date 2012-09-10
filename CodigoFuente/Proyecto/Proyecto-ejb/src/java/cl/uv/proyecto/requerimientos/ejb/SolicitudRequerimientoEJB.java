@@ -6,6 +6,8 @@ package cl.uv.proyecto.requerimientos.ejb;
 
 import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.mensajeria.ejb.EmailEJBLocal;
+import cl.uv.proyecto.mensajeria.ejb.NotificacionEJBLocal;
+import cl.uv.proyecto.mensajeria.ejb.NotificationIntercetor;
 import cl.uv.proyecto.persistencia.ejb.EstadoSolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.TipoPrioridadFacadeLocal;
@@ -17,6 +19,7 @@ import java.util.Date;
 import java.util.Random;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
 /**
  *
@@ -38,6 +41,8 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     private TipoPrioridadFacadeLocal tipoPrioridadFacade;
     @EJB
     private EmailEJBLocal emailEJB;
+    @EJB
+    private NotificacionEJBLocal notificacionEJB;
 
     @Override
     public String generarCodigo(long num) {
@@ -83,6 +88,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_ENVIADA") ));
         solicitud.setCodigoConsulta(generarCodigoConsulta(solicitud));
         solicitudFacade.create(solicitud);
+        notificacionEJB.crearNotificacionEnvioSolicitud(solicitud);
         return solicitud.getCodigoConsulta();
     }
 
