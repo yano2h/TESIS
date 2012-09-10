@@ -65,7 +65,7 @@ public class OpenAMUtil {
     public static AtributosFuncionario createFalseUser() {
         AtributosFuncionario attr = new AtributosFuncionario();
         //attr.setUid("16775578");
-        attr.setUid("17780876");
+        attr.setUid("18000000");
         attr.setGivenname("Alejandro"); //Primer Nombre
         attr.setSn("Alvarez Ahumada"); //Apellido
         attr.setCn(attr.getGivenname()+" "+attr.getSn()); //Givename + Sn
