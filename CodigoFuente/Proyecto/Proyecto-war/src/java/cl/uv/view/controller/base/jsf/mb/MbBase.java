@@ -4,6 +4,7 @@
  */
 package cl.uv.view.controller.base.jsf.mb;
 
+import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.view.controller.base.authentication.MbSSO;
 import cl.uv.view.controller.base.utils.JsfUtils;
@@ -16,10 +17,8 @@ public class MbBase implements Serializable{
     @ManagedProperty("#{flash}")
     private Flash flash;
     
-    @ManagedProperty("#{mbSSO}")
-    private MbSSO mbSSO;
-    
-    public MbBase(){}
+    @ManagedProperty("#{mbUser}")
+    private MbUser mbUser;
 
     public Flash getFlash() {
         return flash;
@@ -29,14 +28,6 @@ public class MbBase implements Serializable{
         this.flash = flash;
     }
 
-    public MbSSO getMbSSO() {
-        return mbSSO;
-    }
-
-    public void setMbSSO(MbSSO mbSSO) {
-        this.mbSSO = mbSSO;
-    }
-    
     public Object getValueOfFlashContext(String key){
         Object v = getFlash().get(key);
         getFlash().keep(key);
@@ -47,8 +38,12 @@ public class MbBase implements Serializable{
         return getFlash().put(key, value);
     }
     
+    public Funcionario getFuncionario(){
+        return mbUser.getFuncionario();
+    }
+    
     public FuncionarioDisico getFuncionarioDisico(){
-        return mbSSO.getFuncionarioDisico();
+        return mbUser.getFuncionarioDisico();
     }
     
     public boolean isUserInRole(String rol){

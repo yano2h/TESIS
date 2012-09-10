@@ -11,6 +11,7 @@ import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.security.openam.OpenAMUserDetails;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
+import java.io.Serializable;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -24,16 +25,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 @ManagedBean
 @SessionScoped
-public class MbSSO {
-    
-    @EJB
-    private FuncionarioFacadeLocal funcionarioFacade;
-    @EJB
-    private FuncionarioDisicoFacadeLocal funcionarioDisicoFacade;
+public class MbSSO implements Serializable{
     
     private OpenAMUserDetails user;
-    private Funcionario funcionario;
-    private FuncionarioDisico funcionarioDisico;
     
     public MbSSO() {
     }
@@ -41,49 +35,7 @@ public class MbSSO {
     @PostConstruct
     private void init(){
         user = (OpenAMUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Integer rut = Integer.parseInt( user.getUsername() );
-        System.out.println("RUT SSO:"+rut);
-        funcionario = funcionarioFacade.find(rut);
-        funcionarioDisico = funcionarioDisicoFacade.find(rut);
-        if (funcionarioDisico == null) {
-            System.out.println("Funcionario:"+rut+" not found");
-        }
-        if(funcionario == null){
-           funcionario = saveUser(user);
-        }
-        
-        funcionario.setFechaUltimoAcceso(new Date());
-        funcionarioFacade.edit(funcionario);
     }
-    
-    private Funcionario saveUser(OpenAMUserDetails u){
-        Funcionario f = new Funcionario();
-        f.setRut(Integer.parseInt( u.getUsername() ));
-        f.setCorreoUv( u.getFuncionario().getCorreouv() );
-        f.setFechaPrimerAcceso(new Date());
-        f.setNombre( u.getFuncionario().getGivenname() );
-        
-        String[] apellidos = u.getFuncionario().getSn().split(" ");
-        String[] nombreCompleto = u.getFuncionario().getCn().split(" ");
-        
-        if(apellidos.length > 0 && apellidos[0].equals(nombreCompleto[0])){
-            f.setApellidoPaterno(apellidos[0]);
-        }else{
-            f.setApellidoPaterno("");
-        }
-        
-        if (apellidos.length > 1 && nombreCompleto.length >= 3 && apellidos[1].equals(nombreCompleto[1])) {
-               f.setApellidoMaterno(apellidos[1]);          
-        }else if(apellidos.length==2){
-            f.setApellidoMaterno(apellidos[1]);
-        }else{
-            f.setApellidoMaterno("");
-        }
-        
-        funcionarioFacade.create(f);
-        return f;
-    }
-     
     
     public void redirectHomePage(){
         if (JsfUtils.getExternalContext().isUserInRole(Resources.getValue("security", "R_JAREA")) 
@@ -98,17 +50,8 @@ public class MbSSO {
         }   
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public FuncionarioDisico getFuncionarioDisico() {
-        return funcionarioDisico;
-    }
-
     public OpenAMUserDetails getUser() {
         return user;
     }
-    
     
 }

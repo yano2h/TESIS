@@ -32,36 +32,20 @@ public class MbUserInfo implements Serializable {
     private AuthEJBBeanLocal authEJBBean;
 
     @EJB
-    private FuncionarioFacadeLocal funcionarioFacade;
-    @EJB
     private NotificacionFacadeLocal notificacionFacade;
     
+    @ManagedProperty(value = "#{mbUser.funcionario}")
     private Funcionario funcionario;
-
-    public MbUserInfo() {
-    }
-
-    @PostConstruct
-    public void init() {
-        funcionario = funcionarioFacade.find(new Integer(16775578));
-        if(funcionario.getFechaPrimerAcceso()==null){
-            funcionario.setFechaPrimerAcceso(new Date());
-        }
-        funcionario.setFechaUltimoAcceso(new Date());
-        funcionarioFacade.edit(funcionario);
-        
-        OpenAMUserDetails user = (OpenAMUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        
-        for (GrantedAuthority a : user.getAuthorities()) {
-            String tempRol = a.getAuthority();
-        }
-        
-    }
 
     public Funcionario getFuncionario() {
         return funcionario;
     }
 
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    
     public List<Notificacion> getNotificaciones() {
         funcionario.setNotificaciones(notificacionFacade.buscarNotificacionPorDestinatario(funcionario));
         return funcionario.getNotificaciones();
