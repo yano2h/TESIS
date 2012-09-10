@@ -33,4 +33,6 @@ public interface SolicitudRequerimientoEJBLocal {
     public void enviarRespuestaJefeArea(SolicitudRequerimiento solicitud);
 
     public void comentarSolicitud(String comentario, SolicitudRequerimiento solicitud, Funcionario autor);
+
+    public void dejarPendienteSolicitud(SolicitudRequerimiento solicitud);
 }

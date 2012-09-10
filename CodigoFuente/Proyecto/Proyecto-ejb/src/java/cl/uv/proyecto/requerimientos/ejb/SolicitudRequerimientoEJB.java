@@ -149,6 +149,14 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     }
 
     @Override
+    public void dejarPendienteSolicitud(SolicitudRequerimiento solicitud){
+        if (solicitud.getEstadoSolicitud().getIdEstadoSolicitudRequerimiento() == Resources.getValueShort("Estados", "EstadoSR_ASIGNADA")) {
+            solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_PENDIENTE") ));
+            solicitudFacade.edit(solicitud);
+        }
+    }
+    
+    @Override
     public void enviarRespuestaJefeArea(SolicitudRequerimiento solicitud) {
         solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_FINALIZADA_SIN_RESPUESTA") ));
         solicitudFacade.edit(solicitud);
