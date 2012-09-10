@@ -50,5 +50,11 @@ public interface SolicitudCambioFacadeLocal {
     public List<SolicitudCambio> buscarSolicitudImplementacionPendiente(FuncionarioDisico funcionario);
     
     public List<SolicitudCambio> buscarSolicitudImplementadas(FuncionarioDisico funcionario);
+
+    public Long contarSolicitudAnalisisPendiente(FuncionarioDisico funcionario);
+
+    public Long contarSolicitudEvaluacionPendiente(FuncionarioDisico funcionario);
+
+    public Long contarSolicitudImplementacionPendiente(FuncionarioDisico funcionario);
     
 }

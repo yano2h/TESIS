@@ -82,6 +82,15 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
     }
 
     @Override
+    public Long contarSolicitudAnalisisPendiente(FuncionarioDisico funcionario) {
+        Query q = em.createQuery("SELECT COUNT(s) FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
+        q.setParameter("responsable", funcionario);
+        q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_ANALIZAR_SC") );
+        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_ENVIADA") ));
+        return (Long) q.getSingleResult();
+    }
+    
+    @Override
     public List<SolicitudCambio> buscarSolicitudAnalisadas(FuncionarioDisico funcionario) {
         Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.evaluadorImpacto = :evaluador ORDER BY s.fechaEnvio DESC");
         q.setParameter("evaluador", funcionario);
@@ -98,6 +107,15 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
     }
 
     @Override
+     public Long contarSolicitudEvaluacionPendiente(FuncionarioDisico funcionario) {
+        Query q = em.createQuery("SELECT COUNT(s) FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
+        q.setParameter("responsable", funcionario);
+        q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_APROBAR_SC"));
+        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_ANALISADA") ));
+        return (Long) q.getSingleResult();
+    }
+     
+    @Override
     public List<SolicitudCambio> buscarSolicitudEvaluadas(FuncionarioDisico funcionario) {
         Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.evaluadorFinal = :evaluador ORDER BY s.fechaEnvio DESC");
         q.setParameter("evaluador", funcionario);
@@ -111,6 +129,15 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
         q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_IMPLEMENTAR_SC"));
         q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_APROBADA") ));
         return q.getResultList();
+    }
+    
+    @Override
+    public Long contarSolicitudImplementacionPendiente(FuncionarioDisico funcionario) {
+        Query q = em.createQuery("SELECT COUNT(s) FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
+        q.setParameter("responsable", funcionario);
+        q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_IMPLEMENTAR_SC"));
+        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_APROBADA") ));
+        return (Long) q.getSingleResult();
     }
 
     @Override

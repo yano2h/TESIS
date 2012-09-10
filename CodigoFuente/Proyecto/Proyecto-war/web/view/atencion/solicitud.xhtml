@@ -21,7 +21,7 @@
                 <h:outputScript library="js" name="calendar-localization.js" />
 
                 <p:panel id="panelDetalleSolicitud" header="Detalle Solicitud" >
-                    <p:menubar styleClass="menu_bar" rendered="#{mbFuncionarioInfo.funcionario.rol eq const.Rol_JA and mbFuncionarioInfo.funcionario.area == mbDetalleSolicitud.solicitud.areaResponsable}"> 
+                    <p:menubar styleClass="menu_bar" rendered="#{p:ifGranted(security.R_ADM) and mbFuncionarioInfo.funcionario.area == mbDetalleSolicitud.solicitud.areaResponsable}"> 
                         <p:menuitem value="Asignar Responsable" icon="ui-icon-pin-s" onclick="dlgAsignarSolicitud.show();" 
                                     disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
                                                 mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA }"/>

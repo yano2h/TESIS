@@ -28,6 +28,11 @@ public class MbBase implements Serializable{
         this.flash = flash;
     }
 
+    public void setMbUser(MbUser mbUser) {
+        this.mbUser = mbUser;
+    }
+
+    
     public Object getValueOfFlashContext(String key){
         Object v = getFlash().get(key);
         getFlash().keep(key);
