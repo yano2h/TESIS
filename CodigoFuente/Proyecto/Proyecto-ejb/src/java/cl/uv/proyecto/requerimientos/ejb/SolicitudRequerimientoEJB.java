@@ -7,19 +7,16 @@ package cl.uv.proyecto.requerimientos.ejb;
 import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.mensajeria.ejb.EmailEJBLocal;
 import cl.uv.proyecto.mensajeria.ejb.NotificacionEJBLocal;
-import cl.uv.proyecto.mensajeria.ejb.NotificationIntercetor;
+import cl.uv.proyecto.mensajeria.ejb.TypeNotification;
+import cl.uv.proyecto.persistencia.ejb.ComentarioSolicitudFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.EstadoSolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.TipoPrioridadFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.Area;
-import cl.uv.proyecto.persistencia.entidades.EstadoSolicitudRequerimiento;
-import cl.uv.proyecto.persistencia.entidades.Funcionario;
-import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import cl.uv.proyecto.persistencia.entidades.*;
 import java.util.Date;
 import java.util.Random;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
 
 /**
  *
@@ -39,6 +36,8 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     private EstadoSolicitudRequerimientoFacadeLocal estadoSolicitudFacade;
     @EJB
     private TipoPrioridadFacadeLocal tipoPrioridadFacade;
+    @EJB
+    private ComentarioSolicitudFacadeLocal comentarioSolicitudFacade;
     @EJB
     private EmailEJBLocal emailEJB;
     @EJB
@@ -88,7 +87,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_ENVIADA") ));
         solicitud.setCodigoConsulta(generarCodigoConsulta(solicitud));
         solicitudFacade.create(solicitud);
-        notificacionEJB.crearNotificacionEnvioSolicitud(solicitud);
+        notificacionEJB.crearNotificacionSolicitud(TypeNotification.ENVIO_SOLICITUD, solicitud, solicitante);
         return solicitud.getCodigoConsulta();
     }
 
@@ -97,12 +96,14 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         EstadoSolicitudRequerimiento estado = estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_RECHAZADA") );
         solicitud.setEstadoSolicitud(estado);
         solicitudFacade.edit(solicitud);
+        notificacionEJB.crearNotificacionSolicitud(TypeNotification.RECHAZO_SOLICITUD, solicitud, null);
     }
 
     private void cerrarSolicitud(SolicitudRequerimiento solicitud) {
         solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_CERRADA") ));
         solicitud.setFechaCierre(new Date());
         solicitudFacade.edit(solicitud);
+        notificacionEJB.crearNotificacionSolicitud(TypeNotification.CIERRE_SOLICITD, solicitud, null);
     }
 
     @Override
@@ -122,7 +123,6 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         asunto = (asunto.isEmpty()) ? crearAsunto(solicitud, CIERRE) : asunto;
         String mensaje = crearMensaje(solicitud, CIERRE);
         emailEJB.enviarEmail(direcciones, asunto, mensaje);
-
     }
 
     @Override
@@ -131,18 +131,21 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitud.setAreaResponsable(nuevaAreaResponsable);
         solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_TRANSFERIDA") ));
         solicitudFacade.edit(solicitud);
+        notificacionEJB.crearNotificacionSolicitud(TypeNotification.TRANSFERENCIA_SOLICITUD, solicitud, null);
     }
 
     @Override
     public void asignarSolicitud(SolicitudRequerimiento solicitud) {
         solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_ASIGNADA") ));
         solicitudFacade.edit(solicitud);
+        notificacionEJB.crearNotificacionSolicitud(TypeNotification.ASIGNACION_SOLICITUD, solicitud, null);
     }
 
     @Override
     public void iniciarSolicitud(SolicitudRequerimiento solicitud) {
         solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_INICIADA") ));
         solicitudFacade.edit(solicitud);
+        notificacionEJB.crearNotificacionSolicitud(TypeNotification.INICIO_SOLICITUD, solicitud, null);
     }
 
     @Override
@@ -178,5 +181,19 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         }
 
         return asunto;
+    }
+    
+    @Override
+    public void comentarSolicitud(String comentario,SolicitudRequerimiento solicitud, Funcionario autor){
+        if (!comentario.isEmpty()) {
+            ComentarioSolicitud c = new ComentarioSolicitud();
+            c.setAutor(autor);
+            c.setFecha(new Date());
+            c.setVisible(true);
+            c.setComentario(comentario);
+            c.setSolicitudRequerimiento(solicitud);
+            comentarioSolicitudFacade.create(c);
+            notificacionEJB.crearNotificacionSolicitud(TypeNotification.COMENTARIO_SOLICITUD, solicitud, autor);
+        }
     }
 }

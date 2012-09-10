@@ -9,6 +9,7 @@ import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.ComentarioSolicitud;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import cl.uv.proyecto.requerimientos.ejb.SolicitudRequerimientoEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
 import cl.uv.view.controller.base.jsf.mb.MbUserInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
@@ -35,6 +36,9 @@ public class MbDetalleSolicitud implements Serializable {
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
     @EJB
     private ComentarioSolicitudFacadeLocal comentarioFacade;
+    @EJB
+    private SolicitudRequerimientoEJBLocal solicitudRequerimientoEJB;
+    
     @ManagedProperty(value = "#{mbUserInfo}")
     private MbUserInfo mbUserInfo;
     @ManagedProperty(value = "#{mbFuncionarioInfo}")
@@ -101,27 +105,15 @@ public class MbDetalleSolicitud implements Serializable {
 
     public void comentar(ActionEvent event) {
         if (!comentario.isEmpty()) {
-            ComentarioSolicitud c = new ComentarioSolicitud();
-            c.setAutor(mbUserInfo.getFuncionario());
-            c.setFecha(new Date());
-            c.setVisible(true);
-            c.setComentario(comentario);
-            c.setSolicitudRequerimiento(solicitud);
-            comentarioFacade.create(c);
-        }
+             solicitudRequerimientoEJB.comentarSolicitud(comentario, solicitud, mbUserInfo.getFuncionario());
+        }   
         comentario = "";
     }
 
     public void comentarFuncionario(ActionEvent event) {
         if (!comentario.isEmpty()) {
-            ComentarioSolicitud c = new ComentarioSolicitud();
-            c.setAutor(mbFuncionarioInfo.getFuncionario());
-            c.setFecha(new Date());
-            c.setVisible(true);
-            c.setComentario(comentario);
-            c.setSolicitudRequerimiento(solicitud);
-            comentarioFacade.create(c);
-        }
+             solicitudRequerimientoEJB.comentarSolicitud(comentario, solicitud, mbFuncionarioInfo.getFuncionario());
+        }  
         comentario = "";
     }
 

@@ -292,7 +292,7 @@ CREATE  TABLE TAREA_SCM (
 CREATE  TABLE NOTIFICACION (
   id_notificacion BIGINT NOT NULL IDENTITY ,
   fecha DATETIME NOT NULL ,
-  mensaje_notificacion VARCHAR(90) NOT NULL,
+  mensaje_notificacion VARCHAR(180) NOT NULL,
   revisada BIT  NOT NULL DEFAULT 0 ,
   rut_destinatario INT NOT NULL ,
   PRIMARY KEY (id_notificacion) ,

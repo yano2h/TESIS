@@ -31,4 +31,6 @@ public interface SolicitudRequerimientoEJBLocal {
     public void asignarSolicitud(SolicitudRequerimiento solicitud);
     public void iniciarSolicitud(SolicitudRequerimiento solicitud);
     public void enviarRespuestaJefeArea(SolicitudRequerimiento solicitud);
+
+    public void comentarSolicitud(String comentario, SolicitudRequerimiento solicitud, Funcionario autor);
 }

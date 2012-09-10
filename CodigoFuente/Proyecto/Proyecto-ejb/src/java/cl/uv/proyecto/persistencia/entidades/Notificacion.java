@@ -36,7 +36,7 @@ public class Notificacion implements Serializable {
     private Date fecha;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 180)
     @Column(name = "mensaje_notificacion")
     private String mensajeNotificacion;
     @Basic(optional = false)

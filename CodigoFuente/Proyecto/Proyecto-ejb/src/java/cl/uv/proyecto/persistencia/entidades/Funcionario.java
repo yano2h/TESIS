@@ -175,6 +175,11 @@ public class Funcionario implements Serializable {
         return nombre+" "+apellidoPaterno+" "+apellidoMaterno;
     }
     
+    public String getNombreCorto(){
+        String inicial = nombre.substring(0,1);
+        return inicial+"."+apellidoPaterno;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

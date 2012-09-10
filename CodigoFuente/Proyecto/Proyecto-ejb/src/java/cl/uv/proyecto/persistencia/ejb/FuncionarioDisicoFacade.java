@@ -36,4 +36,12 @@ public class FuncionarioDisicoFacade extends AbstractFacade<FuncionarioDisico> i
         q.setParameter("area", area); 
         return q.getResultList();
     }
+    
+    @Override
+    public FuncionarioDisico buscarJefeArea(Area area){
+        Query q = em.createQuery("SELECT f FROM FuncionarioDisico f WHERE f.area = :area AND f.cargo like :cargo");
+        q.setParameter("area", area); 
+        q.setParameter("cargo", "%Jefe Area%");
+        return (FuncionarioDisico) q.getSingleResult();
+    }
 }

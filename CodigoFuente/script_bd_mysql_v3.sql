@@ -316,7 +316,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS NOTIFICACION (
   id_notificacion BIGINT NOT NULL AUTO_INCREMENT ,
   fecha DATETIME NOT NULL ,
-  mensaje_notificacion VARCHAR(100) NOT NULL ,
+  mensaje_notificacion VARCHAR(180) NOT NULL ,
   revisada TINYINT(1) NOT NULL DEFAULT false ,
   destinatario INT NOT NULL ,
   PRIMARY KEY (id_notificacion) ,

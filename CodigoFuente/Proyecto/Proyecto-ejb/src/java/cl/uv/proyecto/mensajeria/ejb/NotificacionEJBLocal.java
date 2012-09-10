@@ -4,6 +4,7 @@
  */
 package cl.uv.proyecto.mensajeria.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import javax.ejb.Local;
 
@@ -14,6 +15,6 @@ import javax.ejb.Local;
 @Local
 public interface NotificacionEJBLocal {
 
-    public void crearNotificacionEnvioSolicitud(SolicitudRequerimiento s);
+    void crearNotificacionSolicitud(TypeNotification type, SolicitudRequerimiento s, Funcionario invoker);
     
 }
