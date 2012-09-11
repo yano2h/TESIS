@@ -61,6 +61,13 @@ label{
     line-height: 1.5em;
 }
 
+.title_bold{
+    font-size: 14px;
+    line-height: 1.5em;
+    font-weight: bold;
+    color: black;
+}
+
 
 .text_blod_blue{
     font-family: Helvetica, Arial, sans-serif;
