@@ -11,7 +11,8 @@
         <ui:composition>
             <h:outputStylesheet library="css" name="left.css"/>
             <h:form>
-                <p:menu styleClass="menu_left"> 
+                <p:poll id="poll" update="menu_left" interval="60"/>
+                <p:menu id="menu_left" styleClass="menu_left"> 
                     <p:submenu label="Solicitudes">  
                         <p:menuitem value="Resumen Atencion de Solicitudes" action="/view/atencion/resumen?faces-redirect=true"/>
                         <p:menuitem value="Solicitudes del Area #{mbNotificacionesMenu.msgSolicitudesArea}" action="/view/atencion/solicitudesArea?faces-redirect=true"/>  
