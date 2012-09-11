@@ -105,8 +105,9 @@ public class CalculoDeIndicadoresEJB implements CalculoDeIndicadoresEJBLocal {
         q = em.createQuery(query);
         q.setParameter("responsable", f);
         Long totalSolicitudesResponsable = (Long)q.getSingleResult();
+        Long totalSolicitudesVencidas = cantidadSolCerradasVencidas + cantidadSolVencidas;
         
-        return MathUtils.calcularPorcentajeRedondeado(cantidadSolCerradasVencidas, totalSolicitudesResponsable, 1) ;
+        return MathUtils.calcularPorcentajeRedondeado(totalSolicitudesVencidas, totalSolicitudesResponsable, 1) ;
     }
     
     @Override
@@ -134,8 +135,9 @@ public class CalculoDeIndicadoresEJB implements CalculoDeIndicadoresEJBLocal {
         q = em.createQuery(query);
         q.setParameter("area", a);
         Long totalSolicitudesArea = (Long)q.getSingleResult();
+        Long totalSolicitudesVencidas = cantidadSolCerradasVencidas + cantidadSolVencidas;
         
-        return MathUtils.calcularPorcentajeRedondeado(cantidadSolCerradasVencidas, totalSolicitudesArea, 1) ;
+        return MathUtils.calcularPorcentajeRedondeado(totalSolicitudesVencidas, totalSolicitudesArea, 1) ;
     }
     
     @Override
@@ -158,8 +160,9 @@ public class CalculoDeIndicadoresEJB implements CalculoDeIndicadoresEJBLocal {
         query = "SELECT COUNT(s) FROM SolicitudRequerimiento s";
         q = em.createQuery(query);
         Long totalSolicitudesDpto = (Long)q.getSingleResult();
+        Long totalSolicitudesVencidas = cantidadSolCerradasVencidas + cantidadSolVencidas;
         
-        return MathUtils.calcularPorcentajeRedondeado(cantidadSolCerradasVencidas, totalSolicitudesDpto, 1) ;
+        return MathUtils.calcularPorcentajeRedondeado(totalSolicitudesVencidas, totalSolicitudesDpto, 1) ;
     }
     
 }
