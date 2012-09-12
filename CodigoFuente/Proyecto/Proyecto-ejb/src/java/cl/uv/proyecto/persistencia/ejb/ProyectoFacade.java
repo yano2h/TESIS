@@ -34,6 +34,11 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
     }
     
     @Override
+    public void remove(Proyecto p){
+        super.remove(find(p.getIdProyecto()));
+    }
+    
+    @Override
     public List<Proyecto> buscarProyectosPorArea(Area area){
         Query q = em.createQuery("SELECT DISTINCT p FROM Proyecto p, ParticipanteProyecto pp WHERE p = pp.proyecto AND pp.participante.area = :area ORDER BY p.fechaInicio DESC");
         q.setParameter("area", area);

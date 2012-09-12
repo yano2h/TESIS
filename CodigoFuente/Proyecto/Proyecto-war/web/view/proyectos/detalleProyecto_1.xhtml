@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="title">
+            <h:outputText value="Detalle Proyecto"/>
+        </ui:define>
+        <ui:define name="content">  
+
+            <f:metadata>
+                <f:viewParam id="idProyecto" name="idProyecto" value="#{mbDetalleProyecto.idProyecto}" />
+                <f:event type="preRenderView" listener="#{mbDetalleProyecto.init}" />
+            </f:metadata>
+            <p:messages id="messages" showDetail="true"/>  
+
+            <h:form id="detalleProy" rendered="#{mbDetalleProyecto.proyecto != null}">
+                <h:outputScript library="js" name="calendar-localization.js" />
+                <ui:param name="R_ADM" value="#{security.R_ADM}"/>
+                <ui:param name="R_JAREA" value="#{security.R_JAREA}"/>
+                <ui:param name="ROLES_ADM_JA" value="#{security.R_ADM},#{security.R_JAREA}"/>
+
+                <p:panel id="panelDetalleProyecto" header="Detalle Proyecto" >
+                    <p:menubar id="menu_bar_proy" style="height: 30px;" rendered="#{p:ifAnyGranted(ROLES_ADM_JA)}">
+                        <p:menuitem value="Ver Avance" icon="ui-icon-search" action="#{mbDetalleProyecto.verResumenAvance}"/>
+                        <p:menuitem value="Editar" icon="ui-icon-pencil" action="#{mbDetalleProyecto.editarProyecto}"/>
+                        <p:menuitem value="Eliminar" icon="ui-icon-trash" onclick="confirmarEliminacion.show()" />
+                        <p:menuitem value="Cerrar" icon="ui-icon-locked" update="@form" actionListener="#{mbDetalleProyecto.cerrarProyecto}" disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto eq const.EstadoP_FINALIZADO}"/>
+                        <p:menuitem value="Volver a abrir" icon="ui-icon-unlocked" disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto ne const.EstadoP_FINALIZADO}"/>
+                    </p:menubar>
+
+                    <br/>
+                    <h:outputText id="nombreProy" value="Información Proyecto: #{mbDetalleProyecto.proyecto.codigoInterno}" styleClass="title_bold"/>
+                    <h:panelGrid columns="3" style="border-spacing: 0px;">
+                        <h:panelGrid columns="2" cellspacing="10" width="400" style="margin-left: -10px">
+                            <h:outputText value="Nombre Proyecto:" styleClass="label_blod label" />
+                            <h:outputText value="#{mbDetalleProyecto.proyecto.nombre}" style="width: 350px;" />
+                            <h:outputText value="Tipo Proyecto:" styleClass="label_blod label"/>
+                            <h:outputText value="#{mbDetalleProyecto.proyecto.tipoProyecto.nombreTipoProyecto}"/>
+                            <h:outputText value="Estado Proyecto:" styleClass="label_blod label"/>    
+                            <h:outputText id="otxt_estado_proyecto" value="#{mbDetalleProyecto.proyecto.estadoProyecto.nombreEstadoProyecto}"/>
+                        </h:panelGrid>
+                        <br/>
+                        <h:panelGrid columns="2" cellspacing="10">
+                            <h:outputText value="Codigo Interno:" styleClass="label_blod label"/>
+                            <h:outputText value="#{mbDetalleProyecto.proyecto.codigoInterno}"/>
+                            <h:outputText value="Fecha de Inicio:" styleClass="label_blod label"/>
+                            <h:outputText value="#{mbDetalleProyecto.proyecto.fechaInicio}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+
+                            <h:outputText value="Fecha de Termino:" styleClass="label_blod label"/>
+                            <h:outputText id="fecha_ter" value="#{mbDetalleProyecto.proyecto.fechaTermino}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                    <h:panelGrid columns="1" cellspacing="10" style="margin-left: -9px" width="600">
+                        <h:outputText value="Descripción del Proyecto:" styleClass="label_blod label"/>
+                        <h:outputText id="otxt_descripcion_proyecto" value="#{mbDetalleProyecto.proyecto.descripcion}"/>
+                    </h:panelGrid>
+
+                    <br/>
+                    <h:outputText value="Participantes del Proyecto:" styleClass="title_bold"/>
+                    <p:dataTable id="tabla_participantes"
+                                 value="#{mbDetalleProyecto.proyecto.participantes}"
+                                 var="part">
+
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{part.participante.nombre}"/>
+                        </p:column>
+                        <p:column headerText="Apellido Paterno">
+                            <h:outputText value="#{part.participante.apellidoPaterno}"/>
+                        </p:column>
+                        <p:column headerText="Apellido Materno">
+                            <h:outputText value="#{part.participante.apellidoMaterno}"/>
+                        </p:column>
+                        <p:column headerText="Rol">
+                            <h:outputText value="#{part.rol.nombreRol}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+
+                <p:confirmDialog id="confirm_dlg_eliminacion" message="¿Esta seguro que realmente desea eliminar este proyecto del sistema?"  
+                                 header="Eliminar Proyecto" severity="info" widgetVar="confirmarEliminacion">
+                    <p:commandButton id="btn_confirmar" value="Si" oncomplete="confirmarEliminacion.hide()"  
+                                     actionListener="#{mbDetalleProyecto.eliminarProyecto}" action="proyectosArea?faces-redirect=true" />  
+                    <p:commandButton id="btn_cancelar" value="No" onclick="confirmarEliminacion.hide()" type="button" />
+
+                </p:confirmDialog>
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>
+
