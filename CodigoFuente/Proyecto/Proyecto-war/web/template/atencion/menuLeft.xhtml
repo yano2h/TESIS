@@ -22,7 +22,7 @@
                     
                     <p:submenu label="Proyectos">  
                         <p:menuitem value="Proyectos del Area" action="/view/proyectos/proyectosArea?faces-redirect=true"/>
-                        <p:menuitem value="Crear Proyecto" action="/view/proyectos/crearProyecto?faces-redirect=true" rendered="#{mbFuncionarioInfo.funcionario.rol eq const.Rol_JA}"/>
+                        <p:menuitem value="Crear Proyecto" action="/view/proyectos/crearProyecto?faces-redirect=true" rendered="#{p:ifGranted(security.R_ADM)}"/>
                         <p:menuitem value="Buscar Proyecto" action="/view/proyectos/buscarProyecto?faces-redirect=true"/>
                         <p:menuitem value="Mis Proyectos" action="/view/proyectos/misProyectos?faces-redirect=true"/>
                         <p:menuitem value="Crear Tarea" action="/view/proyectos/crearTarea?faces-redirect=true"/>
@@ -30,7 +30,7 @@
                     </p:submenu>   
                     
                     <p:submenu label="Gestion de SCM">    
-                        <p:menuitem value="Mis Tareas SCM" action="/view/scm/crearSolicitud?faces-redirect=true"/>  
+                        <p:menuitem value="Mis Tareas SCM" action="/view/scm/crearSolicitud?faces-redirect=true" rendered="false"/>  
                         <p:menuitem value="Asignar Tareas SCM" action="/view/scm/tareasScmProyectos?faces-redirect=true"/>  
                         <p:menuitem value="Identificar Configuración" action="/view/scm/identificarConfiguracionProyecto?faces-redirect=true"/> 
                         <p:menuitem value="Crear Solicitud de Cambio" action="/view/scm/crearSolicitudCambio?faces-redirect=true"/> 
@@ -39,7 +39,7 @@
                         <p:menuitem value="Formulario Implementación #{mbNotificacionesMenu.msgSolicitudImplementacion}" action="/view/scm/implementacionSolicitud?faces-redirect=true"/> 
                     </p:submenu>   
                     
-                    <p:submenu label="Opciones de Administracion" rendered="#{p:ifGranted(security.R_ADM)}">  
+                    <p:submenu label="Opciones de Administracion" rendered="false">  
                         <p:menuitem value="Agregar nuevos funcionarios" action="#"/>
                         <p:menuitem value="Solicitudes del Area" action="/view/atencion/solicitudesArea?faces-redirect=true"/>  
                     </p:submenu> 

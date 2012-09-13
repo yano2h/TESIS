@@ -16,30 +16,29 @@
                     <h:panelGrid columns="3" style="width: 100%">
                         <h:panelGrid columns="2" style="line-height: 1.5em;" >
                             <h:outputLabel value="Nombres: " styleClass="label_blod"/>
-                            <h:outputText value="#{mbUserInfo.funcionario.nombre}"/>
+                            <h:outputText value="#{mbUser.funcionario.nombre }"/>
 
                             <h:outputLabel value="Apellido Paterno: " styleClass="label_blod"/>
-                            <h:outputText value="#{mbUserInfo.funcionario.apellidoPaterno}"/>
+                            <h:outputText value="#{mbUser.funcionario.apellidoPaterno}"/>
 
                             <h:outputLabel value="Apellido Materno: " styleClass="label_blod"/>
-                            <h:outputText value="#{mbUserInfo.funcionario.apellidoMaterno}"/>
+                            <h:outputText value="#{mbUser.funcionario.apellidoMaterno}"/>
 
                         </h:panelGrid>
 
                         <p:separator style="width: 2px;height: 100px;margin-left: 50px;margin-right: 20px;"/>
 
                         <h:panelGrid columns="2" style="line-height: 1.5em;">
-
                             <h:outputLabel value="Correo Instritucional: " styleClass="label_blod"/>
-                            <h:outputText value="#{mbUserInfo.funcionario.correoUv}"/>
+                            <h:outputText value="#{mbUser.funcionario.correoUv}"/>
 
                             <h:outputLabel value="Fecha Primer Acceso: " styleClass="label_blod"/>
-                            <h:outputText value="#{mbUserInfo.funcionario.fechaPrimerAcceso}">
+                            <h:outputText value="#{mbUser.funcionario.fechaPrimerAcceso}">
                                 <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" />
                             </h:outputText>
 
                             <h:outputLabel value="Fecha Ultimo Acceso: "  styleClass="label_blod"/>
-                            <h:outputText value="#{mbUserInfo.funcionario.fechaUltimoAcceso}">
+                            <h:outputText value="#{mbUser.funcionario.fechaUltimoAcceso}">
                                 <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" />
                             </h:outputText>
 

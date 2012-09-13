@@ -24,7 +24,7 @@
                     <ui:param name="R_ADM" value="#{security.R_ADM}"/>
                     <ui:param name="R_JAREA" value="#{security.R_JAREA}"/>
                     <ui:param name="ROLES_ADM_JA" value="#{security.R_ADM},#{security.R_JAREA}"/>
-                    <p:menubar style="height: 30px;" 
+                    <p:menubar styleClass="menu_bar" style="height: 30px;" 
                                rendered="#{p:ifAnyGranted(ROLES_ADM_JA)}"> 
                         <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{mbDetalleProyecto.activarEdicion}" update="@form"  oncomplete="inpNombre.show();inpCodigo.show(); inpTipo.show(); inpEstado.show(); inpFechaIni.show();inpDesc.show();"/>
                         <p:menuitem value="Guardar Cambios" icon="ui-icon-disk" 

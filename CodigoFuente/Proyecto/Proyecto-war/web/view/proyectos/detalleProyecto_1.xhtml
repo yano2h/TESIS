@@ -20,7 +20,7 @@
                 <ui:param name="ROLES_ADM_JA" value="#{security.R_ADM},#{security.R_JAREA}"/>
 
                 <p:panel id="panelDetalleProyecto" header="Detalle Proyecto" >
-                    <p:menubar id="menu_bar_proy" style="height: 30px;" rendered="#{p:ifAnyGranted(ROLES_ADM_JA)}">
+                    <p:menubar id="menu_bar_proy" style="height: 30px;" styleClass="menu_bar" rendered="#{p:ifAnyGranted(ROLES_ADM_JA)}">
                         <p:menuitem value="Ver Avance" icon="ui-icon-search" action="#{mbDetalleProyecto.verResumenAvance}"/>
                         <p:menuitem value="Editar" icon="ui-icon-pencil" action="#{mbDetalleProyecto.editarProyecto}"/>
                         <p:menuitem value="Eliminar" icon="ui-icon-trash" onclick="confirmarEliminacion.show()" />

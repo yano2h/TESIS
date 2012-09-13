@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="title">
+            <h:outputText value="Item de Configuracion"/>
+        </ui:define>
+        <ui:define name="content">
+            <h:outputScript library="js" name="calendar-localization.js" />
+            <p:panel header="Item de Configuracion">
+                <p:menubar>
+                    <p:menuitem value="Editar" actionListener="#{mbDetalleIC.editar}" process="@this" />
+                    <p:menuitem value="Volver" actionListener="#{mbDetalleIC.volver}" process="@this"/>
+                </p:menubar>
+                <h:panelGrid columns="4" cellspacing="10">
+                    <h:outputText value="Nombre:" styleClass="label_blod label"/>
+                    <p:inplace>
+                        <p:inputText id="itxt_nombre" value="#{mbDetalleIC.ic.nombreItemConfiguracion}"/>
+                    </p:inplace>
+
+                    <h:outputText value="Codigo:" styleClass="label_blod label"/>
+                    <p:inplace>
+                        <p:inputText id="itxt_codigo" value="#{mbDetalleIC.ic.codigoIdentificadorIc}"/>
+                    </p:inplace>
+
+                    <h:outputText value="Nombre Proyecto:" styleClass="label_blod label"/>
+                    <p:inplace>
+                        <p:calendar id="cal_fecha_ini" showOn="button" pattern="dd/MM/yyyy" locale="es" navigator="true" required="true" value="#{mbEditProyecto.proyecto.fechaInicio}" style="margin-left: 5px;">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </p:calendar>
+                    </p:inplace>
+                    <h:outputText value="#{mbDetalleIC.ic.proyecto.nombre}"/>
+
+                    <h:outputText value="Fecha Ultima Modificacion:" styleClass="label_blod label"/>
+                    <h:outputText value="#{mbDetalleIC.ic.fechaUltimaModificacion}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+
+                    <h:outputText value="Responsable:" styleClass="label_blod label"/>
+                    <h:outputText value="#{mbDetalleIC.ic.responsableItem.nombreCompleto}"/>
+
+                    <h:outputText value="Version Item:" styleClass="label_blod label"/>
+                    <h:outputText value="#{mbDetalleIC.ic.version}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" style="margin-left: 10px;">
+                    <h:outputText value="Ubicacion Biblioteca:" styleClass="label_blod label"/>
+                    <h:outputText value="#{mbDetalleIC.ic.ubicacionEnBiblioteca}"/>
+                </h:panelGrid>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -19,7 +19,7 @@
                 <ui:param name="ROLES_ADM_JA" value="#{security.R_ADM},#{security.R_JAREA}"/>
 
                 <p:panel id="panelDetalleProyecto" header="Editar Proyecto" >
-                    <p:menubar id="menu_bar_proy" style="height: 30px;" rendered="#{p:ifAnyGranted(ROLES_ADM_JA)}">
+                    <p:menubar id="menu_bar_proy" style="height: 30px;" styleClass="menu_bar" rendered="#{p:ifAnyGranted(ROLES_ADM_JA)}">
                         <p:menuitem value="Guardar Cambios" icon="ui-icon-disk" 
                                     oncomplete="if(!args.validationFailed){inpNombre.save();inpCodigo.save(); inpTipo.save(); inpEstado.save(); inpFechaIni.save();inpDesc.save();inpFechaTer.save();}"
                                     action="#{mbEditProyecto.guardarCambios}" update="@form" />

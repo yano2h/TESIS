@@ -12,6 +12,7 @@
         </ui:define>
 
         <ui:define name="content">
+            <h:outputScript library="js" name="calendar-localization.js" />
             <h:form>
                 <p:growl id="growl" showDetail="true" /> 
                 
@@ -29,7 +30,7 @@
                             <p:inputText id="itxt_version" value="#{mbIdentificacionConfiguracion.nuevoItem.version}" required="true"/>
 
                             <p:outputLabel value="Fecha Ultima Modificación: " for="cal_fecha_modificacion"/>
-                            <p:calendar id="cal_fecha_modificacion" value="#{mbIdentificacionConfiguracion.nuevoItem.fechaUltimaModificacion}" required="true"/>
+                            <p:calendar id="cal_fecha_modificacion" value="#{mbIdentificacionConfiguracion.nuevoItem.fechaUltimaModificacion}" required="true" locale="es"/>
                         </h:panelGrid>
 
                         <h:panelGrid columns="2" cellspacing="10">
@@ -43,15 +44,16 @@
                             </p:selectOneMenu>
                         </h:panelGrid>
 
-                        <p:commandButton value="Añadir Item" actionListener="#{mbIdentificacionConfiguracion.addItem}" update="pnl_items_config"/>
+                        <p:commandButton value="Añadir Item" actionListener="#{mbIdentificacionConfiguracion.addItem}" update="@form"/>
 
                         <h:panelGrid columns="2"  style="float: right;">
                             <p:commandButton value="Guardar" actionListener="#{mbIdentificacionConfiguracion.guardarItems}" update="growl" process="@this"/>
-                            <p:commandButton value="Cancelar" action="identificacionConfiguracion?faces-redirect=true"/>
+                            <p:commandButton value="Cancelar" actionListener="#{mbIdentificacionConfiguracion.redirectCancelar}" process="@this" update="@all"/>
                         </h:panelGrid>
 
                     </p:panel>
-
+                    <br/>
+                    <h:outputText value="Items de Configuracion del Proyecto:" styleClass="title_bold"/>
                     <p:dataTable id="tbl_items_configuracion"  
                                  value="#{mbIdentificacionConfiguracion.listaItemConfiguracion}"
                                  var="item"
@@ -59,7 +61,9 @@
                                  rows="20"
                                  emptyMessage="No hay Items de Configuracion"
                                  paginatorPosition="bottom">
-
+                        
+                        <p:ajax event="rowSelect" listener="#{mbIdentificacionConfiguracion.redirectIC}"/>
+                        
                         <p:column headerText="Codigo" sortBy="#{item.codigoIdentificadorIc}">
                             <h:outputText value="#{item.codigoIdentificadorIc}"/>
                         </p:column>
@@ -80,6 +84,11 @@
                             <h:outputText value="#{item.fechaUltimaModificacion}">
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
+                        </p:column>
+                        <p:column style="width: 50px;">
+                            <p:commandButton id="btnDetalle" icon="ui-icon-search" title="Ver Detalle" 
+                                             actionListener="#{mbIdentificacionConfiguracion.redirectIC(item)}"
+                                             process="@this"/>
                         </p:column>
                     </p:dataTable>
 

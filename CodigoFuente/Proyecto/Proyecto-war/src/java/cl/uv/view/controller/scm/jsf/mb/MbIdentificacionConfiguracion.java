@@ -7,15 +7,13 @@ package cl.uv.view.controller.scm.jsf.mb;
 import cl.uv.proyecto.persistencia.ejb.ItemConfiguracionFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.ItemConfiguracion;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
-import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
+import cl.uv.view.controller.base.jsf.mb.MbBase;
 import cl.uv.view.controller.base.utils.JsfUtils;
-import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -24,31 +22,30 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class MbIdentificacionConfiguracion implements Serializable{
+public class MbIdentificacionConfiguracion extends MbBase{
     
     @EJB
     private ItemConfiguracionFacadeLocal itemConfiguracionFacade;
     
-    @ManagedProperty(value = "#{mbFuncionarioInfo}")
-    private MbFuncionarioInfo mbFuncionarioInfo;
-    
     private List<ItemConfiguracion> listaItemConfiguracion;
     private ItemConfiguracion nuevoItem;
     private Proyecto proyecto;
+    private ItemConfiguracion itemSelected;
     
-    public MbIdentificacionConfiguracion() {
-        nuevoItem = new ItemConfiguracion();
-    }
-
     @PostConstruct
     private void init(){
-        proyecto = (Proyecto)JsfUtils.getValue("proyecto");
+        proyecto = (Proyecto)getValueOfFlashContext("proyecto");
         listaItemConfiguracion =  itemConfiguracionFacade.buscarItemsPorProyecto(proyecto);
+        nuevoItem = new ItemConfiguracion();
         nuevoItem.setProyecto(proyecto);
     }
-    
-    public void setMbFuncionarioInfo(MbFuncionarioInfo mbFuncionarioInfo) {
-        this.mbFuncionarioInfo = mbFuncionarioInfo;
+
+    public ItemConfiguracion getItemSelected() {
+        return itemSelected;
+    }
+
+    public void setItemSelected(ItemConfiguracion itemSelected) {
+        this.itemSelected = itemSelected;
     }
 
     public ItemConfiguracion getNuevoItem() {
@@ -67,7 +64,6 @@ public class MbIdentificacionConfiguracion implements Serializable{
         this.listaItemConfiguracion = listaItemConfiguracion;
     }
     
-    
     public void addItem(){
         listaItemConfiguracion.add(nuevoItem);
         nuevoItem = new ItemConfiguracion();
@@ -76,7 +72,6 @@ public class MbIdentificacionConfiguracion implements Serializable{
     
     public void guardarItems(){
         if(listaItemConfiguracion.isEmpty()){
-            
             JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Advertencia", "Debe agregar algun item antes de poder guardar"));
         }else{
             itemConfiguracionFacade.guardarItems(listaItemConfiguracion);
@@ -84,4 +79,13 @@ public class MbIdentificacionConfiguracion implements Serializable{
         }   
     }
     
+    public void redirectIC(ItemConfiguracion item){
+        putValueOnFlashContext("item", item);
+        JsfUtils.performNavigation("detalleItemConfiguracion", true);
+    }
+    
+    public void redirectCancelar(){
+        putValueOnFlashContext("proyecto", proyecto);
+        JsfUtils.performNavigation("identificacionConfiguracion", true);
+    }
 }

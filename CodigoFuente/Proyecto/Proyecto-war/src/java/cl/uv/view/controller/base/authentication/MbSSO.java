@@ -4,6 +4,7 @@
  */
 package cl.uv.view.controller.base.authentication;
 
+import cl.uv.model.base.core.ejb.AuthEJBBeanLocal;
 import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
@@ -26,7 +27,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @ManagedBean
 @SessionScoped
 public class MbSSO implements Serializable{
-    
+    @EJB
+    private AuthEJBBeanLocal authEJBBean;
     private OpenAMUserDetails user;
     
     public MbSSO() {
@@ -52,6 +54,11 @@ public class MbSSO implements Serializable{
 
     public OpenAMUserDetails getUser() {
         return user;
+    }
+    
+    public void logout(){
+        JsfUtils.redirect(JsfUtils.getExternalContext().getRequestContextPath()+"/j_spring_security_logout");
+        authEJBBean.logout(user.getPassword());
     }
     
 }

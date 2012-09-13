@@ -18,7 +18,7 @@
                 <h:outputScript library="js" name="calendar-localization.js" />
 
                 <p:panel id="panelDetalleSolicitud" header="Detalle Solicitud" >
-                    <p:menubar style="height: 30px;"> 
+                    <p:menubar style="height: 30px;" styleClass="menu_bar"> 
                         <p:menuitem value="Asignar Responsable" icon="ui-icon-pin-s" onclick="dlgAsignarSolicitud.show();" 
                                     disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
                                                 mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA }"/>

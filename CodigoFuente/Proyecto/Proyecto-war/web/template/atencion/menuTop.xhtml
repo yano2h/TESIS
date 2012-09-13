@@ -19,7 +19,7 @@
                     </h:panelGrid>
                     <h:panelGroup>
                         <p:commandButton value="Ver Perfil" action="perfilFuncionario?faces-redirect=true"/>
-                        <p:commandButton value="Cerrar Sesión"/>
+                        <p:commandButton value="Cerrar Sesión" actionListener="#{mbSSO.logout}"/>
                     </h:panelGroup>
 
                 </h:panelGrid>

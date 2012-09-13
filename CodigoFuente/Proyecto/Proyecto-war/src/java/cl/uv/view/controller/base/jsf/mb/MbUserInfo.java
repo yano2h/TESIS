@@ -59,7 +59,7 @@ public class MbUserInfo implements Serializable {
     }
     
     public void logout(){
-       // JsfUtils.redirect(JsfUtils.getExternalContext().getRequestContextPath()+"/j_spring_security_logout");
+        //JsfUtils.redirect(JsfUtils.getExternalContext().getRequestContextPath()+"/j_spring_security_logout");
         System.out.println("LOGOUT");
         OpenAMUserDetails user = (OpenAMUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         authEJBBean.logout(user.getPassword());
