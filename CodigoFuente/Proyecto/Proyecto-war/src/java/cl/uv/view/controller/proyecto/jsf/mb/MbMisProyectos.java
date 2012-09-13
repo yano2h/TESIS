@@ -49,6 +49,7 @@ public class MbMisProyectos extends MbBase{
     }
     
     public void onRowSelect(){
-        JsfUtils.performNavigation("detalleProyecto?faces-redirect=true&idProyecto="+proyectoSelected.getIdProyecto(), false);
+        putValueOnFlashContext("proyecto", proyectoSelected);
+        JsfUtils.performNavigation("detalleProyecto_1", true);
     }
 }

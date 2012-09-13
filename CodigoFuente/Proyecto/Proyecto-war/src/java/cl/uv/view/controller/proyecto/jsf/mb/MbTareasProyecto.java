@@ -48,7 +48,11 @@ public class MbTareasProyecto implements Serializable {
     }
 
     public Integer getPorcetajeAvance() {
-        porcetajeAvance = 17;
+        Integer sumaAvances = 0;
+        for (TareaProyecto tareaProyecto : tareasProyecto) {
+            sumaAvances += tareaProyecto.getNivelAvance();
+        }
+        porcetajeAvance = sumaAvances/tareasProyecto.size();
         return porcetajeAvance;
     }
 

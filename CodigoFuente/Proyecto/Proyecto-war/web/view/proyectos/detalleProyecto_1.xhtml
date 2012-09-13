@@ -11,10 +11,6 @@
         </ui:define>
         <ui:define name="content">  
 
-            <f:metadata>
-                <f:viewParam id="idProyecto" name="idProyecto" value="#{mbDetalleProyecto.idProyecto}" />
-                <f:event type="preRenderView" listener="#{mbDetalleProyecto.init}" />
-            </f:metadata>
             <p:messages id="messages" showDetail="true"/>  
 
             <h:form id="detalleProy" rendered="#{mbDetalleProyecto.proyecto != null}">
@@ -29,7 +25,7 @@
                         <p:menuitem value="Editar" icon="ui-icon-pencil" action="#{mbDetalleProyecto.editarProyecto}"/>
                         <p:menuitem value="Eliminar" icon="ui-icon-trash" onclick="confirmarEliminacion.show()" />
                         <p:menuitem value="Cerrar" icon="ui-icon-locked" update="@form" actionListener="#{mbDetalleProyecto.cerrarProyecto}" disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto eq const.EstadoP_FINALIZADO}"/>
-                        <p:menuitem value="Volver a abrir" icon="ui-icon-unlocked" disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto ne const.EstadoP_FINALIZADO}"/>
+                        <p:menuitem value="Volver a abrir" icon="ui-icon-unlocked" update="@form" actionListener="#{mbDetalleProyecto.reabrirProyecto}" disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto ne const.EstadoP_FINALIZADO}"/>
                     </p:menubar>
 
                     <br/>
