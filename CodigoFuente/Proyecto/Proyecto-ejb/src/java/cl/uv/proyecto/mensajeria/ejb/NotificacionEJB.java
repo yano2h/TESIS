@@ -56,7 +56,7 @@ public class NotificacionEJB implements NotificacionEJBLocal {
                 n = crearNotificacionComentarioSolicitud(s, invoker);
                 break;
             default:
-                throw new AssertionError("Tipo enum desconocido", null);
+                throw new AssertionError("Tipo enum desconocido");
         }
 
         notificacionFacade.create(n);
