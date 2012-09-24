@@ -20,14 +20,14 @@
                     <p:panel header="Informacion Nuevo Item">
                         <h:panelGrid columns="4" cellspacing="10">
                             <p:outputLabel value="Identificador: " for="itxt_ident"/>
-                            <p:inputText id="itxt_ident" value="#{mbIdentificacionConfiguracion.nuevoItem.codigoIdentificadorIc}" required="true"/>
+                            <p:inputText id="itxt_ident" value="#{mbIdentificacionConfiguracion.nuevoItem.codigoIdentificadorIc}" required="true" size="5"/>
 
                             <p:outputLabel value="Nombre Item: " for="itxt_nombre"/>
-                            <p:inputText id="itxt_nombre" value="#{mbIdentificacionConfiguracion.nuevoItem.nombreItemConfiguracion}" style="width: 200px;" required="true"/>
+                            <p:inputText id="itxt_nombre" value="#{mbIdentificacionConfiguracion.nuevoItem.nombreItemConfiguracion}" style="width: 200px;" required="true" size="45"/>
                         </h:panelGrid>
                         <h:panelGrid columns="4" cellspacing="10">
                             <p:outputLabel value="Version Item: " for="itxt_version"/>
-                            <p:inputText id="itxt_version" value="#{mbIdentificacionConfiguracion.nuevoItem.version}" required="true"/>
+                            <p:inputText id="itxt_version" value="#{mbIdentificacionConfiguracion.nuevoItem.version}" required="true" size="10"/>
 
                             <p:outputLabel value="Fecha Ultima Modificación: " for="cal_fecha_modificacion"/>
                             <p:calendar id="cal_fecha_modificacion" value="#{mbIdentificacionConfiguracion.nuevoItem.fechaUltimaModificacion}" required="true" locale="es"/>

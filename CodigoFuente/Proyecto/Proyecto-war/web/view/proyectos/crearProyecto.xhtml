@@ -55,7 +55,7 @@
                 </p:panel>
                 <p:dialog id="dlg_creacion_exitosa" widgetVar="dlgExito" closable="false" resizable="false" modal="true" width="390" header="Creacion Exitosa">
                     <h:panelGrid>
-                        <h:outputText value="El proyecto \'#{mbProyecto.nuevoProyecto.nombre}\' fue creado exitosamente. Si desea agregar mas participantes puede hacerlo en el menu de edución"/>
+                        <h:outputText value="El proyecto \'#{mbProyecto.nuevoProyecto.nombre}\' fue creado exitosamente. Si desea agregar mas participantes puede hacerlo en el menu de edición"/>
                         <br/>
                         <h:panelGroup style="float: right;">
                             <p:commandButton value="Crear Otro Proyecto" oncomplete="dlgExito.hide();" update="@all" action="crearProyecto"/>

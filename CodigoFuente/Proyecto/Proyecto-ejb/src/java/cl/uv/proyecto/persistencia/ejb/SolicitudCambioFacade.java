@@ -83,7 +83,7 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
 
     @Override
     public Long contarSolicitudAnalisisPendiente(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT COUNT(s) FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
+        Query q = em.createQuery("SELECT COUNT(s) FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado");
         q.setParameter("responsable", funcionario);
         q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_ANALIZAR_SC") );
         q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_ENVIADA") ));
@@ -108,7 +108,7 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
 
     @Override
      public Long contarSolicitudEvaluacionPendiente(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT COUNT(s) FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
+        Query q = em.createQuery("SELECT COUNT(s) FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado");
         q.setParameter("responsable", funcionario);
         q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_APROBAR_SC"));
         q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_ANALISADA") ));
@@ -133,7 +133,7 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
     
     @Override
     public Long contarSolicitudImplementacionPendiente(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT COUNT(s) FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
+        Query q = em.createQuery("SELECT COUNT(s) FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado");
         q.setParameter("responsable", funcionario);
         q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_IMPLEMENTAR_SC"));
         q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_APROBADA") ));

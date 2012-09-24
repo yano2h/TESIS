@@ -6,14 +6,13 @@ package cl.uv.view.controller.scm.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.SolicitudCambioFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.SolicitudCambio;
-import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
+import cl.uv.view.controller.base.jsf.mb.MbBase;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -22,12 +21,10 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class MbSolicitudesPorTarea {
+public class MbSolicitudesPorTarea extends MbBase{
 
     @EJB
     private SolicitudCambioFacadeLocal solicitudCambioFacade;
-    @ManagedProperty(value = "#{mbFuncionarioInfo}")
-    private MbFuncionarioInfo mbFuncionarioInfo;
     
     private SolicitudCambio solicitudCambioSelected;
     private List<SolicitudCambio> solicitudesPendientes;
@@ -40,19 +37,16 @@ public class MbSolicitudesPorTarea {
     private void init(){
         String url = JsfUtils.getFacesContext().getViewRoot().getViewId();
         if ( url.equals( Resources.getValue("pages", "analisis_solicitud")) ){
-            solicitudesPendientes = solicitudCambioFacade.buscarSolicitudAnalisisPendiente(mbFuncionarioInfo.getFuncionario());
-            solicitudesListas     = solicitudCambioFacade.buscarSolicitudAnalisadas(mbFuncionarioInfo.getFuncionario());
+            System.out.println("ANALISIS");
+            solicitudesPendientes = solicitudCambioFacade.buscarSolicitudAnalisisPendiente(getFuncionarioDisico());
+            solicitudesListas     = solicitudCambioFacade.buscarSolicitudAnalisadas(getFuncionarioDisico());
         }else if ( url .equals( Resources.getValue("pages", "evaluacion_solicitud") )){
-            solicitudesPendientes = solicitudCambioFacade.buscarSolicitudEvaluacionPendiente(mbFuncionarioInfo.getFuncionario());
-            solicitudesListas     = solicitudCambioFacade.buscarSolicitudEvaluadas(mbFuncionarioInfo.getFuncionario());
+            solicitudesPendientes = solicitudCambioFacade.buscarSolicitudEvaluacionPendiente(getFuncionarioDisico());
+            solicitudesListas     = solicitudCambioFacade.buscarSolicitudEvaluadas(getFuncionarioDisico());
         }else if ( url .equals( Resources.getValue("pages", "implementacion_solicitud") )){
-            solicitudesPendientes = solicitudCambioFacade.buscarSolicitudImplementacionPendiente(mbFuncionarioInfo.getFuncionario());
-            solicitudesListas     = solicitudCambioFacade.buscarSolicitudImplementadas(mbFuncionarioInfo.getFuncionario());
+            solicitudesPendientes = solicitudCambioFacade.buscarSolicitudImplementacionPendiente(getFuncionarioDisico());
+            solicitudesListas     = solicitudCambioFacade.buscarSolicitudImplementadas(getFuncionarioDisico());
         }
-    }
-
-    public void setMbFuncionarioInfo(MbFuncionarioInfo mbFuncionarioInfo) {
-        this.mbFuncionarioInfo = mbFuncionarioInfo;
     }
     
     public void redirctToDetalle(){
