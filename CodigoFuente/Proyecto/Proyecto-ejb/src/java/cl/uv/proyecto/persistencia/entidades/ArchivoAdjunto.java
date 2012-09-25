@@ -4,6 +4,7 @@
  */
 package cl.uv.proyecto.persistencia.entidades;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -64,6 +65,8 @@ public class ArchivoAdjunto implements Serializable {
     @NotNull
     @Column(name = "activo")
     private boolean activo;
+    
+    private InputStream inputStream;
 //    @OneToOne(cascade = CascadeType.ALL, mappedBy = "archivoAdjunto")
 //    private ArchivoSolicitudRequerimiento archivoSolicitudRequerimiento;
 //    @OneToOne(cascade = CascadeType.ALL, mappedBy = "archivoAdjunto")

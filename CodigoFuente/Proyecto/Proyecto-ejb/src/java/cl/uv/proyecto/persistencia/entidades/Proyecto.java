@@ -71,7 +71,7 @@ public class Proyecto implements Serializable {
     private TipoProyecto tipoProyecto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
     private List<SolicitudCambio> solicitudesDeCambio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto", orphanRemoval=true, fetch= FetchType.EAGER)
     private List<ArchivoProyecto> archivoProyectoList;
 
     public Proyecto() {
