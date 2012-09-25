@@ -94,7 +94,9 @@ public class SolicitudRequerimiento implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudRequerimiento", orphanRemoval=true)
     private List<ComentarioSolicitud> comentarios;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudRequerimiento")
+    private List<ArchivoSolicitudRequerimiento> archivoSolicitudRequerimientoList;
+    
     public SolicitudRequerimiento() {
     }
 

@@ -474,4 +474,30 @@ CREATE TABLE ESTADISTICA_PERSONAL (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
+CREATE TABLE ARCHIVO_ADJUNTO (
+    id_archivo BIGSERIAL NOT NULL,
+    nombre VARCHAR(255) NOT NULL,
+    path_file VARCHAR(255) NOT NULL,
+    size_file BIGINT NOT NULL,
+    size_format VARCHAR(10) NOT NULL,
+    mimetype VARCHAR(100) ,
+    fecha_upload TIMESTAMP NOT NULL,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    PRIMARY KEY (id_archivo)
+);
 
+CREATE TABLE ARCHIVO_SOLICITUD_REQUERIMIENTO(
+    id_solicitud BIGINT NOT NULL,
+    id_archivo BIGINT NOT NULL UNIQUE,
+    PRIMARY KEY (id_solicitud,id_archivo),
+    FOREIGN KEY (id_solicitud) REFERENCES solicitud_requerimiento (id_solicitud_req),
+    FOREIGN KEY (id_archivo) REFERENCES ARCHIVO_ADJUNTO (id_archivo)
+);
+
+CREATE TABLE ARCHIVO_PROYECTO(
+    id_proyecto INT NOT NULL,
+    id_archivo BIGINT NOT NULL UNIQUE,
+    PRIMARY KEY (id_proyecto,id_archivo),
+    FOREIGN KEY (id_proyecto) REFERENCES PROYECTO (id_proyecto),
+    FOREIGN KEY (id_archivo) REFERENCES ARCHIVO_ADJUNTO (id_archivo)
+);
