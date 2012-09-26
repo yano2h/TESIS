@@ -23,7 +23,7 @@
 	y no presenta mayor dificultad, sin embargo cuando se desea realizar
 	pruebas, ya sea unitarias o de integración, en clases java que son
 	Enterprise Java Beans (EJBs), se presentan algunas dificultades las
-	cuales radican principalmente en el echo que los EJB son componentes
+	cuales radican principalmente en el hecho que los EJB son componentes
 	gestionados por en servidor de aplicaciones y por ende no pueden  
 	funcionar fuera de este, esto significa que para poder probar los EJB
 	debemos desplegar los componentes dentro de un servidor de 
@@ -55,7 +55,7 @@
 		temporal \textit{build/embedded}.
 	\end{itemize}
 	
-	Para esto gestionar todo ese proceso se implemento una nueva clase 
+	Para gestionar todo este proceso, se implemento una nueva clase 
 	denominada BaseTestEJB de la cual extienden todos los test que hacen uso 
 	de los EJB.\\
 
@@ -309,13 +309,18 @@
 		\label{docTestUnit}
 	\end{table}
 
+%	Despues de implementar y ejecutar todas las pruebas antes descritas, se detectaron
+%	algunos errores, los cuales fueron oportunamente corregidos y vueltos a probar.
+%	Actualmente todas las pruebas se encuentra aprobadas, sin
+
 	\subsection{Análisis de Resultados}
-	Todas las pruebas han sido implementadas y ejecutadas satisfactoriamente, y 
-	todas han sido superadas, es decir luz verde. Todos aquellos que no fueron 
-	superados, fueron corregidos y solucionados a la brevedad. Y ante cualquier
-	modificación del código fuente en el futuro, debe volver a ser probadas con 
-	este mismo set de pruebas y corregido hasta volver a lograr un 100\%
-      de aprobación de los tests.
+	Todas las pruebas han sido implementadas y ejecutadas satisfactoriamente.
+	Todos los errores que fueron detectados durante la ejecución de las pruebas
+	fueron solucionados oportunamente y vueltos a probar, por lo que actualmente
+	todas las pruebas se encuentran superadas.
+       Ante cualquier modificación del código fuente en el futuro, se debe volver a ejecutar 
+	este mismo set de pruebas y a corregir los errores detectados hasta volver a lograr 
+	un 100\% de aprobación de los tests.
 
 	\subsection{Problemas detectados}
 	Durante el desarrollo de los tests, los principales problemas que existieron
@@ -393,3 +398,19 @@
 	Esta pruebas fueron realizadas y superadas en su totalidad. Verificando así que 
 	existe una correcta integración de los módulos diseñados. Estas pruebas fueron
 	ejecutadas manualmente dado la dificultad de automatizarlas. 
+
+
+	\section{Pruebas de Rendimiento}
+
+		\subsection{Análisis de Resultados}
+		\subsection{Problemas detectados}
+
+	\section{Pruebas de Aceptación}
+
+		\subsection{Análisis de Resultados}
+		\subsection{Problemas detectados}
+
+	\section{Pruebas Beta}
+
+		\subsection{Análisis de Resultados}
+		\subsection{Problemas detectados}
