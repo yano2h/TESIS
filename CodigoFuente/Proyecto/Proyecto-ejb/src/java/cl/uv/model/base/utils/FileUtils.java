@@ -14,7 +14,8 @@ import java.util.logging.Logger;
  */
 public class FileUtils {
 
-    public void writeUploadFile(String path, InputStream input) {
+    
+    public static void writeUploadFile(String path, InputStream input) {
         File file = new File(path);
         OutputStream out = null;
         try {
