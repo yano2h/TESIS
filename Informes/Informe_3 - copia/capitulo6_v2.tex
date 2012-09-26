@@ -46,15 +46,20 @@ El proceso establecido para la ejecución de las pruebas de aceptación es le sigu
 		\hline
 		{\textbf{Id-Prueba}} & {PA-01} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Crear Solicitud de Requerimiento}\\
 		\hline
-		{\textbf{Requerimiento}} & {} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {}\\
+		{\textbf{Requerimiento}} & {RF02,RF03} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Crear Solicitud de Requerimiento}\\
 		\hline
-		{\textbf{Condición}} & \multicolumn{3}{l|}{}\\
+		{\textbf{Condición}} & \multicolumn{3}{l|}{Estar logueado como funcionario.}\\
 		\hline
-		{\textbf{Pasos}} & \multicolumn{3}{l|}{}\\
+		\multirow{1}{*}{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Crear Solicitud".}\\ 
+		& \multicolumn{3}{m{10.3cm}|}{2. Ingresar los datos de su solicitud y enviarla.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Ingresar a su correo institucional y verificar 
+		que a recibido el correo con el codigo de consulta correspondiente.}\\
 		\hline
-		{\textbf{Resultado Esperado}} & \multicolumn{3}{l|}{}\\
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{ El sistema muestre un 
+		mensaje indicando que la solicitud se envió exitosamente y que el solicitante aya 
+		recibido el código de consulta correspondiente a la solicitud enviada.}\\
 		\hline
-		{\textbf{Observaciones}} & \multicolumn{3}{l|}{}\\
+		{\textbf{Observaciones}} & \multicolumn{3}{l|}{Guardar código de consulta para la prueba PA-02}\\
 		\hline
 	\end{tabular}
 	\end{center}
@@ -64,35 +69,16 @@ El proceso establecido para la ejecución de las pruebas de aceptación es le sigu
 	\begin{center}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
 		\hline
-		{\textbf{Id-Prueba}} & {PA-02} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {}\\
+		{\textbf{Id-Prueba}} & {PA-02} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Consultar por Código de Consulta}\\
 		\hline
-		{\textbf{Requerimiento}} & {} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {}\\
+		{\textbf{Requerimiento}} & {RF04} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Consultar solicitud ,Sección Consultar a través de numero de consulta}\\
 		\hline
-		{\textbf{Condición}} & \multicolumn{3}{l|}{}\\
+		{\textbf{Condición}} & \multicolumn{3}{l|}{Estar logueado como funcionario, y el código debe ser valido.}\\
 		\hline
-		{\textbf{Pasos}} & \multicolumn{3}{l|}{}\\
+		\multirow{1}{*}{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Consultar Solicitud".}\\ 
+		& \multicolumn{3}{m{10.3cm}|}{2. Ingresar el código de consulta y presionar "Buscar".}\\
 		\hline
-		{\textbf{Resultado Esperado}} & \multicolumn{3}{l|}{}\\
-		\hline
-		{\textbf{Observaciones}} & \multicolumn{3}{l|}{}\\
-		\hline
-	\end{tabular}
-	\end{center}
-	\end{table} 
-
-	\begin{table}[H]
-	\begin{center}
-	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
-		\hline
-		{\textbf{Id-Prueba}} & {PA-03} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {}\\
-		\hline
-		{\textbf{Requerimiento}} & {} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {}\\
-		\hline
-		{\textbf{Condición}} & \multicolumn{3}{l|}{}\\
-		\hline
-		{\textbf{Pasos}} & \multicolumn{3}{l|}{}\\
-		\hline
-		{\textbf{Resultado Esperado}} & \multicolumn{3}{l|}{}\\
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se debe desplegar el detalle de la solicitud correspondiente.}\\
 		\hline
 		{\textbf{Observaciones}} & \multicolumn{3}{l|}{}\\
 		\hline
@@ -104,15 +90,16 @@ El proceso establecido para la ejecución de las pruebas de aceptación es le sigu
 	\begin{center}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
 		\hline
-		{\textbf{Id-Prueba}} & {PA-04} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {}\\
+		{\textbf{Id-Prueba}} & {PA-03} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Filtrar Búsqueda}\\
 		\hline
-		{\textbf{Requerimiento}} & {} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {}\\
+		{\textbf{Requerimiento}} & {RF04} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Consultar solicitud ,Sección Filtrar Búsqueda}\\
 		\hline
-		{\textbf{Condición}} & \multicolumn{3}{l|}{}\\
+		{\textbf{Condición}} & \multicolumn{3}{l|}{Estar logueado como funcionario.}\\
 		\hline
-		{\textbf{Pasos}} & \multicolumn{3}{l|}{}\\
+		\multirow{1}{*}{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Consultar Solicitud".}\\ 
+		& \multicolumn{3}{m{10.3cm}|}{2. Ingresar un filtro de búsqueda.}\\
 		\hline
-		{\textbf{Resultado Esperado}} & \multicolumn{3}{l|}{}\\
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se debe actualizar el contenido del la tabla de resultados acorde a los filtros ingresados.}\\
 		\hline
 		{\textbf{Observaciones}} & \multicolumn{3}{l|}{}\\
 		\hline
@@ -124,21 +111,46 @@ El proceso establecido para la ejecución de las pruebas de aceptación es le sigu
 	\begin{center}
 	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
 		\hline
-		{\textbf{Id-Prueba}} & {PA-05} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {}\\
+		{\textbf{Id-Prueba}} & {PA-04} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Comentar Solicitud.}\\
 		\hline
-		{\textbf{Requerimiento}} & {} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {}\\
+		{\textbf{Requerimiento}} & {RF16} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Comentar Solicitud.}\\
 		\hline
 		{\textbf{Condición}} & \multicolumn{3}{l|}{}\\
 		\hline
-		{\textbf{Pasos}} & \multicolumn{3}{l|}{}\\
+		\multirow{1}{*}{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar una solicitud cualquiera para ver su detalle.}\\ 
+		& \multicolumn{3}{m{10.3cm}|}{2. Ingresar su comentario en el campo de texto.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Presionar "Comentar" para publicarlo.}\\
 		\hline
-		{\textbf{Resultado Esperado}} & \multicolumn{3}{l|}{}\\
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se debe actualizar la lista de comentarios, mostrando en primer lugar el nuevo comentario.}\\
 		\hline
 		{\textbf{Observaciones}} & \multicolumn{3}{l|}{}\\
 		\hline
 	\end{tabular}
 	\end{center}
-	\end{table} 
+	\end{table}  
+
+\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-05} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Gestionar Solicitud, Asignar Responsable Solicitud.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF16} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Asignar Responsable Solicitud.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{l|}{Estar logueado como jefe de área, que la solicitud este en estado "Enviada".}\\
+		\hline
+		\multirow{1}{*}{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Solicitudes del Área".}\\ 
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger una solicitud que este en estado Enviada.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Escoger la opción "Asignar Responsable".}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Escoger la opción "Asignar Responsable".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se debe actualizar la lista de comentarios, mostrando en primer lugar el nuevo comentario.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{l|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table}  
 
 	\begin{table}[H]
 	\begin{center}
