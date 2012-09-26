@@ -66,6 +66,7 @@ public class ArchivoAdjunto implements Serializable {
     @Column(name = "activo")
     private boolean activo;
     
+    @Transient
     private InputStream inputStream;
 //    @OneToOne(cascade = CascadeType.ALL, mappedBy = "archivoAdjunto")
 //    private ArchivoSolicitudRequerimiento archivoSolicitudRequerimiento;
