@@ -17,10 +17,10 @@
                         <h:outputLabel value="RUT:" styleClass="label_blod" />  
                         <h:outputText value="#{mbFuncionarioInfo.funcionario.rut}" />  
                     </h:panelGrid>
-                    <h:panelGroup>
-                        <p:commandButton value="Ver Perfil" action="perfilFuncionario?faces-redirect=true"/>
-                        <p:commandButton value="Cerrar Sesión" actionListener="#{mbSSO.logout}"/>
-                    </h:panelGroup>
+                    <h:panelGrid columns="2" style="float: right;">
+                        <p:commandButton value="Ver Perfil" action="perfilFuncionario?faces-redirect=true" style="width: 100%;"/>
+                        <p:commandButton value="Cerrar Sesión" actionListener="#{mbSSO.logout}" style="width: 100%;"/>
+                    </h:panelGrid>
 
                 </h:panelGrid>
             </h:panelGrid>

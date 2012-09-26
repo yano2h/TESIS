@@ -10,19 +10,17 @@
             <h:panelGrid id="header" columns="3" width="100%">
                 <h:graphicImage styleClass="logoUv" library="imagenes" name="#{img.logo_uv}"/>
                 <h:graphicImage styleClass="headerSolicitud" library="imagenes" name="#{img.header_solicitud}"/>
-                <h:panelGrid columns="1" styleClass="basicInfo">
-                    <h:panelGrid columns="2" >     
+                <h:panelGrid columns="1" styleClass="basicInfo" >
+                    <h:panelGrid columns="2" >
                         <h:outputLabel value="Usuario:" styleClass="label_blod" />  
                         <h:outputText value="#{mbUserInfo.funcionario.nombre}" />  
                         <h:outputLabel value="RUT:" styleClass="label_blod" />  
                         <h:outputText value="#{mbUserInfo.funcionario.rut}" />  
                     </h:panelGrid>
-                    <h:panelGroup>
-                        <p:commandButton value="Ver Perfil" action="perfilSolicitante?faces-redirect=true"/>
-                        <p:commandButton value="Cerrar Sesión" actionListener="#{mbSSO.logout}"/>
-                       
-                    </h:panelGroup>
-
+                    <h:panelGrid columns="2" style="float: right;">
+                        <p:commandButton value="Ver Perfil" action="perfilSolicitante?faces-redirect=true" style="width: 100%;"/>
+                        <p:commandButton value="Cerrar Sesión" actionListener="#{mbSSO.logout}" style="width: 100%;"/>
+                    </h:panelGrid>
                 </h:panelGrid>
             </h:panelGrid>
             
