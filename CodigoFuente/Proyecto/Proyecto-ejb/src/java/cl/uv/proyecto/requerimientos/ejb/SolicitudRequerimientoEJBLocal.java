@@ -35,4 +35,6 @@ public interface SolicitudRequerimientoEJBLocal {
     public void comentarSolicitud(String comentario, SolicitudRequerimiento solicitud, Funcionario autor);
 
     public void dejarPendienteSolicitud(SolicitudRequerimiento solicitud);
+
+    public void convertirSolicitudEnProyecto(SolicitudRequerimiento solicitud);
 }

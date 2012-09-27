@@ -140,6 +140,13 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitudFacade.edit(solicitud);
         notificacionEJB.crearNotificacionSolicitud(TypeNotification.ASIGNACION_SOLICITUD, solicitud, null);
     }
+    
+    @Override
+    public void convertirSolicitudEnProyecto(SolicitudRequerimiento solicitud){
+        solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_CERRADA") ));
+        solicitud.setFechaCierre(new Date());
+        solicitudFacade.edit(solicitud);
+    }
 
     @Override
     public void iniciarSolicitud(SolicitudRequerimiento solicitud) {
@@ -150,7 +157,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
 
     @Override
     public void dejarPendienteSolicitud(SolicitudRequerimiento solicitud){
-        if (solicitud.getEstadoSolicitud().getIdEstadoSolicitudRequerimiento() == Resources.getValueShort("Estados", "EstadoSR_ASIGNADA")) {
+        if (solicitud.getEstadoSolicitud().getIdEstadoSolicitudRequerimiento().equals( Resources.getValueShort("Estados", "EstadoSR_ASIGNADA") )) {
             solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_PENDIENTE") ));
             solicitudFacade.edit(solicitud);
         }

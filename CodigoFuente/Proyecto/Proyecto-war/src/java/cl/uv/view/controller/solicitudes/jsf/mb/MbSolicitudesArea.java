@@ -235,4 +235,9 @@ public class MbSolicitudesArea implements Serializable {
         }
         
     }
+    
+    public void convertirEnProyecto(){
+        solicitudEJB.convertirSolicitudEnProyecto(mbDetalleSolicitud.getSolicitud());
+        JsfUtils.handleNavigation("/view/proyectos/crearProyecto?faces-redirect=true");
+    }
 }
