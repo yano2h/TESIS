@@ -40,14 +40,12 @@
                                                 mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
                         <p:submenu label="Cerrar y Responder" icon="ui-icon-mail-closed">
                             <p:menuitem value="Respuesta Directa" onclick="respDirecta.show(); editorRespDirecta.focus();"
-                                        disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
-                                                    mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA and
-                                                    mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_FINALIZADA_SIN_RESPUESTA and 
+                                        disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_RECHAZADA or
+                                                    mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_CERRADA or 
                                                     mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
                             <p:menuitem value="Respuesta Manual" onclick="respManual.show();" 
-                                        disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
-                                                    mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA and
-                                                    mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_FINALIZADA_SIN_RESPUESTA and 
+                                        disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_RECHAZADA or
+                                                    mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_CERRADA or 
                                                     mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
                         </p:submenu>
                     </p:menubar>
@@ -324,7 +322,8 @@
                     <h:panelGroup style="float: right;margin-top: 10px;">
                         <p:commandButton value="Confirmar" 
                                          process="dlg_convertir_proyecto"
-                                         update="dlg_convertir_proyecto panelDetalleSolicitud" />
+                                         update="dlg_convertir_proyecto panelDetalleSolicitud"
+                                         actionListener="#{mbSolicitudesArea.convertirEnProyecto()}"/>
                         <p:commandButton value="Cancelar" onclick="convProyecto.hide();"/>
                     </h:panelGroup>
                 </p:dialog>
