@@ -20,10 +20,10 @@
         
         <security:intercept-url pattern="/faces/view/accessDenied.*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url pattern="/faces/view/jpa/**" access="ROLE_ADMIN"  />
-        <security:intercept-url pattern="/faces/view/atencion/**" access="ROLE_ADMIN" />
-        <security:intercept-url pattern="/faces/view/proyectos/**" access="ROLE_ADMIN" />
-        <security:intercept-url pattern="/faces/view/scm/**" access="ROLE_ADMIN" />
-        <security:intercept-url pattern="/faces/view/solicitudes/**" access="ROLE_ADMIN" />
+        <security:intercept-url pattern="/faces/view/atencion/**" access="ROLE_ADMIN, ROLE_JEFE_AREA, ROLE_JEFE_DEPTO, ROLE_FUNC_DISICO" />
+        <security:intercept-url pattern="/faces/view/proyectos/**" access="ROLE_ADMIN, ROLE_JEFE_AREA, ROLE_JEFE_DEPTO, ROLE_FUNC_DISICO" />
+        <security:intercept-url pattern="/faces/view/scm/**" access="ROLE_ADMIN, ROLE_JEFE_AREA, ROLE_JEFE_DEPTO, ROLE_FUNC_DISICO" />
+        <security:intercept-url pattern="/faces/view/solicitudes/**" access="ROLE_ADMIN, ROLE_SOLICITANTE" />
         <security:intercept-url pattern="/faces/view/**" access="IS_AUTHENTICATED_FULLY" />
         
         <security:logout delete-cookies="iPlanetDirectoryPro" invalidate-session="true" logout-success-url="http://test.uv.cl:8080/Login-war/mainPage.jspx"/>
