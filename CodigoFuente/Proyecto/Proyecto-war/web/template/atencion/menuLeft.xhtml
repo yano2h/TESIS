@@ -14,16 +14,18 @@
                 <p:poll id="poll" update="menu_left" interval="60"/>
                 <p:menu id="menu_left" styleClass="menu_left"> 
                     <p:submenu label="Solicitudes">  
-                        <p:menuitem value="Resumen Atencion de Solicitudes" action="/view/atencion/resumen?faces-redirect=true"/>
-                        <p:menuitem value="Solicitudes del Area #{mbNotificacionesMenu.msgSolicitudesArea}" action="/view/atencion/solicitudesArea?faces-redirect=true"/>  
-                        <p:menuitem value="Mis Solicitudes #{mbNotificacionesMenu.msgMisSolicitudes}" action="/view/atencion/misSolicitudes?faces-redirect=true"/>    
-                        <p:menuitem value="Buscar Solicitud" action="/view/atencion/buscarSolicitud?faces-redirect=true"/>  
+                        <p:menuitem value="Resumen Atencion de Solicitudes" action="/view/atencion/resumen?faces-redirect=true" rendered="#{p:ifAnyGranted(security.rolMenuResumen)}" />
+                        <p:menuitem value="Solicitudes del Area #{mbNotificacionesMenu.msgSolicitudesArea}" action="/view/atencion/solicitudesArea?faces-redirect=true" rendered="#{p:ifAnyGranted(security.rolMenuSolicitudesArea)}"/>  
+                        <p:menuitem value="Mis Solicitudes #{mbNotificacionesMenu.msgMisSolicitudes}" action="/view/atencion/misSolicitudes?faces-redirect=true" rendered="#{p:ifAnyGranted(security.rolMenuMisSolicitudes)}"/>    
+                        <p:menuitem value="Buscar Solicitud" action="/view/atencion/buscarSolicitud?faces-redirect=true" rendered="#{p:ifAnyGranted(security.rolMenuBuscarSolicitud)}"/>  
                     </p:submenu> 
                     
                     <p:submenu label="Proyectos">  
                         <p:menuitem value="Proyectos del Area" action="/view/proyectos/proyectosArea?faces-redirect=true"/>
-                        <p:menuitem value="Crear Proyecto" action="/view/proyectos/crearProyecto?faces-redirect=true" rendered="#{p:ifGranted(security.R_ADM)}"/>
-                        <p:menuitem value="Buscar Proyecto" action="/view/proyectos/buscarProyecto?faces-redirect=true"/>
+                        <p:menuitem value="Crear Proyecto" action="/view/proyectos/crearProyecto?faces-redirect=true" 
+                                    rendered="#{p:ifGranted(security.R_ADM) or p:ifGranted(security.R_JAREA)}"/>
+                        <p:menuitem value="Buscar Proyecto" action="/view/proyectos/buscarProyecto?faces-redirect=true"
+                                    rendered="#{p:ifGranted(security.R_ADM) or p:ifGranted(security.R_JAREA)}"/>/>
                         <p:menuitem value="Mis Proyectos" action="/view/proyectos/misProyectos?faces-redirect=true"/>
                         <p:menuitem value="Crear Tarea" action="/view/proyectos/crearTarea?faces-redirect=true"/>
                         <p:menuitem value="Mis Tareas" action="/view/proyectos/misTareas?faces-redirect=true"/>
