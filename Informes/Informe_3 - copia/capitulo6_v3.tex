@@ -1,50 +1,406 @@
 \chapter{Pruebas}
-	
-%Descripcion de la Estrategia general de Pruebas y tipos de a realizar
-%Orden en que se realizaran
-
-\section{Pruebas Unitarias}
-	\subsection{Resultados y Problemas detectados}
-	\subsection{Análisis de Resultados}
-
-
-\section{Pruebas de Integración}
-	\subsection{Resultados y Problemas detectados}
-	\subsection{Análisis de Resultados}
-	
-\section{Pruebas de Rendimiento}
-	Con estas pruebas se pretende determinar cuales son los recursos utilizados por la aplicación 
-	ante una cantidad elevada de usuarios, sin que se vea degradado el servicio. Para esto, 
-	separaremos las pruebas en 2:
-
-	\begin{enumerate}
-		\item Las que simulan la acción de los usuarios externos a DISICO, la cual representa la mayor
-		cantidad de usuarios esperados.
-		\item Las que simulan la acción del personal interno de DISICO.
-	\end{enumerate}
-	
-	Para estas dos categorías se realizaran pruebas separadas, dando mayor énfasis a la parte mas critica
-	que son los usuarios externos a DISICO, ya que la cantidad de usuarios internos es prácticamente constante.
-	
-	Para esto se utilizaran 2 herramientas:
+	En este capitulo se detallan las pruebas realizadas, junto con los resultados 
+	obtenidos durante la realización de estas.
+	Las pruebas realizadas se dividen en:
 	\begin{itemize}
-		\item \textbf{JMeter:} Es una herramienta Open Source diseñada 100\% en Java, que puede 
-		ser utilizada como una herramienta de prueba de carga para analizar y medir el desempeño
-		de una variedad de servicios, con énfasis en aplicaciones web \cite{jmeter}.
-		\item \textbf{VisualVM:} Es una herramienta que proporciona una interfaz visual para ver 
-		información detallada sobre las aplicaciones Java que están ejecutandoce en una Maquina 
-		Virtual de Java (JVM), normalmente se distribuye junto con el Java Development Kit (JDK) 
-		\cite{visualvm}.
+		\item Pruebas Unitarias.
+		\item Pruebas de Integración.
+		\item Pruebas de Rendimiento.
+		\item Pruebas de Aceptación.
+		\item Pruebas Beta.
+	\end{itemize}
+
+	El principal enfoque de las pruebas es la detección de errores.
+	
+	\section{Pruebas Unitarias}
+	Para llevar a cabo las pruebas unitarias se diseño un set de pruebas 
+	automatizadas, las cuales fueron implementadas aciendo uso del 
+	framework de pruebas JUnit y de Glassfish Embedded (dentro del cual se 
+	despliegan los EJB para ser utilizados durante la ejecución de las 
+	pruebas).\\
+
+	Hacer pruebas JUnit en clases java corrientes, es bastante simple
+	y no presenta mayor dificultad, sin embargo cuando se desea realizar
+	pruebas, ya sea unitarias o de integración, en clases java que son
+	Enterprise Java Beans (EJBs), se presentan algunas dificultades las
+	cuales radican principalmente en el hecho que los EJB son componentes
+	gestionados por en servidor de aplicaciones y por ende no pueden  
+	funcionar fuera de este, esto significa que para poder probar los EJB
+	debemos desplegar los componentes dentro de un servidor de 
+	aplicaciones, junto con las configuraciones de persistencia y 
+	datasources correspondientes, para solucionar este inconveniente
+	es que se utiliza Glassfish Embedded, que actúa como contenedor 
+	embebido el cual es mas rápido y ligero.\\
+	
+	El procedimiento utilizado para ejecutar los test dentro Glassfish
+	Embedded es el siguiente:
+	\begin{itemize}
+		\item Copiar los archivos del directorio \textit{build/classes} a un 
+		directorio temporal \textit{build/embedded} para el despliegue de los 
+		EJB.
+		\item Ademas se copia el archivo test-percistence.xml (que contiene 
+		una configuración diferente para la ejecución de las pruebas en una 
+		base de datos diferente a la de producción) dentro del directorio 
+		\textit{build/embedded/META-INF/} y se renombra como 	
+		\textit{percistence.xml}.
+		\item Antes de levantar Glassfish Embedded se crea un 
+		properties de configuración que le indica a Glassfish donde se 
+		encuentran los módulos a desplegar y el archivo de configuración 
+		\textit{domain.xml} que debe utilizar (en este caso es un archivo 
+		aparte que contiene la configuración necesaria para 	la ejecución del 
+		test).
+		\item Luego se inicia el Glassfish Embedded.
+		\item Se ejecutan los test necesarios.
+		\item Por ultimo se cierra Glassfish Embedded y se borra el directorio 
+		temporal \textit{build/embedded}.
 	\end{itemize}
 	
-	Con el fin simular las condiciones mas reales posibles, el sistema sera probado en uno de los
-	servidores de prueba de DISICO. Ya que estos cuentan con características bastante similar a lo
-	que seria un ambiente de producción
-	
-	\subsection{Análisis de Resultados}
-		
+	Para gestionar todo este proceso, se implemento una nueva clase 
+	denominada BaseTestEJB de la cual extienden todos los test que hacen uso 
+	de los EJB.\\
 
-\section{Pruebas de Aceptación}
+	De acuerdo a lo que se especifico en la fase de diseño de pruebas, se 
+	opto por no realizar una documentación extensiva de los test unitarios
+	ya que estos deben ser auto-explicativos y de manera tal que el mismo
+	código documenta la prueba, sus entradas y salidas esperadas.\\
+
+	Sin embargo a continuación en la Tabla \ref{docTestUnit} se presenta 
+	un resumen las pruebas unitarias diseñadas y ejecutadas, con su nombre y 
+	propósito.
+	
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.5cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
+		\hline
+		& {testGetValue} & {Verificar que el método 	
+		getValue es capas de recuperar la cadena "ABCD" desde un archivo de 
+		propiedades.}\\
+		\cline{2-3}
+		& {testGetValueCon Espacios} & {Verificar que el método getValue es 
+		capas de recuperar la cadena "A B C   D" desde un archivo de propiedades 
+		sin verse afectado por la cantidad de espacios entre los caracteres.}\\
+		\cline{2-3}
+		& {testGetValueShort} & {Verificar que el método getValueShort es capas de 
+		recuperar cadena desde un archivo de propiedades y convertirla a Short 
+		siempre que cumpla con el formato de este.} \\
+		\cline{2-3}
+		& {testGetValueShort Negativo} & {Verificar que el método getValueShort es 
+		capas de recuperar cadena desde un archivo de propiedades y convertirla a 
+		Short aunque este sea negativo.} \\
+		\cline{2-3}
+		\multirow{3}{*}{Resources} & {testGetValueShort ErrorEnString} & {Verificar que el 
+		método getValueShort dispara la excepción NumberFormatException al leer un 
+		String desde el archivo de propiedades.} \\	
+		\cline{2-3}
+		& {testGetValueShort ErrorValorMayor AShort} & {Verificar que el método 
+		getValueShort dispara la expeción NumberFormatException al leer un numero 
+		entero que excede el valor máximo de un Short.} \\	
+		\cline{2-3}
+		& {testGetValueShort ErrorValorDecima} & {Verificar que el método 
+		getValueShort dispara la excepción NumberFormatException al leer un valor 
+		con decimales desde el archivo de propiedades.} \\	
+		\cline{2-3}
+		& {testGetValueInteger} & {Verificar que el método getValueInteger es capas 
+		de recuperar cadena desde un archivo de propiedades y convertirla a Integer 
+		siempre que cumpla con el formato de este.} \\	
+		\cline{2-3}
+		& {testGetValueInteger Negativo} & {Verificar que el método getValueInteger 
+		es capas de recuperar cadena desde un archivo de propiedades y convertirla 
+		a Integer aunque este sea negativo.} \\
+		\cline{2-3}
+		& {testGetValueInteger ErrorValorMayorAInteger} & {Verificar que el método 
+		getValueInteger dispara la expeción NumberFormatException al leer un 
+		numero entero que excede el valor máximo de un Integer.} \\		
+		\hline
+	\end{tabular}
+	\end{table}	
+	
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.5cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
+		\hline
+		 & {testGetValueInteger ErrorValorMayorAInteger} & {Verificar 
+		que el método getValueInteger dispara la expeción NumberFormatException al 
+		leer un numero entero que excede el valor máximo de un Integer.} \\
+		\cline{2-3}
+		& {testGetValueInteger ErrorValorDecimal} & {Verificar que el método 
+		getValueInteger dispara la excepción NumberFormatException al leer un 
+		valor con decimales desde el archivo de propiedades.} \\
+		\cline{2-3}
+		& {testGetValueLong} & {Verificar que el método getValueLong es capas de 
+		recuperar cadena desde un archivo de propiedades y convertirla a Long 
+		siempre que cumpla con el formato de este.} \\		
+		\cline{2-3}
+		& {testGetValueLong Negativo} & {Verificar que el método getValueLong es 
+		capas de recuperar cadena desde un archivo de propiedades y convertirla a 
+		Long aunque este sea negativo.} \\
+		\cline{2-3}
+		\multirow{3}{*}{Resources} & {testGetValueLong ErrorValorMayor ALong} & {Verificar que el método 
+		getValueLong dispara la excepción NumberFormatException al leer un 
+		numero entero que excede el valor máximo de un Long.} \\
+		\cline{2-3}
+		& {testGetValueLong ErrorValorDecimal} & {Verificar que el método getValueLong 
+		dispara la excepción NumberFormatException al leer un valor con decimales 
+		desde el archivo de propiedades.} \\		
+		\cline{2-3}
+		& {testGetPropertiesPath} & {Verifica que el metodo getPropertiesPath obtenga la 
+		ruta de un archivo properties correctamente.} \\
+		\cline{2-3}
+		& {testGetPropertiesPath NotFound} & {Verfica que el metodo getPropertiesPath 
+		dispare la excepcion MissingResourceException al intentar obtener la ruta de un 
+		propertie que no existe.} \\		
+		\cline{2-3}
+		& {testGetPageList} & {Verifica que el metodo getPageList obtenga una lista con 
+		todas las propiedades contenidas en el archivo propertie especificado.} \\
+		\cline{2-3}
+		& {testGetMapPageList} & {Verifica que el metodo getMapPageList obtenga un 
+		Map con todas las propiedades contenidas en el archivo propertie especificado.} \\		
+		\hline
+	\end{tabular}
+	\end{table}	
+		
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.7cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
+		\hline
+		& {testCalcularPorcentaje Redondeado} & {Verifica que el calculo del 
+		porcentaje entero sin decimal.} \\
+		\cline{2-3}
+		& {testCalcularPorcentaje RedondeadoParaArriba} & {Verifica que el porcentaje 
+		sea 	redondeado hacia arriba cuando el decimal es mayor o igual a 5.} \\
+		\cline{2-3}
+		& {testCalcularPorcentaje RedondeadoParaAbajo} & {Verifica que el porcentaje 
+		sea redondeado hacia abajo cuando el decimal es menor a 5.} \\
+		\cline{2-3}
+		& {testCalcularRegla DeTres} & {Verifica el calculo de una regla de tres.} \\
+		\cline{2-3}
+		& {testCalcularReglaDe TresParaDenominadorCero} & {Verifica que se 
+		devuelva un 0 en caso que el denominador sea 0.} \\
+		\cline{2-3}
+		& {testCalcularReglaDe TresParaNumeradorCero} & {Verifica que se devuelva 
+		un 0 en caso que el numerador sea 0.} \\
+		\cline{2-3}
+		\multirow{1}{*}{MathUtils} & {testCalcularReglaDe TresParaCien} & {Verifica el caso 
+		en que se debe devolver 100.} \\
+		\cline{2-3}
+		& {testCalcularReglaDe TresParaPorcentaje MayorACien} & {Verifica que 
+		funcione cuando el numerador es mayor a cien.} \\
+		\cline{2-3}
+		& {testRedondearCero} & {Verifica la funcion redondear cuando el numero es
+		 cero.} \\
+		\cline{2-3}
+		& {testRedondearPara ArribaSinDecimal} & {Verifica que el numero sea 
+		redondeado hacia arriba cuando el decimal es mayor o igual a 5 y el resultado 
+		no debe tener ningún decimal.} \\
+		\cline{2-3}
+		& {testRedondearPara AbajoSinDecimal} & {Verifica que el numero sea 
+		redondeado hacia abajo cuando el decimal es menor a 5 y el resultado 
+		no debe tener ningún decimal.} \\
+		\cline{2-3}
+		& {testRedondearPara ArribaConUnDecimal} & {Verifica que el numero 
+		sea redondeado hacia arriba cuando el decimal es mayor o igual a 5 y el 
+		resultado no debe tener un decimal.} \\
+		\cline{2-3}
+		& {testRedondearPara AbajoConUnDecimal} & {Verifica que el numero sea 
+		redondeado hacia abajo cuando el decimal es menor a 5 y el resultado no debe 
+		tener un decimal.} \\
+		\cline{2-3}
+		& {testRedondearPara ArribaConDecimal5} & {Verifica el caso en que el
+		 decimal es 5.} \\
+		\cline{2-3}
+		& {testRedondearFloat Cero} & {Verifica la función redondear cuando 
+		el numero es cero. Cuando el resultado es convertido de BigDecimal a Float.} \\
+		\hline
+	\end{tabular}
+	\end{table}	
+		
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.7cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
+		\hline
+		& {testRedondearFloat ParaArribaSinDecimal} & {Verifica que el numero 
+		sea redondeado hacia arriba cuando el decimal es mayor o igual a 5 y el 
+		resultado no debe tener ningún decimal. Cuando el resultado es convertido 
+		de BigDecimal a Float.} \\
+		\cline{2-3}
+		& {testRedondearFloat ParaAbajoSinDecimal} & {Verifica que el numero 
+		sea redondeado hacia abajo cuando el decimal es menor a 5 y el resultado 
+		no debe tener ningún decimal. Cuando el resultado es convertido de 
+		BigDecimal a Float.} \\
+		\cline{2-3}
+		\multirow{1}{*}{MathUtils}& {testRedondearFloa tParaArribaConUn 
+		Decimal} & {Verifica que el numero sea redondeado hacia arriba cuando 
+		el decimal es mayor o igual a 5 y el resultado no debe tener un decimal.
+		Cuando el resultado es convertido de BigDecimal a Float.} \\
+		\cline{2-3}
+		& {testRedondearFloat ParaAbajoConUn Decimal} & {Verifica que el
+		numero sea redondeado hacia abajo cuando el decimal es menor a 5 y el 
+		resultado no debe tener un decimal. Cuando el resultado es convertido de 
+		BigDecimal a Float.} \\
+		\cline{2-3}
+		& {testRedondearFloat ParaArribaCon Decimal5} & {Verifica el caso en que 
+		el decimal es 5. Cuando el resultado es convertido de BigDecimal a Float.} \\
+		\hline
+		& {testBuscarSolicitudes VencidasVerificar Cambio} & {Verifica que el 
+		método buscarSolicitudesVencidas haya cambiado el estado de una 
+		solicitud enviada cuya fecha de vencimiento ya fue superada.}\\
+		\cline{2-3}
+		& {testBuscarSolicitudes VencidasVerificar NoCambioVencida} & {Verifica 
+		que el método buscarSolicitudesVencidas no haya cambiado el estado de 
+		solicitudes que ya se encontraban en estado vencida.}\\
+		\cline{2-3}
+		{TimerSolicitud Requerimientos UpdateTest} & {testBuscarSolicitudes 
+		VencidasVerificar NoCambioCerrada} & {Verifica que el método 
+		buscarSolicitudesVencidas no haya cambiado el estado de 
+		solicitudes que se Cerraron después de la fecha de vencimiento.}\\
+		\cline{2-3}
+		& {testBuscarSolicitudes VencidasVerificar NoCambioFinalizada 
+		SinRespuesta} & {Verifica que el método buscarSolicitudesVencidas no 
+		haya cambiado el estado de solicitudes que se Finalizaron sin respuesta 
+		después de la fecha de vencimiento.}\\
+		\cline{2-3}
+		&{testBuscarSolicitudes VencidasVerificar NoCambioSolicitud 
+		SinFechaVencimiento} & {Verifica que el método buscarSolicitudesVencidas
+		no haya cambiado el estado de solicitudes que no poseen fecha de 
+		vencimiento}\\
+		\hline
+	\end{tabular}
+	\end{table}	
+
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.7cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
+		\hline
+		& {testGenerarCodigo NumCero} & {Verifica que el código es vacío cuando 
+		el numero es cero.}\\
+		\cline{2-3}
+		& {testGenerarCodigo NumNegativo} & {Verifica que el código es vacío 
+		cuando el numero es negativo.}\\
+		\cline{2-3}
+		& {testGenerarCodigo NumUno} & {Verifica que el código es "q" cuando el 
+		numero es 1.}\\
+		\cline{2-3}
+		{SolicitudRequeri- mientoEJB} & {testGenerarCodigo MaxLong} & {Verifica 
+		que el código es "2teCogGBXee" cuando el numero es el máximo valor de 
+		un Long.}\\
+		\cline{2-3}
+		& {testGenerarCodigo ConsultaNoDuplicados} & {Verifica que el código no 
+		se repite aunque sea generado en instantes de tiempo casi iguales y con 
+		ruts similares.}\\
+		\cline{2-3}
+		& {testValidarCodigo ConsultaExistente} & {Verifica que un código de 
+		consulta sea invalido cuando ya existe.}\\
+		\cline{2-3}
+		& {testValidarCodigo ConsultaInexistente} & {Verifica que un código de 
+		consulta es invalido cuando no existe.}\\
+		%\cline{2-3}
+		%& {testEnviarSolicitud} & {}\\
+		%\cline{2-3}
+		%& {} & {}\\
+		%\cline{2-3}
+		\hline
+	\end{tabular}
+		\caption{Test unitarios}
+		\label{docTestUnit}
+	\end{table}
+
+%	Despues de implementar y ejecutar todas las pruebas antes descritas, se detectaron
+%	algunos errores, los cuales fueron oportunamente corregidos y vueltos a probar.
+%	Actualmente todas las pruebas se encuentra aprobadas, sin
+
+	\subsection{Análisis de Resultados}
+	Todas las pruebas han sido implementadas y ejecutadas satisfactoriamente.
+	Todos los errores que fueron detectados durante la ejecución de las pruebas
+	fueron solucionados oportunamente y vueltos a probar, por lo que actualmente
+	todas las pruebas se encuentran superadas.
+       Ante cualquier modificación del código fuente en el futuro, se debe volver a ejecutar 
+	este mismo set de pruebas y a corregir los errores detectados hasta volver a lograr 
+	un 100\% de aprobación de los tests.
+
+	\subsection{Problemas detectados}
+	Durante el desarrollo de los tests, los principales problemas que existieron
+	fueron principalmente debido a la incorrecta configuración de los frameworks
+	de pruebas, pero una vez superado aquello, no se encontraron demasiados
+	problemas. Los principales problemas que se detectaron y corrigieron.
+
+	\begin{itemize}
+		\item Problemas en el calculo de porcentajes, cuando existía un denominador 0.
+		\item Duplicación de códigos de consulta en lapsos de tiempos muy cercanos,
+		al no existir variación en la semilla del generador de números aleatorios utilizado
+		en una parte del algoritmo.
+	\end{itemize}
+
+	\section{Pruebas Integración}
+	Una vez completada la fase de pruebas unitarias, se realizaron las pruebas de 
+	integración, las cuales a diferencia de los especificado en la fase de diseño,
+	se opto por no utilizar Arquillian ya que solo era necesario para utilizar
+	inyección de dependencia en los test. Y presenta algunos problemas en proyectos
+	que no gestionan sus dependencias con maven.\\
+
+	Las pruebas realizadas en esta fase se separaron en 2 tipos, las que prueban 
+	directamente la capa de persistencia (ya que probarlas requiere modificar el
+	estado de la base de datos y normalmente de a lo menos las funciones crear, 
+	buscar y eliminar, para poder agrega nuevos datos al inicio del test, buscar para 
+	verificar la correcta creación o modificación de algo y la eliminación para restaurar el 
+	estado de la bd, a su estado original). Y ademas un conjunto de pruebas acorde al
+	esquema de integración definido. En la Tabla \ref{docTestIntegracion} se presentan
+	las pruebas de integración realizadas.
+
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{1cm} | m{5cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Nº}} & \textbf{Objetivo} & \textbf{Prueba}\\
+		\hline
+		{1} & {Comprobar la integración entre el Portal de Login institucional y el sistema
+		interno de Autenticación.} & {Ingresar con una cuenta registrada (rut  
+		11111111), a través del portal de Login institucional y verificar que al 
+		autenticarse el usuario es redireccionado a la aplicación.} \\
+		\hline
+		{2} & {Comprobar la integración entre el modulo de Autenticación y el de Envío
+		de Solicitudes.} & {Ingresar al sistema a través del portal de Login Institucional
+		con el usuario 11111111, y corroborar que los datos personales del usuario 
+		mostrados en la aplicación son los mismo proporcionados por LDAP.} \\
+		\hline
+		{3} & {Comprobar la integración entre el modulo de Envío de Solicitudes  y el
+		modulo de Mensajería.} & { Crear una solicitud de requerimiento y verificar que 
+		esta aya sido creada, que un correo electrónico aya sido enviada al mail del
+		solicitante y que el código enviado sea el mismo de la solicitud.} \\
+		\hline
+		{4} & {Comprobar la integración entre el modulo de Envío de Solicitudes y
+		el modulo de Atención de solicitudes.} & {Crear una nueva solicitud de 
+		requerimiento para el Área de Desarrollo y posteriormente ingresar con la
+		cuenta correspondiente al jefe del área de desarrollo y corroborar que la
+		solicitud creada aparezca como una nueva solicitud entre la lista de solicitudes
+		del área.} \\
+		\hline
+		{5} & {Comprobar la integración entre el modulo de Atención de solicitudes
+		y el modulo de Gestión de Proyectos} & {Seleccionar una solicitud previamente 
+		creada y escoger la opción convertir en proyecto. Verificar que al seleccionar esta 
+		opción la solicitud quede cerrada y se haya redireccionado al usuario al
+		formulario de creación de proyecto.} \\
+		\hline
+		{6} & {Comprobar la integración entre el modulo de Gestión de Proyectos y el 
+		modulo de SCM} & {Crear un nuevo Proyecto, luego ingresar al modulo de SCM
+		y verificar que el proyecto aparece entre la lista de proyectos del área y se
+		puedan definir tareas de SCM para este.} \\
+		\hline
+	\end{tabular}
+		\caption{Test Integración}
+		\label{docTestIntegracion}
+	\end{table}	
+
+	\subsection{Análisis de Resultados}
+	Esta pruebas fueron realizadas y superadas en su totalidad. Verificando así que 
+	existe una correcta integración de los módulos diseñados. Estas pruebas fueron
+	ejecutadas manualmente dado la dificultad de automatizarlas. 
+
+
+	\section{Pruebas de Aceptación}
 El objetivo principal de estas pruebas es demostrar al cliente el cumplimiento
 total o parcial de los requisitos del software. Para este fin se diseño un conjunto
 de escenarios de prueba, los cuales deben ser ejecutados por el cliente en
@@ -1472,7 +1828,39 @@ Se desactiven el resto de todas las opciones.}\\
 
 	Las observaciones correspondientes al segundo tipo, según su complejidad, iran 
 	siendo incorporadas luego de finalizar las pruebas.
+\section{Pruebas de Rendimiento}
+	Con estas pruebas se pretende determinar cuales son los recursos utilizados por la aplicación 
+	ante una cantidad elevada de usuarios, sin que se vea degradado el servicio. Para esto, 
+	separaremos las pruebas en 2:
 
+	\begin{enumerate}
+		\item Las que simulan la acción de los usuarios externos a DISICO, la cual representa la mayor
+		cantidad de usuarios esperados.
+		\item Las que simulan la acción del personal interno de DISICO.
+	\end{enumerate}
+	
+	Para estas dos categorías se realizaran pruebas separadas, dando mayor énfasis a la parte mas critica
+	que son los usuarios externos a DISICO, ya que la cantidad de usuarios internos es prácticamente constante.\\
+	
+	Para esto se utilizaran 2 herramientas:
+	\begin{itemize}
+		\item \textbf{JMeter:} Es una herramienta Open Source diseñada 100\% en Java, que puede 
+		ser utilizada como una herramienta de prueba de carga para analizar y medir el desempeño
+		de una variedad de servicios, con énfasis en aplicaciones web \cite{jmeter}.
+		\item \textbf{VisualVM:} Es una herramienta que proporciona una interfaz visual para ver 
+		información detallada sobre las aplicaciones Java que están ejecutandoce en una Maquina 
+		Virtual de Java (JVM), normalmente se distribuye junto con el Java Development Kit (JDK) 
+		\cite{visualvm}.
+	\end{itemize}
+	
+	Con el fin simular las condiciones mas reales posibles, el sistema sera probado en uno de los
+	servidores de prueba de DISICO. Ya que estos cuentan con características bastante similar a lo
+	que seria un ambiente de producción
+	
+	\subsection{Análisis de Resultados}
+		
+		
+		
 \section{Pruebas Beta}
 	Una vez finalizadas las pruebas de aceptación e incorporadas las observaciones 		
 	del cliente que corresponda, se da entiende como aceptado el producto, por parte
