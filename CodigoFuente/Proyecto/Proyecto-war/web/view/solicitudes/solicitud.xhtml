@@ -60,6 +60,7 @@
 
                         <p:separator style="width:100%; height:4px; margin-bottom:20px;"/>
 
+
                         <h:panelGrid columns="2">    
                             <h:outputLabel value="Asunto:" styleClass="label_blod" />
                             <h:outputText id="asunto" value="#{mbDetalleSolicitud.solicitud.asunto}"/>  
@@ -76,6 +77,20 @@
                         </p:panel>
 
                         <br/>
+                        <p:panel header="Archivos Adjuntos">
+                            <p:dataList id="selectFiles" value="#{mbDetalleSolicitud.solicitud.archivosAdjuntos}" var="f" type="none">
+                                <p:column>
+                                    <h:panelGrid columns="3" styleClass="item-upload">
+                                        <h:outputText value="#{f.archivoAdjunto.nombre} #{f.archivoAdjunto.sizeFormat}" style="width: 300px;"/>
+                                        <p:commandLink id="link" value="Descargar" actionListener="#{mbDetalleSolicitud.load(f)}" 
+                                                       style="float: right;color: steelblue;">
+                                            <p:fileDownload value="#{mbDetalleSolicitud.fileDownload}" />
+                                        </p:commandLink>
+                                    </h:panelGrid>
+                                </p:column>   
+                            </p:dataList>
+                        </p:panel>
+                        <br/>
                         <p:panel id="comentarioPnl" header="Comentarios" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%;" >
 
                             <h:panelGrid columns="2" rowClasses="row_align_bottom" style="width: 100%" columnClasses="column_grid">
@@ -90,7 +105,7 @@
                                         var="comentario" 
                                         type="none" 
                                         paginator="true" rows="10" paginatorPosition="bottom" paginatorAlwaysVisible="false">
-  
+
                                 <p:column  >
                                     <h:panelGrid id="gridComentario" styleClass="ui-corner-all ui-widget-content grid_comentario" width="100%" rendered="#{comentario.visible}">
                                         <h:panelGrid  columns="2" width="100%">

@@ -5,13 +5,10 @@
 package cl.uv.view.controller.base.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.SolicitudCambioFacadeLocal;
-import cl.uv.proyecto.requerimientos.ejb.CalculoDeIndicadoresEJB;
 import cl.uv.proyecto.requerimientos.ejb.CalculoDeIndicadoresEJBLocal;
 import cl.uv.view.controller.base.utils.Resources;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 /**

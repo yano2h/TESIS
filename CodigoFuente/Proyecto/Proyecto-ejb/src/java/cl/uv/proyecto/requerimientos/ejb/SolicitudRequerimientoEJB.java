@@ -5,6 +5,8 @@
 package cl.uv.proyecto.requerimientos.ejb;
 
 import cl.uv.model.base.utils.Resources;
+import cl.uv.proyecto.file.ejb.FileManagerEJB;
+import cl.uv.proyecto.file.ejb.FileManagerEJBLocal;
 import cl.uv.proyecto.mensajeria.ejb.EmailEJBLocal;
 import cl.uv.proyecto.mensajeria.ejb.NotificacionEJBLocal;
 import cl.uv.proyecto.mensajeria.ejb.TypeNotification;
@@ -14,6 +16,7 @@ import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.TipoPrioridadFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -42,6 +45,8 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     private EmailEJBLocal emailEJB;
     @EJB
     private NotificacionEJBLocal notificacionEJB;
+    @EJB
+    private FileManagerEJBLocal fileManagerEJB;
 
     @Override
     public String generarCodigo(long num) {
@@ -78,7 +83,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     }
 
     @Override
-    public String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante) {
+    public String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante, List<ArchivoAdjunto> archivosAdjuntos) {
         Date fechaActual = new Date();
         solicitud.setFechaEnvio(fechaActual);
         solicitud.setFechaUltimaActualizacion(fechaActual);
@@ -88,6 +93,9 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitud.setCodigoConsulta(generarCodigoConsulta(solicitud));
         solicitudFacade.create(solicitud);
         notificacionEJB.crearNotificacionSolicitud(TypeNotification.ENVIO_SOLICITUD, solicitud, solicitante);
+        if (archivosAdjuntos!=null && archivosAdjuntos.size()>0) {
+            fileManagerEJB.adjuntarArchivosSolicitudRequerimiento(archivosAdjuntos, solicitud);
+        }
         return solicitud.getCodigoConsulta();
     }
             

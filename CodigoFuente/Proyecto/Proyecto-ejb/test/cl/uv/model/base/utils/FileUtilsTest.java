@@ -52,7 +52,7 @@ public class FileUtilsTest {
     @Test
     public void testCreateDirectory() {
         System.out.println("createDirectory");
-        String path = "D:/uploadsFile";
+        String path = "D:/A/B/C";
         boolean expResult = true;
         assertEquals(expResult, FileUtils.createDirectory(path));
     }

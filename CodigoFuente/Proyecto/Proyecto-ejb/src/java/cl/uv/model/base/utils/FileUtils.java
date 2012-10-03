@@ -5,6 +5,9 @@
 package cl.uv.model.base.utils;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,16 +43,27 @@ public class FileUtils {
         }
     }
     
+    public static InputStream readDownloadFile(String path){
+        System.out.println("PATH:"+path);
+        File file = new File(path);
+        InputStream fileInput = null;
+        try {
+            fileInput = new FileInputStream(file);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return fileInput;
+    }
     
     public static boolean createDirectory(String path){
         File f = new File(path);
         if (!f.exists()) {
-            return f.mkdir();
+            return f.mkdirs();
         }
         return true;
     }
     
-    public String convertSize(long bytes){
+    public static String convertSize(long bytes){
         System.out.println("SIZE:"+bytes);
         String unit;
         if (bytes >= 1000000) {
@@ -63,4 +77,9 @@ public class FileUtils {
         return unit;
     }
 
+    public static String convertDateToPath(Date d){
+        SimpleDateFormat formateador = new SimpleDateFormat("YYYY/MM", new Locale("es","CL"));
+        String path = formateador.format(d);
+        return path;
+    }
 }

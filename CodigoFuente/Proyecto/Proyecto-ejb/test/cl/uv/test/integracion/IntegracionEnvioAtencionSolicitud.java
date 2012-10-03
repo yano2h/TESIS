@@ -67,7 +67,7 @@ public class IntegracionEnvioAtencionSolicitud extends BaseTestEJB {
     @Test
     public void enviarYAtender() {
         SolicitudRequerimiento s = EntityUtils.createSolicitudReq(a, t);
-        String codigo = solicitudEjb.enviarSolicitud(s, f);
+        String codigo = solicitudEjb.enviarSolicitud(s, f, null);
         assertTrue(!codigo.equals(""));
 
         List<SolicitudRequerimiento> solicitudesArea = solicitudFacade.buscarSolicitudesPorArea(a);

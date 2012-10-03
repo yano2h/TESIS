@@ -4,18 +4,16 @@
  */
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
+import cl.uv.proyecto.file.ejb.FileManagerEJBLocal;
+import cl.uv.proyecto.persistencia.ejb.ArchivoSolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ComentarioSolicitudFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.ComentarioSolicitud;
-import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
-import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import cl.uv.proyecto.persistencia.entidades.*;
 import cl.uv.proyecto.requerimientos.ejb.SolicitudRequerimientoEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
 import cl.uv.view.controller.base.jsf.mb.MbUserInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import java.io.Serializable;
-import java.util.Date;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -23,6 +21,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import org.primefaces.event.DateSelectEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -38,7 +38,11 @@ public class MbDetalleSolicitud implements Serializable {
     private ComentarioSolicitudFacadeLocal comentarioFacade;
     @EJB
     private SolicitudRequerimientoEJBLocal solicitudRequerimientoEJB;
-    
+    @EJB
+    private ArchivoSolicitudRequerimientoFacadeLocal archivosAdjuntosFacade;
+    @EJB
+    private FileManagerEJBLocal fileManagerEJB;
+            
     @ManagedProperty(value = "#{mbUserInfo}")
     private MbUserInfo mbUserInfo;
     @ManagedProperty(value = "#{mbFuncionarioInfo}")
@@ -47,7 +51,8 @@ public class MbDetalleSolicitud implements Serializable {
     private String comentario;
     private ComentarioSolicitud selectedComentario;
     private SolicitudRequerimiento solicitud;
-
+    private StreamedContent fileDownload;
+    
     public MbDetalleSolicitud() {
         comentario = "";
         codigo = "";
@@ -60,6 +65,7 @@ public class MbDetalleSolicitud implements Serializable {
             JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error:", "La solicitud con codigo " + codigo + " no pudo ser encontrada"));
         } else {
             solicitud.setComentarios(comentarioFacade.buscarComentariosPorSolicitud(solicitud.getIdSolicitudRequerimiento()));
+            solicitud.setArchivosAdjuntos(archivosAdjuntosFacade.buscarArchivosPorSolicitud(solicitud));
         }
     }
 
@@ -71,6 +77,15 @@ public class MbDetalleSolicitud implements Serializable {
         this.mbFuncionarioInfo = mbFuncionarioInfo;
     }
 
+    public StreamedContent getFileDownload() {
+        return fileDownload;
+    }
+
+    public void setFileDownload(StreamedContent fileDownload) {
+        this.fileDownload = fileDownload;
+    }
+
+    
     public String getCodigo() {
         return codigo;
     }
@@ -125,5 +140,16 @@ public class MbDetalleSolicitud implements Serializable {
 
     public void fijarFechaVencimento(DateSelectEvent event) {
         solicitud.setFechaVencimiento(event.getDate());
+    }
+    
+    public void load(ArchivoSolicitudRequerimiento a){
+        System.out.println("LOAD");
+        if (a.getArchivoAdjunto().getInputStream()==null) {
+            System.out.println("LOOOAD");
+            fileManagerEJB.loadContentFile(a.getArchivoAdjunto());
+        }
+        ArchivoAdjunto adjunto = a.getArchivoAdjunto();
+        System.out.println("Stream:"+adjunto.getInputStream().toString());
+        setFileDownload( new DefaultStreamedContent(adjunto.getInputStream(), adjunto.getMimetype(), adjunto.getNombre()) );  
     }
 }

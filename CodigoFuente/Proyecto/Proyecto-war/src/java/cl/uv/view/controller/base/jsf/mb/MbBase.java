@@ -14,10 +14,10 @@ import javax.faces.context.Flash;
         
 public class MbBase implements Serializable{
     
-    @ManagedProperty("#{flash}")
+    @ManagedProperty(value="#{flash}")
     private Flash flash;
     
-    @ManagedProperty("#{mbUser}")
+    @ManagedProperty(value="#{mbUser}")
     private MbUser mbUser;
 
     public Flash getFlash() {

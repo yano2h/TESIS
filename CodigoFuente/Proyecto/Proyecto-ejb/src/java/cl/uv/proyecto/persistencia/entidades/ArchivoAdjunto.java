@@ -30,8 +30,8 @@ import javax.validation.constraints.Size;
 public class ArchivoAdjunto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_archivo")
     private Long idArchivo;
     @Basic(optional = false)
@@ -195,7 +195,7 @@ public class ArchivoAdjunto implements Serializable {
             return false;
         }
         ArchivoAdjunto other = (ArchivoAdjunto) object;
-        if ((this.idArchivo == null && other.idArchivo != null) || (this.idArchivo != null && !this.idArchivo.equals(other.idArchivo))) {
+        if ((this.idArchivo == null && other.idArchivo != null) || (this.idArchivo != null && !this.idArchivo.equals(other.idArchivo)) || (this.idArchivo == null && (!this.nombre.equals(other.nombre) || !this.mimetype.equals(other.mimetype)))) {
             return false;
         }
         return true;

@@ -32,26 +32,23 @@
                     <br/>
 
                     <!-- Upload File -->
-                    <p:fileUpload id="filesUpload"     
-                                  label="Adjuntar Archivo"
-                                  fileUploadListener="#{mbCrearSolicitud.handleFileUpload}"  
-                                  mode="advanced"
-                                  sizeLimit="5000000"
-                                  multiple="true" 
-                                  auto="true" update="selectFiles" >  
-
-                    
-                    <p:dataList id="selectFiles" value="#{mbCrearSolicitud.solicitud.archivosAdjuntos}" var="f" type="none">
+                    <p:dataList id="selectFiles" value="#{mbCrearSolicitud.archivosAdjuntos}" var="f" type="none">
                         <p:column>
                             <h:panelGrid columns="3" styleClass="item-upload">
-                                <h:outputText value="#{f.archivoAdjunto.nombre}" style="width: 300px;"/>
+                                <h:outputText value="#{f.nombre}" style="width: 300px;"/>
                                 <p:commandLink id="link" value="Eliminar" actionListener="#{mbCrearSolicitud.remove(f)}" 
                                                process="@this" update="@(.ui-datalist)" style="float: right;color: steelblue;"/>
                             </h:panelGrid>
                         </p:column>   
                     </p:dataList>
                     
-                    </p:fileUpload>
+                    <p:fileUpload id="filesUpload"     
+                                  label="Adjuntar Archivo"
+                                  fileUploadListener="#{mbCrearSolicitud.handleFileUpload}"  
+                                  mode="advanced"
+                                  sizeLimit="5000000"
+                                  multiple="true" 
+                                  auto="true" update="selectFiles" />                      
                     <!-- Fin Upload -->
 
                     <h:panelGrid columns="2">

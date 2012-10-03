@@ -5,9 +5,12 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.ArchivoSolicitudRequerimiento;
+import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,6 +28,13 @@ public class ArchivoSolicitudRequerimientoFacade extends AbstractFacade<ArchivoS
 
     public ArchivoSolicitudRequerimientoFacade() {
         super(ArchivoSolicitudRequerimiento.class);
+    }
+
+    @Override
+    public List<ArchivoSolicitudRequerimiento> buscarArchivosPorSolicitud(SolicitudRequerimiento s) {
+         Query q = em.createQuery("SELECT a FROM ArchivoSolicitudRequerimiento a WHERE a.solicitudRequerimiento = :solicitud");
+        q.setParameter("solicitud", s);
+        return q.getResultList();
     }
     
 }

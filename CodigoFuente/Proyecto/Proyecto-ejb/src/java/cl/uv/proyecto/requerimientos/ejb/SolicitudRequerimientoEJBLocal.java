@@ -4,9 +4,11 @@
  */
 package cl.uv.proyecto.requerimientos.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.ArchivoAdjunto;
 import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -20,7 +22,7 @@ public interface SolicitudRequerimientoEJBLocal {
 
     boolean validarCodigoConsulta(String codigoConsulta);
 
-    String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante);
+    String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante,  List<ArchivoAdjunto> archivosAdjuntos);
 
     String generarCodigo(long num);
     

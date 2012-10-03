@@ -5,6 +5,7 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.ArchivoSolicitudRequerimiento;
+import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,6 +16,7 @@ import javax.ejb.Local;
 @Local
 public interface ArchivoSolicitudRequerimientoFacadeLocal {
 
+    public List<ArchivoSolicitudRequerimiento> buscarArchivosPorSolicitud(SolicitudRequerimiento s);
     void create(ArchivoSolicitudRequerimiento archivoSolicitudRequerimiento);
 
     void edit(ArchivoSolicitudRequerimiento archivoSolicitudRequerimiento);
