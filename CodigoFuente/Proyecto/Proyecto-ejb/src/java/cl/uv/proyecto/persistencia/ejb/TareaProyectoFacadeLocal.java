@@ -34,4 +34,6 @@ public interface TareaProyectoFacadeLocal {
     public List<TareaProyecto> buscarTareasPorProyecto(Proyecto proyecto);
     
     public List<TareaProyecto> buscarTareasPorResponsable(FuncionarioDisico responsable);
+
+    public Integer calcularAvancePromedioTareasPorProyecto(Proyecto p);
 }

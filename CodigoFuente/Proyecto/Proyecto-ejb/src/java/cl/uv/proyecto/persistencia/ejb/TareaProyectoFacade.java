@@ -52,4 +52,13 @@ public class TareaProyectoFacade extends AbstractFacade<TareaProyecto> implement
         return q.getResultList();
     }
     
+    public Integer calcularAvancePromedioTareasPorProyecto(Proyecto p){
+        List<TareaProyecto> tareasProyecto = buscarTareasPorProyecto(p);
+        Integer sumaAvances = 0;
+        for (TareaProyecto tareaProyecto : tareasProyecto) {
+            sumaAvances += tareaProyecto.getNivelAvance();
+        }
+        return (tareasProyecto.size()>0)?sumaAvances/tareasProyecto.size():0;
+    }
+    
 }

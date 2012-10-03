@@ -90,7 +90,8 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         notificacionEJB.crearNotificacionSolicitud(TypeNotification.ENVIO_SOLICITUD, solicitud, solicitante);
         return solicitud.getCodigoConsulta();
     }
-
+            
+            
     @Override
     public void rechazarSolicitud(SolicitudRequerimiento solicitud) {
         EstadoSolicitudRequerimiento estado = estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_RECHAZADA") );

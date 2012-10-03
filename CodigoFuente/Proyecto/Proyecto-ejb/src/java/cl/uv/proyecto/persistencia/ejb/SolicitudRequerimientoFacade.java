@@ -81,9 +81,12 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @Override
     public List<SolicitudRequerimiento> buscarSolicitudesPorArea(Area area) {
+       System.out.println("TIME INI = "+ (new Date()).getTime());
         Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.areaResponsable = :area ORDER BY s.fechaEnvio DESC");
         q.setParameter("area", area);
-        return q.getResultList();
+        List<SolicitudRequerimiento> l = q.getResultList();
+       System.out.println("TIME END = "+ (new Date()).getTime());
+        return l;
     }
 
     @Override

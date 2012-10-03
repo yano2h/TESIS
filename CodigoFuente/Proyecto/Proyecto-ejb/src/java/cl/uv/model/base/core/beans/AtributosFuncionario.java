@@ -1,9 +1,10 @@
 package cl.uv.model.base.core.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AtributosFuncionario {
+public class AtributosFuncionario implements Serializable{
 
     private String uid;
     private String sn;

@@ -95,7 +95,7 @@ public class SolicitudRequerimiento implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudRequerimiento", orphanRemoval=true)
     private List<ComentarioSolicitud> comentarios;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudRequerimiento", orphanRemoval=true, fetch= FetchType.EAGER)
-    private List<ArchivoSolicitudRequerimiento> archivoSolicitudRequerimientoList;
+    private List<ArchivoSolicitudRequerimiento> archivosAdjuntos;
     
     public SolicitudRequerimiento() {
     }
@@ -247,6 +247,14 @@ public class SolicitudRequerimiento implements Serializable {
 
     public void setComentarios(List<ComentarioSolicitud> comentarios) {
         this.comentarios = comentarios;
+    }
+
+    public List<ArchivoSolicitudRequerimiento> getArchivosAdjuntos() {
+        return archivosAdjuntos;
+    }
+
+    public void setArchivosAdjuntos(List<ArchivoSolicitudRequerimiento> archivosAdjuntos) {
+        this.archivosAdjuntos = archivosAdjuntos;
     }
 
     @Override

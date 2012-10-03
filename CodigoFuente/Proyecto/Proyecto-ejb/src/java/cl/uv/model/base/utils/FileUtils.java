@@ -48,4 +48,19 @@ public class FileUtils {
         }
         return true;
     }
+    
+    public String convertSize(long bytes){
+        System.out.println("SIZE:"+bytes);
+        String unit;
+        if (bytes >= 1000000) {
+            float size = (float)bytes/(float)1000000;
+            unit = size+"MB";
+        }else{
+            float size = (float)bytes/(float)1000;
+            unit = size+"KB";
+        }
+        
+        return unit;
+    }
+
 }

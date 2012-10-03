@@ -74,10 +74,13 @@ public class ArchivoAdjunto implements Serializable {
 //    private ArchivoProyecto archivoProyecto;
 
     public ArchivoAdjunto() {
+        activo = true;
     }
 
     public ArchivoAdjunto(Long idArchivo) {
         this.idArchivo = idArchivo;
+        activo = true;
+        fechaUpload = new Date();
     }
 
     public ArchivoAdjunto(Long idArchivo, String nombre, String pathFile, long sizeFile, String sizeFormat, Date fechaUpload, boolean activo) {
@@ -170,6 +173,14 @@ public class ArchivoAdjunto implements Serializable {
 //        this.archivoProyecto = archivoProyecto;
 //    }
 
+    public InputStream getInputStream() {
+        return inputStream;
+    }
+
+    public void setInputStream(InputStream inputStream) {
+        this.inputStream = inputStream;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

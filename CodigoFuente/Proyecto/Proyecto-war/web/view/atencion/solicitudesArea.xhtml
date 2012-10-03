@@ -42,6 +42,13 @@
                             <h:outputText value="#{solicitud.asunto}" />  
                         </p:column>  
 
+                        <p:column headerText="Responsable" 
+                                  sortBy="#{solicitud.responsable.nombreCorto}"
+                                  filterBy="#{solicitud.responsable.nombreCorto}"
+                                  filterMatchMode="contains">  
+                            <h:outputText value="#{solicitud.responsable.nombreCorto}" />  
+                        </p:column>  
+                        
                         <p:column headerText="Estado"
                                   sortBy="#{solicitud.estadoSolicitud.nombreEstadoSolicitud}"
                                   filterBy="#{solicitud.estadoSolicitud.nombreEstadoSolicitud}"
