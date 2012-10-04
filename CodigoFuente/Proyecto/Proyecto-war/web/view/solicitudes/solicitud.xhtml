@@ -82,7 +82,7 @@
                                 <p:column>
                                     <h:panelGrid columns="3" styleClass="item-upload">
                                         <h:outputText value="#{f.archivoAdjunto.nombre} #{f.archivoAdjunto.sizeFormat}" style="width: 300px;"/>
-                                        <p:commandLink id="link" value="Descargar" actionListener="#{mbDetalleSolicitud.load(f)}" 
+                                        <p:commandLink id="link" value="Descargar" actionListener="#{mbDetalleSolicitud.load(f)}" ajax="false" 
                                                        style="float: right;color: steelblue;">
                                             <p:fileDownload value="#{mbDetalleSolicitud.fileDownload}" />
                                         </p:commandLink>
