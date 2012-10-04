@@ -8,13 +8,13 @@
     <h:body>
         <ui:composition>
             <h:outputStylesheet library="css" name="left.css"/>
-            <h:form>
+            <h:form id="formMenuLeft">
                 <p:menu styleClass="menu_left"> 
                     <p:submenu label="Solicitudes">  
-                        <p:menuitem value="Resumen" action="resumenSolicitante?faces-redirect=true"/>  
-                        <p:menuitem value="Crear Solicitud" action="crearSolicitud?faces-redirect=true"/>  
-                        <p:menuitem value="Consultar Solicitud" action="consultarSolicitud?faces-redirect=true"/>  
-                        <p:menuitem value="Ayuda" action="ayudaSolicitante?faces-redirect=true"/>  
+                        <p:menuitem id="menuResumen" value="Resumen" action="resumenSolicitante?faces-redirect=true"/>  
+                        <p:menuitem id="menuCrear" value="Crear Solicitud" action="crearSolicitud?faces-redirect=true"/>  
+                        <p:menuitem id="menuConsultar" value="Consultar Solicitud" action="consultarSolicitud?faces-redirect=true"/>  
+                        <p:menuitem id="menuAyuda" value="Ayuda" action="ayudaSolicitante?faces-redirect=true"/>  
                     </p:submenu>   
                 </p:menu>
             </h:form>

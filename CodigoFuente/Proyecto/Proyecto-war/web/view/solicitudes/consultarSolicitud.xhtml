@@ -33,7 +33,8 @@
 
                         <p:ajax event="rowSelect" listener="#{mbConsultarSolicitud.onRowSelect}"/>
 
-                        <p:column headerText="Codigo" 
+                        <p:column id="columnCodigo" 
+                                  headerText="Codigo" 
                                   sortBy="#{sol.codigoConsulta}" 
                                   filterBy="#{sol.codigoConsulta}"
                                   filterMatchMode="startsWith"
@@ -42,14 +43,16 @@
                             <h:outputText value="#{sol.codigoConsulta}" />  
                         </p:column> 
          
-                        <p:column headerText="Asunto" 
+                        <p:column id="columnAsunto"
+                                  headerText="Asunto" 
                                   sortBy="#{sol.asunto}"
                                   filterBy="#{sol.asunto}"
                                   filterMatchMode="contains">  
                             <h:outputText value="#{sol.asunto}" />  
                         </p:column>  
 
-                        <p:column headerText="Estado"
+                        <p:column id="columnEstado" 
+                                  headerText="Estado"
                                   sortBy="#{sol.estadoSolicitud.nombreEstadoSolicitud}"
                                   filterBy="#{sol.estadoSolicitud.nombreEstadoSolicitud}"
                                   filterOptions="#{estadoSolicitudRequerimientoController.filterOptions}"
@@ -57,7 +60,8 @@
                             <h:outputText value="#{sol.estadoSolicitud.nombreEstadoSolicitud}"/>
                         </p:column>
 
-                        <p:column headerText="Tipo"
+                        <p:column id="columnTipo"
+                                  headerText="Tipo"
                                   sortBy="#{sol.tipoSolicitud.nombreTipoSolicitud}"
                                   filterBy="#{sol.tipoSolicitud.nombreTipoSolicitud}"
                                   filterOptions="#{tipoSolicitudRequerimientoController.filterOptions}"
@@ -65,7 +69,8 @@
                             <h:outputText value="#{sol.tipoSolicitud.nombreTipoSolicitud}"/>
                         </p:column>
                         
-                        <p:column headerText="Fecha Envio" 
+                        <p:column id="columnFechaEnvio"
+                                  headerText="Fecha Envio" 
                                   sortBy="#{sol.fechaEnvio}" >  
                             <h:outputText value="#{sol.fechaEnvio}" >
                                 <f:convertDateTime pattern="dd/MM/yyyy  HH:mm" />

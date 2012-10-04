@@ -76,7 +76,7 @@
                           visible="#{not empty mbCrearSolicitud.codigoConsulta}" >  
                     <h:panelGrid columns="1" id="display">  
                         <h:outputText value="Su numero de consulta es: #{mbCrearSolicitud.codigoConsulta}"/> 
-                        <p:commandButton value="Salir" action="#{mbCrearSolicitud.cerrarDialog}" update="dlg crearSol tituloSol"/>
+                        <p:commandButton id="btnSalirDlg" value="Salir" action="#{mbCrearSolicitud.cerrarDialog}" update="dlg crearSol tituloSol"/>
                     </h:panelGrid>
                 </p:dialog>
             </h:form>
