@@ -1,0 +1,9 @@
+sampler_label,aggregate_report_count,average,aggregate_report_min,aggregate_report_max,aggregate_report_stddev,aggregate_report_error%,aggregate_report_rate,aggregate_report_bandwidth,average_bytes
+/Proyecto-war/faces/view/solicitudes/mainPage.xhtml,400,168,5,696,140.3393814116337,0.005,20.935831675913327,88.85481818538678,4346.01
+/Proyecto-war/faces/view/solicitudes/resumenSolicitante.xhtml,400,260,6,1087,223.71564227831726,0.02,20.643030396862258,292.5210139598493,14510.54
+/Proyecto-war/faces/view/solicitudes/crearSolicitud.xhtml,1000,159,6,827,141.44871380115126,0.012,50.304341264651136,382.1131026302882,7778.331
+/Proyecto-war/faces/view/solicitudes/consultarSolicitud.xhtml,5000,134,4,1260,163.57769179824,0.007,234.58759500797598,986.8783520368067,4307.8298
+/Proyecto-war/faces/view/solicitudes/solicitud.xhtml,1000,156,5,808,134.86124643870085,0.008,47.911077041011886,191.29204009857705,4088.471
+/Proyecto-war/faces/view/solicitudes/ayudaSolicitante.xhtml,400,166,5,580,136.740448455276,0.0125,19.769683190826868,103.38506593498245,5354.9825
+/Proyecto-war/faces/view/solicitudes/perfilSolicitante.xhtml,200,257,91,627,120.84484225650677,0.015,9.894132779261898,94.97608982326607,9829.615
+Total,8400,152,4,1260,161.46541476728763,0.008690476190476191,375.85574298626335,1968.789457512081,5363.8675
