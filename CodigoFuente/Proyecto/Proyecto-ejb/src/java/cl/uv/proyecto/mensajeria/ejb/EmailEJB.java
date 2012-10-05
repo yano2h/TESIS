@@ -17,14 +17,13 @@ import javax.mail.internet.MimeMessage;
 @Stateless
 public class EmailEJB implements EmailEJBLocal {
 
-    @Resource(lookup = "javaMail/correoUv")
-    //@Resource(name = "email/uv")
-    //@Resource(lookup = "email/Sistema")
+    @Resource(name = "email/ssrscm2")
     private Session mailSession;
 
     @Override
     @Asynchronous
     public void enviarEmail(String direccion, String asunto, String mensaje) {
+        System.out.println("ENVIANDO");
         Message msg = new MimeMessage(mailSession);
        
         try {
@@ -59,6 +58,10 @@ public class EmailEJB implements EmailEJBLocal {
         } catch (MessagingException ex) {
             Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void hacerNanda(){
+        System.out.println("NADAAA");
     }
    
 }
