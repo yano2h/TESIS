@@ -4,19 +4,15 @@
  */
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
-import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
-import cl.uv.view.controller.base.jsf.mb.MbUserInfo;
+import cl.uv.view.controller.base.jsf.mb.MbBase;
 import cl.uv.view.controller.base.utils.JsfUtils;
-import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.persistence.Persistence;
 import org.primefaces.event.SelectEvent;
@@ -27,16 +23,13 @@ import org.primefaces.event.SelectEvent;
  */
 @ManagedBean
 @ViewScoped
-public class MbConsultarSolicitud implements Serializable{
+public class MbConsultarSolicitud extends MbBase{
     
     @EJB
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
     
-    @ManagedProperty(value="#{mbUserInfo}")
-    private MbUserInfo mbUserInfo;
-    
     private String codigoConsulta="";
-    private Funcionario funcionario;
+   // private Funcionario funcionario;
     private SolicitudRequerimiento selectedSolicitud;
     private List<SolicitudRequerimiento> ultimasSolicitudesEnviadas;
     private List<SolicitudRequerimiento> ultimasSolicitudesCerradas;
@@ -46,10 +39,11 @@ public class MbConsultarSolicitud implements Serializable{
 
     @PostConstruct
     public void init(){
-        funcionario = mbUserInfo.getFuncionario();
-        if(!Persistence.getPersistenceUtil().isLoaded(funcionario, "solicitudesRequerimientoEnviadas")){
-            funcionario.setSolicitudesRequerimientoEnviadas(solicitudFacade.buscarPorSolicitante(funcionario.getRut()));
+        if(!Persistence.getPersistenceUtil().isLoaded(getFuncionario(), "solicitudesRequerimientoEnviadas")){
+            getFuncionario().setSolicitudesRequerimientoEnviadas(solicitudFacade.buscarPorSolicitante(getFuncionario().getRut()));
         }
+        ultimasSolicitudesEnviadas = solicitudFacade.getUltimasSolicitudesEnviadas(getFuncionario(), 5);;
+        ultimasSolicitudesCerradas = solicitudFacade.getUltimasSolicitudesCerradas(getFuncionario(), 5);;
     }
     
     public String getCodigoConsulta() {
@@ -60,17 +54,9 @@ public class MbConsultarSolicitud implements Serializable{
         this.codigoConsulta = codigoConsulta;
     }
 
-    public void setMbUserInfo(MbUserInfo mbUserInfo) {
-        this.mbUserInfo = mbUserInfo;
-    }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
     public List<SolicitudRequerimiento> getSolicitudesEnviadas(){
         //return solicitudFacade.buscarPorSolicitante(funcionario.getRut());
-        return funcionario.getSolicitudesRequerimientoEnviadas();
+        return getFuncionario().getSolicitudesRequerimientoEnviadas();
     }
     
     public SolicitudRequerimiento getSelectedSolicitud() {
@@ -82,7 +68,8 @@ public class MbConsultarSolicitud implements Serializable{
     }
     
     public void onRowSelect(SelectEvent event) {  
-        JsfUtils.redirect("solicitud.xhtml?codigo="+selectedSolicitud.getCodigoConsulta());
+        JsfUtils.performNavigation("solicitud?codigo="+selectedSolicitud.getCodigoConsulta(), true);
+      //  JsfUtils.redirect("solicitud.xhtml?codigo="+selectedSolicitud.getCodigoConsulta());
     }  
     
     public String buscarCodigo(){
@@ -100,11 +87,11 @@ public class MbConsultarSolicitud implements Serializable{
     }
 
     public List<SolicitudRequerimiento> getUltimasSolicitudesCerradas() {
-        return solicitudFacade.getUltimasSolicitudesCerradas(funcionario, 5);
+        return ultimasSolicitudesCerradas;
     }
 
     public List<SolicitudRequerimiento> getUltimasSolicitudesEnviadas() {
-        return solicitudFacade.getUltimasSolicitudesEnviadas(funcionario, 5);
+        return ultimasSolicitudesEnviadas;
     }
     
     

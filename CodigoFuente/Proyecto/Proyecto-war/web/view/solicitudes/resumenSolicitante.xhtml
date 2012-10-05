@@ -36,7 +36,7 @@
                                   header="Notificaciones" 
                                   resizable="true" 
                                   collapsible="true" 
-                                  minSize="350" maxSize="400" size="300" style="min-width: 200px; ">  
+                                  minSize="350" maxSize="400" size="300" style="min-width: 200px; " rendered="true">  
 
                         <p:scrollPanel id="scrollPanelNotificacion" styleClass="scrollPanelNotificacion">
                             <p:dataList id="notificaciones" type="none" value="#{mbUserInfo.notificaciones}" var="notificacion" >
@@ -126,6 +126,7 @@
                         </h:panelGrid>
                     </p:layoutUnit>  
                 </p:layout>
+                
             </h:form>
         </ui:define>
     </ui:composition>
