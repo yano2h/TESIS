@@ -21,7 +21,7 @@
                 <h:outputScript library="js" name="calendar-localization.js" />
 
                 <p:panel id="panelDetalleSolicitud" header="Detalle Solicitud" >
-                    <p:menubar styleClass="menu_bar" rendered="#{p:ifGranted(security.R_ADM) and mbFuncionarioInfo.funcionario.area == mbDetalleSolicitud.solicitud.areaResponsable}"> 
+                    <p:menubar styleClass="menu_bar" rendered="#{p:ifAnyGranted(security.rolMenuAvanzadoSolicitud) and mbFuncionarioInfo.funcionario.area == mbDetalleSolicitud.solicitud.areaResponsable}"> 
                         <p:menuitem value="Asignar Responsable" icon="ui-icon-pin-s" onclick="dlgAsignarSolicitud.show();" 
                                     disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
                                                 mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA }"/>
@@ -50,7 +50,7 @@
                         </p:submenu>
                     </p:menubar>
 
-                    <p:menubar styleClass="menu_bar" rendered="#{mbFuncionarioInfo.funcionario.rut == mbDetalleSolicitud.solicitud.responsable.rut and mbFuncionarioInfo.funcionario.rol eq const.Rol_FD}"> 
+                    <p:menubar styleClass="menu_bar" rendered="#{mbFuncionarioInfo.funcionario.rut == mbDetalleSolicitud.solicitud.responsable.rut and !p:ifAnyGranted(security.rolMenuAvanzadoSolicitud) }"> 
                         <p:menuitem value="Iniciar" icon="ui-icon-play" actionListener="#{mbMisSolicitudes.iniciarSolicitud}"  
                                     disabled="#{(mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ASIGNADA and
                                                 mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_PENDIENTE) or
@@ -151,6 +151,21 @@
                         </p:panel>
                         <br/>
 
+                        <p:panel header="Archivos Adjuntos" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%" >
+                            <p:dataList id="selectFiles" value="#{mbDetalleSolicitud.solicitud.archivosAdjuntos}" var="f" type="none">
+                                <p:column>
+                                    <h:panelGrid columns="3" styleClass="item-upload">
+                                        <h:outputText value="#{f.archivoAdjunto.nombre} #{f.archivoAdjunto.sizeFormat}" style="width: 300px;"/>
+                                        <p:commandLink id="link" value="Descargar" actionListener="#{mbDetalleSolicitud.load(f)}" ajax="false" 
+                                                       style="float: right;color: steelblue;">
+                                            <p:fileDownload value="#{mbDetalleSolicitud.fileDownload}" />
+                                        </p:commandLink>
+                                    </h:panelGrid>
+                                </p:column>   
+                            </p:dataList>
+                        </p:panel>
+                        
+                        <br/>
                         <p:panel header="Motivo Transferencia" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%" rendered="#{not empty mbDetalleSolicitud.solicitud.justificacionTrasnferencia}" >  
                             <h:outputText id="motivoTransferencia" value="#{mbDetalleSolicitud.solicitud.justificacionTrasnferencia}" escape="false"/>
                         </p:panel>

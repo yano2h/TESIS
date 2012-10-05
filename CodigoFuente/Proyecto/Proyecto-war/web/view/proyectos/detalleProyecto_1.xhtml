@@ -20,10 +20,10 @@
                 <ui:param name="ROLES_ADM_JA" value="#{security.R_ADM},#{security.R_JAREA}"/>
 
                 <p:panel id="panelDetalleProyecto" header="Detalle Proyecto" >
-                    <p:menubar id="menu_bar_proy" style="height: 30px;" styleClass="menu_bar" rendered="#{p:ifAnyGranted(ROLES_ADM_JA)}">
+                    <p:menubar id="menu_bar_proy" style="height: 30px;" styleClass="menu_bar">
                         <p:menuitem value="Ver Avance" icon="ui-icon-search" action="#{mbDetalleProyecto.verResumenAvance}"/>
-                        <p:menuitem value="Editar" icon="ui-icon-pencil" action="#{mbDetalleProyecto.editarProyecto}"/>
-                        <p:menuitem value="Eliminar" icon="ui-icon-trash" onclick="confirmarEliminacion.show()" />
+                        <p:menuitem value="Editar" icon="ui-icon-pencil" action="#{mbDetalleProyecto.editarProyecto}" rendered="#{p:ifAnyGranted(security.rolMenuEditarProyecto)}"/>
+                        <p:menuitem value="Eliminar" icon="ui-icon-trash" onclick="confirmarEliminacion.show()" rendered="#{p:ifAnyGranted(security.rolMenuEliminarProyecto)}" />
                         <p:menuitem value="Cerrar" icon="ui-icon-locked" update="@form" actionListener="#{mbDetalleProyecto.cerrarProyecto}" disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto eq const.EstadoP_FINALIZADO}"/>
                         <p:menuitem value="Volver a abrir" icon="ui-icon-unlocked" update="@form" actionListener="#{mbDetalleProyecto.reabrirProyecto}" disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto ne const.EstadoP_FINALIZADO}"/>
                     </p:menubar>
