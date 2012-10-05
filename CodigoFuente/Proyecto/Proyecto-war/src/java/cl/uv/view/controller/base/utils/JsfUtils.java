@@ -110,7 +110,12 @@ public class JsfUtils {
      */
     public static String redirectTo(String page) {
         if (!page.endsWith("?faces-redirect=true")) {
-            page += "?faces-redirect=true";
+            if(page.contains("?")){
+                page += "&faces-redirect=true";
+            }else{
+                page += "?faces-redirect=true";
+            }
+            
         }
         return page;
     }
