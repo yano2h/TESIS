@@ -78,7 +78,7 @@ public class FileUtils {
     }
 
     public static String convertDateToPath(Date d){
-        SimpleDateFormat formateador = new SimpleDateFormat("YYYY/MM", new Locale("es","CL"));
+        SimpleDateFormat formateador = new SimpleDateFormat("yyyy/MM", new Locale("es","CL"));
         String path = formateador.format(d);
         return path;
     }
