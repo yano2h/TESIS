@@ -13,10 +13,21 @@
             <h:form id="detalle_tarea">
                 <p:panel header="Detalle Tarea">
                     <h:outputScript library="js" name="calendar-localization.js" />
-                    <h:panelGrid columns="4" cellspacing="10" columnClasses="width:100px,width:250px, width:100px, width:250px">
+                    
+                    <p:menubar id="menu_bar_tarea" style="height: 30px;" styleClass="menu_bar" rendered="#{mbDetalleTarea.tarea.responsableTarea eq mbFuncionarioInfo.funcionario}">
+                        <p:menuitem value="Editar" icon="ui-icon-pencil" oncomplete="inpAvance.show();inpDesc.show();inpTarea.show();"/>
+                        <p:menuitem value="Guardar Cambios" icon="ui-icon-disk" 
+                                    oncomplete="if(!args.validationFailed){inpAvance.save();inpDesc.save();inpTarea.save();}" 
+                                    update="grid_desc grid_avance" actionListener="#{mbDetalleTarea.guardarCambios}"/>
+                        <p:menuitem value="Volver" icon="ui-icon-back" action="misTareas?faces-redirect=true"/>
+                    </p:menubar>
+                    <br/>
+                    <h:panelGrid columns="4" cellspacing="10" columnClasses="width:100px,width:250px, width:100px, width:250px" style="width: 850px;">
 
                         <h:outputLabel value="Tarea:" styleClass="label_blod"/>
-                        <h:outputText  value="#{mbDetalleTarea.tarea.tarea}"/>
+                        <p:inplace widgetVar="inpTarea">
+                            <p:inputText id="itxt_nombre_tarea" value="#{mbDetalleTarea.tarea.tarea}" required="true" style="min-width: 300px;" maxlength="60"/>
+                        </p:inplace>
 
                         <h:outputLabel value="Responsable:" styleClass="label_blod"/>
                         <h:outputText value="#{mbDetalleTarea.tarea.responsableTarea.nombreCompleto}"/>
@@ -59,9 +70,6 @@
                             <p:inputTextarea id="itxt_desc" value="#{mbDetalleTarea.tarea.descripcionTarea}" cols="80" rows="3"/>
                         </p:inplace>  
                     </h:panelGrid>
-
-                    <p:commandButton value="Modificar" oncomplete="inpAvance.show();inpDesc.show();" />
-                    <p:commandButton value="Guardar Cambios" oncomplete="if(!args.validationFailed){inpAvance.save();inpDesc.save();}" update="grid_desc grid_avance" actionListener="#{mbDetalleTarea.guardarCambios}"/>
                 </p:panel>
             </h:form>
         </ui:define>

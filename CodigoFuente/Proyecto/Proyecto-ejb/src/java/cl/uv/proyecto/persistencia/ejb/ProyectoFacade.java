@@ -136,4 +136,23 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
         q.setParameter("rutParticipant", funcionarioDisico.getRut());
         return q.getResultList();
     }
+    
+    @Override
+    public String buscarMaximoCodigo(String prefijo){
+        Query q = em.createQuery("SELECT p.codigoInterno FROM Proyecto p WHERE p.codigoInterno LIKE :prefijo ORDER BY p.codigoInterno DESC");
+        q.setParameter("prefijo", prefijo+"%");
+        List<String> l = q.getResultList();
+        if (!l.isEmpty()) {
+            return l.get(0);
+            
+        }
+        return "0";
+    }
+    
+    @Override
+    public boolean existCode(String code){
+        Query q = em.createNamedQuery("Proyecto.findByCodigoInterno");
+        q.setParameter("codigoInterno", code);
+        return !q.getResultList().isEmpty();
+    }
 }

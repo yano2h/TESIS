@@ -8,10 +8,9 @@ import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.RolProyectoFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
-import cl.uv.proyecto.persistencia.entidades.ParticipanteProyecto;
-import cl.uv.proyecto.persistencia.entidades.Proyecto;
-import cl.uv.proyecto.persistencia.entidades.RolProyecto;
+import cl.uv.proyecto.persistencia.entidades.*;
+import cl.uv.proyecto.proyectos.ejb.ProyectoEJBLocal;
+import cl.uv.view.controller.base.jsf.mb.MbBase;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
@@ -20,9 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
 
 /**
@@ -31,7 +32,7 @@ import javax.faces.model.SelectItem;
  */
 @ManagedBean
 @ViewScoped
-public class MbProyecto implements Serializable{
+public class MbProyecto extends MbBase{
 
     @EJB
     private FuncionarioDisicoFacadeLocal funcionarioDisicoFacade;
@@ -41,9 +42,8 @@ public class MbProyecto implements Serializable{
     private ProyectoFacadeLocal proyectoFacade;
     @EJB
     private ParticipanteProyectoFacadeLocal participanteProyectoFacade;
-    
-    @ManagedProperty(value = "#{mbFuncionarioInfo}")
-    private MbFuncionarioInfo mbFuncionarioInfo;
+    @EJB
+    private ProyectoEJBLocal proyectoEJB;
     
     private List<FuncionarioDisico> funcionariosArea;
     private List<ParticipanteProyecto> participantes;
@@ -59,17 +59,11 @@ public class MbProyecto implements Serializable{
     
     @PostConstruct
     private void init(){
-        nuevoProyecto = new Proyecto();
-        nuevoParticipanteProyecto =  new ParticipanteProyecto();
-        participantes = new ArrayList<ParticipanteProyecto>();
-        funcionariosArea = funcionarioDisicoFacade.buscarFuncrionariosPorArea(mbFuncionarioInfo.getFuncionario().getArea());
+        buildNuevoProyecto();
+        funcionariosArea = funcionarioDisicoFacade.buscarFuncrionariosPorArea(getFuncionarioDisico().getArea());
         rolJefeProyecto = rolProyectoFacade.find(new Short(Resources.getValue("const", "RolProyecto_JP")));
         rolesProyecto = rolProyectoFacade.findAll();
         rolesProyecto.remove(rolJefeProyecto);
-    }
-
-    public void setMbFuncionarioInfo(MbFuncionarioInfo mbFuncionarioInfo) {
-        this.mbFuncionarioInfo = mbFuncionarioInfo;
     }
 
     public Proyecto getNuevoProyecto() {
@@ -164,4 +158,27 @@ public class MbProyecto implements Serializable{
         p.setRol(rolJefeProyecto);
         participanteProyectoFacade.create(p);
     }
+    
+    public void buildNuevoProyecto(){
+        nuevoProyecto = new Proyecto();
+        String s = proyectoEJB.sugerirCodigoInterno(getFuncionarioDisico().getArea());
+        nuevoProyecto.setCodigoInterno(s);
+        nuevoParticipanteProyecto =  new ParticipanteProyecto();
+        participantes = new ArrayList<ParticipanteProyecto>();
+        jefeProyecto = new FuncionarioDisico();
+    }
+    
+    public void validateCode(AjaxBehaviorEvent e){
+        boolean exist = proyectoFacade.existCode(nuevoProyecto.getCodigoInterno());
+        if (exist) {
+            FacesMessage f = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error:", "El codigo "+nuevoProyecto.getCodigoInterno()+" ya existe.");
+            JsfUtils.getFacesContext().addMessage(e.getComponent().getClientId(), f);
+        }
+    }
+    
+    public void goDetalleProyecto(){
+        putValueOnFlashContext("proyecto", nuevoProyecto);
+        JsfUtils.performNavigation("detalleProyecto_1", true);
+    }
+    
 }

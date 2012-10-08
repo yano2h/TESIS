@@ -15,14 +15,20 @@
 
             <h:form id="form_crear_proyecto">
                 <p:panel id="pnl_crear_proyecto" header="Crear Nuevo Proyecto">
-                    <h:panelGrid id="grid_crear_proyecto" columns="4" cellspacing="10">
-                        <p:outputLabel value="Codigo Interno:" for="itxt_codigo_interno" styleClass="label_blod"/>
-                        <p:inputText id="itxt_codigo_interno" value="#{mbProyecto.nuevoProyecto.codigoInterno}" required="true" maxlength="6" size="6"/>
-
-                        <p:outputLabel value="Nombre Proyecto:" for="itxt_nombre_proyecto" styleClass="label_blod" style="margin-left: 25px;"/>
-                        <p:inputText id="itxt_nombre_proyecto" value="#{mbProyecto.nuevoProyecto.nombre}" required="true" maxlength="45" size="45"/>
+                    <h:panelGrid id="grid_crear_proyecto" columns="4" cellspacing="10" columnClasses="width: 120px;">
+                        <p:outputLabel value="Codigo Interno:" for="imask_codigo_interno" styleClass="label_blod" />
+                        <p:inputMask id="imask_codigo_interno" value="#{mbProyecto.nuevoProyecto.codigoInterno}" required="true" 
+                                     mask="Pa9999" maxlength="6" size="6" title="El codigo debe empezar con P mas otro caracter. Ej: PD0001">
+                            <p:ajax process="imask_codigo_interno" listener="#{mbProyecto.validateCode}" update="mensajeCodigo"/>
+                        </p:inputMask>
+                        <p:message id="mensajeCodigo" for="imask_codigo_interno"/>
+                        <p:tooltip for="imask_codigo_interno" showEvent="focus" hideEvent="blur" />
+                        
                     </h:panelGrid>
-                    <h:panelGrid columns="2" cellspacing="10" style="line-height: 1.4em;">
+                    <h:panelGrid columns="2" cellspacing="10" style="line-height: 1.4em;margin-top: -10px;">
+                        <p:outputLabel value="Nombre Proyecto:" for="itxt_nombre_proyecto" styleClass="label_blod" />
+                        <p:inputText id="itxt_nombre_proyecto" value="#{mbProyecto.nuevoProyecto.nombre}" required="true" maxlength="45" size="45"/>
+                        
                         <p:outputLabel value="Tipo Proyecto:" for="slct_tipo_proyecto" styleClass="label_blod"/>
                         <p:selectOneMenu id="slct_tipo_proyecto" value="#{mbProyecto.nuevoProyecto.tipoProyecto}" required="true" style="min-width: 250px;margin-left: 5px;">
                             <f:selectItem itemValue="" itemLabel="Seleccione un tipo Proyecto"/>
@@ -58,9 +64,9 @@
                         <h:outputText value="El proyecto \'#{mbProyecto.nuevoProyecto.nombre}\' fue creado exitosamente. Si desea agregar mas participantes puede hacerlo en el menu de edición"/>
                         <br/>
                         <h:panelGroup style="float: right;">
-                            <p:commandButton value="Crear Otro Proyecto" oncomplete="dlgExito.hide();" update="@all" action="crearProyecto"/>
-                            <p:commandButton value="Ir al menu de edicion" action="#"/>
-                            <p:commandButton value="Salir" action="#"/>
+                            <p:commandButton value="Crear Otro Proyecto" oncomplete="dlgExito.hide();" update="pnl_crear_proyecto" actionListener="#{mbProyecto.buildNuevoProyecto}"/>
+                            <p:commandButton value="Ver Proyecto" actionListener="#{mbProyecto.goDetalleProyecto()}"/>
+                            <p:commandButton value="Salir" action="proyectosArea?faces-redirect=true"/>
                         </h:panelGroup>
                     </h:panelGrid>
                 </p:dialog>

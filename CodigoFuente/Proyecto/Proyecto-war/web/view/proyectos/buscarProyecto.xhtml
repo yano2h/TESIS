@@ -70,25 +70,25 @@
 
                             <p:ajax event="rowSelect" listener="#{mbProyectoArea.onRowSelect}"/>
 
-                            <p:column headerText="Codigo Interno" style="max-width: 90px;">
+                            <p:column headerText="Codigo Interno" style="max-width: 90px;" sortBy="#{proyecto.codigoInterno}">
                                 <h:outputText value="#{proyecto.codigoInterno}"/>
                             </p:column>
 
-                            <p:column headerText="Fecha Inicio" style="max-width: 90px;">
+                            <p:column headerText="Fecha Inicio" style="max-width: 90px;" sortBy="#{proyecto.fechaInicio}">
                                 <h:outputText value="#{proyecto.fechaInicio}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
                             </p:column>
 
-                            <p:column headerText="Nombre" style="min-width: 250px;">
+                            <p:column headerText="Nombre" style="min-width: 250px;" sortBy="#{proyecto.nombre}">
                                 <h:outputText value="#{proyecto.nombre}"/>
                             </p:column>
 
-                            <p:column headerText="Tipo">
+                            <p:column headerText="Tipo" sortBy="#{proyecto.tipoProyecto.nombreTipoProyecto}">
                                 <h:outputText value="#{proyecto.tipoProyecto.nombreTipoProyecto}"/>
                             </p:column>
 
-                            <p:column headerText="Estado">
+                            <p:column headerText="Estado" sortBy="#{proyecto.estadoProyecto.nombreEstadoProyecto}">
                                 <h:outputText value="#{proyecto.estadoProyecto.nombreEstadoProyecto}"/>
                             </p:column>
                         </p:dataTable> 
