@@ -23,7 +23,7 @@
                         <p:menuitem value="Guardar Cambios" icon="ui-icon-disk" 
                                     oncomplete="if(!args.validationFailed){inpNombre.save();inpCodigo.save(); inpTipo.save(); inpEstado.save(); inpFechaIni.save();inpDesc.save();inpFechaTer.save();}"
                                     action="#{mbEditProyecto.guardarCambios}" update="@form" />
-                        <p:menuitem value="Cancelar" icon="ui-icon-closethick" onclick="confirmarEliminacion.show()"/>
+                        <p:menuitem value="Cancelar" icon="ui-icon-closethick" actionListener="#{mbEditProyecto.volverDetalleProyecto}"/>
                     </p:menubar>
 
                     <br/>

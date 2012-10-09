@@ -147,4 +147,9 @@ public class MbEditProyecto extends MbBase {
             rolesDisponibles.remove(participante.getRol());
         }
     }
+    
+    public void volverDetalleProyecto(){
+        putValueOnFlashContext("proyecto", proyecto);
+        JsfUtils.performNavigation("detalleProyecto_1", true);
+    }
 }

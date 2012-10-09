@@ -36,7 +36,7 @@ public class MbResumenesFuncionarios implements Serializable {
     
     @ManagedProperty(value = "#{mbFuncionarioInfo}")
     private MbFuncionarioInfo mbFuncionarioInfo;
-    private List<FuncionarioDisico> funcionariosArea;
+    private List<FuncionarioDisico> funcionarios;
 
     private String tipoResumen;
     private PieChartModel pieModel;
@@ -71,7 +71,6 @@ public class MbResumenesFuncionarios implements Serializable {
         tipoResumen = TIPO_PERSONAL;
         funcionarioSelected = mbFuncionarioInfo.getFuncionario();
         areaSelected = funcionarioSelected.getArea();
-        funcionariosArea = funcionarioDisicoFacade.buscarFuncrionariosPorArea(mbFuncionarioInfo.getFuncionario().getArea());
         crearResumen();
     }
 
@@ -222,9 +221,9 @@ public class MbResumenesFuncionarios implements Serializable {
     
     
     public SelectItem[] getItemsAvailableSelectManyNombreCompleto() {
-        SelectItem[] listaItems = new SelectItem[funcionariosArea.size()];
+        SelectItem[] listaItems = new SelectItem[funcionarios.size()];
         int i = 0;
-        for (FuncionarioDisico f : funcionariosArea) {
+        for (FuncionarioDisico f : funcionarios) {
             listaItems[i++] = new SelectItem(f, f.getNombre() + " " + f.getApellidoPaterno() + " " + f.getApellidoMaterno());
         }
         return listaItems;
@@ -271,11 +270,20 @@ public class MbResumenesFuncionarios implements Serializable {
     }
     
     public void crearResumen(){
+        buscarFuncionarios();
         calcularIndicadores();
         createPieModel();
         setTituloGrafico(crearTituloGrafico());
     }
 
+    private void buscarFuncionarios(){
+        if (tipoResumen.equals(TIPO_AREA)) {
+            funcionarios = funcionarioDisicoFacade.buscarFuncrionariosPorArea(mbFuncionarioInfo.getFuncionario().getArea());
+        } else if (tipoResumen.equals(TIPO_DEPTO)) {
+            funcionarios = funcionarioDisicoFacade.findAll();
+        }
+    }
+    
     private void calcularIndicadores() {
         if (tipoResumen.equals(TIPO_AREA)) {
             calcularIndicadoresArea(areaSelected);

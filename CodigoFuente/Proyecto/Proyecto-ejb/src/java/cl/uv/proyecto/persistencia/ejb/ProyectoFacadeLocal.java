@@ -39,4 +39,8 @@ public interface ProyectoFacadeLocal {
     public List<Proyecto> buscarProyectoPorTareaFuncionario(FuncionarioDisico funcionarioDisico, Integer idTarea);
     
     public List<Proyecto> buscarProyectosPorParticipante(FuncionarioDisico funcionarioDisico);
+
+    public String buscarMaximoCodigo(String prefijo);
+
+    public boolean existCode(String code);
 }

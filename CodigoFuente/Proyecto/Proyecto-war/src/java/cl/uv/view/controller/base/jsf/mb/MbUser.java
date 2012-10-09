@@ -58,26 +58,49 @@ public class MbUser implements Serializable{
     
     private Funcionario saveUser(OpenAMUserDetails u){
         Funcionario f = new Funcionario();
-        f.setRut(Integer.parseInt( u.getUsername() ));
-        f.setCorreoUv( u.getFuncionario().getCorreouv() );
+        f.setRut(Integer.parseInt( u.getUsername() ));        
         f.setFechaPrimerAcceso(new Date());
         f.setNombre( u.getFuncionario().getGivenname() );
         
-        String[] apellidos = u.getFuncionario().getSn().split(" ");
+//        String[] apellidos = u.getFuncionario().getSn().split(" ");
+//        String[] nombreCompleto = u.getFuncionario().getCn().split(" ");
+//        
+//        if(apellidos.length > 0 && apellidos[0].equals(nombreCompleto[0])){
+//            f.setApellidoPaterno(apellidos[0]);
+//        }else{
+//            f.setApellidoPaterno("");
+//        }
+//        
+//        if (apellidos.length > 1 && nombreCompleto.length >= 3 && apellidos[1].equals(nombreCompleto[1])) {
+//               f.setApellidoMaterno(apellidos[1]);          
+//        }else if(apellidos.length==2){
+//            f.setApellidoMaterno(apellidos[1]);
+//        }else{
+//            f.setApellidoMaterno("");
+//        }
+        String[] nombres = u.getFuncionario().getSn().split(" ");
         String[] nombreCompleto = u.getFuncionario().getCn().split(" ");
+        int posicionNombre = 0;
         
-        if(apellidos.length > 0 && apellidos[0].equals(nombreCompleto[0])){
-            f.setApellidoPaterno(apellidos[0]);
-        }else{
-            f.setApellidoPaterno("");
+        for (int i = 0; i < nombreCompleto.length; i++) {
+            if (nombreCompleto[i].equals(nombres[0])) {
+                posicionNombre = i;
+            }
         }
         
-        if (apellidos.length > 1 && nombreCompleto.length >= 3 && apellidos[1].equals(nombreCompleto[1])) {
-               f.setApellidoMaterno(apellidos[1]);          
-        }else if(apellidos.length==2){
-            f.setApellidoMaterno(apellidos[1]);
+        f.setApellidoPaterno(nombreCompleto[0]);
+        if (posicionNombre<1) {
+            f.setApellidoMaterno(" ");
+        }else if(posicionNombre==2){
+            f.setApellidoMaterno(nombreCompleto[1]);
+        }else {
+            f.setApellidoMaterno(nombreCompleto[1]+" "+nombreCompleto[2]);
+        }
+        
+        if (u.getFuncionario().getCorreouv().isEmpty()) {
+            f.setCorreoUv( f.getNombre()+"."+f.getApellidoPaterno()+"@uv.cl" );
         }else{
-            f.setApellidoMaterno("");
+            f.setCorreoUv( u.getFuncionario().getCorreouv() );
         }
         
         funcionarioFacade.create(f);

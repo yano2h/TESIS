@@ -31,21 +31,25 @@
                             <h:outputText value="#{index+1}"/>
                         </p:column>
                         
-                        <p:column headerText="Tarea" style="min-width: 250px;">
+                        <p:column headerText="Tarea" style="min-width: 250px;" 
+                                  sortBy="#{tarea.tarea}">
                             <h:outputText value="#{tarea.tarea}"/>
                         </p:column>
 
-                        <p:column headerText="Proyecto" style="min-width: 250px;">
+                        <p:column headerText="Proyecto" style="min-width: 250px;"
+                                  sortBy="#{tarea.proyecto.nombre}">
                             <h:outputText value="#{tarea.proyecto.nombre}"/>
                         </p:column>
 
-                        <p:column headerText="F. Inicio Propuesta" style="width: 90px;">
+                        <p:column headerText="F. Inicio" style="width: 90px;"
+                                  sortBy="#{tarea.fechaInicioPropuesta}">
                             <h:outputText value="#{tarea.fechaInicioPropuesta}">
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </h:outputText>
                         </p:column>
 
-                        <p:column headerText="F. Termino Propuesta" style="width: 90px;">
+                        <p:column headerText="F. Termino" style="width: 90px;"
+                                  sortBy="#{tarea.fechaTerminoPropuesta}">
                             <h:outputText value="#{tarea.fechaTerminoPropuesta}">
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </h:outputText>
