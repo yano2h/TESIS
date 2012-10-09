@@ -14,34 +14,48 @@
                 <p:poll id="poll" update="menu_left" interval="60"/>
                 <p:menu id="menu_left" styleClass="menu_left"> 
                     <p:submenu label="Solicitudes">  
-                        <p:menuitem value="Resumen Atencion de Solicitudes" action="/view/atencion/resumen?faces-redirect=true" rendered="#{p:ifAnyGranted(security.rolMenuResumen)}" />
-                        <p:menuitem value="Solicitudes del Area #{mbNotificacionesMenu.msgSolicitudesArea}" action="/view/atencion/solicitudesArea?faces-redirect=true" rendered="#{p:ifAnyGranted(security.rolMenuSolicitudesArea)}"/>  
-                        <p:menuitem value="Mis Solicitudes #{mbNotificacionesMenu.msgMisSolicitudes}" action="/view/atencion/misSolicitudes?faces-redirect=true" rendered="#{p:ifAnyGranted(security.rolMenuMisSolicitudes)}"/>    
-                        <p:menuitem value="Buscar Solicitud" action="/view/atencion/buscarSolicitud?faces-redirect=true" rendered="#{p:ifAnyGranted(security.rolMenuBuscarSolicitud)}"/>  
+                        <p:menuitem value="Resumen Atencion de Solicitudes" action="/view/atencion/resumen?faces-redirect=true" 
+                                    rendered="#{p:ifAnyGranted(security.rolMenuResumen)}" />
+                        <p:menuitem value="Solicitudes del Area #{mbNotificacionesMenu.msgSolicitudesArea}" action="/view/atencion/solicitudesArea?faces-redirect=true" 
+                                    rendered="#{p:ifAnyGranted(security.rolMenuSolicitudesArea)}"/>  
+                        <p:menuitem value="Mis Solicitudes #{mbNotificacionesMenu.msgMisSolicitudes}" action="/view/atencion/misSolicitudes?faces-redirect=true" 
+                                    rendered="#{p:ifAnyGranted(security.rolMenuMisSolicitudes)}"/>    
+                        <p:menuitem value="Buscar Solicitud" action="/view/atencion/buscarSolicitud?faces-redirect=true" 
+                                    rendered="#{p:ifAnyGranted(security.rolMenuBuscarSolicitud)}"/>  
                     </p:submenu> 
                     
-                    <p:submenu label="Proyectos">  
-                        <p:menuitem value="Proyectos del Area" action="/view/proyectos/proyectosArea?faces-redirect=true"/>
+                    <p:submenu label="Proyectos" rendered="#{p:ifAnyGranted(security.rolMenuProyectos)}">  
+                        <p:menuitem value="Proyectos del Area" action="/view/proyectos/proyectosArea?faces-redirect=true" 
+                                    rendered="#{p:ifAnyGranted(security.rolMenuProyectoArea)}"/>
                         <p:menuitem value="Crear Proyecto" action="/view/proyectos/crearProyecto?faces-redirect=true" 
-                                    rendered="#{p:ifGranted(security.R_ADM) or p:ifGranted(security.R_JAREA)}"/>
+                                    rendered="#{p:ifAnyGranted(security.rolMenuCrearProyecto)}"/>
                         <p:menuitem value="Buscar Proyecto" action="/view/proyectos/buscarProyecto?faces-redirect=true"
-                                    rendered="#{p:ifGranted(security.R_ADM) or p:ifGranted(security.R_JAREA)}"/>/>
-                        <p:menuitem value="Mis Proyectos" action="/view/proyectos/misProyectos?faces-redirect=true"/>
-                        <p:menuitem value="Crear Tarea" action="/view/proyectos/crearTarea?faces-redirect=true"/>
-                        <p:menuitem value="Mis Tareas" action="/view/proyectos/misTareas?faces-redirect=true"/>
+                                    rendered="#{p:ifAnyGranted(security.rolMenuBuscarProyecto)}"/>
+                        <p:menuitem value="Mis Proyectos" action="/view/proyectos/misProyectos?faces-redirect=true"
+                                    rendered="#{p:ifAnyGranted(security.rolMenuMisProyectos)}"/>
+                        <p:menuitem value="Crear Tarea" action="/view/proyectos/crearTarea?faces-redirect=true"
+                                    rendered="#{p:ifAnyGranted(security.rolMenuCrearTarea)}"/>
+                        <p:menuitem value="Mis Tareas" action="/view/proyectos/misTareas?faces-redirect=true"
+                                    rendered="#{p:ifAnyGranted(security.rolMenuMisTareas)}"/>
                     </p:submenu>   
                     
-                    <p:submenu label="Gestion de SCM">    
+                    <p:submenu label="Gestion de SCM" rendered="#{p:ifAnyGranted(security.rolMenuGestionSCM)}">    
                         <p:menuitem value="Mis Tareas SCM" action="/view/scm/crearSolicitud?faces-redirect=true" rendered="false"/>  
-                        <p:menuitem value="Asignar Tareas SCM" action="/view/scm/tareasScmProyectos?faces-redirect=true"/>  
-                        <p:menuitem value="Identificar Configuración" action="/view/scm/identificarConfiguracionProyecto?faces-redirect=true"/> 
+                        <p:menuitem value="Asignar Tareas SCM" action="/view/scm/tareasScmProyectos?faces-redirect=true"
+                                    rendered="#{p:ifAnyGranted(security.rolMenuAsignarTareasScm)}"/>  
+                        <p:menuitem value="Identificar Configuración" action="/view/scm/identificarConfiguracionProyecto?faces-redirect=true"
+                                    rendered="#{p:ifAnyGranted(security.rolMenuIdentificarConfiguracion)}"/> 
                     </p:submenu>   
                     
-                    <p:submenu label="Gestion del Cambio">
-                        <p:menuitem value="Crear Solicitud de Cambio" action="/view/scm/crearSolicitudCambio?faces-redirect=true"/> 
-                        <p:menuitem value="Analizar Solicitud #{mbNotificacionesMenu.msgSolicitudAnalisis}" action="/view/scm/analisisSolicitud?faces-redirect=true"/> 
-                        <p:menuitem value="Evaluar Solicitud #{mbNotificacionesMenu.msgSolicitudEvaluacion}" action="/view/scm/evaluacionSolicitud?faces-redirect=true"/> 
-                        <p:menuitem value="Formulario Implementación #{mbNotificacionesMenu.msgSolicitudImplementacion}" action="/view/scm/implementacionSolicitud?faces-redirect=true"/> 
+                    <p:submenu label="Gestion del Cambio" rendered="#{p:ifAnyGranted(security.rolMenuGestionCambio)}">
+                        <p:menuitem value="Crear Solicitud de Cambio" action="/view/scm/crearSolicitudCambio?faces-redirect=true"
+                                    rendered="#{p:ifAnyGranted(security.rolMenuCrearSolicitudCambio)}"/> 
+                        <p:menuitem value="Analizar Solicitud #{mbNotificacionesMenu.msgSolicitudAnalisis}" action="/view/scm/analisisSolicitud?faces-redirect=true"
+                                    rendered="#{p:ifAnyGranted(security.rolMenuAnalizarSolicitudCambio)}"/> 
+                        <p:menuitem value="Evaluar Solicitud #{mbNotificacionesMenu.msgSolicitudEvaluacion}" action="/view/scm/evaluacionSolicitud?faces-redirect=true"
+                                    rendered="#{p:ifAnyGranted(security.rolMenuEvaluarSolicitudCambio)}"/> 
+                        <p:menuitem value="Formulario Implementación #{mbNotificacionesMenu.msgSolicitudImplementacion}" action="/view/scm/implementacionSolicitud?faces-redirect=true"
+                                    rendered="#{p:ifAnyGranted(security.rolMenuFormularioImplementacion)}"/> 
                     </p:submenu>   
                     
                     <p:submenu label="Opciones de Administracion" rendered="false">  
