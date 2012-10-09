@@ -41,7 +41,7 @@
                                 <h:outputLabel value="Area Responsable:" styleClass="label_blod" />
                                 <h:outputText id="area" value="#{mbDetalleSolicitud.solicitud.areaResponsable.nombreArea}"/>
                                 <h:outputLabel value="Funcionario Responsable:" styleClass="label_blod"/>
-                                <h:outputText id="responsable" value="#{mbDetalleSolicitud.solicitud.responsable.nombre}" rendered="#{mbDetalleSolicitud.solicitud.responsable!=null}"/>
+                                <h:outputText id="responsable" value="#{mbDetalleSolicitud.solicitud.responsable.nombreCorto}" rendered="#{mbDetalleSolicitud.solicitud.responsable!=null}"/>
                                 <h:outputText id="sinResponsable" value="No Asignado" rendered="#{mbDetalleSolicitud.solicitud.responsable==null}"/>
                                 <h:outputLabel value="Fecha de Vencimiento:" styleClass="label_blod"/>
                                 <h:outputText id="fechaVencimiento" value="#{mbDetalleSolicitud.solicitud.fechaVencimiento}">
