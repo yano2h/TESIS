@@ -63,7 +63,7 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @Override
     public List<SolicitudRequerimiento> getUltimasSolicitudesEnviadas(Funcionario funcionario, Integer maxResults) {
-        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante = :solicitante AND s.estadoSolicitud.idEstadoSolicitudRequerimiento <> :idEstado");
+        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante = :solicitante AND s.estadoSolicitud.idEstadoSolicitudRequerimiento <> :idEstado ORDER BY s.fechaEnvio DESC");
         q.setParameter("solicitante", funcionario);
         q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
         q.setMaxResults(maxResults);
@@ -72,7 +72,7 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @Override
     public List<SolicitudRequerimiento> getUltimasSolicitudesCerradas(Funcionario funcionario, Integer maxResults) {
-        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante = :solicitante AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado");
+        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante = :solicitante AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado  ORDER BY s.fechaEnvio DESC");
         q.setParameter("solicitante", funcionario);
         q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
         q.setMaxResults(maxResults);
