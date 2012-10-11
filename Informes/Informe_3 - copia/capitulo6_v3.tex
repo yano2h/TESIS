@@ -15,7 +15,7 @@
 	\section{Pruebas Unitarias}
 	Para llevar a cabo las pruebas unitarias se diseño un set de pruebas 
 	automatizadas, las cuales fueron implementadas aciendo uso del 
-	framework de pruebas JUnit y de Glassfish Embedded (dentro del cual se 
+	framework de pruebas JUnit \cite{junit} y de Glassfish Embedded \cite{emb_glassfish} (dentro del cual se 
 	despliegan los EJB para ser utilizados durante la ejecución de las 
 	pruebas).\\
 
@@ -30,7 +30,7 @@
 	aplicaciones, junto con las configuraciones de persistencia y 
 	datasources correspondientes, para solucionar este inconveniente
 	es que se utiliza Glassfish Embedded, que actúa como contenedor 
-	embebido el cual es mas rápido y ligero.\\
+	embebido el cual es mas rápido y ligero que el Glassfish comun.\\
 	
 	El procedimiento utilizado para ejecutar los test dentro Glassfish
 	Embedded es el siguiente:
@@ -65,7 +65,7 @@
 	código documenta la prueba, sus entradas y salidas esperadas.\\
 
 	Sin embargo a continuación en la Tabla \ref{docTestUnit} se presenta 
-	un resumen las pruebas unitarias diseñadas y ejecutadas, con su nombre y 
+	un resumen de las pruebas unitarias diseñadas y ejecutadas, con su nombre y 
 	propósito.
 	
 	\begin{table}[H]
@@ -319,14 +319,14 @@
 	fueron solucionados oportunamente y vueltos a probar, por lo que actualmente
 	todas las pruebas se encuentran superadas.
        Ante cualquier modificación del código fuente en el futuro, se debe volver a ejecutar 
-	este mismo set de pruebas y a corregir los errores detectados hasta volver a lograr 
+	este mismo set de pruebas y corregir los errores detectados hasta volver a lograr 
 	un 100\% de aprobación de los tests.
 
 	\subsection{Problemas detectados}
 	Durante el desarrollo de los tests, los principales problemas que existieron
 	fueron principalmente debido a la incorrecta configuración de los frameworks
 	de pruebas, pero una vez superado aquello, no se encontraron demasiados
-	problemas. Los principales problemas que se detectaron y corrigieron.
+	problemas. Los principales problemas que se detectaron y corrigieron son:
 
 	\begin{itemize}
 		\item Problemas en el calculo de porcentajes, cuando existía un denominador 0.
@@ -337,8 +337,8 @@
 
 	\section{Pruebas Integración}
 	Una vez completada la fase de pruebas unitarias, se realizaron las pruebas de 
-	integración, las cuales a diferencia de los especificado en la fase de diseño,
-	se opto por no utilizar Arquillian ya que solo era necesario para utilizar
+	integración, las cuales a diferencia de lo especificado en la fase de diseño,
+	se opto por no utilizar Arquillian \cite{arquillian} ya que solo era necesario para utilizar
 	inyección de dependencia en los test. Y presenta algunos problemas en proyectos
 	que no gestionan sus dependencias con maven.\\
 
@@ -347,7 +347,10 @@
 	estado de la base de datos y normalmente de a lo menos las funciones crear, 
 	buscar y eliminar, para poder agrega nuevos datos al inicio del test, buscar para 
 	verificar la correcta creación o modificación de algo y la eliminación para restaurar el 
-	estado de la bd, a su estado original). Y ademas un conjunto de pruebas acorde al
+	estado de la bd, a su estado original) las cuales no hacen mas que probar todas 	
+	las operaciones CRUD en cada tabla. \\
+	
+	Y ademas un conjunto de pruebas acorde al
 	esquema de integración definido. En la Tabla \ref{docTestIntegracion} se presentan
 	las pruebas de integración realizadas.
 
@@ -395,8 +398,10 @@
 	\end{table}	
 
 	\subsection{Análisis de Resultados}
-	Esta pruebas fueron realizadas y superadas en su totalidad. Verificando así que 
-	existe una correcta integración de los módulos diseñados. Estas pruebas fueron
+	Esta pruebas fueron realizadas y superadas en su totalidad, y no se detecto
+	ningún error. Verificando así que existe una correcta integración de los módulos 
+	diseñados. Las pruebas descritas 
+	en la Tabla \ref{docTestIntegracion} fueron
 	ejecutadas manualmente dado la dificultad de automatizarlas. 
 
 
@@ -1829,12 +1834,26 @@ Se desactiven el resto de todas las opciones.}\\
 
 	Las observaciones correspondientes al segundo tipo, según su complejidad, iran 
 	siendo incorporadas luego de finalizar las pruebas.
+	
+	La Imagen \ref{resumenPA} resume gráficamente la cantidad de casos de 
+	prueba evaluados con una cierta ponderación. En este se aprecia claramente
+	la conformidad del cliente con la aplicación.
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.55]{imagenes/encuestas/resumenPA.png}
+			\caption{Gráfico Resumen Pruebas de Aceptación}
+			\label{resumenPA}
+		\end{center}
+	\end{figure}
+	
+	
 \newpage
 \section{Pruebas de Rendimiento}
 	Con estas pruebas se pretende determinar cuales son los tiempos de respuesta de la aplicación
 	y los recursos utilizados ante una cantidad elevada de usuarios, sin que se vea degradado el servicio. 
-	Para estas pruebas, los esfuerzos se centran en las que simulan la acción de los usuarios externos 
-	a DISICO, la cual representa la mayor cantidad de usuarios esperados y puede llegar a ser un numero
+	Para estas pruebas, los esfuerzos se centran en simular la acción de los usuarios externos 
+	a DISICO, los cuales representan la mayor cantidad de usuarios esperados y puede llegar a ser un numero
 	mas variable, dado que la cantidad de usuarios dentro de DISICO es prácticamente constante 
 	y reducida.
 	
@@ -1856,10 +1875,10 @@ Se desactiven el resto de todas las opciones.}\\
 	dado los recursos de la maquina.\\
 
 	La cantidades de usuarios simulados van desde 1 hasta 150 con incrementos de 25 usuarios.
-	Este numero se considera suficiente ya que esta representa la cantidad de usuarios trabajando
+	Este numero se considera suficiente ya que representa la cantidad de usuarios trabajando
 	simultáneamente de forma intensiva, lo cual en un entorno real es poco probable, ya que normalmente
 	los usuarios ingresarían solo para revisar las respuestas a sus solicitudes o crear nuevas y el
-	resto del tiempo probablemente deje la aplicación abierta si hacer ninguna petición.
+	resto del tiempo probablemente dejen la aplicación abierta si hacer ninguna petición.
 	
 	\subsection{Análisis de Resultados}
 		
@@ -1868,7 +1887,7 @@ Se desactiven el resto de todas las opciones.}\\
 
 	La Figura \ref{rend} muestra el rendimiento el cual se entiende como la cantidad de 
 	peticiones procesadas por segundos. En el gráfico se puede observar que el rendimiento
-	aumenta conforme aumentan la cantidad de usuarios simulados, la conclusion de esto
+	aumenta conforme aumentan la cantidad de usuarios simulados, la conclusión de esto
 	es que conforme aumenta la cantidad de peticiones el servidor comienza a reservar mas recursos
 	permitiendole procesar mas peticiones. 
  
@@ -1936,13 +1955,16 @@ Se desactiven el resto de todas las opciones.}\\
 	\end{figure}	
 	
 	Ademas de concluir que los tiempos de respuesta máximo no son lo mas deseables.
-	No se detectaron usos excesivos de recursos en el servidor durante la ejecución de estas.\\
+	No se detectaron usos excesivos de recursos en el servidor durante la ejecución de estas,
+	los máximos valores observados al monitorear la utilización de recursos durante la 
+	ejecución de las pruebas alcanzaron un 20\% en el caso de la CPU y unos 900Mb de
+	memoria RAM.\\
 
 	La ejecución de estas pruebas también permitió descubrir errores relacionados con la concurrencia
 	de usuarios, los cuales principalmente son la perdida de conexiones y errores al
 	intentar modificar un mismo objeto simultáneamente. Este punto es un poco
-	mas complejo que los errores detectados asta ahora y la causas reales de estas están
-	siendo evaluadas, entre las posibles causas se encuentra. 
+	mas complejo que los errores detectados asta ahora y las causas reales de estas están
+	siendo evaluadas, entre las posibles causas consideradas se encuentra: 
 	\begin{itemize}
 		\item Configuración incorrecta en el servidor de aplicaciónes.
 		\item Configuración incorrecta en los pool de conexiones.
@@ -2178,10 +2200,11 @@ Se desactiven el resto de todas las opciones.}\\
 	De acuerdo a los datos recolectados de las encuestas y a los resultados presentados,
 	se realiza un análisis para cada una y se presentan las conclusiones correspondientes
 	obtenidas en dicho análisis. Según la escala de evaluación definida anteriormente, las 
-	notas van de 1 a 5, y para los resultados se considerara los rangos de notas entre,
-	menores a 3, como inaceptables e insuficientes, mayores o iguales a 3 y menores a
-	4,5 como aceptable pero necesita ser mejorado, y mayores o iguales a 4,5 como completamente
-	aceptable.\\
+	notas van de 1 a 5, y para los resultados se considerara 3 rangos de notas, las
+	menores a 3, que se consideran como resultados inaceptables e insuficientes, 
+	mayores o iguales a 3 y menores a 4,5, considerados como aceptables pero que pueden  	
+	ser mejorados, y mayores o iguales a 4,5 considerados como completamente
+	aceptables.\\
 
 	En la Figura \ref{encustaGeneral} se gráfica el promedio de los resultados obtenidos	
 	en la Encuesta General que respondieron todos los usuarios independiente del perfil,
@@ -2190,7 +2213,7 @@ Se desactiven el resto de todas las opciones.}\\
 	se da por satisfecho a los usuarios en la mayor parte de los aspectos visuales, 
 	aunque las notas mas bajas se refieren a los mensajes de errores y al estilo visual
 	del portal, el cual al parecer de los usuarios no es tan similar a la mayoría, aunque
-	estos no le dan mucha importancia a dicha característica.\\
+	estos manifestaron no darle mucha importancia a dicha característica.\\
 
 	La cuarta pregunta evalúa que tan simple fue para los usuarios interactuar con el sistema
 	por primera vez sin conocimiento previo ni manuales de usuario, de la nota se concluye
@@ -2203,7 +2226,7 @@ Se desactiven el resto de todas las opciones.}\\
 	de los usuarios, los usuarios pertenecientes a DISICO son los que presentan mayor satisfacción
 	y encuentran un mayor valor en el uso e implementación del sistema, sin embargo son los 
 	usuarios externos a DISICO quienes crean y envían las solicitudes los que no dan tanto valor 
-	al sistema, ya que están acostumbrados al uso de correo electrónico, aún asi estos tampoco 
+	al sistema, ya que están acostumbrados al uso de correo electrónico, aún así estos tampoco 
 	muestran una disconformidad con el sistema, pero parecen ser mas indiferentes a la utilización 
 	del mismo.
 
@@ -2221,7 +2244,7 @@ Se desactiven el resto de todas las opciones.}\\
 	y no existen quejas de los usuarios por ende se da por satisfecho.\\
 
 	Las preguntas 3 y 6 evalúan que tan clara es la forma en que quedan documentados
-	los requerimientos en contrate con el uso de correo electrónico, este punto es aceptable pero
+	los requerimientos en contraste con el uso del correo electrónico, este punto es aceptable pero
 	se encontraron algunas observaciones sobre la visualización del sistema en monitores de baja resolución, 
 	sobre detallar mas la opción incorporada de adjuntar archivos especificando tipos de archivos permitidos
 	y tamaño máximo permitido, ademas se pudo concluir que a los usuarios no tienen claro en primera
@@ -2296,17 +2319,17 @@ Se desactiven el resto de todas las opciones.}\\
 	\end{figure}
 
 	Por ultimo la Figura \ref{encuestaJefeDepto} muestra el promedio de los resultados de las 
-	encuesta realizada para el perfil del Jefe del Departamento de Disico, en este caso
+	encuesta realizada para el perfil del Jefe del Departamento de DISICO, en este caso
 	las preguntas están enfocadas al modulo de atención de solicitudes y en especial
 	a las funciones relacionadas al control y monitoreo de las actividades de los funcionarios
 	de cada área, en lo que respecta a esto los resultados muestran una total conformidad
 	en este sentido, y la única observación que se realizo es la de añadir la posibilidad
 	de enviar un archivo adjunto a la respuesta del sistema el cual quede almacenado en el sistema
-	y con el envio de una copia al correo electrónico del usuario.
+	y con el envío de una copia al correo electrónico del usuario.
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[scale=0.55]{imagenes/encuestas/EncuestaPerfilJefeDepto.png}
+			\includegraphics[scale=0.5]{imagenes/encuestas/EncuestaPerfilJefeDepto.png}
 			\caption{Gráfico Encuesta Perfil Jefe de Departamento}
 			\label{encuestaJefeDepto}
 		\end{center}
