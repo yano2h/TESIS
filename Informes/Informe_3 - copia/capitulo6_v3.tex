@@ -401,6 +401,7 @@
 
 
 	\section{Pruebas de Aceptación}
+	\label{pruebasAcept}
 El objetivo principal de estas pruebas es demostrar al cliente el cumplimiento
 total o parcial de los requisitos del software. Para este fin se diseño un conjunto
 de escenarios de prueba, los cuales deben ser ejecutados por el cliente en
@@ -1863,7 +1864,7 @@ Se desactiven el resto de todas las opciones.}\\
 		
 \section{Pruebas Beta}
 	Una vez finalizadas las pruebas de aceptación e incorporadas las observaciones 		
-	del cliente que corresponda, se da entiende como aceptado el producto, por parte
+	del cliente que correspondan, se entiende como aceptado el producto, por parte
 	del cliente. Sin embargo, que el producto aya sido aceptado por el cliente, no 
 	necesariamente, quiere decir que los usuarios finales del sistema, vayan a estar 
 	conformes con el mismo. \\
@@ -1875,9 +1876,11 @@ Se desactiven el resto de todas las opciones.}\\
 
 	A pesar de que los usuarios podrán interactuar libremente con el sistema,
 	se les entregara una pauta, la cual incluye las actividades mínimas que cada uno
-	deberá realizar de acuerdo a su rol y nivel de acceso. La pauta se basa en las 
-	pruebas de aceptación, a continuación se presenta la lista de  actividades 
-	separadas por rol.
+	deberá realizar de acuerdo a su rol y nivel de acceso para poder responde la
+	encuesta correspondiente. La pauta de pruebas esta basada en las pruebas de aceptación, 
+	a continuación se presenta la lista de  actividades separadas por rol, en esta se indica
+	el rol y una lista de identificadores de las pruebas a realizar, el detalle de estas puede ser encontrado
+	en la Sección \ref{pruebasAcept}.
 
 	\begin{table}[H]
 	\begin{center}
@@ -1899,4 +1902,331 @@ Se desactiven el resto de todas las opciones.}\\
 
 
 	\subsection{Resultados y Problemas detectados}
+	A continuación se encuentran resumidos los resultados obtenidos 
+	de las encuestas, separados por perfil de usuario. La nota de cada pregunta
+	es la nota promediada de todos los usuarios que respondieron la encuesta,
+	cada pregunta fue evaluada por los usuarios con una nota de 1 a 5, donde
+	1 es \textit{Muy en Desacuerdo} y 5 es \textit{Muy de Acuerdo}. 
+	Junto con cada encuesta se presenta un gráfico que resume los 
+	promedios de cada encuesta.
+
+
+\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{1cm}|>{\columncolor[gray]{0.9}} m{11cm} | m{1cm} |}
+		\hline
+		\multicolumn{3}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta General para todos los Usuarios }}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Nº}} & {\textbf{Pregunta}} & {\textbf{Nota}}\\
+		\hline
+		{P1} & {Los nombres de los menús y botones son representativos} & {5,0}\\
+		\hline
+		{P2} & {Los mensajes de error ayudan a entender la causa y la solución de estos} & {4,5}\\
+		\hline
+		{P3} & {El estilo visual del sistema sigue el estilo del resto de los portales de la UV} & {4,4}\\
+		\hline
+		{P4} & {Es simple aprender a utilizar el sistema} & {4,8}\\
+		\hline
+		{P5} & {El sistema mejora la comunicación entre los diferentes usuarios} & {4,5}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta General para todos los Usuarios}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{1cm}|>{\columncolor[gray]{0.9}} m{11cm} | m{1cm} |}
+		\hline
+		\multicolumn{3}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Solicitante}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Nº}} & {\textbf{Pregunta}} & {\textbf{Nota}}\\
+		\hline
+		{P1} & {Es fácil enviar una solicitud de requerimiento} & {5,0}\\
+		\hline
+		{P2} & {Es fácil buscar una solicitud de requerimiento} & {5,0}\\
+		\hline
+		{P3} & {Las solicitudes quedan mejor documentadas que en correos electrónicos} & {4,7}\\
+		\hline
+		{P4} & {Los mensajes de notificación son lo suficientemente breves y claros} & {4,7}\\
+		\hline
+		{P5} & {El sistema envía una cantidad prudente de correos electrónicos} & {4,7}\\
+		\hline
+		{P6} & {La información de las solicitudes se presentan de forma clara y entendible } & {4,0}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Solicitante }
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{1cm}|>{\columncolor[gray]{0.9}} m{11cm} | m{1cm} |}
+		\hline
+		\multicolumn{3}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Funcionario}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Nº}} & {\textbf{Pregunta}} & {\textbf{Nota}}\\
+		\hline
+		{P1} & {La presentación de las solicitudes asignadas esta claramente ordenada} & {4,8}  \\
+		\hline
+		{P2} & {El sistema notifica claramente cuando se le a asignado una nueva solicitud	} & {4,5} \\
+		\hline
+		{P3} & {El sistema notifica claramente cuando una solicitud esta vencidas (retrasadas)	} & {4,5}  \\
+		\hline
+		{P4} & {El sistema notifica oportunamente cuando se le a asignado una nueva solicitud	} & {4,5}  \\
+		\hline
+		{P5} & {El sistema notifica oportunamente cuando una solicitud esta vencidas (retrasadas)	} & {4,3}  \\
+		\hline
+		{P6} & {El sistema ayuda a que no olvide las solicitudes que dejo pendientes	} & {4,5}  \\
+		\hline
+		{P7} & {Los gráficos en los resumen permiten una mejor visualización de la información} & {4,8} \\
+		\hline
+		{P8} & {Las mediciones que se muestran en el Resumen Personal se entiend claramente} & {4,5} \\
+		\hline
+		{P9} & {Es rápido y sencillo responder las solicitudes de los usuarios} & {4,8} \\
+		\hline
+		{P10} & {El sistema notifica claramente cuando se le a asignado una nueva tarea de SCM	} & {4,8} \\
+		\hline
+
+	\end{tabular}
+	\end{center}
+	\end{table}
+
+\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{1cm}|>{\columncolor[gray]{0.9}} m{11cm} | m{1cm} |}
+		\hline
+		{P11} & {El sistema alerta oportunamente ante retrasos en las tareas de SCM} & {4,5}\\
+		\hline
+		{P12} & {Se entiende claramente la relacion las opciones del subsistema de SCM y la metodología de SCM de DISICO} & {4,3}\\
+		\hline
+		{P13} & {Es mas fácil mantener actualizada la información sobre los cambios} & {4,3}\\
+		\hline
+		{P14} & {El sistema documenta de forma clara el historial de cambios de los items de configuración} & {4,8}\\
+		\hline
+		{P15} & {El sistema permite administrar fácilmente los items de configuración de un proyecto} & {4,5}\\
+		\hline
+		{P16} & {El sistema permite agendar de forma fácil nuevas tareas	} & {4,8} \\
+		\hline
+		{P17} & {El sistema alerta oportunamente cuando existen retraso en las tareas} & {4,5} \\
+		\hline
+		{P18} & {La opción de actualizar el avance de una tarea le brinda un mayor expresividad} & {4,5}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Funcionario}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{1cm}|>{\columncolor[gray]{0.9}} m{11cm} | m{1cm} |}
+		\hline
+		\multicolumn{3}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Jefe de Área}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Nº}} & {\textbf{Pregunta}} & {\textbf{Nota}}\\
+		\hline
+		{P1} & {El sistema mantiene organizadas las solicitudes de su área} & {5}\\
+		\hline
+		{P2} & {El sistema le permite dar seguimiento completo cada solicitud} & {5}\\
+		\hline
+		{P3} & {El sistema le ayuda a decidir a quien asignar una solicitud} & {5}\\
+		\hline
+		{P4} & {Los gráficos en los resumen permiten una mejor visualización de la información} & {4,5}\\
+		\hline
+		{P5} & {Las mediciones del área son de utilidad para la toma de decisiones} & {4,5}\\
+		\hline
+		{P6} & {El sistema lo mantiene informado del estado de cada solicitud de su área} & {5}\\
+		\hline
+		{P7} & {El sistema notifica claramente cuando llega una nueva solicitud al área} & {4,5}\\
+		\hline
+		{P8} & {El sistema notifica claramente cuando existen retrasos en las solicitudes} & {4,5}\\
+		\hline
+		{P9} & {El sistema notifica oportunamente cuando  llega una nueva solicitud al área} & {4,5}\\
+		\hline
+		{P10} & {El sistema notifica oportunamente cuando existen retrasos en las solicitudes} & {4}\\
+		\hline
+		{P11} & {Es útil la opción de respuesta manual} & {4,5}\\
+		\hline
+		{P12} & {Las solicitudes quedan debidamente documentadas} & {4,5}\\
+		\hline
+		{P13} & {El sistema mejora el monitorio de avance en los proyectos} & {5}\\
+		\hline
+		{P14} & {El sistema facilita la documentación de los proyectos existentes} & {4,5}\\
+		\hline
+		{P15} & {El sistema facilita mantener documentado los participantes de cada proyecto y sus tareas} & {5}\\
+		\hline
+		{P16} & {El sistema facilita la tareas de gestión de cambios} & {5}\\
+		\hline
+		{P17} & {El sistema permite asignar fácilmente responsables de las tareas de SCM} & {5}\\
+		\hline
+		{P18} & {El sistema permite documentar correctamente los templates de la metodologia de SCM} & {5}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Jefe de Área}
+	\end{table}
+
+
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{1cm}|>{\columncolor[gray]{0.9}} m{11cm} | m{1cm} |}
+		\hline
+		\multicolumn{3}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Jefe de Departamento}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Nº}} & {\textbf{Pregunta}} & {\textbf{Nota}}\\
+		\hline
+		{P1} & {El sistema permite tener un mayor control de las actividades que se realizan en el departamento} & {5}\\
+		\hline
+		{P2} & {EL sistema documenta correctamente las solicitudes de requerimientos} & {5}\\
+		\hline
+		{P3} & {El sistema facilita la tarea de buscar solicitudes de requerimientos} & {5}\\
+		\hline
+		{P4} & {Las mediciones mostradas son de utilidad} & {5}\\
+		\hline
+		{P5} & {Los gráficos en los resumen permiten una mejor visualización de la información} & {5}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Jefe de Departamento}
+	\end{table}
+
+
+
 	\subsection{Análisis de Resultados}
+	De acuerdo a los datos recolectados de las encuestas y a los resultados presentados,
+	se realiza un análisis para cada una y se presentan las conclusiones correspondientes
+	obtenidas en dicho análisis. Según la escala de evaluación definida anteriormente, las 
+	notas van de 1 a 5, y para los resultados se considerara los rangos de notas entre,
+	menores a 3, como inaceptables e insuficientes, mayores o iguales a 3 y menores a
+	4,5 como aceptable pero necesita ser mejorado, y mayores o iguales a 4,5 como completamente
+	aceptable.\\
+
+	En la Figura \ref{encustaGeneral} se gráfica el promedio de los resultados obtenidos	
+	en la Encuesta General que respondieron todos los usuarios independiente del perfil,
+	las 3 primeras preguntas evalúan la percepción del usuario del sistema, desde un 
+	punto de vista visual. En este punto todas las notas son superiores a 4 por lo que
+	se da por satisfecho a los usuarios en la mayor parte de los aspectos visuales, 
+	aunque las notas mas bajas se refieren a los mensajes de errores y al estilo visual
+	del portal, el cual al parecer de los usuarios no es tan similar a la mayoría, aunque
+	estos no le dan mucha importancia a dicha característica.\\
+
+	La cuarta pregunta evalúa que tan simple fue para los usuarios interactuar con el sistema
+	por primera vez sin conocimiento previo ni manuales de usuario, de la nota se concluye
+	que los usuarios están satisfechos en este punto y prácticamente no tubieron dificultades
+	para utilizar el sistema.\\
+
+	La ultima pregunta evaluá si los usuarios consideran que el sistema mejora la comunicación
+	entre ellos, este punto también se encuentra satisfecho, aunque esta al limite de solo
+	ser aceptable, en este punto por lo que se observo de las opiniones y observaciones 
+	de los usuarios, los usuarios pertenecientes a DISICO son los que presentan mayor satisfacción
+	y encuentran un mayor valor en el uso e implementación del sistema, sin embargo son los 
+	usuarios externos a DISICO quienes crean y envían las solicitudes los que no dan tanto valor 
+	al sistema, ya que están acostumbrados al uso de correo electrónico, aún asi estos tampoco 
+	muestran una disconformidad con el sistema, pero parecen ser mas indiferentes a la utilización 
+	del mismo.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/encuestas/EncuestaGeneral.png}
+			\caption{Gráfico Encuesta General}
+			\label{encustaGeneral}
+		\end{center}
+	\end{figure}
+
+	La Figura \ref{encuestaSolicitante} gráfica el promedio de los resultados obtenidos de 
+	la encuesta de solicitantes, en esta las 2 primeras preguntas evalúan la facilidad de uso
+	del sistema según la percepción de los usuarios, este punto fue superado con en su totalidad
+	y no existen quejas de los usuarios por ende se da por satisfecho.\\
+
+	Las preguntas 3 y 6 evalúan que tan clara es la forma en que quedan documentados
+	los requerimientos en contrate con el uso de correo electrónico, este punto es aceptable pero
+	se encontraron algunas observaciones sobre la visualización del sistema en monitores de baja resolución, 
+	sobre detallar mas la opción incorporada de adjuntar archivos especificando tipos de archivos permitidos
+	y tamaño máximo permitido, ademas se pudo concluir que a los usuarios no tienen claro en primera
+	instancia el uso del código de consulta generado.\\
+
+	Las preguntas 4 y 5 evalúan que tan bien informados los mantiene el sistema de los cambios,
+	y la claridad de la notificación de estos, esta este punto se considera aceptado por los usuarios
+	sin embargo cabe destacar que los usuarios esperan recibir mas correos de los que se pensó
+	en primera instancia.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.8]{imagenes/encuestas/EncuestaPerfilSolicitante.png}
+			\caption{Gráfico Encuesta Perfil Solicitante}
+			\label{encuestaSolicitante}
+		\end{center}
+	\end{figure}
+
+	En la Figura \ref{encuestaFuncionario} se gráfica el resumen promedio de los resultados 
+	obtenidos de la encuesta realizada a los funcionarios de DISICO. Las preguntas de la 1
+	a la 9 evalúan su percepción del modulo de atención de solicitudes, en este caso las notas
+	obtenidas son suficientes para considerar satisfechos a los usuarios, y el única nota bajo
+	los niveles esperados, es sobre la notificación de las propias solicitudes retrasadas, no parece
+	ser suficiente para los usuarios, por lo que se evaluá la alternativa de enviar un correo a los 
+	usuarios alertando de esto.\\
+
+	Las preguntas de la 10 a la 15 evalúan la percepción de los usuarios del modulo
+	de gestión de SCM,  en este caso los resultados son aceptables, pero no completamente
+	por lo que pueden ser necesarias mejoras, sin embargo los usuarios no presentaron
+	observaciones sobre este punto que permita determinar las causas por las cuales 
+	los usuarios no están totalmente satisfechos, por lo que sera necesario hacer una
+	evaluación posterior con los usuarios para aclarar este punto.\\
+	
+	Las preguntas de la 16 a la 18 evalúan la percepción que tienen los usuarios del modulo
+	de proyectos, principalmente la gestión de sus tareas en estas. En este punto la evaluación
+	también tiene un nivel satisfactorio. Y la única observación es que falta mejorar la notificación
+	de las tareas retrasadas.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.55]{imagenes/encuestas/EncuestaPerfilFuncionario.png}
+			\caption{Gráfico Encuesta Perfil Funcionario}
+			\label{encuestaFuncionario}
+		\end{center}
+	\end{figure}
+
+	La Figura \ref{encuestaFuncionario}  gráfica el resumen promedio de los resultados obtenidos
+	en la encuesta realizada para el perfil de Jefe de Área. En esta encuesta las preguntas de la 1 a
+	la 12 evalúan la percepción que tienen los usuarios del modulo de atención de solicitudes, este
+	aspecto según las evaluaciones se encuentra en un nivel satisfactorio y la principal falencia detectada
+	es la falta de alertas mas oportuna cuando existen atraso en la respuesta de solicitudes 
+	ya que el sistema alerta de estas marcándolas en rojo, pero si no se ingresa a ver el listado de
+	solicitudes es posible no percatarse en primera instancia. Ademas el usuario manifestó
+	que le gustaría tener la posibilidad de editar el responsable, fecha de vencimiento y prioridad
+	de las solicitudes después que ya las definió.\\
+
+	Las preguntas de la 13 a la 15 están relacionadas al modulo de gestión de proyectos, en este
+	caso los resultados son totalmente satisfactorios, sin embargo sin perjuicio de lo anterior 
+	el usuario manifestó que le seria útil la posibilidad de agregar archivos adjuntos en la descripción
+	de los proyectos, junto con definir la etapa de este y la contra parte responsable.\\
+
+	Por ultimo las preguntas de las 16 a la 18 están relacionadas con el modulo de gestión de SCM,
+	en esta el resultado es completamente satisfactorio y el usuario no presenta ninguna observación.		
+	
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.55]{imagenes/encuestas/EncuestaPerfilJefeArea.png}
+			\caption{Gráfico Encuesta Perfil Jefe de Área}
+			\label{encuestaJefeArea}
+		\end{center}
+	\end{figure}
+
+	Por ultimo la Figura \ref{encuestaJefeDepto} muestra el promedio de los resultados de las 
+	encuesta realizada para el perfil del Jefe del Departamento de Disico, en este caso
+	las preguntas están enfocadas al modulo de atención de solicitudes y en especial
+	a las funciones relacionadas al control y monitoreo de las actividades de los funcionarios
+	de cada área, en lo que respecta a esto los resultados muestran una total conformidad
+	en este sentido, y la única observación que se realizo es la de añadir la posibilidad
+	de enviar un archivo adjunto a la respuesta del sistema el cual quede almacenado en el sistema
+	y con el envio de una copia al correo electrónico del usuario.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.55]{imagenes/encuestas/EncuestaPerfilJefeDepto.png}
+			\caption{Gráfico Encuesta Perfil Jefe de Departamento}
+			\label{encuestaJefeDepto}
+		\end{center}
+	\end{figure}
