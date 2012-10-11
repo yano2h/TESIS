@@ -1829,19 +1829,14 @@ Se desactiven el resto de todas las opciones.}\\
 
 	Las observaciones correspondientes al segundo tipo, según su complejidad, iran 
 	siendo incorporadas luego de finalizar las pruebas.
+\newpage
 \section{Pruebas de Rendimiento}
-	Con estas pruebas se pretende determinar cuales son los recursos utilizados por la aplicación 
-	ante una cantidad elevada de usuarios, sin que se vea degradado el servicio. Para esto, 
-	separaremos las pruebas en 2:
-
-	\begin{enumerate}
-		\item Las que simulan la acción de los usuarios externos a DISICO, la cual representa la mayor
-		cantidad de usuarios esperados.
-		\item Las que simulan la acción del personal interno de DISICO.
-	\end{enumerate}
-	
-	Para estas dos categorías se realizaran pruebas separadas, dando mayor énfasis a la parte mas critica
-	que son los usuarios externos a DISICO, ya que la cantidad de usuarios internos es prácticamente constante.\\
+	Con estas pruebas se pretende determinar cuales son los tiempos de respuesta de la aplicación
+	y los recursos utilizados ante una cantidad elevada de usuarios, sin que se vea degradado el servicio. 
+	Para estas pruebas, los esfuerzos se centran en las que simulan la acción de los usuarios externos 
+	a DISICO, la cual representa la mayor cantidad de usuarios esperados y puede llegar a ser un numero
+	mas variable, dado que la cantidad de usuarios dentro de DISICO es prácticamente constante 
+	y reducida.
 	
 	Para esto se utilizaran 2 herramientas:
 	\begin{itemize}
@@ -1856,11 +1851,106 @@ Se desactiven el resto de todas las opciones.}\\
 	
 	Con el fin simular las condiciones mas reales posibles, el sistema sera probado en uno de los
 	servidores de prueba de DISICO. Ya que estos cuentan con características bastante similar a lo
-	que seria un ambiente de producción
+	que seria un ambiente de producción. Sin embargo la ejecución de las pruebas se realizara
+	desde el equipo de desarrollo, lo que limita hasta cierto punto la cantidad de usuarios a simular
+	dado los recursos de la maquina.\\
+
+	La cantidades de usuarios simulados van desde 1 hasta 150 con incrementos de 25 usuarios.
+	Este numero se considera suficiente ya que esta representa la cantidad de usuarios trabajando
+	simultáneamente de forma intensiva, lo cual en un entorno real es poco probable, ya que normalmente
+	los usuarios ingresarían solo para revisar las respuestas a sus solicitudes o crear nuevas y el
+	resto del tiempo probablemente deje la aplicación abierta si hacer ninguna petición.
 	
 	\subsection{Análisis de Resultados}
 		
-		
+	Las mediciones realizadas fueron agrupadas por tipo de medición, en cada uno se aprecia el varlor
+	versus la cantidad de usuarios simulados.\\
+
+	La Figura \ref{rend} muestra el rendimiento el cual se entiende como la cantidad de 
+	peticiones procesadas por segundos. En el gráfico se puede observar que el rendimiento
+	aumenta conforme aumentan la cantidad de usuarios simulados, la conclusion de esto
+	es que conforme aumenta la cantidad de peticiones el servidor comienza a reservar mas recursos
+	permitiendole procesar mas peticiones. 
+ 
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.75]{imagenes/jmeter/Rendimiento.png}
+			\caption{ Gráfico de Rendimiento}
+			\label{rend}
+		\end{center}
+	\end{figure}	
+
+	La Figura \ref{max} muestra el	tiempo máximo en mili segundos en que se contesta 
+	una petición. Aquí se observa que una vez superados los 50 usuarios el tiempo
+	máximo de respuesta comienza a mantenerse en 10 segundos, este tiempo
+	es extremadamente alto, como para esperar la respuesta de una petición
+	un valor máximo aceptable seria unos 6 segundos como mucho. Por lo que
+	este punto debe ser corregido y re evaluado. 
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.75]{imagenes/jmeter/Max.png}
+			\caption{ Gráfico de las Máximas}
+			\label{max}
+		\end{center}
+	\end{figure}	
+
+	La Figura \ref{min} muestra el	tiempo mínimo en mili segundos en que se contesta 
+	una petición. En este caso los tiempos no alcanzan los 10 milisegundos lo cual es
+	bastante rápido.
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.75]{imagenes/jmeter/Min.png}
+			\caption{ Gráfico de los Mínimos }
+			\label{min}
+		\end{center}
+	\end{figure}	
+
+
+	Una medida mas representativa que la de los extremos, mostradas anteriormente 
+	es la de la Figura \ref{media} la cual corresponde al tiempo promedio en mili segundos 
+	en que se contesta una petición. Al igual que el rendimiento esta parece mejorar
+	conforme crece la cantidad de usuarios, y van de los 100 a los 150 mili segundos,
+	lo cual se considera una medida aceptable.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.75]{imagenes/jmeter/Media.png}
+			\caption{ Gráfico Media}
+			\label{media}
+		\end{center}
+	\end{figure}	
+
+	Ademas podemos encontrar otras medidas como la de la Figura \ref{mediaB} que muestra 
+	el tamaño medio de la respuesta del servidor en bytes. La cual en este caso es 
+	aproximadamente 1500 bytes o 1,5 KiloBytes. Esta medida también es aceptable como tamaño
+	de la respuesta.
+ 
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.75]{imagenes/jmeter/MediaBytes.png}
+			\caption{ Gráfico Media de Bytes}
+			\label{mediaB}
+		\end{center}
+	\end{figure}	
+	
+	Ademas de concluir que los tiempos de respuesta máximo no son lo mas deseables.
+	No se detectaron usos excesivos de recursos en el servidor durante la ejecución de estas.\\
+
+	La ejecución de estas pruebas también permitió descubrir errores relacionados con la concurrencia
+	de usuarios, los cuales principalmente son la perdida de conexiones y errores al
+	intentar modificar un mismo objeto simultáneamente. Este punto es un poco
+	mas complejo que los errores detectados asta ahora y la causas reales de estas están
+	siendo evaluadas, entre las posibles causas se encuentra. 
+	\begin{itemize}
+		\item Configuración incorrecta en el servidor de aplicaciónes.
+		\item Configuración incorrecta en los pool de conexiones.
+		\item Configuración incorrecta del servidor de base de datos.
+		\item Configuración incorrecta de hibernate.
+		\item Mala gestión del EntityManager dentro de la aplicación.
+	\end{itemize}
+
 		
 \section{Pruebas Beta}
 	Una vez finalizadas las pruebas de aceptación e incorporadas las observaciones 		
@@ -1986,15 +2076,6 @@ Se desactiven el resto de todas las opciones.}\\
 		{P9} & {Es rápido y sencillo responder las solicitudes de los usuarios} & {4,8} \\
 		\hline
 		{P10} & {El sistema notifica claramente cuando se le a asignado una nueva tarea de SCM	} & {4,8} \\
-		\hline
-
-	\end{tabular}
-	\end{center}
-	\end{table}
-
-\begin{table}[H]
-	\begin{center}
-	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{1cm}|>{\columncolor[gray]{0.9}} m{11cm} | m{1cm} |}
 		\hline
 		{P11} & {El sistema alerta oportunamente ante retrasos en las tareas de SCM} & {4,5}\\
 		\hline
