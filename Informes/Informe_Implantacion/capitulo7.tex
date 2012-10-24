@@ -1,0 +1,100 @@
+\chapter{Implantación}
+
+En este capitulo se encuentran descrito todos los pasos
+y configuraciones necesarias para poder dejar la aplicación
+funcionando correctamente en un entorno de producción real.
+
+\section{Software Necesario}
+El software necesario para desplegar la aplicación es el siguiente:
+
+\begin{itemize}
+	\item PostgreSQL 9.0 o superior, este es el motor de base de datos y puede
+	ser descargado desde http://www.postgresql.org/download/.
+	\item GlassFish 3.1.2 o superior, este es el servidor de aplicaciones 
+	donde se desplegara posteriormente la aplicación. Los archivos de 
+	instalación los puede encontrar en 
+	http://glassfish.java.net/downloads/3.1.2-final.html.
+\end{itemize}
+
+La instalación de las aplicaciones recién mencionadas varían dependiendo del
+sistema operativo donde desea instalarlo. Y en este capitulo solo se describen
+configuraciones particulares necesarias para que la aplicacion funcione 
+correctamente y no instalaciones genericas de estas cuya documentación 
+abunda en Internet.
+
+\section{Consideraciones Previas}
+
+\begin{itemize}
+	\item No se requiere de algún sistema operativo en particular. 
+	La única condición es que soporte Java.
+	\item No es necesario que instale el servidor de aplicaciones y el servidor
+	de base de datos en la misma maquina.
+	\item Todos los archivos necesarios para la instalación los puede 
+	encontrar en la carpeta "ArchivosInstalacion" que viene dentro
+	del CD que acompaña el documento.
+\end{itemize}
+
+\section{Configurar la Base de Datos}
+
+	\subsection{Creación de la Base de Datos}
+	
+	Suponiendo que instalo correctamente PostgreSQL, lo siguiente es ingresar
+	como administrador desde linea de comando o desde algún cliente
+	de PostgreSQL de su preferencia ( por ejemplo PgAdmin ). Una vez dentro
+	cree una nueva base de datos con el comando: 
+	"CREATE DATABASE SISTEMA_SOLICITUDES" donde SISTEMA_SOLICITUDES
+	es el nombre asignado a la base de datos, si desea puede utilizar otro
+	nombre pero debe ser consistente con el nombre de base de datos utilizado
+	en los pasos siguientes.\\
+
+	Por ultimo seleccione la BD recien creada y ejecute el script contenido
+	en el archivo "script_bd_postgres.sql" el cual contiene todas las 
+	sentencias necesarias para crear la base de datos.
+
+	\subsection{Poblamiento de la Base de Datos}
+	
+	Una vez creada la base de datos, es necesario cargar algunos
+	datos iniciales para que la aplicación trabaje correctamente.
+	Dichos datos se encuentran en el archivo "datos_iniciales_postgres.sql",
+	estos están preparados dentro de sentencias inserts por lo cual 
+	basta con ejecutarlas directamente.
+
+	\subsection{Configurar PostgreSQL}
+	
+	Aunque la base de datos del sistema ya esta creada y poblada,
+	para que el sistema pueda interactuar con la base de datos de manera
+	optima, es necesario editar algunos de los archivos de configuración
+	de PostgreSQL. Los archivos que debe editar son:
+
+	\begin{itemize}
+		\item \textbf{pg_hba.conf:} Este fichero se utiliza para definir los diferentes 
+		tipos de accesos que un usuario tiene en el cluster. Aquí es necesario agregar
+		la IP del servidor de aplicaciones en el caso de que este en diferentes maquinas.
+		Las lineas de configuración deben tener el siguiente formato:\\
+		[Tipo de conexion][database][usuario][IP][Netmask][Tipo de autentificacion][opciones]
+
+		\item \textbf{postgresql.conf:} En este fichero podemos cambiar todos los 
+		parámetros de configuración que afectan al funcionamiento y al 
+		comportamiento de PostgreSQL en nuestra maquina. Aqui lo importante
+		es editar el parámetro max_connections, el cual define la cantidad máxima de 
+		clientes conectados simultáneamente. Este debe ser mayor al maximo
+		de conexiones configuradas en el pool de conexiones que se crea mas adelante.
+		Dado que de ser menor glassfish intentara establecer mas conexiones de las
+		que la base de datos puede soportar.
+	\end{itemize}
+
+	Se puede encontrar mas información sobre como configurar estos archivos en
+	http://www.postgresql.org.es/node/219 .
+
+	\subsection{Crear Pools de conexión en GlassFish}
+	Para que la aplicación pueda establecer una conexión con la base de datos
+	es necesario, crear un pool de conexiones en glassfish
+	....
+
+\section{Configuración de Hibernate}
+
+\section{Configuración para el envío de Correo Electronico}
+
+\section{Configuración para subir y descargar archivos}
+
+\section{Configuración de Seguridad OpenAM}
