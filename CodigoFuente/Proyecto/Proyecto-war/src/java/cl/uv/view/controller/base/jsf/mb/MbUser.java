@@ -53,7 +53,7 @@ public class MbUser implements Serializable{
         }
         
         funcionario.setFechaUltimoAcceso(new Date());
-        funcionarioFacade.edit(funcionario);
+       // funcionarioFacade.edit(funcionario);
     }
     
     private Funcionario saveUser(OpenAMUserDetails u){

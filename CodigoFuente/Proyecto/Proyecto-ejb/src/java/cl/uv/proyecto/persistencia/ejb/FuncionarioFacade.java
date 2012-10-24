@@ -8,6 +8,7 @@ import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,5 +27,13 @@ public class FuncionarioFacade extends AbstractFacade<Funcionario> implements Fu
     public FuncionarioFacade() {
         super(Funcionario.class);
     }
-      
+
+    @Override
+    public Integer buscarRutPorEmail(String email) {
+        Query q = em.createQuery("SELECT f.rut FROM Funcionario f WHERE f.correoUv = :correoUv");
+        q.setParameter("correoUv", email);
+        return (Integer) q.getSingleResult();
+    }
+    
+    
 }

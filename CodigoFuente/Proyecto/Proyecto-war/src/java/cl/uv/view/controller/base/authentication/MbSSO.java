@@ -10,6 +10,7 @@ import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.security.openam.OpenAMUserDetails;
+import cl.uv.security.openid.controller.GmailSession;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
@@ -57,8 +58,9 @@ public class MbSSO implements Serializable{
     }
     
     public void logout(){
+        GmailSession gmailSession = (GmailSession) JsfUtils.getValue("gmailSession");
+        gmailSession.closeSession();
         JsfUtils.redirect(JsfUtils.getExternalContext().getRequestContextPath()+"/j_spring_security_logout");
-        authEJBBean.logout(user.getPassword());
     }
     
 }

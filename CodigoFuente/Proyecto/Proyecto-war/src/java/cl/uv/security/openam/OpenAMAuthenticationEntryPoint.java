@@ -31,6 +31,7 @@ public class OpenAMAuthenticationEntryPoint implements AuthenticationEntryPoint 
     
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        System.out.println("commence");
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 

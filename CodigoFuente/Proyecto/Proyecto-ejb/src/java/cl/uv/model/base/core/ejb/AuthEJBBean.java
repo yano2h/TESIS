@@ -14,9 +14,39 @@ import javax.ejb.Stateless;
 public class AuthEJBBean implements AuthEJBBeanLocal {
 
     private AtributosFuncionario atributosFuncionario;
+    private Token tokenAdminSession;
 
     public AuthEJBBean() {
         this.atributosFuncionario = null;
+    }
+
+    private void authenticateAdmin() {
+        System.out.println("authenticateAdmin");
+        try {
+            tokenAdminSession = getPort().authenticate(Resources.getValue("BasicParam", "userAdmin"),
+                    Resources.getValue("BasicParam", "passwordAdmin"),
+                    Resources.getValue("BasicParam", "realm"));
+        } catch (GeneralFailure_Exception ex) {
+            Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidCredentials_Exception ex) {
+            Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidPassword_Exception ex) {
+            Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NeedMoreCredentials_Exception ex) {
+            Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UserNotFound_Exception ex) {
+            Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("tokenAdminSession:"+tokenAdminSession);
+    }
+
+    private void logoutAdmin() {
+        System.out.println("logoutAdmin");
+        try {
+            getPort().logout(tokenAdminSession);
+        } catch (GeneralFailure_Exception ex) {
+            Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -77,6 +107,59 @@ public class AuthEJBBean implements AuthEJBBeanLocal {
     }
 
     @Override
+    public AtributosFuncionario readFuncionarios(Integer rut) {
+        System.out.println("readFuncionarios");
+        AtributosFuncionario funcionario = null;
+        try {
+            authenticateAdmin();
+            IdentityDetails user = getPort().read(rut.toString(), null, tokenAdminSession);
+            System.out.println("IdentityDetails:"+user);
+            List<Attribute> attr = user.getAttributes();
+            System.out.println("ROLES:"+user.getRoles());
+            System.out.println("GRUPOS:"+user.getGroups());
+            funcionario = parseAttributesToFuncionario(attr, user.getGroups());
+            logoutAdmin();
+        } catch (AccessDenied_Exception ex) {
+            Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (GeneralFailure_Exception ex) {
+            Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NeedMoreCredentials_Exception ex) {
+            Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ObjectNotFound_Exception ex) {
+            Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TokenExpired_Exception ex) {
+            Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            return funcionario;
+        }
+    }
+
+    private AtributosFuncionario parseAttributesToFuncionario(List<Attribute> attr, List<String> roles) {
+        AtributosFuncionario funcionario = new AtributosFuncionario();
+        funcionario.setListaRoles(roles);
+        for (Attribute a : attr) {
+            System.out.println("Atributo:"+a.getName());
+            if (a.getName().equals("cn")) {
+                funcionario.setCn(a.getValues().get(0));
+            } else if (a.getName().equals("sn")) {
+                funcionario.setSn(a.getValues().get(0));
+            } else if (a.getName().equals("correouv")) {
+                funcionario.setCorreouv(a.getValues().get(0));
+            } else if (a.getName().equals("mail")) {
+                funcionario.setMail(a.getValues().get(0));
+            } else if (a.getName().equals("rut")) {
+                funcionario.setRut(a.getValues().get(0));
+            } else if (a.getName().equals("givenname")) {
+                funcionario.setGivenname(a.getValues().get(0));
+            } else if (a.getName().equals("uid")) {
+                funcionario.setUid(a.getValues().get(0));
+            }
+        }
+
+        return funcionario;
+    }
+
+    @Override
     public boolean validateToken(String tokenCookie) {
         Token token = new Token();
         token.setId(tokenCookie);
@@ -114,8 +197,8 @@ public class AuthEJBBean implements AuthEJBBeanLocal {
         try {
             cl.uv.model.base.ws.funcionarios.Token tokenAdmin;
             tokenAdmin = getPort().authenticate(Resources.getValue("BasicParam", "userAdmin"),
-                                                Resources.getValue("BasicParam", "passwordAdmin"),
-                                                Resources.getValue("BasicParam", "realm"));
+                    Resources.getValue("BasicParam", "passwordAdmin"),
+                    Resources.getValue("BasicParam", "realm"));
             cl.uv.model.base.ws.funcionarios.IdentityDetails identityDetails = new cl.uv.model.base.ws.funcionarios.IdentityDetails();
             identityDetails.setName(atributosFuncionario.getUid());
 
@@ -126,7 +209,7 @@ public class AuthEJBBean implements AuthEJBBeanLocal {
             identityDetails.getAttributes().add(createAttribute("correoUV", atributosFuncionario.getCorreouv()));
             identityDetails.getAttributes().add(createAttribute("Rut", atributosFuncionario.getRut()));
             for (String str : atributosFuncionario.getListaRoles()) {
-                System.out.println("ROLES:"+str);
+                System.out.println("ROLES:" + str);
                 identityDetails.getGroups().add(str);
             }
 
@@ -140,9 +223,9 @@ public class AuthEJBBean implements AuthEJBBeanLocal {
 //                identityDetails.getAttributes().add(createAttribute("Password", atributosFuncionario.getPassword()));
 //            }
 
-            
 
-             try {
+
+            try {
                 getPort().update(identityDetails, tokenAdmin);
             } catch (AccessDenied_Exception ex) {
                 Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -159,7 +242,7 @@ public class AuthEJBBean implements AuthEJBBeanLocal {
             }
             getPort().logout(tokenAdmin);
 
-        } catch (GeneralFailure_Exception ex ) {
+        } catch (GeneralFailure_Exception ex) {
             Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvalidCredentials_Exception ex) {
             Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);

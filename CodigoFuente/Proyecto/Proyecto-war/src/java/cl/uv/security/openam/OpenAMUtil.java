@@ -28,6 +28,7 @@ public class OpenAMUtil {
 
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
+                    System.out.println("COOKIE:"+cookie.getName());
                     if (cookie.getName().equals(tokenName)) {
                         valueCookie = cookie.getValue();
                     }
@@ -45,11 +46,16 @@ public class OpenAMUtil {
         
         for (String rol : roles) {
             System.out.println("ROLES:"+rol);
-            rol = rol.split(",")[0].split("=")[1];
+
+            if (rol.contains("=")) {
+                rol = rol.split(",")[0].split("=")[1];
+            }
+            
             if(rol.startsWith(prefixApp)){
                 rol = rol.replaceFirst(prefixApp, prefixRol);
                 rolesParseados.add(rol);
             }
+            System.out.println("ROL FINAL:"+rol);
         }
         
         return rolesParseados;

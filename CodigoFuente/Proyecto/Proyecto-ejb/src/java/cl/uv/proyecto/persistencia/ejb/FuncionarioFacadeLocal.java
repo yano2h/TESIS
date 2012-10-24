@@ -29,4 +29,6 @@ public interface FuncionarioFacadeLocal {
 
     int count();
     
+    public Integer buscarRutPorEmail(String email);
+    
 }

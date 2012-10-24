@@ -6,6 +6,7 @@ package cl.uv.security.openam;
 
 import cl.uv.model.base.core.beans.AtributosFuncionario;
 import cl.uv.model.base.core.ejb.AuthEJBBeanLocal;
+import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
 import cl.uv.view.controller.base.utils.Resources;
 import java.util.HashSet;
 import java.util.List;
@@ -27,15 +28,36 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * @author Alejandro
  */
 public class OpenAMUserDetailsService implements AuthenticationUserDetailsService<Authentication> {
-
+    
+    private FuncionarioFacadeLocal funcionarioFacade = lookupFuncionarioFacadeLocal();
     private AuthEJBBeanLocal authEJBBean = lookupAuthEJBBeanLocal();
-
+    
     @Override
     public UserDetails loadUserDetails(Authentication token) throws UsernameNotFoundException {
         String tokenOpenAM = (String) token.getCredentials();
-        AtributosFuncionario attr = (tokenOpenAM.equals("N/A")) ? OpenAMUtil.createFalseUser() : authEJBBean.getAtributosFuncionarios(tokenOpenAM);
-        OpenAMUserDetails user = createUser(attr, tokenOpenAM);
-        user.setFuncionario(attr);
+        String emailOpenId = (String) token.getPrincipal();
+        System.out.println("loadUserDetails - token:"+tokenOpenAM+" - email :"+emailOpenId);
+        AtributosFuncionario funcionario = null;
+        
+        if (!tokenOpenAM.equals("N/A")) {
+            System.out.println("Login con token");
+            funcionario = authEJBBean.getAtributosFuncionarios(tokenOpenAM);
+        }else if (!emailOpenId.equals("N/A")){
+            System.out.println("Login con mail");
+            Integer rut = funcionarioFacade.buscarRutPorEmail(emailOpenId);
+            System.out.println("RUT:"+rut);
+            funcionario = authEJBBean.readFuncionarios(rut);
+            System.out.println("Funcionario:"+funcionario.getCorreouv());
+        }else if (tokenOpenAM.equals("TEST") ){
+            System.out.println("Login con usuario default");
+            funcionario = OpenAMUtil.createFalseUser();
+        }else{
+            return null;
+        }
+
+        OpenAMUserDetails user = createUser(funcionario, tokenOpenAM);
+        user.setFuncionario(funcionario);
+        System.out.println("User:"+user.getUsername());
         return user;
     }
 
@@ -52,18 +74,6 @@ public class OpenAMUserDetailsService implements AuthenticationUserDetailsServic
 
     private Set<GrantedAuthority> createGrantedAuthority(List<String> roles) {
         Set<GrantedAuthority> authoritys = new HashSet<GrantedAuthority>();
-
-        /*
-         * String prefixApp = Resources.getValue("security", "prefix_app");
-         * String prefixRol = Resources.getValue("security",
-         * "prefix_rol_spring");
-         *
-         * for (String rol : roles) { String tempRol =
-         * rol.split(",")[0].split("=")[1]; if(tempRol.startsWith(prefixApp)){
-         * tempRol = tempRol.replaceFirst(prefixApp, prefixRol); authoritys.add(
-         * new SimpleGrantedAuthority(tempRol) ); } }
-         */
-
         for (String rol : OpenAMUtil.parseRoles(roles)) {
             authoritys.add(new SimpleGrantedAuthority(rol));
             System.out.println("ROL="+rol);
@@ -75,6 +85,16 @@ public class OpenAMUserDetailsService implements AuthenticationUserDetailsServic
         try {
             Context c = new InitialContext();
             return (AuthEJBBeanLocal) c.lookup("java:global/Proyecto/Proyecto-ejb/AuthEJBBean!cl.uv.model.base.core.ejb.AuthEJBBeanLocal");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private FuncionarioFacadeLocal lookupFuncionarioFacadeLocal() {
+        try {
+            Context c = new InitialContext();
+            return (FuncionarioFacadeLocal) c.lookup("java:global/Proyecto/Proyecto-ejb/FuncionarioFacade!cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

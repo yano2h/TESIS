@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:inputHidden value="#{gmailSession.onLoad}"/>
+            
+            <h:outputLabel for="email" value="Email: "/>
+            <h:outputText id="email" value="#{gmailSession.openIdEmail}"/>
+            <br/>
+            <h:outputLabel for="validate" value="validate "/>
+            <h:outputText id="validate" value="#{gmailSession.validatedId}"/>
+        </h:form>
+    </h:body>
+</html>

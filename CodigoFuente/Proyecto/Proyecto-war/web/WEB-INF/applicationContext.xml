@@ -15,9 +15,15 @@
 		
     </security:global-method-security>
        -->
-    <security:http entry-point-ref="openAMAuthenticationEntryPoint" access-denied-page="/faces/view/accessDenied.xhtml">
+       
+    <security:http pattern="/faces/userRedirect.*" security="none"/>
+    <security:http pattern="/faces/proccesRedirect.*" security="none"/>
+    
+    <security:http entry-point-ref="openAMAuthenticationEntryPoint" access-denied-page="/faces/view/accessDenied.xhtml" >
         <security:custom-filter position="PRE_AUTH_FILTER" ref="openAMFilter" />
         
+       <!-- <security:intercept-url pattern="/faces/userRedirect.*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/faces/proccesRedirect.*" access="IS_AUTHENTICATED_ANONYMOUSLY" />-->
         <security:intercept-url pattern="/faces/view/accessDenied.*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url pattern="/faces/view/jpa/**" access="ROLE_ADMIN"  />
         <security:intercept-url pattern="/faces/view/atencion/**" access="ROLE_ADMIN, ROLE_JEFE_AREA, ROLE_JEFE_DEPTO, ROLE_FUNC_DISICO" />
@@ -28,6 +34,7 @@
         
         <security:logout delete-cookies="iPlanetDirectoryPro" invalidate-session="true" logout-success-url="http://test.uv.cl:8080/Login-war/mainPage.jspx"/>
     </security:http>
+   
     
     
     <!-- Definicion el authentication entry point -->
@@ -37,11 +44,15 @@
 
     </bean>
     
+    <bean id="openIdSession"
+          class="cl.uv.security.openid.OpenIdSession">
+    </bean>
     <!--  Definicion del filtro -->
     <bean id="openAMFilter"
           class="cl.uv.security.openam.OpenAMPreAuthenticatedProcessingFilter">
 	<property name="cookieNameToken" value="iPlanetDirectoryPro" />
 	<property name="authenticationManager" ref="authenticationManager" />
+        <property name="openIdSession" ref="openIdSession"/>
     </bean>
     
     <bean id="preauthAuthProvider"
