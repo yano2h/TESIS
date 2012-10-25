@@ -39,7 +39,7 @@ public class OpenAMUserDetailsService implements AuthenticationUserDetailsServic
         System.out.println("loadUserDetails - token:"+tokenOpenAM+" - email :"+emailOpenId);
         AtributosFuncionario funcionario = null;
         
-        if (!tokenOpenAM.equals("N/A")) {
+        if (!tokenOpenAM.equals("N/A") && !tokenOpenAM.equals("TEST")) {
             System.out.println("Login con token");
             funcionario = authEJBBean.getAtributosFuncionarios(tokenOpenAM);
         }else if (!emailOpenId.equals("N/A")){
