@@ -16,15 +16,21 @@ public class UrlBuilder {
     public static String param2="idRecurso";
             
     public static String buildPublicUrlSolicitudReq(String codigoConsulta){
-        String dominio = Resources.getValue("BasicParams", "dominio");
-        String puerto = Resources.getValue("BasicParams", "puerto");
-        String nombreProyecto = Resources.getValue("BasicParams", "nombre_proyecto");
-        String urlPublica = Resources.getValue("BasicParams", "url_publica");
+        String dominio = Resources.getValue("Urls", "dominio");
+        String puerto = Resources.getValue("Urls", "puerto");
+        String nombreProyecto = Resources.getValue("Urls", "nombre_proyecto");
+        String urlPublica = Resources.getValue("Urls", "url_send_request_auth");
         
-        String url = dominio+puerto+nombreProyecto+urlPublica;
+        String url = "http://"+dominio+":"+puerto+"/"+nombreProyecto+urlPublica;
         String parametros = buildEncodeParams(TypeWebResource.SOLICITUD, codigoConsulta);
         
         return url+"?url="+parametros;
+    }
+    
+    public static String buildUrlExtensionResponse(String actionEncode){
+        String urlResponse = Resources.getValue("Urls", "url_process_response_auth");
+        urlResponse += "?url="+actionEncode;
+        return urlResponse;
     }
     
     private static String buildEncodeParams(TypeWebResource t, String idRecurso){

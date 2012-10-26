@@ -7,6 +7,7 @@ package cl.uv.proyecto.mensajeria.ejb;
 import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import cl.uv.proyecto.url.utils.UrlBuilder;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,7 +73,10 @@ public class EmailEJB implements EmailEJBLocal {
         String msg = Resources.getValue(propertieEmail, prefijoMensaje+t.name());
         switch(t){
             case ENVIO_SOLICITUD:
-                msg = String.format(msg,s.getAsunto(),s.getCodigoConsulta(),"link");
+                String link = UrlBuilder.buildPublicUrlSolicitudReq(s.getCodigoConsulta());
+                System.out.println("LINK:"+link);
+                msg = String.format(msg,s.getAsunto(),s.getCodigoConsulta(),link);
+                System.out.println("MSG:"+msg);
                 break;
             case RECHAZO_SOLICITUD:
 

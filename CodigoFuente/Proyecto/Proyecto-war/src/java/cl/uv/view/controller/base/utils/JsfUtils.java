@@ -41,10 +41,15 @@ public class JsfUtils {
     }
 
     public static Object getValue(String el) {
-        FacesContext ctx = getFacesContext();
+        try{
+            FacesContext ctx = getFacesContext();
+            return getFacesContext().getApplication().getELResolver().getValue(ctx.getELContext(), null, el);
+        }catch(NullPointerException e){
+            System.out.println("Error:"+e.getMessage());
+            return null;
+        }
         //return ctx.getELContext().getELResolver().getValue(ctx.getELContext(), null, beanName);
         // return ctx.getApplication().createValueBinding(el).getValue(ctx);
-        return getFacesContext().getApplication().getELResolver().getValue(ctx.getELContext(), null, el);
     }
 
     public static void handleNavigation(String action) {
@@ -109,7 +114,7 @@ public class JsfUtils {
      * @return
      */
     public static String redirectTo(String page) {
-        if (!page.endsWith("?faces-redirect=true")) {
+        if (!page.contains("faces-redirect=true")) {
             if(page.contains("?")){
                 page += "&faces-redirect=true";
             }else{

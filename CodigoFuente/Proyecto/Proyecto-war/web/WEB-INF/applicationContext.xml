@@ -16,8 +16,8 @@
     </security:global-method-security>
        -->
        
-    <security:http pattern="/faces/userRedirect.*" security="none"/>
-    <security:http pattern="/faces/proccesRedirect.*" security="none"/>
+    <security:http pattern="/faces/authProvider" security="none"/>
+    <security:http pattern="/faces/processResponseProvider" security="none"/>
     
     <security:http entry-point-ref="openAMAuthenticationEntryPoint" access-denied-page="/faces/view/accessDenied.xhtml" >
         <security:custom-filter position="PRE_AUTH_FILTER" ref="openAMFilter" />
