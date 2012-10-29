@@ -35,27 +35,30 @@ import org.openid4java.message.ax.FetchResponse;
  */
 @ManagedBean
 @SessionScoped
-public class GmailSession implements Serializable{
+public class GmailSession implements Serializable {
 
     private static String ENDPOINT_GOOGLE = "https://www.google.com/accounts/o8/id";
     private ConsumerManager manager;
     private DiscoveryInformation discovered;
-//    private String openIdEmail;
-//    private String validatedId;
-
-    @ManagedProperty(value="#{openIdSession}")
+    @ManagedProperty(value = "#{openIdSession}")
     private OpenIdSession openIdSession;
 
     public void googleAuthentication() {
-        manager = new ConsumerManager();
         Map parameters = JsfUtils.getExternalContext().getRequestParameterMap();
         String paramUrl = (String) parameters.get("url");
-        String returnToUrl = returnToUrl(UrlBuilder.buildUrlExtensionResponse(paramUrl));
-        String url = authRequest(returnToUrl);
 
-        if (url != null) {
-            JsfUtils.redirect(url);
+        if (openIdSession.isUserAuthenticated()) {
+            redirectToMainPage(paramUrl);
+        } else {
+            manager = new ConsumerManager();
+            String returnToUrl = returnToUrl(UrlBuilder.buildUrlExtensionResponse(paramUrl));
+            String url = authRequest(returnToUrl);
+
+            if (url != null) {
+                JsfUtils.redirect(url);
+            }
         }
+
     }
 
     private String returnToUrl(String urlExtension) {
@@ -83,10 +86,9 @@ public class GmailSession implements Serializable{
     }
 
     public void verify() {
-        ExternalContext context = javax.faces.context.FacesContext
-                .getCurrentInstance().getExternalContext();
+        ExternalContext context = javax.faces.context.FacesContext.getCurrentInstance().getExternalContext();
         HttpServletRequest request = (HttpServletRequest) context.getRequest();
-        openIdSession.setId( verifyResponse(request) );
+        openIdSession.setId(verifyResponse(request));
     }
 
     private String verifyResponse(HttpServletRequest httpReq) {
@@ -120,6 +122,20 @@ public class GmailSession implements Serializable{
         return null;
     }
 
+    public String getOnLoad() {
+        verify();
+        Map parameters = JsfUtils.getExternalContext().getRequestParameterMap();
+        String paramsUrl = (String) parameters.get("url");
+        redirectToMainPage(paramsUrl);
+        return "pageLoaded";
+    }
+
+    private void redirectToMainPage(String param) {
+        String mainPage = Resources.getValue("pages", "redirect_main_page");
+        mainPage += "?faces-redirect=true&url=" + param;
+        JsfUtils.redirect(mainPage);
+    }
+
     public String getOpenIdEmail() {
         return openIdSession.getEmail();
     }
@@ -128,21 +144,10 @@ public class GmailSession implements Serializable{
         return openIdSession.getId();
     }
 
-    public String getOnLoad() {
-        verify();
-        Map parameters = JsfUtils.getExternalContext().getRequestParameterMap();
-        String paramsUrl = (String) parameters.get("url");
-        String mainPage = Resources.getValue("pages", "redirect_main_page");
-        mainPage += "?faces-redirect=true&url="+paramsUrl;
-        System.out.println("URL MAINPAGE:"+mainPage);
-        JsfUtils.redirect(mainPage);
-        return "pageLoaded";
-    }
-       
-    public void closeSession(){
+    public void closeSession() {
         openIdSession.closeSession();
     }
-    
+
     public void setOpenIdSession(OpenIdSession openIdSession) {
         this.openIdSession = openIdSession;
     }
