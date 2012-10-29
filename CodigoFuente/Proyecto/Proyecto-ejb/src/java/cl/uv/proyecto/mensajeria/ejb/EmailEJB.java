@@ -138,6 +138,7 @@ public class EmailEJB implements EmailEJBLocal {
     }
    
     @Override
+    @Asynchronous
     public void enviarEmailConfirmacionEnvioSolicitud(SolicitudRequerimiento s){
         String asunto = generarAsuntoEmailSolicitud(TypeEmail.ENVIO_SOLICITUD, s, s.getSolicitante());
         String msg = generarContenidoEmailSolicitud(TypeEmail.ENVIO_SOLICITUD, s, s.getSolicitante());
