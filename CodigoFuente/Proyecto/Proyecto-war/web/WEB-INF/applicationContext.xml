@@ -5,7 +5,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                            http://www.springframework.org/schema/security
-                           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+                           http://www.springframework.org/schema/security/spring-security-3.1.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd" 
+       xmlns:context="http://www.springframework.org/schema/context">
    <!-- <security:global-method-security
         secured-annotations="enabled">
 		
@@ -14,16 +17,15 @@
 			bigbank.*Service.post*(..))" access="ROLE_TELLER"/>
 		
     </security:global-method-security>
-       -->
+       -->   
        
-    <security:http pattern="/faces/authProvider" security="none"/>
-    <security:http pattern="/faces/processResponseProvider" security="none"/>
+    <context:property-placeholder location="classpath:cl/uv/security/properties/Security.properties" />
     
-    <security:http entry-point-ref="openAMAuthenticationEntryPoint" access-denied-page="/faces/view/accessDenied.xhtml" >
+    <security:http pattern="/faces/authProvider.*" security="none"/>
+    <security:http pattern="/faces/processResponseProvider.*" security="none"/>
+    
+    <security:http auto-config="true" entry-point-ref="openAMAuthenticationEntryPoint" access-denied-page="/faces/view/accessDenied.xhtml" >
         <security:custom-filter position="PRE_AUTH_FILTER" ref="openAMFilter" />
-        
-       <!-- <security:intercept-url pattern="/faces/userRedirect.*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-        <security:intercept-url pattern="/faces/proccesRedirect.*" access="IS_AUTHENTICATED_ANONYMOUSLY" />-->
         <security:intercept-url pattern="/faces/view/accessDenied.*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url pattern="/faces/view/jpa/**" access="ROLE_ADMIN"  />
         <security:intercept-url pattern="/faces/view/atencion/**" access="ROLE_ADMIN, ROLE_JEFE_AREA, ROLE_JEFE_DEPTO, ROLE_FUNC_DISICO" />
@@ -32,7 +34,7 @@
         <security:intercept-url pattern="/faces/view/solicitudes/**" access="ROLE_ADMIN, ROLE_SOLICITANTE" />
         <security:intercept-url pattern="/faces/view/**" access="IS_AUTHENTICATED_FULLY" />
         
-        <security:logout delete-cookies="iPlanetDirectoryPro" invalidate-session="true" logout-success-url="http://test.uv.cl:8080/Login-war/mainPage.jspx"/>
+        <security:logout logout-success-url="${spring.login_page}" />
     </security:http>
    
     
@@ -40,7 +42,7 @@
     <!-- Definicion el authentication entry point -->
     <bean id="openAMAuthenticationEntryPoint" class="cl.uv.security.openam.OpenAMAuthenticationEntryPoint">
         <property name="openAMLogin"
-                  value="http://test.uv.cl:8080/Login-war/mainPage.jspx" />
+                  value="${spring.login_page}" />
 
     </bean>
     
