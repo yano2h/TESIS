@@ -164,8 +164,7 @@ public class AuthEJBBean implements AuthEJBBeanLocal {
         Token token = new Token();
         token.setId(tokenCookie);
         try {
-            getPort().isTokenValid(token);
-            return true;
+            return getPort().isTokenValid(token);
         } catch (GeneralFailure_Exception ex) {
             return false;
         } catch (InvalidToken_Exception ex) {

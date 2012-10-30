@@ -37,6 +37,7 @@ public class OpenAMAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
         String redirectUrl = buildRedirectUrlToLoginPage(httpRequest);
         httpResponse.sendRedirect(httpResponse.encodeRedirectURL(redirectUrl));
+        System.out.println("End Commence redirect to:"+redirectUrl);
     }
 
     protected String buildRedirectUrlToLoginPage(HttpServletRequest request) {

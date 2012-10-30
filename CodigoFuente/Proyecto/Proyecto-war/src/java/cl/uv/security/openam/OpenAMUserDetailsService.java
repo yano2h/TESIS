@@ -7,7 +7,7 @@ package cl.uv.security.openam;
 import cl.uv.model.base.core.beans.AtributosFuncionario;
 import cl.uv.model.base.core.ejb.AuthEJBBeanLocal;
 import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
-import cl.uv.view.controller.base.utils.Resources;
+import cl.uv.security.openid.OpenIdSession;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,7 +28,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * @author Alejandro
  */
 public class OpenAMUserDetailsService implements AuthenticationUserDetailsService<Authentication> {
-    
+    private OpenIdSession openIdSession = null;
     private FuncionarioFacadeLocal funcionarioFacade = lookupFuncionarioFacadeLocal();
     private AuthEJBBeanLocal authEJBBean = lookupAuthEJBBeanLocal();
     
@@ -36,39 +36,53 @@ public class OpenAMUserDetailsService implements AuthenticationUserDetailsServic
     public UserDetails loadUserDetails(Authentication token) throws UsernameNotFoundException {
         String tokenOpenAM = (String) token.getCredentials();
         String emailOpenId = (String) token.getPrincipal();
-        System.out.println("loadUserDetails - token:"+tokenOpenAM+" - email :"+emailOpenId);
-        AtributosFuncionario funcionario = null;
         
-        if (!tokenOpenAM.equals("N/A") && !tokenOpenAM.equals("TEST")) {
-            System.out.println("Login con token");
-            funcionario = authEJBBean.getAtributosFuncionarios(tokenOpenAM);
+        if (!tokenOpenAM.equals("N/A") && !tokenOpenAM.equals("TEST") && authEJBBean.validateToken(tokenOpenAM)) {
+            return loadUserWithOpenAMToken(tokenOpenAM);
         }else if (!emailOpenId.equals("N/A")){
-            System.out.println("Login con mail");
-            Integer rut = funcionarioFacade.buscarRutPorEmail(emailOpenId);
-            System.out.println("RUT:"+rut);
-            funcionario = authEJBBean.readFuncionarios(rut);
-            System.out.println("Funcionario:"+funcionario.getCorreouv());
+            return loadUserWithOpenIdEmail(emailOpenId);
         }else if (tokenOpenAM.equals("TEST") ){
-            System.out.println("Login con usuario default");
-            funcionario = OpenAMUtil.createFalseUser();
+            return loadUserTest();
         }else{
+            System.out.println("Error: Usuario no encontrado");
             return null;
         }
-
-        OpenAMUserDetails user = createUser(funcionario, tokenOpenAM);
-        user.setFuncionario(funcionario);
-        System.out.println("User:"+user.getUsername());
-        return user;
     }
 
-    private OpenAMUserDetails createUser(AtributosFuncionario attr, String token) {        
+    
+    private OpenAMUserDetails loadUserWithOpenAMToken(String token){
+        System.out.println("Load User With OpenAM Token:"+token);
+        openIdSession.setUserAuthenticatedWithSSO(true);
+        AtributosFuncionario funcionario = authEJBBean.getAtributosFuncionarios(token);
+        return createUser(funcionario, token);
+    }
+    
+    private OpenAMUserDetails loadUserWithOpenIdEmail(String email){
+        System.out.println("Load User With OpenId Email:"+email);
+        openIdSession.setUserAuthenticatedWithSSO(false);
+        Integer rut = funcionarioFacade.buscarRutPorEmail(email);
+        AtributosFuncionario funcionario = authEJBBean.readFuncionarios(rut);
+        return createUser(funcionario, "N/A");
+    }
+    
+    private OpenAMUserDetails loadUserTest(){
+        System.out.println("Load User Test");
+        openIdSession.setUserAuthenticatedWithSSO(true);
+        AtributosFuncionario funcionario = OpenAMUtil.createFalseUser();
+        return createUser(funcionario, "N/A");
+    }
+    
+    private OpenAMUserDetails createUser(AtributosFuncionario attr, String token) { 
+        OpenAMUserDetails user;
         if(attr != null){
-            return new OpenAMUserDetails(attr.getUid(), token,
+            user = new OpenAMUserDetails(attr.getUid(), token,
                                          true, true, true, true,
                                          createGrantedAuthority(attr.getListaRoles()));
         }else{
-           return new OpenAMUserDetails("", token);
+           user = new OpenAMUserDetails("", token);
         }
+        user.setFuncionario(attr);
+        return user;
         
     }
 
@@ -100,4 +114,14 @@ public class OpenAMUserDetailsService implements AuthenticationUserDetailsServic
             throw new RuntimeException(ne);
         }
     }
+
+    public OpenIdSession getOpenIdSession() {
+        return openIdSession;
+    }
+
+    public void setOpenIdSession(OpenIdSession openIdSession) {
+        this.openIdSession = openIdSession;
+    }
+    
+    
 }

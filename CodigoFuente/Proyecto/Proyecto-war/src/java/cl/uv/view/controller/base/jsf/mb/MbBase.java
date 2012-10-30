@@ -6,7 +6,6 @@ package cl.uv.view.controller.base.jsf.mb;
 
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
-import cl.uv.view.controller.base.authentication.MbSSO;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import java.io.Serializable;
 import javax.faces.bean.ManagedProperty;

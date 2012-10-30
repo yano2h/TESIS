@@ -5,7 +5,6 @@
 package cl.uv.security.openid.controller;
 
 import cl.uv.proyecto.url.utils.UrlBuilder;
-import cl.uv.proyecto.url.utils.UrlResolver;
 import cl.uv.security.openid.OpenIdSession;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
@@ -40,6 +39,7 @@ public class GmailSession implements Serializable {
     private static String ENDPOINT_GOOGLE = "https://www.google.com/accounts/o8/id";
     private ConsumerManager manager;
     private DiscoveryInformation discovered;
+    
     @ManagedProperty(value = "#{openIdSession}")
     private OpenIdSession openIdSession;
 
@@ -47,7 +47,7 @@ public class GmailSession implements Serializable {
         Map parameters = JsfUtils.getExternalContext().getRequestParameterMap();
         String paramUrl = (String) parameters.get("url");
 
-        if (openIdSession.isUserAuthenticated()) {
+        if ( openIdSession.isUserAuthenticated()) {
             redirectToMainPage(paramUrl);
         } else {
             manager = new ConsumerManager();

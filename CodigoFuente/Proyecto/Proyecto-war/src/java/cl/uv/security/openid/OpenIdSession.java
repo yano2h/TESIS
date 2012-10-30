@@ -11,7 +11,20 @@ package cl.uv.security.openid;
 public class OpenIdSession {
     private String id;
     private String email;
+    private boolean userAuthenticatedWithSSO;
 
+    public OpenIdSession() {
+        this.userAuthenticatedWithSSO = false;
+    }
+
+    public boolean isUserAuthenticatedWithSSO() {
+        return userAuthenticatedWithSSO;
+    }
+
+    public void setUserAuthenticatedWithSSO(boolean userAuthenticatedWithSSO) {
+        this.userAuthenticatedWithSSO = userAuthenticatedWithSSO;
+    }
+    
     public String getEmail() {
         return email;
     }
@@ -31,9 +44,17 @@ public class OpenIdSession {
     public void closeSession(){
         id = null;
         email = null;
+        userAuthenticatedWithSSO = false;
+    }
+    
+    
+    public boolean isUserAuthenticatedWithOpenId(){
+        return (id != null && !id.isEmpty() && email != null && !email.isEmpty());
     }
     
     public boolean isUserAuthenticated(){
-        return (id != null && !id.isEmpty() && email != null && !email.isEmpty());
+        System.out.println("isUserAuthenticatedWithOpenId()="+isUserAuthenticatedWithOpenId());
+        System.out.println("isUserAuthenticatedWithSSO()="+isUserAuthenticatedWithSSO());
+        return isUserAuthenticatedWithOpenId() || isUserAuthenticatedWithSSO();
     }
 }

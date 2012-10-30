@@ -37,8 +37,6 @@
         <security:logout logout-success-url="${spring.login_page}" />
     </security:http>
    
-    
-    
     <!-- Definicion el authentication entry point -->
     <bean id="openAMAuthenticationEntryPoint" class="cl.uv.security.openam.OpenAMAuthenticationEntryPoint">
         <property name="openAMLogin"
@@ -46,13 +44,15 @@
 
     </bean>
     
+    <!-- Bean que mantiene informacion sobre la autenticacion por OpenID -->
     <bean id="openIdSession"
           class="cl.uv.security.openid.OpenIdSession">
     </bean>
+    
     <!--  Definicion del filtro -->
     <bean id="openAMFilter"
           class="cl.uv.security.openam.OpenAMPreAuthenticatedProcessingFilter">
-	<property name="cookieNameToken" value="iPlanetDirectoryPro" />
+	<property name="cookieNameToken" value="${spring.name_cookie}" />
 	<property name="authenticationManager" ref="authenticationManager" />
         <property name="openIdSession" ref="openIdSession"/>
     </bean>
@@ -64,6 +64,7 @@
     
     <bean id="openAMUserDetailsService"
           class="cl.uv.security.openam.OpenAMUserDetailsService">
+        <property name="openIdSession" ref="openIdSession"/>
     </bean>
     
     <security:authentication-manager alias="authenticationManager">

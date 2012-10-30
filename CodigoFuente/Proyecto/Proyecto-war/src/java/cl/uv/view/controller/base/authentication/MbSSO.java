@@ -4,20 +4,13 @@
  */
 package cl.uv.view.controller.base.authentication;
 
-import cl.uv.model.base.core.ejb.AuthEJBBeanLocal;
-import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
-import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.Funcionario;
-import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.url.utils.UrlResolver;
 import cl.uv.security.openam.OpenAMUserDetails;
 import cl.uv.security.openid.controller.GmailSession;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
-import java.util.Date;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -66,6 +59,9 @@ public class MbSSO implements Serializable{
         GmailSession gmailSession = (GmailSession) JsfUtils.getValue("gmailSession");
         gmailSession.closeSession();
         JsfUtils.redirect(JsfUtils.getExternalContext().getRequestContextPath()+"/j_spring_security_logout");
+        SecurityContextHolder.clearContext();
+        JsfUtils.logout();
+        System.out.println("LOGOUT");
     }
     
 }
