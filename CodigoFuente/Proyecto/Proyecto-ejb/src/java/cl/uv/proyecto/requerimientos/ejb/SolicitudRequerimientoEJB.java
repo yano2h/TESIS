@@ -96,6 +96,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         if (archivosAdjuntos!=null && archivosAdjuntos.size()>0) {
             fileManagerEJB.adjuntarArchivosSolicitudRequerimiento(archivosAdjuntos, solicitud);
         }
+        emailEJB.enviarEmailConfirmacionEnvioSolicitud(solicitud);
         return solicitud.getCodigoConsulta();
     }
             

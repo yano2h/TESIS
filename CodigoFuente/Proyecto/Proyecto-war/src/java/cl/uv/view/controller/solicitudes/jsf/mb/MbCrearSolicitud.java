@@ -5,6 +5,7 @@
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
 import cl.uv.proyecto.mensajeria.ejb.EmailEJBLocal;
+import cl.uv.proyecto.mensajeria.ejb.TypeEmail;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.ArchivoAdjunto;
 import cl.uv.proyecto.persistencia.entidades.ArchivoSolicitudRequerimiento;
@@ -68,9 +69,6 @@ public class MbCrearSolicitud implements Serializable{
     
     public void enviar(ActionEvent event){
         codigoConsulta = ejbSolicitud.enviarSolicitud(solicitud, mbUserInfo.getFuncionario(),archivosAdjuntos);  
-        ejbEmail.enviarEmail(mbUserInfo.getFuncionario().getCorreoUv(), 
-                             Resources.getValue("email", "AsuntoConfirmacion"), 
-                             Resources.getValue("email", "CuerpoMensanje")+codigoConsulta+"\n\n"+Resources.getValue("email", "FirmaMensaje"));
         mbUserInfo.getFuncionario().setSolicitudesRequerimientoEnviadas(solicitudFacade.buscarPorSolicitante(mbUserInfo.getFuncionario().getRut()));
     }
     

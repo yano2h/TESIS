@@ -35,7 +35,7 @@ public class OpenAMUtil {
                 }
             }
         }
-
+        System.out.println("Toke ["+tokenName+"]:"+valueCookie);
         return valueCookie;
     }
 

@@ -4,6 +4,8 @@
  */
 package cl.uv.proyecto.mensajeria.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.Funcionario;
+import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import javax.ejb.Local;
 
 /**
@@ -15,6 +17,7 @@ public interface EmailEJBLocal {
 
     void enviarEmail(String direccion, String asunto, String mensaje);
     void enviarEmail(String[] direcciones,String asunto, String mensaje);
-
-    public void hacerNanda();
+    String generarContenidoEmailSolicitud(TypeEmail t, SolicitudRequerimiento s, Funcionario invoker);
+    String generarAsuntoEmailSolicitud(TypeEmail t, SolicitudRequerimiento s, Funcionario invoker);
+    void enviarEmailConfirmacionEnvioSolicitud(SolicitudRequerimiento s);
 }

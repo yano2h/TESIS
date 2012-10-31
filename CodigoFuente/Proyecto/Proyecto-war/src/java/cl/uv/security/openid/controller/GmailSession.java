@@ -4,8 +4,10 @@
  */
 package cl.uv.security.openid.controller;
 
+import cl.uv.proyecto.url.utils.UrlBuilder;
 import cl.uv.security.openid.OpenIdSession;
 import cl.uv.view.controller.base.utils.JsfUtils;
+import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -32,28 +34,31 @@ import org.openid4java.message.ax.FetchResponse;
  */
 @ManagedBean
 @SessionScoped
-public class GmailSession implements Serializable{
+public class GmailSession implements Serializable {
 
-    private static String ENDPONT_GOOGLE = "https://www.google.com/accounts/o8/id";
+    private static String ENDPOINT_GOOGLE = "https://www.google.com/accounts/o8/id";
     private ConsumerManager manager;
     private DiscoveryInformation discovered;
-//    private String openIdEmail;
-//    private String validatedId;
-
-    @ManagedProperty(value="#{openIdSession}")
+    
+    @ManagedProperty(value = "#{openIdSession}")
     private OpenIdSession openIdSession;
 
     public void googleAuthentication() {
-        manager = new ConsumerManager();
         Map parameters = JsfUtils.getExternalContext().getRequestParameterMap();
-        String internalRedirect = (String) parameters.get("url_redirect");
-        System.out.println("internalRedirect="+internalRedirect);
-        String returnToUrl = returnToUrl("/proccesRedirect.xhtml?url_redirect="+internalRedirect);
-        String url = authRequest(returnToUrl);
+        String paramUrl = (String) parameters.get("url");
 
-        if (url != null) {
-            JsfUtils.redirect(url);
+        if ( openIdSession.isUserAuthenticated()) {
+            redirectToMainPage(paramUrl);
+        } else {
+            manager = new ConsumerManager();
+            String returnToUrl = returnToUrl(UrlBuilder.buildUrlExtensionResponse(paramUrl));
+            String url = authRequest(returnToUrl);
+
+            if (url != null) {
+                JsfUtils.redirect(url);
+            }
         }
+
     }
 
     private String returnToUrl(String urlExtension) {
@@ -65,7 +70,7 @@ public class GmailSession implements Serializable{
 
     private String authRequest(String returnToUrl) {
         try {
-            List discoveries = manager.discover(ENDPONT_GOOGLE);
+            List discoveries = manager.discover(ENDPOINT_GOOGLE);
             discovered = manager.associate(discoveries);
             AuthRequest authReq = manager.authenticate(discovered, returnToUrl);
 
@@ -81,10 +86,9 @@ public class GmailSession implements Serializable{
     }
 
     public void verify() {
-        ExternalContext context = javax.faces.context.FacesContext
-                .getCurrentInstance().getExternalContext();
+        ExternalContext context = javax.faces.context.FacesContext.getCurrentInstance().getExternalContext();
         HttpServletRequest request = (HttpServletRequest) context.getRequest();
-        openIdSession.setId( verifyResponse(request) );
+        openIdSession.setId(verifyResponse(request));
     }
 
     private String verifyResponse(HttpServletRequest httpReq) {
@@ -118,6 +122,20 @@ public class GmailSession implements Serializable{
         return null;
     }
 
+    public String getOnLoad() {
+        verify();
+        Map parameters = JsfUtils.getExternalContext().getRequestParameterMap();
+        String paramsUrl = (String) parameters.get("url");
+        redirectToMainPage(paramsUrl);
+        return "pageLoaded";
+    }
+
+    private void redirectToMainPage(String param) {
+        String mainPage = Resources.getValue("pages", "redirect_main_page");
+        mainPage += "?faces-redirect=true&url=" + param;
+        JsfUtils.redirect(mainPage);
+    }
+
     public String getOpenIdEmail() {
         return openIdSession.getEmail();
     }
@@ -126,19 +144,10 @@ public class GmailSession implements Serializable{
         return openIdSession.getId();
     }
 
-    public String getOnLoad() {
-        verify();
-        Map parameters = JsfUtils.getExternalContext().getRequestParameterMap();
-        String internalRedirect = (String) parameters.get("url_redirect");
-        String returnToUrl = internalRedirect;
-        JsfUtils.redirect("view/solicitudes/mainPage.xhtml");
-        return "pageLoaded";
-    }
-       
-    public void closeSession(){
+    public void closeSession() {
         openIdSession.closeSession();
     }
-    
+
     public void setOpenIdSession(OpenIdSession openIdSession) {
         this.openIdSession = openIdSession;
     }

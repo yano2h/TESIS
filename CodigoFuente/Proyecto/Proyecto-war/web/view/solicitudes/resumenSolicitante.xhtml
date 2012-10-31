@@ -69,7 +69,8 @@
                                          rowKey="#{sol.codigoConsulta}"
                                          rows="5"  
                                          sortBy="#{sol.fechaEnvio}" sortOrder="descending"
-                                         style="margin-left: 40px;margin-right: 40px; min-width:100% ">
+                                         style="margin-left: 40px;margin-right: 40px; min-width:100% "
+                                         emptyMessage="No se ha enviado ninguna solicitud">
                                 <p:ajax event="rowSelect" listener="#{mbConsultarSolicitud.onRowSelect}"/>
 
                                 <f:facet name="header">  
@@ -100,7 +101,8 @@
                                          rowKey="#{sol.codigoConsulta}"
                                          rows="5"  
                                          sortBy="#{sol.fechaEnvio}" sortOrder="descending"
-                                         style="margin-left: 40px;margin-right: 40px; min-width:100%">
+                                         style="margin-left: 40px;margin-right: 40px; min-width:100%"
+                                         emptyMessage="No tiene solicitudes cerradas">
                                 <p:ajax event="rowSelect" listener="#{mbConsultarSolicitud.onRowSelect}"/>
 
                                 <f:facet name="header">  

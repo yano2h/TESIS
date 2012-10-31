@@ -5,20 +5,16 @@
 package cl.uv.view.controller.base.jsf.mb;
 
 import cl.uv.model.base.core.ejb.AuthEJBBeanLocal;
-import cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.NotificacionFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.Notificacion;
 import cl.uv.security.openam.OpenAMUserDetails;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**

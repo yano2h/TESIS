@@ -36,21 +36,15 @@ public class OpenAMPreAuthenticatedProcessingFilter extends AbstractPreAuthentic
 
     @Override
     protected Object getPreAuthenticatedPrincipal(HttpServletRequest request) {
-        System.out.println("getPreAuthenticatedPrincipal");
-        System.out.println("openIdSession: "+openIdSession);
-        if (openIdSession!=null) {
-            System.out.println("Email:"+openIdSession.getEmail());
-        }
-        Object o = (openIdSession!=null && openIdSession.isUserAuthenticated())? openIdSession.getEmail():"N/A"; 
-        System.out.println("getPreAuthenticatedPrincipal RETURN:"+o);
-        return o;
+        Object principal = (openIdSession!=null && openIdSession.isUserAuthenticatedWithOpenId())? openIdSession.getEmail():"N/A"; 
+        System.out.println("getPreAuthenticatedPrincipal RETURN:"+principal);
+        return principal;
     }
 
     @Override
     protected Object getPreAuthenticatedCredentials(HttpServletRequest request) {
-        System.out.println("getPreAuthenticatedCredentials");
-        Object credential = (Resources.getValue("security", "enviroment").equals("testMacBook"))?"TEST":OpenAMUtil.getToken(cookieNameToken, request);
-        credential = (credential==null && openIdSession!=null && openIdSession.isUserAuthenticated())?"N/A":credential;
+        Object credential = (Resources.getValue("security", "enviroment").equals("testMacBook"))? "TEST":OpenAMUtil.getToken(cookieNameToken, request);
+        credential = (credential==null && openIdSession!=null && openIdSession.isUserAuthenticatedWithOpenId())?"N/A":credential;
         System.out.println("getPreAuthenticatedCredentials RETURN:"+credential);
         return  credential;
     } 
