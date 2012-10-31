@@ -5,6 +5,9 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <ui:composition template="#{pages.layout_solicitud}">
+        <ui:define name="title">
+            <h:outputText value="Ayuda"/>
+        </ui:define>
         <ui:define name="content">
             <p:panel header="Ayuda">
                 <p:panel header="Preguntas Frecuentes" toggleable="true" toggleSpeed="100" >
