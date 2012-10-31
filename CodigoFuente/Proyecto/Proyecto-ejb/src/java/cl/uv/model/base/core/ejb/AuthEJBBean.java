@@ -118,7 +118,6 @@ public class AuthEJBBean implements AuthEJBBeanLocal {
             System.out.println("ROLES:"+user.getRoles());
             System.out.println("GRUPOS:"+user.getGroups());
             funcionario = parseAttributesToFuncionario(attr, user.getGroups());
-            logoutAdmin();
         } catch (AccessDenied_Exception ex) {
             Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
         } catch (GeneralFailure_Exception ex) {
@@ -130,6 +129,7 @@ public class AuthEJBBean implements AuthEJBBeanLocal {
         } catch (TokenExpired_Exception ex) {
             Logger.getLogger(AuthEJBBean.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
+            logoutAdmin();
             return funcionario;
         }
     }
