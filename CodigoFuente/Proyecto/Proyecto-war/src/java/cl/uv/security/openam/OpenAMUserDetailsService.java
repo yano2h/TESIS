@@ -45,7 +45,7 @@ public class OpenAMUserDetailsService implements AuthenticationUserDetailsServic
             return loadUserTest();
         }else{
             System.out.println("Error: Usuario no encontrado");
-            return null;
+            throw new UsernameNotFoundException("No existe validación previa.");
         }
     }
 
