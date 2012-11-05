@@ -1,0 +1,75 @@
+\select@language {spanish}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Proceso definido en la ISO 10007}}{18}{table.2.1}
+\contentsline {table}{\numberline {2.2}{\ignorespaces Clases de Informaci\'on SCM definidas por la IEEE 828}}{19}{table.2.2}
+\contentsline {table}{\numberline {2.3}{\ignorespaces Comparaci\'on de est\'andares para solicitud y descripci\'on de requerimientos.}}{24}{table.2.3}
+\contentsline {table}{\numberline {2.4}{\ignorespaces Comparaci\'on de est\'andares para SCM}}{25}{table.2.4}
+\contentsline {table}{\numberline {2.5}{\ignorespaces Comparaci\'on de Herramientas para solicitud de Requerimientos}}{27}{table.2.5}
+\contentsline {table}{\numberline {2.6}{\ignorespaces Comparaci\'on de Herramientas para SCM}}{28}{table.2.6}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Etapas de la actual metodolog\IeC {\'\i }a de SCM}}{30}{table.3.1}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Templates de la actual metodolog\IeC {\'\i }a de SCM}}{33}{table.3.2}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Formato para la documentaci\'on de los test unitarios}}{64}{table.5.1}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Formato para la documentaci\'on de los test de Integraci\'on}}{66}{table.5.2}
+\contentsline {table}{\numberline {5.3}{\ignorespaces Formato Tabla de Cobertura de las Pruebas de Integraci\'on}}{66}{table.5.3}
+\contentsline {table}{\numberline {5.4}{\ignorespaces Documentaci\'on de los escenarios de pruebas de rendimiento}}{67}{table.5.4}
+\contentsline {table}{\numberline {5.5}{\ignorespaces Documentaci\'on de las mediciones de las pruebas de rendimiento}}{68}{table.5.5}
+\contentsline {table}{\numberline {5.6}{\ignorespaces Formato Pruebas de Aceptaci\'on}}{69}{table.5.6}
+\contentsline {table}{\numberline {5.7}{\ignorespaces Formato del resultado de una Prueba de Aceptaci\'on}}{71}{table.5.7}
+\contentsline {table}{\numberline {5.8}{\ignorespaces Encuesta General para todos los Usuarios}}{72}{table.5.8}
+\contentsline {table}{\numberline {5.9}{\ignorespaces Encuesta Perfil Solicitante }}{73}{table.5.9}
+\contentsline {table}{\numberline {5.10}{\ignorespaces Encuesta Perfil Funcionario}}{74}{table.5.10}
+\contentsline {table}{\numberline {5.11}{\ignorespaces Encuesta Perfil Jefe de \'Area}}{75}{table.5.11}
+\contentsline {table}{\numberline {5.12}{\ignorespaces Encuesta Perfil Jefe de Departamento}}{76}{table.5.12}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces Test unitarios}}{93}{table.7.1}
+\contentsline {table}{\numberline {7.2}{\ignorespaces Test Integraci\'on}}{95}{table.7.2}
+\contentsline {table}{\numberline {7.3}{\ignorespaces Encuesta General para todos los Usuarios}}{105}{table.7.3}
+\contentsline {table}{\numberline {7.4}{\ignorespaces Encuesta Perfil Solicitante }}{105}{table.7.4}
+\contentsline {table}{\numberline {7.5}{\ignorespaces Encuesta Perfil Funcionario}}{106}{table.7.5}
+\contentsline {table}{\numberline {7.6}{\ignorespaces Encuesta Perfil Jefe de \'Area}}{107}{table.7.6}
+\contentsline {table}{\numberline {7.7}{\ignorespaces Encuesta Perfil Jefe de Departamento}}{108}{table.7.7}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces Caso de Uso Extendido de Crear Solicitud de Requerimiento}}{125}{table.Alph1.1}
+\contentsline {table}{\numberline {A.2}{\ignorespaces Caso de Uso Extendido Consultar Solicitud.}}{127}{table.Alph1.2}
+\contentsline {table}{\numberline {A.3}{\ignorespaces Caso de Uso Extendido Comentar Solicitud.}}{131}{table.Alph1.3}
+\contentsline {table}{\numberline {A.4}{\ignorespaces Caso de Uso Extendido Gestionar Solicitud.}}{133}{table.Alph1.4}
+\contentsline {table}{\numberline {A.5}{\ignorespaces Caso de Uso Extendido Respuesta Directa}}{144}{table.Alph1.5}
+\contentsline {table}{\numberline {A.6}{\ignorespaces Caso de Uso Extendido Buscar Solicitud.}}{146}{table.Alph1.6}
+\contentsline {table}{\numberline {A.7}{\ignorespaces Caso de Uso Extendido Ver Resumen Personal}}{148}{table.Alph1.7}
+\contentsline {table}{\numberline {A.8}{\ignorespaces Caso de Uso Extendido Ver Resumen \'Area}}{150}{table.Alph1.8}
+\contentsline {table}{\numberline {A.9}{\ignorespaces Caso de Uso Extendido Ver Resumen Departamento}}{152}{table.Alph1.9}
+\contentsline {table}{\numberline {A.10}{\ignorespaces Caso de Uso Extendido Atender Solicitud}}{154}{table.Alph1.10}
+\contentsline {table}{\numberline {A.11}{\ignorespaces Caso de Uso Extendido Gestionar Proyectos}}{160}{table.Alph1.11}
+\contentsline {table}{\numberline {A.12}{\ignorespaces Caso de Uso Extendido Crear Proyecto}}{162}{table.Alph1.12}
+\contentsline {table}{\numberline {A.13}{\ignorespaces Caso de Uso Extendido Buscar Proyecto.}}{165}{table.Alph1.13}
+\contentsline {table}{\numberline {A.14}{\ignorespaces Caso de Uso Extendido Definir Tareas SCM}}{171}{table.Alph1.14}
+\contentsline {table}{\numberline {A.15}{\ignorespaces Caso de Uso Extendido Gestionar Tareas Proyecto}}{173}{table.Alph1.15}
+\contentsline {table}{\numberline {A.16}{\ignorespaces Caso de Uso Extendido Gesti\'on de Cambios}}{180}{table.Alph1.16}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {C.1}{\ignorespaces Caso de Uso Real de Crear Solicitud de Requerimiento}}{197}{table.Alph3.1}
+\contentsline {table}{\numberline {C.2}{\ignorespaces Caso de Uso Real Consultar Solicitud.}}{199}{table.Alph3.2}
+\contentsline {table}{\numberline {C.3}{\ignorespaces Caso de Uso Real Comentar Solicitud.}}{204}{table.Alph3.3}
+\contentsline {table}{\numberline {C.4}{\ignorespaces Caso de Uso Real Gestionar Solicitud.}}{206}{table.Alph3.4}
+\contentsline {table}{\numberline {C.5}{\ignorespaces Caso de Uso Real Respuesta Directa}}{217}{table.Alph3.5}
+\contentsline {table}{\numberline {C.6}{\ignorespaces Caso de Uso Real Buscar Solicitud.}}{219}{table.Alph3.6}
+\contentsline {table}{\numberline {C.7}{\ignorespaces Caso de Uso Real Ver Resumen Personal}}{221}{table.Alph3.7}
+\contentsline {table}{\numberline {C.8}{\ignorespaces Caso de Uso Real Ver Resumen \'Area}}{223}{table.Alph3.8}
+\contentsline {table}{\numberline {C.9}{\ignorespaces Caso de Uso Real Ver Resumen Departamento}}{225}{table.Alph3.9}
+\contentsline {table}{\numberline {C.10}{\ignorespaces Caso de Uso Real Atender Solicitud}}{227}{table.Alph3.10}
+\contentsline {table}{\numberline {C.11}{\ignorespaces Caso de Uso Real Gestionar Proyectos}}{232}{table.Alph3.11}
+\contentsline {table}{\numberline {C.12}{\ignorespaces Caso de Uso Real Crear Proyecto}}{234}{table.Alph3.12}
+\contentsline {table}{\numberline {C.13}{\ignorespaces Caso de Uso Real Buscar Proyecto.}}{236}{table.Alph3.13}
+\contentsline {table}{\numberline {C.14}{\ignorespaces Caso de Uso Real Definir Tareas SCM}}{242}{table.Alph3.14}
+\contentsline {table}{\numberline {C.15}{\ignorespaces Caso de Uso Real Gestionar Tareas Proyecto}}{245}{table.Alph3.15}
+\contentsline {table}{\numberline {C.16}{\ignorespaces Caso de Uso Real Gesti\'on de Cambios}}{251}{table.Alph3.16}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

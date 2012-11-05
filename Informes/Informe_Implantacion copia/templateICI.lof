@@ -1,0 +1,180 @@
+\select@language {spanish}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Proceso de la Petici\'on de servicios TI}}{6}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Proceso de la gesti\'on de incidencias}}{7}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Interfaz de Administraci\'on de Hesk}}{10}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Interfaz de Vista y Respuesta de Tickets en osTicket}}{12}{figure.2.4}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Interfaz de Vista de Tickets en OTRS}}{13}{figure.2.5}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Interfaz de Vista de Tickets en SysAid}}{15}{figure.2.6}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Interfaz de Vista de Tickets en ChangeGear}}{17}{figure.2.7}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Proceso de la Gesti\'on de Cambios TI}}{20}{figure.2.8}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Proceso de la Gesti\'on de Configuraci\'on TI}}{22}{figure.2.9}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Proceso de Control de Configuraci\'on\cite {paloma}}}{32}{figure.3.1}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Modelo de Casos de Uso Solicitud de Requerimientos}}{44}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Modelo Casos de Uso Gesti\'on de SCM}}{45}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Modelo Conceptual}}{46}{figure.4.3}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Interfaz de Arquitectura}}{49}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Interfaz de Descomposici\'on Modular del Sistema}}{51}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Esquema de Navegaci\'on Perfil Jefe de \'Area}}{56}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Esquema de Navegaci\'on Perfil Solicitante}}{56}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Esquema de Navegaci\'on Perfil Funcionario Disico}}{57}{figure.5.5}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Esquema de Navegaci\'on Perfil Jefe Departamento}}{57}{figure.5.6}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Diagrama de Clases}}{59}{figure.5.7}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Modelo F\IeC {\'\i }sico de la Base de Datos}}{62}{figure.5.8}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Esquema de Integraci\'on}}{65}{figure.5.9}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Esquema de Integraci\'on}}{81}{figure.6.1}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Portal de Login}}{82}{figure.6.2}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Panel de Control}}{82}{figure.6.3}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Env\IeC {\'\i }o de Solicitudes}}{83}{figure.6.4}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Solicitudes del \'Area}}{84}{figure.6.5}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Detalle de Solicitud}}{84}{figure.6.6}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Creaci\'on de Proyecto}}{85}{figure.6.7}
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Asignaci\'on de Tareas de SCM}}{86}{figure.6.8}
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Identificaci\'on de la Configuraci\'on}}{86}{figure.6.9}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Gr\'afico de Rendimiento}}{99}{figure.7.1}
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Gr\'afico de las M\'aximas}}{100}{figure.7.2}
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Gr\'afico de los M\IeC {\'\i }nimos }}{101}{figure.7.3}
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Gr\'afico Media}}{102}{figure.7.4}
+\contentsline {figure}{\numberline {7.5}{\ignorespaces Gr\'afico Media de Bytes}}{103}{figure.7.5}
+\contentsline {figure}{\numberline {7.6}{\ignorespaces Gr\'afico Encuesta General}}{109}{figure.7.6}
+\contentsline {figure}{\numberline {7.7}{\ignorespaces Gr\'afico Encuesta Perfil Solicitante}}{110}{figure.7.7}
+\contentsline {figure}{\numberline {7.8}{\ignorespaces Gr\'afico Encuesta Perfil Funcionario}}{111}{figure.7.8}
+\contentsline {figure}{\numberline {7.9}{\ignorespaces Gr\'afico Encuesta Perfil Jefe de \'Area}}{112}{figure.7.9}
+\contentsline {figure}{\numberline {7.10}{\ignorespaces Gr\'afico Encuesta Perfil Jefe de Departamento}}{112}{figure.7.10}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Creaci\'on nueva conexi\'on.}}{115}{figure.8.1}
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Propiedades Conexi\'on.}}{116}{figure.8.2}
+\contentsline {figure}{\numberline {8.3}{\ignorespaces Creaci\'on Nuevo Recurso JDBC.}}{117}{figure.8.3}
+\contentsline {figure}{\numberline {8.4}{\ignorespaces Instalaci\'on Hibernate.}}{118}{figure.8.4}
+\contentsline {figure}{\numberline {8.5}{\ignorespaces Menu Sesiones JavaMail.}}{119}{figure.8.5}
+\contentsline {figure}{\numberline {8.6}{\ignorespaces Configuraci\'on B\'asica Sesiones JavaMail.}}{120}{figure.8.6}
+\contentsline {figure}{\numberline {8.7}{\ignorespaces Configuraci\'on B\'asica panel de Control.}}{121}{figure.8.7}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Diagrama de Secuencia Crear Solicitud}}{126}{figure.Alph1.1}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Diagrama de Estados Crear Solicitud}}{126}{figure.Alph1.2}
+\contentsline {figure}{\numberline {A.3}{\ignorespaces Diagrama de Secuencia Consultar Solicitud}}{129}{figure.Alph1.3}
+\contentsline {figure}{\numberline {A.4}{\ignorespaces Diagrama de Estados Consultar Solicitud}}{130}{figure.Alph1.4}
+\contentsline {figure}{\numberline {A.5}{\ignorespaces Diagrama de Secuencia Comentar Solicitud}}{132}{figure.Alph1.5}
+\contentsline {figure}{\numberline {A.6}{\ignorespaces Diagrama de Estados Comentar Solicitud}}{132}{figure.Alph1.6}
+\contentsline {figure}{\numberline {A.7}{\ignorespaces Diagrama de Secuencia Gestionar Solicitud}}{134}{figure.Alph1.7}
+\contentsline {figure}{\numberline {A.8}{\ignorespaces Diagrama de Estados Gestiona Solicitud}}{135}{figure.Alph1.8}
+\contentsline {figure}{\numberline {A.9}{\ignorespaces Diagrama de Secuencia Asignar Responsable Solicitud}}{136}{figure.Alph1.9}
+\contentsline {figure}{\numberline {A.10}{\ignorespaces Diagrama de Estados Asignar Responsable Solicitud}}{136}{figure.Alph1.10}
+\contentsline {figure}{\numberline {A.11}{\ignorespaces Diagrama de Secuencia Transferir Solicitud}}{138}{figure.Alph1.11}
+\contentsline {figure}{\numberline {A.12}{\ignorespaces Diagrama de Estados Transferir Solicitud}}{139}{figure.Alph1.12}
+\contentsline {figure}{\numberline {A.13}{\ignorespaces Diagrama de Secuencia Rechazar Solicitud}}{140}{figure.Alph1.13}
+\contentsline {figure}{\numberline {A.14}{\ignorespaces Diagrama de Estados Rechazar Solicitud}}{140}{figure.Alph1.14}
+\contentsline {figure}{\numberline {A.15}{\ignorespaces Diagrama de Secuencia Convertir Solicitud en Proyecto}}{141}{figure.Alph1.15}
+\contentsline {figure}{\numberline {A.16}{\ignorespaces Diagrama de Estados Convertir Solicitud en Proyecto}}{142}{figure.Alph1.16}
+\contentsline {figure}{\numberline {A.17}{\ignorespaces Diagrama de Secuencia Enviar Respuesta Manual}}{143}{figure.Alph1.17}
+\contentsline {figure}{\numberline {A.18}{\ignorespaces Diagrama de Estados Enviar Respuesta Manual}}{143}{figure.Alph1.18}
+\contentsline {figure}{\numberline {A.19}{\ignorespaces Diagrama de Secuencia Respuesta Directa}}{145}{figure.Alph1.19}
+\contentsline {figure}{\numberline {A.20}{\ignorespaces Diagrama de Estados Respuesta Directa}}{145}{figure.Alph1.20}
+\contentsline {figure}{\numberline {A.21}{\ignorespaces Diagrama de Secuencia Buscar Solicitud}}{147}{figure.Alph1.21}
+\contentsline {figure}{\numberline {A.22}{\ignorespaces Diagrama de Estados Buscar Solicitud}}{147}{figure.Alph1.22}
+\contentsline {figure}{\numberline {A.23}{\ignorespaces Diagrama de Secuencia Ver Resumen Personal}}{149}{figure.Alph1.23}
+\contentsline {figure}{\numberline {A.24}{\ignorespaces Diagrama de Estados Ver Resumen Personal}}{149}{figure.Alph1.24}
+\contentsline {figure}{\numberline {A.25}{\ignorespaces Diagrama de Secuencia Ver Resumen \'Area}}{151}{figure.Alph1.25}
+\contentsline {figure}{\numberline {A.26}{\ignorespaces Diagrama de Estados Ver Resumen \'Area}}{151}{figure.Alph1.26}
+\contentsline {figure}{\numberline {A.27}{\ignorespaces Diagrama de Secuencia Ver Resumen Departamento}}{153}{figure.Alph1.27}
+\contentsline {figure}{\numberline {A.28}{\ignorespaces Diagrama de Estados Ver Resumen Departamento}}{153}{figure.Alph1.28}
+\contentsline {figure}{\numberline {A.29}{\ignorespaces Diagrama de Secuencia Atender Solicitud}}{155}{figure.Alph1.29}
+\contentsline {figure}{\numberline {A.30}{\ignorespaces Diagrama de Estados Atender Solicitud}}{156}{figure.Alph1.30}
+\contentsline {figure}{\numberline {A.31}{\ignorespaces Diagrama de Secuencia Cerrar Solicitud}}{157}{figure.Alph1.31}
+\contentsline {figure}{\numberline {A.32}{\ignorespaces Diagrama de Estados Cerrar Solicitud}}{158}{figure.Alph1.32}
+\contentsline {figure}{\numberline {A.33}{\ignorespaces Diagrama de Secuencia Respuesta al Jefe de \'Area}}{159}{figure.Alph1.33}
+\contentsline {figure}{\numberline {A.34}{\ignorespaces Diagrama de Estados Respuesta al Jefe de \'Area}}{159}{figure.Alph1.34}
+\contentsline {figure}{\numberline {A.35}{\ignorespaces Diagrama de Secuencia Gestionar Proyectos}}{161}{figure.Alph1.35}
+\contentsline {figure}{\numberline {A.36}{\ignorespaces Diagrama de Estados Gestionar Proyectos}}{161}{figure.Alph1.36}
+\contentsline {figure}{\numberline {A.37}{\ignorespaces Diagrama de Secuencia Crear Proyecto}}{163}{figure.Alph1.37}
+\contentsline {figure}{\numberline {A.38}{\ignorespaces Diagrama de Estados Crear Proyecto}}{164}{figure.Alph1.38}
+\contentsline {figure}{\numberline {A.39}{\ignorespaces Diagrama de Secuencia Buscar Proyecto}}{166}{figure.Alph1.39}
+\contentsline {figure}{\numberline {A.40}{\ignorespaces Diagrama de Estados Buscar Proyecto}}{166}{figure.Alph1.40}
+\contentsline {figure}{\numberline {A.41}{\ignorespaces Diagrama de Secuencia Eliminar Proyecto}}{167}{figure.Alph1.41}
+\contentsline {figure}{\numberline {A.42}{\ignorespaces Diagrama de Estados Eliminar Proyecto}}{168}{figure.Alph1.42}
+\contentsline {figure}{\numberline {A.43}{\ignorespaces Diagrama de Secuencia Modificar Proyecto}}{169}{figure.Alph1.43}
+\contentsline {figure}{\numberline {A.44}{\ignorespaces Diagrama de Estados Modificar Proyecto}}{169}{figure.Alph1.44}
+\contentsline {figure}{\numberline {A.45}{\ignorespaces Diagrama de Secuencia Ver Resumen Avance Proyecto}}{170}{figure.Alph1.45}
+\contentsline {figure}{\numberline {A.46}{\ignorespaces Diagrama de Estados Ver Resumen Avance Proyecto}}{171}{figure.Alph1.46}
+\contentsline {figure}{\numberline {A.47}{\ignorespaces Diagrama de Secuencia Definir Tareas SCM}}{172}{figure.Alph1.47}
+\contentsline {figure}{\numberline {A.48}{\ignorespaces Diagrama de Estados Definir Tareas SCM}}{172}{figure.Alph1.48}
+\contentsline {figure}{\numberline {A.49}{\ignorespaces Diagrama de Secuencia Gestionar Tareas Proyecto}}{174}{figure.Alph1.49}
+\contentsline {figure}{\numberline {A.50}{\ignorespaces Diagrama de Estados Gestionar Tareas Proyecto}}{174}{figure.Alph1.50}
+\contentsline {figure}{\numberline {A.51}{\ignorespaces Diagrama de Secuencia Crear Tarea}}{175}{figure.Alph1.51}
+\contentsline {figure}{\numberline {A.52}{\ignorespaces Diagrama de Estados Crear Tarea}}{176}{figure.Alph1.52}
+\contentsline {figure}{\numberline {A.53}{\ignorespaces Diagrama de Secuencia Eliminar Tarea}}{177}{figure.Alph1.53}
+\contentsline {figure}{\numberline {A.54}{\ignorespaces Diagrama de Estados Eliminar Tarea}}{177}{figure.Alph1.54}
+\contentsline {figure}{\numberline {A.55}{\ignorespaces Diagrama de Secuencia Actualizar estado de avance Tarea}}{178}{figure.Alph1.55}
+\contentsline {figure}{\numberline {A.56}{\ignorespaces Diagrama de Estados Actualizar estado de avance Tarea}}{179}{figure.Alph1.56}
+\contentsline {figure}{\numberline {A.57}{\ignorespaces Diagrama de Secuencia Gesti\'on de Cambios}}{181}{figure.Alph1.57}
+\contentsline {figure}{\numberline {A.58}{\ignorespaces Diagrama de Estados Gesti\'on de Cambios}}{182}{figure.Alph1.58}
+\contentsline {figure}{\numberline {A.59}{\ignorespaces Diagrama de Secuencia Identificar Configuraci\'on}}{183}{figure.Alph1.59}
+\contentsline {figure}{\numberline {A.60}{\ignorespaces Diagrama de Estados Identificar Configuraci\'on}}{183}{figure.Alph1.60}
+\contentsline {figure}{\numberline {A.61}{\ignorespaces Diagrama de Secuencia Crear Solicitud de Cambio}}{184}{figure.Alph1.61}
+\contentsline {figure}{\numberline {A.62}{\ignorespaces Diagrama de Estados Crear Solicitud de Cambio}}{185}{figure.Alph1.62}
+\contentsline {figure}{\numberline {A.63}{\ignorespaces Diagrama de Secuencia Analizar Impacto del Cambio}}{186}{figure.Alph1.63}
+\contentsline {figure}{\numberline {A.64}{\ignorespaces Diagrama de Estados Analizar Impacto del Cambio}}{186}{figure.Alph1.64}
+\contentsline {figure}{\numberline {A.65}{\ignorespaces Diagrama de Secuencia Aprobar/Rechazar Solicitud}}{188}{figure.Alph1.65}
+\contentsline {figure}{\numberline {A.66}{\ignorespaces Diagrama de Estados Aprobar/Rechazar Solicitud}}{189}{figure.Alph1.66}
+\contentsline {figure}{\numberline {A.67}{\ignorespaces Diagrama de Secuencia Implementaci\'on del Cambio}}{190}{figure.Alph1.67}
+\contentsline {figure}{\numberline {A.68}{\ignorespaces Diagrama de Estados Implementaci\'on del Cambio}}{190}{figure.Alph1.68}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Interfaz Crear Nueva Solicitud}}{198}{figure.Alph3.1}
+\contentsline {figure}{\numberline {C.2}{\ignorespaces Interfaz Men\'u de Inicio}}{198}{figure.Alph3.2}
+\contentsline {figure}{\numberline {C.3}{\ignorespaces Interfaz Consultar Solicitud}}{200}{figure.Alph3.3}
+\contentsline {figure}{\numberline {C.4}{\ignorespaces Interfaz Filtrar Solicitudes}}{201}{figure.Alph3.4}
+\contentsline {figure}{\numberline {C.5}{\ignorespaces Interfaz Consultar Solicitud}}{202}{figure.Alph3.5}
+\contentsline {figure}{\numberline {C.6}{\ignorespaces Interfaz Detalle Solicitud}}{202}{figure.Alph3.6}
+\contentsline {figure}{\numberline {C.7}{\ignorespaces Interfaz Solicitud no encontrada}}{203}{figure.Alph3.7}
+\contentsline {figure}{\numberline {C.8}{\ignorespaces Interfaz de Comentar Solicitud}}{205}{figure.Alph3.8}
+\contentsline {figure}{\numberline {C.9}{\ignorespaces Interfaz de Gestionar Solicitud}}{207}{figure.Alph3.9}
+\contentsline {figure}{\numberline {C.10}{\ignorespaces Interfaz de Detalle Solicitud del Jefe de \'Area}}{207}{figure.Alph3.10}
+\contentsline {figure}{\numberline {C.11}{\ignorespaces Interfaz Asignar Responsable Solicitud}}{209}{figure.Alph3.11}
+\contentsline {figure}{\numberline {C.12}{\ignorespaces Interfaz Transferir Solicitud}}{211}{figure.Alph3.12}
+\contentsline {figure}{\numberline {C.13}{\ignorespaces Interfaz Rechazar Solicitud}}{213}{figure.Alph3.13}
+\contentsline {figure}{\numberline {C.14}{\ignorespaces Interfaz Convertir Solicitud en Proyecto}}{214}{figure.Alph3.14}
+\contentsline {figure}{\numberline {C.15}{\ignorespaces Interfaz Enviar Respuesta Manual}}{216}{figure.Alph3.15}
+\contentsline {figure}{\numberline {C.16}{\ignorespaces Interfaz de Respuesta Directa}}{218}{figure.Alph3.16}
+\contentsline {figure}{\numberline {C.17}{\ignorespaces Interfaz Buscar Solicitud}}{220}{figure.Alph3.17}
+\contentsline {figure}{\numberline {C.18}{\ignorespaces Interfaz Ver Resumen Personal}}{222}{figure.Alph3.18}
+\contentsline {figure}{\numberline {C.19}{\ignorespaces Interfaz Ver Resumen \'Area}}{224}{figure.Alph3.19}
+\contentsline {figure}{\numberline {C.20}{\ignorespaces Interfaz Ver Resumen Departamento}}{226}{figure.Alph3.20}
+\contentsline {figure}{\numberline {C.21}{\ignorespaces Interfaz de Mis Solicitud}}{228}{figure.Alph3.21}
+\contentsline {figure}{\numberline {C.22}{\ignorespaces Interfaz Atender Solicitud}}{229}{figure.Alph3.22}
+\contentsline {figure}{\numberline {C.23}{\ignorespaces Interfaz Cerrar Solicitud}}{230}{figure.Alph3.23}
+\contentsline {figure}{\numberline {C.24}{\ignorespaces Interfaz de Respuesta al Jefe de \'Area}}{231}{figure.Alph3.24}
+\contentsline {figure}{\numberline {C.25}{\ignorespaces Interfaz Gestionar Proyectos}}{233}{figure.Alph3.25}
+\contentsline {figure}{\numberline {C.26}{\ignorespaces Interfaz Crear Proyecto}}{235}{figure.Alph3.26}
+\contentsline {figure}{\numberline {C.27}{\ignorespaces Interfaz Buscar Proyecto}}{237}{figure.Alph3.27}
+\contentsline {figure}{\numberline {C.28}{\ignorespaces Interfaz Detalle Proyecto}}{238}{figure.Alph3.28}
+\contentsline {figure}{\numberline {C.29}{\ignorespaces Interfaz Eliminar Proyecto}}{238}{figure.Alph3.29}
+\contentsline {figure}{\numberline {C.30}{\ignorespaces Interfaz Modificar Proyecto}}{240}{figure.Alph3.30}
+\contentsline {figure}{\numberline {C.31}{\ignorespaces Interfaz Resumen Avance Proyecto}}{241}{figure.Alph3.31}
+\contentsline {figure}{\numberline {C.32}{\ignorespaces Interfaz Definir Tareas SCM}}{243}{figure.Alph3.32}
+\contentsline {figure}{\numberline {C.33}{\ignorespaces Interfaz Asignar Tareas SCM}}{244}{figure.Alph3.33}
+\contentsline {figure}{\numberline {C.34}{\ignorespaces Interfaz Gestionar Tareas Proyecto}}{246}{figure.Alph3.34}
+\contentsline {figure}{\numberline {C.35}{\ignorespaces Interfaz Crear Tarea}}{247}{figure.Alph3.35}
+\contentsline {figure}{\numberline {C.36}{\ignorespaces Interfaz Eliminar Tarea}}{248}{figure.Alph3.36}
+\contentsline {figure}{\numberline {C.37}{\ignorespaces Interfaz Actualizar estado de avance Tarea}}{250}{figure.Alph3.37}
+\contentsline {figure}{\numberline {C.38}{\ignorespaces Interfaz Error al Actualizar estado de avance Tarea}}{250}{figure.Alph3.38}
+\contentsline {figure}{\numberline {C.39}{\ignorespaces Interfaz de Gesti\'on de Cambios}}{252}{figure.Alph3.39}
+\contentsline {figure}{\numberline {C.40}{\ignorespaces Interfaz de Identificaci\'on de la Configuraci\'on}}{254}{figure.Alph3.40}
+\contentsline {figure}{\numberline {C.41}{\ignorespaces Interfaz para agregar Item de Configuraci\'on}}{254}{figure.Alph3.41}
+\contentsline {figure}{\numberline {C.42}{\ignorespaces Interfaz Crear Solicitud de Cambio}}{256}{figure.Alph3.42}
+\contentsline {figure}{\numberline {C.43}{\ignorespaces Interfaz Analizar Impacto del Cambio}}{257}{figure.Alph3.43}
+\contentsline {figure}{\numberline {C.44}{\ignorespaces Interfaz de Ingreso del An\'alisis del Impacto del Cambio}}{257}{figure.Alph3.44}
+\contentsline {figure}{\numberline {C.45}{\ignorespaces Interfaz para Aprobar/Rechazar Solicitud}}{259}{figure.Alph3.45}
+\contentsline {figure}{\numberline {C.46}{\ignorespaces Interfaz de ingreso de la Aprobaci\'on/Rechazo de la Solicitud}}{260}{figure.Alph3.46}
+\contentsline {figure}{\numberline {C.47}{\ignorespaces Interfaz de Implementaci\'on del Cambio}}{262}{figure.Alph3.47}
+\contentsline {figure}{\numberline {C.48}{\ignorespaces Interfaz del Formulario de Implementaci\'on del Cambio}}{262}{figure.Alph3.48}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

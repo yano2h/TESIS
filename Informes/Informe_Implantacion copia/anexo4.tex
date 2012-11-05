@@ -1,0 +1,496 @@
+\chapter{Descripción de las clases}
+\label{anexo4}
+
+Para una mayor comprensión del diagrama de clases, se presenta una breve 
+	explicación de cada clase y los atributos y/o métodos que la componen.
+
+	\begin{enumerate}
+
+		\item \textbf{Clase Funcionario:} Es la clase que representa a los 
+		usuarios del sistema, principalmente a los que se dedican a enviar
+		solicitudes de requerimiento a DISICO.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{rut:} Es el rut de la persona en formato entero sin 
+			puntos guiones ni dígito verificador, que sirve para identificar a un 
+			usuario de manera unequivoca.
+			\item \textbf{nombre:} Cadena que contiene el nombre o nombres 
+			del funcionario.
+			\item \textbf{apellidoPaterno:} Cadena que almacena el apellido 
+			paterno (o primer apellido) del funcionario.
+			\item \textbf{apellidoMaterno:} Cadena que almacena el apellido 
+			materno (o segundo apellido) del funcionario.
+			\item \textbf{correoUV:} Cadena que almacena el correo 
+			institucional (con dominio @uv.cl) del funcionario.
+			\item \textbf{fechaPrimerAcceso:} Fecha y hora en que accedió por
+			primera vez el funcionario al sistema.
+			\item \textbf{fechaUltimoAcceso:} Fecha y hora en que accedió por
+			ultima vez el funcionario al sistema.
+			\item \textbf{notificaciones:} Lista del tipo Notificacion con todas las notificaciones
+			del usuario.
+		\end{itemize}
+		
+		\item \textbf{Clase FuncionarioDisico:} Esta clase extiende a de la 
+		clase Funcionario y representa a los funcionarios de la universidad que
+		trabajan en el departamento de DISICO.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item Hereda todos los atributos de la clase Funcionario.
+			\item \textbf{cargo:} Cadena con el cargo que tiene el funcionario
+			dentro de disico.
+			\item \textbf{anexo:} Cadena con el anexo si es que posee para comunicarse
+			por teléfono con el funcionario.
+			\item \textbf{estadisticasPersonales:} Un lista (del tipo EstadisticaPersonalDiaria) que 
+			contiene todas las mediciones estadísticas del usuario que se han tomado desde que fue 
+			registrado en el sistema.
+			\item \textbf{area:} Area de disisco a la que pertenece el funcionario.
+		\end{itemize}
+
+		\item \textbf{Clase Area:} Esta clase representa a un área de DISICO.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{codigoArea:} Entero con el código numero identificador del área.
+			\item \textbf{nombreArea:} Cadena con el nombre del área.
+			\item \textbf{descripcionArea:} Cadena con la descripción del área y sus funciones.
+		\end{itemize}
+
+		\item \textbf{Clase SolicitudDeRequerimiento:} Clase que representa representa a
+		las solicitudes de requerimientos enviadas por los usuarios del sistema.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idSolicitud:} Entero con un numero identificador para la solicitud.
+			\item \textbf{codigoConsulta:} Cadena con un código único, utilizado para que
+			los usuario puedan buscar solicitudes a través de este código, a diferencia del
+			idSolicitud esta cadena no es secuencial, es un conjunto de caracteres mas un dígito 
+			verificador que permite corroborar la valides del código.
+			\item \textbf{asunto:} Cadena con una descripción corta pero representativa de lo que trata
+			la solicitud.
+			\item \textbf{mensaje:} Cadena que contiene el mensaje completo explicando de que 
+			consiste la solicitud. 
+			\item \textbf{justificacionTransferencia:} Cadena utilizada en caso de que el Jefe de Área 
+			transfiera una solicitud a otra área, para justificar el motivo de esta transferencia.
+			\item \textbf{respuesta:} Cadena que contiene el mensaje de respuesta ingresado una vez 
+			que se da por cerrada la solicitud.
+			\item \textbf{fechaEnvio:} Fecha y hora en la que fue enviada la solicitud.
+			\item \textbf{fechaCierre:} Fecha y hora en la que fue cerrada la solicitud.
+			\item \textbf{fechaVencimiento:} Fecha y hora que se a definido como plazo máximo
+			para que el responsable resuelva la solicitud.
+			\item \textbf{fechaUltimaActualizacion:} Fecha y hora en que fue modificada por ultima vez 
+			la solicitud ya sea por creación, edición, transferencia, comentario, cierre de esta.
+			\item \textbf{areaResponsable:} Objeto de la clase Area que contiene la información del 
+			área a la que fue enviada la solicitud.
+			\item \textbf{solicitante:} Objeto de la clase Funcionario que contiene la información del
+			funcionario que envió la solicitud a DISICO.
+			\item \textbf{responsable:} Objeto de la clase FuncionarioDisico que contiene información 
+			sobre el funcionario al que fue asignada la solicitud.
+			\item \textbf{tipoSolicitud:} Objeto del tipo TipoSolicitudRequerimiento con información 
+			sobre el tipo de solicitud que corresponde.
+			\item \textbf{estadoSolicitud:} Objeto del tipo EstadoSolicitudRequerimiento con 
+			información del estado actual de la solicitud.
+			\item \textbf{prioridadSolicitud:} Objeto de la clase Prioridad con información sobre la 
+			prioridad que se le a asignado a la solicitud.
+			\item \textbf{comentarios:} Lista del tipo ComentarioSolicitud que contiene todos
+			los comentarios que se han echo sobre la solicitud.
+		\end{itemize}
+
+		\item \textbf{Clase Notificacion:} Esta clase contiene las notificaciones que son mostradas
+		en la pantalla de cada usuario de manera automática.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idNotificacion:} Entero con el numero identificador de la solicitud.
+			\item \textbf{fechaNotificacion:} Fecha y hora en la que se genero la notificación.
+			\item \textbf{mensajeNotificacion:} Cadena que contiene el mensaje que se muestra en
+			la notificación.
+			\item \textbf{revisada:} Variable booleana que indica si la notificación ya a sido revisada
+			por el usuario.
+		\end{itemize}
+
+		\item \textbf{Clase EstadisticaPersonalDiaria:} Esta clase contiene mediciones de diferentes
+		indicadores, los cuales son calculados de manera automática al final de cada día para cada
+		funcionario de DISICO.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEstadistica:} Entero identificador de la estadística.
+			\item \textbf{fechaMedicion:} Fecha en la que se tomo la medición.
+			\item \textbf{totalSolicitudesAsegnadas:} Entero con la cantidad total de solicitudes que
+			han sido asignadas al funcionario, desde que se registro al funcionario en el sistema
+			a la fecha de la medición.
+			\item \textbf{cantidadSolicitudesPendientes:} Entero con la cantidad de solicitudes 
+			que han sido asignadas al funcionario y que se encuentran pendientes (pero no vencidas)
+			a la fecha de la medición. 
+			\item \textbf{cantidadSolicitudesVencidas:} Entero con la cantidad de solicitudes 
+			vencidas (que han excedido su fecha de vencimiento y no se encuentran cerradas) 
+			a la fecha de la medición.
+			\item \textbf{cantidadSolicitudesIniciadas:} Entero con la cantidad de solicitudes que
+			que el funcionario mantiene en estado iniciado a la fecha de la medición (no incluye 
+			solicitudes vencidas).
+			\item \textbf{cantidadProyectosAcargo:} Entero con la cantidad de proyectos en los que
+			el funcionario participa como jefe de proyecto.
+			\item \textbf{cantidadProyectosQueParticipa:} Entero con la cantidad de proyectos
+			en los que participa el funcionario con un rol distinto al de jefe de proyecto.
+			\item \textbf{cantidadTareasProyecto:} Entero con la cantidad de tareas de proyecto
+			que el funcionario tiene abiertas a la fecha de la medición.
+			\item \textbf{cantidadTareasSCM:}  Entero con la cantidad de tareas de SCM
+			que el funcionario tiene abiertas a la fecha de la medición.
+		\end{itemize}
+
+		\item \textbf{Clase ComentarioSolicitud:} Clase que almacena los comentarios que los usuarios
+		realizan sobre las solicitudes de requerimientos.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idComentario:} Entero identificador de un comentario.
+			\item \textbf{fechaComentario:} Fecha y hora en la que se realizo el comentario.
+			\item \textbf{comentario:} Cadena con el contenido del comentario.
+			\item \textbf{visible:} Variable booleana que indica si el comentario debe ser mostrado
+			o no.
+			\item \textbf{autor:} Objeto de la clase Funcionario que tiene la información del
+			autor del comentario.
+		\end{itemize}
+
+		\item \textbf{Clase TipoSolicitudRequerimiento:} Clase utilizada para representar tipos de 
+		solicitudes de requerimientos.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idTipoSolicitud:} Entero con el identificador del tipo de solicitud.
+			\item \textbf{nombreTipoSolicitud:} Cadena de con el nombre del tipo de solicitud.
+		\end{itemize}
+\pagebreak
+		\item \textbf{Clase EstadoSolicitudRequerimiento:} Clase utilizada para representar los estados
+		que puede tener una solicitud de requerimiento.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEstadoSolicitud:} Entero con el identificador del estado de la solicitud de 
+			requerimiento.
+			\item \textbf{nombreEstadoSolicitud:} Cadena con el nombre del estado de la solicitud de 
+			cambio.
+		\end{itemize}
+
+		\item \textbf{Clase Prioridad:} Clase utilizada para representar los tipos de prioridad que 
+		puede tener una solicitud de requerimiento o cambio.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idPrioridad:} Entero con el identificador de la prioridad.
+			\item \textbf{nombrePrioridad:} Cadena con el nombre de la prioridad.
+		\end{itemize}
+
+		\item \textbf{Clase SolicitudDeCambio:}\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idSolicitud:} Entero identificador de la solicitud de cambio.
+			\item \textbf{fechaEnvio:} Fecha y hora en que fue enviada la solicitud de cambio.
+			\item \textbf{descripcionNecesidadDelCambio:} Cadena en la que se describe el motivo
+			por el cual es necesario realizar el cambio.
+			\item \textbf{descripcionCambio:} Cadena con la descripción del cambio concreto que 
+			debe ser implementado.
+			\item \textbf{fechaAnalisis:} Fecha y hora en la que se ingreso el análisis del impacto
+			al sistema.
+			\item \textbf{descripcionImpactoDelCambio:} Cadena que contiene el análisis del impacto
+			realizado.
+			\item \textbf{fechaCierre:} Fecha y hora en la que fue cerrada la solicitud.
+			\item \textbf{moduloAfectado:} Cadena con la descripción del modulo o módulos
+			afectados por el cambio.
+			\item \textbf{descripcionResolucion:} Cadena que contiene una descripción sobre
+			el motivo de la resolución que se tomo ya sea esta aprobación e rechazo.
+			\item \textbf{prioridadSolicitud:} Objeto de la clase PrioridadSolicitud que contiene la 
+			información de la prioridad asignada a la solicitud de cambio.
+			\item \textbf{estadoSolicitud:} Objeto de la clase EstadoSolicitudDeCambio que contiene
+			la información del estado actual de la solicitud.
+			\item \textbf{formularioImpl:} Objeto de la clase FormularioDeImplementacion que contiene
+			la información del formulario de implementación que debe completarse en caso de 
+			ser aprobada la solicitud.
+			\item \textbf{solicitante:} Objeto de la clase FuncionarioDisico con los datos del funcionario
+			que envió la solicitud de cambio.
+			\item \textbf{evaluadorImpacto:} Objeto de la clase FuncionarioDisico con los datos del 
+			funcionario que realizo la evaluación del impacto de la solicitud.
+			\item \textbf{evaluadorFinal:} Objeto de la clase FuncionarioDisico que realizo la evaluación
+			final de la solicitud.
+		\end{itemize}
+
+		\item \textbf{Clase EstadoSolicitudDeCambio:} Clase utilizada para representar los estados
+		que puede tener una solicitud de requerimiento.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEstadoSolicitud:} Entero con el identificador del estado de la solicitud de 
+			cambio.
+			\item \textbf{nombreEstadoSolicitud:} Cadena con el nombre del estado de la solicitud de 
+			cambio.
+		\end{itemize}
+
+		\item \textbf{Clase FormularioDeImplementacion:} Esta clase contiene la información del
+		formulario de implementación que debe completarse una vez que una solicitud de cambio
+		es aprobada.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idFormulario:} Entero identificador del formulario.
+			\item \textbf{observaciones:} Cadena que contiene observaciones sobre la implementación
+			del cambio.
+			\item \textbf{fechaVerificacion:} Fecha en la que se debe llevar a cabo la verificación del
+			cambio.
+			\item \textbf{verificador:} Objeto de la clase FuncionarioDisico que contiene información 
+			del funcionario que de verificar la implementación del cambio.
+			\item \textbf{implementador:} Objeto de la clase FuncionarioDisico que contiene 
+			información del funcionario que debe implementar el cambio.
+		\end{itemize}
+
+		\item \textbf{Clase TareaSCM:} Clase que contiene la información de una tarea de SCM que
+		debe llevarse a cabo en un proyecto determinado.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idTareaSCM:} Entero con el identificador de la tarea de SCM.
+			\item \textbf{nombreTarea:} Cadena con el nombre de la terea de SCM a realizar.
+			\item \textbf{descripcion:} Cadena con una descripción mas detallada de los objetivos
+			y alcanse de la tarea.
+			\item \textbf{entregablesAsociados:} Lista de la clase Entregable que contiene información
+			de todos los entregables asociados a dicha tarea.
+			\item \textbf{responsable:} Objeto de la clase FuncionarioDisico con la información del
+			responsable de la tarea.
+		\end{itemize}
+
+		\item \textbf{Clase Entregable:} Clase que contiene la información básica de un entregable.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEntregable:} Entero con el identificador del entregable.
+			\item \textbf{nombreEntregable:} Cadena con el nombre del entregable.
+		\end{itemize}
+
+		\item \textbf{Clase Proyecto:} Esta clase representa los proyectos que se realizan en DISICO.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idProyecto:} Entero con el numero identificador del proyecto.
+			\item \textbf{codigoInterno:} Cadena utilizada para definir un codigo interno 
+			para el proyecto que sera mostrado en pantalla en vez del id.
+			\item \textbf{nombre:} Cadena con el nombre del proyecto.
+			\item \textbf{descripcion:} Cadena con una descripción de los objetivos y alcances del 
+			proyecto.
+			\item \textbf{fechaInicio:} Fecha en la que se inicio el proyecto.
+			\item \textbf{fechaTermino:} Fecha en la que se cerro el proyecto.
+			\item \textbf{tipoProyecto:} Objeto de la clase TipoProyecto con información del
+			tipo de proyecto.
+			\item \textbf{estadoProyecto:} Objeto de la clase EstadoProyecto que contiene información
+			del estado actual del proyecto.
+			\item \textbf{tareasSCM:} Lista de la clase TareaSCM que contiene todas las tareas scm del
+			proyecto.
+			\item \textbf{participantes:} Lista de la clase Participante que contiene información de los
+			participantes del proyecto y su rol dentro de este.
+			\item \textbf{itemsDeConfiguracion:} Lista de la clase ItemDeConfiguracion que contiene
+			información de todos los items de configuración asociados al proyecto.
+			\item \textbf{tareasAgendadas:} Lista de la clase TareaProyecto con información de todas
+			las tareas agendadas en el proyecto. 
+		\end{itemize}
+
+		\item \textbf{Clase RolProyecto:} Esta clase representa los roles que puede tener un funcionario
+		dentro de un proyecto.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idRol:} Entero con el numero identificador del rol.
+			\item \textbf{nombreRol:} Cadena con el nombre del rol.
+		\end{itemize}
+
+		\item \textbf{Clase Participante:} Esta clase contiene información de un funcionario que
+		participa en un proyecto y rol que desempeña dentro de este.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{rol:} Objeto de la clase RolProyecto con información del rol del funcionario
+			dentro del proyecto.
+			\item \textbf{funcionario:} Objeto de la clase FuncionarioDisico con información del 
+			funcionario que participa dentro del proyecto.
+		\end{itemize}
+
+		\item \textbf{Clase EstadoProyecto:} Esta clase representa los estados que puede tener un 
+		proyecto.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idEstadoProyecto:} Entero con el identificador del estado del proyecto.
+			\item \textbf{nombreEstadoProyecto:} Cadena con el nombre del estado del proyecto.
+		\end{itemize}
+
+		\item \textbf{Clase TipoProyecto:} Esta clase representa los tipos de proyectos que
+		pueden existir.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idTipoProyecto:} Entero identificador del tipo de proyecto.
+			\item \textbf{nombreTipoProyecto:} Cadena con el nombre del tipo de proyecto.
+		\end{itemize}
+
+		\item \textbf{Clase ItemConfiguracion:} Clase que contiene la información de un item de 
+		configuración.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idItemConfiguracion:} Entero con un numero identificador del item dentro de
+			la base de datos.
+			\item \textbf{codigoIdentificador:} Cadena con un codigo identificador del item dentro
+			del proyecto, este debe ser unico dentro del proyecto.
+			\item \textbf{nombreItemConfiguracion:} Cadena con el nombre del item de configuración.
+			\item \textbf{version:} Cadena con el identificador de la versión del item en el sistema de
+			de control de versiones.
+			\item \textbf{ubicacionEnBiblioteca:} Cadena con una ruta que permite localizar el item
+			de configuración dentro de la biblioteca.
+			\item \textbf{fechaUltimaModificacion:} Fecha y hora en la que se realizo el ultimo
+			cambio al item de configuración.
+			\item \textbf{responsableDelItem:} Objeto de la clase FuncionarioDisico que contiene 
+			información del responsable de la solicitud.
+		\end{itemize}
+
+		\item \textbf{Clase TareaProyecto:} Esta clase contiene información de una tarea clendarizada
+		en un proyecto.\\\\
+		\textbf{Atributos de la Clase:}
+		\begin{itemize}
+			\item \textbf{idTareaProyecto:} Entero identificador de la tarea.
+			\item \textbf{descripcionTarea:} Cadena con una breve descripción de la tarea.
+			\item \textbf{fechaCreacion:} Fecha y hora en que se agrego la tarea al proyecto.
+			\item \textbf{fechaInicioPropuesta:} Fecha y hora en la que se estima debe iniciarse
+			la ejecución de la tarea.
+			\item \textbf{fechaInicioReal:} Fecha y hora en la que realmente se dio inició a la tarea.
+			\item \textbf{fechaTerminoPropuesta:} Fecha y hora en la que se estima debe estar
+			finalizada la tarea.
+			\item \textbf{fechaTerminoReal:} Fecha y hora en la que realmente se dio fin a la tarea.
+			\item \textbf{nivelAvance:} Entero que describe el nivel de avance de una tarea (representa
+			un porcentaje entero entre 0 y 100)
+			\item \textbf{visible:} Variable booleana que determina si una tarea debe ser mostrada
+			o no entre las tareas del proyecto.
+			\item \textbf{responsableTarea:} Objeto de la clase FuncionarioDisico que contiene 
+			información del responsable de la tarea.
+		\end{itemize}
+
+		\item \textbf{Clase EjbSolicitudRequerimeinto:} Es una clase que implementa un Ejb con 
+		métodos dedicados a la gestión de solicitudes de requerimientos.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{generarCodigoConsulta:} Método que genera una cadena con un código de 
+			consulta unico.
+			\item \textbf{validarCodigoConsulta:} Método que verifica si un código de consulta es 
+			valido.
+			\item \textbf{buscarSolicitudPorCodigo:} Método para buscar solicitudes a través de un 
+			código de consulta.
+			\item \textbf{buscarSolicitudPorSolicitante:} Método para buscar solicitudes por solicitante.
+			\item \textbf{buscarSolicitudPorResponsable:} Método para buscar solicitudes por 
+			responsable.
+			\item \textbf{buscarSolicitudPorArea:} Método para buscar solicitudes por área.
+			\item \textbf{enviarSolicitud:} Método para enviar solicitudes a un área de DISICO.
+			\item \textbf{cerrarSolicitud:} Método para cerrar una solicitud.
+			\item \textbf{respuestaDirecta:} Método para enviar una respuesta directa al usuario que
+			envió la solicitud.
+			\item \textbf{respuestaJefeArea:} Método para derivar la responsabilidad de responder la 
+			solicitud al jefe de area.
+			\item \textbf{respuestaManual:} Método para enviar una respuesta manualmente.
+			\item \textbf{asignarResponsable:} Método para asignar responsable a una solicitud.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbEmail:} Es una clase que implementa un Ejb con métodos para la creación 
+		y envió de emails.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{crearEmail:} Método que permite crear la estructura de un correo electrónico.
+			\item \textbf{enviarEmail:} Método que permite enviar el correo generado a una lista de 
+			destinatarios.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbSSO:} Es una clase que implementa un Ejb con métodos para el manejo
+		de cookies SSO y recuperación de información desde el servicio de conexión a LDAP.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{obtenerDatosUsuario:} Método que permite recuperar la información del
+			usuario desde el servidor de LDAP:
+			\item \textbf{cerrarSesion:} Método para cerrar una sesión de usuario.
+			\item \textbf{validarSesion:} Método para validar que existe una sesión SSO activa para
+			el usuario.
+		\end{itemize}
+		
+		
+		\item \textbf{Clase EjbGeneradorDeIndicadores:} Es una clase que implementa un Ejb 
+		con métodos para el calculo de indicadores y estadísticas.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{calcularEstadisticaPersonal:} Método que calcula estadísticas por persona.
+			\item \textbf{calcularEstadisticaArea:} Método que calcula estadísticas po Area.
+			\item \textbf{calcularEstadisticaDepartamento:} Método estadísticas por Departamento.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbGestorNotificaciones:} Es una clase que implementa un Ejb con métodos
+		para la generación de notificaciones y alertas.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{listarNotificacionesUsuario:} Método que entrega una lista con las 
+			notificaciones que deben ser mostradas al usuario.
+			\item \textbf{generarNotificación:} Método que genera una notificación y la enviá al
+			usuario correspondiente.
+			\item \textbf{generarAlerta:} Método que genera una alerta cuando se produce algun 
+			evento como el retraso de una solicitud o tarea.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbCalendarizadorDeTareas:} Es una clase que implementa un Ejb con 
+		métodos para gestionar las tareas de un proyecto.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{agendarTarea:} Método para agregar tareas a un proyecto. 
+			\item \textbf{editarTarea:} Método para editar la información de una tarea.
+			\item \textbf{listarTareasProyecto:} Método para listar todas las tareas visibles de un 
+			proyecto.
+			\item \textbf{buscarTareasPorResponsable:} Método para buscar tareas por responsable.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbMedidorAvanceProyecto:} Es una clase que implementa un Ejb con 
+		métodos para medir y actualizar el avance de las tareas de un proyecto.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{actualizarAvanceTarea:} Método para actualizar el estado de avance de una 
+			tarea.
+			\item \textbf{buscarTareasRetrasadas:} Método para buscar tareas retrasadas en un 
+			proyecto.
+			\item \textbf{generarIndicadoresDeAvanceProyecto:} Método para calcular el avance general
+			de un proyecto.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbItemsConfiguracion:} Es una clase que implementa un Ejb con 
+		métodos para gestionar los items de configuración de un proyecto.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{agregarItemConfiguracion:} Método que permite agregar un item de 
+			configuración a un proyecto.
+			\item \textbf{listarItemsConfiguracion:} Método para listar los items de configuración de un 
+			proyecto.
+			\item \textbf{editarItemConfiguracion:} Método para editar la información de un item de
+			configuración.
+			\item \textbf{asignarResponsableItemConfiguracion:} Método para asignar responsable a
+			un item de configuración.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbProyectos:} Es una clase que implementa un Ejb con 
+		métodos para manejar la información de los proyectos.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{crearProyecto:} Método para crear nuevos proyectos.
+			\item \textbf{editarProyecto:} Método para editar la información de los proyectos.
+			\item \textbf{buscarProyectoPorArea:} Método para buscar proyectos por área.
+			\item \textbf{asignarParticipantes:} Método para agregar participantes a un proyecto.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbTareasSCM:} Es una clase que implementa un Ejb con 
+		métodos para administrar las tareas de SCM de un proyecto.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{listarTareasSCM:} Método que lista las tareas de SCM básicas de todo 
+			proyecto.
+			\item \textbf{asignarResponsableTarea:} Método para asignar responsable a una tarea.
+			\item \textbf{buscarTareasSCMPorProyecto:} Método para buscar las tareas de SCM de un 
+			proyecto.
+			\item \textbf{buscarTareasSCMPorResponsable:} Método para buscar tareas de SCM de un
+			cierto responsable.
+			\item \textbf{iniciarTarea:} Método para iniciar una tarea de SCM.
+			\item \textbf{cerrarTarea:} Método para cerrar una tarea de SCM.
+		\end{itemize}
+		
+		\item \textbf{Clase EjbSolicitudDeCambio:} Es una clase que implementa un Ejb con 
+		métodos para gestionar las solicitudes de cambio.\\\\
+		\textbf{Métodos de la Clase:}
+		\begin{itemize}
+			\item \textbf{enviarSolicitudCambio:} Método para crear y enviar solicitudes de cambio.
+			\item \textbf{analisarImpacto:} Método para ingresar el análisis de impacto en una
+			solicitud de cambio.
+			\item \textbf{evaluarSolicitud:} Método para ingresar la evaluación final de una solicitud.
+			\item \textbf{guardarFormularioImplementacion:} Método para completar la información
+			del formulario de implementación de una solicitud de cambio.
+			\item \textbf{buscarSolicitudesDeCambioPorProyecto:} Método para buscar solicitudes de 
+			cambio relacionadas a un proyecto.
+		\end{itemize}
+	\end{enumerate}

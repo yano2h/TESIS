@@ -1,0 +1,236 @@
+\chapter{Implantación}
+
+En este capitulo se encuentran descrito todos los pasos
+y configuraciones necesarias para poder dejar la aplicación
+funcionando correctamente en un entorno de producción real.
+
+\section{Software Necesario}
+El software necesario para desplegar la aplicación es el siguiente:
+
+\begin{itemize}
+	\item PostgreSQL 9.0 o superior, este es el motor de base de datos y puede
+	ser descargado desde \textit{http://www.postgresql.org/download/}.
+	\item GlassFish 3.1.2 o superior, este es el servidor de aplicaciones 
+	donde se desplegara posteriormente la aplicación. Los archivos de 
+	instalación los puede encontrar en 
+	\textit{http://glassfish.java.net/downloads/3.1.2-final.html}.
+\end{itemize}
+
+La instalación de las aplicaciones recién mencionadas varían dependiendo del
+sistema operativo donde desea instalarlo. Y en este capitulo solo se describen
+configuraciones particulares necesarias para que la aplicación funcione 
+correctamente y no instalaciones genéricas de estas cuya documentación 
+abunda en Internet.
+
+\section{Consideraciones Previas}
+
+\begin{itemize}
+	\item No se requiere de algún sistema operativo en particular. 
+	La única condición es que soporte Java.
+	\item No es necesario que instale el servidor de aplicaciones y el servidor
+	de base de datos en la misma maquina.
+	\item Todos los archivos necesarios para la instalación los puede 
+	encontrar en la carpeta \textit{"ArchivosInstalacion"} que viene dentro
+	del CD que acompaña el documento.
+\end{itemize}
+
+\section{Configurar la Base de Datos}
+
+	\subsection{Creación de la Base de Datos}
+	
+	Suponiendo que instalo correctamente PostgreSQL, lo siguiente es ingresar
+	como administrador desde linea de comando o desde algún cliente
+	de PostgreSQL de su preferencia ( por ejemplo PgAdmin ). Una vez dentro
+	cree una nueva base de datos con el comando: 
+	\textit{CREATE DATABASE SISTEMA\_SOLICITUDES} donde SISTEMA\_SOLICITUDES
+	es el nombre asignado a la base de datos, si desea puede utilizar otro
+	nombre pero debe ser consistente con el nombre de base de datos utilizado
+	en los pasos siguientes.\\
+
+	Por ultimo seleccione la BD recien creada y ejecute el script contenido
+	en el archivo \textit{"script\_bd\_postgres.sql"} el cual contiene todas las 
+	sentencias necesarias para crear la base de datos.
+
+	\subsection{Poblamiento de la Base de Datos}
+	
+	Una vez creada la base de datos, es necesario cargar algunos
+	datos iniciales para que la aplicación trabaje correctamente.
+	Dichos datos se encuentran en el archivo \textit{"datos\_iniciales\_postgres.sql"},
+	estos están preparados dentro de sentencias inserts por lo cual 
+	basta con ejecutarlas directamente.
+
+	\subsection{Configurar PostgreSQL}
+	
+	Aunque la base de datos del sistema ya esta creada y poblada,
+	para que el sistema pueda trabajar con la base de datos de manera
+	optima, es necesario editar algunos de los archivos de configuración
+	de PostgreSQL. Los archivos que debe editar son:
+
+	\begin{itemize}
+		\item \textbf{pg\_hba.conf:} Este fichero se utiliza para definir los diferentes 
+		tipos de accesos que un usuario tiene en el cluster. Aquí es necesario agregar
+		la IP del servidor de aplicaciones en el caso de que este en diferentes maquinas.
+		Las lineas de configuración deben tener el siguiente formato:
+
+		[Tipo de conexion][database][usuario][IP][Netmask][Tipo de autentificacion][opciones]
+
+		\item \textbf{postgresql.conf:} En este fichero podemos cambiar todos los 
+		parámetros de configuración que afectan al funcionamiento y al 
+		comportamiento de PostgreSQL en nuestra maquina. Aqui lo importante
+		es editar el parámetro max\_connections, el cual define la cantidad máxima de 
+		clientes conectados simultáneamente. Este debe ser mayor al maximo
+		de conexiones configuradas en el pool de conexiones que se crea mas adelante.
+		Dado que de ser menor glassfish intentara establecer mas conexiones de las
+		que la base de datos puede soportar.
+	\end{itemize}
+
+	Se puede encontrar mas información sobre como configurar estos archivos en
+	\textit{http://www.postgresql.org.es/node/219} .
+
+	\subsection{Crear Pools de conexión en GlassFish}
+	Para que la aplicación pueda establecer una conexión con la base de datos
+	es necesario, crear y configurar correctamente un pool de conexiones en glassfish. 
+	Para esto es necesario seguir los siguientes pasos:
+
+	\begin{enumerate}
+		\item Descargar el driver de conexión correspondiente. En este caso 
+		corresponde el driver JDBC4 de PostgreSQL en su ultima versión,
+		este puede ser encontrado en \textit{http://jdbc.postgresql.org/download.html}.
+		\item Copiar el driver descargado en glassfish/domains/domain1/lib/ext.
+		\item Reiniciar glassfish para que se detecte el driver cargado. Para esto
+		puede utilizar el comando \textit{asadmin restart-domain}.
+		\item Una vez reiniciado, ingresar a la interfaz de administración.
+		\item Escoger las opciones Recursos -> JDBC -> Conjuntos de Conexiones JDBC
+		y escoger la opción Nuevo, para comenzar a crear un nuevo recurso el cual puede
+		nombrar como prefiera, y deberá escoger \textit{javax.sql.XADataSource} como 
+		Tipo de Recurso y \textit{Postresql} como Proveedor. 
+		\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.5]{imagenes/impl/nuevo_conjunto.png}
+			\caption{Creación nueva conexión.}
+			\label{new_conexion}
+		\end{center}
+		\end{figure}	
+
+		\item Luego en la siguiente ventana modificar la propiedad 
+		\textit{Tamaño de conjunto máximo}, e incrementar su valor al menos a 100 
+		conexiones.
+
+
+		\item Agregar las siguientes propiedades adicionales a la conexión: URL, 
+		driverClass, portNumber, databaseName, User, serverName y Password.
+		Y configurar estos parámetros acorde a la configuración de su base de datos.
+
+		\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.5]{imagenes/impl/propiedades_conexion.png}
+			\caption{Propiedades Conexión.}
+			\label{prop_conexion}
+		\end{center}
+		\end{figure}	
+
+		\item Crear un nuevo Recurso JDBC  que utilice la conexión recién creada.
+		Para esto ir a la opción Recursos -> JDBC -> Recursos JDBC y escoger la opción 
+		Nuevo. El nombre JDNI del recurso debe ser \textit{"jdbc/poolSSRSCM"}, este 
+		es el recurso que buscara la aplicación por lo que debe mantener su nombre,
+		en caso cambiarlo, también debe hacerlo en el código fuente de la aplicación y 
+		volver a compilarlo.
+
+		\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.5]{imagenes/impl/nuevo_recurso_jdbc.png}
+			\caption{Creación Nuevo Recurso JDBC.}
+			\label{prop_conexion}
+		\end{center}
+		\end{figure}	
+
+	\end{enumerate}
+	
+
+\section{Instalación de Hibernate}
+Aunque a esta altura ya debiese tener toda la configuración necesaria para
+poder establecer una conexión exitosa entre la aplicación y la base de datos,
+es necesario instalar las librerías de hibernate en glassfish, ya que toda la 
+capa de persistencia esta implementada bajo el estándar JPA y esta configurada
+para utilizar Hibernate como proveedor.\\
+
+Para poder instalar las librerías de hibernate en glassfish debe abrir la consola de 
+administración y escoger la opción \textit{Herramientas de Actualización} y dentro
+de la pestaña \textit{Complementos Disponibles} y buscar el Complemento
+\textit{hibernate} , seleccionarlo e instalarlo.
+
+	\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.36]{imagenes/impl/update_tools.png}
+		\caption{Instalación Hibernate.}
+		\label{updatetool}
+	\end{center}
+	\end{figure}	
+
+\section{Configuración para el envío de Correo Electrónico}
+Entre las funcionalidades del sistema se encuentra el envío de correos
+electrónicos, ya sea de forma manual o automática, para que estas
+funciones trabajen correctamente, es necesario crear un recurso de sesión JavaMail
+dentro del servidor Glassfish.\\
+
+Para crear un recurso de sesión JavaMail, es necesario ingresar a la consola de
+administración de glassfish y seleccionar la opción \textit{Recursos} -> \textit{Sesiones JavaMail} .
+
+	\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.4]{imagenes/impl/java_mail_1.png}
+		\caption{Menu Sesiones JavaMail.}
+		\label{javamail}
+	\end{center}
+	\end{figure}	
+
+Una vez hay debe seleccionar la opción nuevo y crear un nuevo recurso con el Nombre JNDI 
+\textit{email/ssrscm}, al igual que en casos anteriores este  nombre es obligatorio, sin
+embargo la configuración de la cuenta, puede ser configurada como prefiera. A continuación
+se muestra una configuración básica.
+
+	\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.4]{imagenes/impl/nueva_sesion_javamail.png}
+		\includegraphics[scale=0.4]{imagenes/impl/avanzado_javamail.png}
+		\caption{Configuración Básica Sesiones JavaMail.}
+		\label{confjavamail}
+	\end{center}
+	\end{figure}
+
+\section{Configuración para subir y descargar archivos}
+Para que la aplicación pueda subir y posteriormente descargar archivos
+es necesario declarar la ruta donde se manejaran todos estos recursos,
+para esto existe un archivo de propiedades en el proyecto llamado BasicParams 
+que tiene la propiedad \textit{pathArchivosSolicitudes} la cual sirve
+para configurar la ruta donde se almacenaran los archivos adjuntos a las solicitudes.
+De no existir el sistema la creara automáticamente, y de ser necesario puede
+ser modificada en el mismo archivo. En caso de problemas puede ser necesario
+crear manualmente el directorio y asignar los permisos de acceso necesarios.
+
+
+\section{Configuración de Seguridad OpenAM}
+Para poder utilizar el acceso a la aplicación a travez del Portal de login institucional
+es necesario realizar los siguientes pasos.
+
+\begin{itemize}
+	\item Agregar la aplicación al Panel de Control de aplicaciones de la Universidad.
+	La configuración puede variar dependiendo del dominio asignado a la aplicación, puerto
+	etc. Sin embargo el parámetro correspondiente al Código de Aplicación debe definirse
+	como \textit{SSRSCM}. 
+
+	\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.6]{imagenes/impl/PanelDeControl_3.png}
+		\caption{Configuración Básica panel de Control.}
+		\label{panelcontrol}
+	\end{center}
+	\end{figure}
+	
+	\item Luego debe crear los roles SSRSCM-ADMIN, SSRSCM-JEFE\_AREA, SSRSCM-
+	JEFE\_DEPTO, SSRSCM-FUNC\_DISICO, SSRSCM-SOLICITANTE, en el LDAP de 
+	funcionarios a través de OpenAM.
+
+	\item Por ultimo deberá asignar los roles correspondieres a cada funcionario al 
+	cual requiere dar acceso al sistema.
+\end{itemize}
