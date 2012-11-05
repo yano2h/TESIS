@@ -156,15 +156,15 @@
                                 <p:column>
                                     <h:panelGrid columns="3" styleClass="item-upload">
                                         <h:outputText value="#{f.archivoAdjunto.nombre} #{f.archivoAdjunto.sizeFormat}" style="width: 300px;"/>
-                                        <p:commandLink id="link" value="Descargar" actionListener="#{mbDetalleSolicitud.load(f)}" ajax="false" 
-                                                       style="float: right;color: steelblue;">
-                                            <p:fileDownload value="#{mbDetalleSolicitud.fileDownload}" />
+                                        <p:commandLink id="link" value="Descargar" actionListener="#{mbDetalleSolicitud.load(f)}" ajax="false"
+                                                       style="float: right;color: steelblue;" process="@this">
+                                            <p:fileDownload value="#{mbDetalleSolicitud.fileDownload}"  />
                                         </p:commandLink>
                                     </h:panelGrid>
                                 </p:column>   
                             </p:dataList>
                         </p:panel>
-                        
+
                         <br/>
                         <p:panel header="Motivo Transferencia" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%" rendered="#{not empty mbDetalleSolicitud.solicitud.justificacionTrasnferencia}" >  
                             <h:outputText id="motivoTransferencia" value="#{mbDetalleSolicitud.solicitud.justificacionTrasnferencia}" escape="false"/>
@@ -230,6 +230,25 @@
                         <p:outputLabel value="Mensaje de Respuesta:" styleClass="label_blod" for="editorRespDirecta"/>
                         <p:editor id="editorRespDirecta" widgetVar="editorRespDirecta" width="450" height="200" value="#{mbSolicitudesArea.respuesta}" required="true"/>
 
+                        <!-- Upload File Respuesta -->
+                        <p:dataList id="uploadFiles" value="#{mbSolicitudesArea.archivosAdjuntos}" var="f" type="none">
+                            <p:column>
+                                <h:panelGrid columns="3" styleClass="item-upload">
+                                    <h:outputText value="#{f.nombre}" style="width: 300px;"/>
+                                    <p:commandLink id="link" value="Eliminar" actionListener="#{mbSolicitudesArea.remove(f)}" 
+                                                   process="@this" update="@(.ui-datalist)" style="float: right;color: steelblue;"/>
+                                </h:panelGrid>
+                            </p:column>   
+                        </p:dataList>
+
+                        <p:fileUpload id="filesUpload"     
+                                      label="Adjuntar Archivo"
+                                      fileUploadListener="#{mbSolicitudesArea.handleFileUpload}"  
+                                      mode="advanced"
+                                      sizeLimit="5000000"
+                                      multiple="true" 
+                                      auto="true" update="uploadFiles" />
+
                         <h:panelGroup style="vertical-align: top;margin-bottom: 10px;margin-top: 10px;">
                             <p:selectBooleanCheckbox id="checkBoxEmail" value="#{mbSolicitudesArea.enviarMail}"  />
                             <h:outputText value="Enviar una copia de la respuesat al correo del solicitante" styleClass="small_text"/>
@@ -271,7 +290,7 @@
                 </p:dialog>
 
                 <!-- DIALOG RESPUESTA AL JEFE DE AREA -->
-                
+
                 <p:dialog id="dlg_repuesta_ja" modal="true" closable="false" resizable="false" width="500" widgetVar="respJA" header="Responder al Jefe de Area">
                     <p class="label">
                         Esta opcion le permite delegar al Jefe de Area la responsabilidad de enviar una respuesta al solicitante.
@@ -328,7 +347,7 @@
                 </p:dialog>
 
                 <!-- DIALOG CONVERTIR EN PROYECTO -->
-                
+
                 <p:dialog id="dlg_convertir_proyecto" modal="true" closable="false" resizable="false" width="500" widgetVar="convProyecto" header="Convertir Solicitud en Proyecto">
                     <p class="label">
                         Esta opcion le permite crear un nuevo proyecto a partir de esta solicitud y dar por cerrada automaticamente esta solicitud.

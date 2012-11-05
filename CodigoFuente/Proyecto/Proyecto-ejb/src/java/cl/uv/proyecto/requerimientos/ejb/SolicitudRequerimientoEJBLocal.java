@@ -27,7 +27,7 @@ public interface SolicitudRequerimientoEJBLocal {
     String generarCodigo(long num);
     
     public void rechazarSolicitud(SolicitudRequerimiento solicitud);
-    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo);
+    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo, List<ArchivoAdjunto> archivosAdjuntos);
     public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto);
     public void transferirSolicitud(SolicitudRequerimiento solicitud, Area nuevaAreaResponsable, String motivoTransferencia);
     public void asignarSolicitud(SolicitudRequerimiento solicitud);

@@ -6,6 +6,7 @@ package cl.uv.view.controller.solicitudes.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
+import cl.uv.proyecto.persistencia.entidades.ArchivoAdjunto;
 import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
@@ -13,9 +14,13 @@ import cl.uv.proyecto.persistencia.jsf.mb.AreaController;
 import cl.uv.proyecto.requerimientos.ejb.SolicitudRequerimientoEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -23,6 +28,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -59,13 +65,16 @@ public class MbSolicitudesArea implements Serializable {
     private MbDetalleSolicitud mbDetalleSolicitud;
     @ManagedProperty(value = "#{areaController}")
     private AreaController areaController;
-
+    private List<ArchivoAdjunto> archivosAdjuntos;
+    
     public MbSolicitudesArea() {
     }
 
     @PostConstruct
     public void init() {
+        System.out.println("Inicio:"+new Date());
         solicitudesArea = solicitudFacade.buscarSolicitudesPorArea(mbFuncionarioInfo.getFuncionario().getArea());
+        System.out.println("Termino:"+new Date());
         SelectItem[] temp = areaController.getItemsAvailableSelectMany();
         areasParaTransferencia = new SelectItem[temp.length - 1];
         int cont = 0;
@@ -119,6 +128,14 @@ public class MbSolicitudesArea implements Serializable {
         this.enviarMail = enviarMail;
     }
 
+    public List<ArchivoAdjunto> getArchivosAdjuntos() {
+        return archivosAdjuntos;
+    }
+
+    public void setArchivosAdjuntos(List<ArchivoAdjunto> archivosAdjuntos) {
+        this.archivosAdjuntos = archivosAdjuntos;
+    }
+    
     public String getEmailsRespuestaManual() {
         if(emailsRespuestaManual.isEmpty()){
             emailsRespuestaManual = mbDetalleSolicitud.getSolicitud().getSolicitante().getCorreoUv();
@@ -204,7 +221,7 @@ public class MbSolicitudesArea implements Serializable {
     public void enviarRespuestaDirecta() {
         if (!respuesta.isEmpty()) {
             mbDetalleSolicitud.getSolicitud().setRespuesta(respuesta);
-            solicitudEJB.enviarRespuestaDirecta(mbDetalleSolicitud.getSolicitud(), enviarMail);
+            solicitudEJB.enviarRespuestaDirecta(mbDetalleSolicitud.getSolicitud(), enviarMail,archivosAdjuntos);
         }
         respuesta="";
         enviarMail = false;
@@ -239,5 +256,27 @@ public class MbSolicitudesArea implements Serializable {
     public void convertirEnProyecto(){
         solicitudEJB.convertirSolicitudEnProyecto(mbDetalleSolicitud.getSolicitud());
         JsfUtils.handleNavigation("/view/proyectos/crearProyecto?faces-redirect=true");
+    }
+    
+        
+    public void handleFileUpload(FileUploadEvent event) {
+        if (archivosAdjuntos == null) {
+            archivosAdjuntos = new ArrayList<ArchivoAdjunto>();
+        }
+        
+        ArchivoAdjunto adjunto = new ArchivoAdjunto();
+        adjunto.setMimetype(event.getFile().getContentType());
+        adjunto.setNombre(event.getFile().getFileName());
+        adjunto.setSizeFile(event.getFile().getSize());
+        try {
+            adjunto.setInputStream(event.getFile().getInputstream());
+            archivosAdjuntos.add(adjunto);
+        } catch (IOException ex) {
+            Logger.getLogger(MbCrearSolicitud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void remove(ArchivoAdjunto f){
+        archivosAdjuntos.remove(f);
     }
 }

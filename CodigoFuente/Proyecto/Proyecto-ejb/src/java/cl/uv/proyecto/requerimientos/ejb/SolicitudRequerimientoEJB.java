@@ -115,10 +115,17 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitudFacade.edit(solicitud);
         notificacionEJB.crearNotificacionSolicitud(TypeNotification.CIERRE_SOLICITD, solicitud, null);
     }
+    
+    private void cerrarSolicitud(SolicitudRequerimiento solicitud,List<ArchivoAdjunto> archivosAdjuntos) {
+        if (archivosAdjuntos!=null && archivosAdjuntos.size()>0) {
+            fileManagerEJB.adjuntarArchivosSolicitudRequerimiento(archivosAdjuntos, solicitud);
+        }
+        cerrarSolicitud(solicitud);
+    }
 
     @Override
-    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo) {
-        cerrarSolicitud(solicitud);
+    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo, List<ArchivoAdjunto> archivosAdjuntos) {
+        cerrarSolicitud(solicitud,archivosAdjuntos);
         if (enviarCopiaCorreo) {
             String email = solicitud.getSolicitante().getCorreoUv();
             String asunto = crearAsunto(solicitud, CIERRE);
