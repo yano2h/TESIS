@@ -4,6 +4,7 @@
  */
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
+import cl.uv.model.base.utils.FileUtils;
 import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.ArchivoAdjunto;
@@ -14,6 +15,7 @@ import cl.uv.proyecto.persistencia.jsf.mb.AreaController;
 import cl.uv.proyecto.requerimientos.ejb.SolicitudRequerimientoEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
+import cl.uv.view.controller.base.utils.Resources;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -45,8 +47,6 @@ public class MbSolicitudesArea implements Serializable {
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
     @EJB
     private SolicitudRequerimientoEJBLocal solicitudEJB;
-    
-    
     private String codigoConsulta = "";
     private SolicitudRequerimiento selectedSolicitud;
     private Boolean enviarMail = false;
@@ -66,15 +66,20 @@ public class MbSolicitudesArea implements Serializable {
     @ManagedProperty(value = "#{areaController}")
     private AreaController areaController;
     private List<ArchivoAdjunto> archivosAdjuntos;
-    
+    private Long sizeLimitAttachment;
+    private Long sizeAttachment;
+
     public MbSolicitudesArea() {
+        enviarMail = true;
+        sizeAttachment = 0L;
+        sizeLimitAttachment = Resources.getValueLong("email", "sizeLimitAttachment");
     }
 
     @PostConstruct
     public void init() {
-        System.out.println("Inicio:"+new Date());
+        System.out.println("S.A Inicio: " + (new Date()).getTime());
         solicitudesArea = solicitudFacade.buscarSolicitudesPorArea(mbFuncionarioInfo.getFuncionario().getArea());
-        System.out.println("Termino:"+new Date());
+        System.out.println("S.A Termino:" + new Date().getTime());
         SelectItem[] temp = areaController.getItemsAvailableSelectMany();
         areasParaTransferencia = new SelectItem[temp.length - 1];
         int cont = 0;
@@ -83,13 +88,12 @@ public class MbSolicitudesArea implements Serializable {
                 areasParaTransferencia[cont++] = s;
             }
         }
-        
+
         funcionariosArea = funcionarioDisicoFacade.buscarFuncrionariosPorArea(mbFuncionarioInfo.getFuncionario().getArea());
-        
-        for (FuncionarioDisico f: funcionariosArea) {
+
+        for (FuncionarioDisico f : funcionariosArea) {
             solicitudFacade.contarSolicitudes(f);
         }
-        
     }
 
     public void setMbDetalleSolicitud(MbDetalleSolicitud mbDetalleSolicitud) {
@@ -135,9 +139,9 @@ public class MbSolicitudesArea implements Serializable {
     public void setArchivosAdjuntos(List<ArchivoAdjunto> archivosAdjuntos) {
         this.archivosAdjuntos = archivosAdjuntos;
     }
-    
+
     public String getEmailsRespuestaManual() {
-        if(emailsRespuestaManual.isEmpty()){
+        if (emailsRespuestaManual.isEmpty()) {
             emailsRespuestaManual = mbDetalleSolicitud.getSolicitud().getSolicitante().getCorreoUv();
         }
 
@@ -187,7 +191,7 @@ public class MbSolicitudesArea implements Serializable {
     public void setFuncionariosArea(List<FuncionarioDisico> funcionariosArea) {
         this.funcionariosArea = funcionariosArea;
     }
-    
+
     public SelectItem[] getAreasParaTransferencia() {
         return areasParaTransferencia;
     }
@@ -221,62 +225,77 @@ public class MbSolicitudesArea implements Serializable {
     public void enviarRespuestaDirecta() {
         if (!respuesta.isEmpty()) {
             mbDetalleSolicitud.getSolicitud().setRespuesta(respuesta);
-            solicitudEJB.enviarRespuestaDirecta(mbDetalleSolicitud.getSolicitud(), enviarMail,archivosAdjuntos);
+            solicitudEJB.enviarRespuestaDirecta(mbDetalleSolicitud.getSolicitud(), enviarMail, archivosAdjuntos);
         }
-        respuesta="";
+        respuesta = "";
         enviarMail = false;
     }
-    
-    public void enviarRespuestaManual(){
-        if(!respuesta.isEmpty()){
+
+    public void enviarRespuestaManual() {
+        if (!respuesta.isEmpty()) {
             String[] direcciones = emailsRespuestaManual.replaceAll(" ", "").split(",");
             mbDetalleSolicitud.getSolicitud().setRespuesta(respuesta);
-            solicitudEJB.enviarRespuestaManual(mbDetalleSolicitud.getSolicitud(), direcciones,asuntoRespuestaManual);
+            solicitudEJB.enviarRespuestaManual(mbDetalleSolicitud.getSolicitud(), direcciones, asuntoRespuestaManual);
         }
-        
+
     }
-    
-    public void transferirSolicitud(){
-        if(!motivoTransferencia.isEmpty()){
+
+    public void transferirSolicitud() {
+        if (!motivoTransferencia.isEmpty()) {
             solicitudEJB.transferirSolicitud(mbDetalleSolicitud.getSolicitud(), nuevaArea, motivoTransferencia);
         }
-        motivoTransferencia="";
+        motivoTransferencia = "";
     }
-    
-    public void asignarSolicitud(){
-        if(mbDetalleSolicitud.getSolicitud().getResponsable() == null){
-            JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al asignar responsable solicitud", "Debe seleccionar un funcionario para poder asignar la solicitud "));  
-        }else{
-            JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignacion Exitosa", "La solicitud fue asignada exitosamente a: "+mbDetalleSolicitud.getSolicitud().getResponsable().getNombre()+" "+mbDetalleSolicitud.getSolicitud().getResponsable().getApellidoPaterno()+" "+mbDetalleSolicitud.getSolicitud().getResponsable().getApellidoMaterno()));  
+
+    public void asignarSolicitud() {
+        if (mbDetalleSolicitud.getSolicitud().getResponsable() == null) {
+            JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al asignar responsable solicitud", "Debe seleccionar un funcionario para poder asignar la solicitud "));
+        } else {
+            JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignacion Exitosa", "La solicitud fue asignada exitosamente a: " + mbDetalleSolicitud.getSolicitud().getResponsable().getNombre() + " " + mbDetalleSolicitud.getSolicitud().getResponsable().getApellidoPaterno() + " " + mbDetalleSolicitud.getSolicitud().getResponsable().getApellidoMaterno()));
             solicitudEJB.asignarSolicitud(mbDetalleSolicitud.getSolicitud());
         }
-        
+
     }
-    
-    public void convertirEnProyecto(){
+
+    public void convertirEnProyecto() {
         solicitudEJB.convertirSolicitudEnProyecto(mbDetalleSolicitud.getSolicitud());
         JsfUtils.handleNavigation("/view/proyectos/crearProyecto?faces-redirect=true");
     }
-    
-        
+
     public void handleFileUpload(FileUploadEvent event) {
         if (archivosAdjuntos == null) {
             archivosAdjuntos = new ArrayList<ArchivoAdjunto>();
         }
-        
-        ArchivoAdjunto adjunto = new ArchivoAdjunto();
-        adjunto.setMimetype(event.getFile().getContentType());
-        adjunto.setNombre(event.getFile().getFileName());
-        adjunto.setSizeFile(event.getFile().getSize());
-        try {
-            adjunto.setInputStream(event.getFile().getInputstream());
-            archivosAdjuntos.add(adjunto);
-        } catch (IOException ex) {
-            Logger.getLogger(MbCrearSolicitud.class.getName()).log(Level.SEVERE, null, ex);
+
+        if (sizeValidation(event.getFile().getSize())) {
+            ArchivoAdjunto adjunto = new ArchivoAdjunto();
+            adjunto.setMimetype(event.getFile().getContentType());
+            adjunto.setNombre(event.getFile().getFileName());
+            adjunto.setSizeFile(event.getFile().getSize());
+            adjunto.setSizeFormat(FileUtils.convertSizeRedondeado(event.getFile().getSize()));
+            try {
+                adjunto.setInputStream(event.getFile().getInputstream());
+                archivosAdjuntos.add(adjunto);
+            } catch (IOException ex) {
+                Logger.getLogger(MbCrearSolicitud.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
-    
-    public void remove(ArchivoAdjunto f){
+
+    public void remove(ArchivoAdjunto f) {
         archivosAdjuntos.remove(f);
+    }
+
+    public boolean sizeValidation(Long size) {
+        if ((sizeAttachment + size) > sizeLimitAttachment) {
+            if (archivosAdjuntos != null && archivosAdjuntos.size() > 0) {
+                JsfUtils.addMessage(FacesMessage.SEVERITY_ERROR, "Error al Adjuntar Archivo", Resources.getValue("email", "msg_error_totalsize"));
+            }
+            return false;
+        } else {
+            sizeAttachment += size;
+            return true;
+        }
+
     }
 }
