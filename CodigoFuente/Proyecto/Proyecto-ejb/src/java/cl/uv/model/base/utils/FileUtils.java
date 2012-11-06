@@ -73,10 +73,25 @@ public class FileUtils {
             float size = (float)bytes/(float)1000;
             unit = size+"KB";
         }
-        
         return unit;
     }
 
+    public static String convertSizeRedondeado(long bytes){
+        String unit;
+        float size;
+        
+        if (bytes >= 1000000) {
+            size = (float)bytes/(float)1000000;
+            unit = "MB";
+        }else{
+            size = (float)bytes/(float)1000;
+            unit = "KB";
+        }
+        
+        int sizeRedondeado = MathUtils.redondearFloat(size,0).intValue();
+        return sizeRedondeado+unit;
+    }
+    
     public static String convertDateToPath(Date d){
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy/MM", new Locale("es","CL"));
         String path = formateador.format(d);
