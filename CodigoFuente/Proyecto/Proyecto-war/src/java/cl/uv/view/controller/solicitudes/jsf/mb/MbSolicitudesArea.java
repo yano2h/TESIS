@@ -4,25 +4,19 @@
  */
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
-import cl.uv.model.base.utils.FileUtils;
 import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.ArchivoAdjunto;
 import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import cl.uv.proyecto.persistencia.jsf.mb.AreaController;
 import cl.uv.proyecto.requerimientos.ejb.SolicitudRequerimientoEJBLocal;
+import cl.uv.view.controller.base.jsf.mb.MbFilesUpload;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
-import cl.uv.view.controller.base.utils.Resources;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -30,7 +24,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -47,32 +40,37 @@ public class MbSolicitudesArea implements Serializable {
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
     @EJB
     private SolicitudRequerimientoEJBLocal solicitudEJB;
-    private String codigoConsulta = "";
-    private SolicitudRequerimiento selectedSolicitud;
-    private Boolean enviarMail = false;
-    private String respuesta = "";
-    private String emailsRespuestaManual = "";
-    private String asuntoRespuestaManual = "";
-    private String motivoTransferencia = "";
-    private Area nuevaArea;
-    private int MEDIA_HORA = 1000 * 60 * 30;
-    private List<SolicitudRequerimiento> solicitudesArea;
-    private SelectItem[] areasParaTransferencia;
-    private List<FuncionarioDisico> funcionariosArea;
+    
     @ManagedProperty(value = "#{mbFuncionarioInfo}")
     private MbFuncionarioInfo mbFuncionarioInfo;
     @ManagedProperty(value = "#{mbDetalleSolicitud}")
     private MbDetalleSolicitud mbDetalleSolicitud;
     @ManagedProperty(value = "#{areaController}")
     private AreaController areaController;
-    private List<ArchivoAdjunto> archivosAdjuntos;
-    private Long sizeLimitAttachment;
-    private Long sizeAttachment;
+    @ManagedProperty(value = "#{mbFilesUpload}")
+    private MbFilesUpload mbFilesUpload;
 
+    private Boolean enviarMail;
+    private String respuesta;
+    private String codigoConsulta;
+    private String emailsRespuestaManual;
+    private String asuntoRespuestaManual;
+    private String motivoTransferencia;
+    private Area nuevaArea;
+    private int MEDIA_HORA;
+    private SolicitudRequerimiento selectedSolicitud;
+    private List<FuncionarioDisico> funcionariosArea;
+    private List<SolicitudRequerimiento> solicitudesArea;
+    private SelectItem[] areasParaTransferencia;
+    
     public MbSolicitudesArea() {
         enviarMail = true;
-        sizeAttachment = 0L;
-        sizeLimitAttachment = Resources.getValueLong("email", "sizeLimitAttachment");
+        respuesta = "";
+        codigoConsulta = "";
+        motivoTransferencia = "";
+        emailsRespuestaManual = "";
+        asuntoRespuestaManual = "";
+        MEDIA_HORA = 1000 * 60 * 30;
     }
 
     @PostConstruct
@@ -108,6 +106,11 @@ public class MbSolicitudesArea implements Serializable {
         this.areaController = areaController;
     }
 
+    public void setMbFilesUpload(MbFilesUpload mbFilesUpload) {
+        this.mbFilesUpload = mbFilesUpload;
+    }
+
+    
     public List<SolicitudRequerimiento> getSolicitudesArea() {
         return solicitudesArea;
     }
@@ -130,14 +133,6 @@ public class MbSolicitudesArea implements Serializable {
 
     public void setEnviarMail(Boolean enviarMail) {
         this.enviarMail = enviarMail;
-    }
-
-    public List<ArchivoAdjunto> getArchivosAdjuntos() {
-        return archivosAdjuntos;
-    }
-
-    public void setArchivosAdjuntos(List<ArchivoAdjunto> archivosAdjuntos) {
-        this.archivosAdjuntos = archivosAdjuntos;
     }
 
     public String getEmailsRespuestaManual() {
@@ -225,7 +220,7 @@ public class MbSolicitudesArea implements Serializable {
     public void enviarRespuestaDirecta() {
         if (!respuesta.isEmpty()) {
             mbDetalleSolicitud.getSolicitud().setRespuesta(respuesta);
-            solicitudEJB.enviarRespuestaDirecta(mbDetalleSolicitud.getSolicitud(), enviarMail, archivosAdjuntos);
+            solicitudEJB.enviarRespuestaDirecta(mbDetalleSolicitud.getSolicitud(), enviarMail, mbFilesUpload.extraerArchivosAdjuntos());
         }
         respuesta = "";
         enviarMail = false;
@@ -262,40 +257,40 @@ public class MbSolicitudesArea implements Serializable {
         JsfUtils.handleNavigation("/view/proyectos/crearProyecto?faces-redirect=true");
     }
 
-    public void handleFileUpload(FileUploadEvent event) {
-        if (archivosAdjuntos == null) {
-            archivosAdjuntos = new ArrayList<ArchivoAdjunto>();
-        }
+//    public void handleFileUpload(FileUploadEvent event) {
+//        if (archivosAdjuntos == null) {
+//            archivosAdjuntos = new ArrayList<ArchivoAdjunto>();
+//        }
+//
+//        if (sizeValidation(event.getFile().getSize())) {
+//            ArchivoAdjunto adjunto = new ArchivoAdjunto();
+//            adjunto.setMimetype(event.getFile().getContentType());
+//            adjunto.setNombre(event.getFile().getFileName());
+//            adjunto.setSizeFile(event.getFile().getSize());
+//            adjunto.setSizeFormat(FileUtils.convertSizeRedondeado(event.getFile().getSize()));
+//            try {
+//                adjunto.setInputStream(event.getFile().getInputstream());
+//                archivosAdjuntos.add(adjunto);
+//            } catch (IOException ex) {
+//                Logger.getLogger(MbCrearSolicitud.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//    }
 
-        if (sizeValidation(event.getFile().getSize())) {
-            ArchivoAdjunto adjunto = new ArchivoAdjunto();
-            adjunto.setMimetype(event.getFile().getContentType());
-            adjunto.setNombre(event.getFile().getFileName());
-            adjunto.setSizeFile(event.getFile().getSize());
-            adjunto.setSizeFormat(FileUtils.convertSizeRedondeado(event.getFile().getSize()));
-            try {
-                adjunto.setInputStream(event.getFile().getInputstream());
-                archivosAdjuntos.add(adjunto);
-            } catch (IOException ex) {
-                Logger.getLogger(MbCrearSolicitud.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
+//    public void remove(ArchivoAdjunto f) {
+//        archivosAdjuntos.remove(f);
+//    }
 
-    public void remove(ArchivoAdjunto f) {
-        archivosAdjuntos.remove(f);
-    }
-
-    public boolean sizeValidation(Long size) {
-        if ((sizeAttachment + size) > sizeLimitAttachment) {
-            if (archivosAdjuntos != null && archivosAdjuntos.size() > 0) {
-                JsfUtils.addMessage(FacesMessage.SEVERITY_ERROR, "Error al Adjuntar Archivo", Resources.getValue("email", "msg_error_totalsize"));
-            }
-            return false;
-        } else {
-            sizeAttachment += size;
-            return true;
-        }
-
-    }
+//    public boolean sizeValidation(Long size) {
+//        if ((sizeAttachment + size) > sizeLimitAttachment) {
+//            if (archivosAdjuntos != null && archivosAdjuntos.size() > 0) {
+//                JsfUtils.addMessage(FacesMessage.SEVERITY_ERROR, "Error al Adjuntar Archivo", Resources.getValue("email", "msg_error_totalsize"));
+//            }
+//            return false;
+//        } else {
+//            sizeAttachment += size;
+//            return true;
+//        }
+//
+//    }
 }

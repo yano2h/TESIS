@@ -43,7 +43,7 @@ public class MbFilesUpload {
         if (archivosAdjuntos == null) {
             archivosAdjuntos = new ArrayList<ArchivoAdjunto>();
         }
-
+        
         if (sizeValidation(file.getSize())) {
             ArchivoAdjunto adjunto = new ArchivoAdjunto();
             adjunto.setMimetype(file.getContentType());
@@ -53,6 +53,7 @@ public class MbFilesUpload {
             try {
                 adjunto.setInputStream(file.getInputstream());
                 archivosAdjuntos.add(adjunto);
+                sizeAttachment += adjunto.getSizeFile();
             } catch (IOException ex) {
                 Logger.getLogger(MbCrearSolicitud.class.getName()).log(Level.SEVERE, null, ex);
                 JsfUtils.addMessage(FacesMessage.SEVERITY_ERROR, "Error al Adjuntar Archivo", "No se puedo adjuntar el archivo");
@@ -62,20 +63,34 @@ public class MbFilesUpload {
 
     public void remove(ArchivoAdjunto f) {
         archivosAdjuntos.remove(f);
+        sizeAttachment -= f.getSizeFile();
     }
 
     public boolean sizeValidation(Long size) {
         if ((sizeAttachment + size) > sizeLimitAttachment) {
             if (archivosAdjuntos != null && archivosAdjuntos.size() > 0) {
-                JsfUtils.addMessage(FacesMessage.SEVERITY_ERROR, "Error al Adjuntar Archivo", Resources.getValue("email", "msg_error_totalsize"));
+                JsfUtils.addMessage(FacesMessage.SEVERITY_ERROR, 
+                                    "Error al Adjuntar Archivo", 
+                                    Resources.getValue("email", "msg_error_totalsize"));
             }
             return false;
         } else {
-            sizeAttachment += size;
             return true;
         }
+    }
 
+    public List<ArchivoAdjunto> getArchivosAdjuntos() {
+        return archivosAdjuntos;
+    }
+
+    public void setArchivosAdjuntos(List<ArchivoAdjunto> archivosAdjuntos) {
+        this.archivosAdjuntos = archivosAdjuntos;
     }
     
+    public List<ArchivoAdjunto> extraerArchivosAdjuntos(){
+        List<ArchivoAdjunto> list = new ArrayList<ArchivoAdjunto>(getArchivosAdjuntos());
+        getArchivosAdjuntos().clear();
+        return list;
+    }
     
 }

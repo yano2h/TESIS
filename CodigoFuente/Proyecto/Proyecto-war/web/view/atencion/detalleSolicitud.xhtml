@@ -223,15 +223,16 @@
                     <p:editor id="editorRespDirecta" widgetVar="editorRespDirecta" width="450" height="200" value="#{mbSolicitudesArea.respuesta}" required="true"/>
 
                     <!-- Upload File Respuesta -->
-                    <p:dataList id="uploadFiles" value="#{mbSolicitudesArea.archivosAdjuntos}" var="f" type="none" >
+                    <p:dataList id="uploadFiles" value="#{mbFilesUpload.archivosAdjuntos}" var="f" type="none" 
+                                style="height: 100px; overflow: auto;">
                         <p:column>
                             <h:panelGrid columns="3" styleClass="file_upload_background">
                                 <h:panelGroup>
                                     <h:outputText value="#{f.nombre}" styleClass="file_upload"/>
-                                    <p:spacer width="2"/>
+                                    <p:spacer width="10" height="10"/>
                                     <h:outputText value="(#{f.sizeFormat})" styleClass="file_size_format"/>                                    
                                 </h:panelGroup>
-                                <p:commandLink id="link" title="Eliminar" actionListener="#{mbSolicitudesArea.remove(f)}" 
+                                <p:commandLink id="link" title="Eliminar" actionListener="#{mbFilesUpload.remove(f)}" 
                                                process="@this" update="@(.ui-datalist)" style="float: right;color: steelblue;">
                                     <span class="ui-icon ui-icon-close"></span>  
                                 </p:commandLink>
@@ -241,7 +242,7 @@
                     <p:growl id="growlFile" showDetail="true" sticky="false" life="15000" /> 
                     <p:fileUpload id="filesUpload"     
                                   label="Adjuntar Archivo"
-                                  fileUploadListener="#{mbSolicitudesArea.handleFileUpload}"  
+                                  fileUploadListener="#{mbFilesUpload.handleFileUpload}"  
                                   mode="advanced"
                                   sizeLimit="#{email.sizeLimit}"
                                   multiple="true" 

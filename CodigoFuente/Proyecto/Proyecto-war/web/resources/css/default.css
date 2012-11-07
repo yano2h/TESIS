@@ -87,7 +87,7 @@ label{
 
 .text_small_ligth{
     font-size:  11px;
-    color: lightgrey;
+    color: #616161;
 }
 .grid_comentario{
     margin-bottom: 5px;
@@ -237,5 +237,5 @@ a.small_link{
 .file_size_format{
     color: #777;
     display: inline-block;
-    padding: 3px 0;
+    padding: 3px;
 }
