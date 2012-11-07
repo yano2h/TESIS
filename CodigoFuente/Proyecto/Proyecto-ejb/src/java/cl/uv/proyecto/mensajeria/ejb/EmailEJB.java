@@ -5,18 +5,26 @@
 package cl.uv.proyecto.mensajeria.ejb;
 
 import cl.uv.model.base.utils.Resources;
+import cl.uv.proyecto.persistencia.entidades.ArchivoAdjunto;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import cl.uv.proyecto.url.utils.UrlBuilder;
+import java.io.File;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.annotation.Resource;
 import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 @Stateless
 public class EmailEJB implements EmailEJBLocal {
@@ -27,6 +35,7 @@ public class EmailEJB implements EmailEJBLocal {
     private String propertieEmail = "Emails";
     private String prefijoAsunto = "ASUNTO_";
     private String prefijoMensaje = "MSG_";
+    private String basePathFiles = Resources.getValue("BasicParam", "pathArchivosSolicitudes");
     
     @Override
     @Asynchronous
@@ -143,5 +152,37 @@ public class EmailEJB implements EmailEJBLocal {
         String asunto = generarAsuntoEmailSolicitud(TypeEmail.ENVIO_SOLICITUD, s, s.getSolicitante());
         String msg = generarContenidoEmailSolicitud(TypeEmail.ENVIO_SOLICITUD, s, s.getSolicitante());
         enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg);
+    }
+
+    @Override
+    @Asynchronous
+    public void enviarEmail(String direccion, String asunto, String mensaje, List<ArchivoAdjunto> adjuntos) {
+        Message msg = new MimeMessage(mailSession);
+       
+        try {
+            msg.setFrom(new InternetAddress(mailSession.getProperty("mail.from")));
+            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(direccion));
+            msg.setSubject(asunto);
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setContent(mensaje, "text/html");
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart);
+            
+            //Adjuntar Archivos
+            for (ArchivoAdjunto archivoAdjunto : adjuntos) {
+                BodyPart adjuntoBodyPart = new MimeBodyPart();
+                DataSource source = new FileDataSource(new File(basePathFiles + archivoAdjunto.getPathFile()));
+                adjuntoBodyPart.setDataHandler(new DataHandler(source));
+                adjuntoBodyPart.setFileName(archivoAdjunto.getNombre());
+                multipart.addBodyPart(adjuntoBodyPart);
+            }
+            
+            
+            msg.setContent(multipart);
+            msg.setSentDate(new Date());
+            Transport.send(msg);
+        } catch (MessagingException ex) {
+            Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

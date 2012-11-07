@@ -18,6 +18,7 @@ import cl.uv.proyecto.persistencia.entidades.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -130,7 +131,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
             String email = solicitud.getSolicitante().getCorreoUv();
             String asunto = crearAsunto(solicitud, CIERRE);
             String mensaje = crearMensaje(solicitud, CIERRE);
-            emailEJB.enviarEmail(email, asunto, mensaje);
+            emailEJB.enviarEmail(email, asunto, mensaje, archivosAdjuntos);
         }
     }
 
