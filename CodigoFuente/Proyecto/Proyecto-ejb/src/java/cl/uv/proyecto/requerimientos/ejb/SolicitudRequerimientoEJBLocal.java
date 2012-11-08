@@ -10,6 +10,8 @@ import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import java.util.List;
 import javax.ejb.Local;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 /**
  *
@@ -22,13 +24,13 @@ public interface SolicitudRequerimientoEJBLocal {
 
     boolean validarCodigoConsulta(String codigoConsulta);
 
-    String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante,  List<ArchivoAdjunto> archivosAdjuntos);
+    String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante,  List<ArchivoAdjunto> archivosAdjuntos) throws AddressException, MessagingException ;
 
     String generarCodigo(long num);
     
     public void rechazarSolicitud(SolicitudRequerimiento solicitud);
-    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo, List<ArchivoAdjunto> archivosAdjuntos);
-    public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto);
+    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo, List<ArchivoAdjunto> archivosAdjuntos) throws AddressException, MessagingException ;
+    public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto) throws AddressException, MessagingException ;
     public void transferirSolicitud(SolicitudRequerimiento solicitud, Area nuevaAreaResponsable, String motivoTransferencia);
     public void asignarSolicitud(SolicitudRequerimiento solicitud);
     public void iniciarSolicitud(SolicitudRequerimiento solicitud);

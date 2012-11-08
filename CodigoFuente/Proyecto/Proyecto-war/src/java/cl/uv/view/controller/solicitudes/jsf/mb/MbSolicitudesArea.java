@@ -17,6 +17,8 @@ import cl.uv.view.controller.base.utils.JsfUtils;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -24,6 +26,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -220,7 +224,19 @@ public class MbSolicitudesArea implements Serializable {
     public void enviarRespuestaDirecta() {
         if (!respuesta.isEmpty()) {
             mbDetalleSolicitud.getSolicitud().setRespuesta(respuesta);
-            solicitudEJB.enviarRespuestaDirecta(mbDetalleSolicitud.getSolicitud(), enviarMail, mbFilesUpload.extraerArchivosAdjuntos());
+            try {
+                System.out.println("ENVIAR RESP");
+                solicitudEJB.enviarRespuestaDirecta(mbDetalleSolicitud.getSolicitud(), enviarMail, mbFilesUpload.extraerArchivosAdjuntos());
+                System.out.println("SIN ERROR");
+            } catch (AddressException ex) {
+                System.out.println("ERROR: Addres");
+                Logger.getLogger(MbSolicitudesArea.class.getName()).log(Level.SEVERE, null, ex);
+                JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error con la Dirección de Correo Especificada", ex.getMessage()));
+            } catch (MessagingException ex) {
+                System.out.println("ERROR: Messing");
+                Logger.getLogger(MbSolicitudesArea.class.getName()).log(Level.SEVERE, null, ex);
+                JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al enviar el correo", ex.getMessage()));
+            }
         }
         respuesta = "";
         enviarMail = false;
@@ -230,7 +246,15 @@ public class MbSolicitudesArea implements Serializable {
         if (!respuesta.isEmpty()) {
             String[] direcciones = emailsRespuestaManual.replaceAll(" ", "").split(",");
             mbDetalleSolicitud.getSolicitud().setRespuesta(respuesta);
-            solicitudEJB.enviarRespuestaManual(mbDetalleSolicitud.getSolicitud(), direcciones, asuntoRespuestaManual);
+            try {
+                solicitudEJB.enviarRespuestaManual(mbDetalleSolicitud.getSolicitud(), direcciones, asuntoRespuestaManual);
+            } catch (AddressException ex) {
+                Logger.getLogger(MbSolicitudesArea.class.getName()).log(Level.SEVERE, null, ex);
+                JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error con la Dirección de Correo Especificada", ex.getMessage()));
+            } catch (MessagingException ex) {
+                Logger.getLogger(MbSolicitudesArea.class.getName()).log(Level.SEVERE, null, ex);
+                JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al enviar el correo", ex.getMessage()));
+            }
         }
 
     }

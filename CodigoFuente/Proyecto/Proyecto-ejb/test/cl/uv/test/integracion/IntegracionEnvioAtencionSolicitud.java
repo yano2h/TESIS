@@ -14,6 +14,10 @@ import cl.uv.proyecto.requerimientos.ejb.SolicitudRequerimientoEJBLocal;
 import cl.uv.test.junit.base.BaseTestEJB;
 import cl.uv.test.junit.base.EntityUtils;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.naming.NamingException;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -58,8 +62,8 @@ public class IntegracionEnvioAtencionSolicitud extends BaseTestEJB {
         tipoSolicitudRequerimientoFacade.remove(t);
         areaFacade.remove(a);
         funcionarioFacade.remove(f);
-        
-        
+
+
         solicitudEjb = null;
         solicitudFacade = null;
     }
@@ -67,24 +71,30 @@ public class IntegracionEnvioAtencionSolicitud extends BaseTestEJB {
     @Test
     public void enviarYAtender() {
         SolicitudRequerimiento s = EntityUtils.createSolicitudReq(a, t);
-        String codigo = solicitudEjb.enviarSolicitud(s, f, null);
-        assertTrue(!codigo.equals(""));
+        String codigo;
+        try {
+            codigo = solicitudEjb.enviarSolicitud(s, f, null);
+            assertTrue(!codigo.equals(""));
 
-        List<SolicitudRequerimiento> solicitudesArea = solicitudFacade.buscarSolicitudesPorArea(a);
+            List<SolicitudRequerimiento> solicitudesArea = solicitudFacade.buscarSolicitudesPorArea(a);
 
-        SolicitudRequerimiento result = null;
-        
-        for (SolicitudRequerimiento solicitudRequerimiento : solicitudesArea) {
-            if (solicitudRequerimiento.getCodigoConsulta().equals(s.getCodigoConsulta())) {
-                result = solicitudRequerimiento;
-                break;
+            SolicitudRequerimiento result = null;
+
+            for (SolicitudRequerimiento solicitudRequerimiento : solicitudesArea) {
+                if (solicitudRequerimiento.getCodigoConsulta().equals(s.getCodigoConsulta())) {
+                    result = solicitudRequerimiento;
+                    break;
+                }
             }
-        }
 
-        assertTrue(result!=null);
-        if (result!=null) {
-            solicitudFacade.remove(result);
+            assertTrue(result != null);
+            if (result != null) {
+                solicitudFacade.remove(result);
+            }
+        } catch (AddressException ex) {
+            Logger.getLogger(IntegracionEnvioAtencionSolicitud.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(IntegracionEnvioAtencionSolicitud.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 }

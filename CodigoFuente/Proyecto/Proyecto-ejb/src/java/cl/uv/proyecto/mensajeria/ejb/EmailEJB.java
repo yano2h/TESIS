@@ -21,145 +21,66 @@ import javax.annotation.Resource;
 import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.*;
 
 @Stateless
 public class EmailEJB implements EmailEJBLocal {
- 
+
     @Resource(name = "email/ssrscm2")
     private Session mailSession;
-    
     private String propertieEmail = "Emails";
     private String prefijoAsunto = "ASUNTO_";
     private String prefijoMensaje = "MSG_";
     private String basePathFiles = Resources.getValue("BasicParam", "pathArchivosSolicitudes");
-    
+
     @Override
     @Asynchronous
     public void enviarEmail(String direccion, String asunto, String mensaje) {
-        System.out.println("ENVIANDO");
-        Message msg = new MimeMessage(mailSession);
-       
         try {
+            Message msg = new MimeMessage(mailSession);
+
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress(direccion));
             msg.setSubject(asunto);
             msg.setFrom(new InternetAddress(mailSession.getProperty("mail.from")));
-            msg.setContent(mensaje,"text/html");
+            msg.setContent(mensaje, "text/html");
             msg.setSentDate(new Date());
             Transport.send(msg);
+        } catch (AddressException ex) {
+            Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MessagingException ex) {
             Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     @Asynchronous
-    public void enviarEmail(String[] direcciones,String asunto, String mensaje){
-        Message msg = new MimeMessage(mailSession);
-       
+    public void enviarEmail(String[] direcciones, String asunto, String mensaje) {
         try {
+            Message msg = new MimeMessage(mailSession);
+
             Address[] addresses = new Address[direcciones.length];
             for (int i = 0; i < direcciones.length; i++) {
                 addresses[i] = new InternetAddress(direcciones[i]);
             }
-            
+
             msg.setRecipients(Message.RecipientType.TO, addresses);
             msg.setSubject(asunto);
             msg.setFrom(new InternetAddress(mailSession.getProperty("mail.from")));
-            msg.setContent(mensaje,"text/html");
+            msg.setContent(mensaje, "text/html");
             msg.setSentDate(new Date());
             Transport.send(msg);
+        } catch (AddressException ex) {
+            Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MessagingException ex) {
             Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    @Override
-    public String generarContenidoEmailSolicitud(TypeEmail t, SolicitudRequerimiento s, Funcionario invoker){
-        String msg = Resources.getValue(propertieEmail, prefijoMensaje+t.name());
-        switch(t){
-            case ENVIO_SOLICITUD:
-                String link = UrlBuilder.buildPublicUrlSolicitudReq(s.getCodigoConsulta());
-                System.out.println("LINK:"+link);
-                msg = String.format(msg,s.getAsunto(),s.getCodigoConsulta(),link);
-                System.out.println("MSG:"+msg);
-                break;
-            case RECHAZO_SOLICITUD:
-
-                break;
-            case TRANSFERENCIA_SOLICITUD:
-
-                break;
-            case ASIGNACION_SOLICITUD:
-
-                break;
-            case INICIO_SOLICITUD:
-
-                break;
-            case CIERRE_SOLICITD:
-
-                break;
-            case COMENTARIO_SOLICITUD:
-
-                break;
-            default:
-                throw new AssertionError("Tipo enum desconocido");
-        }
-                
-                
-        return msg;
-    }
-    
-    @Override
-    public String generarAsuntoEmailSolicitud(TypeEmail t, SolicitudRequerimiento s, Funcionario invoker){
-        String asunto = Resources.getValue(propertieEmail, prefijoAsunto+t.name());
-        
-        switch(t){
-            case ENVIO_SOLICITUD:
-                asunto = String.format(asunto,s.getAsunto());
-                break;
-            case RECHAZO_SOLICITUD:
-
-                break;
-            case TRANSFERENCIA_SOLICITUD:
-
-                break;
-            case ASIGNACION_SOLICITUD:
-
-                break;
-            case INICIO_SOLICITUD:
-
-                break;
-            case CIERRE_SOLICITD:
-
-                break;
-            case COMENTARIO_SOLICITUD:
-
-                break;
-            default:
-                throw new AssertionError("Tipo enum desconocido");
-        }
-        
-        return asunto;
-    }
-   
-    @Override
-    @Asynchronous
-    public void enviarEmailConfirmacionEnvioSolicitud(SolicitudRequerimiento s){
-        String asunto = generarAsuntoEmailSolicitud(TypeEmail.ENVIO_SOLICITUD, s, s.getSolicitante());
-        String msg = generarContenidoEmailSolicitud(TypeEmail.ENVIO_SOLICITUD, s, s.getSolicitante());
-        enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg);
     }
 
     @Override
     @Asynchronous
     public void enviarEmail(String direccion, String asunto, String mensaje, List<ArchivoAdjunto> adjuntos) {
-        Message msg = new MimeMessage(mailSession);
-       
         try {
+            Message msg = new MimeMessage(mailSession);
             msg.setFrom(new InternetAddress(mailSession.getProperty("mail.from")));
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress(direccion));
             msg.setSubject(asunto);
@@ -167,7 +88,7 @@ public class EmailEJB implements EmailEJBLocal {
             messageBodyPart.setContent(mensaje, "text/html");
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(messageBodyPart);
-            
+
             //Adjuntar Archivos
             for (ArchivoAdjunto archivoAdjunto : adjuntos) {
                 BodyPart adjuntoBodyPart = new MimeBodyPart();
@@ -176,13 +97,91 @@ public class EmailEJB implements EmailEJBLocal {
                 adjuntoBodyPart.setFileName(archivoAdjunto.getNombre());
                 multipart.addBodyPart(adjuntoBodyPart);
             }
-            
-            
+
             msg.setContent(multipart);
             msg.setSentDate(new Date());
             Transport.send(msg);
+        } catch (AddressException ex) {
+            Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MessagingException ex) {
             Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public String generarContenidoEmailSolicitud(TypeEmail t, SolicitudRequerimiento s, Funcionario invoker) {
+        String msg = Resources.getValue(propertieEmail, prefijoMensaje + t.name());
+        switch (t) {
+            case ENVIO_SOLICITUD:
+                String link = UrlBuilder.buildPublicUrlSolicitudReq(s.getCodigoConsulta());
+                System.out.println("LINK:" + link);
+                msg = String.format(msg, s.getAsunto(), s.getCodigoConsulta(), link);
+                System.out.println("MSG:" + msg);
+                break;
+            case RECHAZO_SOLICITUD:
+
+                break;
+            case TRANSFERENCIA_SOLICITUD:
+
+                break;
+            case ASIGNACION_SOLICITUD:
+
+                break;
+            case INICIO_SOLICITUD:
+
+                break;
+            case CIERRE_SOLICITD:
+
+                break;
+            case COMENTARIO_SOLICITUD:
+
+                break;
+            default:
+                throw new AssertionError("Tipo enum desconocido");
+        }
+
+
+        return msg;
+    }
+
+    @Override
+    public String generarAsuntoEmailSolicitud(TypeEmail t, SolicitudRequerimiento s, Funcionario invoker) {
+        String asunto = Resources.getValue(propertieEmail, prefijoAsunto + t.name());
+
+        switch (t) {
+            case ENVIO_SOLICITUD:
+                asunto = String.format(asunto, s.getAsunto());
+                break;
+            case RECHAZO_SOLICITUD:
+
+                break;
+            case TRANSFERENCIA_SOLICITUD:
+
+                break;
+            case ASIGNACION_SOLICITUD:
+
+                break;
+            case INICIO_SOLICITUD:
+
+                break;
+            case CIERRE_SOLICITD:
+
+                break;
+            case COMENTARIO_SOLICITUD:
+
+                break;
+            default:
+                throw new AssertionError("Tipo enum desconocido");
+        }
+
+        return asunto;
+    }
+
+    @Override
+    @Asynchronous
+    public void enviarEmailConfirmacionEnvioSolicitud(SolicitudRequerimiento s) {
+        String asunto = generarAsuntoEmailSolicitud(TypeEmail.ENVIO_SOLICITUD, s, s.getSolicitante());
+        String msg = generarContenidoEmailSolicitud(TypeEmail.ENVIO_SOLICITUD, s, s.getSolicitante());
+        enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg);
     }
 }

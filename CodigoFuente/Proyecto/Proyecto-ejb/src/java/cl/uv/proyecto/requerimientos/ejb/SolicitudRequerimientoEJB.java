@@ -21,6 +21,8 @@ import java.util.Random;
 import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 /**
  *
@@ -84,7 +86,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     }
 
     @Override
-    public String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante, List<ArchivoAdjunto> archivosAdjuntos) {
+    public String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante, List<ArchivoAdjunto> archivosAdjuntos) throws AddressException, MessagingException {
         Date fechaActual = new Date();
         solicitud.setFechaEnvio(fechaActual);
         solicitud.setFechaUltimaActualizacion(fechaActual);
@@ -125,7 +127,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     }
 
     @Override
-    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo, List<ArchivoAdjunto> archivosAdjuntos) {
+    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo, List<ArchivoAdjunto> archivosAdjuntos) throws AddressException, MessagingException  {
         cerrarSolicitud(solicitud,archivosAdjuntos);
         if (enviarCopiaCorreo) {
             String email = solicitud.getSolicitante().getCorreoUv();
@@ -136,7 +138,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     }
 
     @Override
-    public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto) {
+    public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto) throws AddressException, MessagingException {
         cerrarSolicitud(solicitud);
         asunto = (asunto.isEmpty()) ? crearAsunto(solicitud, CIERRE) : asunto;
         String mensaje = crearMensaje(solicitud, CIERRE);

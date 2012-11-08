@@ -46,8 +46,9 @@ public class FileManagerEJB implements FileManagerEJBLocal {
                                                                   solicitud.getIdSolicitudRequerimiento());
             archivoAdjunto.setPathFile(pathFile+archivoAdjunto.getNombre());
             archivoAdjunto.setSizeFormat(FileUtils.convertSizeRedondeado(archivoAdjunto.getSizeFile()));
-            FileUtils.createDirectory(basePath + pathFile);
-            FileUtils.writeUploadFile(basePath + archivoAdjunto.getPathFile(), archivoAdjunto.getInputStream());//Escribe el archivo en disco
+            writeFile(archivoAdjunto.getInputStream(), archivoAdjunto.getNombre(), pathFile);
+//            FileUtils.createDirectory(basePath + pathFile);
+//            FileUtils.writeUploadFile(basePath + archivoAdjunto.getPathFile(), archivoAdjunto.getInputStream());//Escribe el archivo en disco
             archivoAdjuntoFacade.create(archivoAdjunto);            
             ArchivoSolicitudRequerimiento asr = new ArchivoSolicitudRequerimiento(solicitud.getIdSolicitudRequerimiento(), 
                                                                                   archivoAdjunto.getIdArchivo());
@@ -57,11 +58,11 @@ public class FileManagerEJB implements FileManagerEJBLocal {
         }
         
         for (ArchivoSolicitudRequerimiento a : listArchivos) {
-            System.out.println("Arch:"+a);
             archivoSolicitudRequerimientoFacade.create(a);
         }
     }
     
+    @Asynchronous
     private void writeFile(InputStream input, String name, String pathFile){
         FileUtils.createDirectory(basePath + pathFile);
         FileUtils.writeUploadFile(basePath + pathFile + name, input);
