@@ -23,6 +23,4 @@ public interface EmailEJBLocal {
     void enviarEmail(String direccion, String asunto, String mensaje, List<ArchivoAdjunto> adjuntos);
     void enviarEmail(String[] direcciones,String asunto, String mensaje);
     void enviarEmailConfirmacionEnvioSolicitud(SolicitudRequerimiento s);
-    String generarContenidoEmailSolicitud(TypeEmail t, SolicitudRequerimiento s, Funcionario invoker);
-    String generarAsuntoEmailSolicitud(TypeEmail t, SolicitudRequerimiento s, Funcionario invoker);
 }

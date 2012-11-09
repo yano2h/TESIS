@@ -16,7 +16,7 @@
             <f:event type="preRenderView" listener="#{mbDetalleSolicitud.init}" />
         </f:metadata>
         <p:messages id="messages" showDetail="true"/>  
-        <p:growl id="error_growl" showDetail="true" sticky="false" life="12000" /> 
+        <p:growl id="growlInfo" showDetail="true" sticky="false" life="12000" /> 
 
         <h:form id="detalleSol" rendered="#{mbDetalleSolicitud.solicitud != null}">
             <p:panel id="panelDetalleSolicitud" header="Detalle Solicitud" >
@@ -33,7 +33,7 @@
                     <p:menuitem value="Convertir en Proyecto" icon="ui-icon-note" onclick="convProyecto.show();"
                                 disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
                                             mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA }"/>
-                    <p:menuitem value="Iniciar" icon="ui-icon-play" actionListener="#{mbMisSolicitudes.iniciarSolicitud}" process="@this" update="detalleSol" 
+                    <p:menuitem value="Iniciar" icon="ui-icon-play" actionListener="#{mbMisSolicitudes.iniciarSolicitud}" process="@this" update="detalleSol :growlInfo" 
                                 disabled="#{(mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ASIGNADA and
                                             mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_PENDIENTE) or
                                             mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
@@ -256,7 +256,7 @@
                     <br/>
                     <h:panelGroup style="float: right">
                         <p:commandButton value="Enviar" 
-                                         update="grid_resp_directa :detalleSol:panelDetalleSolicitud :error_growl" 
+                                         update="grid_resp_directa :detalleSol:panelDetalleSolicitud :growlInfo" 
                                          process="dlg_resp_directa"
                                          oncomplete="if(!args.validationFailed) {respDirecta.hide();}"
                                          actionListener="#{mbSolicitudesArea.enviarRespuestaDirecta}"  />
@@ -281,7 +281,7 @@
 
                 <h:panelGroup style="float: right;margin-top: 10px;">
                     <p:commandButton value="Enviar" 
-                                     update="grid_delg_resp_m lbl_mensaje :detalleSol:panelDetalleSolicitud :error_growl"
+                                     update="grid_delg_resp_m lbl_mensaje :detalleSol:panelDetalleSolicitud :growlInfo"
                                      process="dlg_resp_manual"
                                      oncomplete="if(!args.validationFailed) {respManual.hide();}"
                                      actionListener="#{mbSolicitudesArea.enviarRespuestaManual}" />

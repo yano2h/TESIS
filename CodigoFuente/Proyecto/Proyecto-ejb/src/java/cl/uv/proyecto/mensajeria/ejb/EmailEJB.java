@@ -28,9 +28,6 @@ public class EmailEJB implements EmailEJBLocal {
 
     @Resource(name = "email/ssrscm2")
     private Session mailSession;
-    private String propertieEmail = "Emails";
-    private String prefijoAsunto = "ASUNTO_";
-    private String prefijoMensaje = "MSG_";
     private String basePathFiles = Resources.getValue("BasicParam", "pathArchivosSolicitudes");
 
     @Override
@@ -105,83 +102,32 @@ public class EmailEJB implements EmailEJBLocal {
             Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MessagingException ex) {
             Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("ERROR:MessagingException - "+ex.getMessage());
         }
     }
 
-    @Override
-    public String generarContenidoEmailSolicitud(TypeEmail t, SolicitudRequerimiento s, Funcionario invoker) {
-        String msg = Resources.getValue(propertieEmail, prefijoMensaje + t.name());
-        switch (t) {
-            case ENVIO_SOLICITUD:
-                String link = UrlBuilder.buildPublicUrlSolicitudReq(s.getCodigoConsulta());
-                System.out.println("LINK:" + link);
-                msg = String.format(msg, s.getAsunto(), s.getCodigoConsulta(), link);
-                System.out.println("MSG:" + msg);
-                break;
-            case RECHAZO_SOLICITUD:
-
-                break;
-            case TRANSFERENCIA_SOLICITUD:
-
-                break;
-            case ASIGNACION_SOLICITUD:
-
-                break;
-            case INICIO_SOLICITUD:
-
-                break;
-            case CIERRE_SOLICITD:
-
-                break;
-            case COMENTARIO_SOLICITUD:
-
-                break;
-            default:
-                throw new AssertionError("Tipo enum desconocido");
-        }
-
-
-        return msg;
+    private void enviarEmailNotificacionSolicitud(TypeEmail t,SolicitudRequerimiento s, String nameInvoker){
+        String asunto = TypeEmail.ENVIO_SOLICITUD.construirAsunto(s, s.getSolicitante().getNombre());
+        String msg = TypeEmail.ENVIO_SOLICITUD.construirMensaje(s, s.getSolicitante().getNombre());
+        enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg);
     }
-
-    @Override
-    public String generarAsuntoEmailSolicitud(TypeEmail t, SolicitudRequerimiento s, Funcionario invoker) {
-        String asunto = Resources.getValue(propertieEmail, prefijoAsunto + t.name());
-
-        switch (t) {
-            case ENVIO_SOLICITUD:
-                asunto = String.format(asunto, s.getAsunto());
-                break;
-            case RECHAZO_SOLICITUD:
-
-                break;
-            case TRANSFERENCIA_SOLICITUD:
-
-                break;
-            case ASIGNACION_SOLICITUD:
-
-                break;
-            case INICIO_SOLICITUD:
-
-                break;
-            case CIERRE_SOLICITD:
-
-                break;
-            case COMENTARIO_SOLICITUD:
-
-                break;
-            default:
-                throw new AssertionError("Tipo enum desconocido");
-        }
-
-        return asunto;
-    }
-
+    
+    
     @Override
     @Asynchronous
     public void enviarEmailConfirmacionEnvioSolicitud(SolicitudRequerimiento s) {
-        String asunto = generarAsuntoEmailSolicitud(TypeEmail.ENVIO_SOLICITUD, s, s.getSolicitante());
-        String msg = generarContenidoEmailSolicitud(TypeEmail.ENVIO_SOLICITUD, s, s.getSolicitante());
+        String asunto = TypeEmail.ENVIO_SOLICITUD.construirAsunto(s, s.getSolicitante().getNombre());
+        String msg = TypeEmail.ENVIO_SOLICITUD.construirMensaje(s, s.getSolicitante().getNombre());
         enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg);
+    }
+     
+    public void enviarEmailCierreSolicitud(SolicitudRequerimiento s, Funcionario invoker, List<ArchivoAdjunto> adjuntos){
+        String asunto = TypeEmail.CIERRE_SOLICITD.construirAsunto(s, s.getSolicitante().getNombre());
+        String msg = TypeEmail.CIERRE_SOLICITD.construirMensaje(s, s.getSolicitante().getNombre());
+        if (adjuntos!=null && !adjuntos.isEmpty()) {
+            enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg, adjuntos);
+        }else{
+            enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg);
+        }
     }
 }
