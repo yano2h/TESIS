@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -97,4 +98,24 @@ public class FileUtils {
         String path = formateador.format(d);
         return path;
     }
+    
+    public static boolean isRenameNecessary(String filename){
+        File f = new File(filename);
+        return f.exists();
+    }
+    
+    public static String buildNewName(String filename){
+        String name = null;
+        String path = FilenameUtils.getFullPath(filename);
+        String baseName = FilenameUtils.getBaseName(filename);
+        String extension = FilenameUtils.getExtension(filename);
+        for(int count=1; isRenameNecessary(filename); count++){
+            name = baseName+"_("+count+")."+extension;
+            filename = path+name;
+        }
+        
+        return name;
+    }
+    
+
 }

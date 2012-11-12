@@ -150,7 +150,7 @@
                 <br/>
 
                 <p:panel header="Archivos Adjuntos" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%" >
-                    <p:dataList id="selectFiles" value="#{mbDetalleSolicitud.solicitud.archivosAdjuntos}" var="f" type="none">
+                    <p:dataList id="selectFiles" value="#{mbDetalleSolicitud.solicitud.archivosAdjuntos}" var="f" type="none" >
                         <p:column>
                             <h:panelGrid columns="3" styleClass="item-upload">
                                 <h:outputText value="#{f.archivoAdjunto.nombre} #{f.archivoAdjunto.sizeFormat}" style="width: 300px;"/>
@@ -223,21 +223,23 @@
                     <p:editor id="editorRespDirecta" widgetVar="editorRespDirecta" width="450" height="200" value="#{mbSolicitudesArea.respuesta}" required="true"/>
 
                     <!-- Upload File Respuesta -->
+                    <p:scrollPanel id="scrollUploadFiles" style="max-height: 100px;">
                     <p:dataList id="uploadFiles" value="#{mbFilesUpload.archivosAdjuntos}" var="f" type="none" >
                         <p:column>
-                            <h:panelGrid columns="3" styleClass="file_upload_background" style="max-height: 100px; overflow: auto;">
+                            <h:panelGrid columns="3" styleClass="file_upload_background" >
                                 <h:panelGroup>
                                     <h:outputText value="#{f.nombre}" styleClass="file_upload"/>
                                     <p:spacer width="10" height="10"/>
                                     <h:outputText value="(#{f.sizeFormat})" styleClass="file_size_format"/>                                    
                                 </h:panelGroup>
                                 <p:commandLink id="link" title="Eliminar" actionListener="#{mbFilesUpload.remove(f)}" 
-                                               process="@this" update="@(.ui-datalist)" style="float: right;color: steelblue;">
+                                               process="@this" update="@(.ui-datalist) scrollUploadFiles" style="float: right;color: steelblue;">
                                     <span class="ui-icon ui-icon-close"></span>  
                                 </p:commandLink>
                             </h:panelGrid>
                         </p:column>   
                     </p:dataList>
+                    </p:scrollPanel>
                     <p:growl id="growlFile" showDetail="true" sticky="false" life="12000" /> 
                     <p:fileUpload id="filesUpload"     
                                   label="Adjuntar Archivo"
@@ -245,7 +247,7 @@
                                   mode="advanced"
                                   sizeLimit="#{email.sizeLimit}"
                                   multiple="true" 
-                                  auto="true" update="filesUpload uploadFiles growlFile" invalidSizeMessage="#{email.msg_invalid_size}"/>
+                                  auto="true" update="filesUpload scrollUploadFiles growlFile" invalidSizeMessage="#{email.msg_invalid_size}"/>
                     
                     <h:outputText value="#{email.msg_file_upload}" styleClass="text_small_ligth"/>
                     <br/>

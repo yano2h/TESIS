@@ -44,11 +44,16 @@ public class FileManagerEJB implements FileManagerEJBLocal {
             archivoAdjunto.setFechaUpload(new Date());
             String pathFile = buildPathArchivoAdjuntoSolicitudReq(archivoAdjunto.getFechaUpload(),
                                                                   solicitud.getIdSolicitudRequerimiento());
+            if (FileUtils.isRenameNecessary(basePath + pathFile + archivoAdjunto.getNombre())) {
+                String nuevoNombre = FileUtils.buildNewName(basePath + pathFile + archivoAdjunto.getNombre());
+                archivoAdjunto.setNombre(nuevoNombre);
+            }
+            
             archivoAdjunto.setPathFile(pathFile+archivoAdjunto.getNombre());
             archivoAdjunto.setSizeFormat(FileUtils.convertSizeRedondeado(archivoAdjunto.getSizeFile()));
+            
             writeFile(archivoAdjunto.getInputStream(), archivoAdjunto.getNombre(), pathFile);
-//            FileUtils.createDirectory(basePath + pathFile);
-//            FileUtils.writeUploadFile(basePath + archivoAdjunto.getPathFile(), archivoAdjunto.getInputStream());//Escribe el archivo en disco
+
             archivoAdjuntoFacade.create(archivoAdjunto);            
             ArchivoSolicitudRequerimiento asr = new ArchivoSolicitudRequerimiento(solicitud.getIdSolicitudRequerimiento(), 
                                                                                   archivoAdjunto.getIdArchivo());

@@ -77,7 +77,7 @@ public enum TypeEmail {
             return String.format(getAsuntoSinFormato(), s.getResponsable().getNombreCorto(), s.getAsunto());
         }
     },
-    CIERRE_SOLICITD(){
+    CIERRE_SOLICITUD(){
         @Override
         public String construirMensaje(Object o, String nameInvoker){
             SolicitudRequerimiento s = (SolicitudRequerimiento) o;

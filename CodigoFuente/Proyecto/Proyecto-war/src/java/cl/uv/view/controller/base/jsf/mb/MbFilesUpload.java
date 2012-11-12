@@ -10,13 +10,16 @@ import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
 import cl.uv.view.controller.solicitudes.jsf.mb.MbCrearSolicitud;
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -47,7 +50,7 @@ public class MbFilesUpload {
         if (sizeValidation(file.getSize())) {
             ArchivoAdjunto adjunto = new ArchivoAdjunto();
             adjunto.setMimetype(file.getContentType());
-            adjunto.setNombre(file.getFileName());
+            adjunto.setNombre(normalizarNombre(file.getFileName()));
             adjunto.setSizeFile(file.getSize());
             adjunto.setSizeFormat(FileUtils.convertSizeRedondeado(file.getSize()));
             try {
@@ -93,4 +96,12 @@ public class MbFilesUpload {
         return list;
     }
     
+    public String normalizarNombre(String input) {
+        // Descomposición canónica
+        String normalized = Normalizer.normalize(input, Normalizer.Form.NFD);
+        // Nos quedamos únicamente con los caracteres ASCII
+        Pattern pattern = Pattern.compile("\\P{ASCII}+");
+        String output = pattern.matcher(normalized).replaceAll("");
+        return output.replaceAll(" ", "_");
+    }   
 }

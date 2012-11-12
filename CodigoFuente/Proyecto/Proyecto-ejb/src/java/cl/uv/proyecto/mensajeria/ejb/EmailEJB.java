@@ -6,6 +6,7 @@ package cl.uv.proyecto.mensajeria.ejb;
 
 import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.persistencia.entidades.ArchivoAdjunto;
+import cl.uv.proyecto.persistencia.entidades.ComentarioSolicitud;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import cl.uv.proyecto.url.utils.UrlBuilder;
@@ -33,6 +34,7 @@ public class EmailEJB implements EmailEJBLocal {
     @Override
     @Asynchronous
     public void enviarEmail(String direccion, String asunto, String mensaje) {
+        System.out.println("enviarEmail");
         try {
             Message msg = new MimeMessage(mailSession);
 
@@ -52,6 +54,7 @@ public class EmailEJB implements EmailEJBLocal {
     @Override
     @Asynchronous
     public void enviarEmail(String[] direcciones, String asunto, String mensaje) {
+        System.out.println("enviarEmail");
         try {
             Message msg = new MimeMessage(mailSession);
 
@@ -75,7 +78,8 @@ public class EmailEJB implements EmailEJBLocal {
 
     @Override
     @Asynchronous
-    public void enviarEmail(String direccion, String asunto, String mensaje, List<ArchivoAdjunto> adjuntos) {
+    public void enviarEmail(String direccion, String asunto, String mensaje, List<ArchivoAdjunto> adjuntos) throws MessagingException{
+        System.out.println("enviarEmail");
         try {
             Message msg = new MimeMessage(mailSession);
             msg.setFrom(new InternetAddress(mailSession.getProperty("mail.from")));
@@ -100,34 +104,88 @@ public class EmailEJB implements EmailEJBLocal {
             Transport.send(msg);
         } catch (AddressException ex) {
             Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MessagingException ex) {
-            Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("ERROR:MessagingException - "+ex.getMessage());
-        }
+        } 
     }
 
-    private void enviarEmailNotificacionSolicitud(TypeEmail t,SolicitudRequerimiento s, String nameInvoker){
-        String asunto = TypeEmail.ENVIO_SOLICITUD.construirAsunto(s, s.getSolicitante().getNombre());
-        String msg = TypeEmail.ENVIO_SOLICITUD.construirMensaje(s, s.getSolicitante().getNombre());
-        enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg);
+    @Asynchronous
+    private void enviarEmailNotificacionSolicitud(TypeEmail t, SolicitudRequerimiento s, Funcionario invoker, Funcionario destinatario){
+        System.out.println("enviarEmailNotificacionSolicitud");
+        String asunto = t.construirAsunto(s, (invoker!=null)?invoker.getNombre():null);
+        String msg = t.construirMensaje(s, (invoker!=null)?invoker.getNombre():null);
+        enviarEmail(destinatario.getCorreoUv(), asunto, msg);
     }
-    
     
     @Override
     @Asynchronous
     public void enviarEmailConfirmacionEnvioSolicitud(SolicitudRequerimiento s) {
-        String asunto = TypeEmail.ENVIO_SOLICITUD.construirAsunto(s, s.getSolicitante().getNombre());
-        String msg = TypeEmail.ENVIO_SOLICITUD.construirMensaje(s, s.getSolicitante().getNombre());
-        enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg);
+        System.out.println("enviarEmailConfirmacionEnvioSolicitud");
+        enviarEmailNotificacionSolicitud(TypeEmail.ENVIO_SOLICITUD, s, 
+                                         s.getSolicitante(), s.getSolicitante());
     }
-     
+    
+    @Override
+    @Asynchronous
+    public void enviarEmailInicioSolicitud(SolicitudRequerimiento s) {
+        System.out.println("enviarEmailInicioSolicitud");
+        enviarEmailNotificacionSolicitud(TypeEmail.INICIO_SOLICITUD, s, 
+                                         s.getResponsable(), s.getSolicitante());
+    }
+    
+    @Override
+    @Asynchronous
+    public void enviarEmailRechazoSolicitud(SolicitudRequerimiento s, Funcionario invoker) {
+        System.out.println("enviarEmailRechazoSolicitud");
+        enviarEmailNotificacionSolicitud(TypeEmail.RECHAZO_SOLICITUD, s, 
+                                         invoker, s.getSolicitante());
+    }
+    
+    @Override
+    @Asynchronous
+    public void enviarEmailTransferenciaSolicitud(SolicitudRequerimiento s, Funcionario invoker) {
+        System.out.println("enviarEmailTransferenciaSolicitud");
+        enviarEmailNotificacionSolicitud(TypeEmail.TRANSFERENCIA_SOLICITUD, s, 
+                                         invoker, s.getSolicitante());
+    }
+    
+    @Override
+    @Asynchronous
     public void enviarEmailCierreSolicitud(SolicitudRequerimiento s, Funcionario invoker, List<ArchivoAdjunto> adjuntos){
-        String asunto = TypeEmail.CIERRE_SOLICITD.construirAsunto(s, s.getSolicitante().getNombre());
-        String msg = TypeEmail.CIERRE_SOLICITD.construirMensaje(s, s.getSolicitante().getNombre());
-        if (adjuntos!=null && !adjuntos.isEmpty()) {
-            enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg, adjuntos);
+        System.out.println("enviarEmailCierreSolicitud");
+        if (adjuntos!=null && !adjuntos.isEmpty()) {    
+            String asunto = TypeEmail.CIERRE_SOLICITUD.construirAsunto(s, null);
+            String msg = TypeEmail.CIERRE_SOLICITUD.construirMensaje(s, null);
+            try {
+                enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg, adjuntos);
+            } catch (MessagingException ex) {
+                Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
+                String msgError = Resources.getValue("email", "ALERTA_ERROR_ENVIO");
+                msgError = String.format(msgError, UrlBuilder.buildPublicUrlSolicitudReq(s.getCodigoConsulta()));
+                msg += msgError;
+                enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg);
+            }
         }else{
-            enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg);
+            enviarEmailNotificacionSolicitud(TypeEmail.CIERRE_SOLICITUD, s, invoker, s.getSolicitante());
         }
     }
+    
+    @Override
+    @Asynchronous
+    public void enviarEmailNotificacionComentario(ComentarioSolicitud c){
+        System.out.println("enviarEmailNotificacionComentario");
+        String asunto = TypeEmail.COMENTARIO_SOLICITUD.construirAsunto(c.getSolicitudRequerimiento(), c.getAutor().getNombre());
+        String msg = TypeEmail.COMENTARIO_SOLICITUD.construirMensaje(c, c.getAutor().getNombre());
+        if (c.getAutor().equals(c.getSolicitudRequerimiento().getSolicitante())) {
+            enviarEmail(c.getSolicitudRequerimiento().getResponsable().getCorreoUv(), asunto, msg);
+        }else{
+            enviarEmail(c.getSolicitudRequerimiento().getSolicitante().getCorreoUv(), asunto, msg);
+        }     
+    }
+
+    @Override
+    @Asynchronous
+    public void enviarEmailAsignacionSolicitud(SolicitudRequerimiento s){
+        System.out.println("enviarEmailAsignacionSolicitud");
+        enviarEmailNotificacionSolicitud(TypeEmail.ASIGNACION_SOLICITUD, s, null, s.getSolicitante());
+    }
+    
 }
