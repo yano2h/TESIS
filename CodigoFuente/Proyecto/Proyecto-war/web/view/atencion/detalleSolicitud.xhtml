@@ -233,7 +233,7 @@
                                     <h:outputText value="(#{f.sizeFormat})" styleClass="file_size_format"/>                                    
                                 </h:panelGroup>
                                 <p:commandLink id="link" title="Eliminar" actionListener="#{mbFilesUpload.remove(f)}" 
-                                               process="@this" update="@(.ui-datalist) scrollUploadFiles" style="float: right;color: steelblue;">
+                                               process="@this" update="@(.ui-datalist)" style="float: right;color: steelblue;">
                                     <span class="ui-icon ui-icon-close"></span>  
                                 </p:commandLink>
                             </h:panelGrid>
