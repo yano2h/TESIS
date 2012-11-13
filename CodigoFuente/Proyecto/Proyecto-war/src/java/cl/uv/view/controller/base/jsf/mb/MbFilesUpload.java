@@ -98,10 +98,16 @@ public class MbFilesUpload {
     
     public String normalizarNombre(String input) {
         // Descomposición canónica
+        System.out.println("ORIGINAL : ");
         String normalized = Normalizer.normalize(input, Normalizer.Form.NFD);
         // Nos quedamos únicamente con los caracteres ASCII
         Pattern pattern = Pattern.compile("\\P{ASCII}+");
         String output = pattern.matcher(normalized).replaceAll("");
+        System.out.println("NORMAL   : "+output);
         return output.replaceAll(" ", "_");
     }   
+    
+    public void clearFiles(){
+        archivosAdjuntos.clear();
+    }
 }
