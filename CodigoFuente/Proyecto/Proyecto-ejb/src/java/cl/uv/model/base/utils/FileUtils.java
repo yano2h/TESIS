@@ -66,31 +66,27 @@ public class FileUtils {
     
     public static String convertSize(long bytes){
         System.out.println("SIZE:"+bytes);
-        String unit;
-        if (bytes >= 1000000) {
-            float size = (float)bytes/(float)1000000;
+        String unit; 
+        if (bytes >= 1048576) {
+            float size = (float)bytes/(float)1048576;
             unit = size+"MB";
         }else{
-            float size = (float)bytes/(float)1000;
+            float size = (float)bytes/(float)1024;
             unit = size+"KB";
         }
         return unit;
     }
 
     public static String convertSizeRedondeado(long bytes){
-        String unit;
         float size;
         
-        if (bytes >= 1000000) {
-            size = (float)bytes/(float)1000000;
-            unit = "MB";
+        if (bytes >= 1048576) {
+            size = (float)bytes/(float)1048576;
+            return MathUtils.redondearFloat(size,2) + "MB";
         }else{
-            size = (float)bytes/(float)1000;
-            unit = "KB";
+            size = (float)bytes/(float)1024;
+            return MathUtils.redondearFloat(size,0).intValue() + "KB";
         }
-        
-        int sizeRedondeado = MathUtils.redondearFloat(size,0).intValue();
-        return sizeRedondeado+unit;
     }
     
     public static String convertDateToPath(Date d){
