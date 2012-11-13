@@ -158,7 +158,7 @@ public class EmailEJB implements EmailEJBLocal {
                 enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg, adjuntos);
             } catch (MessagingException ex) {
                 Logger.getLogger(EmailEJB.class.getName()).log(Level.SEVERE, null, ex);
-                String msgError = Resources.getValue("email", "ALERTA_ERROR_ENVIO");
+                String msgError = Resources.getValue("Emails", "ALERTA_ERROR_ENVIO");
                 msgError = String.format(msgError, UrlBuilder.buildPublicUrlSolicitudReq(s.getCodigoConsulta()));
                 msg += msgError;
                 enviarEmail(s.getSolicitante().getCorreoUv(), asunto, msg);
