@@ -135,9 +135,9 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     }
 
     @Override
-    public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto) throws AddressException, MessagingException {
-        cerrarSolicitud(solicitud);
-        emailEJB.enviarEmail(direcciones, asunto, solicitud.getRespuesta());
+    public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto, List<ArchivoAdjunto> archivosAdjuntos){
+        cerrarSolicitud(solicitud,archivosAdjuntos);
+        emailEJB.enviarEmailRespuestaManual(solicitud, direcciones, asunto, solicitud.getRespuesta(),archivosAdjuntos);
     }
 
     @Override
@@ -198,6 +198,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
             c.setSolicitudRequerimiento(solicitud);
             comentarioSolicitudFacade.create(c);
             notificacionEJB.crearNotificacionSolicitud(TypeNotification.COMENTARIO_SOLICITUD, solicitud, autor);
+            emailEJB.enviarEmailNotificacionComentario(c);
         }
     }
 }

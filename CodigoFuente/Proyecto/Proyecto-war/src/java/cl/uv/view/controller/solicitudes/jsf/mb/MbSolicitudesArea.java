@@ -44,7 +44,6 @@ public class MbSolicitudesArea implements Serializable {
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
     @EJB
     private SolicitudRequerimientoEJBLocal solicitudEJB;
-    
     @ManagedProperty(value = "#{mbFuncionarioInfo}")
     private MbFuncionarioInfo mbFuncionarioInfo;
     @ManagedProperty(value = "#{mbDetalleSolicitud}")
@@ -53,7 +52,6 @@ public class MbSolicitudesArea implements Serializable {
     private AreaController areaController;
     @ManagedProperty(value = "#{mbFilesUpload}")
     private MbFilesUpload mbFilesUpload;
-
     private Boolean enviarMail;
     private String respuesta;
     private String codigoConsulta;
@@ -66,7 +64,7 @@ public class MbSolicitudesArea implements Serializable {
     private List<FuncionarioDisico> funcionariosArea;
     private List<SolicitudRequerimiento> solicitudesArea;
     private SelectItem[] areasParaTransferencia;
-    
+
     public MbSolicitudesArea() {
         enviarMail = true;
         respuesta = "";
@@ -114,7 +112,6 @@ public class MbSolicitudesArea implements Serializable {
         this.mbFilesUpload = mbFilesUpload;
     }
 
-    
     public List<SolicitudRequerimiento> getSolicitudesArea() {
         return solicitudesArea;
     }
@@ -246,17 +243,8 @@ public class MbSolicitudesArea implements Serializable {
         if (!respuesta.isEmpty()) {
             String[] direcciones = emailsRespuestaManual.replaceAll(" ", "").split(",");
             mbDetalleSolicitud.getSolicitud().setRespuesta(respuesta);
-            try {
-                solicitudEJB.enviarRespuestaManual(mbDetalleSolicitud.getSolicitud(), direcciones, asuntoRespuestaManual);
-            } catch (AddressException ex) {
-                Logger.getLogger(MbSolicitudesArea.class.getName()).log(Level.SEVERE, null, ex);
-                JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error con la Dirección de Correo Especificada", ex.getMessage()));
-            } catch (MessagingException ex) {
-                Logger.getLogger(MbSolicitudesArea.class.getName()).log(Level.SEVERE, null, ex);
-                JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al enviar el correo", ex.getMessage()));
-            }
+            solicitudEJB.enviarRespuestaManual(mbDetalleSolicitud.getSolicitud(), direcciones, asuntoRespuestaManual, mbFilesUpload.extraerArchivosAdjuntos());
         }
-
     }
 
     public void transferirSolicitud() {
@@ -280,7 +268,6 @@ public class MbSolicitudesArea implements Serializable {
         solicitudEJB.convertirSolicitudEnProyecto(mbDetalleSolicitud.getSolicitud());
         JsfUtils.handleNavigation("/view/proyectos/crearProyecto?faces-redirect=true");
     }
-
 //    public void handleFileUpload(FileUploadEvent event) {
 //        if (archivosAdjuntos == null) {
 //            archivosAdjuntos = new ArrayList<ArchivoAdjunto>();
@@ -300,11 +287,9 @@ public class MbSolicitudesArea implements Serializable {
 //            }
 //        }
 //    }
-
 //    public void remove(ArchivoAdjunto f) {
 //        archivosAdjuntos.remove(f);
 //    }
-
 //    public boolean sizeValidation(Long size) {
 //        if ((sizeAttachment + size) > sizeLimitAttachment) {
 //            if (archivosAdjuntos != null && archivosAdjuntos.size() > 0) {

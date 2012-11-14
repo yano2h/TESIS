@@ -153,9 +153,10 @@
                     <p:dataList id="selectFiles" value="#{mbDetalleSolicitud.solicitud.archivosAdjuntos}" var="f" type="none" >
                         <p:column>
                             <h:panelGrid columns="3" styleClass="item-upload">
-                                <h:outputText value="#{f.archivoAdjunto.nombre} #{f.archivoAdjunto.sizeFormat}" style="width: 300px;"/>
+                                <h:outputText value="#{f.archivoAdjunto.nombre} " style="width: 300px;font-weight: bold;"/>
+                                <h:outputText value="- (#{f.archivoAdjunto.sizeFormat})" style="font-weight: bold; font-style: italic; color: #999;"/>
                                 <p:commandLink id="link" value="Descargar" actionListener="#{mbDetalleSolicitud.load(f)}" ajax="false"
-                                               style="float: right;color: steelblue;" process="@this">
+                                               style="float: right;color: steelblue;font-style: italic;" process="@this">
                                     <p:fileDownload value="#{mbDetalleSolicitud.fileDownload}"  />
                                 </p:commandLink>
                             </h:panelGrid>
@@ -262,7 +263,7 @@
                                          process="dlg_resp_directa"
                                          oncomplete="if(!args.validationFailed) {respDirecta.hide();}"
                                          actionListener="#{mbSolicitudesArea.enviarRespuestaDirecta}"  />
-                        <p:commandButton value="Cancelar"  onclick="editorRespDirecta.clear();respDirecta.hide();" actionListener="#{mbFilesUpload.clearFiles()}"/>
+                        <p:commandButton value="Cancelar"  onclick="editorRespDirecta.clear();respDirecta.hide();" actionListener="#{mbFilesUpload.clearFiles()}" process="@this" update="@form"/>
                     </h:panelGroup>
                 </h:panelGrid>
             </p:dialog>
@@ -281,13 +282,39 @@
                 <p:outputLabel id="lbl_mensaje" value="Mensaje de Respuesta:" styleClass="label_blod" for="editorRespManual"/>
                 <p:editor id="editorRespManual" widgetVar="editorRespManual" width="450" height="200" value="#{mbSolicitudesArea.respuesta}" required="true"/>
 
+                <p:scrollPanel id="scrollUploadFiles" style="max-height: 100px;margin-bottom: 5px; margin-top: 5px;">
+                    <p:dataList id="uploadFiles" value="#{mbFilesUpload.archivosAdjuntos}" var="f" type="none" >
+                        <p:column>
+                            <h:panelGrid columns="3" styleClass="file_upload_background" >
+                                <h:panelGroup>
+                                    <h:outputText value="#{f.nombre}" styleClass="file_upload"/>
+                                    <p:spacer width="10" height="10"/>
+                                    <h:outputText value="(#{f.sizeFormat})" styleClass="file_size_format"/>                                    
+                                </h:panelGroup>
+                                <p:commandLink id="link" title="Eliminar" actionListener="#{mbFilesUpload.remove(f)}" 
+                                               process="@this" update="@(.ui-datalist) :form_dlg_resp_manual:scrollUploadFiles" style="float: right;color: steelblue;">
+                                    <span class="ui-icon ui-icon-close"></span>  
+                                </p:commandLink>
+                            </h:panelGrid>
+                        </p:column>   
+                    </p:dataList>
+                    </p:scrollPanel>
+                    <p:growl id="growlFile" showDetail="true" sticky="false" life="12000" /> 
+                    <p:fileUpload id="filesUpload"     
+                                  label="Adjuntar Archivo"
+                                  fileUploadListener="#{mbFilesUpload.handleFileUpload}"  
+                                  mode="advanced"
+                                  sizeLimit="#{email.sizeLimit}"
+                                  multiple="true" 
+                                  auto="true" update="filesUpload scrollUploadFiles growlFile" invalidSizeMessage="#{email.msg_invalid_size}"/>
+                    
                 <h:panelGroup style="float: right;margin-top: 10px;">
                     <p:commandButton value="Enviar" 
                                      update="grid_delg_resp_m lbl_mensaje :detalleSol:panelDetalleSolicitud :growlInfo"
                                      process="dlg_resp_manual"
                                      oncomplete="if(!args.validationFailed) {respManual.hide();}"
                                      actionListener="#{mbSolicitudesArea.enviarRespuestaManual}" />
-                    <p:commandButton value="Cancelar" onclick="editorRespManual.clear();respManual.hide();"/>
+                    <p:commandButton value="Cancelar"  onclick="editorRespManual.clear();respManual.hide();" actionListener="#{mbFilesUpload.clearFiles()}" process="@this" update="@form"/>
                 </h:panelGroup>
             </p:dialog>
         </h:form>
