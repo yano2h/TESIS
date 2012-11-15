@@ -108,6 +108,7 @@ public class MbFilesUpload {
     }   
     
     public void clearFiles(){
+        System.out.println("CLEAN");
         archivosAdjuntos.clear();
     }
 }

@@ -32,5 +32,7 @@ public interface NotificacionFacadeLocal {
 
     public List<Notificacion> buscarNotificacionPorDestinatario(Funcionario destinatario);
 
+    void marcarNotificacionRevisada(Notificacion n);
+
     
 }

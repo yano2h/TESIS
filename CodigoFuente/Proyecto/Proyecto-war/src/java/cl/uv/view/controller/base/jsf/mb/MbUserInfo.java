@@ -10,6 +10,7 @@ import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.Notificacion;
 import cl.uv.security.openam.OpenAMUserDetails;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -24,12 +25,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @ManagedBean
 @SessionScoped
 public class MbUserInfo implements Serializable {
-    @EJB
-    private AuthEJBBeanLocal authEJBBean;
 
     @EJB
+    private AuthEJBBeanLocal authEJBBean;
+    @EJB
     private NotificacionFacadeLocal notificacionFacade;
-    
     @ManagedProperty(value = "#{mbUser.funcionario}")
     private Funcionario funcionario;
 
@@ -41,24 +41,21 @@ public class MbUserInfo implements Serializable {
         this.funcionario = funcionario;
     }
 
-    
     public List<Notificacion> getNotificaciones() {
         funcionario.setNotificaciones(notificacionFacade.buscarNotificacionPorDestinatario(funcionario));
         return funcionario.getNotificaciones();
     }
 
     public void marcarComoRevisada(Notificacion notificacion) {
-        if (notificacion != null && !notificacion.getRevisada()) {
-            notificacion.setRevisada(true);
-            notificacionFacade.edit(notificacion);
-        }
+        System.out.println("REVISADA :" + (new Date()).getTime());
+        notificacion.setRevisada(true);
+        notificacionFacade.marcarNotificacionRevisada(notificacion);
     }
-    
-    public void logout(){
+
+    public void logout() {
         //JsfUtils.redirect(JsfUtils.getExternalContext().getRequestContextPath()+"/j_spring_security_logout");
         System.out.println("LOGOUT");
         OpenAMUserDetails user = (OpenAMUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         authEJBBean.logout(user.getPassword());
     }
-    
 }
