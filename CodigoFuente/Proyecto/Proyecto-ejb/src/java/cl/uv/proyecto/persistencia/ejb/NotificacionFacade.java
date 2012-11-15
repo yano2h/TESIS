@@ -7,6 +7,7 @@ package cl.uv.proyecto.persistencia.ejb;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.Notificacion;
 import java.util.List;
+import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,5 +37,12 @@ public class NotificacionFacade extends AbstractFacade<Notificacion> implements 
         q.setParameter("destinatario", destinatario);
         q.setMaxResults(100);
         return q.getResultList();
+    }
+    
+    @Override
+    @Asynchronous
+    public void marcarNotificacionRevisada(Notificacion n){
+        n.setRevisada(true);
+        getEntityManager().merge(n);
     }
 }

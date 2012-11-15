@@ -84,10 +84,11 @@
                             <p:dataList id="selectFiles" value="#{mbDetalleSolicitud.solicitud.archivosAdjuntos}" var="f" type="none">
                                 <p:column>
                                     <h:panelGrid columns="3" styleClass="item-upload">
-                                        <h:outputText value="#{f.archivoAdjunto.nombre} #{f.archivoAdjunto.sizeFormat}" style="width: 300px;"/>
-                                        <p:commandLink id="link" value="Descargar" actionListener="#{mbDetalleSolicitud.load(f)}" ajax="false" 
-                                                       style="float: right;color: steelblue;">
-                                            <p:fileDownload value="#{mbDetalleSolicitud.fileDownload}" />
+                                        <h:outputText value="#{f.archivoAdjunto.nombre} " style="width: 300px;font-weight: bold;"/>
+                                        <h:outputText value="- (#{f.archivoAdjunto.sizeFormat})" style="font-weight: bold; font-style: italic; color: #999;"/>
+                                        <p:commandLink id="link" value="Descargar" actionListener="#{mbDetalleSolicitud.load(f)}" ajax="false"
+                                                       style="float: right;color: steelblue;font-style: italic;" process="@this">
+                                            <p:fileDownload value="#{mbDetalleSolicitud.fileDownload}"  />
                                         </p:commandLink>
                                     </h:panelGrid>
                                 </p:column>   

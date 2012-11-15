@@ -5,30 +5,17 @@
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
 import cl.uv.proyecto.mensajeria.ejb.EmailEJBLocal;
-import cl.uv.proyecto.mensajeria.ejb.TypeEmail;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.ArchivoAdjunto;
-import cl.uv.proyecto.persistencia.entidades.ArchivoSolicitudRequerimiento;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import cl.uv.proyecto.requerimientos.ejb.SolicitudRequerimientoEJBLocal;
+import cl.uv.view.controller.base.jsf.mb.MbFilesUpload;
 import cl.uv.view.controller.base.jsf.mb.MbUserInfo;
-import cl.uv.view.controller.base.utils.JsfUtils;
-import cl.uv.view.controller.base.utils.Resources;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-import org.primefaces.event.FileUploadEvent;
 
 /**
  *
@@ -36,7 +23,7 @@ import org.primefaces.event.FileUploadEvent;
  */
 @ManagedBean
 @ViewScoped
-public class MbCrearSolicitud implements Serializable{
+public class MbCrearSolicitud implements Serializable {
 
     @EJB
     private SolicitudRequerimientoEJBLocal ejbSolicitud;
@@ -44,18 +31,16 @@ public class MbCrearSolicitud implements Serializable{
     private EmailEJBLocal ejbEmail;
     @EJB
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
-    
-    @ManagedProperty(value="#{mbUserInfo}")
+    @ManagedProperty(value = "#{mbUserInfo}")
     private MbUserInfo mbUserInfo;
-    
+    @ManagedProperty(value = "#{mbFilesUpload}")
+    private MbFilesUpload mbFilesUpload;
     private SolicitudRequerimiento solicitud;
     private String codigoConsulta;
-    private List<ArchivoAdjunto> archivosAdjuntos;
-            
-            
+
     public MbCrearSolicitud() {
     }
-    
+
     public SolicitudRequerimiento getSolicitud() {
         if (solicitud == null) {
             solicitud = new SolicitudRequerimiento();
@@ -70,57 +55,22 @@ public class MbCrearSolicitud implements Serializable{
     public String getCodigoConsulta() {
         return codigoConsulta;
     }
-    
-    public void enviar(ActionEvent event){
-        try {
-            codigoConsulta = ejbSolicitud.enviarSolicitud(solicitud, mbUserInfo.getFuncionario(),archivosAdjuntos);
-        } catch (AddressException ex) {
-            Logger.getLogger(MbCrearSolicitud.class.getName()).log(Level.SEVERE, null, ex);
-            JsfUtils.addMessage(FacesMessage.SEVERITY_ERROR, "Error el email de confimación no se envio", "Existe un problema con la dirección '"+mbUserInfo.getFuncionario().getCorreoUv() +"'");
-        } catch (MessagingException ex) {
-            Logger.getLogger(MbCrearSolicitud.class.getName()).log(Level.SEVERE, null, ex);
-            JsfUtils.addMessage(FacesMessage.SEVERITY_ERROR, "Error al enviar el email de confimación", "Error:"+ex.getMessage());
-        }
+
+    public void enviar(ActionEvent event) {
+        codigoConsulta = ejbSolicitud.enviarSolicitud(solicitud, mbUserInfo.getFuncionario(), mbFilesUpload.extraerArchivosAdjuntos());
         mbUserInfo.getFuncionario().setSolicitudesRequerimientoEnviadas(solicitudFacade.buscarPorSolicitante(mbUserInfo.getFuncionario().getRut()));
     }
-    
-    public String cerrarDialog(){
-        codigoConsulta = "";        
+
+    public String cerrarDialog() {
+        codigoConsulta = "";
         return "crearSolicitud?faces-redirect=true";
     }
 
     public void setMbUserInfo(MbUserInfo mbUserInfo) {
         this.mbUserInfo = mbUserInfo;
     }
-    
-    public void handleFileUpload(FileUploadEvent event) {
-        if (archivosAdjuntos == null) {
-            archivosAdjuntos = new ArrayList<ArchivoAdjunto>();
-        }
-        
-        ArchivoAdjunto adjunto = new ArchivoAdjunto();
-        adjunto.setMimetype(event.getFile().getContentType());
-        adjunto.setNombre(event.getFile().getFileName());
-        adjunto.setSizeFile(event.getFile().getSize());
-        try {
-            adjunto.setInputStream(event.getFile().getInputstream());
-            archivosAdjuntos.add(adjunto);
-        } catch (IOException ex) {
-            Logger.getLogger(MbCrearSolicitud.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void remove(ArchivoAdjunto f){
-        archivosAdjuntos.remove(f);
-    }
 
-    public List<ArchivoAdjunto> getArchivosAdjuntos() {
-        return archivosAdjuntos;
+    public void setMbFilesUpload(MbFilesUpload mbFilesUpload) {
+        this.mbFilesUpload = mbFilesUpload;
     }
-
-    public void setArchivosAdjuntos(List<ArchivoAdjunto> archivosAdjuntos) {
-        this.archivosAdjuntos = archivosAdjuntos;
-    }
-    
-    
 }

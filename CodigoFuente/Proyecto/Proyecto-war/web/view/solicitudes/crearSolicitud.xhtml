@@ -34,26 +34,6 @@
                     </h:panelGrid>
                     <br/>
 
-                    <!-- Upload File -->
-                    <p:dataList id="selectFiles" value="#{mbCrearSolicitud.archivosAdjuntos}" var="f" type="none">
-                        <p:column>
-                            <h:panelGrid columns="3" styleClass="item-upload">
-                                <h:outputText value="#{f.nombre}" style="width: 300px;"/>
-                                <p:commandLink id="link" value="Eliminar" actionListener="#{mbCrearSolicitud.remove(f)}" 
-                                               process="@this" update="@(.ui-datalist)" style="float: right;color: steelblue;"/>
-                            </h:panelGrid>
-                        </p:column>   
-                    </p:dataList>
-                    
-                    <p:fileUpload id="filesUpload"     
-                                  label="Adjuntar Archivo"
-                                  fileUploadListener="#{mbCrearSolicitud.handleFileUpload}"  
-                                  mode="advanced"
-                                  sizeLimit="5000000"
-                                  multiple="true" 
-                                  auto="true" update="selectFiles" />                      
-                    <!-- Fin Upload -->
-
                     <h:panelGrid columns="2">
                         <p:outputLabel value="#{msg_sol.LabelMensajeSol}:" for="mensajeSol" style="margin-top: 10px;"/>
                         <p:message id="mensajeSolMessage" for="mensajeSol"/>
@@ -61,10 +41,38 @@
                     <p:editor id="mensajeSol" widgetVar="mensajeSol" value="#{mbCrearSolicitud.solicitud.mensaje}" width="700" required="true" requiredMessage="#{msg_sol.requiredMessageMensajeSol}"/>
 
                     <br/>
-
+                     <!-- Upload File -->
+                    <p:scrollPanel id="scrollUploadFiles" style="max-height: 100px;margin-bottom: 5px; margin-top: 5px;">
+                    <p:dataList id="selectFiles" value="#{mbFilesUpload.archivosAdjuntos}" var="f" type="none" >
+                        <p:column>
+                            <h:panelGrid columns="3" styleClass="file_upload_background" >
+                                <h:panelGroup>
+                                    <h:outputText value="#{f.nombre}" styleClass="file_upload"/>
+                                    <p:spacer width="10" height="10"/>
+                                    <h:outputText value="(#{f.sizeFormat})" styleClass="file_size_format"/>                                    
+                                </h:panelGroup>
+                                <p:commandLink id="link" title="Eliminar" actionListener="#{mbFilesUpload.remove(f)}" 
+                                               process="@this" update="@(.ui-datalist) :formSol:scrollUploadFiles" style="float: right;color: steelblue;">
+                                    <span class="ui-icon ui-icon-close"></span>  
+                                </p:commandLink>
+                            </h:panelGrid>
+                        </p:column>   
+                    </p:dataList>
+                    </p:scrollPanel>
+                    <p:growl id="growlFile" showDetail="true" sticky="false" life="12000" /> 
+                    <p:fileUpload id="filesUpload"     
+                                  label="Adjuntar Archivo"
+                                  fileUploadListener="#{mbFilesUpload.handleFileUpload}"  
+                                  mode="advanced"
+                                  sizeLimit="#{email.sizeLimit}"
+                                  multiple="true" 
+                                  auto="true" update="selectFiles scrollUploadFiles growlFile" invalidSizeMessage="#{email.msg_invalid_size}"/>
+                    <h:outputText value="#{email.msg_file_upload}" styleClass="text_small_ligth"/>
+                    <!-- Fin Upload -->
+                    
                     <h:panelGrid columns="3">
                         <p:commandButton id="btnEnviar" value="#{msg_sol.BtnEnviar}" actionListener="#{mbCrearSolicitud.enviar}" update="crearSol dlg" />
-                        <p:commandButton id="btnLimpiar" value="#{msg_sol.BtnLimpiar}" type="button" onclick="mensajeSol.clear()" />
+                        <p:commandButton id="btnLimpiar" value="#{msg_sol.BtnLimpiar}" type="button" onclick="mensajeSol.clear()" actionListener="#{mbFilesUpload.clearFiles()}" update="@form" />
                         <p:commandButton id="btnCancelar" value="#{msg_sol.BtnCancelar}" immediate="true" action="resumenSolicitante?faces-redirect=true" />      
                     </h:panelGrid>
                 </p:panel>   
