@@ -96,11 +96,11 @@
                                 <h:panelGrid  columns="2" style="line-height: 1.5em;">
                                     <h:outputLabel value="Fecha de Envio:" styleClass="label_blod"/>
                                     <h:outputText id="fechaEnvio" value="#{mbDetalleSolicitud.solicitud.fechaEnvio}">
-                                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm:ss" />
+                                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm" />
                                     </h:outputText>
                                     <h:outputLabel value="Fecha Ultima Actualizacion:" styleClass="label_blod"/>
                                     <h:outputText id="fechaUltimaActualizacio" value="#{mbDetalleSolicitud.solicitud.fechaUltimaActualizacion}">
-                                        <f:convertDateTime pattern="dd-MM-yyyy  HH:mm:ss" />
+                                        <f:convertDateTime pattern="dd-MM-yyyy  HH:mm" />
                                     </h:outputText>
                                     <h:outputLabel value="Fecha de Vencimiento:" styleClass="label_blod"/>
                                     <h:outputText id="fechaVencimiento"
