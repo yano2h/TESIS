@@ -50,11 +50,14 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @Override
     public SolicitudRequerimiento buscarPorCodigo(String codigo) {
+        System.out.println("Buscar solicitud por codigo.");
         Query q = em.createNamedQuery("SolicitudRequerimiento.findByCodigoConsulta");
         q.setParameter("codigoConsulta", codigo);
         SolicitudRequerimiento solicitud;
         try {
+            System.out.println("INICIO - "+(new Date()).getTime());
             solicitud = (SolicitudRequerimiento) q.getSingleResult();
+            System.out.println("TERMINO - "+(new Date()).getTime());
         } catch (NoResultException e) {
             solicitud = null;
         }

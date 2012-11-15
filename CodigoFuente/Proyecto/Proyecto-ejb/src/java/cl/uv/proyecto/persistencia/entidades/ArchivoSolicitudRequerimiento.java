@@ -18,6 +18,7 @@ import javax.persistence.*;
     @NamedQuery(name = "ArchivoSolicitudRequerimiento.findByIdSolicitud", query = "SELECT a FROM ArchivoSolicitudRequerimiento a WHERE a.archivoSolicitudRequerimientoPK.idSolicitud = :idSolicitud"),
     @NamedQuery(name = "ArchivoSolicitudRequerimiento.findByIdArchivo", query = "SELECT a FROM ArchivoSolicitudRequerimiento a WHERE a.archivoSolicitudRequerimientoPK.idArchivo = :idArchivo")})
 public class ArchivoSolicitudRequerimiento implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ArchivoSolicitudRequerimientoPK archivoSolicitudRequerimientoPK;
@@ -37,6 +38,14 @@ public class ArchivoSolicitudRequerimiento implements Serializable {
 
     public ArchivoSolicitudRequerimiento(long idSolicitud, long idArchivo) {
         this.archivoSolicitudRequerimientoPK = new ArchivoSolicitudRequerimientoPK(idSolicitud, idArchivo);
+    }
+
+    public ArchivoSolicitudRequerimiento(SolicitudRequerimiento solicitudRequerimiento, ArchivoAdjunto archivoAdjunto) {
+        this.archivoSolicitudRequerimientoPK = new ArchivoSolicitudRequerimientoPK(
+                                               solicitudRequerimiento.getIdSolicitudRequerimiento(),
+                                               archivoAdjunto.getIdArchivo());
+        this.solicitudRequerimiento = solicitudRequerimiento;
+        this.archivoAdjunto = archivoAdjunto;
     }
 
     public ArchivoSolicitudRequerimientoPK getArchivoSolicitudRequerimientoPK() {
@@ -87,5 +96,4 @@ public class ArchivoSolicitudRequerimiento implements Serializable {
     public String toString() {
         return "cl.uv.proyecto.persistencia.entidades.ArchivoSolicitudRequerimiento[ archivoSolicitudRequerimientoPK=" + archivoSolicitudRequerimientoPK + " ]";
     }
-    
 }

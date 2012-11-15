@@ -6,21 +6,19 @@ package cl.uv.view.controller.solicitudes.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.ComentarioSolicitud;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import cl.uv.proyecto.requerimientos.ejb.SolicitudRequerimientoEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.ActionEvent;
+
 
 /**
  *
@@ -79,6 +77,7 @@ public class MbMisSolicitudes implements Serializable{
     
     public void iniciarSolicitud(){
         solicitudEJB.iniciarSolicitud(mbDetalleSolicitud.getSolicitud());
+        JsfUtils.addMessage(FacesMessage.SEVERITY_INFO, "Operación Exitosa", "La solicitud a sido cambiada correctamente al estado Iniciada");
     }
     
     public void respuestaAlJefeDeArea(){

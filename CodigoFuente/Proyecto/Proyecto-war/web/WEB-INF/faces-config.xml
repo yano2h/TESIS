@@ -31,6 +31,10 @@
             <base-name>/cl/uv/security/properties/Security</base-name>
             <var>security</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/cl/uv/view/controller/base/properties/Email</base-name>
+            <var>email</var>
+        </resource-bundle>
        <!-- <lifecycle>
             <phase-listener>cl.uv.view.controller.proyecto.jsf.core.CachePhaseListener</phase-listener>
         </lifecycle>-->

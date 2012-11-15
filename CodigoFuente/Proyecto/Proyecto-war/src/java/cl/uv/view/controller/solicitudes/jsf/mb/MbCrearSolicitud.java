@@ -12,6 +12,7 @@ import cl.uv.proyecto.persistencia.entidades.ArchivoSolicitudRequerimiento;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import cl.uv.proyecto.requerimientos.ejb.SolicitudRequerimientoEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbUserInfo;
+import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
 import java.io.IOException;
 import java.io.Serializable;
@@ -20,10 +21,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import org.primefaces.event.FileUploadEvent;
 
 /**
@@ -68,7 +72,15 @@ public class MbCrearSolicitud implements Serializable{
     }
     
     public void enviar(ActionEvent event){
-        codigoConsulta = ejbSolicitud.enviarSolicitud(solicitud, mbUserInfo.getFuncionario(),archivosAdjuntos);  
+        try {
+            codigoConsulta = ejbSolicitud.enviarSolicitud(solicitud, mbUserInfo.getFuncionario(),archivosAdjuntos);
+        } catch (AddressException ex) {
+            Logger.getLogger(MbCrearSolicitud.class.getName()).log(Level.SEVERE, null, ex);
+            JsfUtils.addMessage(FacesMessage.SEVERITY_ERROR, "Error el email de confimación no se envio", "Existe un problema con la dirección '"+mbUserInfo.getFuncionario().getCorreoUv() +"'");
+        } catch (MessagingException ex) {
+            Logger.getLogger(MbCrearSolicitud.class.getName()).log(Level.SEVERE, null, ex);
+            JsfUtils.addMessage(FacesMessage.SEVERITY_ERROR, "Error al enviar el email de confimación", "Error:"+ex.getMessage());
+        }
         mbUserInfo.getFuncionario().setSolicitudesRequerimientoEnviadas(solicitudFacade.buscarPorSolicitante(mbUserInfo.getFuncionario().getRut()));
     }
     

@@ -1,32 +1,27 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:body>
-        <ui:composition>
-        <h:form>
-            <h:panelGrid id="header" columns="3" width="100%">
-                <h:graphicImage styleClass="logoUv" library="imagenes" name="#{img.logo_uv}"/>
-                <h:graphicImage styleClass="headerSolicitud" library="imagenes" name="#{img.header_solicitud}"/>
-                <h:panelGrid columns="1" styleClass="basicInfo">
-                    <h:panelGrid columns="2" >     
-                        <h:outputLabel value="Usuario:" styleClass="label_blod" />  
-                        <h:outputText value="#{mbFuncionarioInfo.funcionario.nombre}" />  
-                        <h:outputLabel value="RUT:" styleClass="label_blod" />  
-                        <h:outputText value="#{mbFuncionarioInfo.funcionario.rut}" />  
-                    </h:panelGrid>
-                    <h:panelGrid columns="2" style="float: right;">
-                        <p:commandButton value="Ver Perfil" action="perfilFuncionario?faces-redirect=true" style="width: 100%;"/>
-                        <p:commandButton value="Cerrar Sesión" actionListener="#{mbSSO.logout}" style="width: 100%;"/>
-                    </h:panelGrid>
-
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:form>
+        <h:panelGrid id="header" columns="3" width="100%">
+            <h:graphicImage styleClass="logoUv" library="imagenes" name="#{img.logo_uv}"/>
+            <h:graphicImage styleClass="headerSolicitud" library="imagenes" name="#{img.header_solicitud}"/>
+            <h:panelGrid columns="1" styleClass="basicInfo">
+                <h:panelGrid columns="2" >     
+                    <h:outputLabel value="Usuario:" styleClass="label_blod" />  
+                    <h:outputText value="#{mbFuncionarioInfo.funcionario.nombre}" />  
+                    <h:outputLabel value="RUT:" styleClass="label_blod" />  
+                    <h:outputText value="#{mbFuncionarioInfo.funcionario.rut}" />  
                 </h:panelGrid>
+                <h:panelGrid columns="2" style="float: right;">
+                    <p:commandButton value="Ver Perfil" action="perfilFuncionario?faces-redirect=true" style="width: 100%;"/>
+                    <p:commandButton value="Cerrar Sesión" actionListener="#{mbSSO.logout}" style="width: 100%;"/>
+                </h:panelGrid>
+
             </h:panelGrid>
-         </h:form>
-      
-        </ui:composition>
-    </h:body>
-</html>
+        </h:panelGrid>
+    </h:form>
+
+</ui:composition>
+
 

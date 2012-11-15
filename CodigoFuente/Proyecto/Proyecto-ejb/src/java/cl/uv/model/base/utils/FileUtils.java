@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -65,21 +66,52 @@ public class FileUtils {
     
     public static String convertSize(long bytes){
         System.out.println("SIZE:"+bytes);
-        String unit;
-        if (bytes >= 1000000) {
-            float size = (float)bytes/(float)1000000;
+        String unit; 
+        if (bytes >= 1048576) {
+            float size = (float)bytes/(float)1048576;
             unit = size+"MB";
         }else{
-            float size = (float)bytes/(float)1000;
+            float size = (float)bytes/(float)1024;
             unit = size+"KB";
         }
-        
         return unit;
     }
 
+    public static String convertSizeRedondeado(long bytes){
+        float size;
+        
+        if (bytes >= 1048576) {
+            size = (float)bytes/(float)1048576;
+            return MathUtils.redondearFloat(size,2) + "MB";
+        }else{
+            size = (float)bytes/(float)1024;
+            return MathUtils.redondearFloat(size,0).intValue() + "KB";
+        }
+    }
+    
     public static String convertDateToPath(Date d){
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy/MM", new Locale("es","CL"));
         String path = formateador.format(d);
         return path;
     }
+    
+    public static boolean isRenameNecessary(String filename){
+        File f = new File(filename);
+        return f.exists();
+    }
+    
+    public static String buildNewName(String filename){
+        String name = null;
+        String path = FilenameUtils.getFullPath(filename);
+        String baseName = FilenameUtils.getBaseName(filename);
+        String extension = FilenameUtils.getExtension(filename);
+        for(int count=1; isRenameNecessary(filename); count++){
+            name = baseName+"_("+count+")."+extension;
+            filename = path+name;
+        }
+        
+        return name;
+    }
+    
+
 }

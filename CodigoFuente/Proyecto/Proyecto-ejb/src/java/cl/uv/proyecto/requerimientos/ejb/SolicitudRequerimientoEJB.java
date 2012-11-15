@@ -18,8 +18,11 @@ import cl.uv.proyecto.persistencia.entidades.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 /**
  *
@@ -31,7 +34,6 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     private final long MOD = 1000L;
     private final long DESPLAZAMIENTO = 10000000000L;
     private final long TIME_INIT = 1341773584868L;
-    private final int CIERRE = 0;
     
     @EJB
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
@@ -83,7 +85,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     }
 
     @Override
-    public String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante, List<ArchivoAdjunto> archivosAdjuntos) {
+    public String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante, List<ArchivoAdjunto> archivosAdjuntos) throws AddressException, MessagingException {
         Date fechaActual = new Date();
         solicitud.setFechaEnvio(fechaActual);
         solicitud.setFechaUltimaActualizacion(fechaActual);
@@ -106,6 +108,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         EstadoSolicitudRequerimiento estado = estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_RECHAZADA") );
         solicitud.setEstadoSolicitud(estado);
         solicitudFacade.edit(solicitud);
+        emailEJB.enviarEmailRechazoSolicitud(solicitud, null);
         notificacionEJB.crearNotificacionSolicitud(TypeNotification.RECHAZO_SOLICITUD, solicitud, null);
     }
 
@@ -115,24 +118,26 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitudFacade.edit(solicitud);
         notificacionEJB.crearNotificacionSolicitud(TypeNotification.CIERRE_SOLICITD, solicitud, null);
     }
+    
+    private void cerrarSolicitud(SolicitudRequerimiento solicitud,List<ArchivoAdjunto> archivosAdjuntos) {
+        if (archivosAdjuntos!=null && archivosAdjuntos.size()>0) {
+            fileManagerEJB.adjuntarArchivosSolicitudRequerimiento(archivosAdjuntos, solicitud);
+        }
+        cerrarSolicitud(solicitud);
+    }
 
     @Override
-    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo) {
-        cerrarSolicitud(solicitud);
+    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo, List<ArchivoAdjunto> archivosAdjuntos) throws AddressException, MessagingException  {
+        cerrarSolicitud(solicitud,archivosAdjuntos);
         if (enviarCopiaCorreo) {
-            String email = solicitud.getSolicitante().getCorreoUv();
-            String asunto = crearAsunto(solicitud, CIERRE);
-            String mensaje = crearMensaje(solicitud, CIERRE);
-            emailEJB.enviarEmail(email, asunto, mensaje);
+            emailEJB.enviarEmailCierreSolicitud(solicitud, null, archivosAdjuntos);
         }
     }
 
     @Override
-    public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto) {
-        cerrarSolicitud(solicitud);
-        asunto = (asunto.isEmpty()) ? crearAsunto(solicitud, CIERRE) : asunto;
-        String mensaje = crearMensaje(solicitud, CIERRE);
-        emailEJB.enviarEmail(direcciones, asunto, mensaje);
+    public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto, List<ArchivoAdjunto> archivosAdjuntos){
+        cerrarSolicitud(solicitud,archivosAdjuntos);
+        emailEJB.enviarEmailRespuestaManual(solicitud, direcciones, asunto, solicitud.getRespuesta(),archivosAdjuntos);
     }
 
     @Override
@@ -141,6 +146,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitud.setAreaResponsable(nuevaAreaResponsable);
         solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_TRANSFERIDA") ));
         solicitudFacade.edit(solicitud);
+        emailEJB.enviarEmailTransferenciaSolicitud(solicitud, null);
         notificacionEJB.crearNotificacionSolicitud(TypeNotification.TRANSFERENCIA_SOLICITUD, solicitud, null);
     }
 
@@ -148,6 +154,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     public void asignarSolicitud(SolicitudRequerimiento solicitud) {
         solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_ASIGNADA") ));
         solicitudFacade.edit(solicitud);
+        emailEJB.enviarEmailAsignacionSolicitud(solicitud);
         notificacionEJB.crearNotificacionSolicitud(TypeNotification.ASIGNACION_SOLICITUD, solicitud, null);
     }
     
@@ -162,6 +169,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     public void iniciarSolicitud(SolicitudRequerimiento solicitud) {
         solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_INICIADA") ));
         solicitudFacade.edit(solicitud);
+        emailEJB.enviarEmailInicioSolicitud(solicitud);
         notificacionEJB.crearNotificacionSolicitud(TypeNotification.INICIO_SOLICITUD, solicitud, null);
     }
 
@@ -178,35 +186,6 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
         solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_FINALIZADA_SIN_RESPUESTA") ));
         solicitudFacade.edit(solicitud);
     }
-
-    private String crearMensaje(SolicitudRequerimiento solicitud, int tipoMensaje) {
-        String mensaje = "";
-        switch (tipoMensaje) {
-            case CIERRE:
-                mensaje = "<strong>[Codigo: " + solicitud.getCodigoConsulta() + " ][" + solicitud.getAsunto() + "]</strong>"
-                        + "<div><br/><strong>Respuesta:</strong><br/></div>"
-                        + solicitud.getRespuesta()
-                        + "<br/><div>Para mayor información ingrese al sistema</div>";
-                break;
-            default:
-                throw new AssertionError();
-        }
-
-        return mensaje;
-    }
-
-    private String crearAsunto(SolicitudRequerimiento solicitud, int tipoAsunto) {
-        String asunto = "";
-        switch (tipoAsunto) {
-            case CIERRE:
-                asunto = "La solicitud " + solicitud.getCodigoConsulta() + " fue cerrada.";
-                break;
-            default:
-                throw new AssertionError();
-        }
-
-        return asunto;
-    }
     
     @Override
     public void comentarSolicitud(String comentario,SolicitudRequerimiento solicitud, Funcionario autor){
@@ -219,6 +198,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
             c.setSolicitudRequerimiento(solicitud);
             comentarioSolicitudFacade.create(c);
             notificacionEJB.crearNotificacionSolicitud(TypeNotification.COMENTARIO_SOLICITUD, solicitud, autor);
+            emailEJB.enviarEmailNotificacionComentario(c);
         }
     }
 }

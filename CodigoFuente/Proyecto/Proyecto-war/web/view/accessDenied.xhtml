@@ -1,17 +1,18 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
-    <ui:composition template="#{pages.layout_solicitud}">
-        <ui:define name="title">
-            Acceso Denegado
-        </ui:define>
-        <ui:insert name="left">
-        </ui:insert> 
-        <ui:define name="content">
-            Usted esta intentando acceder a una parte del sitio a la cual no esta autorizado.
-        </ui:define>
-    </ui:composition>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="#{pages.layout_solicitud}">
+    <ui:define name="title">
+        Acceso Denegado
+    </ui:define>
+    <ui:insert name="left">
+    </ui:insert> 
+    <ui:define name="content">
+        <h:panelGrid columns="2">
+            <h:graphicImage library="imagenes" name="access_denied.png"/>
+            <h:outputText style="font-size: 21px;" value="Usted esta intentando acceder a una parte del sitio a la cual no esta autorizado."/>
+        </h:panelGrid> 
+    </ui:define>
+</ui:composition>
+
 

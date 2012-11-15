@@ -1,0 +1,467 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="#{pages.layout_atencion}">
+
+    <ui:define name="title">
+        <h:outputText value="Detalle Solicitud"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:outputScript library="js" name="calendar-localization.js" />
+        <f:metadata>
+            <f:viewParam id="codigo" name="codigo" value="#{mbDetalleSolicitud.codigo}" />
+            <f:event type="preRenderView" listener="#{mbDetalleSolicitud.init}" />
+        </f:metadata>
+        <p:messages id="messages" showDetail="true"/>  
+        <p:growl id="growlInfo" showDetail="true" sticky="false" life="12000" /> 
+
+        <h:form id="detalleSol" rendered="#{mbDetalleSolicitud.solicitud != null}">
+            <p:panel id="panelDetalleSolicitud" header="Detalle Solicitud" >
+                <p:menubar styleClass="menu_bar" rendered="#{p:ifAnyGranted(security.rolMenuAvanzadoSolicitud) and mbFuncionarioInfo.funcionario.area == mbDetalleSolicitud.solicitud.areaResponsable}"> 
+                    <p:menuitem value="Asignar Responsable" icon="ui-icon-pin-s" onclick="dlgAsignarSolicitud.show();" 
+                                disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
+                                            mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA }"/>
+                    <p:menuitem value="Transferir" icon="ui-icon-transferthick-e-w" onclick="dlgTranferencia.show();"
+                                disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
+                                            mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA }"/>
+                    <p:menuitem value="Rechazar" icon="ui-icon-closethick" onclick="dlgRechazar.show();"
+                                disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
+                                            mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA }"/>
+                    <p:menuitem value="Convertir en Proyecto" icon="ui-icon-note" onclick="convProyecto.show();"
+                                disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
+                                            mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA }"/>
+                    <p:menuitem value="Iniciar" icon="ui-icon-play" actionListener="#{mbMisSolicitudes.iniciarSolicitud}" process="@this" update="detalleSol :growlInfo" 
+                                disabled="#{(mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ASIGNADA and
+                                            mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_PENDIENTE) or
+                                            mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
+                    <p:submenu label="Cerrar y Responder" icon="ui-icon-mail-closed">
+                        <p:menuitem value="Respuesta Directa" onclick="respDirecta.show(); editorRespDirecta.focus();"
+                                    disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_RECHAZADA or
+                                                mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_CERRADA or 
+                                                mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
+                        <p:menuitem value="Respuesta Manual" onclick="respManual.show();" 
+                                    disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_RECHAZADA or
+                                                mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_CERRADA or 
+                                                mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
+                    </p:submenu>
+                </p:menubar>
+
+                <p:menubar styleClass="menu_bar" rendered="#{mbFuncionarioInfo.funcionario.rut == mbDetalleSolicitud.solicitud.responsable.rut and !p:ifAnyGranted(security.rolMenuAvanzadoSolicitud) }"> 
+                    <p:menuitem value="Iniciar" icon="ui-icon-play" actionListener="#{mbMisSolicitudes.iniciarSolicitud}"  
+                                disabled="#{(mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ASIGNADA and
+                                            mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_PENDIENTE) or
+                                            mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
+                    <p:submenu label="Cerrar y Responder" icon="ui-icon-mail-closed">
+                        <p:menuitem value="Respuesta Directa" onclick="respDirecta.show(); editorRespDirecta.focus();"
+                                    disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_CERRADA or
+                                                mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_FINALIZADA_SIN_RESPUESTA}"/>
+
+                        <p:menuitem value="Respuesta al Jefe de Area" onclick="respJA.show();"
+                                    disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_CERRADA or
+                                                mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento == const.EstadoSR_FINALIZADA_SIN_RESPUESTA }"/>
+                    </p:submenu>
+                </p:menubar>
+
+                <br/>
+
+                <h:panelGrid columns="2" styleClass="title_asunto">    
+                    <h:outputLabel value="Asunto:" styleClass="label_blod" />
+                    <h:outputText id="asunto" value="#{mbDetalleSolicitud.solicitud.asunto}"/>    
+                </h:panelGrid>
+
+                <br/>
+
+                <h:panelGrid id="detalle" columns="3">
+                    <h:panelGroup>
+                        <h:outputText value="Datos Solicitud" styleClass="title_italic"/>
+                        <h:panelGrid id="izq" columns="2" style="line-height: 1.5em;">
+                            <h:outputLabel value="Codigo de Consulta:" styleClass="label_blod" />
+                            <h:outputText id="codigoConsulta" value="#{mbDetalleSolicitud.solicitud.codigoConsulta}"/>
+                            <h:outputLabel value="Area Responsable:" styleClass="label_blod" />
+                            <h:outputText id="area" value="#{mbDetalleSolicitud.solicitud.areaResponsable.nombreArea}"/>
+                            <h:outputLabel value="Tipo de Solicitud:" styleClass="label_blod"/>
+                            <h:outputText id="tipo" value="#{mbDetalleSolicitud.solicitud.tipoSolicitud.nombreTipoSolicitud}"/>
+                            <h:outputLabel value="Estado Actual:" styleClass="label_blod"/>
+                            <h:outputText id="estado" value="#{mbDetalleSolicitud.solicitud.estadoSolicitud.nombreEstadoSolicitud}"/>
+                            <h:outputLabel value="Prioridad:" styleClass="label_blod"/>
+                            <h:outputText id="prioridad" value="#{mbDetalleSolicitud.solicitud.prioridadSolicitud.nombrePrioridad}"/>
+                        </h:panelGrid>
+                        <p:separator style="height: 1px;margin-bottom:20px;"/>
+                        <h:outputText value="Fechas" styleClass="title_italic"/>
+                        <h:panelGrid  columns="2" style="line-height: 1.5em;">
+                            <h:outputLabel value="Fecha de Envio:" styleClass="label_blod"/>
+                            <h:outputText id="fechaEnvio" value="#{mbDetalleSolicitud.solicitud.fechaEnvio}">
+                                <f:convertDateTime pattern="dd-MM-yyyy HH:mm:ss" />
+                            </h:outputText>
+                            <h:outputLabel value="Fecha Ultima Actualizacion:" styleClass="label_blod"/>
+                            <h:outputText id="fechaUltimaActualizacio" value="#{mbDetalleSolicitud.solicitud.fechaUltimaActualizacion}">
+                                <f:convertDateTime pattern="dd-MM-yyyy  HH:mm:ss" />
+                            </h:outputText>
+                            <h:outputLabel value="Fecha de Vencimiento:" styleClass="label_blod"/>
+                            <h:outputText id="fechaVencimiento"
+                                          value="#{mbDetalleSolicitud.solicitud.fechaVencimiento}">
+                                <f:convertDateTime pattern="dd-MM-yyyy  HH:mm"/>
+                            </h:outputText>
+                            <h:outputLabel value="Fecha de Cierre:" styleClass="label_blod"/>
+                            <h:outputText id="fechaCierre" value="#{mbDetalleSolicitud.solicitud.fechaCierre}">
+                                <f:convertDateTime pattern="dd-MM-yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:panelGrid>
+                    </h:panelGroup>
+
+                    <p:separator style="width:1px;height: 250px;margin-left: 20px;margin-right: 20px;"/>
+
+                    <h:panelGroup>
+                        <h:outputText value="Datos Solicitante" styleClass="title_italic"/>
+                        <h:panelGrid columns="2" style="line-height: 1.5em;">
+                            <h:outputLabel value="Nombres:" styleClass="label_blod"/>
+                            <h:outputText id="nombreSolicitante" value="#{mbDetalleSolicitud.solicitud.solicitante.nombre}"/>
+                            <h:outputLabel value="Apellido Paterno:" styleClass="label_blod"/>
+                            <h:outputText id="apellidoPaternoSolicitante" value="#{mbDetalleSolicitud.solicitud.solicitante.apellidoPaterno}"/>
+                            <h:outputLabel value="Apellido Materno:" styleClass="label_blod"/>
+                            <h:outputText id="apellidoMaternoSolicitante" value="#{mbDetalleSolicitud.solicitud.solicitante.apellidoMaterno}"/>
+                            <h:outputLabel value="Correo Institucional:" styleClass="label_blod"/>
+                            <h:outputText id="correoUvSolicitante" value="#{mbDetalleSolicitud.solicitud.solicitante.correoUv}"/>
+                            <br/>
+                        </h:panelGrid>
+                        <p:separator style="height: 1px;margin-bottom:20px;"/>
+                        <h:outputText value="Datos Responsable" styleClass="title_italic"/>
+                        <h:panelGrid columns="2" style="line-height: 1.5em;">
+                            <h:outputLabel value="Nombres:" styleClass="label_blod"/>
+                            <h:outputText id="nombreResponsable" value="#{mbDetalleSolicitud.solicitud.responsable.nombre }"/>
+                            <h:outputLabel value="Apellido Paterno:" styleClass="label_blod"/>
+                            <h:outputText id="apellidoPaternoResponsable" value="#{mbDetalleSolicitud.solicitud.responsable.apellidoPaterno}"/>
+                            <h:outputLabel value="Apellido Materno:" styleClass="label_blod"/>
+                            <h:outputText id="apellidoMaternoResponsable" value="#{mbDetalleSolicitud.solicitud.responsable.apellidoMaterno}"/>
+                            <h:outputLabel value="Correo Institucional:" styleClass="label_blod"/>
+                            <h:outputText id="correoUvResponsable" value="#{mbDetalleSolicitud.solicitud.responsable.correoUv}"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </h:panelGrid>
+
+                <p:separator style="height:3px; margin-bottom:20px;margin-top: 10px;"/>
+
+                <p:panel header="Mensaje" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%" >  
+                    <h:outputText id="mensaje" value="#{mbDetalleSolicitud.solicitud.mensaje}" escape="false"/>       
+                </p:panel>
+                <br/>
+
+                <p:panel header="Archivos Adjuntos" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%" >
+                    <p:dataList id="selectFiles" value="#{mbDetalleSolicitud.solicitud.archivosAdjuntos}" var="f" type="none" >
+                        <p:column>
+                            <h:panelGrid columns="3" styleClass="item-upload">
+                                <h:outputText value="#{f.archivoAdjunto.nombre} " style="width: 300px;font-weight: bold;"/>
+                                <h:outputText value="- (#{f.archivoAdjunto.sizeFormat})" style="font-weight: bold; font-style: italic; color: #999;"/>
+                                <p:commandLink id="link" value="Descargar" actionListener="#{mbDetalleSolicitud.load(f)}" ajax="false"
+                                               style="float: right;color: steelblue;font-style: italic;" process="@this">
+                                    <p:fileDownload value="#{mbDetalleSolicitud.fileDownload}"  />
+                                </p:commandLink>
+                            </h:panelGrid>
+                        </p:column>   
+                    </p:dataList>
+                </p:panel>
+                <br/>
+
+                <p:panel header="Motivo Transferencia" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%" rendered="#{not empty mbDetalleSolicitud.solicitud.justificacionTrasnferencia}" >  
+                    <h:outputText id="motivoTransferencia" value="#{mbDetalleSolicitud.solicitud.justificacionTrasnferencia}" escape="false"/>
+                </p:panel>
+                <br/>
+
+                <p:panel header="Respuesta" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%;" rendered="#{not empty mbDetalleSolicitud.solicitud.respuesta}" >  
+                    <h:outputText id="respuesta" value="#{mbDetalleSolicitud.solicitud.respuesta}" escape="false" />
+                </p:panel>
+                <br/>
+
+                <p:panel id="comentarioPnl" header="Comentarios" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%;" >
+
+                    <h:panelGrid columns="2" rowClasses="row_align_bottom" style="width: 100%" columnClasses="column_grid">
+                        <p:inputTextarea id="nuevoComentario" value="#{mbDetalleSolicitud.comentario}" rows="3" style="width: 98%;"/>
+                        <p:commandButton value="Comentar" actionListener="#{mbDetalleSolicitud.comentarFuncionario}" update="nuevoComentario comentarios" icon="ui-icon-comment" process="comentarioPnl"/>
+                    </h:panelGrid>
+                    <br/>
+
+                    <p:dataList id="comentarios" 
+                                value="#{mbDetalleSolicitud.solicitud.comentarios}" 
+                                var="comentario" 
+                                type="none" 
+                                paginator="true" rows="10" paginatorPosition="bottom" paginatorAlwaysVisible="false">
+
+                        <p:column>
+                            <h:panelGrid id="gridComentario" styleClass="ui-corner-all ui-widget-content grid_comentario" width="100%" rendered="#{comentario.visible}">
+                                <h:panelGrid  columns="2" width="100%">
+                                    <h:outputText value="#{comentario.autor.nombre} #{comentario.autor.apellidoPaterno}" styleClass="text_blod_blue text_small" />
+                                    <h:outputText value="#{comentario.fecha}" styleClass="text_date_small" style="float: right;">
+                                        <f:convertDateTime pattern="dd/MM/yyyy  HH:mm"/>
+                                    </h:outputText>
+                                </h:panelGrid>
+                                <h:outputText value="#{comentario.comentario}" style="padding: 2px;"/>
+
+                                <p:commandLink id="linkEliminar" value="Eliminar" actionListener="#{mbDetalleSolicitud.eliminarComentario}"  styleClass="small_link" style="float: right" update="@form" rendered="#{comentario.autor.rut == mbUserInfo.funcionario.rut}" process="@this">
+                                    <f:attribute name="comentario" value="#{comentario}"/>
+                                </p:commandLink>
+                            </h:panelGrid>
+                        </p:column>
+                    </p:dataList>
+
+                </p:panel>
+
+            </p:panel>
+        </h:form>
+
+        <h:form id="form_dlg_resp_directa" enctype="multipart/form-data">
+            <p:dialog id="dlg_resp_directa" header="Respuesta Directa" widgetVar="respDirecta" resizable="true" modal="true" closable="false" maximizable="true"> 
+                <h:panelGrid id="grid_resp_directa">
+                    <h:panelGroup>
+                        <h:outputText value="Destinatario: " styleClass="label label_blod"/>
+                        <h:outputText value="#{mbDetalleSolicitud.solicitud.solicitante.nombre} #{mbDetalleSolicitud.solicitud.solicitante.apellidoPaterno} #{mbDetalleSolicitud.solicitud.solicitante.apellidoMaterno}"/>
+                    </h:panelGroup>
+                    <p:separator styleClass="separator_horizontal"/>
+
+                    <p:outputLabel value="Mensaje de Respuesta:" styleClass="label_blod" for="editorRespDirecta"/>
+                    <p:editor id="editorRespDirecta" widgetVar="editorRespDirecta" width="450" height="180" value="#{mbSolicitudesArea.respuesta}" required="true"/>
+
+                    <!-- Upload File Respuesta -->
+                    <p:scrollPanel id="scrollUploadFiles" style="max-height: 100px;">
+                    <p:dataList id="uploadFiles" value="#{mbFilesUpload.archivosAdjuntos}" var="f" type="none" >
+                        <p:column>
+                            <h:panelGrid columns="3" styleClass="file_upload_background" >
+                                <h:panelGroup>
+                                    <h:outputText value="#{f.nombre}" styleClass="file_upload"/>
+                                    <p:spacer width="10" height="10"/>
+                                    <h:outputText value="(#{f.sizeFormat})" styleClass="file_size_format"/>                                    
+                                </h:panelGroup>
+                                <p:commandLink id="link" title="Eliminar" actionListener="#{mbFilesUpload.remove(f)}" 
+                                               process="@this" update="@(.ui-datalist) :form_dlg_resp_directa:scrollUploadFiles" style="float: right;color: steelblue;">
+                                    <span class="ui-icon ui-icon-close"></span>  
+                                </p:commandLink>
+                            </h:panelGrid>
+                        </p:column>   
+                    </p:dataList>
+                    </p:scrollPanel>
+                    <p:growl id="growlFile" showDetail="true" sticky="false" life="12000" /> 
+                    <p:fileUpload id="filesUpload"     
+                                  label="Adjuntar Archivo"
+                                  fileUploadListener="#{mbFilesUpload.handleFileUpload}"  
+                                  mode="advanced"
+                                  sizeLimit="#{email.sizeLimit}"
+                                  multiple="true" 
+                                  auto="true" update="filesUpload scrollUploadFiles growlFile" invalidSizeMessage="#{email.msg_invalid_size}"/>
+                    
+                    <h:outputText value="#{email.msg_file_upload}" styleClass="text_small_ligth"/>
+               <!--     <br/>
+                    <h:panelGroup style="vertical-align: top;margin-bottom: 10px;margin-top: 10px;">
+                        <p:selectBooleanCheckbox id="checkBoxEmail" value="#{mbSolicitudesArea.enviarMail}"  />
+                        <h:outputText value="Enviar una copia de la respuesat al correo del solicitante" styleClass="small_text"/>
+                    </h:panelGroup>
+                    <br/> -->
+                    <h:panelGroup style="float: right">
+                        <p:commandButton value="Enviar" 
+                                         update="grid_resp_directa :detalleSol:panelDetalleSolicitud :growlInfo" 
+                                         process="dlg_resp_directa"
+                                         oncomplete="if(!args.validationFailed) {respDirecta.hide();}"
+                                         actionListener="#{mbSolicitudesArea.enviarRespuestaDirecta}"  />
+                        <p:commandButton value="Cancelar"  onclick="editorRespDirecta.clear();respDirecta.hide();" actionListener="#{mbFilesUpload.clearFiles()}" process="@this" update="@form"/>
+                    </h:panelGroup>
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="form_dlg_resp_manual">
+            <p:dialog id="dlg_resp_manual" header="Respuesta Manual" widgetVar="respManual" resizable="false" modal="true" closable="false">  
+                <h:panelGrid id="grid_delg_resp_m" columns="2">
+                    <p:outputLabel value="Para:" for="emails" styleClass="label_blod"/>
+                    <p:inputText id="emails" value="#{mbSolicitudesArea.emailsRespuestaManual}" style="width: 200px;" required="true"/>
+
+                    <p:outputLabel value="Asunto:" for="asuntoRespManual" styleClass="label_blod"/>
+                    <p:inputText id="asuntoRespManual" value="#{mbSolicitudesArea.asuntoRespuestaManual}" style="width: 350px;" required="true" />
+                </h:panelGrid>                    
+                <p:separator styleClass="separator_horizontal"/>
+                <p:outputLabel id="lbl_mensaje" value="Mensaje de Respuesta:" styleClass="label_blod" for="editorRespManual"/>
+                <p:editor id="editorRespManual" widgetVar="editorRespManual" width="450" height="200" value="#{mbSolicitudesArea.respuesta}" required="true"/>
+
+                <p:scrollPanel id="scrollUploadFiles" style="max-height: 100px;margin-bottom: 5px; margin-top: 5px;">
+                    <p:dataList id="uploadFiles" value="#{mbFilesUpload.archivosAdjuntos}" var="f" type="none" >
+                        <p:column>
+                            <h:panelGrid columns="3" styleClass="file_upload_background" >
+                                <h:panelGroup>
+                                    <h:outputText value="#{f.nombre}" styleClass="file_upload"/>
+                                    <p:spacer width="10" height="10"/>
+                                    <h:outputText value="(#{f.sizeFormat})" styleClass="file_size_format"/>                                    
+                                </h:panelGroup>
+                                <p:commandLink id="link" title="Eliminar" actionListener="#{mbFilesUpload.remove(f)}" 
+                                               process="@this" update="@(.ui-datalist) :form_dlg_resp_manual:scrollUploadFiles" style="float: right;color: steelblue;">
+                                    <span class="ui-icon ui-icon-close"></span>  
+                                </p:commandLink>
+                            </h:panelGrid>
+                        </p:column>   
+                    </p:dataList>
+                    </p:scrollPanel>
+                    <p:growl id="growlFile" showDetail="true" sticky="false" life="12000" /> 
+                    <p:fileUpload id="filesUpload"     
+                                  label="Adjuntar Archivo"
+                                  fileUploadListener="#{mbFilesUpload.handleFileUpload}"  
+                                  mode="advanced"
+                                  sizeLimit="#{email.sizeLimit}"
+                                  multiple="true" 
+                                  auto="true" update="filesUpload scrollUploadFiles growlFile" invalidSizeMessage="#{email.msg_invalid_size}"/>
+                    
+                <h:panelGroup style="float: right;margin-top: 10px;">
+                    <p:commandButton value="Enviar" 
+                                     update="grid_delg_resp_m lbl_mensaje :detalleSol:panelDetalleSolicitud :growlInfo"
+                                     process="dlg_resp_manual"
+                                     oncomplete="if(!args.validationFailed) {respManual.hide();}"
+                                     actionListener="#{mbSolicitudesArea.enviarRespuestaManual}" />
+                    <p:commandButton value="Cancelar"  onclick="editorRespManual.clear();respManual.hide();" actionListener="#{mbFilesUpload.clearFiles()}" process="@this" update="@form"/>
+                </h:panelGroup>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="form_dlg_repuesta_ja">
+            <p:dialog id="dlg_repuesta_ja" modal="true" closable="false" resizable="false" width="500" widgetVar="respJA" header="Responder al Jefe de Area">
+                <p class="label">
+                    Esta opcion le permite delegar al Jefe de Area la responsabilidad de enviar una respuesta al solicitante.
+                    ¿Por favor confirme que realmente deseara realizar esta acción?
+                </p>
+                <h:panelGroup style="float: right;margin-top: 10px;">
+                    <p:commandButton value="Confirmar" 
+                                     process="dlg_repuesta_ja"
+                                     update=":detalleSol:panelDetalleSolicitud"
+                                     actionListener="#{mbMisSolicitudes.respuestaAlJefeDeArea}"
+                                     oncomplete="respJA.hide();"/>
+                    <p:commandButton value="Cancelar" onclick="respJA.hide();"/>
+                </h:panelGroup>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="form_dlg_transferir">
+            <p:dialog id="dlg_transferir" header="Transferir Solicitud" widgetVar="dlgTranferencia" modal="true" closable="false" resizable="false">
+                <h:panelGrid id="grid_transferir" columns="2">
+                    <p:outputLabel value="Nueva Area:" for="areaDestino" styleClass="label_blod"/>
+                    <p:selectOneMenu id="areaDestino" value="#{mbSolicitudesArea.nuevaArea}" required="true">
+                        <f:selectItems value="#{mbSolicitudesArea.areasParaTransferencia}" />
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <p:separator styleClass="separator_horizontal"/>
+
+                <p:outputLabel id="lbl_editorMotivoTransferencia" value="Motivo de la Transferencia:" styleClass="label_blod" for="editorMotivoTransferencia"/>
+                <p:editor id="editorMotivoTransferencia" widgetVar="editorMotivoTransferencia" width="450" height="200" value="#{mbSolicitudesArea.motivoTransferencia}" required="true"/>
+
+                <h:panelGroup style="float: right;margin-top: 10px;">
+                    <p:commandButton value="Transferir" 
+                                     update="grid_transferir lbl_editorMotivoTransferencia :detalleSol:panelDetalleSolicitud" 
+                                     oncomplete="if(!args.validationFailed) {dlgTranferencia.hide();}"
+                                     actionListener="#{mbSolicitudesArea.transferirSolicitud}"
+                                     process="dlg_transferir"/>
+                    <p:commandButton value="Cancelar" onclick="editorMotivoTransferencia.clear();dlgTranferencia.hide();"/>
+                </h:panelGroup>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="form_dlg_rechazar">
+            <p:dialog id="dlg_rechazar" header="Rechazar Solicitud" widgetVar="dlgRechazar" modal="true" closable="false" resizable="false">  
+                <p:outputLabel id="lbl_editorMotivoRechazo" value="Motivo del Rechazo:" styleClass="label_blod" for="editorMotivoRechazo"/>
+                <p:editor id="editorMotivoRechazo" widgetVar="editorMotivoRechazo" width="450" height="200" value="#{mbSolicitudesArea.respuesta}" required="true"/>
+
+                <h:panelGroup style="float: right;margin-top: 10px;">
+                    <p:commandButton value="Rechazar" 
+                                     process="dlg_rechazar"
+                                     update="lbl_editorMotivoRechazo :detalleSol:panelDetalleSolicitud" 
+                                     oncomplete="if(!args.validationFailed) {dlgRechazar.hide();}"
+                                     actionListener="#{mbSolicitudesArea.rechazarSolcitiud}"/>
+                    <p:commandButton value="Cancelar" onclick="editorMotivoRechazo.clear();dlgRechazar.hide();"/>
+                </h:panelGroup>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="form_dlg_convertir_proyecto">
+            <p:dialog id="dlg_convertir_proyecto" modal="true" closable="false" resizable="false" width="500" widgetVar="convProyecto" header="Convertir Solicitud en Proyecto">
+                <p class="label">
+                    Esta opcion le permite crear un nuevo proyecto a partir de esta solicitud y dar por cerrada automaticamente esta solicitud.
+                    ¿Por favor confirme que realmente deseara convertir la solicitud en un proyecto?
+                </p>
+                <h:panelGroup style="float: right;margin-top: 10px;">
+                    <p:commandButton value="Confirmar" 
+                                     process="dlg_convertir_proyecto"
+                                     update="dlg_convertir_proyecto :detalleSol:panelDetalleSolicitud"
+                                     actionListener="#{mbSolicitudesArea.convertirEnProyecto()}"/>
+                    <p:commandButton value="Cancelar" onclick="convProyecto.hide();"/>
+                </h:panelGroup>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="form_dlg_asignarSolicitud">
+            <p:growl id="growlAsignacion" showDetail="true" sticky="false" /> 
+            <p:dialog id="dlg_asignarSolicitud" header="Asignar Solicitud" widgetVar="dlgAsignarSolicitud" modal="true" closable="false" resizable="false" width="640">
+                <h:panelGrid columns="4" style="margin-bottom: 10px;">
+                    <p:outputLabel value="Prioridad:" for="prioridadMenu" styleClass="label_blod"/>
+                    <p:selectOneMenu id="prioridadMenu" value="#{mbDetalleSolicitud.solicitud.prioridadSolicitud}">
+                        <f:selectItems value="#{tipoPrioridadController.itemsAvailableSelectMany}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Fecha de Vencimiento:" for="fechaVencimientoCalendar" styleClass="label_blod" style="margin-left: 40px;"/>
+                    <p:calendar id="fechaVencimientoCalendar" locale="es" 
+                                value="#{mbDetalleSolicitud.solicitud.fechaVencimiento}" 
+                                mindate="#{mbSolicitudesArea.minDate}" showOn="button" pattern="dd/MM/yyyy  HH:mm"/>
+
+                </h:panelGrid>
+
+                <p:dataTable value="#{mbSolicitudesArea.funcionariosArea}" 
+                             var="funcionario" 
+                             rowKey="#{funcionario.rut}"
+                             selectionMode="single"
+                             selection="#{mbDetalleSolicitud.solicitud.responsable}"
+                             scrollWidth="599">
+
+                    <p:column id="nombreColumn" headerText="Nombre" width="130">
+                        <h:outputText value="#{funcionario.nombre}"/>
+                    </p:column>
+                    <p:column headerText="A. Paterno" width="100">
+                        <h:outputText value="#{funcionario.apellidoPaterno}"/>
+                    </p:column>
+                    <p:column headerText="A. Materno" width="100">
+                        <h:outputText value="#{funcionario.apellidoMaterno}"/>
+                    </p:column>
+                    <p:column headerText="S.A" width="30">
+                        <h:outputText value="#{funcionario.cantidadDeSolicitudesAsignadas}"/>
+                    </p:column>
+                    <p:column headerText="S.P" width="30">
+                        <h:outputText value="#{funcionario.cantidadDeSolicitudesPendientes}"/>
+                    </p:column>
+                    <p:column headerText="S.I" width="30">
+                        <h:outputText value="#{funcionario.cantidadDeSolicitudesIniciadas}"/>
+                    </p:column>
+                    <p:column headerText="S.V" width="30">
+                        <h:outputText value="#{funcionario.cantidadDeSolicitudesVencidas}"/>
+                    </p:column>
+                </p:dataTable>
+
+                <h:panelGrid columns="3" width="100%">
+                    <p:commandLink type="button" id="siglasLink" value="Siglas" style="float: left;" />
+                    <p:overlayPanel id="panelSiglas" for="siglasLink" hideEffect="fade" dynamic="true">  
+                        <h:panelGrid columns="2">
+                            <h:outputText value="S.A :" styleClass="label_blod label"/>
+                            <h:outputText value="Solicitudes Asignadas"/>
+                            <h:outputText value="S.P :" styleClass="label_blod label"/>
+                            <h:outputText value="Solicitudes Pendientes"/>
+                            <h:outputText value="S.I :" styleClass="label_blod label"/>
+                            <h:outputText value="Solicitudes Iniciadas"/>
+                            <h:outputText value="S.V :" styleClass="label_blod label"/>
+                            <h:outputText value="Solicitudes Venciadas"/>
+                        </h:panelGrid>
+                    </p:overlayPanel>
+
+                    <h:panelGroup style="float: right;margin-top: 10px;">
+                        <p:commandButton value="Asignar" update="growlAsignacion :detalleSol:panelDetalleSolicitud" oncomplete="dlgAsignarSolicitud.hide()"
+                                         actionListener="#{mbSolicitudesArea.asignarSolicitud}" process="dlg_asignarSolicitud"/>
+                        <p:commandButton value="Cancelar" onclick="dlgAsignarSolicitud.hide();"/>
+                    </h:panelGroup>
+                </h:panelGrid>
+            </p:dialog>
+            
+        </h:form>
+
+    </ui:define>
+</ui:composition>
