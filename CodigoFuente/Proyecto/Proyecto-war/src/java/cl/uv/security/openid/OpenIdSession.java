@@ -53,8 +53,6 @@ public class OpenIdSession {
     }
     
     public boolean isUserAuthenticated(){
-        System.out.println("isUserAuthenticatedWithOpenId()="+isUserAuthenticatedWithOpenId());
-        System.out.println("isUserAuthenticatedWithSSO()="+isUserAuthenticatedWithSSO());
-        return isUserAuthenticatedWithOpenId() || isUserAuthenticatedWithSSO();
+        return (id != null && !id.isEmpty() && email != null && !email.isEmpty()) || userAuthenticatedWithSSO;
     }
 }
