@@ -32,7 +32,7 @@ public class FuncionarioDisicoFacade extends AbstractFacade<FuncionarioDisico> i
     
     @Override
     public List<FuncionarioDisico> buscarFuncrionariosPorArea(Area area){
-        Query q = em.createQuery("SELECT f FROM FuncionarioDisico f WHERE f.area = :area");
+        Query q = em.createQuery("SELECT f FROM FuncionarioDisico f WHERE f.area = :area ORDER BY f.nombre, f.apellidoPaterno, f.apellidoMaterno");
         q.setParameter("area", area); 
         return q.getResultList();
     }
