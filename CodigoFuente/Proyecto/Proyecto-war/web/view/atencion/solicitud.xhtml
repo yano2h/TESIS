@@ -33,7 +33,7 @@
                     <p:menuitem value="Convertir en Proyecto" icon="ui-icon-note" onclick="convProyecto.show();"
                                 disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
                                             mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA }"/>
-                    <p:menuitem value="Iniciar" icon="ui-icon-play" actionListener="#{mbMisSolicitudes.iniciarSolicitud}" process="@this" update="detalleSol :growlInfo" 
+                    <p:menuitem value="Iniciar" icon="ui-icon-play" actionListener="#{mbDetalleSolicitud.iniciarSolicitud}" process="@this" update="detalleSol :growlInfo" 
                                 disabled="#{(mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ASIGNADA and
                                             mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_PENDIENTE) or
                                             mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
@@ -50,7 +50,7 @@
                 </p:menubar>
 
                 <p:menubar styleClass="menu_bar" rendered="#{mbFuncionarioInfo.funcionario.rut == mbDetalleSolicitud.solicitud.responsable.rut and !p:ifAnyGranted(security.rolMenuAvanzadoSolicitud) }"> 
-                    <p:menuitem value="Iniciar" icon="ui-icon-play" actionListener="#{mbMisSolicitudes.iniciarSolicitud}"  
+                    <p:menuitem value="Iniciar" icon="ui-icon-play" actionListener="#{mbDetalleSolicitud.iniciarSolicitud}"  
                                 disabled="#{(mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ASIGNADA and
                                             mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_PENDIENTE) or
                                             mbFuncionarioInfo.funcionario.rut != mbDetalleSolicitud.solicitud.responsable.rut}"/>
@@ -144,42 +144,38 @@
 
                 <p:separator style="height:3px; margin-bottom:20px;margin-top: 10px;"/>
 
-                <p:panel header="Mensaje" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%" >  
+                <p:panel header="Mensaje" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%;margin-bottom: 1.5em;" >  
                     <h:outputText id="mensaje" value="#{mbDetalleSolicitud.solicitud.mensaje}" escape="false"/>       
                 </p:panel>
-                <br/>
 
-                <p:panel header="Archivos Adjuntos" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%" >
+                <p:panel header="Archivos Adjuntos" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%;margin-bottom: 1.5em;" >
                     <p:dataList id="selectFiles" value="#{mbDetalleSolicitud.solicitud.archivosAdjuntos}" var="f" type="none" >
                         <p:column>
                             <h:panelGrid columns="3" styleClass="item-upload">
                                 <h:outputText value="#{f.archivoAdjunto.nombre} " style="width: 300px;font-weight: bold;"/>
                                 <h:outputText value="- (#{f.archivoAdjunto.sizeFormat})" style="font-weight: bold; font-style: italic; color: #999;"/>
-                                <p:commandLink id="link" value="Descargar" actionListener="#{mbDetalleSolicitud.load(f)}" ajax="false"
+                                <p:commandLink id="link" value="Descargar" actionListener="#{mbFilesUpload.downloadFile(f.archivoAdjunto)}" ajax="false"
                                                style="float: right;color: steelblue;font-style: italic;" process="@this">
-                                    <p:fileDownload value="#{mbDetalleSolicitud.fileDownload}"  />
+                                    <p:fileDownload value="#{mbFilesUpload.fileDownload}"  />
                                 </p:commandLink>
                             </h:panelGrid>
                         </p:column>   
                     </p:dataList>
                 </p:panel>
-                <br/>
 
-                <p:panel header="Motivo Transferencia" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%" rendered="#{not empty mbDetalleSolicitud.solicitud.justificacionTrasnferencia}" >  
+                <p:panel header="Motivo Transferencia" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%;margin-bottom: 1.5em;" rendered="#{not empty mbDetalleSolicitud.solicitud.justificacionTrasnferencia}" >  
                     <h:outputText id="motivoTransferencia" value="#{mbDetalleSolicitud.solicitud.justificacionTrasnferencia}" escape="false"/>
                 </p:panel>
-                <br/>
 
-                <p:panel header="Respuesta" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%;" rendered="#{not empty mbDetalleSolicitud.solicitud.respuesta}" >  
+                <p:panel header="Respuesta" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%;margin-bottom: 1.5em;" rendered="#{not empty mbDetalleSolicitud.solicitud.respuesta}" >  
                     <h:outputText id="respuesta" value="#{mbDetalleSolicitud.solicitud.respuesta}" escape="false" />
                 </p:panel>
-                <br/>
 
                 <p:panel id="comentarioPnl" header="Comentarios" toggleable="true" toggleSpeed="100" collapsed="false" style="width: 98%;" >
 
                     <h:panelGrid columns="2" rowClasses="row_align_bottom" style="width: 100%" columnClasses="column_grid">
                         <p:inputTextarea id="nuevoComentario" value="#{mbDetalleSolicitud.comentario}" rows="3" style="width: 98%;"/>
-                        <p:commandButton value="Comentar" actionListener="#{mbDetalleSolicitud.comentarFuncionario}" update="nuevoComentario comentarios" icon="ui-icon-comment" process="comentarioPnl"/>
+                        <p:commandButton value="Comentar" actionListener="#{mbDetalleSolicitud.comentar}" update="nuevoComentario comentarios" icon="ui-icon-comment" process="comentarioPnl"/>
                     </h:panelGrid>
                     <br/>
 
@@ -199,9 +195,8 @@
                                 </h:panelGrid>
                                 <h:outputText value="#{comentario.comentario}" style="padding: 2px;"/>
 
-                                <p:commandLink id="linkEliminar" value="Eliminar" actionListener="#{mbDetalleSolicitud.eliminarComentario}"  styleClass="small_link" style="float: right" update="@form" rendered="#{comentario.autor.rut == mbUserInfo.funcionario.rut}" process="@this">
-                                    <f:attribute name="comentario" value="#{comentario}"/>
-                                </p:commandLink>
+                                <p:commandLink id="linkEliminar" value="Eliminar" actionListener="#{mbDetalleSolicitud.eliminarComentario(comentario)}"  
+                                               styleClass="small_link" style="float: right" update="@form" rendered="#{comentario.autor.rut == mbUserInfo.funcionario.rut}" process="@this"/>
                             </h:panelGrid>
                         </p:column>
                     </p:dataList>
@@ -221,7 +216,7 @@
                     <p:separator styleClass="separator_horizontal"/>
 
                     <p:outputLabel value="Mensaje de Respuesta:" styleClass="label_blod" for="editorRespDirecta"/>
-                    <p:editor id="editorRespDirecta" widgetVar="editorRespDirecta" width="450" height="180" value="#{mbSolicitudesArea.respuesta}" required="true"/>
+                    <p:editor id="editorRespDirecta" widgetVar="editorRespDirecta" width="450" height="180" value="#{mbDetalleSolicitud.respuesta}" required="true"/>
 
                     <!-- Upload File Respuesta -->
                     <p:scrollPanel id="scrollUploadFiles" style="max-height: 100px;">
@@ -251,18 +246,13 @@
                                   auto="true" update="filesUpload scrollUploadFiles growlFile" invalidSizeMessage="#{email.msg_invalid_size}"/>
                     
                     <h:outputText value="#{email.msg_file_upload}" styleClass="text_small_ligth"/>
-               <!--     <br/>
-                    <h:panelGroup style="vertical-align: top;margin-bottom: 10px;margin-top: 10px;">
-                        <p:selectBooleanCheckbox id="checkBoxEmail" value="#{mbSolicitudesArea.enviarMail}"  />
-                        <h:outputText value="Enviar una copia de la respuesat al correo del solicitante" styleClass="small_text"/>
-                    </h:panelGroup>
-                    <br/> -->
+
                     <h:panelGroup style="float: right">
                         <p:commandButton value="Enviar" 
                                          update="grid_resp_directa :detalleSol:panelDetalleSolicitud :growlInfo" 
                                          process="dlg_resp_directa"
                                          oncomplete="if(!args.validationFailed) {respDirecta.hide();}"
-                                         actionListener="#{mbSolicitudesArea.enviarRespuestaDirecta}"  />
+                                         actionListener="#{mbDetalleSolicitud.enviarRespuestaDirecta}"  />
                         <p:commandButton value="Cancelar"  onclick="editorRespDirecta.clear();respDirecta.hide();" actionListener="#{mbFilesUpload.clearFiles()}" process="@this" update="@form"/>
                     </h:panelGroup>
                 </h:panelGrid>
@@ -273,14 +263,14 @@
             <p:dialog id="dlg_resp_manual" header="Respuesta Manual" widgetVar="respManual" resizable="false" modal="true" closable="false">  
                 <h:panelGrid id="grid_delg_resp_m" columns="2">
                     <p:outputLabel value="Para:" for="emails" styleClass="label_blod"/>
-                    <p:inputText id="emails" value="#{mbSolicitudesArea.emailsRespuestaManual}" style="width: 200px;" required="true"/>
+                    <p:inputText id="emails" value="#{mbDetalleSolicitud.emailsRespuestaManual}" style="width: 200px;" required="true"/>
 
                     <p:outputLabel value="Asunto:" for="asuntoRespManual" styleClass="label_blod"/>
-                    <p:inputText id="asuntoRespManual" value="#{mbSolicitudesArea.asuntoRespuestaManual}" style="width: 350px;" required="true" />
+                    <p:inputText id="asuntoRespManual" value="#{mbDetalleSolicitud.asuntoRespuestaManual}" style="width: 350px;" required="true" />
                 </h:panelGrid>                    
                 <p:separator styleClass="separator_horizontal"/>
                 <p:outputLabel id="lbl_mensaje" value="Mensaje de Respuesta:" styleClass="label_blod" for="editorRespManual"/>
-                <p:editor id="editorRespManual" widgetVar="editorRespManual" width="450" height="200" value="#{mbSolicitudesArea.respuesta}" required="true"/>
+                <p:editor id="editorRespManual" widgetVar="editorRespManual" width="450" height="200" value="#{mbDetalleSolicitud.respuesta}" required="true"/>
 
                 <p:scrollPanel id="scrollUploadFiles" style="max-height: 100px;margin-bottom: 5px; margin-top: 5px;">
                     <p:dataList id="uploadFiles" value="#{mbFilesUpload.archivosAdjuntos}" var="f" type="none" >
@@ -313,7 +303,7 @@
                                      update="grid_delg_resp_m lbl_mensaje :detalleSol:panelDetalleSolicitud :growlInfo"
                                      process="dlg_resp_manual"
                                      oncomplete="if(!args.validationFailed) {respManual.hide();}"
-                                     actionListener="#{mbSolicitudesArea.enviarRespuestaManual}" />
+                                     actionListener="#{mbDetalleSolicitud.enviarRespuestaManual}" />
                     <p:commandButton value="Cancelar"  onclick="editorRespManual.clear();respManual.hide();" actionListener="#{mbFilesUpload.clearFiles()}" process="@this" update="@form"/>
                 </h:panelGroup>
             </p:dialog>
@@ -329,7 +319,7 @@
                     <p:commandButton value="Confirmar" 
                                      process="dlg_repuesta_ja"
                                      update=":detalleSol:panelDetalleSolicitud"
-                                     actionListener="#{mbMisSolicitudes.respuestaAlJefeDeArea}"
+                                     actionListener="#{mbDetalleSolicitud.respuestaAlJefeDeArea}"
                                      oncomplete="respJA.hide();"/>
                     <p:commandButton value="Cancelar" onclick="respJA.hide();"/>
                 </h:panelGroup>
@@ -340,20 +330,20 @@
             <p:dialog id="dlg_transferir" header="Transferir Solicitud" widgetVar="dlgTranferencia" modal="true" closable="false" resizable="false">
                 <h:panelGrid id="grid_transferir" columns="2">
                     <p:outputLabel value="Nueva Area:" for="areaDestino" styleClass="label_blod"/>
-                    <p:selectOneMenu id="areaDestino" value="#{mbSolicitudesArea.nuevaArea}" required="true">
-                        <f:selectItems value="#{mbSolicitudesArea.areasParaTransferencia}" />
+                    <p:selectOneMenu id="areaDestino" value="#{mbDetalleSolicitud.nuevaArea}" required="true">
+                        <f:selectItems value="#{areaController.areasParaTransferencia}" />
                     </p:selectOneMenu>
                 </h:panelGrid>
                 <p:separator styleClass="separator_horizontal"/>
 
                 <p:outputLabel id="lbl_editorMotivoTransferencia" value="Motivo de la Transferencia:" styleClass="label_blod" for="editorMotivoTransferencia"/>
-                <p:editor id="editorMotivoTransferencia" widgetVar="editorMotivoTransferencia" width="450" height="200" value="#{mbSolicitudesArea.motivoTransferencia}" required="true"/>
+                <p:editor id="editorMotivoTransferencia" widgetVar="editorMotivoTransferencia" width="450" height="200" value="#{mbDetalleSolicitud.motivoTransferencia}" required="true"/>
 
                 <h:panelGroup style="float: right;margin-top: 10px;">
                     <p:commandButton value="Transferir" 
                                      update="grid_transferir lbl_editorMotivoTransferencia :detalleSol:panelDetalleSolicitud" 
                                      oncomplete="if(!args.validationFailed) {dlgTranferencia.hide();}"
-                                     actionListener="#{mbSolicitudesArea.transferirSolicitud}"
+                                     actionListener="#{mbDetalleSolicitud.transferirSolicitud}"
                                      process="dlg_transferir"/>
                     <p:commandButton value="Cancelar" onclick="editorMotivoTransferencia.clear();dlgTranferencia.hide();"/>
                 </h:panelGroup>
@@ -363,14 +353,14 @@
         <h:form id="form_dlg_rechazar">
             <p:dialog id="dlg_rechazar" header="Rechazar Solicitud" widgetVar="dlgRechazar" modal="true" closable="false" resizable="false">  
                 <p:outputLabel id="lbl_editorMotivoRechazo" value="Motivo del Rechazo:" styleClass="label_blod" for="editorMotivoRechazo"/>
-                <p:editor id="editorMotivoRechazo" widgetVar="editorMotivoRechazo" width="450" height="200" value="#{mbSolicitudesArea.respuesta}" required="true"/>
+                <p:editor id="editorMotivoRechazo" widgetVar="editorMotivoRechazo" width="450" height="200" value="#{mbDetalleSolicitud.motivoRechazo}" required="true"/>
 
                 <h:panelGroup style="float: right;margin-top: 10px;">
                     <p:commandButton value="Rechazar" 
                                      process="dlg_rechazar"
                                      update="lbl_editorMotivoRechazo :detalleSol:panelDetalleSolicitud" 
                                      oncomplete="if(!args.validationFailed) {dlgRechazar.hide();}"
-                                     actionListener="#{mbSolicitudesArea.rechazarSolcitiud}"/>
+                                     actionListener="#{mbDetalleSolicitud.rechazarSolcitiud}"/>
                     <p:commandButton value="Cancelar" onclick="editorMotivoRechazo.clear();dlgRechazar.hide();"/>
                 </h:panelGroup>
             </p:dialog>
@@ -386,7 +376,7 @@
                     <p:commandButton value="Confirmar" 
                                      process="dlg_convertir_proyecto"
                                      update="dlg_convertir_proyecto :detalleSol:panelDetalleSolicitud"
-                                     actionListener="#{mbSolicitudesArea.convertirEnProyecto()}"/>
+                                     actionListener="#{mbDetalleSolicitud.convertirEnProyecto()}"/>
                     <p:commandButton value="Cancelar" onclick="convProyecto.hide();"/>
                 </h:panelGroup>
             </p:dialog>
@@ -404,11 +394,11 @@
                     <p:outputLabel value="Fecha de Vencimiento:" for="fechaVencimientoCalendar" styleClass="label_blod" style="margin-left: 40px;"/>
                     <p:calendar id="fechaVencimientoCalendar" locale="es" 
                                 value="#{mbDetalleSolicitud.solicitud.fechaVencimiento}" 
-                                mindate="#{mbSolicitudesArea.minDate}" showOn="button" pattern="dd/MM/yyyy  HH:mm"/>
+                                mindate="#{mbDetalleSolicitud.minDate}" showOn="button" pattern="dd/MM/yyyy  HH:mm"/>
 
                 </h:panelGrid>
 
-                <p:dataTable value="#{mbSolicitudesArea.funcionariosArea}" 
+                <p:dataTable value="#{funcionarioDisicoController.funcionariosArea}" 
                              var="funcionario" 
                              rowKey="#{funcionario.rut}"
                              selectionMode="single"
@@ -455,7 +445,7 @@
 
                     <h:panelGroup style="float: right;margin-top: 10px;">
                         <p:commandButton value="Asignar" update="growlAsignacion :detalleSol:panelDetalleSolicitud" oncomplete="dlgAsignarSolicitud.hide()"
-                                         actionListener="#{mbSolicitudesArea.asignarSolicitud}" process="dlg_asignarSolicitud"/>
+                                         actionListener="#{mbDetalleSolicitud.asignarSolicitud}" process="dlg_asignarSolicitud"/>
                         <p:commandButton value="Cancelar" onclick="dlgAsignarSolicitud.hide();"/>
                     </h:panelGroup>
                 </h:panelGrid>

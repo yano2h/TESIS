@@ -4,100 +4,94 @@
  */
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
-import cl.uv.proyecto.file.ejb.FileManagerEJBLocal;
 import cl.uv.proyecto.persistencia.ejb.ArchivoSolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ComentarioSolicitudFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.*;
 import cl.uv.proyecto.requerimientos.ejb.SolicitudRequerimientoEJBLocal;
-import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
-import cl.uv.view.controller.base.jsf.mb.MbUserInfo;
+import cl.uv.view.controller.base.jsf.mb.MbBase;
+import cl.uv.view.controller.base.jsf.mb.MbFilesUpload;
 import cl.uv.view.controller.base.utils.JsfUtils;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Date;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
-import org.primefaces.event.DateSelectEvent;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
 /**
  *
- * @author Jano
+ * @author Alejandro
  */
 @ManagedBean
 @ViewScoped
-public class MbDetalleSolicitud implements Serializable {
+public class MbDetalleSolicitud extends MbBase implements Serializable {
 
     @EJB
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
     @EJB
     private ComentarioSolicitudFacadeLocal comentarioFacade;
     @EJB
-    private SolicitudRequerimientoEJBLocal solicitudRequerimientoEJB;
-    @EJB
     private ArchivoSolicitudRequerimientoFacadeLocal archivosAdjuntosFacade;
     @EJB
-    private FileManagerEJBLocal fileManagerEJB;
-            
-    @ManagedProperty(value = "#{mbUserInfo}")
-    private MbUserInfo mbUserInfo;
-    @ManagedProperty(value = "#{mbFuncionarioInfo}")
-    private MbFuncionarioInfo mbFuncionarioInfo;
+    private SolicitudRequerimientoEJBLocal solicitudRequerimientoEJB;
+    @ManagedProperty(value = "#{mbFilesUpload}")
+    private MbFilesUpload mbFilesUpload;
     private String codigo;
-    private String comentario;
-    private ComentarioSolicitud selectedComentario;
     private SolicitudRequerimiento solicitud;
-    private StreamedContent fileDownload;
-    
+    private String comentario;
+    private String respuesta;
+    private String motivoTransferencia;
+    private String motivoRechazo;
+    private String emailsRespuestaManual;
+    private String asuntoRespuestaManual;
+    private Area nuevaArea;
+
     public MbDetalleSolicitud() {
         comentario = "";
-        codigo = "";
+        respuesta = "";
+        motivoTransferencia = "";
+        motivoRechazo = "";
+        emailsRespuestaManual = "";
+        asuntoRespuestaManual = "";
     }
 
     public void init() {
         solicitud = solicitudFacade.buscarPorCodigo(codigo);
-        FuncionarioDisico f = new FuncionarioDisico();
         if (solicitud == null) {
-            JsfUtils.getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error:", "La solicitud con codigo " + codigo + " no pudo ser encontrada"));
+            JsfUtils.addErrorMessage("Error:", "La solicitud con codigo " + codigo + " no pudo ser encontrada");
         } else {
             solicitud.setComentarios(comentarioFacade.buscarComentariosPorSolicitud(solicitud.getIdSolicitudRequerimiento()));
             solicitud.setArchivosAdjuntos(archivosAdjuntosFacade.buscarArchivosPorSolicitud(solicitud));
         }
     }
 
-    public void setMbUserInfo(MbUserInfo mbUserInfo) {
-        this.mbUserInfo = mbUserInfo;
+    public void setMbFilesUpload(MbFilesUpload mbFilesUpload) {
+        this.mbFilesUpload = mbFilesUpload;
     }
 
-    public void setMbFuncionarioInfo(MbFuncionarioInfo mbFuncionarioInfo) {
-        this.mbFuncionarioInfo = mbFuncionarioInfo;
-    }
-
-    public StreamedContent getFileDownload() {
-        return fileDownload;
-    }
-
-    public void setFileDownload(StreamedContent fileDownload) {
-        this.fileDownload = fileDownload;
-    }
-
-    
-    public String getCodigo() {
-        return codigo;
+    public SolicitudRequerimiento getSolicitud() {
+        return solicitud;
     }
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getAsuntoRespuestaManual() {
+        return asuntoRespuestaManual;
+    }
+
+    public void setAsuntoRespuestaManual(String asuntoRespuestaManual) {
+        this.asuntoRespuestaManual = asuntoRespuestaManual;
     }
 
     public String getComentario() {
@@ -108,54 +102,114 @@ public class MbDetalleSolicitud implements Serializable {
         this.comentario = comentario;
     }
 
-    public SolicitudRequerimiento getSolicitud() {
-        return solicitud;
+    public String getEmailsRespuestaManual() {
+        return emailsRespuestaManual;
     }
 
-    public void setSolicitud(SolicitudRequerimiento solicitud) {
-        this.solicitud = solicitud;
+    public void setEmailsRespuestaManual(String emailsRespuestaManual) {
+        this.emailsRespuestaManual = emailsRespuestaManual;
     }
 
-    public ComentarioSolicitud getSelectedComentario() {
-        return selectedComentario;
+    public String getMotivoRechazo() {
+        return motivoRechazo;
     }
 
-    public void setSelectedComentario(ComentarioSolicitud selectedComentario) {
-        this.selectedComentario = selectedComentario;
+    public void setMotivoRechazo(String motivoRechazo) {
+        this.motivoRechazo = motivoRechazo;
     }
 
-    public void comentar(ActionEvent event) {
-        if (!comentario.isEmpty()) {
-             solicitudRequerimientoEJB.comentarSolicitud(comentario, solicitud, mbUserInfo.getFuncionario());
-        }   
-        comentario = "";
+    public String getMotivoTransferencia() {
+        return motivoTransferencia;
     }
 
-    public void comentarFuncionario(ActionEvent event) {
-        if (!comentario.isEmpty()) {
-             solicitudRequerimientoEJB.comentarSolicitud(comentario, solicitud, mbFuncionarioInfo.getFuncionario());
-        }  
-        comentario = "";
+    public void setMotivoTransferencia(String motivoTransferencia) {
+        this.motivoTransferencia = motivoTransferencia;
     }
 
-    public void eliminarComentario(ActionEvent event) {
-        selectedComentario = (ComentarioSolicitud) event.getComponent().getAttributes().get("comentario");
-        selectedComentario.setVisible(false);
-        comentarioFacade.edit(selectedComentario);
+    public Area getNuevaArea() {
+        return nuevaArea;
     }
 
-    public void fijarFechaVencimento(DateSelectEvent event) {
-        solicitud.setFechaVencimiento(event.getDate());
+    public void setNuevaArea(Area nuevaArea) {
+        this.nuevaArea = nuevaArea;
+    }
+
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
     }
     
-    public void load(ArchivoSolicitudRequerimiento a){
-        System.out.println("LOAD");
-        if (a.getArchivoAdjunto().getInputStream()==null) {
-            System.out.println("LOOOAD");
-            fileManagerEJB.loadContentFile(a.getArchivoAdjunto());
+    public Date getMinDate() {
+        Date d = new Date();
+        d = new Date(d.getTime() + (1000 * 60 * 30));
+        return d;
+    }
+    
+    public void comentar(ActionEvent event) {
+        if (!comentario.isEmpty()) {
+            solicitudRequerimientoEJB.comentarSolicitud(comentario, solicitud, getFuncionario());
         }
-        ArchivoAdjunto adjunto = a.getArchivoAdjunto();
-        System.out.println("Stream:"+adjunto.getInputStream().toString());
-        setFileDownload( new DefaultStreamedContent(adjunto.getInputStream(), adjunto.getMimetype(), adjunto.getNombre()) );  
+        comentario = "";
+    }
+
+    public void eliminarComentario(ComentarioSolicitud c) {
+        c.setVisible(false);
+        comentarioFacade.edit(c);
+    }
+
+    public void enviarRespuestaDirecta() {
+        if (!respuesta.isEmpty()) {
+            solicitud.setRespuesta(respuesta);
+            solicitudRequerimientoEJB.enviarRespuestaDirecta(solicitud, true, mbFilesUpload.extraerArchivosAdjuntos());
+        }
+        respuesta = "";
+    }
+    
+    public void enviarRespuestaManual() {
+        if (!respuesta.isEmpty()) {
+            String[] direcciones = emailsRespuestaManual.replaceAll(" ", "").split(",");
+            solicitud.setRespuesta(respuesta);
+            solicitudRequerimientoEJB.enviarRespuestaManual(solicitud, direcciones, asuntoRespuestaManual, mbFilesUpload.extraerArchivosAdjuntos());
+        }
+    }
+    
+    public void respuestaAlJefeDeArea(){
+        solicitudRequerimientoEJB.enviarRespuestaJefeArea(solicitud);
+    }
+    
+    public void transferirSolicitud() {
+        if (!motivoTransferencia.isEmpty()) {
+            solicitudRequerimientoEJB.transferirSolicitud(solicitud, nuevaArea, motivoTransferencia);
+        }
+        motivoTransferencia = "";
+    }
+    
+    public void rechazarSolcitiud() {
+        if (!motivoRechazo.isEmpty()) {
+            solicitud.setRespuesta(motivoRechazo);
+            solicitudRequerimientoEJB.rechazarSolicitud(solicitud);
+        }
+    }
+    
+    public void convertirEnProyecto() {
+        solicitudRequerimientoEJB.convertirSolicitudEnProyecto(solicitud);
+        JsfUtils.handleNavigation("/view/proyectos/crearProyecto?faces-redirect=true");
+    }
+    
+    public void asignarSolicitud() {
+        if (solicitud.getResponsable() == null) {
+            JsfUtils.addErrorMessage("Error al asignar responsable solicitud", "Debe seleccionar un funcionario para poder asignar la solicitud ");
+        } else {
+            solicitudRequerimientoEJB.asignarSolicitud(solicitud);
+            JsfUtils.addSuccessMessage("Asignacion Exitosa", "La solicitud fue asignada exitosamente a: " + solicitud.getResponsable().getNombre() + " " + solicitud.getResponsable().getApellidoPaterno() + " " + solicitud.getResponsable().getApellidoMaterno());
+        }
+    }
+    
+    public void iniciarSolicitud(){
+        solicitudRequerimientoEJB.iniciarSolicitud(solicitud);
+        JsfUtils.addSuccessMessage("Operación Exitosa", "La solicitud a sido cambiada correctamente al estado Iniciada");
     }
 }

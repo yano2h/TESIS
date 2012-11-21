@@ -43,10 +43,10 @@
                         </p:column>  
 
                         <p:column headerText="Responsable" 
-                                  sortBy="#{solicitud.nombreCorto}"
-                                  filterBy="#{solicitud.nombreCorto}"
+                                  sortBy="#{solicitud.responsable.nombreCorto}"
+                                  filterBy="#{solicitud.responsable.nombreCorto}"
                                   filterMatchMode="contains">  
-                            <h:outputText value="#{solicitud.nombreCorto}" />  
+                            <h:outputText value="#{solicitud.responsable.nombreCorto}" />  
                         </p:column>  
                         
                         <p:column headerText="Estado"

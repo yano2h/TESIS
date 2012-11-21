@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
  * @author Jano
  */
 @Entity
+@org.hibernate.annotations.Entity(dynamicUpdate=true)
 @Table(name = "SOLICITUD_REQUERIMIENTO", uniqueConstraints=@UniqueConstraint(columnNames="codigo_consulta"))
 @NamedQueries({
     @NamedQuery(name = "SolicitudRequerimiento.findAll", query = "SELECT s FROM SolicitudRequerimiento s"),

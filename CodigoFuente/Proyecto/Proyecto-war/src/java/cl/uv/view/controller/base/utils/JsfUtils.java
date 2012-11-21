@@ -93,7 +93,15 @@ public class JsfUtils {
     public static void addMessage(Severity severity, String summary, String detail) {
         getFacesContext().addMessage(null, new FacesMessage(severity, summary, detail));
     }
-
+    
+    public static void addErrorMessage(String summary, String detail){
+        addMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
+    }
+    
+    public static void addSuccessMessage(String summary, String detail){
+        addMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+    }
+    
     /**
      * Metodo para logout, invalida la sesion
      *
@@ -224,5 +232,9 @@ public class JsfUtils {
             return items;
         }
 
+    }
+    
+    public static String getRequestParameter(String key) {
+        return getExternalContext().getRequestParameterMap().get(key);
     }
 }
