@@ -65,8 +65,8 @@ public class MbDetalleSolicitud extends MbBase implements Serializable {
         if (solicitud == null) {
             JsfUtils.addErrorMessage("Error:", "La solicitud con codigo " + codigo + " no pudo ser encontrada");
         } else {
-            solicitud.setComentarios(comentarioFacade.buscarComentariosPorSolicitud(solicitud.getIdSolicitudRequerimiento()));
-            solicitud.setArchivosAdjuntos(archivosAdjuntosFacade.buscarArchivosPorSolicitud(solicitud));
+//            solicitud.setComentarios(comentarioFacade.buscarComentariosPorSolicitud(solicitud.getIdSolicitudRequerimiento()));
+//            solicitud.setArchivosAdjuntos(archivosAdjuntosFacade.buscarArchivosPorSolicitud(solicitud));
         }
     }
 
