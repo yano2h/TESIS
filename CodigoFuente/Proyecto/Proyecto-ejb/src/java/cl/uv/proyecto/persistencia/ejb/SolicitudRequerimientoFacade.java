@@ -9,6 +9,7 @@ import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -38,17 +39,17 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
         solicitud.setFechaUltimaActualizacion(new Date());
         getEntityManager().merge(solicitud);
     }
-    
+
     @Override
-    public void remove(SolicitudRequerimiento solicitud){
+    public void remove(SolicitudRequerimiento solicitud) {
         super.remove(find(solicitud.getIdSolicitudRequerimiento()));
     }
-    
+
     @Override
     public List<SolicitudRequerimiento> buscarPorSolicitante(Integer rutSolicitante) {
-        TypedQuery<SolicitudRequerimiento> q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante.rut = :rut",SolicitudRequerimiento.class);
+        TypedQuery<SolicitudRequerimiento> q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante.rut = :rut", SolicitudRequerimiento.class);
         q.setParameter("rut", rutSolicitante);
-        return q.getResultList(); 
+        return q.getResultList();
     }
 
     @Override
@@ -66,11 +67,11 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @Override
     public List<SolicitudRequerimiento> getUltimasSolicitudesEnviadas(Funcionario funcionario, Integer maxResults) {
-        TypedQuery<SolicitudRequerimiento> q = 
-                em.createQuery("SELECT s FROM SolicitudRequerimiento s "+
-                               "WHERE s.solicitante = :solicitante AND "+
-                               "s.estadoSolicitud.idEstadoSolicitudRequerimiento <> :idEstado "+
-                               "ORDER BY s.fechaEnvio DESC", SolicitudRequerimiento.class);
+        TypedQuery<SolicitudRequerimiento> q =
+                em.createQuery("SELECT s FROM SolicitudRequerimiento s "
+                + "WHERE s.solicitante = :solicitante AND "
+                + "s.estadoSolicitud.idEstadoSolicitudRequerimiento <> :idEstado "
+                + "ORDER BY s.fechaEnvio DESC", SolicitudRequerimiento.class);
         q.setParameter("solicitante", funcionario);
         q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
         q.setMaxResults(maxResults);
@@ -88,7 +89,7 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @Override
     public List<SolicitudRequerimiento> buscarSolicitudesPorArea(Area area) {
-        TypedQuery<SolicitudRequerimiento> q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.areaResponsable = :area ORDER BY s.fechaEnvio DESC",SolicitudRequerimiento.class);
+        TypedQuery<SolicitudRequerimiento> q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.areaResponsable = :area ORDER BY s.fechaEnvio DESC", SolicitudRequerimiento.class);
         q.setParameter("area", area);
         List<SolicitudRequerimiento> l = q.getResultList();
         return l;
@@ -96,7 +97,7 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @Override
     public List<SolicitudRequerimiento> getSolicitudesAsignadas(FuncionarioDisico funcionarioDisico) {
-        TypedQuery<SolicitudRequerimiento> q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.responsable = :responsable ORDER BY s.fechaEnvio DESC",SolicitudRequerimiento.class);
+        TypedQuery<SolicitudRequerimiento> q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.responsable = :responsable ORDER BY s.fechaEnvio DESC", SolicitudRequerimiento.class);
         q.setParameter("responsable", funcionarioDisico);
         return q.getResultList();
     }
@@ -108,32 +109,32 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @Override
     public void contarSolicitudes(FuncionarioDisico funcionario) {
-        String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE s.responsable = :responsable AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado";
-        Query q = em.createQuery(query);
-        q.setParameter("responsable", funcionario);
+        String query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE responsable = ? AND estado_solicitud = ?";
+        Query q = em.createNativeQuery(query);
+        q.setParameter(1, funcionario.getRut());
 
-        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_ASIGNADA"));
-        funcionario.setCantidadDeSolicitudesAsignadas(((Long) q.getSingleResult()).intValue());
+        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_ASIGNADA"));
+        funcionario.setCantidadDeSolicitudesAsignadas(((BigInteger) q.getSingleResult()).intValue());
 
-        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_PENDIENTE"));
-        funcionario.setCantidadDeSolicitudesPendientes(((Long) q.getSingleResult()).intValue());
+        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_PENDIENTE"));
+        funcionario.setCantidadDeSolicitudesPendientes(((BigInteger) q.getSingleResult()).intValue());
 
-        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_INICIADA"));
-        funcionario.setCantidadDeSolicitudesIniciadas(((Long) q.getSingleResult()).intValue());
+        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_INICIADA"));
+        funcionario.setCantidadDeSolicitudesIniciadas(((BigInteger) q.getSingleResult()).intValue());
 
-        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
-        funcionario.setCantidadDeSolicitudesVencidas(((Long) q.getSingleResult()).intValue());
+        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
+        funcionario.setCantidadDeSolicitudesVencidas(((BigInteger) q.getSingleResult()).intValue());
     }
 
     @Override
     public List<SolicitudRequerimiento> buscarSolicitudPorFiltros(SolicitudRequerimiento solicitud, Date minDate, Date maxDate) {
-        
+
         //Create query
         String select = "SELECT s FROM SolicitudRequerimiento s ";
         String where = "WHERE ";
         String condicion = "";
         String order = " ORDER BY s.fechaEnvio DESC";
-        
+
         if (!solicitud.getCodigoConsulta().isEmpty()) {
             condicion += " s.codigoConsulta LIKE :codigoConsulta ";
         }
@@ -161,31 +162,31 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
         if (solicitud.getTipoSolicitud() != null) {
             condicion += (condicion.isEmpty()) ? " s.tipoSolicitud = :tipoSolicitud" : " AND s.tipoSolicitud = :tipoSolicitud";
         }
-        
+
         if (minDate != null) {
             condicion += (condicion.isEmpty()) ? " s.fechaEnvio >= :minFechaEnvio" : " AND s.fechaEnvio >= :minFechaEnvio";
         }
-        
+
         if (maxDate != null) {
             condicion += (condicion.isEmpty()) ? " s.fechaEnvio <= :maxFechaEnvio" : " AND s.fechaEnvio <= :maxFechaEnvio";
         }
 
         //Set Paramenters
-        String consulta = (condicion.isEmpty())? select+order : select+where+condicion+order;        
-        TypedQuery<SolicitudRequerimiento> q = em.createQuery(consulta,SolicitudRequerimiento.class);
-        
+        String consulta = (condicion.isEmpty()) ? select + order : select + where + condicion + order;
+        TypedQuery<SolicitudRequerimiento> q = em.createQuery(consulta, SolicitudRequerimiento.class);
+
         if (!solicitud.getCodigoConsulta().isEmpty()) {
-            q.setParameter("codigoConsulta", "%"+solicitud.getCodigoConsulta()+"%");
+            q.setParameter("codigoConsulta", "%" + solicitud.getCodigoConsulta() + "%");
         }
 
         if (!solicitud.getAsunto().isEmpty()) {
-            String asunto = "%"+solicitud.getAsunto()+"%";
+            String asunto = "%" + solicitud.getAsunto() + "%";
             asunto = asunto.replaceAll(" ", "%");
             q.setParameter("asunto", asunto);
         }
 
         if (!solicitud.getMensaje().isEmpty()) {
-            String mensaje = "%"+solicitud.getMensaje()+"%";
+            String mensaje = "%" + solicitud.getMensaje() + "%";
             mensaje = mensaje.replaceAll(" ", "%");
             q.setParameter("mensaje", mensaje);
         }
@@ -205,15 +206,15 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
         if (solicitud.getTipoSolicitud() != null) {
             q.setParameter("tipoSolicitud", solicitud.getTipoSolicitud());
         }
-        
+
         if (minDate != null) {
             q.setParameter("minFechaEnvio", minDate, TemporalType.DATE);
         }
-        
+
         if (maxDate != null) {
             q.setParameter("maxFechaEnvio", maxDate, TemporalType.DATE);
         }
-        
+
         return q.getResultList();
     }
 }
