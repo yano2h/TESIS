@@ -8,6 +8,7 @@ import cl.uv.model.base.utils.MathUtils;
 import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
+import java.math.BigInteger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,87 +25,78 @@ public class CalculoDeIndicadoresEJB implements CalculoDeIndicadoresEJBLocal {
     
     @Override
     public Long contarSolicitudes(FuncionarioDisico funcionario, Short idEstado) {
-        String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE s.responsable = :responsable AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado";
-        Query q = em.createQuery(query);
-        q.setParameter("responsable", funcionario);
-        q.setParameter("idEstado", idEstado);
-        return (Long)q.getSingleResult();
+        String query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE responsable = ? AND estado_solicitud = ?";
+        Query q = em.createNativeQuery(query);
+        q.setParameter(1, funcionario.getRut());
+        q.setParameter(2, idEstado);
+        return ((BigInteger)q.getSingleResult()).longValue();
     }
     
     @Override
     public Long contarSolicitudes(Area area, Short idEstado) {
-        String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE s.areaResponsable = :area AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado";
-        Query q = em.createQuery(query);
-        q.setParameter("area", area);
-        q.setParameter("idEstado", idEstado);
-        return (Long)q.getSingleResult();
+        String query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE area_responsable = ? AND estado_solicitud = ?";
+        Query q = em.createNativeQuery(query);
+        q.setParameter(1, area.getIdArea());
+        q.setParameter(2, idEstado);
+        return ((BigInteger)q.getSingleResult()).longValue();
     }
     
     @Override
     public Long contarSolicitudes(Short idEstado) {
-        String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado";
-        Query q = em.createQuery(query);
-        q.setParameter("idEstado", idEstado);
-        return (Long)q.getSingleResult();
+        String query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE estado_solicitud = ?";
+        Query q = em.createNativeQuery(query);
+        q.setParameter(1, idEstado);
+        return ((BigInteger)q.getSingleResult()).longValue();
     }
 
     @Override
     public Float porcentajeSolicitudesAsignadas(FuncionarioDisico f){
-        String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-                     + "s.responsable = :responsable";
-        Query q = em.createQuery(query);
-        q.setParameter("responsable", f);
-        Long cantidadSolAsignadas = (Long)q.getSingleResult();
+        String query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE responsable = ?";
+        Query q = em.createNativeQuery(query);
+        q.setParameter(1, f.getRut());
+        Long cantidadSolAsignadas = ((BigInteger)q.getSingleResult()).longValue();
 
-        query  = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-               + "s.areaResponsable = :area";
-        q = em.createQuery(query);
-        q.setParameter("area", f.getArea());
-        Long cantidadSolArea = (Long)q.getSingleResult();
+        query  = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE area_responsable = ?";
+        q = em.createNativeQuery(query);
+        q.setParameter(1, f.getArea().getIdArea());
+        Long cantidadSolArea = ((BigInteger)q.getSingleResult()).longValue();
 
         return MathUtils.calcularPorcentajeRedondeado(cantidadSolAsignadas, cantidadSolArea, 1) ;
     }
     
     @Override
     public Float porcentajeSolicitudesAsignadas(Area a){
-        String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-                     + "s.areaResponsable = :area";
-        Query q = em.createQuery(query);
-        q.setParameter("area", a);
-        Long cantidadSolAsignadas = (Long)q.getSingleResult();
+        String query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE area_responsable = ?";
+        Query q = em.createNativeQuery(query);
+        q.setParameter(1, a.getIdArea());
+        Long cantidadSolAsignadas = ((BigInteger)q.getSingleResult()).longValue();
         
-        query  = "SELECT COUNT(s) FROM SolicitudRequerimiento s";
-        q = em.createQuery(query);
-        Long cantidadSolDpto = (Long)q.getSingleResult();
+        query  = "SELECT COUNT(*) FROM solicitud_requerimiento";
+        q = em.createNativeQuery(query);
+        Long cantidadSolDpto = ((BigInteger)q.getSingleResult()).longValue();
         
         return MathUtils.calcularPorcentajeRedondeado(cantidadSolAsignadas, cantidadSolDpto, 1) ;
     }
     
     @Override
     public Float porcentajeRetrasos(FuncionarioDisico f){
-        String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-                     + "s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado AND "
-                     + "s.fechaCierre > s.fechaVencimiento AND "
-                     + "s.responsable = :responsable";
-        Query q = em.createQuery(query);
-        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
-        q.setParameter("responsable", f);
+        String query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE responsable = ? AND estado_solicitud = ? AND fecha_cierre > fecha_vencimiento";
+        Query q = em.createNativeQuery(query);
+        q.setParameter(1, f.getRut());
+        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
         
-        Long cantidadSolCerradasVencidas = (Long)q.getSingleResult();
+        Long cantidadSolCerradasVencidas = ((BigInteger)q.getSingleResult()).longValue();
         
-        query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-              + "s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado AND "
-              + "s.responsable = :responsable";
-        q = em.createQuery(query);
-        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
-        q.setParameter("responsable", f);
-        Long cantidadSolVencidas = (Long)q.getSingleResult();
+        query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE responsable = ? AND estado_solicitud = ?";
+        q = em.createNativeQuery(query);
+        q.setParameter(1, f.getRut());
+        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
+        Long cantidadSolVencidas = ((BigInteger)q.getSingleResult()).longValue();
         
-        query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-              + "s.responsable = :responsable ";
-        q = em.createQuery(query);
-        q.setParameter("responsable", f);
-        Long totalSolicitudesResponsable = (Long)q.getSingleResult();
+        query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE responsable = ?";
+        q = em.createNativeQuery(query);
+        q.setParameter(1, f.getRut());
+        Long totalSolicitudesResponsable = ((BigInteger)q.getSingleResult()).longValue();
         Long totalSolicitudesVencidas = cantidadSolCerradasVencidas + cantidadSolVencidas;
         
         return MathUtils.calcularPorcentajeRedondeado(totalSolicitudesVencidas, totalSolicitudesResponsable, 1) ;
@@ -112,29 +104,23 @@ public class CalculoDeIndicadoresEJB implements CalculoDeIndicadoresEJBLocal {
     
     @Override
     public Float porcentajeRetrasos(Area a){
-        String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-                     + "s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado AND "
-                     + "s.fechaCierre > s.fechaVencimiento AND "
-                     + "s.areaResponsable = :area";
-        Query q = em.createQuery(query);
-        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
-        q.setParameter("area", a);
+        String query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE area_responsable = ? AND estado_solicitud = ? AND fecha_cierre > fecha_vencimiento ";
+        Query q = em.createNativeQuery(query);
+        q.setParameter(1, a.getIdArea());
+        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
         
-        Long cantidadSolCerradasVencidas = (Long)q.getSingleResult();
+        Long cantidadSolCerradasVencidas = ((BigInteger)q.getSingleResult()).longValue();
         
-        query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-              + "s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado AND "
-              + "s.areaResponsable = :area";
-        q = em.createQuery(query);
-        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
-        q.setParameter("area", a);
-        Long cantidadSolVencidas = (Long)q.getSingleResult();
+        query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE area_responsable = ? AND estado_solicitud = ? ";
+        q = em.createNativeQuery(query);
+        q.setParameter(1, a.getIdArea());
+        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
+        Long cantidadSolVencidas = ((BigInteger)q.getSingleResult()).longValue();
         
-        query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-              + "s.areaResponsable = :area";
-        q = em.createQuery(query);
-        q.setParameter("area", a);
-        Long totalSolicitudesArea = (Long)q.getSingleResult();
+        query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE area_responsable = ?";
+        q = em.createNativeQuery(query);
+        q.setParameter(1, a.getIdArea());
+        Long totalSolicitudesArea = ((BigInteger)q.getSingleResult()).longValue();
         Long totalSolicitudesVencidas = cantidadSolCerradasVencidas + cantidadSolVencidas;
         
         return MathUtils.calcularPorcentajeRedondeado(totalSolicitudesVencidas, totalSolicitudesArea, 1) ;
@@ -142,24 +128,21 @@ public class CalculoDeIndicadoresEJB implements CalculoDeIndicadoresEJBLocal {
     
     @Override
     public Float porcentajeRetrasos(){
-        String query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-                     + "s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado AND "
-                     + "s.fechaCierre > s.fechaVencimiento";
-        Query q = em.createQuery(query);
-        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
+        String query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE estado_solicitud = ? AND fecha_cierre > fecha_vencimiento ";
+        Query q = em.createNativeQuery(query);
+        q.setParameter(1, Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
         
-        Long cantidadSolCerradasVencidas = (Long)q.getSingleResult();
+        Long cantidadSolCerradasVencidas = ((BigInteger)q.getSingleResult()).longValue();
         
-        query = "SELECT COUNT(s) FROM SolicitudRequerimiento s WHERE "
-              + "s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado";
-        q = em.createQuery(query);
-        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
+        query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE estado_solicitud = ?";
+        q = em.createNativeQuery(query);
+        q.setParameter(1, Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
 
-        Long cantidadSolVencidas = (Long)q.getSingleResult();
+        Long cantidadSolVencidas = ((BigInteger)q.getSingleResult()).longValue();
         
-        query = "SELECT COUNT(s) FROM SolicitudRequerimiento s";
-        q = em.createQuery(query);
-        Long totalSolicitudesDpto = (Long)q.getSingleResult();
+        query = "SELECT COUNT(*) FROM solicitud_requerimiento";
+        q = em.createNativeQuery(query);
+        Long totalSolicitudesDpto = ((BigInteger)q.getSingleResult()).longValue();
         Long totalSolicitudesVencidas = cantidadSolCerradasVencidas + cantidadSolVencidas;
         
         return MathUtils.calcularPorcentajeRedondeado(totalSolicitudesVencidas, totalSolicitudesDpto, 1) ;
