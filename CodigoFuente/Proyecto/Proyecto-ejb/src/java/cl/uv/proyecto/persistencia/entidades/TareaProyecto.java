@@ -18,16 +18,7 @@ import javax.validation.constraints.Size;
 @Table(name = "TAREA_PROYECTO")
 @NamedQueries({
     @NamedQuery(name = "TareaProyecto.findAll", query = "SELECT t FROM TareaProyecto t"),
-    @NamedQuery(name = "TareaProyecto.findByIdTareaProyecto", query = "SELECT t FROM TareaProyecto t WHERE t.idTareaProyecto = :idTareaProyecto"),
-    @NamedQuery(name = "TareaProyecto.findByTarea", query = "SELECT t FROM TareaProyecto t WHERE t.tarea = :tarea"),
-    @NamedQuery(name = "TareaProyecto.findByDescripcionTarea", query = "SELECT t FROM TareaProyecto t WHERE t.descripcionTarea = :descripcionTarea"),
-    @NamedQuery(name = "TareaProyecto.findByFechaCreacion", query = "SELECT t FROM TareaProyecto t WHERE t.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "TareaProyecto.findByFechaInicioPropuesta", query = "SELECT t FROM TareaProyecto t WHERE t.fechaInicioPropuesta = :fechaInicioPropuesta"),
-    @NamedQuery(name = "TareaProyecto.findByFechaInicioReal", query = "SELECT t FROM TareaProyecto t WHERE t.fechaInicioReal = :fechaInicioReal"),
-    @NamedQuery(name = "TareaProyecto.findByFechaTerminoPropuesta", query = "SELECT t FROM TareaProyecto t WHERE t.fechaTerminoPropuesta = :fechaTerminoPropuesta"),
-    @NamedQuery(name = "TareaProyecto.findByFechaTerminoReal", query = "SELECT t FROM TareaProyecto t WHERE t.fechaTerminoReal = :fechaTerminoReal"),
-    @NamedQuery(name = "TareaProyecto.findByNivelAvance", query = "SELECT t FROM TareaProyecto t WHERE t.nivelAvance = :nivelAvance"),
-    @NamedQuery(name = "TareaProyecto.findByVisible", query = "SELECT t FROM TareaProyecto t WHERE t.visible = :visible")})
+    @NamedQuery(name = "TareaProyecto.findByIdTareaProyecto", query = "SELECT t FROM TareaProyecto t WHERE t.idTareaProyecto = :idTareaProyecto")})
 public class TareaProyecto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

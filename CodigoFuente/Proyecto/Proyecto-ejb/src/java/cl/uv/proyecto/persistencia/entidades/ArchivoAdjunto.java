@@ -19,14 +19,7 @@ import javax.validation.constraints.Size;
 @Table(name = "archivo_adjunto")
 @NamedQueries({
     @NamedQuery(name = "ArchivoAdjunto.findAll", query = "SELECT a FROM ArchivoAdjunto a"),
-    @NamedQuery(name = "ArchivoAdjunto.findByIdArchivo", query = "SELECT a FROM ArchivoAdjunto a WHERE a.idArchivo = :idArchivo"),
-    @NamedQuery(name = "ArchivoAdjunto.findByNombre", query = "SELECT a FROM ArchivoAdjunto a WHERE a.nombre = :nombre"),
-    @NamedQuery(name = "ArchivoAdjunto.findByPathFile", query = "SELECT a FROM ArchivoAdjunto a WHERE a.pathFile = :pathFile"),
-    @NamedQuery(name = "ArchivoAdjunto.findBySizeFile", query = "SELECT a FROM ArchivoAdjunto a WHERE a.sizeFile = :sizeFile"),
-    @NamedQuery(name = "ArchivoAdjunto.findBySizeFormat", query = "SELECT a FROM ArchivoAdjunto a WHERE a.sizeFormat = :sizeFormat"),
-    @NamedQuery(name = "ArchivoAdjunto.findByMimetype", query = "SELECT a FROM ArchivoAdjunto a WHERE a.mimetype = :mimetype"),
-    @NamedQuery(name = "ArchivoAdjunto.findByFechaUpload", query = "SELECT a FROM ArchivoAdjunto a WHERE a.fechaUpload = :fechaUpload"),
-    @NamedQuery(name = "ArchivoAdjunto.findByActivo", query = "SELECT a FROM ArchivoAdjunto a WHERE a.activo = :activo")})
+    @NamedQuery(name = "ArchivoAdjunto.findByIdArchivo", query = "SELECT a FROM ArchivoAdjunto a WHERE a.idArchivo = :idArchivo")})
 public class ArchivoAdjunto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

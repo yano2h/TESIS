@@ -18,8 +18,7 @@ import javax.validation.constraints.Size;
 @Table(name = "ROL_PROYECTO")
 @NamedQueries({
     @NamedQuery(name = "RolProyecto.findAll", query = "SELECT r FROM RolProyecto r"),
-    @NamedQuery(name = "RolProyecto.findByIdRol", query = "SELECT r FROM RolProyecto r WHERE r.idRol = :idRol"),
-    @NamedQuery(name = "RolProyecto.findByNombreRol", query = "SELECT r FROM RolProyecto r WHERE r.nombreRol = :nombreRol")})
+    @NamedQuery(name = "RolProyecto.findByIdRol", query = "SELECT r FROM RolProyecto r WHERE r.idRol = :idRol")})
 public class RolProyecto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

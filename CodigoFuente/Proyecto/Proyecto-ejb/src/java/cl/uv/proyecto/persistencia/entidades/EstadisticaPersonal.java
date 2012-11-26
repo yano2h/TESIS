@@ -18,16 +18,7 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
     @NamedQuery(name = "EstadisticaPersonal.findAll", query = "SELECT e FROM EstadisticaPersonal e"),
     @NamedQuery(name = "EstadisticaPersonal.findById", query = "SELECT e FROM EstadisticaPersonal e WHERE e.id = :id"),
-    @NamedQuery(name = "EstadisticaPersonal.findByFechaMedicion", query = "SELECT e FROM EstadisticaPersonal e WHERE e.fechaMedicion = :fechaMedicion"),
-    @NamedQuery(name = "EstadisticaPersonal.findByCantidadTotalSolicitudesAsignadas", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadTotalSolicitudesAsignadas = :cantidadTotalSolicitudesAsignadas"),
-    @NamedQuery(name = "EstadisticaPersonal.findByCantidadSolicitudesPendientes", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadSolicitudesPendientes = :cantidadSolicitudesPendientes"),
-    @NamedQuery(name = "EstadisticaPersonal.findByCantidadSolicitudesVencidas", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadSolicitudesVencidas = :cantidadSolicitudesVencidas"),
-    @NamedQuery(name = "EstadisticaPersonal.findByCantidadSolicitudesIniciadas", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadSolicitudesIniciadas = :cantidadSolicitudesIniciadas"),
-    @NamedQuery(name = "EstadisticaPersonal.findByCantidadSolicitudesCerradas", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadSolicitudesCerradas = :cantidadSolicitudesCerradas"),
-    @NamedQuery(name = "EstadisticaPersonal.findByCantidadProyectosAcargo", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadProyectosAcargo = :cantidadProyectosAcargo"),
-    @NamedQuery(name = "EstadisticaPersonal.findByCantidadProyectosEnQueParticipa", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadProyectosEnQueParticipa = :cantidadProyectosEnQueParticipa"),
-    @NamedQuery(name = "EstadisticaPersonal.findByCantidadTareasProyectoAsociadas", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadTareasProyectoAsociadas = :cantidadTareasProyectoAsociadas"),
-    @NamedQuery(name = "EstadisticaPersonal.findByCantidadTareasScmAsociadas", query = "SELECT e FROM EstadisticaPersonal e WHERE e.cantidadTareasScmAsociadas = :cantidadTareasScmAsociadas")})
+    @NamedQuery(name = "EstadisticaPersonal.findByFechaMedicion", query = "SELECT e FROM EstadisticaPersonal e WHERE e.fechaMedicion = :fechaMedicion")})
 public class EstadisticaPersonal implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -19,9 +19,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Notificacion.findAll", query = "SELECT n FROM Notificacion n"),
     @NamedQuery(name = "Notificacion.findByIdNotificacion", query = "SELECT n FROM Notificacion n WHERE n.idNotificacion = :idNotificacion"),
-    @NamedQuery(name = "Notificacion.findByFecha", query = "SELECT n FROM Notificacion n WHERE n.fecha = :fecha"),
-    @NamedQuery(name = "Notificacion.findByMensajeNotificacion", query = "SELECT n FROM Notificacion n WHERE n.mensajeNotificacion = :mensajeNotificacion"),
-    @NamedQuery(name = "Notificacion.findByRevisada", query = "SELECT n FROM Notificacion n WHERE n.revisada = :revisada")})
+    @NamedQuery(name = "Notificacion.findByFecha", query = "SELECT n FROM Notificacion n WHERE n.fecha = :fecha")})
 public class Notificacion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -20,11 +20,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "ItemConfiguracion.findAll", query = "SELECT i FROM ItemConfiguracion i"),
     @NamedQuery(name = "ItemConfiguracion.findByIdItemConfiguracion", query = "SELECT i FROM ItemConfiguracion i WHERE i.idItemConfiguracion = :idItemConfiguracion"),
-    @NamedQuery(name = "ItemConfiguracion.findByCodigoIdentificadorIc", query = "SELECT i FROM ItemConfiguracion i WHERE i.codigoIdentificadorIc = :codigoIdentificadorIc"),
-    @NamedQuery(name = "ItemConfiguracion.findByNombreItemConfiguracion", query = "SELECT i FROM ItemConfiguracion i WHERE i.nombreItemConfiguracion = :nombreItemConfiguracion"),
-    @NamedQuery(name = "ItemConfiguracion.findByVersion", query = "SELECT i FROM ItemConfiguracion i WHERE i.version = :version"),
-    @NamedQuery(name = "ItemConfiguracion.findByUbicacionEnBiblioteca", query = "SELECT i FROM ItemConfiguracion i WHERE i.ubicacionEnBiblioteca = :ubicacionEnBiblioteca"),
-    @NamedQuery(name = "ItemConfiguracion.findByFechaUltimaModificacion", query = "SELECT i FROM ItemConfiguracion i WHERE i.fechaUltimaModificacion = :fechaUltimaModificacion")})
+    @NamedQuery(name = "ItemConfiguracion.findByCodigoIdentificadorIc", query = "SELECT i FROM ItemConfiguracion i WHERE i.codigoIdentificadorIc = :codigoIdentificadorIc")})
 public class ItemConfiguracion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
