@@ -5,7 +5,10 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.model.base.utils.Resources;
-import cl.uv.proyecto.persistencia.entidades.*;
+import cl.uv.proyecto.persistencia.entidades.Area;
+import cl.uv.proyecto.persistencia.entidades.Funcionario;
+import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
+import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -43,21 +46,18 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
     
     @Override
     public List<SolicitudRequerimiento> buscarPorSolicitante(Integer rutSolicitante) {
-        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante.rut = :rut");
+        TypedQuery<SolicitudRequerimiento> q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante.rut = :rut",SolicitudRequerimiento.class);
         q.setParameter("rut", rutSolicitante);
         return q.getResultList(); 
     }
 
     @Override
     public SolicitudRequerimiento buscarPorCodigo(String codigo) {
-        System.out.println("Buscar solicitud por codigo.");
-        Query q = em.createNamedQuery("SolicitudRequerimiento.findByCodigoConsulta");
+        TypedQuery<SolicitudRequerimiento> q = em.createNamedQuery("SolicitudRequerimiento.findByCodigoConsulta", SolicitudRequerimiento.class);
         q.setParameter("codigoConsulta", codigo);
         SolicitudRequerimiento solicitud;
         try {
-            System.out.println("INICIO - "+(new Date()).getTime());
-            solicitud = (SolicitudRequerimiento) q.getSingleResult();
-            System.out.println("TERMINO - "+(new Date()).getTime());
+            solicitud = q.getSingleResult();
         } catch (NoResultException e) {
             solicitud = null;
         }
@@ -66,7 +66,11 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @Override
     public List<SolicitudRequerimiento> getUltimasSolicitudesEnviadas(Funcionario funcionario, Integer maxResults) {
-        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante = :solicitante AND s.estadoSolicitud.idEstadoSolicitudRequerimiento <> :idEstado ORDER BY s.fechaEnvio DESC");
+        TypedQuery<SolicitudRequerimiento> q = 
+                em.createQuery("SELECT s FROM SolicitudRequerimiento s "+
+                               "WHERE s.solicitante = :solicitante AND "+
+                               "s.estadoSolicitud.idEstadoSolicitudRequerimiento <> :idEstado "+
+                               "ORDER BY s.fechaEnvio DESC", SolicitudRequerimiento.class);
         q.setParameter("solicitante", funcionario);
         q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
         q.setMaxResults(maxResults);
@@ -75,7 +79,7 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @Override
     public List<SolicitudRequerimiento> getUltimasSolicitudesCerradas(Funcionario funcionario, Integer maxResults) {
-        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante = :solicitante AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado  ORDER BY s.fechaEnvio DESC");
+        TypedQuery<SolicitudRequerimiento> q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.solicitante = :solicitante AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado  ORDER BY s.fechaEnvio DESC", SolicitudRequerimiento.class);
         q.setParameter("solicitante", funcionario);
         q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
         q.setMaxResults(maxResults);
@@ -84,17 +88,15 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @Override
     public List<SolicitudRequerimiento> buscarSolicitudesPorArea(Area area) {
-       System.out.println("TIME INI = "+ (new Date()).getTime());
-        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.areaResponsable = :area ORDER BY s.fechaEnvio DESC");
+        TypedQuery<SolicitudRequerimiento> q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.areaResponsable = :area ORDER BY s.fechaEnvio DESC",SolicitudRequerimiento.class);
         q.setParameter("area", area);
         List<SolicitudRequerimiento> l = q.getResultList();
-       System.out.println("TIME END = "+ (new Date()).getTime());
         return l;
     }
 
     @Override
     public List<SolicitudRequerimiento> getSolicitudesAsignadas(FuncionarioDisico funcionarioDisico) {
-        Query q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.responsable = :responsable ORDER BY s.fechaEnvio DESC");
+        TypedQuery<SolicitudRequerimiento> q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.responsable = :responsable ORDER BY s.fechaEnvio DESC",SolicitudRequerimiento.class);
         q.setParameter("responsable", funcionarioDisico);
         return q.getResultList();
     }
@@ -170,7 +172,7 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
         //Set Paramenters
         String consulta = (condicion.isEmpty())? select+order : select+where+condicion+order;        
-        Query q = em.createQuery(consulta);
+        TypedQuery<SolicitudRequerimiento> q = em.createQuery(consulta,SolicitudRequerimiento.class);
         
         if (!solicitud.getCodigoConsulta().isEmpty()) {
             q.setParameter("codigoConsulta", "%"+solicitud.getCodigoConsulta()+"%");
