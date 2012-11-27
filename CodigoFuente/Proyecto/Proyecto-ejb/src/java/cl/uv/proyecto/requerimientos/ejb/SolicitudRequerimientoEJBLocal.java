@@ -24,7 +24,7 @@ public interface SolicitudRequerimientoEJBLocal {
 
     boolean validarCodigoConsulta(String codigoConsulta);
 
-    String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante,  List<ArchivoAdjunto> archivosAdjuntos) throws AddressException, MessagingException ;
+    String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante,  List<ArchivoAdjunto> archivosAdjuntos) ;
 
     String generarCodigo(long num);
     

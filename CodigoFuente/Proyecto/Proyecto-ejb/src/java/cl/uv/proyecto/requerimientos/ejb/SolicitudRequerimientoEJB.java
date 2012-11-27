@@ -85,7 +85,7 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
     }
 
     @Override
-    public String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante, List<ArchivoAdjunto> archivosAdjuntos) throws AddressException, MessagingException {
+    public String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante, List<ArchivoAdjunto> archivosAdjuntos)  {
         Date fechaActual = new Date();
         solicitud.setFechaEnvio(fechaActual);
         solicitud.setFechaUltimaActualizacion(fechaActual);
