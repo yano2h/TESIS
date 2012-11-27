@@ -24,12 +24,12 @@ public interface SolicitudRequerimientoEJBLocal {
 
     boolean validarCodigoConsulta(String codigoConsulta);
 
-    String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante,  List<ArchivoAdjunto> archivosAdjuntos) ;
+    String enviarSolicitud(SolicitudRequerimiento solicitud, Funcionario solicitante,  List<ArchivoAdjunto> archivosAdjuntos);
 
     String generarCodigo(long num);
     
     public void rechazarSolicitud(SolicitudRequerimiento solicitud);
-    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo, List<ArchivoAdjunto> archivosAdjuntos) throws AddressException, MessagingException ;
+    public void enviarRespuestaDirecta(SolicitudRequerimiento solicitud, Boolean enviarCopiaCorreo, List<ArchivoAdjunto> archivosAdjuntos) ;
     public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto, List<ArchivoAdjunto> archivosAdjuntos) ;
     public void transferirSolicitud(SolicitudRequerimiento solicitud, Area nuevaAreaResponsable, String motivoTransferencia);
     public void asignarSolicitud(SolicitudRequerimiento solicitud);

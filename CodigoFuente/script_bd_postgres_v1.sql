@@ -474,6 +474,9 @@ CREATE TABLE ESTADISTICA_PERSONAL (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
+-- -----------------------------------------------------
+-- Table ARCHIVO_ADJUNTO
+-- -----------------------------------------------------
 CREATE TABLE ARCHIVO_ADJUNTO (
     id_archivo BIGSERIAL NOT NULL,
     nombre VARCHAR(255) NOT NULL,
@@ -486,6 +489,9 @@ CREATE TABLE ARCHIVO_ADJUNTO (
     PRIMARY KEY (id_archivo)
 );
 
+-- -----------------------------------------------------
+-- Table ARCHIVO_SOLICITUD_REQUERIMIENTO
+-- -----------------------------------------------------
 CREATE TABLE ARCHIVO_SOLICITUD_REQUERIMIENTO(
     id_solicitud BIGINT NOT NULL,
     id_archivo BIGINT NOT NULL UNIQUE,
@@ -494,6 +500,9 @@ CREATE TABLE ARCHIVO_SOLICITUD_REQUERIMIENTO(
     FOREIGN KEY (id_archivo) REFERENCES ARCHIVO_ADJUNTO (id_archivo)
 );
 
+-- -----------------------------------------------------
+-- Table ARCHIVO_PROYECTO
+-- -----------------------------------------------------
 CREATE TABLE ARCHIVO_PROYECTO(
     id_proyecto INT NOT NULL,
     id_archivo BIGINT NOT NULL UNIQUE,
@@ -502,10 +511,22 @@ CREATE TABLE ARCHIVO_PROYECTO(
     FOREIGN KEY (id_archivo) REFERENCES ARCHIVO_ADJUNTO (id_archivo)
 );
 
-CREATE TABLE ETAPA_PROYECTO (
-  id_etapa_proyecto SMALLINT NOT NULL ,
-  nombre_etapa_proyecto VARCHAR(50) NOT NULL ,
-  PRIMARY KEY (id_etapa_proyecto) 
-);
-
-EKSJEIQTYRHANDJFHTOAMETIANDTONAKOPWRTUHANTORY
+-- -----------------------------------------------------
+-- View RESUMEN_SOLICITUD_REQUERIMIENTO
+-- -----------------------------------------------------
+CREATE VIEW RESUMEN_SOLICITUD_REQUERIMIENTO AS
+    SELECT 
+      SR.id_solicitud_req, 
+      SR.codigo_consulta, 
+      SR.asunto, 
+      SR.responsable,
+      (substring(F.nombre from 1 for 1)||'.'||F.apellido_paterno) AS nombreCorto,
+      SR.estado_solicitud, 
+      SR.tipo_solicitud, 
+      SR.fecha_envio, 
+      SR.fecha_vencimiento ,
+      SR.area_responsable
+    FROM SOLICITUD_REQUERIMIENTO SR
+    LEFT JOIN FUNCIONARIO F 
+      ON F.rut = SR.responsable 
+    ORDER BY fecha_envio DESC 

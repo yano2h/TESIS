@@ -8,6 +8,7 @@ import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.persistencia.entidades.SolicitudCambio;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -83,11 +84,11 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
 
     @Override
     public Long contarSolicitudAnalisisPendiente(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT COUNT(s) FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado");
-        q.setParameter("responsable", funcionario);
-        q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_ANALIZAR_SC") );
-        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_ENVIADA") ));
-        return (Long) q.getSingleResult();
+        Query q = em.createNativeQuery("SELECT COUNT(*) FROM tarea_scm_proyecto t, solicitud_cambio s WHERE t.responsable = ? AND t.id_tarea_scm = ? AND s.proyecto = t.id_proyecto AND s.estado_solicitud = ?");
+        q.setParameter(1, funcionario.getRut());
+        q.setParameter(2, Resources.getValueInteger("TareasSCM", "TSCM_ANALIZAR_SC") );
+        q.setParameter(3, Resources.getValueShort("Estados", "EstadoSC_ENVIADA"));
+        return ((BigInteger) q.getSingleResult()).longValue();
     }
     
     @Override
@@ -108,11 +109,11 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
 
     @Override
      public Long contarSolicitudEvaluacionPendiente(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT COUNT(s) FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado");
-        q.setParameter("responsable", funcionario);
-        q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_APROBAR_SC"));
-        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_ANALISADA") ));
-        return (Long) q.getSingleResult();
+        Query q = em.createNativeQuery("SELECT COUNT(*) FROM tarea_scm_proyecto t, solicitud_cambio s WHERE t.responsable = ? AND t.id_tarea_scm = ? AND s.proyecto = t.id_proyecto AND s.estado_solicitud = ?");
+        q.setParameter(1, funcionario.getRut());
+        q.setParameter(2, Resources.getValueInteger("TareasSCM", "TSCM_APROBAR_SC"));
+        q.setParameter(3, Resources.getValueShort("Estados", "EstadoSC_ANALISADA"));
+        return ((BigInteger) q.getSingleResult()).longValue();
     }
      
     @Override
@@ -133,11 +134,11 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
     
     @Override
     public Long contarSolicitudImplementacionPendiente(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT COUNT(s) FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado");
-        q.setParameter("responsable", funcionario);
-        q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_IMPLEMENTAR_SC"));
-        q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_APROBADA") ));
-        return (Long) q.getSingleResult();
+        Query q = em.createNativeQuery("SELECT COUNT(*) FROM tarea_scm_proyecto t, solicitud_cambio s WHERE t.responsable = ? AND t.id_tarea_scm = ? AND s.proyecto = t.id_proyecto AND s.estado_solicitud = ?");
+        q.setParameter(1, funcionario.getRut());
+        q.setParameter(2, Resources.getValueInteger("TareasSCM", "TSCM_IMPLEMENTAR_SC"));
+        q.setParameter(3, Resources.getValueShort("Estados", "EstadoSC_APROBADA"));
+        return ((BigInteger) q.getSingleResult()).longValue();
     }
 
     @Override

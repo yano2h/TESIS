@@ -9,18 +9,19 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  *
  * @author Jano
  */
+@Cacheable
 @Entity
+@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "TIPO_SOLICITUD_REQ")
 @NamedQueries({
     @NamedQuery(name = "TipoSolicitudRequerimiento.findAll", query = "SELECT t FROM TipoSolicitudRequerimiento t"),
-    @NamedQuery(name = "TipoSolicitudRequerimiento.findByIdTipoSolicitudRequerimiento", query = "SELECT t FROM TipoSolicitudRequerimiento t WHERE t.idTipoSolicitudRequerimiento = :idTipoSolicitudRequerimiento"),
-    @NamedQuery(name = "TipoSolicitudRequerimiento.findByNombreTipoSolicitud", query = "SELECT t FROM TipoSolicitudRequerimiento t WHERE t.nombreTipoSolicitud = :nombreTipoSolicitud"),
-    @NamedQuery(name = "TipoSolicitudRequerimiento.findByDescripcionTipo", query = "SELECT t FROM TipoSolicitudRequerimiento t WHERE t.descripcionTipo = :descripcionTipo")})
+    @NamedQuery(name = "TipoSolicitudRequerimiento.findByIdTipoSolicitudRequerimiento", query = "SELECT t FROM TipoSolicitudRequerimiento t WHERE t.idTipoSolicitudRequerimiento = :idTipoSolicitudRequerimiento")})
 public class TipoSolicitudRequerimiento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

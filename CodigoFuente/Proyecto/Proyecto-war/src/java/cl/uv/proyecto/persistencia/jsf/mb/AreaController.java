@@ -4,6 +4,7 @@ import cl.uv.proyecto.persistencia.ejb.AreaFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
+import cl.uv.view.controller.base.jsf.mb.MbBase;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
@@ -20,7 +21,7 @@ import javax.faces.model.SelectItem;
 
 @ManagedBean(name = "areaController")
 @SessionScoped
-public class AreaController implements Serializable {
+public class AreaController extends MbBase implements Serializable {
 
     private Area current;
     private DataModel items = null;
@@ -28,7 +29,8 @@ public class AreaController implements Serializable {
     private AreaFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    private SelectItem[] areasParaTransferencia;
+    
     public AreaController() {
     }
 
@@ -186,6 +188,18 @@ public class AreaController implements Serializable {
 
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtils.getSelectItems(ejbFacade.findAll(), "getNombreArea",true);
+    }
+
+    public SelectItem[] getAreasParaTransferencia() {
+        SelectItem[] temp = getItemsAvailableSelectMany();
+        areasParaTransferencia = new SelectItem[temp.length - 1];
+        int cont = 0;
+        for (SelectItem s : temp) {
+            if (!s.getValue().equals(getFuncionarioDisico().getArea())) {
+                areasParaTransferencia[cont++] = s;
+            }
+        }
+        return areasParaTransferencia;
     }
     
     @FacesConverter(forClass = Area.class)

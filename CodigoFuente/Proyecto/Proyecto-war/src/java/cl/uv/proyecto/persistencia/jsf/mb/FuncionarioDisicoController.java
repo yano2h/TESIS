@@ -1,9 +1,11 @@
 package cl.uv.proyecto.persistencia.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
+import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
+import cl.uv.view.controller.base.jsf.mb.MbBase;
 import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
 import java.util.List;
@@ -20,14 +22,17 @@ import javax.faces.model.SelectItem;
 
 @ManagedBean(name = "funcionarioDisicoController")
 @SessionScoped
-public class FuncionarioDisicoController implements Serializable {
+public class FuncionarioDisicoController extends MbBase implements Serializable {
 
     private FuncionarioDisico current;
     private DataModel items = null;
     @EJB
     private FuncionarioDisicoFacadeLocal ejbFacade;
+    @EJB
+    private SolicitudRequerimientoFacadeLocal solicitudFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private List<FuncionarioDisico> funcionariosArea;
 
     public FuncionarioDisicoController() {
     }
@@ -207,6 +212,16 @@ public class FuncionarioDisicoController implements Serializable {
             listaItems[i++] = new SelectItem(f, f.getNombre()+" "+f.getApellidoPaterno()+" "+f.getApellidoMaterno());
         }
         return listaItems;
+    }
+    
+    public List<FuncionarioDisico> getFuncionariosArea(){
+        funcionariosArea = ejbFacade.buscarFuncrionariosPorArea(getFuncionarioDisico().getArea());
+
+        for (FuncionarioDisico f : funcionariosArea) {
+            solicitudFacade.contarSolicitudes(f);
+        }
+        
+        return funcionariosArea;
     }
     
     @FacesConverter(forClass = FuncionarioDisico.class)

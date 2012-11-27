@@ -5,6 +5,7 @@
 package cl.uv.view.controller.base.jsf.mb;
 
 import cl.uv.model.base.utils.FileUtils;
+import cl.uv.proyecto.file.ejb.FileManagerEJBLocal;
 import cl.uv.proyecto.persistencia.entidades.ArchivoAdjunto;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
@@ -16,11 +17,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -31,9 +35,13 @@ import org.primefaces.model.UploadedFile;
 @ViewScoped
 public class MbFilesUpload {
 
+    @EJB
+    private FileManagerEJBLocal fileManagerEJB;
+    
     private Long sizeLimitAttachment;
     private Long sizeAttachment;
     private List<ArchivoAdjunto> archivosAdjuntos;
+    private StreamedContent fileDownload;
     
     public MbFilesUpload() {
         sizeAttachment = 0L;
@@ -111,4 +119,22 @@ public class MbFilesUpload {
         System.out.println("CLEAN");
         archivosAdjuntos.clear();
     }
+    
+    public void downloadFile(ArchivoAdjunto file){
+        if (file.getInputStream() == null) {
+            fileManagerEJB.loadContentFile(file);
+        }
+        
+        setFileDownload( new DefaultStreamedContent(file.getInputStream(), file.getMimetype(), file.getNombre()) );  
+    }
+
+    public StreamedContent getFileDownload() {
+        return fileDownload;
+    }
+
+    public void setFileDownload(StreamedContent fileDownload) {
+        this.fileDownload = fileDownload;
+    }
+    
+    
 }

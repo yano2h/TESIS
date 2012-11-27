@@ -9,17 +9,18 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 /**
  *
  * @author Jano
  */
+@Cacheable
 @Entity
+@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "TIPO_PRIORIDAD")
 @NamedQueries({
     @NamedQuery(name = "TipoPrioridad.findAll", query = "SELECT t FROM TipoPrioridad t"),
-    @NamedQuery(name = "TipoPrioridad.findByIdTipoPrioridad", query = "SELECT t FROM TipoPrioridad t WHERE t.idTipoPrioridad = :idTipoPrioridad"),
-    @NamedQuery(name = "TipoPrioridad.findByNombrePrioridad", query = "SELECT t FROM TipoPrioridad t WHERE t.nombrePrioridad = :nombrePrioridad")})
+    @NamedQuery(name = "TipoPrioridad.findByIdTipoPrioridad", query = "SELECT t FROM TipoPrioridad t WHERE t.idTipoPrioridad = :idTipoPrioridad")})
 public class TipoPrioridad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -32,9 +33,9 @@ public class TipoPrioridad implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombre_prioridad")
     private String nombrePrioridad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prioridadSolicitud", orphanRemoval=true)
+    @OneToMany(cascade= CascadeType.REMOVE, mappedBy = "prioridadSolicitud",fetch= FetchType.LAZY, orphanRemoval=true)
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prioridadSolicitud")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "prioridadSolicitud",fetch= FetchType.LAZY)
     private List<SolicitudCambio> solicitudCambioList;
 
     public TipoPrioridad() {
