@@ -1,0 +1,202 @@
+\chapter{Implementaci\'on}
+En este Capítulo se presenta la plataforma de desarrollo a utilizar, las herramientas
+necesarias para el desarrollo tanto de software como de hardware, los lenguajes de 
+programación y las estrategías para utilizarlos.
+
+\section{Plataforma de Desarrollo}
+El sistema es completamente un plataforma web, ya que permite a los diferentes
+usuarios de la Universidad comunicarse desde cualquier dispositivo con acceso a 
+Internet con la Dirección de Servicios de Información y Computación (DISICO), 
+manteniéndose al tanto del estado de sus solicitudes de requerimiento en todo momento. Ademas de permitir gestionar estas dentro de DISICO, junto con los proyectos y solicitudes de SCM.
+
+
+\section{Herramientas de Software}
+	\begin{itemize}
+		\item \textbf{NetBeans 7.1.1:} Es un entorno de desarrollo integrado, está diseñado principalmente para el 
+		lenguaje de programación Java - pero puede servir para cualquier otro lenguaje de programación. 
+		Es gratuito y sin restricciones de uso.\cite{netbeans}
+		\item \textbf{GlassFish 3.1.1:} GlassFish es un servidor de aplicaciones de software libre desarrollado por Sun Microsystems, 
+		compañía adquirida por Oracle Corporation, que implementa las tecnologías definidas en la plataforma Java EE y 
+		permite ejecutar aplicaciones que siguen esta especificación. Es gratuito y de código libre, se distribuye bajo un 
+		licenciamiento dual a través de la licencia CDDL y la GNU GPL.\cite{glassfish}
+		\item \textbf{SQL Server 2008 R2:} Es un sistema gestor de Bases de Datos relacionales, desarrollado por Microsoft, 
+		que ademas incluye un conjunto de herramientas para su administración. \cite{sqlserver}
+	\end{itemize}
+
+%	\subsection{MySQL 5.1}
+\newpage
+\section{Herramientas de Hardware}
+	\begin{itemize}
+		\item \textbf{PC Lenovo:} Computador para el uso dentro de las instalaciones de DISICO con las siguientes características básicas; 
+		Procesador Intel Core 2 Duo, con 4 GB de RAM y 300 GB de Disco duro.
+		\item \textbf{MacBook Pro:} Computador portátil personal para el desarrollo de Software, documentos, etc.
+		Procesador Intel Core i5, con 4 GB de RAM y 500 GB de Disco duro.
+		\item \textbf{Servidor Dell Inc. PowerEdge R710:} Servidor de DISICO para el despliegue de la aplicación. 
+		Servidor Dell con 2 procesadores i5, 48 GB de RAM y 500GB de Disco duro.
+	\end{itemize}
+
+\newpage
+\section{Lenguajes de Programación y Frameworks}
+
+	\subsection{Lenguajes}
+	\begin{itemize}
+		\item \textbf{Java EE:}  Java Platform, Enterprise Edition o Java EE (anteriormente conocido como Java 2 Platform, 
+		Enterprise Edition o J2EE hasta la versión 1.4), es una plataforma de programación parte de la Plataforma Java para desarrollar 
+		y ejecutar software de aplicaciones en el lenguaje de programación Java con arquitectura de N capas distribuidas 
+		y que se apoya ampliamente en componentes de software modulares ejecutándose sobre un servidor de aplicaciones. 
+		La plataforma Java EE está definida por una especificación. Similar a otras especificaciones del Java Community Process, Java EE es también 
+		considerada informalmente como un estándar debido a que los proveedores deben cumplir ciertos requisitos de conformidad para declarar 
+		que sus productos son conformes a Java EE; estandarizado por The Java Community Process / JCP.
+
+		\item \textbf{JPQL:} El Java Persistence Query Language (JPQL) es un lenguaje de consulta independiente de 
+		plataforma orientado a objetos definidos como parte de la especificación Java Persistence API. JPQL se utiliza 
+		para hacer consultas en entidades almacenadas en basesde datos relacionales. Está fuertemente inspirado en 
+		SQL, y sus consultas se asemejan a la sintaxis de las consultas SQL, solo que operan contra objetos entidad JPA 
+		en lugar de hacerlo directamente con las tablas de base de datos.
+
+		\item \textbf{SQL:} El lenguaje de consulta estructurado o SQL (por sus siglas en inglés structured query language) 
+		es un lenguaje declarativo de acceso a bases de datos relacionales que permite especificar diversos tipos de operaciones 
+		en estas. Una de sus características es el manejo del álgebra y el cálculo relacional permitiendo efectuar consultas 
+		con el fin de recuperar de una forma sencilla información de interés de una base de datos, así como también hacer cambios sobre ella.
+		En este trabajo se utiliza principalmente para la creación y poblamiento de la base de datos.
+
+	\end{itemize}
+	
+	\newpage
+	\subsection{Frameworks}
+
+	\begin{itemize}
+
+		\item \textbf{JPA:} Java Persistence API, más conocida por sus siglas JPA, es la API de persistencia desarrollada 
+		para la plataforma Java EE. Es un framework del lenguaje de programación Java que maneja datos relacionales 
+		en aplicaciones usando la Plataforma Java en sus ediciones Standard (Java SE) y Enterprise (Java EE).
+
+		\item \textbf{Hibernate 4.1:} Hibernate es un framework de persistencia de objetos para Java. Su función principal 
+		es la de Mapeo Objeto-Relacional (ORM), es decir, mapear objetos a tablas de una base de datos relacional \cite{hibernate}. 
+		Es una implementación de JPA y para este trabajo se utiliza como proveedor de persistencia.
+
+		\item \textbf{JSF 2:} La tecnología JavaServer Faces es un framework de interfaz de componentes de usuarios 
+		del lado del servidor para las aplicaciones web basadas en la tecnología Java. JSF es una especificación desarrollada 
+		por la Java Community Process. 
+
+		\item \textbf{PrimeFaces 3.3:} PrimeFaces es una librería de componentes visuales open source basada en JSF y desarrollada 
+		y mantenida por Prime Technology, una compañía Turca de IT especializada en consultoría ágil, JSF, Java EE y Outsourcing.\cite{primefaces} 
+
+	\end{itemize}
+
+\newpage
+\section{Estrategia de Implementación}
+La estrategia de implementación adoptada es incremental, donde se desarrollan
+los subsistemas descritos en la Figura \ref{implementacionFig}, donde se observa 
+el esquema de integración de estos.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/PruebasIntegracion.png}
+			\caption{Esquema de Integración}
+			\label{implementacionFig}
+		\end{center}
+	\end{figure}
+
+A continuación se muestran y explican algunas de las principales pantallas del sistema,
+para un mayor detalle puede revisar el Apendice \ref{anexo3} donde se encuentran 
+descrito en detalle los Casos de Uso Reales.
+
+\begin{enumerate}
+
+	\item La implementación del sistema de autenticación, no posee interfaces, ya
+	que conciste en integrar el sistema con el sistema de autenticación de funcionarios
+	que se utiliza para acceder al resto de las aplicaciones de la Universidad de Valparaíso.
+	El cual esta compuesto principalmente de por dos pantallas. La de la Figura \ref{login01}
+	la cual permite a los usuarios autenticarse y la de la Figura \ref{login02} que le muestra 
+	a los usuarios las a aplicaciones a las que tiene acceso y les brinda el acceso directo a estas.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.9]{imagenes/ITF/ITF_Login01.png}
+			\caption{Portal de Login}
+			\label{login01}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.8]{imagenes/ITF/ITF_Login02.png}
+			\caption{Panel de Control}
+			\label{login02}
+		\end{center}
+	\end{figure}
+
+	\item Se implementa el sistema de envío de solicitudes de requerimientos
+	donde los usuarios crean, envian y buscan solicitudes de requerimientos. 
+	La creación y envío se observa en la Figura \ref{itf_envioSol}.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/ITF/ITF_EnvioSol.png}
+			\caption{Envío de Solicitudes}
+			\label{itf_envioSol}
+		\end{center}
+	\end{figure}
+
+	\item Se implementa un subsistema de mensajeria que permite enviar 
+	correos electrónicos de con notificaciones o respuestas, ya sea de forma
+	automática o manual a los usuarios, este no posee interfaz, ya que su fin
+	es proporcionar servicios que luego serán consumidos por el resto de los 
+	sistemas.
+
+	\item Luego para atender y gestionar las solicitudes de requerimiento por 
+	parte de DISICO se implementa el sistema de atención, en la Figura \ref{itf_atencion}
+	se muestra la interfaz de recepción de Solicitudes del Área. Y en la 
+	Figura \ref{itf_atencion02} se muestra la vista en detalle de la solicitud.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.37]{imagenes/ITF/ITF_Atencion.png}
+			\caption{Solicitudes del Área}
+			\label{itf_atencion}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/ITF/ITF_Atencion02.png}
+			\caption{Detalle de Solicitud}
+			\label{itf_atencion02}
+		\end{center}
+	\end{figure}
+
+	\item Posteriormente se Implementa y se integra el sistema de proyectos.
+	En la Figura \ref{itf_proyecto} se presenta la interfaz para la creación de 
+	proyectos.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/ITF/ITF_Proyecto.png}
+			\caption{Creación de Proyecto}
+			\label{itf_proyecto}
+		\end{center}
+	\end{figure}
+
+	\item Por ultimo se implementa el sistema de gestión de SCM para dar soporte
+	a la metodología de SCM de DISICO. En la Figura \ref{itf_scm} se muestra la
+	interfaz de asignación de tareas de SCM. Y en la Figura \ref{itf_scm02} se muestra
+	la interfaz  para agregar Items de Configuración en un proyecto.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.37]{imagenes/ITF/ITF_Scm.png}
+			\caption{Asignación de Tareas de SCM}
+			\label{itf_scm}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.37]{imagenes/ITF/ITF_Scm02.png}
+			\caption{Identificación de la Configuración}
+			\label{itf_scm02}
+		\end{center}
+	\end{figure}
+
+\end{enumerate}

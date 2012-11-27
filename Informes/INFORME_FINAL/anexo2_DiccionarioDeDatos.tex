@@ -1,0 +1,320 @@
+\chapter{Diccionario de Datos}
+	\label{dicDatos}
+	Para dar un mayor nivel de detalle a continuación se presenta el diccionario de datos, 
+	en la cual se describe cada tabla con sus atributos, el tipo de estos
+	y se indica si aceptan valores nulo y si tienen algún tipo de restricción como clave primaria
+	o foránea.
+	
+	\begin{table}[H]
+		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
+		\hline
+		\rowcolor[gray]{0.9}\textbf{Entidad} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Null} & \textbf{Clave}  \\
+		\hline
+		\multirow{7}{*}{FUNCIONARIO} & {rut} & {INT} & {NO} & {PK} \\
+									\cline{2-5}
+									& {nombre} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {apellido\_paterno} & {VARCHAR(25)} & {NO} & {} \\
+									\cline{2-5}
+									& {apellido\_materno} & {VARCHAR(25)} & {NO} & {} \\
+									\cline{2-5}
+									& {correo\_uv} & {VARCHAR(45)} & {SI} & {}  \\
+									\cline{2-5}
+									& {fecha\_primer\_acceso} & {DATETIME} & {SI} & {} \\
+									\cline{2-5}
+									& {fecha\_ultimo\_acceso} & {DATETIME} & {SI} & {}  \\
+		\hline
+		\multirow{4}{*}{FUNCIONARIO\_DISICO} & {rut} & {INT} & {NO} & {PK,FK}  \\
+									\cline{2-5}
+									& {id\_area} & {SAMLLINT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {cargo} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {anexo} & {VARCHAR(5)} & {NO} & {} \\
+		\hline
+		\multirow{3}{*}{AREA} & {id\_area} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {nombre} & {SAMLLINT} & {NO} & {} \\
+									\cline{2-5}
+									& {descripcion\_area} & {TEXT} & {SI} & {} \\
+		\hline
+		\multirow{3}{*}{TIPO\_SOLICITUD\_REQ} & {id\_tipo\_solicitud\_req} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {tipo\_solicitud} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {descripcion\_tipo} & {VARCHAR(255)} & {SI} & {} \\
+		\hline
+		\multirow{7}{*}{} & {id\_solicitud\_req} & {BIGINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {codigo\_consulta} & {VARCHAR(9)} & {NO} & {} \\
+									\cline{2-5}
+									& {asunto} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {mensaje} & {TEXT} & {NO} & {} \\
+									\cline{2-5}
+									& {id\_tipo\_solicitud\_req} & {TINYINT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {id\_estado\_solicitud\_req} & {TINYINT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {id\_area} & {TINYINT} & {NO} & {FK} \\
+									\cline{2-5}
+	{SOLICITUD\_REQUERI-}			& {rut\_responsable} & {INT} & {NO} & {FK} \\
+									\cline{2-5}
+	{MIENTO}						& {rut\_solicitante} & {INT} & {NO} & {FK} \\
+									\cline{2-5}
+	\multirow{7}{*}{}				& {id\_tipo\_prioridad} & {TINYINT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {fecha\_envio} & {DATETIME} & {NO} & {} \\
+									\cline{2-5}
+									& {fecha\_cierre} & {DATETIME} & {SI} & {} \\
+									\cline{2-5}
+									& {fecha\_vencimiento} & {DATETIME} & {SI} & {} \\
+									\cline{2-5}
+									& {fecha\_ultima\_actualizacion} & {DATETIME} & {NO} & {} \\
+									\cline{2-5}
+									& {justificacion\_transferencia} & {VARCHAR(255)} & {SI} & {} \\
+									\cline{2-5}
+									& {respuesta} & {TEXT} & {SI} & {} \\
+		\hline
+
+		\end{tabular}
+	\end{table}
+
+	\begin{table}[H]
+		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
+		\hline
+		\rowcolor[gray]{0.9}\textbf{Entidad} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Null} & \textbf{Clave}  \\
+		\hline
+		\multirow{2}{*}{TIPO\_PRIORIDAD} & {id\_tipo\_prioridad} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {prioridad} & {VARCHAR(45)} & {NO} & {} \\
+		\hline
+		\multirow{3}{*}{ESTADO\_SOLICITUD\_REQ} & {id\_estado\_solicitud\_req} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {estado\_solicitud\_req} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {descripcion\_estado} & {VARCHAR(255)} & {SI} & {} \\
+		\hline
+		\multirow{6}{*}{COMENTARIO\_SOLICITUD} & {id\_comentario} & {BIGINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {id\_solicitud\_req} & {BIGINT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {rut\_autor} & {INT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {comentario} & {TEXT} & {NO} & {} \\
+									\cline{2-5}
+									& {fecha} & {DATETIME} & {NO} & {} \\
+									\cline{2-5}
+									& {visible} & {BOOLEAN} & {NO} & {} \\
+		\hline
+		\multirow{5}{*}{NOTIFICACION} & {id\_notificacion} & {BIGINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {fecha} & {DATETIME} & {NO} & {} \\
+									\cline{2-5}
+									& {mensaje\_notificacion} & {VARCHAR(90)} & {NO} & {} \\
+									\cline{2-5}
+									& {revisada} & {BOOLEAN} & {NO} & {} \\
+									\cline{2-5}
+									& {rut\_destinatario} & {INT} & {NO} & {FK} \\
+		\hline		
+		\multirow{8}{*}{PROYECTO} & {id\_proyecto} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {codigo\_interno} & {VARCHAR(6)} & {NO} & {} \\
+									\cline{2-5}
+									& {nombre} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {descripcion} & {VARCHAR(255)} & {NO} & {} \\
+									\cline{2-5}
+									& {fecha\_inicio} & {DATETIME} & {NO} & {} \\
+									\cline{2-5}
+									& {fecha\_termino} & {DATETIME} & {SI} & {} \\
+									\cline{2-5}
+									 & {id\_tipo\_proyecto} & {TINYINT} & {NO} & {FK}  \\
+									\cline{2-5}
+									 & {id\_estado\_proyecto} & {TINYINT} & {NO} & {FK}  \\
+		\hline
+		\multirow{2}{*}{TIPO\_PROYECTO} & {id\_tipo\_proyecto} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {tipo\_proyecto} & {VARCHAR(45)} & {NO} & {} \\
+		\hline
+		\multirow{2}{*}{ESTADO\_PROYECTO} & {id\_estado\_proyecto} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {estado\_proyecto} & {VARCHAR(45)} & {NO} & {} \\
+		\hline
+		\multirow{3}{*}{PARTICIPANTE\_PROYECTO} & {rut\_participante} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {id\_proyecto} & {INT} & {NO} & {PK} \\
+									\cline{2-5}
+									& {id\_rol} & {TINYINT} & {NO} & {FK} \\
+		\hline
+		\multirow{2}{*}{ROL\_PROYECTO} & {id\_rol} & {TINYINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {nombre\_rol} & {VARCHAR(45)} & {NO} & {} \\
+		\hline
+		\multirow{8}{*}{ITEM\_CONFIGURACION} & {id\_item\_configuracion} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {codigo\_identificador\_ic} & {VARCHAR(5)} & {NO} & {} \\
+									\cline{2-5}
+									& {nombre\_ic} & {VARCHAR(45)} & {NO} & {} \\
+									\cline{2-5}
+									& {version} & {VARCHAR(10)} & {NO} & {} \\
+									\cline{2-5}
+									& {ubicacion\_en\_biblioteca} & {VARCHAR(100)} & {NO} & {} \\
+									\cline{2-5}
+									& {fecha\_ultima\_modificacion} & {DATETIME} & {NO} & {} \\
+									\cline{2-5}
+									& {id\_proyecto} & {INT} & {NO} & {FK}  \\
+									\cline{2-5}
+									& {rut\_responsable\_ic} & {INT} & {NO} & {FK} \\		
+		\hline		
+
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[H]
+		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
+		\hline
+		\rowcolor[gray]{0.9}\textbf{Entidad} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Null} & \textbf{Clave}  \\
+		\hline
+		\multirow{13}{*}{ESTADISTICA\_PERSONAL} & {id} & {BIGINT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {rut\_funcionario} & {INT} & {NO} & {FK} \\
+									\cline{2-5}
+									& {fecha} & {DATE} & {NO} & {} \\
+									\cline{2-5}
+									& {cantidad\_total\_solicitudes} & \multirow{2}{*}{BIGINT} & \multirow{2}{*}{NO} & {} \\
+									& {\_asignadas}  & & & \\
+									\cline{2-5}
+									& {cantidad\_solicitudes} & \multirow{2}{*}{INT} & \multirow{2}{*}{NO} & \multirow{2}{*}{} \\
+									& {\_pendientes} &  &  &  \\
+									\cline{2-5}
+									& {cantidad\_solicitudes\_vencidas} & {INT} & {NO} & {} \\
+									& {\_vencidas} & {INT} & {NO} & {} \\
+									\cline{2-5}
+									& {cantidad\_solicitudes\_iniciadas} & {INT} & {NO} & {} \\
+									\cline{2-5}
+									& {cantidad\_solicitudes\_cerradas} & {INT} & {NO} & {} \\
+									\cline{2-5}
+									& {cantidad\_proyectos\_acargo} & {INT} & {NO} & {} \\
+									\cline{2-5}
+									& {cantidad\_proyectos\_en\_que} & \multirow{2}{*}{INT} & \multirow{2}{*}{NO} & \multirow{2}{*}{} \\
+									& {\_participa} & & & \\
+									\cline{2-5}
+									& {cantidad\_tareas\_proyecto} & \multirow{2}{*}{INT} & \multirow{2}{*}{NO} & \multirow{2}{*}{} \\
+									& {\_asociadas} & & & \\
+									\cline{2-5}
+									& {cantidad\_tareas\_scm\_asociadas} & {INT} & {NO} & {} \\		
+		\hline		
+		\multirow{11}{*}{TREA\_PROYECTO} & {id\_tarea\_proyecto} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
+									& {id\_proyecto} & {INT} & {NO} & {FK}  \\
+									\cline{2-5}
+									& {rut\_responsable} & {INT} & {NO} & {FK}  \\
+									\cline{2-5}
+									& {tarea} & {VARCHAR(45)} & {NO} & {}  \\
+									\cline{2-5}
+									& {fecha\_creacion} & {DATE} & {NO} & {}  \\
+									\cline{2-5}
+									& {fecha\_inicio\_propuesta} & {DATETIME} & {NO} & {}  \\
+									\cline{2-5}
+									& {fecha\_inicio\_real} & {DATETIME} & {SI} & {}  \\
+									\cline{2-5}
+									& {fecha\_termino\_propuesta} & {DATETIME} & {NO} & {}  \\
+									\cline{2-5}
+									& {fecha\_termino\_real} & {DATETIME} & {SI} & {}  \\
+									\cline{2-5}
+									& {nivel\_avance} & {SMALLINT} & {NO} & {}  \\
+									\cline{2-5}
+									& {visible} & {BOOLEAN} & {NO} & {}  \\
+		\hline
+		\multirow{3}{*}{TREA\_SCM} & {id\_tarea\_scm} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
+									   & {nombre\_tarea} & {VARCHAR(45)} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {descripcion\_tarea} & {VARCHAR(255)} & {NO} & {}  \\
+									  \cline{2-5}
+		\hline
+		\multirow{3}{*}{ENTREGABLE} & {id\_entregable} & {INT} & {NO} & {PK}  \\
+									\cline{2-5}
+									   & {nombre\_entregable} & {VARCHAR(45)} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {id\_tarea\_scm} & {INT} & {NO} & {FK}  \\
+									  \cline{2-5}
+		\hline
+		\multirow{6}{*}{TAREA\_SCM\_PROYECTO} & {id\_tarea\_scm\_proyecto} & {INT} & {NO} & {PK}  \\
+									   \cline{2-5}
+									   & {id\_tarea\_scm} & {INT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {id\_proyecto} & {INT} & {NO} & {FK}  \\
+									  \cline{2-5}
+									   & {rut\_responsable} & {INT} & {NO} & {FK}  \\
+									  \cline{2-5}
+									   & {fecha\_inicio} & {DATE} & {NO} & {}  \\
+									  \cline{2-5}
+									   & {id\_termino} & {DATE} & {NO} & {}  \\
+		\hline
+
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[H]
+		\begin{tabular}{| m{5cm} | m{5.2cm} | m{2.8cm} | c | m{1cm}  |}
+		\hline
+		\rowcolor[gray]{0.9}\textbf{Entidad} & \textbf{Atributo} & \textbf{Tipo} & \textbf{Null} & \textbf{Clave}  \\
+		\hline
+		\multirow{2}{*}{ESTADO\_SOLICITUD} & {id\_estado\_solicitud\_cambio} & {TINYINT} & {NO} & {PK}  \\
+									   \cline{2-5}
+									   & {estado\_solicitud\_cambio} & {VARCHAR(45)} & {NO} & {}  \\
+									   \cline{2-5}
+       	{\_CAMBIO}						   & {descripcion} & {VARCHAR(255)} & {SI} & {}  \\		\hline
+		\multirow{17}{*}{SOLICITUD\_CAMBIO} & {id\_solicitud\_cambio} & {INT} & {NO} & {PK}  \\
+									   \cline{2-5}
+									   & {id\_proyecto} & {INT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {rut\_solicitante} & {INT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {titulo} & {VARCHAR(50)} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {fecha\_solicitud} & {DATETIME} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {descripcion\_necesidad\_cambio} & {TEXT} & {NO} & {}  \\
+									   \cline{2-5}
+									   & {id\_tipo\_prioridad} & {TINYINT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {id\_estado\_solicitud\_cambio} & {TINYINT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {id\_item\_configuracion} & {INT} & {NO} & {FK}  \\
+									   \cline{2-5}
+									   & {descripcion\_cambio} & {TEXT} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {rut\_evaluador\_impacto} & {INT} & {SI} & {FK}  \\
+									   \cline{2-5}
+									   & {fecha\_analisis} & {DATETIME} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {descripcion\_impacto\_cambio} & {TEXT} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {fecha\_cierre} & {DATETIME} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {modulo\_afectado} & {VARCHAR(60)} & {SI} & {}  \\
+									   \cline{2-5}
+									   & {rut\_evaluador\_final} & {INT} & {SI} & {FK}  \\
+									   \cline{2-5}
+									   & {descripcion\_resolucion} & {VARCHAR(255)} & {SI} & {}  \\
+		\hline
+\multirow{2}{*}{} & {id\_formulario\_implementación} & {INT} & {NO} & {PK}  \\
+									 \cline{2-5}
+									 & {observaciones} & {TEXT} & {NO} & {}  \\
+									 \cline{2-5}
+				{FORMULARIO}		 & {fecha\_verificacion} & {DATE} & {SI} & {}  \\
+\cline{2-5}
+				{\_IMPLEMENTACION}	& {rut\_verificador} & {INT} & {NO} & {FK}  \\
+									\cline{2-5}
+\multirow{2}{*}{}						& {rut\_implementador} & {INT} & {NO} & {FK}  \\
+									 \cline{2-5}
+									& {id\_solicitud\_cambio} & {INT} & {NO} & {FK}  \\
+									 \cline{2-5}
+	\hline
+									  								  
+		\end{tabular}
+	\end{table}
+	

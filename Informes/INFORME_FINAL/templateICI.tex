@@ -1,0 +1,109 @@
+\documentclass[12pt,letterpaper]{report}
+
+\marginparsep 0pt
+\textwidth 6in
+\topmargin 0pt
+\headsep .5in
+\textheight 9.2in
+\voffset = 0pt
+\hoffset = 0pt
+\marginparwidth = 0pt \oddsidemargin = 0pt \sloppy
+
+%Dimensiones de la página
+\usepackage[left=2.5cm,top=3cm,right=2.5cm,bottom=2.5cm]{geometry}
+%Sangría
+\setlength{\parindent}{1cm}
+
+%Numeracion
+\pagenumbering{arabic}
+
+\usepackage{templateICI}
+\usepackage{amsmath,amsfonts}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage[dvips]{epsfig}
+\usepackage{times}
+\usepackage[latin1]{inputenc}
+\usepackage[dvips]{graphicx}
+\usepackage[usenames]{color}
+\usepackage[spanish]{babel}
+\newcommand{\ie}{i.e.}
+\newcommand {\out}[1]{}
+\newtheorem{definicion}{Definicion}
+\usepackage[dvips]{epsfig}
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage[]{fontenc}
+\usepackage{hyperref}
+
+\usepackage{enumerate}
+\usepackage{url}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{colortbl}
+%\usepackage{slashbox}
+
+\renewcommand{\shorthandsspanish}{}
+
+\addto\captionsspanish{
+\def\listtablename{Índice de tablas}
+\def\tablename{Tabla}}
+
+\sloppy
+
+\begin{document}
+\title{\textbf{DESARROLLO DE UNA PLATAFORMA PARA LA SOLICITUD Y GESTIÓN DE REQUERIMIENTOS Y SCM}}
+\author{\textbf{Alejandro Alvarez Ahumada}}
+\principaladviser{Carlos Becerra Castro}
+\coprincipaladviser{Nombre Profesor Correferente}
+\firstreader{Nombre Profesor Informante 1}
+
+\beforepreface
+\prefacesection{Resumen}
+La Dirección de Servicios de Información y Computación (DISICO)
+de la Universidad de Valparaíso durante los últimos años ha estado 
+en constante crecimiento y en busca de mejoras que le permitan 
+brindar un mejor servicio. Aunque en este poco tiempo son muchas 
+las mejoras que se han hecho, aún quedan aspectos por mejorar, algunos 
+de estos son los procesos relacionados a las solicitudes de requerimientos y 
+solicitudes de cambios, para las cuales ya se han diseñado procedimientos y 
+metodologías, sin embargo se carece de una herramienta que permita la 
+automatización de estas. El propósito de este trabajo de título es dar solución 
+a dicho problema mediante el desarrollo de una plataforma que permita 
+automatizar los procedimientos actuales de solicitud de requerimientos y SCM. 
+Los principales resultados que se esperan son disminuir el tiempo y esfuerzo 
+invertido en la aplicación de las metodologías que existen actualmente.
+
+
+\newpage
+\prefacesection{Agradecimientos}
+Aquí pueden colocar sus agradecimientos.
+Si han estudiado con becas es recomendable colocar los agradecimientos a las instituciones que les otorgaron las becas.
+
+\afterpreface
+
+%Aqui deben incluir el fuente de cada capitulo, sin su encabezado.
+\include{Cap1_Introduccion}
+\include{Cap2_MarcoConceptual}
+\include{Cap3_DefinicionProblema}
+\include{Cap4_Analisis}
+\include{Cap5_Diseno}
+\include{Cap6_Implementacion}
+\include{Cap7_Pruebas}
+\include{Cap8_Implantacion}
+\include{Cap9_Conclusion}
+
+\bibliographystyle{ieeetr}
+\bibliography{template}
+
+\appendix
+\include{anexo1_CasosDeUsoExtendidos}
+\include{anexo2_DiccionarioDeDatos}
+\include{anexo3_CasosDeUsoReales}
+\include{anexo4_DescripcionDeLasClases}
+\include{anexo5_DescripcionDeLasPruebasDeAceptacion}
+\include{anexo6_ResultadosDeLasPruebasDeAceptacion}
+
+\end{document} 
