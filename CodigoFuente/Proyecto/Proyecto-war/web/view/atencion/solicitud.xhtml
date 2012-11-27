@@ -11,17 +11,13 @@
 
     <ui:define name="content">
         <h:outputScript library="js" name="calendar-localization.js" />
-        <f:metadata>
-            <f:viewParam id="codigo" name="codigo" value="#{mbDetalleSolicitud.codigo}" />
-            <f:event type="preRenderView" listener="#{mbDetalleSolicitud.init}" />
-        </f:metadata>
         <p:messages id="messages" showDetail="true"/>  
         <p:growl id="growlInfo" showDetail="true" sticky="false" life="12000" /> 
 
         <h:form id="detalleSol" rendered="#{mbDetalleSolicitud.solicitud != null}">
             <p:panel id="panelDetalleSolicitud" header="Detalle Solicitud" >
                 <p:menubar styleClass="menu_bar" rendered="#{p:ifAnyGranted(security.rolMenuAvanzadoSolicitud) and mbFuncionarioInfo.funcionario.area == mbDetalleSolicitud.solicitud.areaResponsable}"> 
-                    <p:menuitem value="Asignar Responsable" icon="ui-icon-pin-s" onclick="dlgAsignarSolicitud.show();" 
+                    <p:menuitem value="Asignar Responsable" icon="ui-icon-pin-s" oncomplete="dlgAsignarSolicitud.show();" actionListener="#{mbDetalleSolicitud.cargarFuncionariosArea()}" update=":form_dlg_asignarSolicitud"
                                 disabled="#{mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_ENVIADA and
                                             mbDetalleSolicitud.solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento != const.EstadoSR_TRANSFERIDA }"/>
                     <p:menuitem value="Transferir" icon="ui-icon-transferthick-e-w" onclick="dlgTranferencia.show();"
@@ -196,7 +192,7 @@
                                 <h:outputText value="#{comentario.comentario}" style="padding: 2px;"/>
 
                                 <p:commandLink id="linkEliminar" value="Eliminar" actionListener="#{mbDetalleSolicitud.eliminarComentario(comentario)}"  
-                                               styleClass="small_link" style="float: right" update="@form" rendered="#{comentario.autor.rut == mbUserInfo.funcionario.rut}" process="@this"/>
+                                               styleClass="small_link" style="float: right" update=":detalleSol:comentarioPnl" rendered="#{comentario.autor.rut == mbUserInfo.funcionario.rut}" process="@this"/>
                             </h:panelGrid>
                         </p:column>
                     </p:dataList>
@@ -206,7 +202,7 @@
             </p:panel>
         </h:form>
 
-        <h:form id="form_dlg_resp_directa" enctype="multipart/form-data">
+        <h:form id="form_dlg_resp_directa" enctype="multipart/form-data" rendered="#{mbDetalleSolicitud.solicitud != null}">
             <p:dialog id="dlg_resp_directa" header="Respuesta Directa" widgetVar="respDirecta" resizable="true" modal="true" closable="false" maximizable="true"> 
                 <h:panelGrid id="grid_resp_directa">
                     <h:panelGroup>
@@ -259,7 +255,7 @@
             </p:dialog>
         </h:form>
 
-        <h:form id="form_dlg_resp_manual">
+        <h:form id="form_dlg_resp_manual" rendered="#{mbDetalleSolicitud.solicitud != null}">
             <p:dialog id="dlg_resp_manual" header="Respuesta Manual" widgetVar="respManual" resizable="false" modal="true" closable="false">  
                 <h:panelGrid id="grid_delg_resp_m" columns="2">
                     <p:outputLabel value="Para:" for="emails" styleClass="label_blod"/>
@@ -309,7 +305,7 @@
             </p:dialog>
         </h:form>
 
-        <h:form id="form_dlg_repuesta_ja">
+        <h:form id="form_dlg_repuesta_ja" rendered="#{mbDetalleSolicitud.solicitud != null}">
             <p:dialog id="dlg_repuesta_ja" modal="true" closable="false" resizable="false" width="500" widgetVar="respJA" header="Responder al Jefe de Area">
                 <p class="label">
                     Esta opcion le permite delegar al Jefe de Area la responsabilidad de enviar una respuesta al solicitante.
@@ -326,7 +322,7 @@
             </p:dialog>
         </h:form>
 
-        <h:form id="form_dlg_transferir">
+        <h:form id="form_dlg_transferir" rendered="#{mbDetalleSolicitud.solicitud != null}">
             <p:dialog id="dlg_transferir" header="Transferir Solicitud" widgetVar="dlgTranferencia" modal="true" closable="false" resizable="false">
                 <h:panelGrid id="grid_transferir" columns="2">
                     <p:outputLabel value="Nueva Area:" for="areaDestino" styleClass="label_blod"/>
@@ -350,7 +346,7 @@
             </p:dialog>
         </h:form>
 
-        <h:form id="form_dlg_rechazar">
+        <h:form id="form_dlg_rechazar" rendered="#{mbDetalleSolicitud.solicitud != null}">
             <p:dialog id="dlg_rechazar" header="Rechazar Solicitud" widgetVar="dlgRechazar" modal="true" closable="false" resizable="false">  
                 <p:outputLabel id="lbl_editorMotivoRechazo" value="Motivo del Rechazo:" styleClass="label_blod" for="editorMotivoRechazo"/>
                 <p:editor id="editorMotivoRechazo" widgetVar="editorMotivoRechazo" width="450" height="200" value="#{mbDetalleSolicitud.motivoRechazo}" required="true"/>
@@ -366,7 +362,7 @@
             </p:dialog>
         </h:form>
 
-        <h:form id="form_dlg_convertir_proyecto">
+        <h:form id="form_dlg_convertir_proyecto" rendered="#{mbDetalleSolicitud.solicitud != null}">
             <p:dialog id="dlg_convertir_proyecto" modal="true" closable="false" resizable="false" width="500" widgetVar="convProyecto" header="Convertir Solicitud en Proyecto">
                 <p class="label">
                     Esta opcion le permite crear un nuevo proyecto a partir de esta solicitud y dar por cerrada automaticamente esta solicitud.
@@ -382,8 +378,8 @@
             </p:dialog>
         </h:form>
 
-        <h:form id="form_dlg_asignarSolicitud">
-            <p:growl id="growlAsignacion" showDetail="true" sticky="false" /> 
+        <h:form id="form_dlg_asignarSolicitud" rendered="#{mbDetalleSolicitud.solicitud != null}">
+            
             <p:dialog id="dlg_asignarSolicitud" header="Asignar Solicitud" widgetVar="dlgAsignarSolicitud" modal="true" closable="false" resizable="false" width="640">
                 <h:panelGrid columns="4" style="margin-bottom: 10px;">
                     <p:outputLabel value="Prioridad:" for="prioridadMenu" styleClass="label_blod"/>
@@ -398,7 +394,7 @@
 
                 </h:panelGrid>
 
-                <p:dataTable value="#{funcionarioDisicoController.funcionariosArea}" 
+                <p:dataTable value="#{mbDetalleSolicitud.funcionariosArea}" 
                              var="funcionario" 
                              rowKey="#{funcionario.rut}"
                              selectionMode="single"
@@ -444,7 +440,7 @@
                     </p:overlayPanel>
 
                     <h:panelGroup style="float: right;margin-top: 10px;">
-                        <p:commandButton value="Asignar" update="growlAsignacion :detalleSol:panelDetalleSolicitud" oncomplete="dlgAsignarSolicitud.hide()"
+                        <p:commandButton value="Asignar" update=":growlInfo :detalleSol:panelDetalleSolicitud" oncomplete="dlgAsignarSolicitud.hide()"
                                          actionListener="#{mbDetalleSolicitud.asignarSolicitud}" process="dlg_asignarSolicitud"/>
                         <p:commandButton value="Cancelar" onclick="dlgAsignarSolicitud.hide();"/>
                     </h:panelGroup>
