@@ -53,15 +53,12 @@ public class Funcionario implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPrimerAcceso;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "destinatario", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "destinatario", fetch = FetchType.LAZY)
     private List<Notificacion> notificaciones;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitante", fetch = FetchType.LAZY, orphanRemoval=true)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "solicitante", fetch = FetchType.LAZY, orphanRemoval=true)
     private List<SolicitudRequerimiento> solicitudesRequerimientoEnviadas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "autor", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "autor", fetch = FetchType.LAZY)
     private List<ComentarioSolicitud> comentarioSolicitudList;
-    
-    @Transient
-    private String rol;
 
     public Funcionario() {
     }
@@ -155,14 +152,6 @@ public class Funcionario implements Serializable {
 
     public void setComentarioSolicitudList(List<ComentarioSolicitud> comentarioSolicitudList) {
         this.comentarioSolicitudList = comentarioSolicitudList;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
     }
 
     public String getNombreCompleto(){
