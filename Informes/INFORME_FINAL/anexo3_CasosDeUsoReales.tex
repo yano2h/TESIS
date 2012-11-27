@@ -1,0 +1,1428 @@
+\chapter{Casos de Uso Reales}
+\label{anexo3}
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Crear Solicitud de Requerimiento.}\\
+		\hline
+		{\textbf{Actores}} & {Solicitante.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al solicitante el enviar
+		solicitudes de requerimientos a algún área de DISICO.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario
+		desea enviar alguna solicitud de requerimiento a cualquiera de las áreas
+		de DISICO, esto se hace ingresando la información de la solicitud y el 
+		área a la que esta va dirigida.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario selecciona la opción Nueva Solicitud (campo A Figura \ref{CrearSolicitud}).} & {}\\
+		{} & {2. El sistema despliega un formulario para el ingreso de los datos requeridos (seccion B de la Figura \ref{CrearSolicitud}).}\\
+		{3. El usuario completa la información de la solicitud.} & {}\\
+		{4. El usuario selecciona el Área a la que desea dirigir su solicitud.} & {}\\
+		{5. El usuario envía la solicitud (campo C Figura \ref{CrearSolicitud}).} & {}\\
+		{} & {6. El sistema registra la solicitud.}\\
+		{} & {7. El sistema envía un correo electrónico al usuario con el numero de su solicitud.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la solicitud (campo D Figura \ref{CrearSolicitud}).} & {}\\
+		{} & {6. El sistema vuelve al menú principal (Figura \ref{resumen}).}\\
+		\hline
+	\end{tabular}
+	\caption{Caso de Uso Real de Crear Solicitud de Requerimiento}
+	\end{table}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.45]{imagenes/CUR/S_NuevaSolicitud.png}
+			\caption{Interfaz Crear Nueva Solicitud}
+			\label{CrearSolicitud}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.45]{imagenes/CUR/S_Resumen.png}
+			\caption{Interfaz Menú de Inicio}
+			\label{resumen}
+		\end{center}
+	\end{figure}
+	
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Consultar Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Solicitante.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir a un usuario consultar una solicitud a través de 
+		un numero de consulta.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario desea 
+		consultar el estado de una solicitud, esto puede hacerlo a través del numero de consulta de 
+		la solicitud, lo que le permitirá ver la solicitud aunque esta no haya sido enviada por el,
+		o por fecha o asunto lo que le permitirá encontrar solo solicitudes enviadas por el mismo.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa la opción Consultar Solicitud (botón A de la Figura \ref{consultarSol}).} & {} \\
+		{} & {2. El sistema despliega una lista con todas las solicitudes del usuario
+		ordenadas por fecha de la mas reciente a la menos reciente (sección B Figura \ref{consultarSol}).} \\
+		{3. El usuario tiene las siguientes opciones:} & {}\\
+		{a. Ingresar un filtro de búsqueda: \textit{Ver sección Filtrar Búsqueda}} & {}\\
+		{b. Consultar a través del numero de consulta: \textit{Ver sección Consultar 
+		a través de numero de consulta.}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Consultar Solicitud.}
+	\end{table}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.46]{imagenes/CUR/S_ConsultarSolicitud.png}
+			\caption{Interfaz Consultar Solicitud}
+			\label{consultarSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Filtrar Búsqueda}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa los filtros de búsqueda (campos A Figura \ref{filtrarSol}).} & {}\\
+		{} & {2. El sistema actualiza la lista de solicitudes desplegadas, mostrando solo las
+		que coinciden con los filtros (sección B).}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.46]{imagenes/CUR/S_FiltrarSolicitud.png}
+			\caption{Interfaz Filtrar Solicitudes}
+			\label{filtrarSol}
+		\end{center}
+	\end{figure}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Consultar a través de numero de consulta}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa el numero de consulta (campo A de la Figura \ref{numConsulta}) y selecciona la opción consultar (campo B de la Figura \ref{numConsulta}).} & {}\\
+		{} & {2. El sistema encuentra la solicitud.}\\
+		{} & {3. El sistema despliega la información de la solicitud (Figura \ref{detSol}).}\\
+		{4. El usuario tiene la opción Comentar Solicitud (campo A Figura \ref{detSol}): \textit{Consultar caso de uso Comentar Solicitud.}} & {}\\		
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {2. El sistema no encuentra la solicitud.}\\
+		{} & {3. El sistema despliega un mensaje indicando que no se encontró la solicitud (Figura \ref{noEncontrada}) .}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.448]{imagenes/CUR/S_NumConsulta.png}
+			\caption{Interfaz Consultar Solicitud}
+			\label{numConsulta}
+		\end{center}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.448]{imagenes/CUR/S_DetalleSolicitud.png}
+			\caption{Interfaz Detalle Solicitud}
+			\label{detSol}
+		\end{center}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/S_SolicitudNoEncontrada.png}
+			\caption{Interfaz Solicitud no encontrada}
+			\label{noEncontrada}
+		\end{center}
+	\end{figure}
+	
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Comentar Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Solicitante, Jefe de Área, Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Añadir información, preguntas y respuestas a la solicitud.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario 
+		visualiza una solicitud y  selecciona la opción comentar y agrega un comentario.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge una solicitud y la opción Comentar Solicitud  (campo A Figura \ref{detSol}).} & {}\\
+		{} & {2. El sistema despliega el campo para el ingreso de texto (campo A Figura \ref{comSolicitud}).}\\
+		{3. El usuario ingresa su comentario y lo enviá (campo B Figura \ref{comSolicitud}).} & {}\\
+		{} & {4. El sistema registra el comentario.}\\
+		{} & {5. El sistema notifica a los involucrados.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{3. El usuario cancela la acción (campo C Figura \ref{comSolicitud}).} & {}\\
+		{} & {4. El sistema oculta el campo de texto.}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Comentar Solicitud.}
+	\end{table}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/S_ComentarSolicitud.png}
+			\caption{Interfaz de Comentar Solicitud}
+			\label{comSolicitud}
+		\end{center}
+	\end{figure}
+
+	
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Gestionar Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al Jefe de área gestionar una solicitud que 
+		ha sido enviada a su área.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea 
+		indicar que se debe hacer con una solicitud que ha sido enviada a su área, 
+		para lo cual debe seleccionarla e indicar una opciones de gestión de solicitud, 
+		permitiendo Asignar, Transferir, Rechazar, Convertir en Proyecto, Comentar, Responder.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario selecciona una solicitud (campo A Figura \ref{gestSolicitud}).} & {}\\
+		{} & {2. El sistema muestra el detalle de la solicitud.}\\
+		{3. El usuario tiene las siguientes opciones:} & {}\\
+		{a. Asignar Responsable (campo A Figura \ref{detSolJa}):  \textit{Ver sección Asignar Responsable Solicitud} } & {}\\
+		{b. Transferir Solicitud (campo B Figura \ref{detSolJa}): \textit{Ver sección Transferir Solicitud} } & {}\\
+		{c. Rechazar (campo C Figura \ref{detSolJa}):  \textit{Ver sección Rechazar Solicitud} } & {}\\
+		{d. Convertir en proyecto (campo D Figura \ref{detSolJa}):  \textit{Ver sección Convertir Solicitud en Proyecto} } & {}\\
+		{e. Comentar (campo E Figura \ref{detSolJa}):  \textit{Ver Caso de Uso Comentar Solicitud} } & {}\\
+		{f. Respuesta Directa (campo F Figura \ref{detSolJa}):  \textit{Ver Caso de Uso Enviar Respuesta Directa.} } & {}\\
+		{g. Respuesta Manual (campo G Figura \ref{detSolJa}):  \textit{Ver sección Enviar Respuesta Manual} } & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Gestionar Solicitud.}
+	\end{table}
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.43]{imagenes/CUR/R_GestionarSolicitud.png}
+			\caption{Interfaz de Gestionar Solicitud}
+			\label{gestSolicitud}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/CUR/R_DetalleSolicitudJA.png}
+			\caption{Interfaz de Detalle Solicitud del Jefe de Área}
+			\label{detSolJa}
+		\end{center}
+	\end{figure}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Asignar Responsable Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Asignar Responsable (campo A Figura \ref{detSolJa})} & {}\\
+		{} & {2. El sistema despliega un menú de selección, con el nombre de
+		todos los miembros del Área (Figura \ref{asigSol}).}\\
+		{3. El usuario selecciona un responsable dentro de la lista (campo A Figura \ref{asigSol}).} & {}\\
+		{4. El usuario presiona confirmar (campo B Figura \ref{asigSol}).} & {}\\
+		{} & {5. El sistema registra la actualización y cambia el estado de la 
+		solicitud a asignada.}\\
+		{} & {6. El sistema muestra una notificación en la pantalla del responsable.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{4. El usuario presiona cancelar (campo C Figura \ref{asigSol}), se vuelve al paso 3.} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.56]{imagenes/CUR/R_AsignarResponsable.png}
+			\caption{Interfaz Asignar Responsable Solicitud}
+			\label{asigSol}
+		\end{center}
+	\end{figure}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Transferir Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Transferir Solicitud (campo B Figura \ref{detSolJa})} & {}\\
+		{} & {2. El sistema despliega una lista con el nombre de todas las Áreas, 
+		del departamento exceptuando el Área actual.}\\
+		{3. El usuario selecciona un área  (campo A Figura \ref{transSol})} & {}\\
+		{} & {4. El sistema solicita ingresar el motivo de la transferencia.}\\
+		{5. El usuario ingresa el motivo de la transferencia  (campo B Figura \ref{transSol}) y confirma la acción  (campo C Figura \ref{transSol})} & {}\\
+		{} & {6. El sistema registra la transferencia y muestra notificación en el
+		perfil del Jefe de Área al cual se transfirió la solicitud.}\\
+		{} & {7. El sistema vuelve a la pantalla principal.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. Cancelar acción  (campo D Figura \ref{transSol}).} & {}\\
+		{} & {6. El sistema regresa al paso 2.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_TransferirSolicitud.png}
+			\caption{Interfaz Transferir Solicitud}
+			\label{transSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Rechazar Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario selecciona la opción rechazar solicitud  (campo C Figura \ref{detSolJa}).} & {}\\
+		{} & {2. El sistema solicita el ingreso del motivo del rechazo.}\\
+		{3. El usuario ingresa el motivo del rechazo  (campo A Figura \ref{rechSol}) y confirma la acción  (campo B Figura \ref{rechSol}).} & {}\\
+		{} & {4. El sistema registra el motivo del rechazo y cambia el estado de la solicitud 
+		a rechazada.}\\
+		{} & {5. El sistema enviá un correo electrónico al solicitante indicando el motivo
+		por el cual su solicitud fue rechazada.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{3. El usuario cancela la acción  (campo C Figura \ref{rechSol}).} & {}\\
+		{} & {4. El sistema vuelve al paso 2 del Caso de Uso Gestionar Solicitud. }\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/R_RechazarSolicitud.png}
+			\caption{Interfaz Rechazar Solicitud}
+			\label{rechSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Convertir Solicitud en Proyecto}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción  Convertir en Proyecto  (campo D Figura \ref{detSolJa})} & {}\\
+		{} & {2. El sistema solicitara confirmación.}\\
+		{3. El usuario confirma la acción  (campo A Figura \ref{convSol})} & {}\\
+		{} & {4. El sistema modifica el estado de la solicitud a 
+		convertida en proyecto.}\\
+		{} & {5. El sistema da inicio al caso de uso Crear Proyecto}\\ 
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{3. El usuario cancela la acción  (campo B Figura \ref{convSol}).} & {}\\
+		{} & {4. El sistema vuelve al paso 2 del Caso de Uso Gestionar Solicitud. }\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.5]{imagenes/CUR/R_ConvertirEnProyecto.png}
+			\caption{Interfaz Convertir Solicitud en Proyecto}
+			\label{convSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Enviar Respuesta Manual}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario selecciona la opción de Respuesta Manual  (campo G Figura \ref{detSolJa}).} & {}\\
+		{} & {2. El sistema solicita el ingreso de la dirección de correo
+		de las personas a las que deberá ser respondida la solicitud.}\\
+		{3. El usuario ingresa las direcciones de correo  (campo A Figura \ref{resManual}).} & {}\\
+		{} & {4. El sistema solicita el ingreso del contenido del correo.}\\
+		{5. El usuario ingresa el contenido del correo  (campos B y C Figura \ref{resManual}) y confirma el envío  (campo D Figura \ref{resManual}).} & {}\\
+		{} & {6. El sistema envía el correo a los destinatarios especificados.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la acción  (campo E Figura \ref{resManual})} & {}\\
+		{} & {6. El sistema vuelve al paso 2 del Caso de Uso Gestionar Solicitud.} \\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_RespuestaManual.png}
+			\caption{Interfaz Enviar Respuesta Manual}
+			\label{resManual}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Respuesta Directa.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO, Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Enviar la respuesta de una solicitud directamente al solicitante.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea responder directamente
+		una solicitud, para lo cual ingresa un mensaje que sera enviado por correo electrónico al solicitante.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción respuesta directa  (campo F Figura \ref{detSolJa}).} & {}\\
+		{} & {2. El sistema solicita ingresar un mensaje de respuesta.}\\
+		{3. El usuario ingresa el mensaje  (campo A Figura \ref{resDirecta}).} & {}\\
+		{} & {4. El sistema solicita confirmación.} \\
+		{5. El usuario confirma la acción  (campo B Figura \ref{resDirecta}).} & {} \\
+		{} & {6. El sistema enviá el mensaje al correo electrónico del solicitante 
+		y cambia el estado de la solicitud a Finalizada.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la acción  (campo C Figura \ref{resDirecta}).} & {}\\
+		{} & {6. El sistema vuelve a mostrar la solicitud.}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Respuesta Directa}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_RespuestaDirecta.png}
+			\caption{Interfaz de Respuesta Directa}
+			\label{resDirecta}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Buscar Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área, Jefe de Departamento.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir a un usuario encontrar una solicitud.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario desea 
+		consultar una solicitud sin importar el autor o área, esto puede realizarse
+		filtrando por numero de consulta, estado, fecha, asunto, solicitante, responsable,
+		área.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa la opción Buscar Solicitud  (campo A Figura \ref{buscSol}).} & {} \\
+		{} & {2. El sistema despliega una lista con todas las solicitudes existentes
+		ordenadas por fecha de la mas reciente a la menos reciente  (sección B Figura \ref{buscSol}).} \\
+		{3. El usuario ingresa los filtros de búsqueda  (campos C Figura \ref{buscSol}).} & {}\\
+		{} & {4. El sistema actualiza la lista de solicitudes desplegadas, mostrando solo las
+		que coinciden con los filtros.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Buscar Solicitud.}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_BuscarSolicitud.png}
+			\caption{Interfaz Buscar Solicitud}
+			\label{buscSol}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Ver Resumen Personal.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al usuario ver un resumen con indicadores
+		y gráficos sobre todas las solicitudes que le han sido asignadas.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un funcionario desea ver
+		indicadores y gráficos que resumen todas las solicitudes que alguna ves le fueron asignadas,
+		para esto el sistema recupera todas las solicitudes del usuario y calcula los indicadores
+		y se construyen los gráficos para ser mostrados al usuario.}\\
+		\hline
+		{\textbf{Tipo}} & {Opcional.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción  Ver Resumen Personal (campo A y luego B Figura \ref{resPersonal}). } & {}\\
+		{} & {2. El sistema recupera todas las solicitudes alguna ves e fueron asignadas.}\\
+		{} & {3. Se calculan los indicadores correspondientes.}\\
+		{} & {4. El sistema muestra los indicadores (sección C Figura \ref{resPersonal})  y los gráficos (sección D Figura \ref{resPersonal}) .}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Ver Resumen Personal}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_ResumenPersonal.png}
+			\caption{Interfaz Ver Resumen Personal}
+			\label{resPersonal}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Ver Resumen Área.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al usuario ver un resumen con indicadores
+		y gráficos sobre todas las solicitudes que le han sido asignadas a algún funcionario 
+		del área o en general de toda el área.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea ver indicadores
+		y gráficos sobre las solicitudes del área o por funcionario del área, para lo cual
+		el usuario indica si desea ver el resumen completo del área o filtrando por persona.}\\
+		\hline
+		{\textbf{Tipo}} & {Opcional.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Ver Resumen Área (campo A y luego B Figura \ref{resArea}).} & {}\\
+		{} & {2. El sistema solicita escoger el tipo de resumen (campo C Figura \ref{resArea}).}\\
+		{3. El usuario escoge el tipo de resumen} & {}\\
+		{} & {4. El sistema recupera las solicitudes correspondientes y calcula los indicadores.}\\
+		{} & {5. El sistema muestra los indicadores (sección D Figura \ref{resArea}) y los gráficos (sección E Figura \ref{resArea}).}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Ver Resumen Área}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_ResumenArea.png}
+			\caption{Interfaz Ver Resumen Área}
+			\label{resArea}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso }} & {Ver Resumen Departamento.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Departamento.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al usuario ver un resumen con indicadores
+		y gráficos sobre todas las solicitudes que le han sido asignadas a algún funcionario, 
+		a un área o en general de todo el departamento.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea ver indicadores
+		y gráficos sobre las solicitudes del departamento, por área o por funcionario, para lo cual
+		el usuario indica el tipo de resumen que desea ver, y el sistema calcula y muestra los gráficos
+		e indicadores correspondientes.}\\
+		\hline
+		{\textbf{Tipo}} & {Opcional.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Ver Resumen Departamento (campo A y luego B Figura \ref{resDepto})} & {}\\
+		{} & {2. El sistema solicita escoger el tipo de resumen (campo C Figura \ref{resDepto}).}\\
+		{3. El usuario escoge el tipo de resumen} & {}\\
+		{} & {4. El sistema recupera las solicitudes correspondientes y calcula los indicadores.}\\
+		{} & {5. El sistema muestra los indicadores (campo D Figura \ref{resDepto}) y los gráficos (campo E Figura \ref{resDepto}).}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Ver Resumen Departamento}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.62]{imagenes/CUR/R_ResumenDepartamento.png}
+			\caption{Interfaz Ver Resumen Departamento}
+			\label{resDepto}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Atender Solicitud.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al usuario atender una solicitud que
+		le ha sido asignada.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario
+		desea atender una solicitud que le fue asignada, para lo cual debe 
+		indicar una opción de atención de solicitud, Iniciar, Finalizar, Comentar.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge una solicitud (campo A Figura \ref{misSol}).} & {}\\
+		{} & {2. El sistema muestra el detalle de la solicitud (Figura \ref{atenSol}).}\\
+		{3. El usuario tiene las siguientes opciones.} & {}\\
+		{a. Iniciar (campo A Figura \ref{atenSol}): \textit{Ver sección Iniciar Solicitud}} & {}\\
+		{b. Comentar (campo B Figura \ref{atenSol}): \textit{Ver caso de uso Comentar Solicitud}} & {}\\
+		{c. Cerrar (campo C Figura \ref{atenSol}): \textit{Ver sección Cerrar Solicitud}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Atender Solicitud}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/R_ListarSolicitudes.png}
+			\caption{Interfaz de Mis Solicitud}
+			\label{misSol}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/R_AtenderSolicitud.png}
+			\caption{Interfaz Atender Solicitud}
+			\label{atenSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Iniciar Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Iniciar (campo A Figura \ref{atenSol}).} & {}\\
+		{} & {2. El sistema cambia el estado de la solicitud a Iniciada.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Cerrar Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción cerrar solicitud (campo C Figura \ref{atenSol}).} & {}\\
+		{} & {2. El sistema solicita seleccionar un tipo de respuesta}\\
+		{3. El usuario escoge tipo de respuesta:} & {}\\
+		{a. Respuesta Directa (campo A Figura \ref{cerrarSol}): \textit{Ver Caso de Uso Respuesta Directa}} & {}\\
+		{b. Respuesta al Jefe de Área (campo B Figura \ref{cerrarSol}): \textit{Ver sección Respuesta al Jefe de Área}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.52]{imagenes/CUR/R_CerrarSolicitud.png}
+			\caption{Interfaz Cerrar Solicitud}
+			\label{cerrarSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Respuesta al Jefe de Área}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Respuesta la Jefe de Área (campo A Figura \ref{cerrarSol}).} & {}\\
+		{} & {2. El sistema solicita confirmación.} \\
+		{3. El usuario confirma la acción (campo A Figura \ref{resJa}).} & {} \\
+		{} & {4. El sistema cambia el estado de la solicitud a Finalizada y notifica al jefe de área
+		que es el quien debe responder la solicitud.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{3. El usuario cancela la acción (campo B Figura \ref{resJa}).} & {}\\
+		{} & {4. El sistema vuelve a mostrar la solicitud.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.53]{imagenes/CUR/R_RespuestaJA.png}
+			\caption{Interfaz de Respuesta al Jefe de Área}
+			\label{resJa}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Gestionar Proyectos.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir al jefe de área gestionar los proyectos que se 
+		manejan dentro del área.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el jefe de área desea escoger una
+		una acción que le permita gestionar los proyectos de su área, para lo cual el sistema le 
+		muestra una lista con los proyectos, donde puede escoger alguna opción de gestión.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción gestionar Proyectos (campo A Figura \ref{gestPro})} & {}\\
+		{} & {2. El sistema despliega una lista con todos los proyectos}\\
+		{3. El usuario puede escoger entre:} & {}\\
+		{a. Crear Proyecto (campo B Figura \ref{gestPro}): \textit{Ver caso se uso Crear Proyecto}} & {}\\
+		{b. Eliminar Proyecto (campo C Figura \ref{gestPro}): \textit{Ver sección Eliminar Proyecto}} & {}\\
+		{c. Modificar Proyecto (campo D Figura \ref{gestPro}): \textit{Ver sección Modificar Proyecto}} & {}\\
+		{d. Ver Resumen Avance (campo E Figura \ref{gestPro}): \textit{Ver sección Ver Resumen Avance Proyecto}} & {}\\
+		{e. Buscar Proyecto (campo F Figura \ref{gestPro}): \textit{Ver caso se uso Buscar Proyecto}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Gestionar Proyectos}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.61]{imagenes/CUR/P_GestionProyectos.png}
+			\caption{Interfaz Gestionar Proyectos}
+			\label{gestPro}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Crear Proyecto.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Crear un nuevo proyecto junto con la definición de sus
+		involucrados.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso puede comenzar por que el usuario a escogido
+		la opción Crear Proyecto o Convertir Solicitud en Proyecto, donde el usuario ingresa la
+		información del proyecto y define a lo menos el Jefe de Proyecto de Proyecto.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Crear Proyecto (campo A Figura \ref{crearPro}) o Convertir Solicitud en Proyecto} & {}\\
+		{} & {2. El sistema solicita la información del proyecto.}\\
+		{3. El usuario ingresa los datos del proyecto (sección B Figura \ref{crearPro}).} & {}\\
+		{} & {4. El sistema solicita el nombre del jefe de proyecto.}\\
+		{5. El usuario ingresa el nombre del jefe de proyecto (campo C Figura \ref{crearPro})} & {}\\
+		{} & {6. El sistema solicita el ingreso de otros involucrados en el Proyecto.}\\
+		{7. El usuario ingresa el nombre del resto de los involucrados en el proyecto (sección D Figura \ref{crearPro}).} & {}\\
+		{} & {8. El sistema solicita confirmación.}\\
+		{9. El usuario confirma la acción (campo E Figura \ref{crearPro}).} & {}\\
+		{} & {10. El sistema registra la información del proyecto.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{7. El usuario omite este paso.} & {}\\
+		\hline
+		{9. El usuario cancela la acción (campo F Figura \ref{crearPro}).} & {}\\
+		{} & {10. El sistema regresa al caso de uso Gestionar Proyecto.}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Crear Proyecto}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/P_CrearProyecto.png}
+			\caption{Interfaz Crear Proyecto}
+			\label{crearPro}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Buscar Proyecto.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área, Funcionario.}\\
+		\hline
+		{\textbf{Propósito}} & {Permitir a un usuario encontrar un proyecto.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un usuario desea 
+		consultar un Proyecto sin importar el autor o área, esto puede realizarse
+		filtrando por nombre, estado, fecha, responsable, área.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario ingresa la opción Buscar Proyecto (campo A Figura \ref{buscPro}).} & {} \\
+		{} & {2. El sistema despliega una lista con todos los proyectos
+		ordenados por fecha del mas reciente al menos reciente (sección D Figura \ref{buscPro}).} \\
+		{3. El usuario ingresa los filtros de búsqueda (sección B Figura \ref{buscPro}) y confirma (campo C Figura \ref{buscPro}).} & {}\\
+		{} & {4. El sistema actualiza la lista de proyectos desplegados, mostrando solo las
+		que coinciden con los filtros (sección D Figura \ref{buscPro}).}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Buscar Proyecto.}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.46]{imagenes/CUR/P_BuscarProyecto.png}
+			\caption{Interfaz Buscar Proyecto}
+			\label{buscPro}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Eliminar Proyecto.}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge un proyecto.} & {}\\
+		{} & {2. El sistema muestra el detalle del proyecto (Figura \ref{detPro}).}\\
+		{3. El usuario escoge la opción Eliminar Proyecto (campo B Figura \ref{detPro}).} & {}\\
+		{} & {4. El sistema solicita la confirmación de la acción.}\\
+		{5. El usuario confirma (campo A Figura \ref{elimPro}).} & {}\\
+		{} & {6. El sistema elimina la información del proyecto.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la acción (campo B Figura \ref{elimPro}).} & {}\\
+		{} & {6. El sistema regresa al caso de uso Gestionar Proyecto.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.39]{imagenes/CUR/P_DetalleProyecto.png}
+			\caption{Interfaz Detalle Proyecto}
+			\label{detPro}
+		\end{center}
+	\end{figure}	
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.41]{imagenes/CUR/P_EliminarProyecto.png}
+			\caption{Interfaz Eliminar Proyecto}
+			\label{elimPro}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Modificar Proyecto}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge un proyecto.} & {}\\
+		{} & {2. El sistema muestra el detalle del proyecto (Figura \ref{detPro}).}\\
+		{3. El usuario escoge la opción Modificar Proyecto (campo A Figura \ref{detPro}).} & {}\\
+		{} & {4. El sistema solicita el ingreso de modificaciones.}\\
+		{5. El usuario ingresa las modificación e los datos del proyecto (sección A Figura \ref{editPro}) y confirma los cambios (campo B Figura \ref{editPro}).} & {}\\
+		{} & {6. El sistema registra los cambios.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la acción (campo C Figura \ref{editPro}).} & {}\\
+		{} & {6. El sistema regresa al caso de uso Gestionar Proyecto.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.5]{imagenes/CUR/P_EditarProyecto.png}
+			\caption{Interfaz Modificar Proyecto}
+			\label{editPro}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Ver Resumen Avance Proyecto.}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge un proyecto.} & {}\\
+		{} & {2. El sistema muestra el detalle del proyecto.}\\
+		{3. El usuario la opción Ver Resumen Avance (campo C Figura \ref{detPro}).} & {}\\
+		{} & {4. El sistema muestra el detalle de todas las actividades del proyecto y su estado (Figura \ref{resAvance}).}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/P_ResumenAvance.png}
+			\caption{Interfaz Resumen Avance Proyecto}
+			\label{resAvance}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Definir Tareas SCM.}\\
+		\hline
+		{\textbf{Actores}} & {Jefe de Área.}\\
+		\hline
+		{\textbf{Propósito}} & {Definir responsables para las tareas de SCM de un proyecto.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando el usuario desea definir responsables para
+		las tareas de SCM, el sistema despliega la lista de tareas de SCM y el usuario define el responsable de
+		cada una.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Definir Tareas SCM (campo A Figura \ref{defTareasSCM}} & {}\\
+		{} & {2. El sistema muestra la lista de proyectos (sección B Figura \ref{defTareasSCM}.}\\
+		{3. El usuario escoge un proyecto} & {}\\
+		{} & {4. El sistema despliega la lista de tareas de SCM.}\\
+		{5. El usuario ingresa el responsable para cada una (campo A Figura \ref{asigTareasSCM}.} & {}\\
+		{} & {6. El sistema solicita confirmación de los cambios.}\\
+		{7. El usuario ingresa confirmación (campo B Figura \ref{asigTareasSCM}.} & {}\\
+		{} & {8. El sistema registra los cambios.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{7. El usuario cancela los cambios (campo C Figura \ref{asigTareasSCM}.} & {}\\
+		{} & {8. El sistema regresa a la pantalla de inicio.}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Definir Tareas SCM}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_TareasSCM.png}
+			\caption{Interfaz Definir Tareas SCM}
+			\label{defTareasSCM}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_DefinirTareasSCM.png}
+			\caption{Interfaz Asignar Tareas SCM}
+			\label{asigTareasSCM}
+		\end{center}
+	\end{figure}	
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Gestionar Tareas Proyecto.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Gestionar las Tareas de un Proyecto.}\\
+		\hline
+		{\textbf{Resumen}} & {Este caso de uso comienza cuando un
+		usuario desea gestionar sus tareas en un proyecto, esto le permite
+		crear nuevas tareas, eliminar tareas y actualizar el estado de avance de las mismas.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Gestionar Tareas del Proyecto (campo A Figura \ref{gestTareasPro}} & {}\\
+		{} & {2. El sistema despliega la lista de tareas del proyecto (sección B Figura \ref{gestTareasPro}.}\\
+		{3. El usuario escoge entre:} & {}\\
+		{a. Crear Tarea (campo C Figura \ref{gestTareasPro}: \textit{Ver sección Crear Tarea}} & {}\\
+		{b. Eliminar Tarea (campo D Figura \ref{gestTareasPro}: \textit{Ver sección Eliminar Tarea}} & {}\\
+		{c. Actualizar Estado de Avance (campo E Figura \ref{gestTareasPro}: \textit{Ver sección Actualizar estado de avance}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Gestionar Tareas Proyecto}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/P_GestionarTareas.png}
+			\caption{Interfaz Gestionar Tareas Proyecto}
+			\label{gestTareasPro}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Crear Tarea}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Crear Tarea  (campo C Figura \ref{gestTareasPro}.} & {}\\
+		{} & {2. El sistema solicita el ingreso de la información de la tarea.}\\
+		{3. El usuario ingresa la tarea  (sección A Figura \ref{crearTarea}.} & {}\\
+		{} & {4. El sistema solicita confirmación.}\\
+		{5. El usuario confirma  (campo B Figura \ref{crearTarea}.} & {}\\
+		{} & {6. El sistema registra la tarea.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{6. El usuario cancela la acción  (campo C Figura \ref{crearTarea}.} & {}\\
+		{} & {7. El sistema regresa al caso de uso Gestionar Tareas Proyecto.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.55]{imagenes/CUR/P_NuevaTarea.png}
+			\caption{Interfaz Crear Tarea}
+			\label{crearTarea}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Eliminar Tarea}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge una Tarea  (sección B Figura \ref{gestTareasPro}.} & {}\\
+		%{} & {2. El sistema muestra el detalle de la tarea.}\\
+		{2. El usuario escoge la opción Eliminar Tarea  (campo D Figura \ref{gestTareasPro}.} & {}\\
+		{} & {3. El sistema solicita confirmación.}\\
+		{4. El usuario confirma la acción  (campo A Figura \ref{delTarea}.} & {}\\
+		{} & {6. El sistema elimina la tarea.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{4. El usuario cancela la acción  (campo B Figura \ref{delTarea}.} & {}\\
+		{} & {5. El sistema regresa al paso 2.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.55]{imagenes/CUR/P_EliminarTarea.png}
+			\caption{Interfaz Eliminar Tarea}
+			\label{delTarea}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Actualizar estado de avance}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge una Tarea .} & {}\\
+		%{} & {2. El sistema muestra el detalle de la tarea  (Figura \ref{upAvance}.}\\
+		{2. El usuario escoge la opción Actualizar estado de avance (campo E Figura \ref{gestTareasPro}).} & {}\\
+		{} & {3. El sistema solicita que ingrese el nivel de avance de la tarea.}\\
+		{4. El usuario ingresa el nivel de avance (campo A Figura \ref{upAvance}) y confirma el cambió (campo B Figura \ref{upAvance}).} & {}\\
+		{} & {5. El sistema valida que el nivel de avance sea mayor al actual.}\\
+		{} & {6. El sistema registra el nuevo nivel de avance.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {5. El nivel de avance es erróneo (campo A Figura \ref{errorAvance}).}\\
+		{} & {6. El sistema despliega un mensaje indicando el error.}\\
+		\hline
+		{4. El usuario cancela la acción (campo C Figura \ref{upAvance})} & {}\\
+		{} & {5. El sistema vuelve al menú de gestión de tareas}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.52]{imagenes/CUR/P_ActualizarAvance.png}
+			\caption{Interfaz Actualizar estado de avance Tarea}
+			\label{upAvance}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.52]{imagenes/CUR/P_ActualizarAvanceError.png}
+			\caption{Interfaz Error al Actualizar estado de avance Tarea}
+			\label{errorAvance}
+		\end{center}
+	\end{figure}
+
+	\begin{table}[H]
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		{\textbf{Nombre Caso de Uso}} & {Gestión de Cambios.}\\
+		\hline
+		{\textbf{Actores}} & {Funcionario DISICO.}\\
+		\hline
+		{\textbf{Propósito}} & {Que los usuarios puedan llevar a cabo 
+		cualquiera de las tareas de SCM.}\\
+		\hline
+		{\textbf{Resumen}} & {El usuario selecciona esta opción y el sistema muestra la 
+		lista de opciones disponibles de gestión de cambio en cada proyecto.}\\
+		\hline
+		{\textbf{Tipo}} & {Esencial.}\\
+		\hline
+		{\textbf{Referencias Cruzadas}} & {.}\\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Gestión de Cambios (campo A Figura \ref{gestCamb}).} & {}\\
+		{} & {2. El sistema solicita escoger una opción.}\\
+		{3. El usuario escoge una de las siguientes opciones:} & {}\\
+		{a. Identificación de Configuración (campo E Figura \ref{gestCamb}): \textit{Ver sección Identificar Configuración}} & {}\\
+		{b. Crear Solicitud de Cambio (campo B Figura \ref{gestCamb}): \textit{Ver sección Crear Solicitud de Cambio}} & {}\\
+		{c. Aprobar/Rechazar Solicitud (campo D Figura \ref{gestCamb}): \textit{Ver sección Aprobar/Rechazar Solicitud}} & {}\\
+		{d. Análisis de Impacto (campo C Figura \ref{gestCamb}): \textit{Ver sección Analizar Impacto del Cambio} } & {}\\
+		{e. Implementación de Cambio (campo F Figura \ref{gestCamb}): \text{Ver sección Implementación del Cambio}} & {}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{} & {}\\
+		\hline
+	\end{tabular}
+		\caption{Caso de Uso Real Gestión de Cambios}
+	\end{table}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_GestionCambios.png}
+			\caption{Interfaz de Gestión de Cambios}
+			\label{gestCamb}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Identificar Configuración}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Identificación de Configuración (campo E Figura \ref{gestCamb}).} & {}\\
+		{} & {2. El sistema despliega la lista de Proyectos en los que el usuario tiene permitido
+		realizar esta tarea (sección A Figura \ref{identIC}).}\\
+		{3. El usuario escoge un proyecto.} & {}\\
+		{} & {4. El sistema solicita el ingreso de nuevos items de configuración.}\\
+		{5. El usuario ingresa la información de los nuevos items de configuración (sección A Figura \ref{addIC}).} & {} \\
+		{} & {6. El sistema solicita confirmación.}\\
+		{7. El usuario confirma los cambios (campo B Figura \ref{addIC}).} & {}\\
+		{} & {8. El sistema registra los nuevos items de configuración}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{7. El usuario cancela la acción (campo C Figura \ref{addIC}).} & {}\\
+		{} & {8. El sistema regresa al Caso de uso Gestión de Cambio}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/CUR/SCM_IdentificacionConfiguracion.png}
+			\caption{Interfaz de Identificación de la Configuración}
+			\label{identIC}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/CUR/SCM_AgregarIC.png}
+			\caption{Interfaz para agregar Item de Configuración}
+			\label{addIC}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Crear Solicitud de Cambio}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Crear Solicitud (campo A Figura \ref{newSol}).} & {}\\
+		{} & {2. El sistema solicita el ingreso de los datos de la solicitud.}\\
+		{3. El usuario ingresa los datos de la solicitud (sección B Figura \ref{newSol}).} & {}\\
+		{} & {4. El sistema solicita confirmación.}\\
+		{5. El usuario confirma la acción (campo C Figura \ref{newSol}).} & {}\\
+		{} & {6. El sistema registra la solicitud y notifica al encargado de analizar la solicitud.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la acción (campo B Figura \ref{newSol}).} & {}\\
+		{} & {6. El sistema regresa al Caso de uso Gestión de Cambio}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.44]{imagenes/CUR/SCM_CrearSolicitudDeCambio.png}
+			\caption{Interfaz Crear Solicitud de Cambio}
+			\label{newSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Analizar Impacto del Cambio}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Análisis de Impacto (campo A Figura \ref{anImpacto}).} & {}\\
+		{} & {2. El sistema despliega lista de solicitudes que el usuario debe analisar (sección B Figura \ref{anImpacto}).}\\
+		{3. El usuario escoge solicitud.} & {}\\
+		{} & {4. El sistema solicita el ingreso del analisis del impacto.}\\
+		{5. El usuario ingresa su analisis del impacto (campo A Figura \ref{ingresoImpacto}) y confirma los cambios (campo B Figura \ref{ingresoImpacto}).} & {}\\
+		{} & {6. El sistema registra los cambios.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{5. El usuario cancela la acción (campo C Figura \ref{ingresoImpacto}).} & {}\\
+		{} & {6. El sistema regresa al paso 2}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.42]{imagenes/CUR/SCM_MenuAnalizarSolicitudes.png}
+			\caption{Interfaz Analizar Impacto del Cambio}
+			\label{anImpacto}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.4]{imagenes/CUR/SCM_AnalisisDeImpacto.png}
+			\caption{Interfaz de Ingreso del Análisis del Impacto del Cambio}
+			\label{ingresoImpacto}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Aprobar/Rechazar Solicitud}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Aprobar/Rechazar Solicitud (campo A Figura \ref{evSol}).} & {}\\
+		{} & {2. El sistema despliega la lista de solicitudes que el usuario
+		esta autorizado a Aprobar o Rechazar (sección B Figura \ref{evSol}).}\\
+		{3. El usuario escoge una solicitud.} & {}\\
+		{} & {4. El sistema despliega el detalle de la solicitud junto con el análisis de impacto}\\
+		{5. El usuario escoge si Aprobar o Rechazar la solicitud (campo A Figura \ref{ingresoEvSol})} & {}\\
+		{6. El usuario ingresa el motivo de la resolución (campo B Figura \ref{ingresoEvSol}).} & {}\\
+		{} & {7. El sistema solicita confirmación.}\\
+		{8. El usuario confirma la acción (campo C Figura \ref{ingresoEvSol}).} & {}\\
+		{} & {9. El sistema registra el cambio y notifica al encargado de la implementación del cambio.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{8. El usuario cancela la acción (campo D Figura \ref{ingresoEvSol}).} & {}\\
+		{} & {9. El sistema regresa al paso 2}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_MenuEvaluarSolicitud.png}
+			\caption{Interfaz para Aprobar/Rechazar Solicitud}
+			\label{evSol}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/CUR/SCM_EvaluarSolicitud.png}
+			\caption{Interfaz de ingreso de la Aprobación/Rechazo de la Solicitud}
+			\label{ingresoEvSol}
+		\end{center}
+	\end{figure}
+
+	\begin{center}
+	\begin{tabular}{|m{7.2cm}|m{7.2cm}|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Sección Implementación del Cambio}} \\
+		\hline
+		{\textbf{Curso Normal (Usuario)}} & {\textbf{Curso Normal (Sistema)}}\\
+		\hline
+		{1. El usuario escoge la opción Implementación de Cambio (campo A Figura \ref{impCamb}).} & {}\\
+		{} & {2. El sistema despliega lista de solicitudes que el usuario esta a autorizado para 
+		completar el formulario de implementación de cambio (sección B Figura \ref{impCamb}).}\\
+		{3. El usuario escoge una solicitud.} & {}\\
+		{} & {4. El sistema solicita completar los datos del formulario de implementación.}\\
+		{5. El usuario completa el formulario (sección A Figura \ref{formImpCamb}).} & {}\\
+		{} & {6. El sistema solicita confirmación.}\\
+		{7. El usuario confirma la acción (campo B Figura \ref{formImpCamb}).} & {}\\
+		{} & {8. El sistema registra el cambio y cierra la solicitud.}\\
+		\hline
+		{\textbf{Curso Alternativo (Usuario)}} & {\textbf{Curso Alternativo (Sistema)}}\\
+		\hline
+		{7. El usuario cancela la acción (campo C Figura \ref{formImpCamb}).} & {}\\
+		{} & {8. El sistema regresa al paso 2}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.37]{imagenes/CUR/SCM_MenuFormImplement.png}
+			\caption{Interfaz de Implementación del Cambio}
+			\label{impCamb}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.37]{imagenes/CUR/SCM_FormImplement.png}
+			\caption{Interfaz del Formulario de Implementación del Cambio}
+			\label{formImpCamb}
+		\end{center}
+	\end{figure}

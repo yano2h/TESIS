@@ -1,0 +1,941 @@
+\chapter{Pruebas}
+	En este capitulo se detallan las pruebas realizadas, junto con los resultados 
+	obtenidos durante la realización de estas.
+	Las pruebas realizadas se dividen en:
+	\begin{itemize}
+		\item Pruebas Unitarias.
+		\item Pruebas de Integración.
+		\item Pruebas de Rendimiento.
+		\item Pruebas de Aceptación.
+		\item Pruebas Beta.
+	\end{itemize}
+
+	El principal enfoque de las pruebas es la detección de errores.
+	
+	\section{Pruebas Unitarias}
+	Para llevar a cabo las pruebas unitarias se diseño un set de pruebas 
+	automatizadas, las cuales fueron implementadas aciendo uso del 
+	framework de pruebas JUnit y de Glassfish Embedded (dentro del cual se 
+	despliegan los EJB para ser utilizados durante la ejecución de las 
+	pruebas).\\
+
+	Hacer pruebas JUnit en clases java corrientes, es bastante simple
+	y no presenta mayor dificultad, sin embargo cuando se desea realizar
+	pruebas, ya sea unitarias o de integración, en clases java que son
+	Enterprise Java Beans (EJBs), se presentan algunas dificultades las
+	cuales radican principalmente en el hecho que los EJB son componentes
+	gestionados por en servidor de aplicaciones y por ende no pueden  
+	funcionar fuera de este, esto significa que para poder probar los EJB
+	debemos desplegar los componentes dentro de un servidor de 
+	aplicaciones, junto con las configuraciones de persistencia y 
+	datasources correspondientes, para solucionar este inconveniente
+	es que se utiliza Glassfish Embedded, que actúa como contenedor 
+	embebido el cual es mas rápido y ligero.\\
+	
+	El procedimiento utilizado para ejecutar los test dentro Glassfish
+	Embedded es el siguiente:
+	\begin{itemize}
+		\item Copiar los archivos del directorio \textit{build/classes} a un 
+		directorio temporal \textit{build/embedded} para el despliegue de los 
+		EJB.
+		\item Ademas se copia el archivo test-percistence.xml (que contiene 
+		una configuración diferente para la ejecución de las pruebas en una 
+		base de datos diferente a la de producción) dentro del directorio 
+		\textit{build/embedded/META-INF/} y se renombra como 	
+		\textit{percistence.xml}.
+		\item Antes de levantar Glassfish Embedded se crea un 
+		properties de configuración que le indica a Glassfish donde se 
+		encuentran los módulos a desplegar y el archivo de configuración 
+		\textit{domain.xml} que debe utilizar (en este caso es un archivo 
+		aparte que contiene la configuración necesaria para 	la ejecución del 
+		test).
+		\item Luego se inicia el Glassfish Embedded.
+		\item Se ejecutan los test necesarios.
+		\item Por ultimo se cierra Glassfish Embedded y se borra el directorio 
+		temporal \textit{build/embedded}.
+	\end{itemize}
+	
+	Para gestionar todo este proceso, se implemento una nueva clase 
+	denominada BaseTestEJB de la cual extienden todos los test que hacen uso 
+	de los EJB.\\
+
+	De acuerdo a lo que se especifico en la fase de diseño de pruebas, se 
+	opto por no realizar una documentación extensiva de los test unitarios
+	ya que estos deben ser auto-explicativos y de manera tal que el mismo
+	código documenta la prueba, sus entradas y salidas esperadas.\\
+
+	Sin embargo a continuación en la Tabla \ref{docTestUnit} se presenta 
+	un resumen las pruebas unitarias diseñadas y ejecutadas, con su nombre y 
+	propósito.
+	
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.5cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
+		\hline
+		& {testGetValue} & {Verificar que el método 	
+		getValue es capas de recuperar la cadena "ABCD" desde un archivo de 
+		propiedades.}\\
+		\cline{2-3}
+		& {testGetValueCon Espacios} & {Verificar que el método getValue es 
+		capas de recuperar la cadena "A B C   D" desde un archivo de propiedades 
+		sin verse afectado por la cantidad de espacios entre los caracteres.}\\
+		\cline{2-3}
+		& {testGetValueShort} & {Verificar que el método getValueShort es capas de 
+		recuperar cadena desde un archivo de propiedades y convertirla a Short 
+		siempre que cumpla con el formato de este.} \\
+		\cline{2-3}
+		& {testGetValueShort Negativo} & {Verificar que el método getValueShort es 
+		capas de recuperar cadena desde un archivo de propiedades y convertirla a 
+		Short aunque este sea negativo.} \\
+		\cline{2-3}
+		\multirow{3}{*}{Resources} & {testGetValueShort ErrorEnString} & {Verificar que el 
+		método getValueShort dispara la excepción NumberFormatException al leer un 
+		String desde el archivo de propiedades.} \\	
+		\cline{2-3}
+		& {testGetValueShort ErrorValorMayor AShort} & {Verificar que el método 
+		getValueShort dispara la expeción NumberFormatException al leer un numero 
+		entero que excede el valor máximo de un Short.} \\	
+		\cline{2-3}
+		& {testGetValueShort ErrorValorDecima} & {Verificar que el método 
+		getValueShort dispara la excepción NumberFormatException al leer un valor 
+		con decimales desde el archivo de propiedades.} \\	
+		\cline{2-3}
+		& {testGetValueInteger} & {Verificar que el método getValueInteger es capas 
+		de recuperar cadena desde un archivo de propiedades y convertirla a Integer 
+		siempre que cumpla con el formato de este.} \\	
+		\cline{2-3}
+		& {testGetValueInteger Negativo} & {Verificar que el método getValueInteger 
+		es capas de recuperar cadena desde un archivo de propiedades y convertirla 
+		a Integer aunque este sea negativo.} \\
+		\cline{2-3}
+		& {testGetValueInteger ErrorValorMayorAInteger} & {Verificar que el método 
+		getValueInteger dispara la expeción NumberFormatException al leer un 
+		numero entero que excede el valor máximo de un Integer.} \\		
+		\hline
+	\end{tabular}
+	\end{table}	
+	
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.5cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
+		\hline
+		 & {testGetValueInteger ErrorValorMayorAInteger} & {Verificar 
+		que el método getValueInteger dispara la expeción NumberFormatException al 
+		leer un numero entero que excede el valor máximo de un Integer.} \\
+		\cline{2-3}
+		& {testGetValueInteger ErrorValorDecimal} & {Verificar que el método 
+		getValueInteger dispara la excepción NumberFormatException al leer un 
+		valor con decimales desde el archivo de propiedades.} \\
+		\cline{2-3}
+		& {testGetValueLong} & {Verificar que el método getValueLong es capas de 
+		recuperar cadena desde un archivo de propiedades y convertirla a Long 
+		siempre que cumpla con el formato de este.} \\		
+		\cline{2-3}
+		& {testGetValueLong Negativo} & {Verificar que el método getValueLong es 
+		capas de recuperar cadena desde un archivo de propiedades y convertirla a 
+		Long aunque este sea negativo.} \\
+		\cline{2-3}
+		\multirow{3}{*}{Resources} & {testGetValueLong ErrorValorMayor ALong} & {Verificar que el método 
+		getValueLong dispara la excepción NumberFormatException al leer un 
+		numero entero que excede el valor máximo de un Long.} \\
+		\cline{2-3}
+		& {testGetValueLong ErrorValorDecimal} & {Verificar que el método getValueLong 
+		dispara la excepción NumberFormatException al leer un valor con decimales 
+		desde el archivo de propiedades.} \\		
+		\cline{2-3}
+		& {testGetPropertiesPath} & {Verifica que el metodo getPropertiesPath obtenga la 
+		ruta de un archivo properties correctamente.} \\
+		\cline{2-3}
+		& {testGetPropertiesPath NotFound} & {Verfica que el metodo getPropertiesPath 
+		dispare la excepcion MissingResourceException al intentar obtener la ruta de un 
+		propertie que no existe.} \\		
+		\cline{2-3}
+		& {testGetPageList} & {Verifica que el metodo getPageList obtenga una lista con 
+		todas las propiedades contenidas en el archivo propertie especificado.} \\
+		\cline{2-3}
+		& {testGetMapPageList} & {Verifica que el metodo getMapPageList obtenga un 
+		Map con todas las propiedades contenidas en el archivo propertie especificado.} \\		
+		\hline
+	\end{tabular}
+	\end{table}	
+		
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.7cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
+		\hline
+		& {testCalcularPorcentaje Redondeado} & {Verifica que el calculo del 
+		porcentaje entero sin decimal.} \\
+		\cline{2-3}
+		& {testCalcularPorcentaje RedondeadoParaArriba} & {Verifica que el porcentaje 
+		sea 	redondeado hacia arriba cuando el decimal es mayor o igual a 5.} \\
+		\cline{2-3}
+		& {testCalcularPorcentaje RedondeadoParaAbajo} & {Verifica que el porcentaje 
+		sea redondeado hacia abajo cuando el decimal es menor a 5.} \\
+		\cline{2-3}
+		& {testCalcularRegla DeTres} & {Verifica el calculo de una regla de tres.} \\
+		\cline{2-3}
+		& {testCalcularReglaDe TresParaDenominadorCero} & {Verifica que se 
+		devuelva un 0 en caso que el denominador sea 0.} \\
+		\cline{2-3}
+		& {testCalcularReglaDe TresParaNumeradorCero} & {Verifica que se devuelva 
+		un 0 en caso que el numerador sea 0.} \\
+		\cline{2-3}
+		\multirow{1}{*}{MathUtils} & {testCalcularReglaDe TresParaCien} & {Verifica el caso 
+		en que se debe devolver 100.} \\
+		\cline{2-3}
+		& {testCalcularReglaDe TresParaPorcentaje MayorACien} & {Verifica que 
+		funcione cuando el numerador es mayor a cien.} \\
+		\cline{2-3}
+		& {testRedondearCero} & {Verifica la funcion redondear cuando el numero es
+		 cero.} \\
+		\cline{2-3}
+		& {testRedondearPara ArribaSinDecimal} & {Verifica que el numero sea 
+		redondeado hacia arriba cuando el decimal es mayor o igual a 5 y el resultado 
+		no debe tener ningún decimal.} \\
+		\cline{2-3}
+		& {testRedondearPara AbajoSinDecimal} & {Verifica que el numero sea 
+		redondeado hacia abajo cuando el decimal es menor a 5 y el resultado 
+		no debe tener ningún decimal.} \\
+		\cline{2-3}
+		& {testRedondearPara ArribaConUnDecimal} & {Verifica que el numero 
+		sea redondeado hacia arriba cuando el decimal es mayor o igual a 5 y el 
+		resultado no debe tener un decimal.} \\
+		\cline{2-3}
+		& {testRedondearPara AbajoConUnDecimal} & {Verifica que el numero sea 
+		redondeado hacia abajo cuando el decimal es menor a 5 y el resultado no debe 
+		tener un decimal.} \\
+		\cline{2-3}
+		& {testRedondearPara ArribaConDecimal5} & {Verifica el caso en que el
+		 decimal es 5.} \\
+		\cline{2-3}
+		& {testRedondearFloat Cero} & {Verifica la función redondear cuando 
+		el numero es cero. Cuando el resultado es convertido de BigDecimal a Float.} \\
+		\hline
+	\end{tabular}
+	\end{table}	
+		
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.7cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
+		\hline
+		& {testRedondearFloat ParaArribaSinDecimal} & {Verifica que el numero 
+		sea redondeado hacia arriba cuando el decimal es mayor o igual a 5 y el 
+		resultado no debe tener ningún decimal. Cuando el resultado es convertido 
+		de BigDecimal a Float.} \\
+		\cline{2-3}
+		& {testRedondearFloat ParaAbajoSinDecimal} & {Verifica que el numero 
+		sea redondeado hacia abajo cuando el decimal es menor a 5 y el resultado 
+		no debe tener ningún decimal. Cuando el resultado es convertido de 
+		BigDecimal a Float.} \\
+		\cline{2-3}
+		\multirow{1}{*}{MathUtils}& {testRedondearFloa tParaArribaConUn 
+		Decimal} & {Verifica que el numero sea redondeado hacia arriba cuando 
+		el decimal es mayor o igual a 5 y el resultado no debe tener un decimal.
+		Cuando el resultado es convertido de BigDecimal a Float.} \\
+		\cline{2-3}
+		& {testRedondearFloat ParaAbajoConUn Decimal} & {Verifica que el
+		numero sea redondeado hacia abajo cuando el decimal es menor a 5 y el 
+		resultado no debe tener un decimal. Cuando el resultado es convertido de 
+		BigDecimal a Float.} \\
+		\cline{2-3}
+		& {testRedondearFloat ParaArribaCon Decimal5} & {Verifica el caso en que 
+		el decimal es 5. Cuando el resultado es convertido de BigDecimal a Float.} \\
+		\hline
+		& {testBuscarSolicitudes VencidasVerificar Cambio} & {Verifica que el 
+		método buscarSolicitudesVencidas haya cambiado el estado de una 
+		solicitud enviada cuya fecha de vencimiento ya fue superada.}\\
+		\cline{2-3}
+		& {testBuscarSolicitudes VencidasVerificar NoCambioVencida} & {Verifica 
+		que el método buscarSolicitudesVencidas no haya cambiado el estado de 
+		solicitudes que ya se encontraban en estado vencida.}\\
+		\cline{2-3}
+		{TimerSolicitud Requerimientos UpdateTest} & {testBuscarSolicitudes 
+		VencidasVerificar NoCambioCerrada} & {Verifica que el método 
+		buscarSolicitudesVencidas no haya cambiado el estado de 
+		solicitudes que se Cerraron después de la fecha de vencimiento.}\\
+		\cline{2-3}
+		& {testBuscarSolicitudes VencidasVerificar NoCambioFinalizada 
+		SinRespuesta} & {Verifica que el método buscarSolicitudesVencidas no 
+		haya cambiado el estado de solicitudes que se Finalizaron sin respuesta 
+		después de la fecha de vencimiento.}\\
+		\cline{2-3}
+		&{testBuscarSolicitudes VencidasVerificar NoCambioSolicitud 
+		SinFechaVencimiento} & {Verifica que el método buscarSolicitudesVencidas
+		no haya cambiado el estado de solicitudes que no poseen fecha de 
+		vencimiento}\\
+		\hline
+	\end{tabular}
+	\end{table}	
+
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{3cm} | m{3.7cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Clase}} & \textbf{Test} & \textbf{Propósito}\\
+		\hline
+		& {testGenerarCodigo NumCero} & {Verifica que el código es vacío cuando 
+		el numero es cero.}\\
+		\cline{2-3}
+		& {testGenerarCodigo NumNegativo} & {Verifica que el código es vacío 
+		cuando el numero es negativo.}\\
+		\cline{2-3}
+		& {testGenerarCodigo NumUno} & {Verifica que el código es "q" cuando el 
+		numero es 1.}\\
+		\cline{2-3}
+		{SolicitudRequeri- mientoEJB} & {testGenerarCodigo MaxLong} & {Verifica 
+		que el código es "2teCogGBXee" cuando el numero es el máximo valor de 
+		un Long.}\\
+		\cline{2-3}
+		& {testGenerarCodigo ConsultaNoDuplicados} & {Verifica que el código no 
+		se repite aunque sea generado en instantes de tiempo casi iguales y con 
+		ruts similares.}\\
+		\cline{2-3}
+		& {testValidarCodigo ConsultaExistente} & {Verifica que un código de 
+		consulta sea invalido cuando ya existe.}\\
+		\cline{2-3}
+		& {testValidarCodigo ConsultaInexistente} & {Verifica que un código de 
+		consulta es invalido cuando no existe.}\\
+		%\cline{2-3}
+		%& {testEnviarSolicitud} & {}\\
+		%\cline{2-3}
+		%& {} & {}\\
+		%\cline{2-3}
+		\hline
+	\end{tabular}
+		\caption{Test unitarios}
+		\label{docTestUnit}
+	\end{table}
+
+%	Despues de implementar y ejecutar todas las pruebas antes descritas, se detectaron
+%	algunos errores, los cuales fueron oportunamente corregidos y vueltos a probar.
+%	Actualmente todas las pruebas se encuentra aprobadas, sin
+
+	\subsection{Análisis de Resultados}
+	Todas las pruebas han sido implementadas y ejecutadas satisfactoriamente.
+	Todos los errores que fueron detectados durante la ejecución de las pruebas
+	fueron solucionados oportunamente y vueltos a probar, por lo que actualmente
+	todas las pruebas se encuentran superadas.
+       Ante cualquier modificación del código fuente en el futuro, se debe volver a ejecutar 
+	este mismo set de pruebas y a corregir los errores detectados hasta volver a lograr 
+	un 100\% de aprobación de los tests.
+
+	\subsection{Problemas detectados}
+	Durante el desarrollo de los tests, los principales problemas que existieron
+	fueron principalmente debido a la incorrecta configuración de los frameworks
+	de pruebas, pero una vez superado aquello, no se encontraron demasiados
+	problemas. Los principales problemas que se detectaron y corrigieron.
+
+	\begin{itemize}
+		\item Problemas en el calculo de porcentajes, cuando existía un denominador 0.
+		\item Duplicación de códigos de consulta en lapsos de tiempos muy cercanos,
+		al no existir variación en la semilla del generador de números aleatorios utilizado
+		en una parte del algoritmo.
+	\end{itemize}
+
+	\section{Pruebas Integración}
+	Una vez completada la fase de pruebas unitarias, se realizaron las pruebas de 
+	integración, las cuales a diferencia de los especificado en la fase de diseño,
+	se opto por no utilizar Arquillian ya que solo era necesario para utilizar
+	inyección de dependencia en los test. Y presenta algunos problemas en proyectos
+	que no gestionan sus dependencias con maven.\\
+
+	Las pruebas realizadas en esta fase se separaron en 2 tipos, las que prueban 
+	directamente la capa de persistencia (ya que probarlas requiere modificar el
+	estado de la base de datos y normalmente de a lo menos las funciones crear, 
+	buscar y eliminar, para poder agrega nuevos datos al inicio del test, buscar para 
+	verificar la correcta creación o modificación de algo y la eliminación para restaurar el 
+	estado de la bd, a su estado original). Y ademas un conjunto de pruebas acorde al
+	esquema de integración definido. En la Tabla \ref{docTestIntegracion} se presentan
+	las pruebas de integración realizadas.
+
+	\begin{table}[H]
+	\begin{tabular}{|>{\columncolor[gray]{0.9}}m{1cm} | m{5cm}|m{8cm}|}
+		\hline
+		\rowcolor[gray]{0.7} {\textbf{Nº}} & \textbf{Objetivo} & \textbf{Prueba}\\
+		\hline
+		{1} & {Comprobar la integración entre el Portal de Login institucional y el sistema
+		interno de Autenticación.} & {Ingresar con una cuenta registrada (rut  
+		11111111), a través del portal de Login institucional y verificar que al 
+		autenticarse el usuario es redireccionado a la aplicación.} \\
+		\hline
+		{2} & {Comprobar la integración entre el modulo de Autenticación y el de Envío
+		de Solicitudes.} & {Ingresar al sistema a través del portal de Login Institucional
+		con el usuario 11111111, y corroborar que los datos personales del usuario 
+		mostrados en la aplicación son los mismo proporcionados por LDAP.} \\
+		\hline
+		{3} & {Comprobar la integración entre el modulo de Envío de Solicitudes  y el
+		modulo de Mensajería.} & { Crear una solicitud de requerimiento y verificar que 
+		esta aya sido creada, que un correo electrónico aya sido enviada al mail del
+		solicitante y que el código enviado sea el mismo de la solicitud.} \\
+		\hline
+		{4} & {Comprobar la integración entre el modulo de Envío de Solicitudes y
+		el modulo de Atención de solicitudes.} & {Crear una nueva solicitud de 
+		requerimiento para el Área de Desarrollo y posteriormente ingresar con la
+		cuenta correspondiente al jefe del área de desarrollo y corroborar que la
+		solicitud creada aparezca como una nueva solicitud entre la lista de solicitudes
+		del área.} \\
+		\hline
+		{5} & {Comprobar la integración entre el modulo de Atención de solicitudes
+		y el modulo de Gestión de Proyectos} & {Seleccionar una solicitud previamente 
+		creada y escoger la opción convertir en proyecto. Verificar que al seleccionar esta 
+		opción la solicitud quede cerrada y se haya redireccionado al usuario al
+		formulario de creación de proyecto.} \\
+		\hline
+		{6} & {Comprobar la integración entre el modulo de Gestión de Proyectos y el 
+		modulo de SCM} & {Crear un nuevo Proyecto, luego ingresar al modulo de SCM
+		y verificar que el proyecto aparece entre la lista de proyectos del área y se
+		puedan definir tareas de SCM para este.} \\
+		\hline
+	\end{tabular}
+		\caption{Test Integración}
+		\label{docTestIntegracion}
+	\end{table}	
+
+	\subsection{Análisis de Resultados}
+	Esta pruebas fueron realizadas y superadas en su totalidad. Verificando así que 
+	existe una correcta integración de los módulos diseñados. Estas pruebas fueron
+	ejecutadas manualmente dado la dificultad de automatizarlas. 
+
+
+	\section{Pruebas de Aceptación}
+	\label{pruebasAcept}
+El objetivo principal de estas pruebas es demostrar al cliente el cumplimiento
+total o parcial de los requisitos del software. Para este fin se diseño un conjunto
+de escenarios de prueba, los cuales deben ser ejecutados por el cliente en
+compañía del desarrollador.
+\\
+El proceso establecido para la ejecución de las pruebas de aceptación es le siguiente:
+
+\begin{enumerate}
+	\item El desarrollador selecciona el caso de prueba a ejecutar.
+	\item El cliente ejecuta los pasos descritos en el caso de prueba (con ayuda
+		   del desarrollador si es necesario).
+	\item Finalizada la prueba el desarrollador le indica al cliente los requerimientos
+	que quedan demostrados por la ejecución de dicha prueba.
+	\item El desarrollador documenta la ejecución de la prueba y registra el 	
+	nivel de satisfacción del cliente, las observaciones y errores detectados.
+	\item El desarrollador corrige los errores, implementa las observaciones 
+	correspondientes, hasta alcanzar la aprobación del cliente.
+\end{enumerate}
+
+	Puede encontrar un detalle de las pruebas de aceptación realizadas
+	y ejecutadas en el Anexo \ref{anexo5}
+
+
+	\subsection{Resultados y Problemas detectados}
+	Los resultados y problemas detectados durante la ejecución de las pruebas 
+	de aceptación se encuentran documentados en el Anexo \ref{anexo6}.
+
+	
+	\subsection{Análisis de Resultados}
+
+	Luego de realizar las pruebas de aceptación en compañía del cliente, y de registrar 
+	debidamente estas mismas, se han podido establecer las siguientes conclusiones
+	en base a los resultados obtenidos:
+
+	\begin{itemize}
+		\item Los requerimientos establecidos inicialmente por el cliente, están cubiertos
+		por la aplicación desarrollada.
+		\item El cliente ha indicado estar conforme con el producto según lo observado en
+		las pruebas.
+		\item El cliente ha presentado algunas observaciones, para llegar a estar 
+		completamente conforme con el producto.
+	\end{itemize}
+
+	En cuanto a las observaciones manifestadas por el cliente, se pueden identificar 2 tipos:
+	\begin{enumerate}
+		\item Las que se refieren a modificaciones a la estructura u organización de la información desplegada.
+		\item Las que incluyen la implementación de nuevas funcionalidades, no 	
+		especificadas previamente, en los requerimientos.
+	\end{enumerate} 
+	
+	De acurdo a lo anterior, para continuar con la ejecución de las pruebas, es necesario
+	incorporar todas las observaciones indicadas por el cliente, del primer tipo.\\
+
+	Las observaciones correspondientes al segundo tipo, según su complejidad, iran 
+	siendo incorporadas luego de finalizar las pruebas.
+\newpage
+\section{Pruebas de Rendimiento}
+	Con estas pruebas se pretende determinar cuales son los tiempos de respuesta de la aplicación
+	y los recursos utilizados ante una cantidad elevada de usuarios, sin que se vea degradado el servicio. 
+	Para estas pruebas, los esfuerzos se centran en las que simulan la acción de los usuarios externos 
+	a DISICO, la cual representa la mayor cantidad de usuarios esperados y puede llegar a ser un numero
+	mas variable, dado que la cantidad de usuarios dentro de DISICO es prácticamente constante 
+	y reducida.
+	
+	Para esto se utilizaran 2 herramientas:
+	\begin{itemize}
+		\item \textbf{JMeter:} Es una herramienta Open Source diseñada 100\% en Java, que puede 
+		ser utilizada como una herramienta de prueba de carga para analizar y medir el desempeño
+		de una variedad de servicios, con énfasis en aplicaciones web \cite{jmeter}.
+		\item \textbf{VisualVM:} Es una herramienta que proporciona una interfaz visual para ver 
+		información detallada sobre las aplicaciones Java que están ejecutandoce en una Maquina 
+		Virtual de Java (JVM), normalmente se distribuye junto con el Java Development Kit (JDK) 
+		\cite{visualvm}.
+	\end{itemize}
+	
+	Con el fin simular las condiciones mas reales posibles, el sistema sera probado en uno de los
+	servidores de prueba de DISICO. Ya que estos cuentan con características bastante similar a lo
+	que seria un ambiente de producción. Sin embargo la ejecución de las pruebas se realizara
+	desde el equipo de desarrollo, lo que limita hasta cierto punto la cantidad de usuarios a simular
+	dado los recursos de la maquina.\\
+
+	La cantidades de usuarios simulados van desde 1 hasta 150 con incrementos de 25 usuarios.
+	Este numero se considera suficiente ya que esta representa la cantidad de usuarios trabajando
+	simultáneamente de forma intensiva, lo cual en un entorno real es poco probable, ya que normalmente
+	los usuarios ingresarían solo para revisar las respuestas a sus solicitudes o crear nuevas y el
+	resto del tiempo probablemente deje la aplicación abierta si hacer ninguna petición.
+	
+	\subsection{Análisis de Resultados}
+		
+	Las mediciones realizadas fueron agrupadas por tipo de medición, en cada uno se aprecia el varlor
+	versus la cantidad de usuarios simulados.\\
+
+	La Figura \ref{rend} muestra el rendimiento el cual se entiende como la cantidad de 
+	peticiones procesadas por segundos. En el gráfico se puede observar que el rendimiento
+	aumenta conforme aumentan la cantidad de usuarios simulados, la conclusion de esto
+	es que conforme aumenta la cantidad de peticiones el servidor comienza a reservar mas recursos
+	permitiendole procesar mas peticiones. 
+ 
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.75]{imagenes/jmeter/Rendimiento.png}
+			\caption{ Gráfico de Rendimiento}
+			\label{rend}
+		\end{center}
+	\end{figure}	
+
+	La Figura \ref{max} muestra el	tiempo máximo en mili segundos en que se contesta 
+	una petición. Aquí se observa que una vez superados los 50 usuarios el tiempo
+	máximo de respuesta comienza a mantenerse en 10 segundos, este tiempo
+	es extremadamente alto, como para esperar la respuesta de una petición
+	un valor máximo aceptable seria unos 6 segundos como mucho. Por lo que
+	este punto debe ser corregido y re evaluado. 
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.75]{imagenes/jmeter/Max.png}
+			\caption{ Gráfico de las Máximas}
+			\label{max}
+		\end{center}
+	\end{figure}	
+
+	La Figura \ref{min} muestra el	tiempo mínimo en mili segundos en que se contesta 
+	una petición. En este caso los tiempos no alcanzan los 10 milisegundos lo cual es
+	bastante rápido.
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.75]{imagenes/jmeter/Min.png}
+			\caption{ Gráfico de los Mínimos }
+			\label{min}
+		\end{center}
+	\end{figure}	
+
+
+	Una medida mas representativa que la de los extremos, mostradas anteriormente 
+	es la de la Figura \ref{media} la cual corresponde al tiempo promedio en mili segundos 
+	en que se contesta una petición. Al igual que el rendimiento esta parece mejorar
+	conforme crece la cantidad de usuarios, y van de los 100 a los 150 mili segundos,
+	lo cual se considera una medida aceptable.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.75]{imagenes/jmeter/Media.png}
+			\caption{ Gráfico Media}
+			\label{media}
+		\end{center}
+	\end{figure}	
+
+	Ademas podemos encontrar otras medidas como la de la Figura \ref{mediaB} que muestra 
+	el tamaño medio de la respuesta del servidor en bytes. La cual en este caso es 
+	aproximadamente 1500 bytes o 1,5 KiloBytes. Esta medida también es aceptable como tamaño
+	de la respuesta.
+ 
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.75]{imagenes/jmeter/MediaBytes.png}
+			\caption{ Gráfico Media de Bytes}
+			\label{mediaB}
+		\end{center}
+	\end{figure}	
+	
+	Ademas de concluir que los tiempos de respuesta máximo no son lo mas deseables.
+	No se detectaron usos excesivos de recursos en el servidor durante la ejecución de estas.\\
+
+	La ejecución de estas pruebas también permitió descubrir errores relacionados con la concurrencia
+	de usuarios, los cuales principalmente son la perdida de conexiones y errores al
+	intentar modificar un mismo objeto simultáneamente. Este punto es un poco
+	mas complejo que los errores detectados asta ahora y la causas reales de estas están
+	siendo evaluadas, entre las posibles causas se encuentra. 
+	\begin{itemize}
+		\item Configuración incorrecta en el servidor de aplicaciónes.
+		\item Configuración incorrecta en los pool de conexiones.
+		\item Configuración incorrecta del servidor de base de datos.
+		\item Configuración incorrecta de hibernate.
+		\item Mala gestión del EntityManager dentro de la aplicación.
+	\end{itemize}
+
+		
+\section{Pruebas Beta}
+	Una vez finalizadas las pruebas de aceptación e incorporadas las observaciones 		
+	del cliente que correspondan, se entiende como aceptado el producto, por parte
+	del cliente. Sin embargo, que el producto aya sido aceptado por el cliente, no 
+	necesariamente, quiere decir que los usuarios finales del sistema, vayan a estar 
+	conformes con el mismo. \\
+
+	Para conocer cual es la percepción que los usuarios finales tienen del sistema y
+	también para tener la posibilidad de encontrar defectos en la aplicación aun no 
+	detectados. Se brindara acceso a un numero limitado de usuarios, para que estos 
+	interactuen con el sistema libremente y puedan entregar su opinión. \\
+
+	A pesar de que los usuarios podrán interactuar libremente con el sistema,
+	se les entregara una pauta, la cual incluye las actividades mínimas que cada uno
+	deberá realizar de acuerdo a su rol y nivel de acceso para poder responde la
+	encuesta correspondiente. La pauta de pruebas esta basada en las pruebas de aceptación, 
+	a continuación se presenta la lista de  actividades separadas por rol, en esta se indica
+	el rol y una lista de identificadores de las pruebas a realizar, el detalle de estas puede ser encontrado
+	en la Sección \ref{pruebasAcept}.
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{4cm} | m{7cm}|}
+		\hline
+		\rowcolor[gray]{0.9}{ROL} & {ACTIVIDADES}\\
+		\hline
+		{Solicitante} & {PA-01, PA-02, PA-03, PA-04}\\
+		\hline
+		{Funcionario Disico} & {PA-04, PA-12, PA-15, PA-16, PA-17, PA-21, PA-22, PA-24, PA-25, PA-26, PA-27, PA-28, PA-29, PA-30}\\
+		\hline
+		{Jefe de Área} & {PA-04, PA-05, PA-06, PA-07, PA-08, PA-09, PA-10, PA-11, PA-12, PA-13, PA-18, PA-19, PA-20, PA-21, PA-22, PA-23}\\
+		\hline
+		{Jefe de Departamento} & {PA-11, PA-14, PA-22}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+
+
+	\subsection{Resultados y Problemas detectados}
+	A continuación se encuentran resumidos los resultados obtenidos 
+	de las encuestas, separados por perfil de usuario. La nota de cada pregunta
+	es la nota promediada de todos los usuarios que respondieron la encuesta,
+	cada pregunta fue evaluada por los usuarios con una nota de 1 a 5, donde
+	1 es \textit{Muy en Desacuerdo} y 5 es \textit{Muy de Acuerdo}. 
+	Junto con cada encuesta se presenta un gráfico que resume los 
+	promedios de cada encuesta.
+
+
+\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{1cm}|>{\columncolor[gray]{0.9}} m{11cm} | m{1cm} |}
+		\hline
+		\multicolumn{3}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta General para todos los Usuarios }}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Nº}} & {\textbf{Pregunta}} & {\textbf{Nota}}\\
+		\hline
+		{P1} & {Los nombres de los menús y botones son representativos} & {5,0}\\
+		\hline
+		{P2} & {Los mensajes de error ayudan a entender la causa y la solución de estos} & {4,5}\\
+		\hline
+		{P3} & {El estilo visual del sistema sigue el estilo del resto de los portales de la UV} & {4,4}\\
+		\hline
+		{P4} & {Es simple aprender a utilizar el sistema} & {4,8}\\
+		\hline
+		{P5} & {El sistema mejora la comunicación entre los diferentes usuarios} & {4,5}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta General para todos los Usuarios}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{1cm}|>{\columncolor[gray]{0.9}} m{11cm} | m{1cm} |}
+		\hline
+		\multicolumn{3}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Solicitante}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Nº}} & {\textbf{Pregunta}} & {\textbf{Nota}}\\
+		\hline
+		{P1} & {Es fácil enviar una solicitud de requerimiento} & {5,0}\\
+		\hline
+		{P2} & {Es fácil buscar una solicitud de requerimiento} & {5,0}\\
+		\hline
+		{P3} & {Las solicitudes quedan mejor documentadas que en correos electrónicos} & {4,7}\\
+		\hline
+		{P4} & {Los mensajes de notificación son lo suficientemente breves y claros} & {4,7}\\
+		\hline
+		{P5} & {El sistema envía una cantidad prudente de correos electrónicos} & {4,7}\\
+		\hline
+		{P6} & {La información de las solicitudes se presentan de forma clara y entendible } & {4,0}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Solicitante }
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{1cm}|>{\columncolor[gray]{0.9}} m{11cm} | m{1cm} |}
+		\hline
+		\multicolumn{3}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Funcionario}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Nº}} & {\textbf{Pregunta}} & {\textbf{Nota}}\\
+		\hline
+		{P1} & {La presentación de las solicitudes asignadas esta claramente ordenada} & {4,8}  \\
+		\hline
+		{P2} & {El sistema notifica claramente cuando se le a asignado una nueva solicitud	} & {4,5} \\
+		\hline
+		{P3} & {El sistema notifica claramente cuando una solicitud esta vencidas (retrasadas)	} & {4,5}  \\
+		\hline
+		{P4} & {El sistema notifica oportunamente cuando se le a asignado una nueva solicitud	} & {4,5}  \\
+		\hline
+		{P5} & {El sistema notifica oportunamente cuando una solicitud esta vencidas (retrasadas)	} & {4,3}  \\
+		\hline
+		{P6} & {El sistema ayuda a que no olvide las solicitudes que dejo pendientes	} & {4,5}  \\
+		\hline
+		{P7} & {Los gráficos en los resumen permiten una mejor visualización de la información} & {4,8} \\
+		\hline
+		{P8} & {Las mediciones que se muestran en el Resumen Personal se entiend claramente} & {4,5} \\
+		\hline
+		{P9} & {Es rápido y sencillo responder las solicitudes de los usuarios} & {4,8} \\
+		\hline
+		{P10} & {El sistema notifica claramente cuando se le a asignado una nueva tarea de SCM	} & {4,8} \\
+		\hline
+		{P11} & {El sistema alerta oportunamente ante retrasos en las tareas de SCM} & {4,5}\\
+		\hline
+		{P12} & {Se entiende claramente la relacion las opciones del subsistema de SCM y la metodología de SCM de DISICO} & {4,3}\\
+		\hline
+		{P13} & {Es mas fácil mantener actualizada la información sobre los cambios} & {4,3}\\
+		\hline
+		{P14} & {El sistema documenta de forma clara el historial de cambios de los items de configuración} & {4,8}\\
+		\hline
+		{P15} & {El sistema permite administrar fácilmente los items de configuración de un proyecto} & {4,5}\\
+		\hline
+		{P16} & {El sistema permite agendar de forma fácil nuevas tareas	} & {4,8} \\
+		\hline
+		{P17} & {El sistema alerta oportunamente cuando existen retraso en las tareas} & {4,5} \\
+		\hline
+		{P18} & {La opción de actualizar el avance de una tarea le brinda un mayor expresividad} & {4,5}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Funcionario}
+	\end{table}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{1cm}|>{\columncolor[gray]{0.9}} m{11cm} | m{1cm} |}
+		\hline
+		\multicolumn{3}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Jefe de Área}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Nº}} & {\textbf{Pregunta}} & {\textbf{Nota}}\\
+		\hline
+		{P1} & {El sistema mantiene organizadas las solicitudes de su área} & {5}\\
+		\hline
+		{P2} & {El sistema le permite dar seguimiento completo cada solicitud} & {5}\\
+		\hline
+		{P3} & {El sistema le ayuda a decidir a quien asignar una solicitud} & {5}\\
+		\hline
+		{P4} & {Los gráficos en los resumen permiten una mejor visualización de la información} & {4,5}\\
+		\hline
+		{P5} & {Las mediciones del área son de utilidad para la toma de decisiones} & {4,5}\\
+		\hline
+		{P6} & {El sistema lo mantiene informado del estado de cada solicitud de su área} & {5}\\
+		\hline
+		{P7} & {El sistema notifica claramente cuando llega una nueva solicitud al área} & {4,5}\\
+		\hline
+		{P8} & {El sistema notifica claramente cuando existen retrasos en las solicitudes} & {4,5}\\
+		\hline
+		{P9} & {El sistema notifica oportunamente cuando  llega una nueva solicitud al área} & {4,5}\\
+		\hline
+		{P10} & {El sistema notifica oportunamente cuando existen retrasos en las solicitudes} & {4}\\
+		\hline
+		{P11} & {Es útil la opción de respuesta manual} & {4,5}\\
+		\hline
+		{P12} & {Las solicitudes quedan debidamente documentadas} & {4,5}\\
+		\hline
+		{P13} & {El sistema mejora el monitorio de avance en los proyectos} & {5}\\
+		\hline
+		{P14} & {El sistema facilita la documentación de los proyectos existentes} & {4,5}\\
+		\hline
+		{P15} & {El sistema facilita mantener documentado los participantes de cada proyecto y sus tareas} & {5}\\
+		\hline
+		{P16} & {El sistema facilita la tareas de gestión de cambios} & {5}\\
+		\hline
+		{P17} & {El sistema permite asignar fácilmente responsables de las tareas de SCM} & {5}\\
+		\hline
+		{P18} & {El sistema permite documentar correctamente los templates de la metodologia de SCM} & {5}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Jefe de Área}
+	\end{table}
+
+
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.9}} m{1cm}|>{\columncolor[gray]{0.9}} m{11cm} | m{1cm} |}
+		\hline
+		\multicolumn{3}{|c|}{\cellcolor[gray]{0.8}\textbf{Encuesta Perfil Jefe de Departamento}}\\
+		\hline
+		\rowcolor[gray]{0.8}{\textbf{Nº}} & {\textbf{Pregunta}} & {\textbf{Nota}}\\
+		\hline
+		{P1} & {El sistema permite tener un mayor control de las actividades que se realizan en el departamento} & {5}\\
+		\hline
+		{P2} & {EL sistema documenta correctamente las solicitudes de requerimientos} & {5}\\
+		\hline
+		{P3} & {El sistema facilita la tarea de buscar solicitudes de requerimientos} & {5}\\
+		\hline
+		{P4} & {Las mediciones mostradas son de utilidad} & {5}\\
+		\hline
+		{P5} & {Los gráficos en los resumen permiten una mejor visualización de la información} & {5}\\
+		\hline
+	\end{tabular}
+	\end{center}
+		\caption{Encuesta Perfil Jefe de Departamento}
+	\end{table}
+
+
+
+	\subsection{Análisis de Resultados}
+	De acuerdo a los datos recolectados de las encuestas y a los resultados presentados,
+	se realiza un análisis para cada una y se presentan las conclusiones correspondientes
+	obtenidas en dicho análisis. Según la escala de evaluación definida anteriormente, las 
+	notas van de 1 a 5, y para los resultados se considerara los rangos de notas entre,
+	menores a 3, como inaceptables e insuficientes, mayores o iguales a 3 y menores a
+	4,5 como aceptable pero necesita ser mejorado, y mayores o iguales a 4,5 como completamente
+	aceptable.\\
+
+	En la Figura \ref{encustaGeneral} se gráfica el promedio de los resultados obtenidos	
+	en la Encuesta General que respondieron todos los usuarios independiente del perfil,
+	las 3 primeras preguntas evalúan la percepción del usuario del sistema, desde un 
+	punto de vista visual. En este punto todas las notas son superiores a 4 por lo que
+	se da por satisfecho a los usuarios en la mayor parte de los aspectos visuales, 
+	aunque las notas mas bajas se refieren a los mensajes de errores y al estilo visual
+	del portal, el cual al parecer de los usuarios no es tan similar a la mayoría, aunque
+	estos no le dan mucha importancia a dicha característica.\\
+
+	La cuarta pregunta evalúa que tan simple fue para los usuarios interactuar con el sistema
+	por primera vez sin conocimiento previo ni manuales de usuario, de la nota se concluye
+	que los usuarios están satisfechos en este punto y prácticamente no tubieron dificultades
+	para utilizar el sistema.\\
+
+	La ultima pregunta evaluá si los usuarios consideran que el sistema mejora la comunicación
+	entre ellos, este punto también se encuentra satisfecho, aunque esta al limite de solo
+	ser aceptable, en este punto por lo que se observo de las opiniones y observaciones 
+	de los usuarios, los usuarios pertenecientes a DISICO son los que presentan mayor satisfacción
+	y encuentran un mayor valor en el uso e implementación del sistema, sin embargo son los 
+	usuarios externos a DISICO quienes crean y envían las solicitudes los que no dan tanto valor 
+	al sistema, ya que están acostumbrados al uso de correo electrónico, aún asi estos tampoco 
+	muestran una disconformidad con el sistema, pero parecen ser mas indiferentes a la utilización 
+	del mismo.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/encuestas/EncuestaGeneral.png}
+			\caption{Gráfico Encuesta General}
+			\label{encustaGeneral}
+		\end{center}
+	\end{figure}
+
+	La Figura \ref{encuestaSolicitante} gráfica el promedio de los resultados obtenidos de 
+	la encuesta de solicitantes, en esta las 2 primeras preguntas evalúan la facilidad de uso
+	del sistema según la percepción de los usuarios, este punto fue superado con en su totalidad
+	y no existen quejas de los usuarios por ende se da por satisfecho.\\
+
+	Las preguntas 3 y 6 evalúan que tan clara es la forma en que quedan documentados
+	los requerimientos en contrate con el uso de correo electrónico, este punto es aceptable pero
+	se encontraron algunas observaciones sobre la visualización del sistema en monitores de baja resolución, 
+	sobre detallar mas la opción incorporada de adjuntar archivos especificando tipos de archivos permitidos
+	y tamaño máximo permitido, ademas se pudo concluir que a los usuarios no tienen claro en primera
+	instancia el uso del código de consulta generado.\\
+
+	Las preguntas 4 y 5 evalúan que tan bien informados los mantiene el sistema de los cambios,
+	y la claridad de la notificación de estos, esta este punto se considera aceptado por los usuarios
+	sin embargo cabe destacar que los usuarios esperan recibir mas correos de los que se pensó
+	en primera instancia.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.8]{imagenes/encuestas/EncuestaPerfilSolicitante.png}
+			\caption{Gráfico Encuesta Perfil Solicitante}
+			\label{encuestaSolicitante}
+		\end{center}
+	\end{figure}
+
+	En la Figura \ref{encuestaFuncionario} se gráfica el resumen promedio de los resultados 
+	obtenidos de la encuesta realizada a los funcionarios de DISICO. Las preguntas de la 1
+	a la 9 evalúan su percepción del modulo de atención de solicitudes, en este caso las notas
+	obtenidas son suficientes para considerar satisfechos a los usuarios, y el única nota bajo
+	los niveles esperados, es sobre la notificación de las propias solicitudes retrasadas, no parece
+	ser suficiente para los usuarios, por lo que se evaluá la alternativa de enviar un correo a los 
+	usuarios alertando de esto.\\
+
+	Las preguntas de la 10 a la 15 evalúan la percepción de los usuarios del modulo
+	de gestión de SCM,  en este caso los resultados son aceptables, pero no completamente
+	por lo que pueden ser necesarias mejoras, sin embargo los usuarios no presentaron
+	observaciones sobre este punto que permita determinar las causas por las cuales 
+	los usuarios no están totalmente satisfechos, por lo que sera necesario hacer una
+	evaluación posterior con los usuarios para aclarar este punto.\\
+	
+	Las preguntas de la 16 a la 18 evalúan la percepción que tienen los usuarios del modulo
+	de proyectos, principalmente la gestión de sus tareas en estas. En este punto la evaluación
+	también tiene un nivel satisfactorio. Y la única observación es que falta mejorar la notificación
+	de las tareas retrasadas.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.55]{imagenes/encuestas/EncuestaPerfilFuncionario.png}
+			\caption{Gráfico Encuesta Perfil Funcionario}
+			\label{encuestaFuncionario}
+		\end{center}
+	\end{figure}
+
+	La Figura \ref{encuestaFuncionario}  gráfica el resumen promedio de los resultados obtenidos
+	en la encuesta realizada para el perfil de Jefe de Área. En esta encuesta las preguntas de la 1 a
+	la 12 evalúan la percepción que tienen los usuarios del modulo de atención de solicitudes, este
+	aspecto según las evaluaciones se encuentra en un nivel satisfactorio y la principal falencia detectada
+	es la falta de alertas mas oportuna cuando existen atraso en la respuesta de solicitudes 
+	ya que el sistema alerta de estas marcándolas en rojo, pero si no se ingresa a ver el listado de
+	solicitudes es posible no percatarse en primera instancia. Ademas el usuario manifestó
+	que le gustaría tener la posibilidad de editar el responsable, fecha de vencimiento y prioridad
+	de las solicitudes después que ya las definió.\\
+
+	Las preguntas de la 13 a la 15 están relacionadas al modulo de gestión de proyectos, en este
+	caso los resultados son totalmente satisfactorios, sin embargo sin perjuicio de lo anterior 
+	el usuario manifestó que le seria útil la posibilidad de agregar archivos adjuntos en la descripción
+	de los proyectos, junto con definir la etapa de este y la contra parte responsable.\\
+
+	Por ultimo las preguntas de las 16 a la 18 están relacionadas con el modulo de gestión de SCM,
+	en esta el resultado es completamente satisfactorio y el usuario no presenta ninguna observación.		
+	
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.55]{imagenes/encuestas/EncuestaPerfilJefeArea.png}
+			\caption{Gráfico Encuesta Perfil Jefe de Área}
+			\label{encuestaJefeArea}
+		\end{center}
+	\end{figure}
+
+	Por ultimo la Figura \ref{encuestaJefeDepto} muestra el promedio de los resultados de las 
+	encuesta realizada para el perfil del Jefe del Departamento de Disico, en este caso
+	las preguntas están enfocadas al modulo de atención de solicitudes y en especial
+	a las funciones relacionadas al control y monitoreo de las actividades de los funcionarios
+	de cada área, en lo que respecta a esto los resultados muestran una total conformidad
+	en este sentido, y la única observación que se realizo es la de añadir la posibilidad
+	de enviar un archivo adjunto a la respuesta del sistema el cual quede almacenado en el sistema
+	y con el envio de una copia al correo electrónico del usuario.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.55]{imagenes/encuestas/EncuestaPerfilJefeDepto.png}
+			\caption{Gráfico Encuesta Perfil Jefe de Departamento}
+			\label{encuestaJefeDepto}
+		\end{center}
+	\end{figure}
