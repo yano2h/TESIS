@@ -6,6 +6,7 @@
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
     <properties>
+      <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.SunONETransactionManagerLookup"/>
       <property name="hibernate.cache.use_second_level_cache" value="true"/>       
       <property name="hibernate.cache.region.factory_class" value="net.sf.ehcache.hibernate.EhCacheRegionFactory"/>
       <property name="hibernate.show_sql" value="true"/>
