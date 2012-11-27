@@ -18,7 +18,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Cacheable
 @Entity
-@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.READ_ONLY)
 @Table(name = "AREA")
 @NamedQueries({
     @NamedQuery(name = "Area.findAll", query = "SELECT a FROM Area a"),
@@ -40,9 +40,9 @@ public class Area implements Serializable {
     @Column(name = "descripcion_area")
     private String descripcionArea;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "areaResponsable")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "areaResponsable", fetch = FetchType.LAZY, orphanRemoval=true)
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "area")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "area",fetch = FetchType.LAZY, orphanRemoval=true)
     private List<FuncionarioDisico> funcionarioDisicoList;
 
     public Area() {
