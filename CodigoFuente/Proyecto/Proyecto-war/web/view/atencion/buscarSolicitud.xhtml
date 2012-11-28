@@ -77,13 +77,13 @@
                                      rows="20" 
                                      paginatorPosition="bottom"           
                                      selectionMode="single"
-                                     selection="#{mbSolicitudesArea.selectedSolicitud}"
+                                     selection="#{mbBusquedaSolicitud.selectedSolicitud}"
                                      rowKey="#{solicitud.codigoConsulta}"
                                      rowStyleClass="#{solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 0? 'row_solicitud_nueva':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 6? 'row_solicitud_vencida':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 8?'row_solicitud_cerrada':null))}"
                                      style="min-width: 350px;"
                                      >
 
-                            <p:ajax event="rowSelect" listener="#{mbSolicitudesArea.onRowSelect}"/>
+                            <p:ajax event="rowSelect" listener="#{mbBusquedaSolicitud.onRowSelect}"/>
 
                             <p:column headerText="Codigo" 
                                       sortBy="#{solicitud.codigoConsulta}" style="width: 65px;" >  
