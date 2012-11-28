@@ -20,7 +20,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.READ_ONLY)
 @Table(name = "TIPO_SOLICITUD_REQ")
 @NamedQueries({
-    @NamedQuery(name = "TipoSolicitudRequerimiento.findAll", query = "SELECT t FROM TipoSolicitudRequerimiento t"),
+    @NamedQuery(name = "TipoSolicitudRequerimiento.findAll", query = "SELECT t FROM TipoSolicitudRequerimiento t",hints={@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
     @NamedQuery(name = "TipoSolicitudRequerimiento.findByIdTipoSolicitudRequerimiento", query = "SELECT t FROM TipoSolicitudRequerimiento t WHERE t.idTipoSolicitudRequerimiento = :idTipoSolicitudRequerimiento")})
 public class TipoSolicitudRequerimiento implements Serializable {
     private static final long serialVersionUID = 1L;
