@@ -20,11 +20,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Proyecto.findAll", query = "SELECT p FROM Proyecto p"),
     @NamedQuery(name = "Proyecto.findByIdProyecto", query = "SELECT p FROM Proyecto p WHERE p.idProyecto = :idProyecto"),
-    @NamedQuery(name = "Proyecto.findByCodigoInterno", query = "SELECT p FROM Proyecto p WHERE p.codigoInterno = :codigoInterno"),
-    @NamedQuery(name = "Proyecto.findByNombre", query = "SELECT p FROM Proyecto p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "Proyecto.findByDescripcion", query = "SELECT p FROM Proyecto p WHERE p.descripcion = :descripcion"),
-    @NamedQuery(name = "Proyecto.findByFechaInicio", query = "SELECT p FROM Proyecto p WHERE p.fechaInicio = :fechaInicio"),
-    @NamedQuery(name = "Proyecto.findByFechaTermino", query = "SELECT p FROM Proyecto p WHERE p.fechaTermino = :fechaTermino")})
+    @NamedQuery(name = "Proyecto.findByCodigoInterno", query = "SELECT p FROM Proyecto p WHERE p.codigoInterno = :codigoInterno")})
 public class Proyecto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

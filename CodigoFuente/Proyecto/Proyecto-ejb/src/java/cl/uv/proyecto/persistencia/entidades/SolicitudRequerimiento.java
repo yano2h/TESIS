@@ -7,27 +7,41 @@ package cl.uv.proyecto.persistencia.entidades;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Basic;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Lob;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
  * @author Jano
  */
-@Entity
-@org.hibernate.annotations.Entity(dynamicUpdate=true)
+@javax.persistence.Entity
 @Table(name = "SOLICITUD_REQUERIMIENTO", uniqueConstraints=@UniqueConstraint(columnNames="codigo_consulta"))
+@org.hibernate.annotations.Entity(dynamicUpdate=true)
 @NamedQueries({
     @NamedQuery(name = "SolicitudRequerimiento.findAll", query = "SELECT s FROM SolicitudRequerimiento s"),
     @NamedQuery(name = "SolicitudRequerimiento.findByIdSolicitudRequerimiento", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.idSolicitudRequerimiento = :idSolicitudRequerimiento"),
-    @NamedQuery(name = "SolicitudRequerimiento.findByCodigoConsulta", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.codigoConsulta = :codigoConsulta"),
-    @NamedQuery(name = "SolicitudRequerimiento.findByAsunto", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.asunto = :asunto"),
-    @NamedQuery(name = "SolicitudRequerimiento.findByFechaEnvio", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.fechaEnvio = :fechaEnvio"),
-    @NamedQuery(name = "SolicitudRequerimiento.findByFechaCierre", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.fechaCierre = :fechaCierre"),
-    @NamedQuery(name = "SolicitudRequerimiento.findByFechaVencimiento", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.fechaVencimiento = :fechaVencimiento"),
-    @NamedQuery(name = "SolicitudRequerimiento.findByFechaUltimaActualizacion", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.fechaUltimaActualizacion = :fechaUltimaActualizacion"),
-    @NamedQuery(name = "SolicitudRequerimiento.findByJustificacionTrasnferencia", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.justificacionTrasnferencia = :justificacionTrasnferencia")})
+    @NamedQuery(name = "SolicitudRequerimiento.findByCodigoConsulta", query = "SELECT s FROM SolicitudRequerimiento s WHERE s.codigoConsulta = :codigoConsulta")})
 public class SolicitudRequerimiento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -94,8 +108,12 @@ public class SolicitudRequerimiento implements Serializable {
     private TipoSolicitudRequerimiento tipoSolicitud;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudRequerimiento", orphanRemoval=true)
+    @LazyCollection(value= LazyCollectionOption.FALSE)
+    @Fetch(value=FetchMode.SUBSELECT)
     private List<ComentarioSolicitud> comentarios;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudRequerimiento", orphanRemoval=true, fetch= FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudRequerimiento", orphanRemoval=true)
+    @LazyCollection(value= LazyCollectionOption.FALSE)
+    @Fetch(value=FetchMode.SUBSELECT)
     private List<ArchivoSolicitudRequerimiento> archivosAdjuntos;
     
     public SolicitudRequerimiento() {

@@ -17,8 +17,7 @@ import javax.validation.constraints.Size;
 @Table(name = "ENTREGABLE")
 @NamedQueries({
     @NamedQuery(name = "Entregable.findAll", query = "SELECT e FROM Entregable e"),
-    @NamedQuery(name = "Entregable.findByIdEntregable", query = "SELECT e FROM Entregable e WHERE e.idEntregable = :idEntregable"),
-    @NamedQuery(name = "Entregable.findByNombreEntregable", query = "SELECT e FROM Entregable e WHERE e.nombreEntregable = :nombreEntregable")})
+    @NamedQuery(name = "Entregable.findByIdEntregable", query = "SELECT e FROM Entregable e WHERE e.idEntregable = :idEntregable")})
 public class Entregable implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -18,14 +18,7 @@ import javax.validation.constraints.Size;
 @Table(name = "SOLICITUD_CAMBIO")
 @NamedQueries({
     @NamedQuery(name = "SolicitudCambio.findAll", query = "SELECT s FROM SolicitudCambio s"),
-    @NamedQuery(name = "SolicitudCambio.findByIdSolicitudCambio", query = "SELECT s FROM SolicitudCambio s WHERE s.idSolicitudCambio = :idSolicitudCambio"),
-    @NamedQuery(name = "SolicitudCambio.findByTitulo", query = "SELECT s FROM SolicitudCambio s WHERE s.titulo = :titulo"),
-    @NamedQuery(name = "SolicitudCambio.findByFechaEnvio", query = "SELECT s FROM SolicitudCambio s WHERE s.fechaEnvio = :fechaEnvio"),
-    @NamedQuery(name = "SolicitudCambio.findByFechaAnalisis", query = "SELECT s FROM SolicitudCambio s WHERE s.fechaAnalisis = :fechaAnalisis"),
-    @NamedQuery(name = "SolicitudCambio.findByFechaCierre", query = "SELECT s FROM SolicitudCambio s WHERE s.fechaCierre = :fechaCierre"),
-    @NamedQuery(name = "SolicitudCambio.findByModuloAfectado", query = "SELECT s FROM SolicitudCambio s WHERE s.moduloAfectado = :moduloAfectado"),
-    @NamedQuery(name = "SolicitudCambio.findByDescripcionResolucion", query = "SELECT s FROM SolicitudCambio s WHERE s.descripcionResolucion = :descripcionResolucion"),
-    @NamedQuery(name = "SolicitudCambio.findByAprobada", query = "SELECT s FROM SolicitudCambio s WHERE s.aprobada = :aprobada")})
+    @NamedQuery(name = "SolicitudCambio.findByIdSolicitudCambio", query = "SELECT s FROM SolicitudCambio s WHERE s.idSolicitudCambio = :idSolicitudCambio")})
 public class SolicitudCambio implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

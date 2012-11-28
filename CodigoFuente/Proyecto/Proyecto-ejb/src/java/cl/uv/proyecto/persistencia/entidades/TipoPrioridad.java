@@ -16,7 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Cacheable
 @Entity
-@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@org.hibernate.annotations.Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 @Table(name = "TIPO_PRIORIDAD")
 @NamedQueries({
     @NamedQuery(name = "TipoPrioridad.findAll", query = "SELECT t FROM TipoPrioridad t"),
@@ -33,9 +33,10 @@ public class TipoPrioridad implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombre_prioridad")
     private String nombrePrioridad;
-    @OneToMany(cascade= CascadeType.REMOVE, mappedBy = "prioridadSolicitud",fetch= FetchType.LAZY, orphanRemoval=true)
+    
+    @OneToMany(cascade= CascadeType.REMOVE, mappedBy = "prioridadSolicitud",fetch = FetchType.LAZY, orphanRemoval=true)
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "prioridadSolicitud",fetch= FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "prioridadSolicitud",fetch = FetchType.LAZY, orphanRemoval=true)
     private List<SolicitudCambio> solicitudCambioList;
 
     public TipoPrioridad() {

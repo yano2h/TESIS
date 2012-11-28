@@ -18,9 +18,7 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
     @NamedQuery(name = "TareaScmProyecto.findAll", query = "SELECT t FROM TareaScmProyecto t"),
     @NamedQuery(name = "TareaScmProyecto.findByIdTareaScm", query = "SELECT t FROM TareaScmProyecto t WHERE t.tareaScmProyectoPK.idTareaScm = :idTareaScm"),
-    @NamedQuery(name = "TareaScmProyecto.findByIdProyecto", query = "SELECT t FROM TareaScmProyecto t WHERE t.tareaScmProyectoPK.idProyecto = :idProyecto"),
-    @NamedQuery(name = "TareaScmProyecto.findByFechaInicio", query = "SELECT t FROM TareaScmProyecto t WHERE t.fechaInicio = :fechaInicio"),
-    @NamedQuery(name = "TareaScmProyecto.findByFechaTermino", query = "SELECT t FROM TareaScmProyecto t WHERE t.fechaTermino = :fechaTermino")})
+    @NamedQuery(name = "TareaScmProyecto.findByIdProyecto", query = "SELECT t FROM TareaScmProyecto t WHERE t.tareaScmProyectoPK.idProyecto = :idProyecto")})
 public class TareaScmProyecto implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId

@@ -16,11 +16,10 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "COMENTARIO_SOLICITUD")
+@org.hibernate.annotations.Entity(dynamicUpdate=true)
 @NamedQueries({
     @NamedQuery(name = "ComentarioSolicitud.findAll", query = "SELECT c FROM ComentarioSolicitud c"),
-    @NamedQuery(name = "ComentarioSolicitud.findByIdComentario", query = "SELECT c FROM ComentarioSolicitud c WHERE c.idComentario = :idComentario"),
-    @NamedQuery(name = "ComentarioSolicitud.findByFecha", query = "SELECT c FROM ComentarioSolicitud c WHERE c.fecha = :fecha"),
-    @NamedQuery(name = "ComentarioSolicitud.findByVisible", query = "SELECT c FROM ComentarioSolicitud c WHERE c.visible = :visible")})
+    @NamedQuery(name = "ComentarioSolicitud.findByIdComentario", query = "SELECT c FROM ComentarioSolicitud c WHERE c.idComentario = :idComentario")})
 public class ComentarioSolicitud implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

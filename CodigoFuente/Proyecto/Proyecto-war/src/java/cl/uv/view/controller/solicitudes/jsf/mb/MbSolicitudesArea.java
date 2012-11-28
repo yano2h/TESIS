@@ -54,7 +54,7 @@ public class MbSolicitudesArea extends MbBase implements Serializable{
     }
 
     public void onRowSelect(SelectEvent event) {
-        JsfUtils.redirect("detalleSolicitud.xhtml?codigo=" + selectedSolicitud.getCodigoConsulta());
+        JsfUtils.redirect("solicitud.xhtml?codigo=" + selectedSolicitud.getCodigoConsulta());
     }
 
     public void reload() {

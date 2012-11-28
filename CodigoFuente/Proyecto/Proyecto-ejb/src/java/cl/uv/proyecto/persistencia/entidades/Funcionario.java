@@ -20,13 +20,7 @@ import javax.validation.constraints.Size;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
     @NamedQuery(name = "Funcionario.findAll", query = "SELECT f FROM Funcionario f"),
-    @NamedQuery(name = "Funcionario.findByRut", query = "SELECT f FROM Funcionario f WHERE f.rut = :rut"),
-    @NamedQuery(name = "Funcionario.findByNombre", query = "SELECT f FROM Funcionario f WHERE f.nombre = :nombre"),
-    @NamedQuery(name = "Funcionario.findByApellidoPaterno", query = "SELECT f FROM Funcionario f WHERE f.apellidoPaterno = :apellidoPaterno"),
-    @NamedQuery(name = "Funcionario.findByApellidoMaterno", query = "SELECT f FROM Funcionario f WHERE f.apellidoMaterno = :apellidoMaterno"),
-    @NamedQuery(name = "Funcionario.findByCorreoUv", query = "SELECT f FROM Funcionario f WHERE f.correoUv = :correoUv"),
-    @NamedQuery(name = "Funcionario.findByFechaUltimoAcceso", query = "SELECT f FROM Funcionario f WHERE f.fechaUltimoAcceso = :fechaUltimoAcceso"),
-    @NamedQuery(name = "Funcionario.findByFechaPrimerAcceso", query = "SELECT f FROM Funcionario f WHERE f.fechaPrimerAcceso = :fechaPrimerAcceso")})
+    @NamedQuery(name = "Funcionario.findByRut", query = "SELECT f FROM Funcionario f WHERE f.rut = :rut")})
 public class Funcionario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -58,16 +52,13 @@ public class Funcionario implements Serializable {
     @Column(name = "fecha_primer_acceso")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPrimerAcceso;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "destinatario")
-    private List<Notificacion> notificaciones;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitante", fetch= FetchType.LAZY, orphanRemoval=true)
-    private List<SolicitudRequerimiento> solicitudesRequerimientoEnviadas;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "autor")
-    private List<ComentarioSolicitud> comentarioSolicitudList;
     
-    @Transient
-    private String rol;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "destinatario", fetch = FetchType.LAZY)
+    private List<Notificacion> notificaciones;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "solicitante", fetch = FetchType.LAZY, orphanRemoval=true)
+    private List<SolicitudRequerimiento> solicitudesRequerimientoEnviadas;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "autor", fetch = FetchType.LAZY)
+    private List<ComentarioSolicitud> comentarioSolicitudList;
 
     public Funcionario() {
     }
@@ -161,14 +152,6 @@ public class Funcionario implements Serializable {
 
     public void setComentarioSolicitudList(List<ComentarioSolicitud> comentarioSolicitudList) {
         this.comentarioSolicitudList = comentarioSolicitudList;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
     }
 
     public String getNombreCompleto(){

@@ -8,20 +8,20 @@ import cl.uv.proyecto.persistencia.ejb.ArchivoSolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ComentarioSolicitudFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.*;
+import cl.uv.proyecto.persistencia.jsf.mb.FuncionarioDisicoController;
 import cl.uv.proyecto.requerimientos.ejb.SolicitudRequerimientoEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbBase;
 import cl.uv.view.controller.base.jsf.mb.MbFilesUpload;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
-import org.primefaces.model.DefaultStreamedContent;
 
 /**
  *
@@ -41,6 +41,9 @@ public class MbDetalleSolicitud extends MbBase implements Serializable {
     private SolicitudRequerimientoEJBLocal solicitudRequerimientoEJB;
     @ManagedProperty(value = "#{mbFilesUpload}")
     private MbFilesUpload mbFilesUpload;
+    @ManagedProperty(value = "#{funcionarioDisicoController}")
+    private FuncionarioDisicoController mbFuncionarioDisico;
+    
     private String codigo;
     private SolicitudRequerimiento solicitud;
     private String comentario;
@@ -50,6 +53,7 @@ public class MbDetalleSolicitud extends MbBase implements Serializable {
     private String emailsRespuestaManual;
     private String asuntoRespuestaManual;
     private Area nuevaArea;
+    private List<FuncionarioDisico> funcionariosArea;
 
     public MbDetalleSolicitud() {
         comentario = "";
@@ -60,13 +64,16 @@ public class MbDetalleSolicitud extends MbBase implements Serializable {
         asuntoRespuestaManual = "";
     }
 
+    @PostConstruct
     public void init() {
+        codigo = JsfUtils.getRequestParameter("codigo");
         solicitud = solicitudFacade.buscarPorCodigo(codigo);
+
         if (solicitud == null) {
             JsfUtils.addErrorMessage("Error:", "La solicitud con codigo " + codigo + " no pudo ser encontrada");
         } else {
-//            solicitud.setComentarios(comentarioFacade.buscarComentariosPorSolicitud(solicitud.getIdSolicitudRequerimiento()));
-//            solicitud.setArchivosAdjuntos(archivosAdjuntosFacade.buscarArchivosPorSolicitud(solicitud));
+            solicitud.setComentarios(comentarioFacade.buscarComentariosPorSolicitud(solicitud.getIdSolicitudRequerimiento()));
+            solicitud.setArchivosAdjuntos(archivosAdjuntosFacade.buscarArchivosPorSolicitud(solicitud));
         }
     }
 
@@ -74,6 +81,11 @@ public class MbDetalleSolicitud extends MbBase implements Serializable {
         this.mbFilesUpload = mbFilesUpload;
     }
 
+    public void setMbFuncionarioDisico(FuncionarioDisicoController mbFuncionarioDisico) {
+        this.mbFuncionarioDisico = mbFuncionarioDisico;
+    }
+
+    
     public SolicitudRequerimiento getSolicitud() {
         return solicitud;
     }
@@ -141,21 +153,23 @@ public class MbDetalleSolicitud extends MbBase implements Serializable {
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
     }
-    
+
     public Date getMinDate() {
         Date d = new Date();
         d = new Date(d.getTime() + (1000 * 60 * 30));
         return d;
     }
-    
+
     public void comentar(ActionEvent event) {
         if (!comentario.isEmpty()) {
             solicitudRequerimientoEJB.comentarSolicitud(comentario, solicitud, getFuncionario());
         }
         comentario = "";
+        solicitud.setComentarios(comentarioFacade.buscarComentariosPorSolicitud(solicitud.getIdSolicitudRequerimiento()));
     }
 
     public void eliminarComentario(ComentarioSolicitud c) {
+        System.out.println("EliminarCOmentario - " + c.getSolicitudRequerimiento().getAsunto());
         c.setVisible(false);
         comentarioFacade.edit(c);
     }
@@ -166,39 +180,41 @@ public class MbDetalleSolicitud extends MbBase implements Serializable {
             solicitudRequerimientoEJB.enviarRespuestaDirecta(solicitud, true, mbFilesUpload.extraerArchivosAdjuntos());
         }
         respuesta = "";
+        solicitud.setArchivosAdjuntos(archivosAdjuntosFacade.buscarArchivosPorSolicitud(solicitud));
     }
-    
+
     public void enviarRespuestaManual() {
         if (!respuesta.isEmpty()) {
             String[] direcciones = emailsRespuestaManual.replaceAll(" ", "").split(",");
             solicitud.setRespuesta(respuesta);
             solicitudRequerimientoEJB.enviarRespuestaManual(solicitud, direcciones, asuntoRespuestaManual, mbFilesUpload.extraerArchivosAdjuntos());
         }
+        solicitud.setArchivosAdjuntos(archivosAdjuntosFacade.buscarArchivosPorSolicitud(solicitud));
     }
-    
-    public void respuestaAlJefeDeArea(){
+
+    public void respuestaAlJefeDeArea() {
         solicitudRequerimientoEJB.enviarRespuestaJefeArea(solicitud);
     }
-    
+
     public void transferirSolicitud() {
         if (!motivoTransferencia.isEmpty()) {
             solicitudRequerimientoEJB.transferirSolicitud(solicitud, nuevaArea, motivoTransferencia);
         }
         motivoTransferencia = "";
     }
-    
+
     public void rechazarSolcitiud() {
         if (!motivoRechazo.isEmpty()) {
             solicitud.setRespuesta(motivoRechazo);
             solicitudRequerimientoEJB.rechazarSolicitud(solicitud);
         }
     }
-    
+
     public void convertirEnProyecto() {
         solicitudRequerimientoEJB.convertirSolicitudEnProyecto(solicitud);
         JsfUtils.handleNavigation("/view/proyectos/crearProyecto?faces-redirect=true");
     }
-    
+
     public void asignarSolicitud() {
         if (solicitud.getResponsable() == null) {
             JsfUtils.addErrorMessage("Error al asignar responsable solicitud", "Debe seleccionar un funcionario para poder asignar la solicitud ");
@@ -207,9 +223,23 @@ public class MbDetalleSolicitud extends MbBase implements Serializable {
             JsfUtils.addSuccessMessage("Asignacion Exitosa", "La solicitud fue asignada exitosamente a: " + solicitud.getResponsable().getNombre() + " " + solicitud.getResponsable().getApellidoPaterno() + " " + solicitud.getResponsable().getApellidoMaterno());
         }
     }
-    
-    public void iniciarSolicitud(){
+
+    public void iniciarSolicitud() {
         solicitudRequerimientoEJB.iniciarSolicitud(solicitud);
         JsfUtils.addSuccessMessage("Operación Exitosa", "La solicitud a sido cambiada correctamente al estado Iniciada");
     }
+    
+    public void cargarFuncionariosArea(){
+        funcionariosArea = mbFuncionarioDisico.getFuncionariosArea();
+    }
+
+    public List<FuncionarioDisico> getFuncionariosArea() {
+        return funcionariosArea;
+    }
+
+    public void setFuncionariosArea(List<FuncionarioDisico> funcionariosArea) {
+        this.funcionariosArea = funcionariosArea;
+    }
+    
+    
 }

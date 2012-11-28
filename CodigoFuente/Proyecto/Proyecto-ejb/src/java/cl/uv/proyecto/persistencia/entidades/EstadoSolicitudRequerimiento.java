@@ -17,7 +17,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Cacheable
 @Entity
-@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.READ_ONLY)
 @Table(name = "ESTADO_SOLICITUD_REQ")
 @NamedQueries({
     @NamedQuery(name = "EstadoSolicitudRequerimiento.findAll", query = "SELECT e FROM EstadoSolicitudRequerimiento e"),
@@ -39,7 +39,7 @@ public class EstadoSolicitudRequerimiento implements Serializable {
     private String descripcionEstado;
     
     /* Ver si borrar */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoSolicitud", orphanRemoval=true)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "estadoSolicitud",fetch= FetchType.LAZY, orphanRemoval=true)
     private List<SolicitudRequerimiento> solicitudRequerimientoList;
 
     public EstadoSolicitudRequerimiento() {

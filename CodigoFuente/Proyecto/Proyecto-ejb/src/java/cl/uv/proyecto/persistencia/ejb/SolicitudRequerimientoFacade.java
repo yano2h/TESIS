@@ -109,21 +109,43 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
 
     @Override
     public void contarSolicitudes(FuncionarioDisico funcionario) {
-        String query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE responsable = ? AND estado_solicitud = ?";
-        Query q = em.createNativeQuery(query);
-        q.setParameter(1, funcionario.getRut());
-
-        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_ASIGNADA"));
-        funcionario.setCantidadDeSolicitudesAsignadas(((BigInteger) q.getSingleResult()).intValue());
-
-        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_PENDIENTE"));
-        funcionario.setCantidadDeSolicitudesPendientes(((BigInteger) q.getSingleResult()).intValue());
-
-        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_INICIADA"));
-        funcionario.setCantidadDeSolicitudesIniciadas(((BigInteger) q.getSingleResult()).intValue());
-
-        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
-        funcionario.setCantidadDeSolicitudesVencidas(((BigInteger) q.getSingleResult()).intValue());
+          String query = "SELECT COUNT(*) AS total,"+ 
+                         "SUM(CASE estado_solicitud WHEN ? THEN 1 ELSE 0 END) AS cantidad_asignadas, "+
+                         "SUM(CASE estado_solicitud WHEN ? THEN 1 ELSE 0 END) AS cantidad_pendientes, "+
+                         "SUM(CASE estado_solicitud WHEN ? THEN 1 ELSE 0 END) AS cantidad_iniciadas, "+
+                         "SUM(CASE estado_solicitud WHEN ? THEN 1 ELSE 0 END) AS cantidad_vencidas "+
+                         "FROM solicitud_requerimiento WHERE responsable = ?";
+          Query q = em.createNativeQuery(query);
+          q.setParameter(1, Resources.getValueShort("Estados", "EstadoSR_ASIGNADA"));
+          q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_PENDIENTE"));
+          q.setParameter(3, Resources.getValueShort("Estados", "EstadoSR_INICIADA"));
+          q.setParameter(4, Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
+          q.setParameter(5, funcionario.getRut());
+          Object[] result = (Object[])q.getSingleResult();
+   
+          for (Object object : result) {
+              System.out.println("Obj:"+object);
+          }
+          funcionario.setCantidadDeSolicitudesAsignadas((result[1]!=null)?((BigInteger)result[1]).intValue():0);
+          funcionario.setCantidadDeSolicitudesPendientes((result[2]!=null)?((BigInteger)result[2]).intValue():0);
+          funcionario.setCantidadDeSolicitudesIniciadas((result[3]!=null)?((BigInteger)result[3]).intValue():0);
+          funcionario.setCantidadDeSolicitudesVencidas((result[4]!=null)?((BigInteger)result[4]).intValue():0);
+          
+//        String query = "SELECT COUNT(*) FROM solicitud_requerimiento WHERE responsable = ? AND estado_solicitud = ?";
+//        Query q = em.createNativeQuery(query);
+//        q.setParameter(1, funcionario.getRut());
+//
+//        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_ASIGNADA"));
+//        funcionario.setCantidadDeSolicitudesAsignadas(((BigInteger) q.getSingleResult()).intValue());
+//
+//        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_PENDIENTE"));
+//        funcionario.setCantidadDeSolicitudesPendientes(((BigInteger) q.getSingleResult()).intValue());
+//
+//        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_INICIADA"));
+//        funcionario.setCantidadDeSolicitudesIniciadas(((BigInteger) q.getSingleResult()).intValue());
+//
+//        q.setParameter(2, Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
+//        funcionario.setCantidadDeSolicitudesVencidas(((BigInteger) q.getSingleResult()).intValue());
     }
 
     @Override
