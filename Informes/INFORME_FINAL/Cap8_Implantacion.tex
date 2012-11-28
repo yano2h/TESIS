@@ -100,7 +100,7 @@ abunda en Internet.
 		\item Reiniciar glassfish para que se detecte el driver cargado. Para esto
 		puede utilizar el comando \textit{asadmin restart-domain}.
 		\item Una vez reiniciado, ingresar a la interfaz de administración.
-		\item Escoger las opciones Recursos -> JDBC -> Conjuntos de Conexiones JDBC
+		\item Escoger las opciones Recursos \(\rightarrow\)  JDBC \(\rightarrow\) Conjuntos de Conexiones JDBC
 		y escoger la opción Nuevo, para comenzar a crear un nuevo recurso el cual puede
 		nombrar como prefiera, y deberá escoger \textit{javax.sql.XADataSource} como 
 		Tipo de Recurso y \textit{Postresql} como Proveedor. 
@@ -130,7 +130,7 @@ abunda en Internet.
 		\end{figure}	
 
 		\item Crear un nuevo Recurso JDBC  que utilice la conexión recién creada.
-		Para esto ir a la opción Recursos -> JDBC -> Recursos JDBC y escoger la opción 
+		Para esto ir a la opción Recursos \(\rightarrow\)  JDBC \(\rightarrow\)  Recursos JDBC y escoger la opción 
 		Nuevo. El nombre JDNI del recurso debe ser \textit{"jdbc/poolSSRSCM"}, este 
 		es el recurso que buscara la aplicación por lo que debe mantener su nombre,
 		en caso cambiarlo, también debe hacerlo en el código fuente de la aplicación y 
@@ -174,7 +174,7 @@ funciones trabajen correctamente, es necesario crear un recurso de sesión JavaMa
 dentro del servidor Glassfish.\\
 
 Para crear un recurso de sesión JavaMail, es necesario ingresar a la consola de
-administración de glassfish y seleccionar la opción \textit{Recursos} -> \textit{Sesiones JavaMail} .
+administración de glassfish y seleccionar la opción \textit{Recursos} \(\rightarrow\) \textit{Sesiones JavaMail} .
 
 	\begin{figure}[H]
 	\begin{center}
