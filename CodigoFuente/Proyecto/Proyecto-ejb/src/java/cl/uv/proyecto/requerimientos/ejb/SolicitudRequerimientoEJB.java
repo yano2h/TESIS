@@ -5,7 +5,6 @@
 package cl.uv.proyecto.requerimientos.ejb;
 
 import cl.uv.model.base.utils.Resources;
-import cl.uv.proyecto.file.ejb.FileManagerEJB;
 import cl.uv.proyecto.file.ejb.FileManagerEJBLocal;
 import cl.uv.proyecto.mensajeria.ejb.EmailEJBLocal;
 import cl.uv.proyecto.mensajeria.ejb.NotificacionEJBLocal;
@@ -18,11 +17,8 @@ import cl.uv.proyecto.persistencia.entidades.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
 
 /**
  *
@@ -179,6 +175,12 @@ public class SolicitudRequerimientoEJB implements SolicitudRequerimientoEJBLocal
             solicitud.setEstadoSolicitud(estadoSolicitudFacade.find( Resources.getValueShort("Estados", "EstadoSR_PENDIENTE") ));
             solicitudFacade.edit(solicitud);
         }
+    }
+    
+    @Override
+    public void dejarPendienteSolicitud(Long idSolicitud){
+        SolicitudRequerimiento s = solicitudFacade.find(idSolicitud);
+        dejarPendienteSolicitud(s);
     }
     
     @Override
