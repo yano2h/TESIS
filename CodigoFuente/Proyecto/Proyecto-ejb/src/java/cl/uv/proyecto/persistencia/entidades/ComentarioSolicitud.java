@@ -19,7 +19,8 @@ import javax.validation.constraints.Size;
 @org.hibernate.annotations.Entity(dynamicUpdate=true)
 @NamedQueries({
     @NamedQuery(name = "ComentarioSolicitud.findAll", query = "SELECT c FROM ComentarioSolicitud c"),
-    @NamedQuery(name = "ComentarioSolicitud.findByIdComentario", query = "SELECT c FROM ComentarioSolicitud c WHERE c.idComentario = :idComentario")})
+    @NamedQuery(name = "ComentarioSolicitud.findByIdComentario", query = "SELECT c FROM ComentarioSolicitud c WHERE c.idComentario = :idComentario"),
+    @NamedQuery(name = "ComentarioSolicitud.findByIdSolicitud", query = "SELECT c FROM ComentarioSolicitud c WHERE c.solicitudRequerimiento.idSolicitudRequerimiento = :id ORDER BY c.fecha DESC")})
 public class ComentarioSolicitud implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
