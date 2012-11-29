@@ -29,14 +29,14 @@ public class MbTareasProyecto implements Serializable {
     private TareaProyecto tareaSelected;
     private Proyecto proyecto;
     private Integer porcetajeAvance;
-
-    public MbTareasProyecto() {
-    }
-
+    private String porcentajeConFormato;
+    
     @PostConstruct
     private void init() {
         proyecto = (Proyecto) JsfUtils.getParametro("proyecto");
         tareasProyecto = tareaProyectoFacade.buscarTareasPorProyecto(proyecto);
+        porcetajeAvance = tareaProyectoFacade.calcularAvancePromedioTareasPorProyecto(proyecto);
+        porcentajeConFormato = porcetajeAvance+"%";
     }
 
     public Proyecto getProyecto() {
@@ -47,15 +47,14 @@ public class MbTareasProyecto implements Serializable {
         return tareasProyecto;
     }
 
-    public Integer getPorcetajeAvance() {
-        return tareaProyectoFacade.calcularAvancePromedioTareasPorProyecto(proyecto);
+    public String getPorcentajeConFormato() {
+        return porcentajeConFormato;
     }
 
-    public void onRowSelect(){
-    
+    public void setPorcentajeConFormato(String porcentajeConFormato) {
+        this.porcentajeConFormato = porcentajeConFormato;
     }
     
-    public void listener(){
-        System.out.println("POOLING");
+    public void onRowSelect(){    
     }
 }
