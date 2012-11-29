@@ -51,13 +51,13 @@ public class Proyecto implements Serializable {
     @Column(name = "fecha_termino")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaTermino;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
     private List<ItemConfiguracion> itemsDeConfiguracion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
     private List<TareaProyecto> tareasAgendadas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
     private List<TareaScmProyecto> tareasScmProyecto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
     private List<ParticipanteProyecto> participantes;
     @JoinColumn(name = "estado_proyecto", referencedColumnName = "id_estado_proyecto")
     @ManyToOne(optional = false)
@@ -65,9 +65,9 @@ public class Proyecto implements Serializable {
     @JoinColumn(name = "tipo_proyecto", referencedColumnName = "id_tipo_proyecto")
     @ManyToOne(optional = false)
     private TipoProyecto tipoProyecto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
     private List<SolicitudCambio> solicitudesDeCambio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto", orphanRemoval=true, fetch= FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto", orphanRemoval=true)
     private List<ArchivoProyecto> archivoProyectoList;
 
     public Proyecto() {
