@@ -1,0 +1,118 @@
+\select@language {spanish}
+\contentsline {chapter}{Resumen}{\es@scroman {iii}}{chapter*.1}
+\contentsline {chapter}{Agradecimientos}{\es@scroman {iv}}{chapter*.2}
+\contentsline {chapter}{\numberline {1}Introducci\'on}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Marco Conceptual}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Conceptos y Terminologia}{3}{section.2.1}
+\contentsline {section}{\numberline {2.2}Metodolog\IeC {\'\i }as para la solicitudes de Requerimientos}{4}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}ITIL v3 - Petici\'on de Servicios TI}{5}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}ITIL v3 - Gesti\'on de Incidencias}{6}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.3}Est\'andares para la descripci\'on de Requerimientos}{8}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}IEEE Std-830-1998 : Especificaci\'on de los Requisitos del Software}{8}{subsection.2.3.1}
+\contentsline {section}{\numberline {2.4}Herramientas para la Solicitudes de Requerimientos}{9}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Hesk}{9}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}osTicket}{11}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}OTRS}{12}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}SysAid}{13}{subsection.2.4.4}
+\contentsline {subsection}{\numberline {2.4.5}ChangeGear - ServiceDesk}{15}{subsection.2.4.5}
+\contentsline {section}{\numberline {2.5}Est\'andares para SCM}{17}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}ISO Sistemas de Gesti\'on de calidad. Directrices para la Gesti\'on de la Configuraci\'on}{17}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}IEEE 828-2005 Plan de Gesti\'on de Configuraci\'on de Software}{18}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}IEEE 828-2012 Gesti\'on de la Configuraci\'on en Sistemas e Ingenier\IeC {\'\i }a de Software}{19}{subsection.2.5.3}
+\contentsline {subsection}{\numberline {2.5.4}ITIL v3 - Gesti\'on del Cambio}{19}{subsection.2.5.4}
+\contentsline {subsection}{\numberline {2.5.5}ITIL v3 - Gesti\'on de la Configuraci\'on y Activos del Servicio}{21}{subsection.2.5.5}
+\contentsline {section}{\numberline {2.6}Herramientas para SCM}{22}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}SVN}{22}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.2}Mercurial}{23}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.3}Git}{23}{subsection.2.6.3}
+\contentsline {subsection}{\numberline {2.6.4}ChangeGear - Change Edition}{23}{subsection.2.6.4}
+\contentsline {section}{\numberline {2.7}Comparaci\'on entre Estandares}{24}{section.2.7}
+\contentsline {subsection}{\numberline {2.7.1}Comparaci\'on entre est\'andares y metodolog\IeC {\'\i }as para solicitud y descripci\'on Requerimientos}{24}{subsection.2.7.1}
+\contentsline {subsection}{\numberline {2.7.2}Comparaci\'on entre est\'andares para SCM}{25}{subsection.2.7.2}
+\contentsline {section}{\numberline {2.8}Comparaci\'on entre Herramientas}{25}{section.2.8}
+\contentsline {subsection}{\numberline {2.8.1}Comparaci\'on entre Herramientas para Solicitud de Requerimientos}{26}{subsection.2.8.1}
+\contentsline {subsection}{\numberline {2.8.2}Comparaci\'on ente Herramientas para SCM}{28}{subsection.2.8.2}
+\contentsline {chapter}{\numberline {3}Definici\'on del Problema}{29}{chapter.3}
+\contentsline {section}{\numberline {3.1}Situaci\'on Actual}{29}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Proceso para la Solicitud de Requerimientos}{29}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Gesti\'on de Requerimientos en los Proyectos}{30}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Metodolog\IeC {\'\i }a de SCM}{30}{subsection.3.1.3}
+\contentsline {section}{\numberline {3.2}Formulaci\'on del Problema}{33}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Problemas en las Solicitudes de Requerimientos}{33}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Problemas en la Gesti\'on de Requerimientos en los \\Proyectos}{34}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Problemas en la Solicitudes de SCM}{34}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Soluci\'on Propuesta}{35}{section.3.3}
+\contentsline {section}{\numberline {3.4}Objetivos}{35}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Objetivo General}{35}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Objetivos Espec\IeC {\'\i }ficos}{35}{subsection.3.4.2}
+\contentsline {chapter}{\numberline {4}An\'alisis}{36}{chapter.4}
+\contentsline {section}{\numberline {4.1}Especificaci\'on de Requerimientos}{36}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Acronimos y Abreviaturas}{36}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Tipos de Usuarios}{36}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Requerimientos Funcionales}{37}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Requerimientos No Funcionales}{43}{subsection.4.1.4}
+\contentsline {section}{\numberline {4.2}Casos de Uso}{43}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Modelo de Casos de Uso}{43}{subsection.4.2.1}
+\contentsline {section}{\numberline {4.3}Modelo Conceptual}{46}{section.4.3}
+\contentsline {chapter}{\numberline {5}Dise\~no}{48}{chapter.5}
+\contentsline {section}{\numberline {5.1}Dise\~no Arquitect\'onico}{48}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Restricciones Arquitecturales}{48}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Estructura del Sistema}{49}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Estilo de Descomposici\'on Modular}{50}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Modelo de Control}{53}{subsection.5.1.4}
+\contentsline {section}{\numberline {5.2}Dise\~no de Interfaz}{53}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Estilo de Interacci\'on}{53}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Pautas de Estilo}{54}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Esquemas de Navegaci\'on}{55}{subsection.5.2.3}
+\contentsline {section}{\numberline {5.3}Dise\~no L\'ogico}{58}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Dise\~no de Clases}{58}{subsection.5.3.1}
+\contentsline {section}{\numberline {5.4}Dise\~no de Datos}{60}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Modelo Entidad Relaci\'on}{60}{subsection.5.4.1}
+\contentsline {section}{\numberline {5.5}Dise\~no de Pruebas}{63}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Pruebas Unitarias}{63}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}Pruebas de Integraci\'on}{64}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.3}Pruebas de Rendimiento}{66}{subsection.5.5.3}
+\contentsline {subsection}{\numberline {5.5.4}Pruebas de Aceptaci\'on}{68}{subsection.5.5.4}
+\contentsline {subsection}{\numberline {5.5.5}Pruebas Beta}{71}{subsection.5.5.5}
+\contentsline {chapter}{\numberline {6}Implementaci\'on}{77}{chapter.6}
+\contentsline {section}{\numberline {6.1}Plataforma de Desarrollo}{77}{section.6.1}
+\contentsline {section}{\numberline {6.2}Herramientas de Software}{77}{section.6.2}
+\contentsline {section}{\numberline {6.3}Herramientas de Hardware}{78}{section.6.3}
+\contentsline {section}{\numberline {6.4}Lenguajes de Programaci\'on y Frameworks}{78}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}Lenguajes}{78}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}Frameworks}{79}{subsection.6.4.2}
+\contentsline {section}{\numberline {6.5}Estrategia de Implementaci\'on}{79}{section.6.5}
+\contentsline {chapter}{\numberline {7}Pruebas}{86}{chapter.7}
+\contentsline {section}{\numberline {7.1}Pruebas Unitarias}{86}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}An\'alisis de Resultados}{92}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.2}Problemas detectados}{92}{subsection.7.1.2}
+\contentsline {section}{\numberline {7.2}Pruebas Integraci\'on}{93}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}An\'alisis de Resultados}{94}{subsection.7.2.1}
+\contentsline {section}{\numberline {7.3}Pruebas de Aceptaci\'on}{95}{section.7.3}
+\contentsline {subsection}{\numberline {7.3.1}Resultados y Problemas detectados}{95}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.2}An\'alisis de Resultados}{95}{subsection.7.3.2}
+\contentsline {section}{\numberline {7.4}Pruebas de Rendimiento}{96}{section.7.4}
+\contentsline {subsection}{\numberline {7.4.1}An\'alisis de Resultados}{97}{subsection.7.4.1}
+\contentsline {section}{\numberline {7.5}Pruebas Beta}{101}{section.7.5}
+\contentsline {subsection}{\numberline {7.5.1}Resultados y Problemas detectados}{102}{subsection.7.5.1}
+\contentsline {subsection}{\numberline {7.5.2}An\'alisis de Resultados}{106}{subsection.7.5.2}
+\contentsline {chapter}{\numberline {8}Implantaci\'on}{111}{chapter.8}
+\contentsline {section}{\numberline {8.1}Software Necesario}{111}{section.8.1}
+\contentsline {section}{\numberline {8.2}Consideraciones Previas}{111}{section.8.2}
+\contentsline {section}{\numberline {8.3}Configurar la Base de Datos}{112}{section.8.3}
+\contentsline {subsection}{\numberline {8.3.1}Creaci\'on de la Base de Datos}{112}{subsection.8.3.1}
+\contentsline {subsection}{\numberline {8.3.2}Poblamiento de la Base de Datos}{112}{subsection.8.3.2}
+\contentsline {subsection}{\numberline {8.3.3}Configurar PostgreSQL}{112}{subsection.8.3.3}
+\contentsline {subsection}{\numberline {8.3.4}Crear Pools de conexi\'on en GlassFish}{113}{subsection.8.3.4}
+\contentsline {section}{\numberline {8.4}Instalaci\'on de Hibernate}{115}{section.8.4}
+\contentsline {section}{\numberline {8.5}Configuraci\'on para el env\IeC {\'\i }o de Correo Electr\'onico}{116}{section.8.5}
+\contentsline {section}{\numberline {8.6}Configuraci\'on para subir y descargar archivos}{118}{section.8.6}
+\contentsline {section}{\numberline {8.7}Configuraci\'on de Seguridad OpenAM}{118}{section.8.7}
+\contentsline {chapter}{\numberline {9}Conclusi\'on}{120}{chapter.9}
+\contentsline {chapter}{Bibliograf\'{\i }a}{122}{chapter*.6}
+\contentsline {chapter}{\numberline {A}Casos de Uso Extendidos}{125}{appendix.Alph1}
+\contentsline {chapter}{\numberline {B}Diccionario de Datos}{192}{appendix.Alph2}
+\contentsline {chapter}{\numberline {C}Casos de Uso Reales}{197}{appendix.Alph3}
+\contentsline {chapter}{\numberline {D}Descripci\'on de las clases}{264}{appendix.Alph4}
+\contentsline {chapter}{\numberline {E}Descripci\'on de las Pruebas de Aceptaci\'on}{278}{appendix.Alph5}
+\contentsline {chapter}{\numberline {F}Resultados de las Pruebas de Aceptaci\'on}{292}{appendix.Alph6}

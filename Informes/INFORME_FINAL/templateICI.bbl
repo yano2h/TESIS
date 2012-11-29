@@ -1,0 +1,131 @@
+\begin{thebibliography}{10}
+
+\bibitem{paloma}
+P.~Méndez, ``{Desarrollo de Metodologías de SQA y SCM para la Dirección de
+  Servicios de Información y Computación},'' {Trabajo de Título}, Universidad
+  de Valparaíso, 2011.
+
+\bibitem{disico}
+{Universidad de Valparaíso}, ``Dirección de servicios de información y
+  computación.'' Último acceso: 4 Abril 2012, \url{http://www.disico.uv.cl}.
+
+\bibitem{decreto427}
+{Rectoría de la Universidad de Valparaíso}, ``Decreto universitario nº427.''
+  Último acceso: 4 Abril 2012,
+  \url{http://disico.uv.cl/images/docs/decreto427.pdf}.
+
+\bibitem{ieee610.12:1990}
+{The Institute of Electrical and Eletronics Engineers}, ``{IEEE Standard
+  Glossary of Software Engineering Terminology}.'' IEEE Standard, September
+  1990.
+
+\bibitem{helpdesk}
+{Coasin Group}, ``{Mesa de Ayuda TI}.'' Último acceso: 25 Abril 2012,
+  \url{http://www.coasin.cl/index.php?id=246}.
+
+\bibitem{itil_v3}
+{Osiatis}, ``{ITIL V3 Gestión de Servicios TI}.'' Último acceso: 1 Mayo 2012,
+  \url{http://itilv3.osiatis.es/}.
+
+\bibitem{hesk}
+{Hesk}, ``{Hesk Software Help}.'' Último acceso: 25 Abril 2012,
+  \url{http://www.hesk.com}.
+
+\bibitem{osticket}
+{osTicket}, ``{osTicket Support Ticket System}.'' Último acceso: 25 Abril 2012,
+  \url{http://osticket.com/}.
+
+\bibitem{otrs}
+{OTRS Group}, ``{OTRS Help Desk}.'' Último acceso: 25 Abril 2012,
+  \url{http://www.otrs.com/es}.
+
+\bibitem{SysAid}
+{SysAid Technologies}, ``{SysAid IT}.'' Último acceso: 30 Abril 2012,
+  \url{http://www.sysaid.com}.
+
+\bibitem{changeGear}
+{Sun View}, ``{ChangeGear - Service Desk}.'' Último acceso: 25 Abril 2012,
+  \url{http://www.sunviewsoftware.com/products/servicedesk.aspx}.
+
+\bibitem{iso10007}
+{International Organization for Standardization}, {\em {ISO} 10007: 2003 --
+  Quality management systems -- Guidelines for configuration management}, 2003.
+
+\bibitem{IEEE828}
+{IEEE}, {\em {IEEE Standard for Software Configuration Management Plans}}.
+\newblock {The Institute of Electrical and Electronics Engineers, Inc.}, 2005.
+
+\bibitem{IEEE828_2012}
+{IEEE}, {\em {IEEE Standard for Configuration Management in Systems and
+  Software Engineering}}.
+\newblock {The Institute of Electrical and Electronics Engineers, Inc.}, 2012.
+
+\bibitem{javaee}
+{Oracle}, ``The java ee 6 tutorial.'' Último acceso: 1 Junio 2012,
+  \url{http://docs.oracle.com/javaee/6/tutorial/doc/}.
+
+\bibitem{sommerville}
+I.~Sommerville, {\em Ingenieria de Software}.
+\newblock Pearson Addison Wesley, 2005.
+\newblock 7ma Edición.
+
+\bibitem{decreto03301}
+{Rectoría de la Universidad de Valparaíso}, ``Decreto exento nº 03301.'' Último
+  acceso: 27 Junio 2012,
+  \url{http://uv.cl/universidad/descargas/archivos/decreto_03301.pdf}, 2009.
+
+\bibitem{normasGraficas}
+{Dirección de Extensión y Comunicaciones}, ``Manual de normas gráficas de la
+  universidad de valparaíso.'' Último acceso: 27 Junio 2012,
+  \url{http://uv.cl/universidad/descargas/archivos/manualdenormasUV.pdf}, 2009.
+
+\bibitem{ing_soft_ep}
+{Roger Pressman}, {\em {Ingeniería del Software: Un enfoque practico}}.
+\newblock {McGraw-Hill}, 2005.
+
+\bibitem{disenoTDD}
+C.~Jurado, {\em Diseñoo Ágil con TDD}.
+\newblock Lulu, 2010.
+
+\bibitem{junit}
+{Object Mentor}, ``Junit.org resources for test driven development.'' Último
+  acceso: 24 Junio 2012, \url{http://www.junit.org/}.
+
+\bibitem{arquillian}
+{JBoss Community}, ``Arquillian - write real tests!.'' Último acceso: 24 Junio
+  2012, \url{http://www.jboss.org/arquillian.html}.
+
+\bibitem{jmeter}
+{The Apache Software Fundation}, ``Apache jmeter.'' Último acceso: 27 Junio
+  2012, \url{http://jmeter.apache.org/}.
+
+\bibitem{visualvm}
+{Oracle}, ``Visualvm all-in-one java troubleshooting tool.'' Último acceso: 27
+  Junio 2012, \url{http://visualvm.java.net/}.
+
+\bibitem{reqPA}
+M.~I.~M. Estellés, M.~C. Bria, P.~L. Torres, and F.~S. Grueso, ``Gestión de
+  requisitos basada en pruebas de aceptación: Test-driven en su máxima
+  expresión.,'' pp.~61--72, 2010.
+
+\bibitem{netbeans}
+{Oracle Corporation}, ``Netbeans.'' Último acceso: 4 Abril 2012,
+  \url{http://netbeans.org/}.
+
+\bibitem{glassfish}
+{Oracle Corporation}, ``Glassfish.'' Último acceso: 4 Abril 2012,
+  \url{http://glassfish.java.net/es/}.
+
+\bibitem{sqlserver}
+{Micrososf}, ``Sql server.'' Último acceso: 9 Abril 2012,
+  \url{http://www.microsoft.com/es-es/sqlserver/default.aspx}.
+
+\bibitem{hibernate}
+{JBoss Community}, ``Hibernate.'' Último acceso: 6 Abril 2012,
+  \url{http://www.hibernate.org/}.
+
+\bibitem{primefaces}
+{Prime Technology}, ``Primefaces.'' Último acceso: 7 Abril 2012,
+  \url{http://primefaces.org/}.
+
+\end{thebibliography}

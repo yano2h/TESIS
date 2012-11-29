@@ -1,0 +1,63 @@
+This is BibTeX, Version 0.99d (TeX Live 2011)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: templateICI.aux
+A level-1 auxiliary file: Cap1_Introduccion.aux
+A level-1 auxiliary file: Cap2_MarcoConceptual.aux
+A level-1 auxiliary file: Cap3_DefinicionProblema.aux
+A level-1 auxiliary file: Cap4_Analisis.aux
+A level-1 auxiliary file: Cap5_Diseno.aux
+A level-1 auxiliary file: Cap6_Implementacion.aux
+A level-1 auxiliary file: Cap7_Pruebas.aux
+A level-1 auxiliary file: Cap8_Implantacion.aux
+A level-1 auxiliary file: Cap9_Conclusion.aux
+The style file: ieeetr.bst
+A level-1 auxiliary file: anexo1_CasosDeUsoExtendidos.aux
+A level-1 auxiliary file: anexo2_DiccionarioDeDatos.aux
+A level-1 auxiliary file: anexo3_CasosDeUsoReales.aux
+A level-1 auxiliary file: anexo4_DescripcionDeLasClases.aux
+A level-1 auxiliary file: anexo5_DescripcionDeLasPruebasDeAceptacion.aux
+A level-1 auxiliary file: anexo6_ResultadosDeLasPruebasDeAceptacion.aux
+Database file #1: template.bib
+Warning--empty journal in reqPA
+You've used 30 entries,
+            1876 wiz_defined-function locations,
+            625 strings with 7578 characters,
+and the built_in function-call counts, 3969 in all, are:
+= -- 345
+> -- 130
+< -- 0
++ -- 63
+- -- 33
+* -- 151
+:= -- 578
+add.period$ -- 36
+call.type$ -- 30
+change.case$ -- 25
+chr.to.int$ -- 0
+cite$ -- 31
+duplicate$ -- 161
+empty$ -- 550
+format.name$ -- 33
+if$ -- 1005
+int.to.chr$ -- 0
+int.to.str$ -- 30
+missing$ -- 11
+newline$ -- 99
+num.names$ -- 30
+pop$ -- 154
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 145
+stack$ -- 0
+substring$ -- 20
+swap$ -- 13
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 32
+width$ -- 32
+write$ -- 230
+(There was 1 warning)
