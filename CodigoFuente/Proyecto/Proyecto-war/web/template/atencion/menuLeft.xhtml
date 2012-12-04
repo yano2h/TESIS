@@ -4,7 +4,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:outputStylesheet library="css" name="left.css"/>
     <h:form>
-        <p:poll id="poll" update="menu_left" interval="60"/>
+        <p:poll id="poll" update="menu_left" interval="120"/>
         <p:menu id="menu_left" styleClass="menu_left"> 
             <p:submenu label="Solicitudes">  
                 <p:menuitem value="Resumen Atencion de Solicitudes" action="/view/atencion/resumen?faces-redirect=true" 
