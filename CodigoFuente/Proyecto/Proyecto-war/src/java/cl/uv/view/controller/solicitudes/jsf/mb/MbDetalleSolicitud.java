@@ -223,6 +223,15 @@ public class MbDetalleSolicitud extends MbBase implements Serializable {
             JsfUtils.addSuccessMessage("Asignacion Exitosa", "La solicitud fue asignada exitosamente a: " + solicitud.getResponsable().getNombre() + " " + solicitud.getResponsable().getApellidoPaterno() + " " + solicitud.getResponsable().getApellidoMaterno());
         }
     }
+    
+    public void editarSolicitud() {
+        if (solicitud.getResponsable() == null) {
+            JsfUtils.addErrorMessage("Error al asignar responsable solicitud", "Debe seleccionar un funcionario para poder asignar la solicitud ");
+        } else {
+            solicitudRequerimientoEJB.editarResponsableSolicitud(solicitud);
+            JsfUtils.addSuccessMessage("Edicion Exitosa", "La solicitud se ha modificado exitosamente.");
+        }
+    }
 
     public void iniciarSolicitud() {
         solicitudRequerimientoEJB.iniciarSolicitud(solicitud);
