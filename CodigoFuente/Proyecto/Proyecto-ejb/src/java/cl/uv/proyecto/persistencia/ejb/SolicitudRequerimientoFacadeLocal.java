@@ -50,4 +50,10 @@ public interface SolicitudRequerimientoFacadeLocal {
     public void contarSolicitudes(FuncionarioDisico funcionario);
     
     public List<SolicitudRequerimiento> buscarSolicitudPorFiltros(SolicitudRequerimiento solicitud,  Date minDate, Date maxDate);
+
+    public List<SolicitudRequerimiento> buscarSolicitudesAsignadasVencidas(FuncionarioDisico funcionarioDisico);
+
+    public List<SolicitudRequerimiento> buscarSolicitudesAsignadasQueVencenProximamente(FuncionarioDisico funcionarioDisico, int horasAEvaluar);
+
+    public List<SolicitudRequerimiento> buscarSolicitudesAsignadasNoRevisadas(FuncionarioDisico funcionarioDisico);
 }
