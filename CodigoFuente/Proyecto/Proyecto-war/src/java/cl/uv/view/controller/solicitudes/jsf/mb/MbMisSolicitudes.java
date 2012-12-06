@@ -58,7 +58,6 @@ public class MbMisSolicitudes extends MbBase implements Serializable{
     }
     
     public void onRowSelect(){
-        solicitudEJB.dejarPendienteSolicitud(selectedSolicitud.getIdSolicitudReq());
         JsfUtils.redirect("solicitud.xhtml?codigo=" + selectedSolicitud.getCodigoConsulta());
     }
     
