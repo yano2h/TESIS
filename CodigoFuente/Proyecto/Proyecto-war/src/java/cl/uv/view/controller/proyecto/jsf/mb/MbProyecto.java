@@ -8,20 +8,20 @@ import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.RolProyectoFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.*;
+import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
+import cl.uv.proyecto.persistencia.entidades.ParticipanteProyecto;
+import cl.uv.proyecto.persistencia.entidades.Proyecto;
+import cl.uv.proyecto.persistencia.entidades.RolProyecto;
 import cl.uv.proyecto.proyectos.ejb.ProyectoEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbBase;
-import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
@@ -151,18 +151,14 @@ public class MbProyecto extends MbBase{
 //    }
     
     public void crearProyecto(){
-        proyectoFacade.create(nuevoProyecto);
-        ParticipanteProyecto p = new ParticipanteProyecto(jefeProyecto.getRut(), nuevoProyecto.getIdProyecto());
-        p.setProyecto(nuevoProyecto);
-        p.setParticipante(jefeProyecto);
-        p.setRol(rolJefeProyecto);
-        participanteProyectoFacade.create(p);
+        proyectoEJB.crearProyecto(nuevoProyecto, jefeProyecto);
     }
     
     public void buildNuevoProyecto(){
         nuevoProyecto = new Proyecto();
         String s = proyectoEJB.sugerirCodigoInterno(getFuncionarioDisico().getArea());
         nuevoProyecto.setCodigoInterno(s);
+        nuevoProyecto.setAreaResponsable(getFuncionarioDisico().getArea());
         nuevoParticipanteProyecto =  new ParticipanteProyecto();
         participantes = new ArrayList<ParticipanteProyecto>();
         jefeProyecto = new FuncionarioDisico();

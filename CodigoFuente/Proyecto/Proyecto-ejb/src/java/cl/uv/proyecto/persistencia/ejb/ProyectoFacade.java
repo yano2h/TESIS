@@ -10,10 +10,7 @@ import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 /**
  *
@@ -40,8 +37,8 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
     
     @Override
     public List<Proyecto> buscarProyectosPorArea(Area area){
-        Query q = em.createQuery("SELECT DISTINCT p FROM Proyecto p, ParticipanteProyecto pp WHERE p = pp.proyecto AND pp.participante.area = :area ORDER BY p.fechaInicio DESC");
-        q.setParameter("area", area);
+        TypedQuery<Proyecto> q = em.createNamedQuery("Proyecto.findByArea", Proyecto.class);
+        q.setParameter("areaResponsable", area);
         return q.getResultList();
     }
     

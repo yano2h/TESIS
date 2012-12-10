@@ -530,3 +530,48 @@ CREATE VIEW RESUMEN_SOLICITUD_REQUERIMIENTO AS
     LEFT JOIN FUNCIONARIO F 
       ON F.rut = SR.responsable 
     ORDER BY fecha_envio DESC 
+
+
+
+-- -----------------------------------------------------
+-- ADD COLUMNA AREA AL PROYECTO
+-- -----------------------------------------------------
+ALTER TABLE PROYECTO ADD area_responsable SMALLINT;
+ALTER TABLE PROYECTO ADD FOREIGN KEY(area_responsable) REFERENCES AREA(id_area);
+
+
+-- UPDATE DEL area_responsable
+
+UPDATE PROYECTO P
+SET area_responsable = (SELECT F.area
+      FROM PARTICIPANTE_PROYECTO PP, FUNCIONARIO_DISICO F 
+      WHERE PP.rol = 1 AND F.rut = PP.rut_participante AND PP.id_proyecto = P.id_proyecto)
+
+-- AGREGA NOT NULL AL area_responsable
+ALTER TABLE PROYECTO ALTER COLUMN area_responsable SET NOT NULL;
+
+
+-- -----------------------------------------------------
+-- TABLE ETAPA_PROYECTO
+-- -----------------------------------------------------
+CREATE TABLE ETAPA_PROYECTO(
+  id_etapa_proyecto SMALLINT NOT NULL ,
+  nombre_etapa_proyecto VARCHAR(45) NOT NULL ,
+  descripcion_etapa_proyecto VARCHAR(255) NULL ,
+  PRIMARY KEY (id_etapa_proyecto) 
+);
+
+INSERT INTO ETAPA_PROYECTO VALUES 
+(0, 'Solicitud de Proyecto',''),
+(1, 'Toma de Requerimientos', ''),
+(2, 'Definición de Requerimientos', ''),
+(3, 'Diseño', ''),
+(4, 'Codificación', ''),
+(5, 'Pruebas de Software', ''),
+(6, 'Mantenciones correctivas', ''),
+(7, 'Puesta en Producción', ''),
+(8, 'Marcha Blanca', ''),
+(9, 'Liberación del producto y cierre', '');
+
+ALTER TABLE PROYECTO ADD etapa_proyecto SMALLINT NOT NULL DEFAULT 0;
+ALTER TABLE PROYECTO ADD FOREIGN KEY(etapa_proyecto) REFERENCES ETAPA_PROYECTO(id_etapa_proyecto);

@@ -41,6 +41,12 @@
                             <f:selectItems value="#{estadoProyectoController.itemsAvailableSelectMany}"/>
                         </p:selectOneMenu>
 
+                        <p:outputLabel value="Etapa Proyecto:" for="slct_etapa_proyecto" styleClass="label_blod"/>
+                        <p:selectOneMenu id="slct_etapa_proyecto" value="#{mbProyecto.nuevoProyecto.etapaProyecto}" required="true" style="min-width: 250px;margin-left: 5px;">
+                            <f:selectItem itemValue="" itemLabel="Seleccione una Etapa para el Proyecto"/>
+                            <f:selectItems value="#{etapaProyectoController.itemsAvailableSelectMany}"/>
+                        </p:selectOneMenu>
+                        
                         <p:outputLabel value="Jefe de Proyecto:" for="slct_jefe_proyecto" styleClass="label_blod"/>
                         <p:selectOneMenu id="slct_jefe_proyecto" value="#{mbProyecto.jefeProyecto}" required="true" style="min-width: 250px;margin-left: 5px;">
                             <f:selectItem itemLabel="Seleccione un Jefe de Proyecto"/>
