@@ -22,7 +22,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "AREA")
 @NamedQueries({
     @NamedQuery(name = "Area.findAll", query = "SELECT a FROM Area a",hints={@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
-    @NamedQuery(name = "Area.findByIdArea", query = "SELECT a FROM Area a WHERE a.idArea = :idArea")})
+    @NamedQuery(name = "Area.findByIdArea", query = "SELECT a FROM Area a WHERE a.idArea = :idArea",hints={@QueryHint(name = "org.hibernate.cacheable", value = "true")})})
 public class Area implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
