@@ -156,7 +156,7 @@
                             <h:panelGrid columns="3" styleClass="item-upload">
                                 <h:outputText value="#{f.archivoAdjunto.nombre} " style="width: 300px;font-weight: bold;"/>
                                 <h:outputText value="- (#{f.archivoAdjunto.sizeFormat})" style="font-weight: bold; font-style: italic; color: #999;"/>
-                                <p:commandLink id="link" value="Descargar" actionListener="#{mbFilesUpload.downloadFile(f.archivoAdjunto)}" ajax="false"
+                                <p:commandLink id="link" value="Descargar" actionListener="#{mbFilesUpload.downloadFileSolicitud(f)}" ajax="false"
                                                style="float: right;color: steelblue;font-style: italic;" process="@this">
                                     <p:fileDownload value="#{mbFilesUpload.fileDownload}"  />
                                 </p:commandLink>

@@ -7,10 +7,9 @@ package cl.uv.proyecto.file.ejb;
 import cl.uv.model.base.utils.FileUtils;
 import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.persistencia.ejb.ArchivoAdjuntoFacadeLocal;
+import cl.uv.proyecto.persistencia.ejb.ArchivoProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ArchivoSolicitudRequerimientoFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.ArchivoAdjunto;
-import cl.uv.proyecto.persistencia.entidades.ArchivoSolicitudRequerimiento;
-import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
+import cl.uv.proyecto.persistencia.entidades.*;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,10 +29,15 @@ public class FileManagerEJB implements FileManagerEJBLocal {
     private ArchivoAdjuntoFacadeLocal archivoAdjuntoFacade;
     @EJB
     private ArchivoSolicitudRequerimientoFacadeLocal archivoSolicitudRequerimientoFacade;
-    private String basePath;
+    @EJB
+    private ArchivoProyectoFacadeLocal archivoProyectoFacade;
+    
+    private String basePathSolicitudes;
+    private String basePathProyectos;
 
     public FileManagerEJB() {
-        basePath = Resources.getValue("BasicParam", "pathArchivosSolicitudes");
+        basePathSolicitudes = Resources.getValue("BasicParam", "pathArchivosSolicitudes");
+        basePathProyectos   = Resources.getValue("BasicParam", "pathArchivosProyectos");
     }
     
     @Override
@@ -42,17 +46,17 @@ public class FileManagerEJB implements FileManagerEJBLocal {
 
         for (ArchivoAdjunto archivoAdjunto : archivosAdjuntos) {
             archivoAdjunto.setFechaUpload(new Date());
-            String pathFile = buildPathArchivoAdjuntoSolicitudReq(archivoAdjunto.getFechaUpload(),
+            String pathFile = buildPathArchivoAdjunto(archivoAdjunto.getFechaUpload(),
                                                                   solicitud.getIdSolicitudRequerimiento());
-            if (FileUtils.isRenameNecessary(basePath + pathFile + archivoAdjunto.getNombre())) {
-                String nuevoNombre = FileUtils.buildNewName(basePath + pathFile + archivoAdjunto.getNombre());
+            if (FileUtils.isRenameNecessary(basePathSolicitudes + pathFile + archivoAdjunto.getNombre())) {
+                String nuevoNombre = FileUtils.buildNewName(basePathSolicitudes + pathFile + archivoAdjunto.getNombre());
                 archivoAdjunto.setNombre(nuevoNombre);
             }
             
             archivoAdjunto.setPathFile(pathFile+archivoAdjunto.getNombre());
             archivoAdjunto.setSizeFormat(FileUtils.convertSizeRedondeado(archivoAdjunto.getSizeFile()));
             
-            writeFile(archivoAdjunto.getInputStream(), archivoAdjunto.getNombre(), pathFile);
+            writeFile(archivoAdjunto.getInputStream(), archivoAdjunto.getNombre(),basePathSolicitudes, pathFile);
 
             archivoAdjuntoFacade.create(archivoAdjunto);            
             ArchivoSolicitudRequerimiento asr = new ArchivoSolicitudRequerimiento(solicitud.getIdSolicitudRequerimiento(), 
@@ -67,27 +71,64 @@ public class FileManagerEJB implements FileManagerEJBLocal {
         }
     }
     
+    @Override
+    public void adjuntarArchivosProyecto(List<ArchivoProyecto> archivosAdjuntos, Proyecto p) {
+        for (ArchivoProyecto archivoProyecto : archivosAdjuntos) {
+            ArchivoAdjunto archivoAdjunto = archivoProyecto.getArchivoAdjunto();
+            archivoAdjunto.setFechaUpload(new Date());
+            String pathFile = buildPathArchivoAdjunto(archivoAdjunto.getFechaUpload(),
+                                                      (long)p.getIdProyecto());
+            if (FileUtils.isRenameNecessary(basePathProyectos + pathFile + archivoAdjunto.getNombre())) {
+                String nuevoNombre = FileUtils.buildNewName(basePathProyectos + pathFile + archivoAdjunto.getNombre());
+                archivoAdjunto.setNombre(nuevoNombre);
+            }
+            
+            archivoAdjunto.setPathFile(pathFile+archivoAdjunto.getNombre());
+            archivoAdjunto.setSizeFormat(FileUtils.convertSizeRedondeado(archivoAdjunto.getSizeFile()));
+            
+            writeFile(archivoAdjunto.getInputStream(), archivoAdjunto.getNombre(),basePathProyectos, pathFile);
+            archivoAdjuntoFacade.create(archivoAdjunto);
+            archivoProyecto.setArchivoProyectoPK(new ArchivoProyectoPK(p.getIdProyecto(), archivoAdjunto.getIdArchivo()));
+        }
+        
+        for (ArchivoProyecto archivoProyecto : archivosAdjuntos) {
+            archivoProyectoFacade.create(archivoProyecto);
+        }
+    }
+    
     @Asynchronous
-    private void writeFile(InputStream input, String name, String pathFile){
+    private void writeFile(InputStream input, String name, String basePath, String pathFile){
         FileUtils.createDirectory(basePath + pathFile);
         FileUtils.writeUploadFile(basePath + pathFile + name, input);
     }
             
     @Override
-    public ArchivoAdjunto loadContentFile(ArchivoAdjunto a){
-        String fullPath = basePath + a.getPathFile();
+    public ArchivoAdjunto loadContentFileSolicitud(ArchivoAdjunto a){
+        System.out.println("loadContentFileSolicitud");
+        String fullPath = basePathSolicitudes + a.getPathFile();
+        a.setInputStream(FileUtils.readDownloadFile(fullPath));
+        return a;
+    }
+    
+    @Override
+    public ArchivoAdjunto loadContentFileProyecto(ArchivoAdjunto a){
+        System.out.println("loadContentFileProyecto");
+        String fullPath = basePathProyectos + a.getPathFile();
         a.setInputStream(FileUtils.readDownloadFile(fullPath));
         return a;
     }
     
     @Override
     public String buildFullPath(ArchivoAdjunto a){
-        return basePath + a.getPathFile();
+        return basePathSolicitudes + a.getPathFile();
     }
     
-    private String buildPathArchivoAdjuntoSolicitudReq(Date d, Long id){
+    private String buildPathArchivoAdjunto(Date d, Long id){
         String pathDate = FileUtils.convertDateToPath(d);
         String path = "/"+ pathDate+"/"+id.toString()+"/";
         return path;
     }
+    
+    
+
 }

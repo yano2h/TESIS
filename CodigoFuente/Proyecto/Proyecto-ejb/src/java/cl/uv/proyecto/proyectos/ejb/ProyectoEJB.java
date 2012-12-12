@@ -5,6 +5,7 @@
 package cl.uv.proyecto.proyectos.ejb;
 
 import cl.uv.model.base.utils.Resources;
+import cl.uv.proyecto.file.ejb.FileManagerEJBLocal;
 import cl.uv.proyecto.persistencia.ejb.EstadoProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ProyectoFacadeLocal;
@@ -34,7 +35,9 @@ public class ProyectoEJB implements ProyectoEJBLocal {
     private RolProyectoFacadeLocal rolProyectoFacade;
     @EJB
     private ParticipanteProyectoFacadeLocal participanteProyectoFacade;
-
+    @EJB
+    private FileManagerEJBLocal fileManagerEJB;
+    
     @Override
     public void cerrarProyecto(Proyecto p) {
         p.setFechaTermino(new Date());
@@ -62,15 +65,18 @@ public class ProyectoEJB implements ProyectoEJBLocal {
 
     @Override
     public void crearProyecto(Proyecto p, FuncionarioDisico f) {
-        if (p!=null && f != null && f.getArea() != null) {
+        if (p != null && f != null && f.getArea() != null) {
             p.setAreaResponsable(f.getArea());
             proyectoFacade.create(p);
             RolProyecto rol = rolProyectoFacade.find(Resources.getValueShort("Tipos", "RolProyecto_JP"));
-            ParticipanteProyecto participante = new ParticipanteProyecto(f.getRut(),p.getIdProyecto());
+            ParticipanteProyecto participante = new ParticipanteProyecto(f.getRut(), p.getIdProyecto());
             participante.setProyecto(p);
             participante.setParticipante(f);
             participante.setRol(rol);
             participanteProyectoFacade.create(participante);
+            if (p.getArchivoProyectoList() != null && p.getArchivoProyectoList().size() > 0) {
+                fileManagerEJB.adjuntarArchivosProyecto(p.getArchivoProyectoList(), p);
+            }
         } else {
             throw new NullPointerException("Imposible crear el proyecto nulo o con un funcionario nulo o sin area");
         }
