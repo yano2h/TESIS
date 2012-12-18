@@ -76,16 +76,20 @@
                     <h:form id="form_adjuntar_archivos" enctype="multipart/form-data" >
                         <h:outputText value="Archivos Adjuntos" styleClass="title_bold" style="margin-bottom: 10px;"/>
                         <br/>
-                        <p:fileUpload id="filesUpload" style="margin-left: 0px;margin-top: 15px;margin-bottom: 5px;"     
-                                          value="#{mbFilesUpload.uploadFile}"
-                                          mode="simple" required="true">
-                            </p:fileUpload>
+                        <p:fileUpload id="filesUpload" style="margin-left: 0px;margin-top: 15px;margin-bottom: 5px;max-width: 400px;overflow: auto;"     
+                                      fileUploadListener="#{mbFilesUpload.handleFileUploadWithoutSizeValidation}"
+                                      mode="advanced" required="true" auto="true" label="Adjuntar" update="grid_file_selected">
+                        </p:fileUpload> 
+                        <h:panelGrid id="grid_file_selected" columns="2" style="margin-left: 0px;max-width: 400px;">
+                            <h:outputText value="Archivo Seleccionado:" styleClass="label_blod label"/>
+                            <h:outputText value="#{mbFilesUpload.uploadFile.fileName}"/>
+                        </h:panelGrid>
                         <h:panelGrid id="grid_upload" columns="2" style="margin-left: 0px;">
                             <h:panelGroup style="margin-left: 0px;">
-                                <p:inputText id="itxt_tipoInfo" value="#{mbProyecto.tipoInformacion}" maxlength="200" required="true" size="60" style="margin-bottom: 4px;"/>
+                                <p:inputText id="itxt_tipoInfo" value="#{mbProyecto.tipoInformacion}" maxlength="200" required="true" size="60" />
                                 <p:watermark for="itxt_tipoInfo" value="Tipo de Información" /> 
                             </h:panelGroup>
-                            <p:commandButton title="Agregar Archivo al Proyecto" actionListener="#{mbProyecto.addArchivoAdjunto}" ajax="false" update=":form_adjuntar_archivos" icon="ui-icon-plus"/>
+                            <p:commandButton value="Agregar" title="Agregar Archivo al Proyecto" actionListener="#{mbProyecto.addArchivoAdjunto}" ajax="true" update=":form_adjuntar_archivos" icon="ui-icon-plus" process=":form_adjuntar_archivos"/>
                         </h:panelGrid>
 
                         <h:panelGrid columns="3" columnClasses="column_150p border_rh,column_150p border_rh,column_70p" styleClass="header_file_upload_proyecto" style="margin-top: 15px;" rendered="#{not empty mbProyecto.archivosProyectoAdjuntos}">
