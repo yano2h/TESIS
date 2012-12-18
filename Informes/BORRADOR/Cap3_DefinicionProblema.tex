@@ -1,0 +1,229 @@
+\chapter{Definición del Problema}
+
+En este capitulo se define cual es el contexto sobre el cual se desarrolla
+este trabajo, los problemas que se abordaran, la solución que se ha propuesto
+y los objetivos que se espera cumplir al final de este trabajo.
+
+\section{Situación Actual}
+	Esta sección describe la situación actual existente en DISICO
+	las cuales se han separado en 3 sub-secciones las cuales
+	se presentan a continuación.
+	
+	\subsection{Proceso para la Solicitud de Requerimientos}
+	\label{proceso_solicitud}
+	Las solicitudes de requerimientos son peticiones que envían los usuarios
+	de los diferentes sistemas de la universidad a DISICO, comúnmente con 
+	alguno de los siguientes objetivos:
+	\begin{itemize}
+		\item Resolver un problema.
+		\item Obtener algún tipo de información.
+		\item Obtener acceso a alguno de los sistemas.
+	\end{itemize}
+
+	Actualmente para que una solicitud de requerimiento sea llevada a cabo,
+	se deben seguir los siguientes pasos:
+	\begin{enumerate}
+		\item El usuario envía un email desde su cuenta institucional, detallando su
+		solicitud.
+		\item El jefe de área evaluá la solicitud y la aprueba o la rechaza.
+		\item Dependiendo de la solicitud puede ser necesario requerir la autorización 
+		de otro persona para aprobar la solicitud.
+		\item En caso de ser rechazada la solicitud, se envía un email de respuesta
+		con la justificación del rechazo de su solicitud.
+		\item Si la solicitud es autorizada, el jefe de área determina quien será el responsable
+		de llevar a cabo la solicitud, para lo cual reenvía el email con la descripción 
+		de esta, al nuevo responsable.
+		\item Se completa la solicitud.
+		\item Se le comunica al solicitante que su solicitud se ha completado.
+	\end{enumerate}
+	
+	\subsection{Gestión de Requerimientos en los Proyectos}
+	\label{gestion_req}
+	Cuando existen solicitudes de requerimientos que por su
+	complejidad superan dicha categoría estas pasan a convertirse en 
+	Proyectos. Los responsables de dicho proyecto definen los requerimientos
+	de este y determinan cuales serán las actividades que se llevaran a
+	cabo para completarlo. \\
+	
+	Actualmente dichas actividades se calendarizan a través de una carta Gantt, la
+	cual debe ser entregada al jefe de área. Quien la utiliza como referencia para
+	controlar el avance del proyecto. \\
+	
+	Además existe una aplicación desarrollada en google sites donde el personal
+	de DISICO debe ingresar de forma manual que actividad relacionada
+	con su proyecto ha completado. Estas pueden ser vistas
+	por cualquier persona a través del portal www.disico.uv.cl.
+	
+	\subsection{Metodología de SCM}
+	\label{metod_scm}
+	La actual metodología de SCM utilizada en DISICO, fue desarrollada y descrita
+	en el Trabajo de Titulo \textit{Desarrollo de Metodologías de SQA y SCM para 
+	la Dirección de Servicios de Información y Computación}\cite{paloma}. Las 
+	principales etapas que componen esta metodología se encuentran representadas
+	en la Tabla \ref{scm_paloma}
+	
+	\begin{table}[H]
+		\begin{tabular}{| l | m{11cm} |}
+			\hline
+			\textbf{Etapa} & \textbf{Descripción}\\
+			\hline
+			{Tareas y Responsables} & {Identificar tareas asociadas y asignar responsables a cada una.}\\
+			\hline
+			{Actividades SCM} & {Definen las principales actividades a realizar para gestionar la configuración de un sistema de software. Estas actividades son: Identificación de la Configuración y Control de la Configuración}\\
+			\hline
+			{Recursos} & {Herramientas de apoyo a la metodología, actualmente estas son: Subversion, los templates definidos para esta metodología y el personal del área de desarrollo de DISICO.}\\
+			\hline
+			{Formación} & {Material visual para educar a los integrantes de cada proyecto en cuanto a SCM.}\\
+			\hline
+		\end{tabular}
+		\caption{Etapas de la actual metodología de SCM}
+		\label{scm_paloma}
+	\end{table}
+
+	La actividad de Control de la Configuración tiene como objetivo 
+	gestionar los cambios que se realizan a lo largo del ciclo de vida
+	de cada proyecto. Para esto se definen una serie de pasos, los cuales
+	se enumeran a continuación y cuyo flujo se observa en la Figura \ref{fig_proceso_cc}:
+	\begin{enumerate}
+		\item Identificación y documentación de la necesidad de un cambio.
+		\item Análisis y evaluación de la solicitud de cambio.
+		\item Se aprueba o desaprueba la solicitud.
+		\item Aplicación y liberación del cambio.
+	\end{enumerate}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.4]{imagenes/proceso_control_configuracion.png}
+			\caption{Proceso de Control de Configuración\cite{paloma}}
+			\label{fig_proceso_cc}
+		\end{center}
+	\end{figure}
+	
+	Ademas esta metodología cuenta con una serie de templates que definen la 
+	documentación mínima que debe ser generada, para la correcta aplicación 
+	de la misma. Una lista completa de los templates de esta metodología 
+	(referentes a SCM) se presentan en la Tabla \ref{templates_paloma}.
+	
+	\begin{table}[H]
+		\begin{tabular}{| l | m{9cm} |}
+			\hline
+			\textbf{Template} & \textbf{Descripción}\\
+			\hline
+			{Tareas y Responsables SCM} & {Detalla todas las tareas de SCM a realizar, entregables asociados, fechas y responsable}\\
+			\hline
+			{Identificación de la configuración} & {Detalla todos los items de configuración, con su nombre identificador, versión, ubicación y responsable.}\\
+			\hline
+			{Solicitud de Cambio} & {Describe el formato y los campos necesario para crear una solicitud de cambios formal.}\\
+			\hline
+			{Implementación del cambio} & {Describe la información necesaria para la posterior verificación del cambio implementado.} \\
+			\hline
+		\end{tabular}
+		\caption{Templates de la actual metodología de SCM}
+		\label{templates_paloma}
+	\end{table}
+
+	
+\section{Formulación del Problema}
+
+La Dirección de Servicios de Información y Computación (DISICO) de la 
+Universidad de Valparaíso en su constante búsqueda por mejorar ha detectado 
+algunos problemas, los cuales se nombran y detallan a continuación:
+	
+	\subsection{Problemas en las Solicitudes de Requerimientos}
+	\label{prob1}
+	El proceso para la solicitud de requerimientos que existe en DISICO fue descrito
+	en la sección \ref{proceso_solicitud}, este proceso conlleva una seria de problemas,
+	los cuales son detallados a continuación.
+	
+	\begin{itemize}
+		\item El correo del Jefe de Área puede verse saturado con cientos de correos 
+		en un mismo día. Sobretodo en periodos críticos como son el inicio y termino de 
+		cada semestre.
+		\item Los requerimientos quedan almacenados en emails y no se cuenta con 
+		ninguna estructura de datos que permita, mejores búsquedas, priorización de 
+		tareas, análisis de avance de las tareas, análisis posteriores acerca de velocidad 
+		de desarrollo o productividad, establecer dependencias entre tareas, 
+		complejidad de las tareas, etc.
+		\item El Jefe de Área no tiene una visión clara de cuales ni cuantas tareas se 
+		han asignado a cada miembro del equipo.
+		\item El Jefe de Área no tiene una visión clara sobre cuales ni cuantas tareas 
+		están aún en espera, en desarrollo o finalizadas.
+		\item Los funcionarios que envían solicitudes de requerimientos desconocen en 
+		que estado se encuentran, cuanto se ha avanzado, ni la prioridad que esta 
+		tiene, y menos las complicaciones que pueden haber surgido, por lo que deben 
+		estar consultando por teléfono o esperando asta recibir un respuesta.
+		\item Entre tanto correo muchas veces se pierden los requerimientos debido a 
+		que el responsable leyó el correo y dejo la tarea para mas tarde debido a que 
+		en ese momento aún se encontraba realizando otras tareas.
+	\end{itemize}
+
+	\subsection{Problemas en la Gestión de Requerimientos en los \\Proyectos}
+	\label{prob2}
+	La descripción de la situación actual de esta proceso se encuentra en la sección
+	\ref{gestion_req}, y las falencias y problemas que implica están detalladas a continuación:
+	
+	\begin{itemize}
+		\item Aunque la Carta Gantt es un instrumento importante, no le permite al 
+		Jefe de Área conocer cuales puntos ya han sido completados, en cuales se esta 
+		trabajado actualmente y cual es el nivel de avance de estos.
+		\item Tampoco tiene un registro de las causas que pueden estar demorando 
+		una tarea.
+		\item Esto también implica que el Jefe de Área no tiene una visión clara de la 
+		productividad ni del avance de cada uno de los involucrados en 
+		un proyecto.
+	\end{itemize}
+
+	\subsection{Problemas en la Solicitudes de SCM}
+	\label{prob3}
+	Actualmente DISICO cuanta con una metodologia de SCM la cual
+	se encuentra resumida en la sección \ref{metod_scm}, en este caso
+	la metodología en si no presenta problemas, sino mas bien la falta de una 
+	herramienta	que la implemente trae con sigo una serie de problemas que
+	a continuación se detallan:
+	
+	\begin{itemize}
+		\item La metodología propuesta no logra ser lo suficientemente ágil, debido a 
+		que creación de la documentación que exige, no se encuentra automatizada.
+		\item La documentación se realiza en plantillas Word, por lo que la persona deberá descargar 
+		la plantilla si es que no la posee, abrirla con Word (o similar) para editarla, luego imprimirla y archivarla 
+		o si se desea compartirlas mantenerlas versionadas en SVN, de donde el resto de los involucrados en los 
+		cambios deberán estar descargando la ultima versión para conocer los nuevos cambios, y 
+		actualizarlas si es necesario.
+		\item El uso de estas plantillas Word no facilita la búsqueda rápida de 
+		información sobre cambios pasados, personas involucradas en los cambios, etc. 
+		Debido a que se debe descargar los últimos cambios de los documentos, buscar por los nombres de los documentos, 
+		cuales posiblemente están relacionados a la búsqueda en particular y abrirlos para 
+		buscar dentro de estos lo que se necesita.
+	\end{itemize} 
+	
+\section{Solución Propuesta}
+
+Como se observa la mayoría de los problemas identificados, se encuentran ampliamente relacionados, 
+esto se debe a que tanto las solicitudes de requerimientos, los requerimientos de un proyecto y las solicitudes de cambios, 
+derivan en tareas que debe realizar el personal de DISICO, y sobre las cuales existe escaso control y documentación 
+actualmente. Dado lo anterior se propone desarrollar una plataforma de solicitud y gestión de requerimientos y SCM, 
+la cual integrara estos 3 puntos (los requerimientos diarios, los proyectos y las peticiones de cambios) en una 
+plataforma que ayudará tanto en la comunicación, documentación y control de estas actividades dentro del equipo, 
+permitiendo el mapeo de estas, a tareas concretas que deben llevarse a cabo.  Y que también, 
+integre y brinde el soporte a la metodología de SCM diseñada para DISICO\cite{paloma}.
+
+
+\section{Objetivos}
+
+	\subsection{Objetivo General}
+	El objetivo es el desarrollo de una aplicación para la solicitud y gestión de requerimientos y SCM para 
+	la Dirección de Servicios de Información y Computación de la Universidad de Valparaíso (DISICO).
+
+	\subsection{Objetivos Específicos}
+	\begin{itemize}
+		\item Dar soporte mediante una aplicación web, a la Metodología de SCM 
+		diseñada para DISICO \cite{paloma}.
+		\item Permitir monitorear el ciclo de vida completo de cada solicitud de 
+		requerimiento y de cambio que se recibe en DISICO.
+		\item Mejorar el control que tiene el Jefe de Área sobre las labores que se 
+		encuentra desempeñando actualmente cada miembro del equipo.
+		\item Mantener un historial de todas los requerimientos que se han 
+		completado, para permitir mejorar las estimaciones de tiempo y esfuerzo, para 
+		futuros requerimientos de similares características.
+		\item Obtener mediciones cuantitativas de la productividad del equipo de desarrollo.  
+	\end{itemize}

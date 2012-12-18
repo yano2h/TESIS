@@ -1,0 +1,151 @@
+\long\def\comment#1{}
+
+\topmargin 0pt \headsep .5in
+\textheight 8.1in \textwidth 6in
+\brokenpenalty=10000
+\def\dept#1{\gdef\@dept{#1}}
+\def\advis@r{Gu\'{\i}a}
+\def\principaladviser#1{\gdef\@principaladviser{#1}}
+\def\principaladvisor#1{\gdef\@principaladviser{#1}\gdef\advis@r{Gu\'ia}}
+\def\coprincipaladvisor#1{\gdef\@coprincipaladviser{#1}\gdef\advis@r{Co-Referente}}
+\def\coprincipaladviser#1{\gdef\@coprincipaladviser{#1}\gdef\advis@r{Co-Referente}}
+\def\firstreader#1{\gdef\@firstreader{#1}\gdef\advis@r{Informante}}
+\def\secondreader#1{\gdef\@secondreader{#1}\gdef\advis@r{Informante}}
+\def\thirdreader#1{\gdef\@thirdreader{#1}}
+\def\fourthreader#1{\gdef\@fourthreader{#1}}
+\def\submitdate#1{\gdef\@submitdate{#1}}
+\def\copyrightyear#1{\gdef\@copyrightyear{#1}}
+\def\languagemajor#1{\gdef\@languagemajor{#1}} \def\@language{babel}
+\def\@title{}\def\@author{}\def\@dept{Computaci\'on}
+\def\@principaladviser{}\def\@firstreader{*}\def\@secondreader{*}
+\def\@coprincipaladviser{*}
+\def\@thirdreader{*}
+\def\@fourthreader{*}
+\def\@submitdate{\ifcase\the\month\or
+  Enero\or Febrero\or Marzo\or Abril\or Mayo\or Junio\or
+  Julio\or Agosto\or Septiembre\or Octubre\or Noviembre\or Diciembre\fi
+  \space \number\the\year}\ifnum\month>8
+    \@tempcnta=\year \advance\@tempcnta by 1
+    \edef\@copyrightyear{\number\the\@tempcnta}
+\else
+    \def\@copyrightyear{\number\the\year}
+\fi
+\newif\ifcopyright \newif\iffigurespage \newif\iftablespage
+\newif\ifthesiscopyright
+\copyrighttrue \figurespagetrue \tablespagetrue
+\thesiscopyrighttrue
+\def\@standardsub{Enviado al Departamento de \uppercase\expandafter{\@dept}\\}
+\def\@standardend{}
+\def\committeethesis{\let\@whichsub=\@committeesub}
+\def\programthesis{\let\@whichsub=\@programsub}
+\def\educationthesis{\let\@whichsub=\@educationsub}
+\def\businessthesis{\let\@whichsub=\@businesssub}
+\def\lawthesis{\let\@whichsub=\@lawsub}
+\def\humanitiesthesis{\let\@whichsub=\@humanitiessub%
+\let\@whichend=\@humanitiesend}
+\def\specialthesis{\let\@whichsub=\@specialsub%
+\let\@whichend=\@specialend}
+\def\industrialthesis{\let\@whichsub=\@industrialsub%
+\let\@whichend=\@industrialend}
+\def\dualthesis{\let\@whichsub=\@dualsub%
+\let\@whichend=\@dualend}
+\def\@committeesub{ENVIADO AL COMITE DEL \uppercase\expandafter{\@dept}\\}
+\def\@programsub{ENVIADO AL COMITE DEL \uppercase\expandafter{\@dept}\\}
+\def\@educationsub{ENVIADO AL COMITE DEL \uppercase\expandafter{\@dept}\\}
+\let\@whichend=\@standardend
+\let\@whichsub=\@standardsub
+\def\titlep{
+        \thispagestyle{empty}
+
+\begin{figure}[ht]
+		 \includegraphics[scale=0.45]{imagenes/logo.png}
+\end{figure}
+
+\begin{flushleft}
+Facultad de Ingenier\'ia\\
+Escuela de Ingenier\'ia Civil en Inform\'atica
+\end{flushleft}
+
+        \null\vskip1in%
+        \begin{center}
+                \Large\uppercase\expandafter{\@title}
+        \end{center}
+        \vfill
+        \begin{center}Por \\\end{center}
+        \begin{center}
+                \rm \@author\\
+        \end{center}
+        \vfill
+        \begin{center}
+        \large
+                Trabajo realizado para optar al T\'itulo de\\
+             \textbf{INGENIERO CIVIL EN INFORM\'{A}TICA} \uppercase\expandafter{\@whichend}\\
+        Prof. Gu\'ia: \@principaladviser \\
+        
+        Prof. Co-Referente: \@coprincipaladviser \\
+        \@submitdate\\
+        \end{center}\vskip.5in
+        \newpage}
+\newlength{\signaturespace}
+\setlength{\signaturespace}{.5in}
+\long\def\signature#1{%
+\begin{flushright}
+\begin{minipage}{5in}
+\parindent=0pt
+Certifico que he le\'{\i}do este documento y que, en mi opini\'on, es adecuado en \'ambito y calidad como
+trabajo para optar al t\'itulo de Ingeniero Civil en Inform\'atica.
+\par
+\vspace{\signaturespace}
+\hbox to 5in{\hfil\begin{tabular}{@{}l@{}}\vrule width 3in height
+    0.4pt depth 0pt\\ #1\end{tabular}}
+\end{minipage}
+\end{flushright}}
+\def\signaturepage{%
+        \signature{\@principaladviser\quad Profesor Gu\'ia}
+        \vfill
+        \if*\@coprincipaladviser \else
+        \signature{\@coprincipaladviser\quad Profesor Co-Referente}
+        \vfill\fi
+        \if*\@firstreader \else
+        \signature{\@firstreader\quad Profesor Informante}
+        \vfill\fi
+        \if*\@secondreader \else
+        \signature{\@secondreader\quad Profesor Informante}
+        \vfill\fi
+        \if*\@thirdreader \else
+        \signature\@thirdreader
+        \vfill\fi
+        \if*\@fourthreader \else
+        \signature\@fourthreader
+        \vfill\fi
+        \begin{flushright}
+        \begin{minipage}{5in}
+        Aprobado por la Escuela de Ingenier\'ia Civil en Inform\'atica, UNIVERSIDAD DE VALPARA\'ISO.\par
+        \vspace{.5in}
+        \end{minipage}
+        \end{flushright}}
+\def\beforepreface{
+        \pagenumbering{roman}
+        \pagestyle{plain}
+        \titlep
+        \signaturepage
+        \cleardoublepage}
+\def\prefacesection#1{%
+        \chapter*{#1}
+        \addcontentsline{toc}{chapter}{#1}}
+\def\afterpreface{\newpage
+        \tableofcontents
+        \iftablespage
+                \listoftables
+        \fi
+        \iffigurespage
+                \listoffigures
+        \fi
+        \cleardoublepage
+        \pagenumbering{arabic}
+        \pagestyle{headings}}
+\let\@ldthebibliography\thebibliography
+\renewcommand{\thebibliography}[1]{\newpage
+                \@ldthebibliography{#1}%
+\addcontentsline{toc}{chapter}{\bibname}}
+\pagestyle{headings}

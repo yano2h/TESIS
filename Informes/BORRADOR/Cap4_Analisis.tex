@@ -1,0 +1,602 @@
+\chapter{Análisis}
+
+\section{Especificación de Requerimientos}
+	A continuación se describen los requerimientos funcionales y también
+	los requerimientos no funcionales, los cuales describen las funciones
+	y características que debe poseer la plataforma que se debe desarrollar.
+	
+	\subsection{Acronimos y Abreviaturas}
+	Los acronimos y abreviaturas utilizados de aquí en adelante, se encuentran definidos
+	a continuación.
+	\begin{itemize}
+		\item \textbf{SCM:} Software Configuration Management.
+		\item \textbf{DISICO:} Dirección de Servicios de Información y Computación.
+		\item \textbf{SSO:} Single Sign-On.
+		\item \textbf{IC:} Item de Configuración.
+		\item \textbf{J.A:} Jefe de Área. 
+		\item \textbf{RF:} Requerimiento Funcional.
+		\item \textbf{RNF:} Requerimiento No Funcional.
+	\end{itemize}
+
+	\subsection{Tipos de Usuarios}
+	Dentro del sistema a desarrollar se pueden encontrar diferentes tipos de usuarios,
+	los cuales son definidos y descritos a continuación:
+	
+	\begin{itemize}
+		\item \textbf{Administrador:} Usuario con conocimientos avanzados en 
+		computación. Encargado de administrar el sistema, con acceso a todas las 
+		funcionalidades del sistema.
+		\item \textbf{Jefe de Departamento:} Usuario con conocimientos generales
+		de computación. Puede buscar solicitudes y ver resumenes del avance en
+		todo DISICO.
+		\item \textbf{Jefe de Área:} Jefe de alguno de los departamentos de DISICO, 
+		encargado de asignar responsables a las solicitudes y de controlar que estas 
+		se lleven a cabo.
+		\item \textbf{Funcionario de DISICO:} Usuarios con conocimientos avanzados
+		en computación, y que deben resolver las solicitudes que les son
+		asignadas. Estos también pueden tener asignada alguna de las tareas de SCM,
+		definidas por la metodología.
+		\item \textbf{Solicitante:} Usuario con conocimientos básicos en computación,
+		quienes envían a DISICO solicitudes de requerimientos.
+	\end{itemize}
+
+	\subsection{Requerimientos Funcionales}
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF01} & \textbf{Tipo de Usuario} & {Todos} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Autenticar a los usuarios 
+		con sus cuentas institucionales.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Rut y Contraseña.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se verifica que el rut y la contraseña 
+		concuerden y si tiene los permisos necesarios.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Ingreso al sistema con el perfil ingresado.}\\
+		\hline
+	\end{tabular}	 
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF02} & \textbf{Tipo de Usuario} & {Solicitante} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Crear y enviar solicitudes de 
+		requerimientos, dirigida a cualquiera de las 3 áreas de DISICO (Desarrollo, Fincom o Redes).}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Datos de la solicitud (Asunto, 
+		Descripción de la solicitud, tipo de solicitud, departamento de DISICO a la que esta dirigida, sistema 
+		al que se refiere).}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se registra y almacena la solicitud.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Pantalla de envió exitoso y 
+		notificación en el perfil del Jefe de Área correspondiente.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF03} & \textbf{Tipo de Usuario} & {Solicitante} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Enviar al email del solicitante 
+		el numero de consulta de su solicitud.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Registro de una solicitud.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Al registrar la solicitud, automáticamente 
+		se genera un numero de consulta para esta, el cual es enviado automáticamente al usuario.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Correo electrónico con el numero 
+		de consulta de la solicitud.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF04} & \textbf{Tipo de Usuario} & {Solicitante} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Buscar solicitud en el historial}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Parámetros de búsqueda 
+		(Numero, Fecha o Asunto)}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se busca entre todos las 
+		solicitudes generadas por dicho solicitante aquellas que coincidan con los parámetros de búsqueda.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Listado con todas las solicitudes resultantes.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF05} & \textbf{Tipo de Usuario} & {Jefe de Área} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Asignar un responsable 
+		para una solicitud recibida.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Responsable, prioridad y 
+		fecha de vencimiento.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se registran la información 
+		ingresada y se notifica al responsable}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Notificación en el perfil del responsable.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF06} & \textbf{Tipo de Usuario} & {Jefe de Área} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Transferir una solicitud 
+		a otra área en caso de que esta venga mal asignada.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Área y Justificación de la Transferencia.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se registra la transferencia de la solicitud}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Notificación en el perfil del Jefe de 
+		Área donde fue transferida la solicitud.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF07} & \textbf{Tipo de Usuario} & {Jefe de Área} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Rechazar una solicitud.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Justificación del rechazo.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se registra la justificación 
+		del rechazo y se cierra la solicitud.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Correo electrónico al solicitante 
+		notificando el rechazo de su solicitud.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF08} & \textbf{Tipo de Usuario} & {Jefe de Área} & \textbf{Prioridad} & {Deseable}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Convertir una solicitud en un proyecto.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Nombre del Proyecto y Responsables.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se registra el proyecto y se cierra la solicitud.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Correo electrónico notificando al solicitante.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF09} & \textbf{Tipo de Usuario} & {Jefe de Área} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Ver resumen de las 
+		solicitudes del área, el cual debe mostrar las cantidad de solicitudes no asignadas, asignadas, iniciadas, 
+		pendientes, atrasadas, finalizadas, rechazadas y transferidas del área y por responsable a la fecha.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Se selecciona la opción.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se calculan la cantidad 
+		de solicitudes en los diferentes estados del área y por responsable.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Se despliega la información 
+		en pantalla en forma de tabla y gráfico.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF10} & \textbf{Tipo de Usuario} & {Jefe de Departamento} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Ver resumen de las 
+		solicitudes del departamento, el cual debe mostrar las cantidad de solicitudes no asignadas, asignadas, iniciadas, 
+		pendientes, atrasadas, finalizadas, rechazadas y transferidas del departamento, por área y por responsable a la fecha .}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Se selecciona la opción.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se calculan la cantidad de 
+		solicitudes en los diferentes estados del departamento, por área y por responsable.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Se despliega la información 
+		en pantalla en forma de tabla y gráfico.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF11} & \textbf{Tipo de Usuario} & {Jefe de Departamento} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Buscar solicitudes por numero de consulta 
+		o por alguno de los siguientes filtros de búsqueda (Área, Responsable, Solicitante, Estado, Fecha, Asunto, Tipo, Sistema)}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Parámetro de búsqueda.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se busca entre los registros aquellas solicitudes 
+		que coincidan con los parámetros de búsqueda especificados.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Listado de las solicitudes.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF12} & \textbf{Tipo de Usuario} & {Jefe de Área y Funcionario DISICO} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Mostrar alertas cuando existan solicitudes atrasadas.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{La fecha actual.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Al ingresar al perfil se comprueba cuales solicitudes han 
+		excedido su fecha de vencimiento y se cambian a estado atrasadas.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Una alerta en el perfil del Jefe de Área y del Responsable.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF13} & \textbf{Tipo de Usuario} & {Funcionario DISICO} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{El responsable podrá modificar el estado de una 
+		solicitud a pendiente, iniciada o finalizada .}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{El nuevo estado de la tarea.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se actualiza el estado de la tarea.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Pantalla de selección de tipo de respuesta.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF14} & \textbf{Tipo de Usuario} & {Funcionario DISICO} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Al finalizar una solicitud el 
+		responsable puede escoger entre 2 tipos de respuesta que son: Responder al Jefe de Área o 
+		Responder al solicitante directamente.}	\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Selección de una opción de respuesta.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Según la opción se realiza alguna de las 
+		siguientes acciones:
+		\begin{itemize}
+			\item \textbf{Respuesta al Jefe de Área:} Esta opción solo enviá una notificación al jefe de Área quien 
+			deberá encargarse de responder luego al solicitante.
+			\item \textbf{Respuesta Directa:} Esta enviá un correo electrónico al solicitante, notificándole 
+			que su solicitud ha sido completada.
+		\end{itemize}
+		}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Notificación a quien corresponde según el caso.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF15} & \textbf{Tipo de Usuario} & {Jefe de Área} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{El Jefe de Área 
+		tienen la posibilidad de responder solicitudes de 2 formas, las cuales son: Respuesta Directa o
+		Respuesta manual.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Selección de una opción de respuesta.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Según la opción se realiza alguna de las 
+		siguientes acciones:
+		\begin{itemize}
+			\item \textbf{Respuesta Directa:} Se notifica directamente al solicitante a trabes de correo electrónico.
+			\item \textbf{Respuesta Manual:} Se enviá un correo electrónico personalizado a una o mas personas
+			entre las cuales puede estar o no el solicitante.
+		\end{itemize}
+		}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Notificación a quien corresponde según el caso..}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF16} & \textbf{Tipo de Usuario} & {Todos} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{El responsable, 
+		el solicitante y el jefe de área pueden agregar comentarios a una solicitud.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Comentario.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se registra el comentario asociándolo a la solicitud.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Notificación en el perfil del resto de los involucrados, 
+		sin considerar a quien genero la solicitud.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF17} & \textbf{Tipo de Usuario} & {Jefe de Área} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Crear nuevo proyecto.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Información del proyecto e involucrados
+		, según lo descrito en la metodología de SCM.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se registra el nuevo proyecto.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Pantalla principal de configuración
+		del proyecto.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF18} & \textbf{Tipo de Usuario} & {Jefe de Área} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Definir responsables para las
+		tareas de SCM del proyecto, definidas por la metodología.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Responsable y tarea.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se registra el responsable de la tarea.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Pantalla de asignación de tareas de SCM.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF19} & \textbf{Tipo de Usuario} & {Funcionario DISICO} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Definir Items de configuración del
+		proyecto.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Información del Item de Configuración,
+		acorde a lo descrito en la metodología de SCM.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se registra el Item de Configuración.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Pantalla de Items de Configuración del proyecto.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF20} & \textbf{Tipo de Usuario} & {Funcionario DISICO} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Crear solicitud de cambio para algún proyecto.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Datos de la solicitud, acorde a lo 
+		definido por la metodología de SCM.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se registra la solicitud de cambio.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Notificación en pantalla del perfil del responsable 
+		de analizar la solicitud.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF21} & \textbf{Tipo de Usuario} & {Funcionario DISICO} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Analizar solicitud de cambio.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Información del impacto del cambio,
+		acorde a lo definido por la metodología de SCM.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se actualiza la solicitud.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Notificación en el perfil del responsable
+		de aprobar o  rechazar la solicitud.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF22} & \textbf{Tipo de Usuario} & {Funcionario DISICO} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Aprobar o rechazar solicitud.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Selección de la opción.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se actualiza la información
+		de la solicitud.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Notificación en el perfil del 
+		responsable de SCM.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF23} & \textbf{Tipo de Usuario} & {Funcionario DISICO} & \textbf{Prioridad} & {Obligatorio}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Completar formulario de 
+		implementación del cambio.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Datos del formulario,
+		acorde a lo definido por la metodología de SCM.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Registrar del formulario.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Pantalla de solicitudes de cambio.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF24} & \textbf{Tipo de Usuario} & {Funcionario DISICO} & \textbf{Prioridad} & {Deseable}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Definir tareas de un proyecto.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Datos de la tarea 
+		(Proyecto, Descripción, Fecha programada).}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Registrar la tarea.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Pantalla de tareas del proyecto.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF25} & \textbf{Tipo de Usuario} & {Funcionario DISICO} & \textbf{Prioridad} & {Deseable}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Actualizar tarea del proyecto.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Nuevo estado de la tarea (Iniciada o Finalizada).}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se actualiza la tarea.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Pantalla de Tareas del proyecto.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{| l | m{1.5cm} | l | m{4cm} | l | m{2.2cm} |}
+		\hline
+		\textbf{Id} & {RF25} & \textbf{Tipo de Usuario} & {Jefe de Área} & \textbf{Prioridad} & {Deseable}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Descripción}} & \multicolumn{4}{m{12cm}|}{Ver resumen del avance de los proyectos.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Entrada}} & \multicolumn{4}{m{12cm}|}{Selección de la opción.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Proceso}} & \multicolumn{4}{m{12cm}|}{Se calcula el avance del proyecto en base a las
+		fechas programadas y las tareas completadas.}\\
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Salida}} & \multicolumn{4}{m{12cm}|}{Tabla y gráficos resumen de la información.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+
+	\subsection{Requerimientos No Funcionales}
+	\begin{center}
+	\begin{tabular}{| c | m{13.2cm} |}
+		\hline
+			\textbf{Id} & \textbf{Descripción}\\
+		\hline
+			{RNF01} & {Permitir autenticación de usuarios a través de SSO.}\\
+		\hline
+			{RNF02} & {Utilizar la librería de componentes visuales de PrimeFaces 3.2.}\\
+		\hline
+			{RNF03} & {Utilizar el framework de persistencia Hibernate 4.1.}\\
+		\hline
+			{RNF04} & {Utilizar como servidor de aplicaciones Glassfish 3.1.1.}\\
+		\hline
+			{RNF05} & {Utilizar SQL Server 2008 R2 como sistema gestor de base de datos.}\\
+		\hline
+			{RNF06} & {La aplicación debe ser fácil de utilizar por personas con pocos 
+			conocimientos en computación. Tiempo de aprendizaje máximo 1 día.}\\
+		\hline
+			{RNF07} & {La aplicación no debe verse afectada ante la falla de algún
+			otro sistema de DISICO.}\\
+		\hline
+			{RNF08} & {La aplicación debe estar disponible 24/7. Con un limite frontera aceptable
+			de 20/7 para operaciones de corrección y mantenimiento.}\\
+		\hline
+			{RNF09} & {La aplicación debe soportar una concurrencia de 800 usuarios
+			sin ver degradados los tiempos de respuestas.}\\
+		\hline
+			{RNF10} & {Los tiempos de respuesta del sistema deben ser de 8 segundos. 
+			aceptando como limite 12 segundos solo en el caso de pantallas con resumen
+			de información en tablas y gráficos.}\\
+		\hline
+	\end{tabular}
+	\end{center}
+
+\section{Casos de Uso}
+	En esta sección se describe el comportamiento del sistema a través
+	de los casos de uso.
+
+	\subsection{Modelo de Casos de Uso}
+	Las Figuras \ref{CU_SolicitudReq} y \ref{CU_SolicitudSCM} muestran los respectivos casos de uso
+	para los diferentes actores del sistema, y se encuentran separados entre lo que se refiere a
+	solicitudes de requerimientos y los relacionados con la gestión de proyectos y SCM.
+	El conjunto de casos de usos descritos nos da los lineamientos necesarios para saber que hará el 
+	sistema una vez construido. En el Apéndice \ref{anexoA} se muestra el detalle de los casos de uso
+	en formato expandido junto con los diagramas de secuencia y estado correspondientes.
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=14.5cm]{imagenes/CU/CU_SolicitudReq.png}
+			\caption{Modelo de Casos de Uso Solicitud de Requerimientos}
+			\label{CU_SolicitudReq}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=16.5cm]{imagenes/CU/CU_SolicitudSCM.png}
+			\caption{Modelo Casos de Uso Gestión de SCM}
+			\label{CU_SolicitudSCM}
+		\end{center}
+	\end{figure}
+
+\section{Modelo Conceptual}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[angle=90,scale=0.61]{imagenes/ModeloConceptual.png}
+			\caption{Modelo Conceptual}
+			\label{modConceptual}
+		\end{center}
+	\end{figure}
+
+	La Figura \ref{modConceptual} muestra el modelo conceptual de la plataforma, donde 
+	se representan los principales conceptos del dominio y la forma en que estos se encuentran 
+	relacionados. Los cuales no necesariamente estarán presentes luego en el diseño lógico.
