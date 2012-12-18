@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="#{pages.layout_atencion}">
+        <ui:define name="title">
+            <h:outputText value="Crear Proyecto"/>
+        </ui:define>
+        <ui:define name="content">
+            <h:outputScript library="js" name="calendar-localization.js" />
+
+
+            <p:panel id="pnl_crear_proyecto" header="Crear Nuevo Proyecto">
+                <h:outputText value="Para crear un nuevo proyecto por favor complete todos los campos obligatorios, recuerde que usted solo puede crear proyecto para su propia area." style="color: #616161;margin-top: 10px;"/>
+
+                <h:panelGrid columns="3" columnClasses="alig_top_column,,alig_top_column" style="margin-left: 0px;margin-top: 10px;">
+                    <h:form id="form_crear_proyecto">
+                        <h:outputText value="Información del Proyecto" styleClass="title_bold" />
+                        <br/>
+                        <h:panelGrid id="grid_crear_proyecto" columns="4" cellspacing="10" columnClasses="width: 120px;" style="margin-left: -10px;margin-top: 5px;">
+                            <p:outputLabel value="Codigo Interno:" for="imask_codigo_interno" styleClass="label_blod" />
+                            <p:inputMask id="imask_codigo_interno" value="#{mbProyecto.nuevoProyecto.codigoInterno}" required="true" 
+                                         mask="Pa9999" maxlength="6" size="6" title="El codigo debe empezar con P mas otro caracter. Ej: PD0001">
+                                <p:ajax process="imask_codigo_interno" listener="#{mbProyecto.validateCode}" update="mensajeCodigo"/>
+                            </p:inputMask>
+                            <p:message id="mensajeCodigo" for="imask_codigo_interno"/>
+                            <p:tooltip for="imask_codigo_interno" showEvent="focus" hideEvent="blur" />
+
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" cellspacing="10" style="line-height: 1.4em;margin-top: -10px;margin-left: -10px;">
+                            <p:outputLabel value="Nombre Proyecto:" for="itxt_nombre_proyecto" styleClass="label_blod" />
+                            <p:inputText id="itxt_nombre_proyecto" value="#{mbProyecto.nuevoProyecto.nombre}" required="true" maxlength="45" size="45"/>
+
+                            <p:outputLabel value="Tipo Proyecto:" for="slct_tipo_proyecto" styleClass="label_blod"/>
+                            <p:selectOneMenu id="slct_tipo_proyecto" value="#{mbProyecto.nuevoProyecto.tipoProyecto}" required="true" style="min-width: 250px;margin-left: 5px;">
+                                <f:selectItem itemValue="" itemLabel="Seleccione un tipo Proyecto"/>
+                                <f:selectItems value="#{tipoProyectoController.itemsAvailableSelectMany}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Estado Proyecto:" for="slct_estado_proyecto" styleClass="label_blod"/>
+                            <p:selectOneMenu id="slct_estado_proyecto" value="#{mbProyecto.nuevoProyecto.estadoProyecto}" required="true" style="min-width: 250px;margin-left: 5px;">
+                                <f:selectItem itemValue="" itemLabel="Seleccione un Estado Proyecto"/>
+                                <f:selectItems value="#{estadoProyectoController.itemsAvailableSelectMany}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Etapa Proyecto:" for="slct_etapa_proyecto" styleClass="label_blod"/>
+                            <p:selectOneMenu id="slct_etapa_proyecto" value="#{mbProyecto.nuevoProyecto.etapaProyecto}" required="true" style="min-width: 250px;margin-left: 5px;">
+                                <f:selectItem itemValue="" itemLabel="Seleccione una Etapa para el Proyecto"/>
+                                <f:selectItems value="#{etapaProyectoController.itemsAvailableSelectMany}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Jefe de Proyecto:" for="slct_jefe_proyecto" styleClass="label_blod"/>
+                            <p:selectOneMenu id="slct_jefe_proyecto" value="#{mbProyecto.jefeProyecto}" required="true" style="min-width: 250px;margin-left: 5px;">
+                                <f:selectItem itemLabel="Seleccione un Jefe de Proyecto"/>
+                                <f:selectItems value="#{mbProyecto.itemsAvailableSelectManyNombreCompleto}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Fecha de Inicio:" for="cal_fecha_ini" styleClass="label_blod"/>
+                            <p:calendar id="cal_fecha_ini" showOn="button" pattern="dd/MM/yyyy" locale="es" navigator="true" required="true" value="#{mbProyecto.nuevoProyecto.fechaInicio}" style="margin-left: 5px;"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1">
+                            <p:outputLabel value="Descripción:" for="itxta_descripcion" styleClass="label_blod"/>
+                            <p:inputTextarea id="itxta_descripcion" value="#{mbProyecto.nuevoProyecto.descripcion}" maxlength="255" rows="4" cols="48" required="true"/>
+                        </h:panelGrid>
+                        <h:panelGrid>
+                            <p:commandButton value="Crear" actionListener="#{mbProyecto.crearProyecto}" update="@form" oncomplete="if(!args.validationFailed){dlgExito.show();}"/>
+                        </h:panelGrid>
+                    </h:form>
+
+                    <p:separator style="width:1px;height: 450px;margin-left: 20px;margin-right: 20px;"/>
+
+                    <h:form id="form_adjuntar_archivos" enctype="multipart/form-data" >
+                        <h:outputText value="Archivos Adjuntos" styleClass="title_bold" style="margin-bottom: 10px;"/>
+                        <br/>
+                        <p:fileUpload id="filesUpload" style="margin-left: 0px;margin-top: 15px;margin-bottom: 5px;"     
+                                          value="#{mbFilesUpload.uploadFile}"
+                                          mode="simple" required="true">
+                            </p:fileUpload>
+                        <h:panelGrid id="grid_upload" columns="2" style="margin-left: 0px;">
+                            <h:panelGroup style="margin-left: 0px;">
+                                <p:inputText id="itxt_tipoInfo" value="#{mbProyecto.tipoInformacion}" maxlength="200" required="true" size="60" style="margin-bottom: 4px;"/>
+                                <p:watermark for="itxt_tipoInfo" value="Tipo de Información" /> 
+                            </h:panelGroup>
+                            <p:commandButton title="Agregar Archivo al Proyecto" actionListener="#{mbProyecto.addArchivoAdjunto}" ajax="false" update=":form_adjuntar_archivos" icon="ui-icon-plus"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="3" columnClasses="column_150p border_rh,column_150p border_rh,column_70p" styleClass="header_file_upload_proyecto" style="margin-top: 15px;" rendered="#{not empty mbProyecto.archivosProyectoAdjuntos}">
+                            <h:outputText value="Tipo de Información" />
+                            <h:outputText value="Archivo" />
+                            <h:outputText value="Size" />     
+                        </h:panelGrid>
+                        <p:dataList id="selectFiles" value="#{mbProyecto.archivosProyectoAdjuntos}" var="f" type="none" >
+                            <p:column>
+                                <h:panelGrid columns="4" columnClasses="column_150p border_rb,column_150p border_rb,column_50p border_rb,column_20p" styleClass="file_upload_proyecto_background">
+                                    <h:outputText value="#{f.tipoInformacion}" styleClass="file_upload_proyecto"/>
+                                    <h:outputText value="#{f.archivoAdjunto.nombre}" styleClass="file_upload_proyecto"/>
+                                    <h:outputText value="#{f.archivoAdjunto.sizeFormat}" styleClass="file_upload_proyecto"/>
+                                    <p:commandLink id="link" title="Eliminar" actionListener="#{mbProyecto.remove(f)}" 
+                                                   process="@this" update="@(.ui-datalist)" style="float: right;color: steelblue;">
+                                        <span class="ui-icon ui-icon-close"></span>  
+                                    </p:commandLink>
+                                </h:panelGrid>
+                            </p:column>   
+                        </p:dataList>
+                    </h:form>
+                </h:panelGrid>
+
+                <br/>
+
+
+
+                <br/>
+
+
+            </p:panel>
+            <p:dialog id="dlg_creacion_exitosa" widgetVar="dlgExito" closable="false" resizable="false" modal="true" width="390" header="Creacion Exitosa">
+                <h:panelGrid>
+                    <h:outputText value="El proyecto \'#{mbProyecto.nuevoProyecto.nombre}\' fue creado exitosamente. Si desea agregar mas participantes puede hacerlo en el menu de edición"/>
+                    <br/>
+                    <h:panelGroup style="float: right;">
+                        <p:commandButton value="Crear Otro Proyecto" oncomplete="dlgExito.hide();" update="pnl_crear_proyecto" actionListener="#{mbProyecto.buildNuevoProyecto}"/>
+                        <p:commandButton value="Ver Proyecto" actionListener="#{mbProyecto.goDetalleProyecto()}"/>
+                        <p:commandButton value="Salir" action="proyectosArea?faces-redirect=true"/>
+                    </h:panelGroup>
+                </h:panelGrid>
+            </p:dialog>
+
+        </ui:define>
+    </ui:composition>
+</html>

@@ -4,18 +4,22 @@
  */
 package cl.uv.view.controller.proyecto.jsf.mb;
 
+import cl.uv.model.base.utils.FileUtils;
 import cl.uv.proyecto.persistencia.ejb.ArchivoProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ProyectoFacadeLocal;
+import cl.uv.proyecto.persistencia.entidades.ArchivoAdjunto;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.proyectos.ejb.ProyectoEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbBase;
 import cl.uv.view.controller.base.utils.JsfUtils;
+import cl.uv.view.controller.base.utils.Resources;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -79,5 +83,5 @@ public class MbDetalleProyecto extends MbBase {
     public void reabrirProyecto() {
         proyectoEJB.reabrirProyecto(proyecto);
     }
-
+    
 }

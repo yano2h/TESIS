@@ -86,14 +86,14 @@
                         <p:column headerText="Tipo de Información">
                             <h:outputText value="#{f.tipoInformacion}"/>
                         </p:column>
-                        <p:column headerText="Size">
+                        <p:column headerText="Size" style="width: 60px;">
                             <h:outputText value="#{f.archivoAdjunto.sizeFormat}"/>
                         </p:column>
-                        <p:column headerText="Archivo">
+                        <p:column headerText="Archivo" style="width: 50px;">
                             <p:commandLink id="link" title="Descargar" actionListener="#{mbFilesUpload.downloadFileProyecto(f)}" ajax="false"
-                                           style="float: right;color: steelblue;font-style: italic;" process="@this">
+                                           process="@this">
                                 
-                                <h:graphicImage library="imagenes" name="logo_uv.png"/>
+                                <h:graphicImage library="imagenes" name="#{mbFilesUpload.findIcon(f.archivoAdjunto)}" width="24" height="24" style="display: block;margin: 0 auto;"/>
                                 <p:fileDownload value="#{mbFilesUpload.fileDownload}"  />
                             </p:commandLink>
                         </p:column>
