@@ -1,0 +1,713 @@
+\chapter{Descripción de las Pruebas de Aceptación}
+\label{anexo5}
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-01} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Crear Solicitud de Requerimiento}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF02,RF03} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Crear Solicitud de Requerimiento}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{l|}{Estar logueado como funcionario.}\\
+		\hline
+		\multirow{1}{*}{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Crear Solicitud".}\\ 
+		& \multicolumn{3}{m{10.3cm}|}{2. Ingresar los datos de su solicitud y enviarla.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Ingresar a su correo institucional y verificar 
+		que a recibido el correo con el codigo de consulta correspondiente.}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{ El sistema muestre un 
+		mensaje indicando que la solicitud se envió exitosamente y que el solicitante haya 
+		recibido el código de consulta correspondiente a la solicitud enviada.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{l|}{Guardar código de consulta para la prueba PA-02}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+	
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-02} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Consultar por Código de Consulta}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF04} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Consultar solicitud ,Sección Consultar a través de numero de consulta}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{l|}{Estar logueado como funcionario, y el código debe ser valido.}\\
+		\hline
+		\multirow{1}{*}{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Consultar Solicitud".}\\ 
+		& \multicolumn{3}{m{10.3cm}|}{2. Ingresar el código de consulta y presionar "Buscar".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se debe desplegar el detalle de la solicitud correspondiente.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{l|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-03} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Filtrar Búsqueda}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF04} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Consultar solicitud ,Sección Filtrar Búsqueda}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{l|}{Estar logueado como funcionario.}\\
+		\hline
+		\multirow{1}{*}{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Consultar Solicitud".}\\ 
+		& \multicolumn{3}{m{10.3cm}|}{2. Ingresar un filtro de búsqueda.}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se debe actualizar el contenido del la tabla de resultados acorde a los filtros ingresados.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{l|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-04} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Comentar Solicitud.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF16} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Comentar Solicitud.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{l|}{}\\
+		\hline
+		\multirow{1}{*}{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar una solicitud cualquiera para ver su detalle.}\\ 
+		& \multicolumn{3}{m{10.3cm}|}{2. Ingresar su comentario en el campo de texto.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Presionar "Comentar" para publicarlo.}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se debe actualizar la lista de comentarios, mostrando en primer lugar el nuevo comentario.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{l|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table}  
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-05} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Asignar Responsable Solicitud.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF05} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Solicitud, Asignar Responsable Solicitud.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como jefe de área, que la solicitud este en estado "Enviada".}\\
+		\hline
+		\multirow{1}{*}{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Solicitudes del Área".}\\ 
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger una solicitud que este en estado Enviada.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Escoger la opción "Asignar Responsable".}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Escoger un funcionario al cual asignara la solicitud.}\\
+		& \multicolumn{3}{m{10.3cm}|}{5. Alternativamente puede asignar una prioridad y fecha de vencimiento.}\\
+		& \multicolumn{3}{m{10.3cm}|}{6. Presione "Asignar".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Mensaje de Asignación Exitosa. Actualización de la información referente al responsable en el detalle de la solicitud.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{l|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table}  
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-06} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Transferir Solicitud.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF06} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Solicitud, Sección Transferir Solicitud.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como jefe de área, que la solicitud este en estado "Enviada".}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Solicitudes del Área". }\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger una solicitud que este en estado Enviada.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Escoger la opción "Transferir".}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Seleccione el área a la que transferirá la solicitud e ingrese el motivo.}\\
+		& \multicolumn{3}{m{10.3cm}|}{5. Presione "Transferir".}\\
+
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Actualización de la solicitud mostrando la nueva area responsable.
+Desaparición de las opciones para gestionar dicha solicitud.
+Desaparición de la solicitud del listado de Solicitudes del Área.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{l|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-07} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Rechazar Solicitud.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF07} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Solicitud, Sección Rechazar Solicitud.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como jefe de área, que la solicitud este en estado "Enviada".}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Solicitudes del Área".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger una solicitud que este en estado Enviada.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Escoger la opción "Rechazar".}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Ingresar el motivo del rechazo y confirmar.}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Actualización del estado de la solicitud a "Rechazada".
+Bloqueo de todas las opciones de administración de la solicitud.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-08} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Convertir Solicitud en Proyecto }\\
+		\hline
+		{\textbf{Requerimiento}} & {RF08} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Solicitud, Sección Convertir Solicitud en Proyecto.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como jefe de área, que la solicitud este en estado "Enviada".}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Solicitudes del Área".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger una solicitud que este en estado Enviada.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Escoger la opción "Convertir en Proyecto".}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Confirmar la acción.}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{La solicitud cambia su estado a cerrada. 
+Se re-direcciona hacia el formulario de Crear Proyecto}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-09} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Enviar Respuesta Manual.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF15} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Solicitud, Sección Enviar Respuesta Manual.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como jefe de área, que la solicitud este en estado distinto a "Cerrada" o "Rechazada".}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Solicitudes del Área".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger la solicitud con el Asunto "Responder Manualmente".}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Seleccionar la opción "Cerrar y Responder" y la sub-opción "Respuesta Manual".}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Completar los datos de la respuesta y Seleccione "Enviar".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{La solicitud cambie a estado cerrada.
+Aparece la respuesta ingresada en el detalle de la solicitud.
+El destinatario reciba un correo electrónico.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-10} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Respuesta Directa.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF14,RF15} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Solicitud, Sección Respuesta Directa.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como jefe de área.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Solicitudes del Área".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger la solicitud con el Asunto "Responder Directamente".}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Seleccionar la opción "Cerrar y Responder" y la sub-opción "Respuesta Directa".}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Completar los datos de la respuesta y Seleccione "Enviar".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{La solicitud cambie a estado cerrada.
+Aparece la respuesta ingresada en el detalle de la solicitud.
+Se desactive la opción de Respuesta Directa.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{Alternativamente al ingresar su respuesta puede seleccionar la opción
+"Enviar una copia de la respuesta al correo del solicitante".}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-11} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Buscar Solicitud.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF11} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Solicitud, Buscar Solicitud.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como jefe de área o jefe de departamento.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la  opción "Buscar Solicitud".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Ingresar filtros de búsquedas. }\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Presionar la opción "Filtrar".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Lista de solicitudes que cumple con los criterios de búsqueda especificados.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-12} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Resumen Personal.}\\
+		\hline
+		{\textbf{Requerimiento}} & {} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Ver Resumen Personal.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como funcionario de Disico.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Resumen Atención de Solicitudes".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger la pestaña "Personal".}\\
+
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se muestre un resumen de las cantidades de solicitudes correspondientes al funcionario.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-13} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Resumen Área.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF09} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Ver Resumen Área.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como jefe de área.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Resumen Atención de Solicitudes".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger la pestaña "Área".}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Seleccionar "Por funcionario de Área" y escoger un funcionario del área.}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Presionar "Ver Resumen".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se muestre un resumen de las cantidades de solicitudes por funcionarios del área y del área en general.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-14} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Resumen Departamento.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF10} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Ver Resumen Departamento.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como jefe de Departamento.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Resumen Atención de Solicitudes".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger la pestaña "Departamento".}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Seleccionar "Por  Área" y escoger área.}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Presionar "Ver Resumen".}\\
+		& \multicolumn{3}{m{10.3cm}|}{5. Seleccionar "Por  Funcionario" y escoger un funcionario.}\\
+		& \multicolumn{3}{m{10.3cm}|}{6. Presionar "Ver Resumen".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se muestre un resumen de las cantidades de solicitudes del departamento en general,
+por área y por departamento.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-15} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Iniciar Solicitud.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF13} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Atender Solicitud, Sección Iniciar Solicitud.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como funcionario de Disico.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Mis Solicitudes".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger una solicitud en estado "Asignada".}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Seleccionar la opción "Iniciar".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Actualización del estado de la solicitud a Iniciada.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-16} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Respuesta Directa Funcionario DISICO.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF14,RF15} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Atender Solicitud, Sección Cerrar Solicitud con Respuesta Directa y Gestionar Solicitud, Sección Respuesta Directa.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como funcionario de DISICO.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Mis Solicitudes".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger una solicitud que no este en estado "Cerrada".}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Seleccionar la opción "Cerrar y Responder" y la sub-opción "Respuesta Directa".}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Completar los datos de la respuesta y Seleccione "Enviar".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{La solicitud cambie a estado cerrada.
+Aparece la respuesta ingresada en el detalle de la solicitud.
+Se desactive la opción de Respuesta Directa.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{Alternativamente al ingresar su respuesta puede seleccionar la opción
+"Enviar una copia de la respuesta al correo del solicitante".}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-17} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Respuesta Al Jefe de Área.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF14} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Atender Solicitud, Sección Cerrar Solicitud con Respuesta Al Jefe de Área.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como funcionario de DISICO. }\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Mis Solicitudes".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger una solicitud que no este en estado "Cerrada".}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Seleccionar la opción "Cerrar y Responder" y la sub-opción "Respuesta al Jefe de Área".}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Confirmar la acción.}\\
+
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{La solicitud cambie a estado "Finalizada en espera de aprobación".
+Se desactiven el resto de todas las opciones.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-18} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Crear Proyecto.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF17} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Proyectos, Sección Crear Proyecto.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como Jefe de Área.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccionar la opción "Crear Proyecto".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Completar la información del Nuevo Proyecto.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Presionar "Crear".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se muestre un mensaje de creación exitosa del proyecto.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-19} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Eliminar Proyecto}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF17} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Proyectos, Sección Eliminar Proyecto.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como Jefe de Área.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Escoger la opción "Proyectos del Área".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Seleccionar un Proyecto.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Presionar "Eliminar".}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Confirme la acción.}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Que el sistema regresa al menú de "Proyectos del Área" y que el proyecto ya no aparezca.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-20} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Editar Proyecto.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF17} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Proyectos, Sección Modificar Proyecto.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como Jefe de Área.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Escoger la opción "Proyectos del Área".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Seleccionar un Proyecto.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Presione "Editar".}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Presione sobre los campos a editar y modifiquelos.}\\
+		& \multicolumn{3}{m{10.3cm}|}{5. Agregue nuevos participantes al proyecto.}\\
+		& \multicolumn{3}{m{10.3cm}|}{6. Presione "Guardar Cambios".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{El sistema vuelve al detalle del Proyecto y muestra la información actualizada.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-21} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Ver Avance Proyecto.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF26} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Proyectos, Sección Resumen Avance de Proyecto.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar participando en el proyecto.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Escoger la opción "Mis Proyectos".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Seleccionar un proyecto.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Seleccionar la opción "Ver Avance".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{El sistema muestra un listado con todas las tareas y su nivel de avance.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-22} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Buscar Proyecto.}\\
+		\hline
+		{\textbf{Requerimiento}} & {} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Proyectos, Sección Buscar Proyecto.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como Jefe de Departamento, Área, o Funcionario de Disico.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Escoger la opción "Buscar Proyecto".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Ingresar filtros de búsqueda.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Presionar "Filtrar".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{El sistema lista todos los proyectos que cumplen con los criterios de búsqueda.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-23} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Asignar Tareas SCM.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF18} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Definir Tareas SCM}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar logueado como Jefe de Área.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Escoger la opción "Asignar Tareas SCM".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Seleccione el Proyecto en el cual desea asignar las tareas de SCM.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Escoja una Tarea y Agregala.}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Modifique el detalle de esta de ser necesario.}\\
+		& \multicolumn{3}{m{10.3cm}|}{5. Presione "Guardar Cambios".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se muestra un mensaje de operación exitosa.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-24} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Crear Tarea}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF24} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Tareas Proyecto, Sección Crear Tarea.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar registrado como participante en al menos un proyecto.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Escoger la opción "Crear Tarea".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Ingresar los datos de la tarea.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Presionar "Aceptar".}\\
+
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se agrega la tarea al listado de tareas del usuario y del proyecto.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-25} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Actualizar Tarea.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF25} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestionar Tareas Proyecto, Actualizar estado de Avance.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Seleccione la opción "Mis Tareas". }\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Escoger una Tarea.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Seleccionar el campo de Avance para activar la edición.}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Presionar "Guardar Cambios".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se actualiza la información de la Tarea.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-26} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Identificar Configuración.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF19} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestión de Cambios, Sección Identificar Configuración.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Tener asignada la tarea de Identificar Configuración en a lo menos un proyecto.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Escoger la opción "Identificar la Configuración".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Seleccionar el proyecto al cual se desea agregar Items de Configuración.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Complete la información del nuevo item.}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Presione "Añadir Item".}\\
+		& \multicolumn{3}{m{10.3cm}|}{5. Presionar "Guardar".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Mensaje de Operación exitosa.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-27} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Crear Solicitud de Cambio.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF20} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestión de Cambios, Sección Crear Solicitud de Cambio.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Estar participando en a lo menos un proyecto.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Escoger la opción "Crear Solicitud de Cambio".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Completar los datos de la solicitud.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Presione "Enviar".}\\
+
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Mensaje de envío exitoso.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-28} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Analizar Solicitud.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF21} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestión de Cambios, Sección Analizar Impacto del Cambio.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Tener asignada la tarea de Analizar Impacto del Cambio en a lo menos un proyecto.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Presione la opción "Analizar Solicitud".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Seleccionar una solicitud.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Escoger la opción "Analizar".}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Ingresar los datos del análisis.}\\
+		& \multicolumn{3}{m{10.3cm}|}{5. Presionar "Aceptar".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se agrega la información relacionada al análisis  detalle de la solicitud de cambio.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-29} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & {Evaluar Solicitud.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF22} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestión de Cambios, Sección Aprobar/Rechazar Solicitud.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Tener asignada la tarea de Evaluar solicitudes en a lo menos un proyecto.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Escoger la opción "Evaluar Solicitud".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Seleccionar una solicitud.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Escoger la opción "Aprobar/Rechazar".}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Apruebe la solicitud.}\\
+		& \multicolumn{3}{m{10.3cm}|}{5. Presionar "Aceptar".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se agrega la información de aprobación o desaprobación de la solicitud.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 
+
+
+	\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{|>{\columncolor[gray]{0.8}}m{2.8cm}|m{2cm}|m{2.3cm}|m{6cm}|}
+		\hline
+		{\textbf{Id-Prueba}} & {PA-30} & {\cellcolor[gray]{0.8}\textbf{Nombre}} & 
+{Implementar Cambio.}\\
+		\hline
+		{\textbf{Requerimiento}} & {RF23} & {\cellcolor[gray]{0.8}\textbf{Caso de Uso}} & {Gestión de Cambios, Sección Implementación del Cambio.}\\
+		\hline
+		{\textbf{Condición}} & \multicolumn{3}{m{10.3cm}|}{Tener asignada la tarea de Implementar el Cambio en a lo menos un proyecto.}\\
+		\hline
+		{\textbf{Pasos}} & \multicolumn{3}{m{10.3cm}|}{1. Escoger la opción "Formulario Implementación".}\\
+		& \multicolumn{3}{m{10.3cm}|}{2. Seleccionar una solicitud.}\\
+		& \multicolumn{3}{m{10.3cm}|}{3. Escoger la opción "Implementar".}\\
+		& \multicolumn{3}{m{10.3cm}|}{4. Ingresar los datos de implementación.}\\
+		& \multicolumn{3}{m{10.3cm}|}{5. Presionar "Aceptar".}\\
+		\hline
+		{\textbf{Resultado Esperado}} & \multicolumn{3}{m{10.3cm}|}{Se agrega la información de implementación al detalle de la solicitud de cambio.}\\
+		\hline
+		{\textbf{Observaciones}} & \multicolumn{3}{m{10.3cm}|}{}\\
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table} 

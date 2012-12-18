@@ -1,0 +1,847 @@
+\chapter{Marco Conceptual}
+
+\section{Conceptos y Terminología}
+	\begin{itemize}
+		%\item{\textbf{Solicitud:}}
+		\item{\textbf{Requerimiento:}} El Glosario de Terminología Estándar de 
+		Ingeniería de Software 
+			\cite{ieee610.12:1990} define al requisito como:
+			\begin{enumerate}[(1)]
+				\item Una condición o capacidad que necesita un usuario para resolver 
+				un problema o alcanzar un objetivo.
+				\item Una condición o capacidad que debería ser reunida o poseída por 
+				un sistema o componente de un sistema para satisfacer un contrato, 
+				estándar, u otro documento impuesto	formalmente.
+				\item Una representación documentada de una condición o capacidad 
+				como las expresadas en (1) y (2).
+			\end{enumerate}
+		\item{\textbf{Tarea:}} Una secuencia de instrucciones tratadas como una 	
+		unidad básica de trabajo \cite{ieee610.12:1990}. 
+		\item{\textbf{HelpDesk:}} O en español Mesa de ayuda establece un punto 
+		único de contacto y permite dar soporte remoto a los usuarios mejorando su 
+		productividad. Dentro de los subservicios que puede brindar la mesa de 
+		servicios TI están: atención de llamadas, soporte con control remoto, gestión 
+		de activos, distribución remota de software, soporte a sistemas de antivirus, 
+		aplicaciones de autoservicio: catálogo electrónico y reset de passwords y 
+		respaldo 	
+		 online \cite{helpdesk}.
+		%\item{\textbf{TI:}}
+		\item{\textbf{ITIL:}} ITIL puede ser definido como un conjunto de buenas prácticas 
+		destinadas a mejorar la gestión y provisión de servicios TI. Su objetivo último es 
+		mejorar la calidad de los servicios TI ofrecidos, evitar los problemas asociados
+		a los mismos y en caso de que estos ocurran ofrecer un marco de actuación 
+		para que estos sean solucionados con el menor impacto y a la mayor 
+		brevedad posible\cite{itil_v3}.
+		\item{\textbf{CMDB:}} Base de Datos de la Gestión de Configuraciones,  esta base 
+		de datos debe incluir \cite{itil_v3}: 
+		\begin{itemize}
+			\item Información detallada de cada elemento de configuración,
+			\item Interrelaciones entre los diferentes elementos de configuración, como, 
+			por ejemplo, relaciones "padre-hijo" o interdependencias tanto lógicas como 
+			físicas.
+		\end{itemize}
+		%\item{\textbf{KB:}}
+		%\item{\textbf{SKBS:}}
+		%\item{\textbf{SLAs:}}
+		\item{\textbf{SCM:}} Software Configuration Management (SCM) es un proceso 
+		técnico y administrativo que busca identificar y documentar las características
+		funcionales y físicas de un elemento de configuración, control de cambios a las 
+		características, registros y procesamiento de informes de cambio y estado de 
+		ejecución, y verificar el cumplimientos de los requisitos especificados 
+		\cite{ieee610.12:1990}. 
+		%Para lograr
+		%interiorizar el concepto de SCM es necesario definir un conjunto de conceptos y 
+		%términos fundamentales.
+		\item{\textbf{Ítem de Configuración:}} Una agregación de hardware, software, o 
+		ambos, que es designado para la gestión de configuración y tratados como una 
+		sola entidad en el proceso de gestión de la configuración \cite{ieee610.12:1990}.
+		\item{\textbf{Identificación de la Configuración:}} Es un elemento de la gestión de 
+		configuración, que consiste en seleccionar los elementos de configuración de un
+		sistema y el registro de sus características funcionales y físicas en técnicas de
+		documentación \cite{ieee610.12:1990}.
+		\item{\textbf{Versión:}} Una versión inicial o re-lanzamiento de un elemento de
+		 configuración de software, asociadas con una compilación completa o la
+		 recopilación del elemento de configuración \cite{ieee610.12:1990}.
+	\end{itemize}
+
+
+\section{Metodologías para la solicitudes de Requerimientos}
+\label{metod_sol_req}
+ITIL nos ofrece la siguiente definición de servicio; "Un servicio es un medio para 
+entregar valor a los clientes facilitándoles un resultado deseado sin la necesidad 
+de que estos asuman los costes y riesgos específicos asociados".\\
+
+ITIL v3 consta de 5 libros basados en el ciclo de vida del servicio y de estos 5, la 
+Operación de Servicio monitoriza activa y pasivamente el funcionamiento del servicio, 
+se registran eventos, incidencias, problemas, peticiones y accesos al servicio.\\ 
+
+De los principales procesos asociados a esta fase existen dos relacionados
+de cierta manera a la solicitud de requerimientos, estos son la \textit{Petición de 
+Servicios TI} y \textit{Gestión de Incidencias}.
+
+	
+	\subsection{ITIL v3 - Petición de Servicios TI}
+	La Gestión de Peticiones, como su nombre indica, es la encargada de atender las 
+	peticiones de los usuarios proporcionándoles información y acceso rápido a los 
+	servicios estándar de la organización TI\cite{itil_v3}.\\
+	
+	Es importante aclarar qué entendemos por petición de servicio, un concepto que 
+	engloba las solicitudes que los usuarios pueden plantear al departamento de TI:
+	
+	\begin{itemize}
+		\item Solicitudes de información o consejo.
+		\item Peticiones de cambios estándar (por ejemplo cuando el usuario olvida su 
+		contraseña y solicita una nueva).
+		\item Peticiones de acceso a servicios TI.
+	\end{itemize}
+	Las actividades incluidas en el proceso de Gestión de Peticiones son:
+	\begin{itemize}
+		\item \textbf{Selección de peticiones:} Los usuarios, a través de las 
+		herramientas destinadas a tal fin por la Gestión de Peticiones, emiten sus 
+		peticiones conforme a una serie de tipologías predefinidas.
+		\item \textbf{Aprobación financiera de la petición:} Dado que la mayoría de 
+		peticiones tienen implicaciones financieras, se considera su coste y se decide 
+		si tramitar la petición o no.
+		\item \textbf{Tramitación:} La petición es cursada por la persona o personas 
+		adecuadas según cada caso.
+		\item \textbf{Cierre:} Tras notificar al Centro de Servicios y comprobar desde 
+		aquél que el usuario ha quedado conforme con la gestión se procede a 
+		cerrarla.
+	\end{itemize}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/Proceso_gestion_peticiones_IT.png}
+			\caption{Proceso de la Petición de servicios TI}
+		\end{center}
+	\end{figure}
+
+		
+	\subsection{ITIL v3 - Gestión de Incidencias}
+	La Gestión de Incidencias tiene como objetivo resolver, de la manera más rápida y eficaz 
+	posible, cualquier incidente que cause una interrupción en el servicio. No se preocupa de 
+	encontrar y analizar las causas subyacentes a un determinado incidente sino exclusivamente
+	de restaurar el servicio\cite{itil_v3}.\\
+	
+	Aunque el concepto de incidencia se asocia naturalmente con cualquier mal funcionamiento de 
+	los sistemas de hardware y software, según el libro de Soporte del Servicio de ITIL una incidencia es:
+	"Cualquier evento que no forma parte de la operación estándar de un servicio y que causa, o 
+	puede causar, una interrupción o una reducción de calidad del mismo"\cite{itil_v3}.
+	\\\\Las actividades incluidas en el proceso de Gestión de Incidencias son:
+	\begin{itemize}
+		\item \textbf{Registro:} La incidencia debe ser registrada inmediatamente, pues resulta 
+		mucho más costoso hacerlo posteriormente y se corre el riesgo de que la aparición de 
+		nuevas incidencias demore indefinidamente el proceso. 
+		\item \textbf{Clasificación:} Tiene como objetivo principal el recopilar toda la información 
+		que pueda ser utilizada para la resolución de la incidencia. Incluye categorización, 
+		establecimiento del nivel de prioridad, asignación de recursos, y monitorización del estado 
+		y tiempo de respuesta esperado.
+		\item \textbf{Diagnostico:} Se examina la incidencia con ayuda de la KB para determinar
+		si se puede identificar con alguna incidencia ya resuelta para aplicar el procedimiento asignado.
+		Si no se puede resolver esta escala a un nivel superior para su investigación. Si fuese necesario
+		se puede generar una petición de cambio.
+		\item \textbf{Resolución:} Una vez resuelta la incidencia, se debe consultar con los usuarios si la 
+		solución es satisfactoria, se reclasifica el incidente si es necesario, se actualiza la información en
+		el CMDB sobre los ítem de configuración implicados, se incorpora el proceso de resolución al SKMS.
+	\end{itemize}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.6]{imagenes/Proceso_gestion_incidencias.png}
+			\caption{Proceso de la gestión de incidencias}
+		\end{center}
+	\end{figure}
+
+\newpage
+\section{Estándares para la descripción de Requerimientos}
+\label{estandar_req}
+
+
+	\subsection{IEEE Std-830-1998 : Especificación de los Requisitos del Software}
+	El estándar IEEE 830 describe el contenido y cualidades de una buena especificación de 
+	requerimientos (ERS) de software y presenta varios ejemplos de de esquemas de ERS. 
+	Puede ser usado tanto para crear una especificación de requerimientos directamente, 
+	como también puede ser usado como modelo para un estándar mas especifico.\\
+
+	Según el estándar la información que debería ser considerada para escribir una buena 
+	ERS, incluye lo siguiente:
+
+	\begin{itemize}
+		\item \textbf{Naturaleza de la ERS:} La ERS es una especificación para un producto 
+		de software que lleva a cabo sus funciones en un ambiente especifico. Por lo que
+		debiese ser escrita por el proveedor o el cliente o ambos. Las cuestiones básicas
+		que el escritor debe abordar son funcionalidad, interfaces externas, 
+		desempeño, atributos, restricciones del diseño impuesta en la aplicación.
+		\item \textbf{Entorno de la ERS:} Dado que la ERS tiene un papel especifico que 
+		desempeñar en el proceso de desarrollo de software, el escritor debe tener
+		cuidado de no ir mas allá de los limite de ese papel.
+		\item \textbf{Características de una buena ERS:} La ERS debe ser correcta, no 
+		ambigua, completa, verificable, consistente, clasificada por su importancia y/o 
+		estabilidad, modificable y trazable.
+		\item \textbf{Preparación conjunta de la ERS:} El proceso de desarrollo debe 
+		comenzar con el acuerdo del cliente en lo que el software completo debe hacer. 
+		Este acuerdo en forma de ERS, debe ser preparado conjuntamente. Ya que por lo 
+		general el cliente no esta capacitado para escribir una buena ERS. 
+		\item \textbf{Evaluación de la ERS:} La ERS puede necesitar evolucionar a medida 
+		que el desarrollo del software avanza, por lo que deben tener en cuenta que 
+		aunque los requerimientos se especifican de la forma mas completa y detalla 
+		posible, aun son incompletos. Y un proceso formal debe ser iniciado, para 
+		identificar, rastrar y reportar los cambios proyectados. Y los cambios aprobados en 
+		los requerimientos deben ser incorporados en la ERS.
+		\item \textbf{Prototipos:} Un prototipo debe ser utilizado como un modo de 
+		obtener los requisitos de software. Algunas características tales como formatos de 
+		pantalla o reporte se pueden extraer directamente del prototipo. Otros requisitos 
+		se pueden deducir mediante la ejecución de experimentos con el prototipo.
+		\item \textbf{Incorporación del diseño en la ERS:} La ERS debe centrarse en los 
+		servicios a realizar, normalmente no debe especificar los elementos del diseño 
+		tales como: partición del software en módulos, asignación de funciones a los 
+		módulos, describir flujo de información o control entre los modulos, elección de 
+		estructuras de datos.
+		\item \textbf{Incorporación de los requerimientos del proyecto en la ERS:} 
+		La ERS debe dirigir el producto de software y no el proceso de producción de este. 
+		Por lo que requisitos del proyecto no deben incluirse en la ERS. Estos normalmente 
+		incluyen elementos tales como: Costos, Plazos de Entrega, Procedimientos de 
+		Notificación, métodos de desarrollo de software, aseguramiento de calidad, 	
+		criterios de V\&V, o procedimientos de aceptación.
+	\end{itemize}
+
+	Sin embargo el estándar no identifica ningún método especifico, nomenclatura o 
+	herramienta para la preparación de una ERS.
+
+
+\section{Herramientas para la Solicitudes de Requerimientos}
+En este trabajo se entiende por Herramienta para la Solicitud de Requerimientos, 
+como una plataforma a través de la cual los usuarios de los sistemas de la Universidad 
+de Valparaíso (Portal de Alumnos, Portal de Profesores, SCA, el Aula Virtual, SharePoint, 
+etc), pueden enviar solicitudes de requerimientos (Ej: de información, solución de 
+problemas, cambios de clave), las cuales deben ser contestadas y resueltas 
+por DISICO a la brevedad, y que a su vez permite a los Jefes de Área asignar 
+responsables a las solicitudes y mantener un visión clara de cuantas y cuales 
+solicitudes tiene asignada cada miembro de su Área.\\
+
+En este ámbito el tipo de herramientas en el mercado, que mas se adecua a 
+este propósito son los Sistemas de Mesa de Ayuda (Help Desk System) o de 
+Asignamiento de tickets. Ambos se centran principalmente en el seguimiento 
+de problemas o de solicitudes de asistencia mediante el creación y asignación
+de Tickets. A continuación se nombran y describen algunas de las mas relevantes
+de este tipo:
+
+
+	\subsection{Hesk}
+	Es un sistema gratuito, programado en php con mysql, que permite gestionar 
+	los tickets enviados por los clientes para poder tener organizadas todas las 
+	solicitaciones de nuevas funcionalidades o problemas detectados en nuestros 
+	productos o servicios. La versión gratuita es completamente 
+	funcional, aunque incluye algunas referencias a hesk.com. Sus principales 
+	características son \cite{hesk}:
+	\begin{itemize}
+		\item Fácil administración, con posibilidad de tener más de un responsable 
+		por los tickets recibidos.
+		\item Ilimitadas categorías.
+		\item Posibilidad de adjuntar archivos en los tickets.
+		\item Sistema de anti-spam.
+		\item Campos personalizados.
+		\item Traducción sencilla a varios idiomas.
+		\item Alertas por email.
+	\end{itemize}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.5]{imagenes/hesk_interface.png}
+			\caption{Interfaz de Administración de Hesk}
+		\end{center}
+	\end{figure}
+
+	\newpage
+	\subsection{osTicket}
+	Es un sistema de ticket open source muy extendido. Integra sin problemas 
+	las preguntas creadas vía email, teléfono y a través de formularios web en 
+	una interfaz simple y fácil de usar. Gestiona, organiza y archiva todas las 
+	solicitudes de apoyo en un solo lugar, mientras que provee a los clientes 
+	de la capacidad de respuesta que merecen. osTicket está diseñado para 
+	ayudar a agilizar 	las solicitudes de apoyo y mejorar la eficiencia de atención 
+	al cliente, proporcionando al personal las herramientas necesarias para ofrecer 
+	un soporte técnico rápido, eficaz y medible \cite{osticket}. 
+	Algunas de las características principales incluyen:
+	
+	\begin{itemize}
+		\item Los tickets pueden ser creados a través de emails, formularios online o 
+		por teléfono (creado por el staff).
+		\item Respuesta automática que se envía cuando un nuevo ticket es abierto 
+		o un mensaje es recibido (plantillas personalizables de correo).
+		\item Respuestas predefinidas para las preguntas mas frecuentes.
+		\item Añadir notas internas a los tickets para el personal.
+		\item Temas de ayuda configurables para los tickets web. Enruta las 
+		consultas sin exponer los departamentos internos y prioridades.
+		\item El personal y los clientes se mantienen al día con alertas de correo 
+		electrónico (ajuste configurable y flexible).
+		\item Controla los niveles de acceso del personal, basado en grupos y 
+		departamentos.
+		\item Asigna tickets al personal y/o departamentos.
+		\item No requiere cuentas de usuarios o registro de usuarios 
+		(Ticket ID/email usados para el login).
+		\item Todas las solicitudes de apoyo y respuesta son archivadas.
+	\end{itemize}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=1]{imagenes/osTicket_interface.png}
+			\caption{Interfaz de Vista y Respuesta de Tickets en osTicket}
+		\end{center}
+	\end{figure}
+
+
+	\subsection{OTRS}
+	OTRS  es una suite de código abierto líder en innovación de servicios, 
+	que incluye Help Desk, una solución para la gestión de servicios de IT. 
+	Es conocido por su administración de solicitudes de servicio. 
+	El Panel Principal de OTRS proporciona un completo equipo de
+	herramientas para visualizar, clasificar, administrar, responder, escalar y 
+	resolver las solicitudes de servicio. Cuenta con una amplia gama de funciones
+	disponibles y se integra sin problemas con procesos existentes \cite{otrs}.
+	Algunas de las principales funciones con las que cuenta son:
+	
+	\begin{itemize}
+		\item Generación de Tickets, con soporte de múltiples entradas (correo, fax, 
+		PDA, SMS o SOAP/XML).
+		\item Clasificación y priorización de Tickets configurables.
+		\item Interfaz de auto servicio del cliente.
+		\item Notificaciones por evento de cambios en el estado de los tickets.
+		\item Plantillas de auto respuesta, para solicitudes recurrentes. 		
+		\item Enrutamiento  automático y manual de incidencias.
+		\item Integración del centro de asistencia telefónica.
+		\item Ejecución automática de acciones pre definidas 
+		utilizando filtros de criterio.
+		\item Múltiples Visualizaciones.
+		\item Búsqueda de texto completo por índice en todos los tickets: 
+		por título, hora, cliente o agente.
+	\end{itemize}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.4]{imagenes/OTRS_interface.png}
+			\caption{Interfaz de Vista de Tickets en OTRS}
+		\end{center}
+	\end{figure}
+
+
+	\subsection{SysAid}
+	SysAid es una solución de servicio técnico integral que ayuda a optimizar las 
+	operaciones de IT, incrementa la productividad, e implementa las mejores
+	practicas de la industria. En una ubicación centralizada, tiene todas las herramientas
+	necesarias para manejar todas las solicitudes de servicio que recibe un departamento
+	de IT. Desde la asignación de a administradores y resolución de incidencias a 
+	automatización de flujos de trabajo y el seguimiento hasta su finalización \cite{SysAid}. 
+	Algunas de las principales características son:
+	
+	\begin{itemize}
+		\item Crear reglas de enrutamiento, las cuales
+		especifican el individuo, la cola o el grupo de soporte a las cuales las
+		solicitudes deben ser directamente dirigidas en base a su categoría, urgencia o
+		de otros parámetros predefinidos.
+		\item Establece prioridades de las solicitudes basada en parámetros predefinidos.
+		\item Genera notificaciones automáticas que permiten mantener a los usuarios 
+		informados de las actualizaciones de sus solicitudes.
+		\item Establecer fecha de vencimiento para las solicitudes.
+		\item Crear Templates predefinidos para solicitudes de servicios a problemas
+		comunes.
+		\item Definición de permisos de administración y de grupos.
+		\item Asignar un individuo o grupo responsable para una solicitud.
+		\item Realiza encuestas de satisfacción a los usuarios una vez se cierra la solicitud.
+		\item Bases de conocimiento, para la resolución de problemas comunes.
+		\item Permite a los usuario tomar capturas de pantalla y las adjunta 
+		automáticamente a su solicitud.
+		\item Documenta todo el historial de mensajes dentro de la misma solicitud.
+		\item Si existen varias solicitudes relacionadas a un mismo problema, pueden ser
+		adjuntadas a una solicitud padre, de modo que todo los cambios y actualizaciones
+		en la solicitud padre sera replicada en sus hijos.
+		\item Integración con email, convierte automáticamente los emails enviados
+		a las direcciones predefinidas en solicitudes de servicio.
+		\item Integrarse con otros portales.
+		\item Chat online en vivo.
+		\item Ver el impacto en el negocio que puede tener una solicitud de servicio 
+		mediante la vinculación de la solicitud de servicio a un item de configuración en
+		tu CMDB.
+	\end{itemize}
+	Esta herramienta es de pago pero cuanta con una versión gratuita, la cual cuenta con
+	algunas limitaciones de uso, las cuales son:
+	\begin{itemize}
+		\item Permite solo 2 administradores.
+		\item Un máximo de 100 usuarios finales.
+		\item Solo incluye los módulos básicos para la administración de solicitudes de 
+		servicio, generación de reportes, notificaciones, acceso remoto y chat online.
+	\end{itemize}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.45]{imagenes/SysAid_interface.png}
+			\caption{Interfaz de Vista de Tickets en SysAid}
+		\end{center}
+	\end{figure}
+
+
+	\subsection{ChangeGear - ServiceDesk}
+	ChangeGear Service Desk es una solución completa que permite al personal de
+	soporte responder rápida y fácilmente a las peticiones de los clientes. Diseñado
+	utilizando el framework de mejores prácticas de ITIL y la plataforma Microsoft. 
+	NET, ChangeGear Service Desk cuenta con la automatización del flujo de 
+	trabajo, el seguimiento inteligente y una arquitectura integrada 
+	\cite{changeGear}. Algunas de sus principales características son:
+	
+	\begin{itemize}
+		\item Gestión de Incidentes que simplifica y automatiza el proceso de 
+		presentación de informes, seguimiento y gestión de las solicitudes de 
+		servicio.
+		\item Gestión de Problemas, identifica pro-activamente la causa raíz para 
+		prevenir futuras interrupciones de servicio. Dispone de una base de datos 
+		para el almacenamiento de errores conocidos permitiendo el análisis futuro 
+		de estos.
+		\item Gestión de Cambios y Entregas, facilita el seguimiento, gestión y 
+		control de todos los cambios de TI realizado en su entorno de TI, usando el 
+		framework de mejores practicas de de practicas ITIL prácticas.
+		\item La interfaz intuitiva de Microsoft. NET Web hace que sea fácil de usar y 
+		fácil de implementar. Incluso el personal no técnico puede utilizar
+		ChangeGear 	con poca o ninguna formación en cuestión.
+		\item Portal Web basado en el usuario final, proporciona a los empleados un
+		punto de acceso único para reportar y seguir las solicitudes de servicio.
+		\item Permite a los usuario buscar en una base de datos, para encontrar 
+		soluciones provisorias, errores conocidos y preguntas frecuentes.
+		\item Permite personalizar el flujo de trabajo para satisfacer las necesidades 
+		de su organización.
+		\item Alertas automáticas sobre los cambios o actualizaciones en las 
+		solicitudes.
+		\item Permite personalizar los template de emails, para el envió de 
+		notificaciones personalizadas.
+		\item Las solicitudes de aprobación se envían automáticamente a los
+		aprobadores	basado en condiciones predefinidas y los avances en el flujo de 
+		trabajo.
+		\item Panel de rendimiento que muestra gráficos en tiempo real y KPIs 
+		(Indicadores Clave de Desempeño).
+	\end{itemize}
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.4]{imagenes/changeGear_interface.png}
+			\caption{Interfaz de Vista de Tickets en ChangeGear}
+		\end{center}
+	\end{figure}
+
+
+\section{Estándares para SCM}
+	
+
+	\subsection{ISO Sistemas de Gestión de calidad. Directrices para la Gestión de la 
+	Configuración}
+	El propósito de este estándar, es aumentar el entendimiento común de los temas
+	de gestión de la configuración, como también promover su uso, y ayudar a las
+	organizaciones aplicando la gestión de la configuración para mejorar su 
+	desempeño.	Este estándar sirve de guía en el uso de Gestión de la Configuración
+	dentro de una organización. Es aplicable para el soporte de los productos desde
+	su concepción hasta su eliminación \cite{iso10007}.\\
+	
+	La ISO 1007 describe las responsabilidades y autoridades, también describe
+	el proceso de gestión de la configuración, el cual se describe a continuación.
+	
+	\begin{table}[H]
+		\begin{tabular}{| l | l |}
+			\hline
+			\textbf{Etapa del Proceso} & \textbf{Descripción} \\
+			\hline 
+			\hline
+			\multirow{3}{*}{Planificación de SCM} & {Es la base del proceso, coordina las actividades de gestión} \\
+									         		 & {de la configuración en un contexto especifico dentro del ciclo} \\
+									         		 & {de vida del producto.} \\
+			\hline
+			\multirow{1}{*}[-0.2cm]{Identificación de la} & {La selección de los items de configuración y sus interrelaciones}\\
+			 \multirow{2}{*}{configuración}			      & {deberían describir la estructura del producto. Ademas define}\\	
+			                                                                      & {criterios para la selección de ítems de configuración.}\\								      
+ 			\hline
+			\multirow{4}{*}{Control de Cambio} & {Se deben controlar todos los cambios. El grado de control}\\
+			                                                        & {necesario para procesar una petición de cambio, dependerá del}\\
+			                                                        & {impacto potencial del cambio, los requerimientos del cliente y }\\
+			                                                        & {los baselines de configuración.}\\
+			\hline
+			{Reporte del Estado} & {Esta actividad resulta en registros y reportes relacionados a un}\\
+			{de la configuración} & {producto y su información de configuración.}\\
+
+			\hline
+			\multirow{1}{*}[-0.2cm]{Auditoría de la} & {Debe realizarse en concordancia de acuerdo con procedimientos}\\
+			\multirow{2}{*}{Configuración}    & {documentados para determinar si el producto cumple con sus }\\
+			 &	 {requisitos e información de configuración}\\
+										   
+			\hline
+		\end{tabular}
+		\caption{Proceso definido en la ISO 10007}
+	\end{table}
+	
+
+	\subsection{IEEE 828-2005 Plan de Gestión de Configuración de Software} 
+	A través de este estándar se establecen los contenidos mínimos requeridos
+	en un Plan de Gestión de la Configuración del Software (SCM). Este estándar se
+	aplica al ciclo de vida completo de software critico. También a software no critico
+	y software ya desarrollado. La aplicación de este estándar no esta restringida a
+	ninguna forma, clase o tipo de software\cite{IEEE828}.\\
+
+	En este estándar la información de la planificación de SCM 
+	es dividida en seis clases las cuales se describen a continuación.
+
+	\begin{table}[H]
+		\begin{tabular}{| l | l |}
+			\hline
+			\textbf{Clase de información} & \textbf{Descripción} \\
+			\hline 
+			\hline
+			\multirow{2}{*}{Introducción} & {Describe el propósito del plan, ámbito de aplicación,} \\
+									         & {términos clave y referencias.} \\
+			\hline
+			\multirow{3}{*}{Administración SCM} & {(¿Quien?) Identifica las responsabilidades y autoridades}\\
+												& {para la administración y cumplimiento de las actividades}\\	
+												& {de SCM.}\\
+ 			\hline
+			\multirow{2}{*}{Actividades SCM} & {(¿Que?) Se identifican todas las actividades a ser}\\
+			                                                     & {desarrolladas en la aplicación del proyecto.}\\
+			\hline
+			\multirow{3}{*}{Cronograma SCM} & {(¿Cuando?) Identifica la coordinación necesaria en de}\\
+			                                                      & {las actividades de SCM con las otras actividades en el}\\
+											   & {proyecto.}\\
+			\hline
+			\multirow{2}{*}{Recursos SCM} & {Identifica las herramientas y los recursos físicos y }\\
+										     & {humanos para la ejecución del plan.}\\
+			\hline
+			\multirow{2}{*}{Mantenimiento del plan SCM} & {Identifica como el plan se mantendrá mientras}\\
+														& {se encuentre vigente.}\\
+			\hline
+		\end{tabular}
+		\caption{Clases de Información SCM definidas por la IEEE 828}
+	\end{table}
+
+
+	\subsection{IEEE 828-2012  Gestión de la Configuración en Sistemas e Ingeniería de Software} 
+	Esta norma establece los requisitos mínimos para los procesos de Gestión de la
+	Configuración (CM) en sistemas e ingeniería de software. La aplicación de esta
+	norma se aplica a cualquier forma, clase o tipo de software o sistema. Esta
+	revisión de la norma amplía la versión anterior para explicar CM,
+	incluyendo la identificación y adquisición de ítems de configuración, 
+	el control de cambios, reporte del estado de los ítems de configuración, así como
+	compilaciones de software e ingeniería de la liberación. \\
+
+	La edición anterior de 2005 define sólo el contenido de un Plan de Gestión de
+	Configuración de Software. Esta nueva edición del estándar aborda cuales son
+	las actividades de CM a realizar, cuando estas van a ocurrir en el ciclo de vida, 
+	y que planificación y recursos son necesarios. También se describen las áreas de
+	contenido para un Plan de CM\cite{IEEE828_2012}. 
+
+	
+	\subsection{ITIL v3 - Gestión del Cambio}
+	En la Fase de Transición de los Servicios TI de ITIL v3 se describe un proceso para
+	la gestión del cambio. Aquí se establece que el principal objetivo de la Gestión de 
+	Cambios es la evaluación y planificación del proceso de cambio para asegurar que, 
+	si éste se lleva a cabo, se haga de la forma más eficiente, siguiendo los procedimientos 
+	establecidos y asegurando en todo momento la calidad y continuidad del servicio TI.\\\\
+	Las principales razones para la realización de cambios en la infraestructura TI son:
+	\begin{itemize}
+		\item Solución de errores conocidos.
+		\item Desarrollo de nuevos servicios.
+		\item Mejora de los servicios existentes.
+		\item Imperativo legal.
+	\end{itemize}
+	Las principales actividades de la Gestión de Cambios se resumen en:
+	\begin{itemize}
+		\item Registrar, evaluar y aceptar o rechazar las peticiones de cambio (RFC) 
+		recibidas.
+		\item Planificación e implementación del cambio
+		\item Convocar reuniones del Comité Asesor del Cambio, excepto en el caso de 
+		cambios menores, para la aprobación de las peticiones de cambio y la elaboración 
+		del calendario del cambio.
+		\item Evaluar los resultados del cambio y proceder a su cierre en caso de éxito.
+	\end{itemize}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/Proceso_gestion_cambio.png}
+			\caption{Proceso de la Gestión de Cambios TI}
+		\end{center}
+	\end{figure}
+
+
+	\subsection{ITIL v3 - Gestión de la Configuración y Activos del Servicio}
+	En ITIL v3 también se hace mención a la Gestión de la Configuración, con el nombre
+	de \textit{Gestión de la Configuración y Activos del Servicio} cuyas principales 
+	funciones pueden ser resumidas en:
+
+	\begin{itemize}
+		\item Llevar el control de todos los elementos de configuración de la 
+		infraestructura TI con el adecuado nivel de detalle y gestionar dicha 
+		información a través de la Base de Datos de Configuración (CMDB).
+		\item Proporcionar información precisa sobre la configuración TI a la 
+		Planificación y Soporte a la Transición en su papel de coordinación del 
+		cambio para que ésta pueda establecer las fases y plazos en que se articulará 
+		la Transición.
+		\item Interactuar con la Gestiones de Incidencias, Problemas, Cambios y 
+		Entregas y Despliegues de manera que éstas puedan resolver más 
+		eficientemente las incidencias, encontrar rápidamente la causa de los problemas, 
+		realizar los cambios necesarios para su resolución y mantener actualizada en todo 
+		momento la CMDB.
+		\item Monitorizar periódicamente la configuración de los sistemas en el entorno 
+		de producción y contrastarla con la almacenada en la CMDB para subsanar 
+		discrepancias.
+	\end{itemize}
+	El proceso Gestión de la Configuración y Activos TI en resumen tiene como 
+	principales actividades:
+
+	\begin{itemize}
+		\item \textbf{Planificación:} determinar los objetivos y estrategias de la Gestión de 
+		la Configuración y Activos TI.
+		\item \textbf{Clasificación y Registro:} los CIs deben ser registrados conforme al 
+		alcance, nivel de profundidad y nomenclatura predefinidos.
+		\item \textbf{Monitorización y Control:} monitorizar la CMDB para asegurar que 
+		todos los componentes autorizados estén correctamente registrados y se conoce 
+		su estado actual.
+		\item \textbf{Realización de auditorías:} para asegurar que la información 
+		registrada en la CMDB coincide con la configuración real de la estructura TI de la 
+		organización.
+		\item \textbf{Elaboración de informes:} para evaluar el rendimiento de la Gestión 
+		de la Configuración y Activos TI y aportar información de vital importancia a otras 
+		áreas de la infraestructura TI.
+	\end{itemize}
+
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale=0.7]{imagenes/Proceso_gestion_configuracion.png}
+			\caption{Proceso de la Gestión de Configuración TI}
+		\end{center}
+	\end{figure}
+
+
+\section{Herramientas para SCM}
+Actualmente la mayoría de las herramientas relacionadas con SCM se enfocan 
+solo al control de versiones, por lo que no existen realmente herramientas que
+abarquen el proceso completo de SCM, ya que el proceso de SCM va mucho mas
+aya que solo el control de versiones. Algunas de las principales herramientas
+relacionadas a SCM de hoy en dia son:
+
+
+	\subsection{SVN}
+	SVN o  Subversion es un sistema de control de versiones centralizado libre y de código
+	fuente abierto. Permite manejar ficheros y directorios a través del tiempo utilizando un
+	árbol de ficheros en un repositorio central, el cual recuerda todos los cambios hechos a
+	sus ficheros y directorios, permitiendo así recuperar versiones antiguas de sus datos, o
+	examinar el historial de cambios de los mismos. \\
+
+	Subversion puede acceder al repositorio a través de redes, lo que permite que varias
+	personas puedan modificar y administrar el mismo conjunto de datos desde sus 
+	respectivas ubicaciones. Todo esto además permite realizar cambios sin temer que la
+	calidad del código se vea afectada, ya que ante cualquier problema se puede volver a la
+	versión anterior.
+
+	
+	\subsection{Mercurial}
+	Mercurial es una herramienta libre para administración del control de versiones. Ofrece 
+	el poder de manejar de manera eficiente sus proyectos de cualquier tamaño mientras 
+	usa una intuitiva interface. Es fácil de usar y difícil de romper, haciéndolo ideal para 
+	trabajar con cualquier archivo de versionados.
+
+	
+	\subsection{Git}
+	Git es un sistema distribuido de control de versiones libre y open sources, creado por 
+	Linus Torvalds (el creador del núcleo linux). Esta enfocado a la velocidad uso practico y
+	manejo de proyectos grandes. Y no depende de acceso a la red o a un repositorio 
+	central, dado que al ser distribuido cada participante cuenta con una copia completa 
+	del repositorio de manera local, lo que permite trabajar sin conexión a internet.
+	
+
+	\subsection{ChangeGear - Change Edition}
+	Esta es otra herramienta de GangeGear que ofrece automatización de procesos TI
+	para simplificar el proceso de cambio y de gestión de releases. Esto incluye la
+	automatización de flujos de trabajo, aprobaciones, notificaciones, y que proporcionan
+	una completo historial  pista de auditoría. Su principal característica es que se
+	incorpora en el proceso de gestión de cambios y permite realizar un seguimiento, 
+	gestionar y controlar todos los cambios de TI realizados en su entorno de TI. El resto
+	de sus características son prácticamente las mismas que ChangeGear - ServiceDesk.
+
+
+\section{Comparación entre Estándares}
+	
+
+	\subsection{Comparación entre estándares y metodologías para solicitud y descripción Requerimientos}
+	\begin{table}[H]
+		\begin{tabular}{|c|m{8cm}|}
+			\hline
+			\textbf{Estándar } & \textbf{Descripción}\\
+			\hline
+			{ITIL v3 - Petición de Servicios TI} & {Define como atender las peticiones de los usuarios.}\\
+			\hline
+			{ITIL v3 - Gestión de Incidencias} & {Define el proceso para resolver las incidencias que interrumpen el servicio.}\\
+			\hline
+			{IEEE Std-830-1998} & {Define como realizar una ERS.}\\
+			\hline
+		\end{tabular}
+		\caption{Comparación de estándares para solicitud y descripción de requerimientos.}
+		\label{comp_req}
+	\end{table}
+	
+	Según la Tabla \ref{comp_req} y lo descrito anteriormente en la sección \ref{metod_sol_req} 
+	y \ref{estandar_req} se observa que el estándar IEEE 830 escapa a los propósitos de este 
+	trabajo dado que el tipo de requerimientos	y el nivel de detalle de los mismos difícilmente 
+	podrá ser descrito por un usuario que no posee conocimientos sobre ingeniería de software, 
+	por lo que su utilización queda completamente descartada. Por otra parte ITIL v3 se acomoda 
+	bastante bien al propósito de permitir a los usuarios enviar peticiones de requerimientos (o servicio) 
+	a DISICO, ademas ITIL v3 describe relaciones entre estas peticiones y las peticiones de cambio, lo
+	cual también es abordado en este trabajo. 	Por tanto para este trabajo se utilizara una mezcla 
+	de ambos procesos (Petición de Servicios y Gestión de Incidencias), y serán adaptados a las 
+	necesidades y flujo de trabajo que tiene DISICO.\\
+	
+	Cabe destacar que ITIL v3 es mucho mas amplio y completo de lo que se a descrito en 
+	este documento y que abarca todo lo relacionado a servicios de TI. Sin embargo aquí 
+	se han resumido y considerado solo los procesos de Petición de Servicios 
+	y Gestión de Incidencias descritos por ITIL v3 ya que son los que abarcan los temas 
+	de nuestro interés. 
+	
+	\subsection{Comparación entre estándares para SCM}
+	\begin{table}[H]
+		\begin{tabular}{|m{5cm}|m{10cm}|}
+			\hline
+			\textbf{Estándar } & \textbf{Descripción}\\
+			\hline
+			{ISO - 10007} & { Guía en el uso de Gestión de la Configuración dentro de una organización.}\\
+			\hline
+			{IEEE 828-2005 } & { Establece los contenidos mínimos requeridos en un Plan de Gestión de la Configuración del Software.}\\
+			\hline
+			{IEEE 828-2012 } & {Establece los requisitos mínimos para los procesos de Gestión de la Configuración.}\\
+			\hline
+			{ITIL v3 - Gestión del Cambio} & {Define un proceso para evaluación y planificación del proceso de cambio.}\\
+			\hline
+			{ITIL v3 - Gestión de la Configuración y Activos del Servicio} & {Define un proceso para el registro, control y monitoreo de elementos de la configuración.}\\
+			\hline
+		\end{tabular}
+		\caption{Comparación de estándares para SCM}
+		\label{comp_scm}
+	\end{table}
+
+	Aunque todos los estándares presentados son bastante útiles, su uso en este trabajo
+	carece de sentido dado que DISICO cuenta con una metodología de SCM propia hecha
+	a medida, y para cuyo desarrollo ya fueron considerados los estándares 
+	ISO - 10007 e IEEE 828. \\
+	
+	Ademas uno de los principales objetivos de este trabajo es dar soporte a la 
+	metodología de SCM existente y no el desarrollo de una nueva metodología. No 
+	obstante, sin perjuicio de lo anterior para el desarrollo de este trabajo se incorporaran 
+	aquellos aspectos de	los procesos ITIL v3, que permitan establecer una relación entre 
+	las solicitudes de requerimientos y la solicitudes de cambio y gestión de la 
+	configuración. 
+
+\section{Comparación entre Herramientas}
+	A continuación se presenta una comparación entre las herramientas anteriormente
+	descritas, en base a las características y/o funciones básicas con las que
+	debiesen contar para satisface la necesidad actual del cliente. 
+	
+	\subsection{Comparación entre Herramientas para Solicitud de Requerimientos}
+	\begin{table}[H]
+	\begin{tabular}{|m{4cm}| m{1.7cm} | m{1.7cm} | m{1.7cm} | m{1.7cm} | m{2.1cm} |}
+			\hline
+			\multirow{2}{*}{\textbf{Característica}} & \multicolumn{5}{c|}{\textbf{Herramientas}}\\
+												      \cline{2-6}
+												     & \textbf{Hesk} & \textbf{osTicket} & \textbf{OTRS} & \textbf{SysAid} & \textbf{ChangeGear} \\
+			\hline
+			{Versión Gratuita} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			{Idioma Español} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline
+			{Soporta SQL Server} & {NO} &  {NO} & {SI} & {SI} & {SI} \\
+			\hline
+			{Código Libre} & {SI} &  {SI} & {SI} & {NO} & {NO} \\
+			\hline
+			{Escrito en Java} & {NO (PHP)} &  {NO (PHP)} & {NO (PHP)} & {SI} & {NO (.NET)} \\
+			\hline
+			{Servidor Web} & {Apache} &  {Apache} & {Apache} & {Tomcat} & {IIS 7} \\ % IIS = Internet Information Services
+			\hline
+			{Soporta SSO} & {NO} &  {NO} & {SI} & {SI} & {SI} \\
+			\hline
+			{¿Genera N° de Consulta para las solicitudes?} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline
+			{¿Enviá dicho Nº al email?} & {NO} &  {SI} & {SI} & {SI} & {NO} \\
+			\hline
+			{¿El solicitante tiene historial de solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline 
+			{¿Separa por áreas las solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline
+			{¿Separar por áreas los usuarios?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline
+			{¿Existe administrador por área?} & {NO} &  {SI} & {NO} & {NO} & {SI} \\
+			\hline
+			{¿Es posible asignar responsable a las solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+
+			\hline
+			{¿Solo el administrador del área asigna los responsables?} & {NO} &  {NO} & {SI} & {NO} & {SI} \\
+			\hline
+			{¿Se pueden transferir solicitudes a otra área?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+\hline
+\end{tabular}
+\end{table}
+\begin{table}[H]
+		\begin{tabular}{|m{4cm}| m{1.7cm} | m{1.7cm} | m{1.7cm} | m{1.7cm} | m{2.1cm} |}
+			\hline
+			\multirow{2}{*}{\textbf{Característica}} & \multicolumn{5}{c|}{\textbf{Herramientas}}\\
+												      \cline{2-6}
+												     & \textbf{Hesk} & \textbf{osTicket} & \textbf{OTRS} & \textbf{SysAid} & \textbf{ChangeGear} \\			
+			\hline
+			{¿Solo el administrador del área puede transferir las solicitudes?} & {NO} &  {SI} & {NO} & {NO} & {SI} \\ %revisar
+			\hline
+			{¿Se priorizan las solicitudes?} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline
+			{¿Es posible establecer fecha de vencimiento para las solicitudes?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline
+			{¿Se generan alarmas para las solicitudes vencidas?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline
+			{¿Cada área ve solo las solicitudes de su área?} & {NO} &  {NO} & {NO} & {NO} & {NO} \\
+			\hline
+			{¿El administrador del área puede ver gráficos y estadísticas de las solicitudes de cada miembro de su área?} & {NO} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline
+			{¿El solicitante recibe notificaciones cuando su solicitud es actualizada?} & {SI} &  {SI} & {SI} & {SI} & {SI} \\
+			\hline
+			{¿Es posible solicitar autorización a otro usuario para llevar a cabo una solicitud?} & {NO} &  {NO} & {NO} & {NO} & {SI} \\
+			\hline
+			{¿Es posible responder a otro usuario que no sea el solicitante?} & {NO} &  {NO} & {NO} & {NO} & {NO} \\
+			\hline
+		\end{tabular}
+		\caption{Comparación de Herramientas para solicitud de Requerimientos}
+		\label{comp_herramientas}
+	\end{table}
+
+	Según la descripción de las herramientas y la Tabla \ref{comp_herramientas} de comparación,
+	es posible concluir que aunque las herramientas que existen actualmente son 
+	bastante completas, ninguna de ellas logra satisfacer completamente las necesidades 
+	de DISICO. La principal causa de esto, es que las herramientas actuales no se adecuan 
+	al flujo de trabajo que se pretende lograr en DISICO, dado que todas estas 
+	herramientas están principalmente basadas en los procesos definidos ITIL v3.
+	Aun así no se descarta la posibilidad de rescatar algunas ideas de estas herramientas.
+	
+	\subsection{Comparación ente Herramientas para SCM}
+	
+	\begin{table}[H]
+		\begin{tabular}{|m{4.5cm}| m{2cm} | m{2cm} | m{2cm} | m{3cm} |}
+			\hline
+			\multirow{2}{*}{\textbf{Característica}} & \multicolumn{4}{c|}{\textbf{Herramientas}}\\
+												      \cline{2-5}
+												     & \textbf{SVN} & \textbf{Mercurial} & \textbf{Git} & \textbf{ChangeGear - Change Edition} \\
+			\hline
+			{Versión Gratuita} & {SI} &  {SI} & {SI} & {NO} \\
+			\hline
+			{¿Es posible crear solicitudes de cambio?} & {NO} &  {NO} & {NO} & {SI} \\
+			\hline
+			{¿Es posible definir IC?} & {NO} &  {NO} & {NO} & {SI} \\
+			\hline
+			{¿Es posible asignar responsables de los IC?} & {NO} &  {NO} & {NO} & {SI} \\
+			\hline
+			{¿Se adapta a la metodología actual de SCM?} & {NO} &  {NO} & {NO} & {NO} \\
+			\hline
+	\end{tabular}
+		\caption{Comparación de Herramientas para SCM}
+	\end{table}
+
+	En este caso, existen realmente pocas herramientas que permitan manejar solicitudes
+	de cambio y gestión de la configuración. La mayoría de herramientas para SCM
+	se basan en el control de cambios, y las pocas que implementan algún sistema
+	para el manejo de solicitudes de cambio, lo hacen desde la perspectiva de ITIL.
+	Por tanto tampoco sirven como soporte adecuado para la metodología de SCM
+	actual de DISICO, por ende es necesario el desarrollo de una herramienta ad hoc.
+	
