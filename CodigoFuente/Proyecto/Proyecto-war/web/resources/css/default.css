@@ -279,6 +279,11 @@ a.small_link{
     width: 10px;
 }
 
+.column_16p{
+    min-width: 16px;
+    max-width: 16px;
+}
+
 .column_20p{
     min-width: 20px;
     max-width: 20px;
@@ -317,6 +322,16 @@ a.small_link{
     max-width: 100px;
 }
 
+.column_110p{
+    min-width: 110px;
+    max-width: 110px;
+}
+
+.column_115p{
+    min-width: 115px;
+    max-width: 115px;
+}
+
 .column_125p{
     max-width: 125px;
     min-width: 125px;
@@ -342,9 +357,19 @@ a.small_link{
     min-width: 250px;
 }
 
+.column_260p{
+    max-width: 260px;
+    min-width: 260px;
+}
+
 .column_300p{
     max-width: 300px;
     min-width: 300px;
+}
+
+.column_400p{
+    max-width: 400px;
+    min-width: 400px;
 }
 
 .border_rh{
