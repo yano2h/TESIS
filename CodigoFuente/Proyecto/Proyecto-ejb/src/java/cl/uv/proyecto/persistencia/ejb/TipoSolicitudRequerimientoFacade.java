@@ -5,9 +5,11 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.TipoSolicitudRequerimiento;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -25,6 +27,12 @@ public class TipoSolicitudRequerimientoFacade extends AbstractFacade<TipoSolicit
 
     public TipoSolicitudRequerimientoFacade() {
         super(TipoSolicitudRequerimiento.class);
+    }
+
+    @Override
+    public List<TipoSolicitudRequerimiento> findAll() {
+        TypedQuery<TipoSolicitudRequerimiento> q = getEntityManager().createNamedQuery("TipoSolicitudRequerimiento.findAll",TipoSolicitudRequerimiento.class);
+        return q.getResultList();
     }
     
 }

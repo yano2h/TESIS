@@ -4,7 +4,7 @@
  */
 package cl.uv.proyecto.persistencia.ejb;
 
-import cl.uv.proyecto.persistencia.entidades.TipoPrioridad;
+import cl.uv.proyecto.persistencia.entidades.EtapaProyecto;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,10 +13,11 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author Jano
+ * @author Alejandro
  */
 @Stateless
-public class TipoPrioridadFacade extends AbstractFacade<TipoPrioridad> implements TipoPrioridadFacadeLocal {
+public class EtapaProyectoFacade extends AbstractFacade<EtapaProyecto> implements EtapaProyectoFacadeLocal {
+
     @PersistenceContext(unitName = "Proyecto-ejbPU")
     private EntityManager em;
 
@@ -25,15 +26,14 @@ public class TipoPrioridadFacade extends AbstractFacade<TipoPrioridad> implement
         return em;
     }
 
-    public TipoPrioridadFacade() {
-        super(TipoPrioridad.class);
+    public EtapaProyectoFacade() {
+        super(EtapaProyecto.class);
     }
 
     @Override
-    public List<TipoPrioridad> findAll() {
-        TypedQuery<TipoPrioridad> q = getEntityManager().createNamedQuery("TipoPrioridad.findAll",TipoPrioridad.class);
+    public List<EtapaProyecto> findAll() {
+        TypedQuery<EtapaProyecto> q = getEntityManager().createNamedQuery("EstapaProyecto.findAll", EtapaProyecto.class);
         return q.getResultList();
     }
-    
     
 }

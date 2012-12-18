@@ -6,6 +6,8 @@ package cl.uv.proyecto.persistencia.entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -27,6 +29,11 @@ public class ArchivoProyecto implements Serializable {
     @JoinColumn(name = "id_archivo", referencedColumnName = "id_archivo", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private ArchivoAdjunto archivoAdjunto;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "tipo_informacion")
+    private String tipoInformacion;
 
     public ArchivoProyecto() {
     }
@@ -63,6 +70,15 @@ public class ArchivoProyecto implements Serializable {
         this.archivoAdjunto = archivoAdjunto;
     }
 
+    public String getTipoInformacion() {
+        return tipoInformacion;
+    }
+
+    public void setTipoInformacion(String tipoInformacion) {
+        this.tipoInformacion = tipoInformacion;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

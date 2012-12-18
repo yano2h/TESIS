@@ -74,6 +74,9 @@ public class MbDetalleSolicitud extends MbBase implements Serializable {
         } else {
             solicitud.setComentarios(comentarioFacade.buscarComentariosPorSolicitud(solicitud.getIdSolicitudRequerimiento()));
             solicitud.setArchivosAdjuntos(archivosAdjuntosFacade.buscarArchivosPorSolicitud(solicitud));
+            if (solicitud.getResponsable().equals(getFuncionarioDisico())) {
+                solicitudRequerimientoEJB.dejarPendienteSolicitud(solicitud);
+            }
         }
     }
 
@@ -221,6 +224,15 @@ public class MbDetalleSolicitud extends MbBase implements Serializable {
         } else {
             solicitudRequerimientoEJB.asignarSolicitud(solicitud);
             JsfUtils.addSuccessMessage("Asignacion Exitosa", "La solicitud fue asignada exitosamente a: " + solicitud.getResponsable().getNombre() + " " + solicitud.getResponsable().getApellidoPaterno() + " " + solicitud.getResponsable().getApellidoMaterno());
+        }
+    }
+    
+    public void editarSolicitud() {
+        if (solicitud.getResponsable() == null) {
+            JsfUtils.addErrorMessage("Error al asignar responsable solicitud", "Debe seleccionar un funcionario para poder asignar la solicitud ");
+        } else {
+            solicitudRequerimientoEJB.editarResponsableSolicitud(solicitud);
+            JsfUtils.addSuccessMessage("Edicion Exitosa", "La solicitud se ha modificado exitosamente.");
         }
     }
 

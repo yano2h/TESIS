@@ -5,9 +5,11 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.RolProyecto;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -26,5 +28,12 @@ public class RolProyectoFacade extends AbstractFacade<RolProyecto> implements Ro
     public RolProyectoFacade() {
         super(RolProyecto.class);
     }
+
+    @Override
+    public List<RolProyecto> findAll() {
+        TypedQuery<RolProyecto> q = getEntityManager().createNamedQuery("RolProyecto.findAll", RolProyecto.class);
+        return q.getResultList();
+    }
+    
     
 }

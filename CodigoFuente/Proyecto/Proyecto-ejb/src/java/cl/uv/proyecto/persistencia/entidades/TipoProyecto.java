@@ -9,15 +9,18 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  *
  * @author Jano
  */
+@Cacheable
 @Entity
+@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.READ_ONLY)
 @Table(name = "TIPO_PROYECTO")
 @NamedQueries({
-    @NamedQuery(name = "TipoProyecto.findAll", query = "SELECT t FROM TipoProyecto t"),
+    @NamedQuery(name = "TipoProyecto.findAll", query = "SELECT t FROM TipoProyecto t",hints={@QueryHint(name = "org.hibernate.cacheable", value = "true")}),
     @NamedQuery(name = "TipoProyecto.findByIdTipoProyecto", query = "SELECT t FROM TipoProyecto t WHERE t.idTipoProyecto = :idTipoProyecto")})
 public class TipoProyecto implements Serializable {
     private static final long serialVersionUID = 1L;

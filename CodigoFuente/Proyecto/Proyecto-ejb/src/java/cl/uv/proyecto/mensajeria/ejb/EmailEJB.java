@@ -11,8 +11,10 @@ import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import cl.uv.proyecto.url.utils.UrlBuilder;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.activation.DataHandler;
@@ -95,7 +97,7 @@ public class EmailEJB implements EmailEJBLocal {
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(messageBodyPart);
 
-            //Adjuntar Archivos
+            //Adjuntar Archizos
             for (ArchivoAdjunto archivoAdjunto : adjuntos) {
                 BodyPart adjuntoBodyPart = new MimeBodyPart();
                 DataSource source = new FileDataSource(new File(basePathFiles + archivoAdjunto.getPathFile()));
@@ -231,5 +233,33 @@ public class EmailEJB implements EmailEJBLocal {
     @Asynchronous
     public void enviarEmailAsignacionSolicitud(SolicitudRequerimiento s) {
         enviarEmailNotificacionSolicitud(TypeEmail.ASIGNACION_SOLICITUD, s, null, s.getSolicitante());
+    }
+
+    @Override
+    @Asynchronous
+    public void enviarEmailEdicionSolicitud(SolicitudRequerimiento s, boolean cambioFechaVencimiento, boolean cambioPrioridad) {
+        String asunto = TypeEmail.CAMBIO_SOLICITUD.construirAsunto(s, null);
+        String msg = TypeEmail.CAMBIO_SOLICITUD.construirMensaje(s, null);
+        String listadoCambios = "";
+        
+        if (cambioFechaVencimiento) {
+            listadoCambios += Resources.getValue("Emails", "LI_CAMBIO_FVENCIMIENTO");
+            SimpleDateFormat df = new SimpleDateFormat("dd 'de' MMMM 'a las' HH:mm", new Locale("es","CL"));
+            listadoCambios = String.format(listadoCambios, df.format(s.getFechaVencimiento()));
+        }
+        
+        if (cambioPrioridad) {
+            listadoCambios += Resources.getValue("Emails", "LI_CAMBIO_PRIORIDAD");
+            listadoCambios = String.format(listadoCambios, s.getPrioridadSolicitud().getNombrePrioridad());
+        }
+
+        msg = String.format(msg, listadoCambios);
+        enviarEmail(s.getResponsable().getCorreoUv(), asunto, msg);
+    }
+
+    @Override
+    @Asynchronous
+    public void enviarEmailCambioResponsable(SolicitudRequerimiento s) {
+        enviarEmailNotificacionSolicitud(TypeEmail.CAMBIO_RESPONSABLE_SOLICITUD, s, null, s.getSolicitante());
     }
 }

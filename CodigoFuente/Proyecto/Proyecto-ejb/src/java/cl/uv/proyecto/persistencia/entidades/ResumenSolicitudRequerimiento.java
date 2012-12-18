@@ -30,7 +30,7 @@ public class ResumenSolicitudRequerimiento implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_solicitud_req")
-    private BigInteger idSolicitudReq;
+    private Long idSolicitudReq;
     @Column(name = "codigo_consulta", length = 9)
     private String codigoConsulta;
     @Column(name = "asunto", length = 45)
@@ -58,11 +58,11 @@ public class ResumenSolicitudRequerimiento implements Serializable {
     public ResumenSolicitudRequerimiento() {
     }
 
-    public BigInteger getIdSolicitudReq() {
+    public Long getIdSolicitudReq() {
         return idSolicitudReq;
     }
 
-    public void setIdSolicitudReq(BigInteger idSolicitudReq) {
+    public void setIdSolicitudReq(Long idSolicitudReq) {
         this.idSolicitudReq = idSolicitudReq;
     }
 

@@ -15,10 +15,6 @@
 
             <h:form id="detalleProy" rendered="#{mbDetalleProyecto.proyecto != null}">
                 <h:outputScript library="js" name="calendar-localization.js" />
-                <ui:param name="R_ADM" value="#{security.R_ADM}"/>
-                <ui:param name="R_JAREA" value="#{security.R_JAREA}"/>
-                <ui:param name="ROLES_ADM_JA" value="#{security.R_ADM},#{security.R_JAREA}"/>
-
                 <p:panel id="panelDetalleProyecto" header="Detalle Proyecto" >
                     <p:menubar id="menu_bar_proy" style="height: 30px;" styleClass="menu_bar">
                         <p:menuitem value="Ver Avance" icon="ui-icon-search" action="#{mbDetalleProyecto.verResumenAvance}"/>
@@ -38,6 +34,8 @@
                             <h:outputText value="#{mbDetalleProyecto.proyecto.tipoProyecto.nombreTipoProyecto}"/>
                             <h:outputText value="Estado Proyecto:" styleClass="label_blod label"/>    
                             <h:outputText id="otxt_estado_proyecto" value="#{mbDetalleProyecto.proyecto.estadoProyecto.nombreEstadoProyecto}"/>
+                            <h:outputText value="Etapa Proyecto:" styleClass="label_blod label"/>    
+                            <h:outputText value="#{mbDetalleProyecto.proyecto.etapaProyecto.nombreEtapaProyecto}"/>
                         </h:panelGrid>
                         <br/>
                         <h:panelGrid columns="2" cellspacing="10">
@@ -76,6 +74,28 @@
                         </p:column>
                         <p:column headerText="Rol">
                             <h:outputText value="#{part.rol.nombreRol}"/>
+                        </p:column>
+                    </p:dataTable>
+
+                    <br/>
+                    <h:outputText value="Archivos Adjuntos:" styleClass="title_bold"/>
+                    <p:dataTable id="tabla_archivos_adjunto"
+                                 value="#{mbDetalleProyecto.proyecto.archivoProyectoList}"
+                                 var="f">
+
+                        <p:column headerText="Tipo de Información">
+                            <h:outputText value="#{f.tipoInformacion}"/>
+                        </p:column>
+                        <p:column headerText="Size">
+                            <h:outputText value="#{f.archivoAdjunto.sizeFormat}"/>
+                        </p:column>
+                        <p:column headerText="Archivo">
+                            <p:commandLink id="link" title="Descargar" actionListener="#{mbFilesUpload.downloadFileProyecto(f)}" ajax="false"
+                                           style="float: right;color: steelblue;font-style: italic;" process="@this">
+                                
+                                <h:graphicImage library="imagenes" name="logo_uv.png"/>
+                                <p:fileDownload value="#{mbFilesUpload.fileDownload}"  />
+                            </p:commandLink>
                         </p:column>
                     </p:dataTable>
                 </p:panel>

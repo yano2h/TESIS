@@ -7,6 +7,7 @@ package cl.uv.proyecto.requerimientos.ejb;
 import cl.uv.proyecto.persistencia.entidades.ArchivoAdjunto;
 import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
+import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import java.util.List;
 import javax.ejb.Local;
@@ -33,12 +34,13 @@ public interface SolicitudRequerimientoEJBLocal {
     public void enviarRespuestaManual(SolicitudRequerimiento solicitud, String[] direcciones, String asunto, List<ArchivoAdjunto> archivosAdjuntos) ;
     public void transferirSolicitud(SolicitudRequerimiento solicitud, Area nuevaAreaResponsable, String motivoTransferencia);
     public void asignarSolicitud(SolicitudRequerimiento solicitud);
+    public void editarResponsableSolicitud(SolicitudRequerimiento solicitud);
     public void iniciarSolicitud(SolicitudRequerimiento solicitud);
     public void enviarRespuestaJefeArea(SolicitudRequerimiento solicitud);
 
     public void comentarSolicitud(String comentario, SolicitudRequerimiento solicitud, Funcionario autor);
 
     public void dejarPendienteSolicitud(SolicitudRequerimiento solicitud);
-
+    public void dejarPendienteSolicitud(Long idSolicitud);
     public void convertirSolicitudEnProyecto(SolicitudRequerimiento solicitud);
 }

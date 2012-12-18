@@ -5,9 +5,11 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.TipoProyecto;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -26,5 +28,12 @@ public class TipoProyectoFacade extends AbstractFacade<TipoProyecto> implements 
     public TipoProyectoFacade() {
         super(TipoProyecto.class);
     }
+
+    @Override
+    public List<TipoProyecto> findAll() {
+        TypedQuery<TipoProyecto> q = getEntityManager().createNamedQuery("TipoProyecto.findAll",TipoProyecto.class);
+        return q.getResultList();
+    }
+    
     
 }

@@ -10,11 +10,6 @@
             <h:outputText value="Detalle Proyecto"/>
         </ui:define>
         <ui:define name="content">  
-
-            <f:metadata>
-                <f:viewParam id="idProyecto" name="idProyecto" value="#{mbDetalleProyecto.idProyecto}" />
-                <f:event type="preRenderView" listener="#{mbDetalleProyecto.init}" />
-            </f:metadata>
             <p:messages id="messages" showDetail="true"/>  
 
             <h:form id="detalleProy" rendered="#{mbDetalleProyecto.proyecto != null}">

@@ -5,8 +5,10 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.Funcionario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -16,6 +18,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class FuncionarioFacade extends AbstractFacade<Funcionario> implements FuncionarioFacadeLocal {
+
     @PersistenceContext(unitName = "Proyecto-ejbPU")
     private EntityManager em;
 
@@ -32,8 +35,18 @@ public class FuncionarioFacade extends AbstractFacade<Funcionario> implements Fu
     public Integer buscarRutPorEmail(String email) {
         Query q = em.createQuery("SELECT f.rut FROM Funcionario f WHERE f.correoUv = :correoUv");
         q.setParameter("correoUv", email);
-        return (Integer) q.getSingleResult();
+        Integer rut = null;
+        
+        try {
+            rut = (Integer) q.getSingleResult();
+        } catch (NonUniqueResultException e) {
+            System.out.println("ERROR buscarRutPorEmail ("+email+"): " + e.toString());
+            List<Integer> ruts = q.getResultList();
+            for (Integer r : ruts) {
+                System.out.println("RUT: " + r);
+            }
+        }
+
+        return rut;
     }
-    
-    
 }

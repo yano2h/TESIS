@@ -5,6 +5,7 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.ArchivoProyecto;
+import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -29,4 +30,5 @@ public interface ArchivoProyectoFacadeLocal {
 
     int count();
     
+    List<ArchivoProyecto> buscarArchivosPorProyecto(Proyecto p);
 }

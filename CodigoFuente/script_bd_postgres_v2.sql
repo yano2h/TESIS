@@ -557,21 +557,26 @@ ALTER TABLE PROYECTO ALTER COLUMN area_responsable SET NOT NULL;
 CREATE TABLE ETAPA_PROYECTO(
   id_etapa_proyecto SMALLINT NOT NULL ,
   nombre_etapa_proyecto VARCHAR(45) NOT NULL ,
-  descripcion_etapa_proyecto VARCHAR(255) NULL ,
   PRIMARY KEY (id_etapa_proyecto) 
 );
 
 INSERT INTO ETAPA_PROYECTO VALUES 
-(0, 'Solicitud de Proyecto',''),
-(1, 'Toma de Requerimientos', ''),
-(2, 'Definición de Requerimientos', ''),
-(3, 'Diseño', ''),
-(4, 'Codificación', ''),
-(5, 'Pruebas de Software', ''),
-(6, 'Mantenciones correctivas', ''),
-(7, 'Puesta en Producción', ''),
-(8, 'Marcha Blanca', ''),
-(9, 'Liberación del producto y cierre', '');
+(0, 'Solicitud de Proyecto'),
+(1, 'Toma de Requerimientos'),
+(2, 'Definición de Requerimientos'),
+(3, 'Diseño'),
+(4, 'Codificación'),
+(5, 'Pruebas de Software'),
+(6, 'Mantenciones correctivas'),
+(7, 'Puesta en Producción'),
+(8, 'Marcha Blanca'),
+(9, 'Liberación del producto y cierre');
 
 ALTER TABLE PROYECTO ADD etapa_proyecto SMALLINT NOT NULL DEFAULT 0;
 ALTER TABLE PROYECTO ADD FOREIGN KEY(etapa_proyecto) REFERENCES ETAPA_PROYECTO(id_etapa_proyecto);
+
+-- ---------------------------------------------------------------------------------
+-- Se Agrega la columna tipo de informacion a los archivos adjuntos a los proyectos
+-- ---------------------------------------------------------------------------------
+
+ALTER TABLE archivo_proyecto ADD COLUMN tipo_informacion VARCHAR(200) NOT NULL;

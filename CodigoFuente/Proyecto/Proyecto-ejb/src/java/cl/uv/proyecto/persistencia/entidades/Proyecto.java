@@ -17,10 +17,12 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "PROYECTO")
+@org.hibernate.annotations.Entity(dynamicUpdate=true)
 @NamedQueries({
     @NamedQuery(name = "Proyecto.findAll", query = "SELECT p FROM Proyecto p"),
     @NamedQuery(name = "Proyecto.findByIdProyecto", query = "SELECT p FROM Proyecto p WHERE p.idProyecto = :idProyecto"),
-    @NamedQuery(name = "Proyecto.findByCodigoInterno", query = "SELECT p FROM Proyecto p WHERE p.codigoInterno = :codigoInterno")})
+    @NamedQuery(name = "Proyecto.findByCodigoInterno", query = "SELECT p FROM Proyecto p WHERE p.codigoInterno = :codigoInterno"),
+    @NamedQuery(name = "Proyecto.findByArea", query="SELECT p FROM Proyecto p WHERE p.areaResponsable = :areaResponsable ORDER BY p.fechaInicio DESC")})
 public class Proyecto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,23 +53,30 @@ public class Proyecto implements Serializable {
     @Column(name = "fecha_termino")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaTermino;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
-    private List<ItemConfiguracion> itemsDeConfiguracion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
-    private List<TareaProyecto> tareasAgendadas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
-    private List<TareaScmProyecto> tareasScmProyecto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
-    private List<ParticipanteProyecto> participantes;
     @JoinColumn(name = "estado_proyecto", referencedColumnName = "id_estado_proyecto")
     @ManyToOne(optional = false)
     private EstadoProyecto estadoProyecto;
+    @JoinColumn(name = "etapa_proyecto", referencedColumnName = "id_etapa_proyecto")
+    @ManyToOne(optional = false)
+    private EtapaProyecto etapaProyecto;
     @JoinColumn(name = "tipo_proyecto", referencedColumnName = "id_tipo_proyecto")
     @ManyToOne(optional = false)
-    private TipoProyecto tipoProyecto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
+    private TipoProyecto tipoProyecto;    
+    @JoinColumn(name = "area_responsable", referencedColumnName = "id_area")
+    @ManyToOne(optional = false)
+    private Area areaResponsable;
+    
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
+    private List<ItemConfiguracion> itemsDeConfiguracion;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
+    private List<TareaProyecto> tareasAgendadas;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
+    private List<TareaScmProyecto> tareasScmProyecto;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
+    private List<ParticipanteProyecto> participantes;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
     private List<SolicitudCambio> solicitudesDeCambio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto", orphanRemoval=true, fetch= FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto", orphanRemoval=true)
     private List<ArchivoProyecto> archivoProyectoList;
 
     public Proyecto() {
@@ -173,6 +182,14 @@ public class Proyecto implements Serializable {
         this.estadoProyecto = estadoProyecto;
     }
 
+    public EtapaProyecto getEtapaProyecto() {
+        return etapaProyecto;
+    }
+
+    public void setEtapaProyecto(EtapaProyecto etapaProyecto) {
+        this.etapaProyecto = etapaProyecto;
+    }
+
     public TipoProyecto getTipoProyecto() {
         return tipoProyecto;
     }
@@ -181,12 +198,28 @@ public class Proyecto implements Serializable {
         this.tipoProyecto = tipoProyecto;
     }
 
+    public Area getAreaResponsable() {
+        return areaResponsable;
+    }
+
+    public void setAreaResponsable(Area areaResponsable) {
+        this.areaResponsable = areaResponsable;
+    }
+
     public List<SolicitudCambio> getSolicitudesDeCambio() {
         return solicitudesDeCambio;
     }
 
     public void setSolicitudesDeCambio(List<SolicitudCambio> solicitudesDeCambio) {
         this.solicitudesDeCambio = solicitudesDeCambio;
+    }
+
+    public List<ArchivoProyecto> getArchivoProyectoList() {
+        return archivoProyectoList;
+    }
+
+    public void setArchivoProyectoList(List<ArchivoProyecto> archivoProyectoList) {
+        this.archivoProyectoList = archivoProyectoList;
     }
 
     @Override

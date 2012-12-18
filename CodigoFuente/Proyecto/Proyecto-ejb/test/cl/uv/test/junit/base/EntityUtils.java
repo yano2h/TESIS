@@ -69,7 +69,6 @@ public class EntityUtils {
         f.setFechaPrimerAcceso(new Date());
         f.setFechaUltimoAcceso(new Date());
         f.setNombre("Nombre F"+f.getRut());
-        f.setRol("Rol X");
         return f;
     }
     

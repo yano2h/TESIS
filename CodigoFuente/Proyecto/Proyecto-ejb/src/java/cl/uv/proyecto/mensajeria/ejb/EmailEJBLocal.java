@@ -31,4 +31,6 @@ public interface EmailEJBLocal {
     void enviarEmailRespuestaManual(SolicitudRequerimiento s, String[] direcciones, String asunto, String msg, List<ArchivoAdjunto> adjuntos);
     void enviarEmailNotificacionComentario(ComentarioSolicitud c);
     void enviarEmailAsignacionSolicitud(SolicitudRequerimiento s);
+    void enviarEmailEdicionSolicitud(SolicitudRequerimiento s, boolean cambioFechaVencimiento, boolean cambioPrioridad);
+    void enviarEmailCambioResponsable(SolicitudRequerimiento s);
 }

@@ -7,6 +7,8 @@ package cl.uv.view.controller.base.jsf.mb;
 import cl.uv.model.base.utils.FileUtils;
 import cl.uv.proyecto.file.ejb.FileManagerEJBLocal;
 import cl.uv.proyecto.persistencia.entidades.ArchivoAdjunto;
+import cl.uv.proyecto.persistencia.entidades.ArchivoProyecto;
+import cl.uv.proyecto.persistencia.entidades.ArchivoSolicitudRequerimiento;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
 import cl.uv.view.controller.solicitudes.jsf.mb.MbCrearSolicitud;
@@ -37,24 +39,36 @@ public class MbFilesUpload {
 
     @EJB
     private FileManagerEJBLocal fileManagerEJB;
-    
     private Long sizeLimitAttachment;
     private Long sizeAttachment;
     private List<ArchivoAdjunto> archivosAdjuntos;
+    private UploadedFile uploadFile;
     private StreamedContent fileDownload;
-    
+
     public MbFilesUpload() {
         sizeAttachment = 0L;
         sizeLimitAttachment = Resources.getValueLong("email", "sizeLimitAttachment");
         archivosAdjuntos = new ArrayList<ArchivoAdjunto>();
     }
-    
+
+    private ArchivoAdjunto parseUploadFileToArchivoAdjunto(UploadedFile file) throws IOException {
+        System.out.println("--parseUploadFileToArchivoAdjunto--");
+        ArchivoAdjunto adjunto = new ArchivoAdjunto();
+        adjunto.setMimetype(file.getContentType());
+        adjunto.setNombre(normalizarNombre(file.getFileName()));
+        adjunto.setSizeFile(file.getSize());
+        adjunto.setSizeFormat(FileUtils.convertSizeRedondeado(file.getSize()));
+        adjunto.setInputStream(file.getInputstream());
+
+        return adjunto;
+    }
+
     public void handleFileUpload(FileUploadEvent event) {
         UploadedFile file = event.getFile();
         if (archivosAdjuntos == null) {
             archivosAdjuntos = new ArrayList<ArchivoAdjunto>();
         }
-        
+
         if (sizeValidation(file.getSize())) {
             ArchivoAdjunto adjunto = new ArchivoAdjunto();
             adjunto.setMimetype(file.getContentType());
@@ -66,11 +80,12 @@ public class MbFilesUpload {
                 archivosAdjuntos.add(adjunto);
                 sizeAttachment += adjunto.getSizeFile();
             } catch (IOException ex) {
-                Logger.getLogger(MbCrearSolicitud.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MbFilesUpload.class.getName()).log(Level.SEVERE, null, ex);
                 JsfUtils.addMessage(FacesMessage.SEVERITY_ERROR, "Error al Adjuntar Archivo", "No se puedo adjuntar el archivo");
             }
         }
     }
+
 
     public void remove(ArchivoAdjunto f) {
         archivosAdjuntos.remove(f);
@@ -80,9 +95,9 @@ public class MbFilesUpload {
     public boolean sizeValidation(Long size) {
         if ((sizeAttachment + size) > sizeLimitAttachment) {
             if (archivosAdjuntos != null && archivosAdjuntos.size() > 0) {
-                JsfUtils.addMessage(FacesMessage.SEVERITY_ERROR, 
-                                    "Error al Adjuntar Archivo", 
-                                    Resources.getValue("email", "msg_error_totalsize"));
+                JsfUtils.addMessage(FacesMessage.SEVERITY_ERROR,
+                        "Error al Adjuntar Archivo",
+                        Resources.getValue("email", "msg_error_totalsize"));
             }
             return false;
         } else {
@@ -97,13 +112,41 @@ public class MbFilesUpload {
     public void setArchivosAdjuntos(List<ArchivoAdjunto> archivosAdjuntos) {
         this.archivosAdjuntos = archivosAdjuntos;
     }
-    
-    public List<ArchivoAdjunto> extraerArchivosAdjuntos(){
+
+
+
+    public UploadedFile getUploadFile() {
+        return uploadFile;
+    }
+
+    public void setUploadFile(UploadedFile uploadFile) {
+        this.uploadFile = uploadFile;
+    }
+
+    public UploadedFile extraerUploadedFile() {
+        UploadedFile copy = getUploadFile();
+        setUploadFile(null);
+        return copy;
+    }
+
+    public ArchivoAdjunto extraerArchivoAdjunto() {
+        System.out.println("--extraerArchivoAdjunto--");
+        ArchivoAdjunto copy = null;
+        try {
+            copy = parseUploadFileToArchivoAdjunto(uploadFile);
+        } catch (IOException ex) {
+            Logger.getLogger(MbFilesUpload.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        uploadFile = null;
+        return copy;
+    }
+
+    public List<ArchivoAdjunto> extraerArchivosAdjuntos() {
         List<ArchivoAdjunto> list = new ArrayList<ArchivoAdjunto>(getArchivosAdjuntos());
         getArchivosAdjuntos().clear();
         return list;
     }
-    
+
     public String normalizarNombre(String input) {
         // Descomposición canónica
         System.out.println("ORIGINAL : ");
@@ -111,21 +154,34 @@ public class MbFilesUpload {
         // Nos quedamos únicamente con los caracteres ASCII
         Pattern pattern = Pattern.compile("\\P{ASCII}+");
         String output = pattern.matcher(normalized).replaceAll("");
-        System.out.println("NORMAL   : "+output);
+        System.out.println("NORMAL   : " + output);
         return output.replaceAll(" ", "_");
-    }   
-    
-    public void clearFiles(){
+    }
+
+    public void clearFiles() {
         System.out.println("CLEAN");
         archivosAdjuntos.clear();
     }
+
     
-    public void downloadFile(ArchivoAdjunto file){
+    public void downloadFileProyecto(ArchivoProyecto a){
+        System.out.println("downloadFile(Proyecto)");
+        ArchivoAdjunto file = a.getArchivoAdjunto();
         if (file.getInputStream() == null) {
-            fileManagerEJB.loadContentFile(file);
+            fileManagerEJB.loadContentFileProyecto(file);
         }
-        
-        setFileDownload( new DefaultStreamedContent(file.getInputStream(), file.getMimetype(), file.getNombre()) );  
+
+        setFileDownload(new DefaultStreamedContent(file.getInputStream(), file.getMimetype(), file.getNombre()));
+    }
+    
+    public void downloadFileSolicitud(ArchivoSolicitudRequerimiento a){
+        System.out.println("downloadFile(Solicitud)");
+        ArchivoAdjunto file = a.getArchivoAdjunto();
+        if (file.getInputStream() == null) {
+            fileManagerEJB.loadContentFileSolicitud(file);
+        }
+
+        setFileDownload(new DefaultStreamedContent(file.getInputStream(), file.getMimetype(), file.getNombre()));
     }
 
     public StreamedContent getFileDownload() {
@@ -135,6 +191,4 @@ public class MbFilesUpload {
     public void setFileDownload(StreamedContent fileDownload) {
         this.fileDownload = fileDownload;
     }
-    
-    
 }

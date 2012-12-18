@@ -12,12 +12,6 @@
         <ui:define name="content">  
 
             <h:form id="detalleSol">
-
-                <f:metadata>
-                    <f:viewParam id="codigo" name="codigo" value="#{mbDetalleSolicitud.codigo}"/>
-                    <f:event type="preRenderView" listener="#{mbDetalleSolicitud.init}" />
-                </f:metadata>
-
                 <p:panel id="panelDetalleSolicitud" header="Detalle Solicitud">
                     <p:messages id="messages" showDetail="true" autoUpdate="true"/>  
                     <h:panelGroup rendered="#{mbDetalleSolicitud.solicitud != null}">

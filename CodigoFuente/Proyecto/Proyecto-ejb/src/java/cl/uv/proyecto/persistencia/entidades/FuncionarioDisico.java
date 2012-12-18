@@ -33,27 +33,27 @@ public class FuncionarioDisico extends Funcionario {
     @ManyToOne(optional = false)
     private Area area;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsableItem")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "responsableItem", fetch= FetchType.LAZY)
     private List<ItemConfiguracion> itemsConfiguracionAcargo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsableTarea")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsableTarea", fetch= FetchType.LAZY)
     private List<TareaProyecto> tareasProyectoAgendadas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionarioDisico", fetch= FetchType.LAZY)
     private List<EstadisticaPersonal> estadisticasPersonales;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsable",orphanRemoval=true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsable", fetch= FetchType.LAZY)
     private List<SolicitudRequerimiento> solicitudesRequerimientosAsignadas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsable")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsable", fetch= FetchType.LAZY)
     private List<TareaScmProyecto> tareasScmAsignadas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "participante")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "participante", fetch= FetchType.LAZY)
     private List<ParticipanteProyecto> participacionesProyecto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "implementador")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "implementador", fetch= FetchType.LAZY)
     private List<FormularioImplementacion> implementadorForlumarios;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "verificador")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "verificador", fetch= FetchType.LAZY)
     private List<FormularioImplementacion> verificadorFormularios;
-    @OneToMany(mappedBy = "evaluadorFinal")
+    @OneToMany(mappedBy = "evaluadorFinal", fetch= FetchType.LAZY)
     private List<SolicitudCambio> solicitudesCambioEvaluadorFinal;
-    @OneToMany(mappedBy = "evaluadorImpacto")
+    @OneToMany(mappedBy = "evaluadorImpacto", fetch= FetchType.LAZY)
     private List<SolicitudCambio> solicitudesCambioEvaluadorImpacto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitante")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitante", fetch= FetchType.LAZY)
     private List<SolicitudCambio> solicitudesCambioEnviadas;
     
     /* Atributos no persistidos */

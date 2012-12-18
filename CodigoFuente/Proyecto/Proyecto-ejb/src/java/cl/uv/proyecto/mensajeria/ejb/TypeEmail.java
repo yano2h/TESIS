@@ -106,6 +106,33 @@ public enum TypeEmail {
         public String construirAsunto(SolicitudRequerimiento s, String nameInvoker){
             return String.format(getAsuntoSinFormato(), nameInvoker, s.getAsunto());
         }
+    },
+    CAMBIO_RESPONSABLE_SOLICITUD(){
+
+        @Override
+        public String construirMensaje(Object o, String nameInvoker) {
+            SolicitudRequerimiento s = (SolicitudRequerimiento) o;
+            return String.format(getMensajeSinFormato(),
+                                 s.getAsunto(),
+                                 s.getSolicitante().getNombre(),
+                                 s.getResponsable().getNombreCorto(),
+                                 s.getResponsable().getNombreCorto(),
+                                 getLink(s));
+        }
+        
+        
+    },
+    CAMBIO_SOLICITUD(){
+        @Override
+        public String construirMensaje(Object o, String nameInvoker) {
+            SolicitudRequerimiento s = (SolicitudRequerimiento) o;
+            return String.format(getMensajeSinFormato(),
+                                 s.getAsunto(),
+                                 s.getResponsable().getNombre(),
+                                 "%s",
+                                 getLink(s));
+        }
+        
     };
     
     private static final String propertieEmail = "Emails";

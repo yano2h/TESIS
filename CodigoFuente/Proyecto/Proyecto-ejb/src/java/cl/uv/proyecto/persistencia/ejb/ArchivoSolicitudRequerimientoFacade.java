@@ -10,7 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -32,8 +32,8 @@ public class ArchivoSolicitudRequerimientoFacade extends AbstractFacade<ArchivoS
 
     @Override
     public List<ArchivoSolicitudRequerimiento> buscarArchivosPorSolicitud(SolicitudRequerimiento s) {
-         Query q = em.createQuery("SELECT a FROM ArchivoSolicitudRequerimiento a WHERE a.solicitudRequerimiento = :solicitud");
-        q.setParameter("solicitud", s);
+        TypedQuery<ArchivoSolicitudRequerimiento> q = em.createNamedQuery("ArchivoSolicitudRequerimiento.findByIdSolicitud", ArchivoSolicitudRequerimiento.class);
+        q.setParameter("idSolicitud", s.getIdSolicitudRequerimiento());
         return q.getResultList();
     }
     

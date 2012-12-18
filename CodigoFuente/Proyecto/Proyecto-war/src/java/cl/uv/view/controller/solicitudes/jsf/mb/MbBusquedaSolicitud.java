@@ -5,11 +5,8 @@
 package cl.uv.view.controller.solicitudes.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.SolicitudRequerimientoFacadeLocal;
-import cl.uv.proyecto.persistencia.entidades.Area;
-import cl.uv.proyecto.persistencia.entidades.EstadoSolicitudRequerimiento;
-import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
-import cl.uv.proyecto.persistencia.entidades.TipoPrioridad;
-import cl.uv.proyecto.persistencia.entidades.TipoSolicitudRequerimiento;
+import cl.uv.proyecto.persistencia.entidades.*;
+import cl.uv.view.controller.base.utils.JsfUtils;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -28,32 +25,28 @@ public class MbBusquedaSolicitud implements Serializable {
 
     @EJB
     private SolicitudRequerimientoFacadeLocal solicitudFacade;
-    
     private List<SolicitudRequerimiento> resultadosBusqueda;
     private SolicitudRequerimiento prototipoSolicitud;
-    
+    private SolicitudRequerimiento selectedSolicitud;
     private String codigoConsulta;
     private String asunto;
     private String mensaje;
-    
     private Area areaResponsable;
     private TipoPrioridad prioridad;
     private EstadoSolicitudRequerimiento estadoSolicitudRequerimiento;
     private TipoSolicitudRequerimiento tipoSolicitudRequerimiento;
-    
     private Date maxFechaEnvio;
     private Date minFechaEnvio;
 
-    
     public MbBusquedaSolicitud() {
         prototipoSolicitud = new SolicitudRequerimiento();
         codigoConsulta = "";
         asunto = "";
         mensaje = "";
     }
-    
+
     @PostConstruct
-    private void init(){
+    private void init() {
         resultadosBusqueda = solicitudFacade.findAll();
     }
 
@@ -63,6 +56,14 @@ public class MbBusquedaSolicitud implements Serializable {
 
     public void setResultadosBusqueda(List<SolicitudRequerimiento> resultadosBusqueda) {
         this.resultadosBusqueda = resultadosBusqueda;
+    }
+
+    public SolicitudRequerimiento getSelectedSolicitud() {
+        return selectedSolicitud;
+    }
+
+    public void setSelectedSolicitud(SolicitudRequerimiento selectedSolicitud) {
+        this.selectedSolicitud = selectedSolicitud;
     }
 
     public Area getAreaResponsable() {
@@ -144,8 +145,8 @@ public class MbBusquedaSolicitud implements Serializable {
     public void setMinFechaEnvio(Date minFechaEnvio) {
         this.minFechaEnvio = minFechaEnvio;
     }
-    
-    public void filtrar(){
+
+    public void filtrar() {
         prototipoSolicitud.setCodigoConsulta(codigoConsulta);
         prototipoSolicitud.setAsunto(asunto);
         prototipoSolicitud.setMensaje(mensaje);
@@ -153,19 +154,20 @@ public class MbBusquedaSolicitud implements Serializable {
         prototipoSolicitud.setEstadoSolicitud(estadoSolicitudRequerimiento);
         prototipoSolicitud.setTipoSolicitud(tipoSolicitudRequerimiento);
         prototipoSolicitud.setPrioridadSolicitud(prioridad);
-        maxFechaEnvio = (maxFechaEnvio!=null)? new Date(maxFechaEnvio.getTime()+86400000):null;
+        maxFechaEnvio = (maxFechaEnvio != null) ? new Date(maxFechaEnvio.getTime() + 86400000) : null;
         System.out.println(maxFechaEnvio);
         resultadosBusqueda = solicitudFacade.buscarSolicitudPorFiltros(prototipoSolicitud, minFechaEnvio, maxFechaEnvio);
     }
-    
-    public Date getMaxDateCalendarFechaEnvio(){
+
+    public Date getMaxDateCalendarFechaEnvio() {
         return new Date();
     }
-    
-    public Date getMinDateCalendarFechaEnvio(){
 
-            return minFechaEnvio;
-
+    public Date getMinDateCalendarFechaEnvio() {
+        return minFechaEnvio;
     }
-    
+
+    public void onRowSelect() {
+        JsfUtils.redirect("solicitud.xhtml?codigo=" + selectedSolicitud.getCodigoConsulta());
+    }
 }

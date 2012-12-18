@@ -4,6 +4,7 @@
  */
 package cl.uv.view.controller.proyecto.jsf.mb;
 
+import cl.uv.proyecto.persistencia.ejb.ArchivoProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
@@ -30,6 +31,9 @@ public class MbDetalleProyecto extends MbBase {
     private ParticipanteProyectoFacadeLocal participanteProyectoFacade;
     @EJB
     private ProyectoEJBLocal proyectoEJB;
+    @EJB
+    private ArchivoProyectoFacadeLocal archivoProyectoFacade;
+    
     private Proyecto proyecto;
 
     @PostConstruct
@@ -42,6 +46,7 @@ public class MbDetalleProyecto extends MbBase {
         } else {
             proyecto = proyectoFacade.find(proyecto.getIdProyecto());
             proyecto.setParticipantes(participanteProyectoFacade.buscarParticipantesProyecto(proyecto));
+            proyecto.setArchivoProyectoList(archivoProyectoFacade.buscarArchivosPorProyecto(proyecto));
         }
     }
 

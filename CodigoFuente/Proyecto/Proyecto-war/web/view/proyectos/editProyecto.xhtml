@@ -48,13 +48,18 @@
                                     <f:selectItems value="#{estadoProyectoController.itemsAvailableSelectMany}"/>
                                 </p:selectOneMenu>
                             </p:inplace>
+                            <h:outputText value="Etapa Proyecto:" styleClass="label_blod label"/>    
+                            <p:inplace widgetVar="inpEtapa">
+                                <h:inputHidden value="#{mbEditProyecto.proyecto.etapaProyecto.nombreEtapaProyecto}" />  
+                                <p:selectOneMenu id="slct_etapa_proyecto" value="#{mbEditProyecto.proyecto.etapaProyecto}" required="true" style="min-width: 250px;margin-left: 5px;" >
+                                    <f:selectItems value="#{etapaProyectoController.itemsAvailableSelectMany}"/>
+                                </p:selectOneMenu>
+                            </p:inplace>
                         </h:panelGrid>
                         <br/>
                         <h:panelGrid columns="2" cellspacing="10">
                             <h:outputText value="Codigo Interno:" styleClass="label_blod label"/>
-                            <p:inplace widgetVar="inpCodigo" >
-                                <p:inputText id="itxt_codigo_interno" value="#{mbEditProyecto.proyecto.codigoInterno}" required="true"/>
-                            </p:inplace>
+                            <h:outputText value="#{mbEditProyecto.proyecto.codigoInterno}"/>
                             <h:outputText value="Fecha de Inicio:" styleClass="label_blod label"/>
                             <p:inplace widgetVar="inpFechaIni" >                                
                                 <p:calendar id="cal_fecha_ini" showOn="button" pattern="dd/MM/yyyy" locale="es" navigator="true" required="true" value="#{mbEditProyecto.proyecto.fechaInicio}" style="margin-left: 5px;">
@@ -77,7 +82,7 @@
                             <p:inputTextarea id="itxta_descripcion" value="#{mbEditProyecto.proyecto.descripcion}" cols="100" rows="4" maxlength="255"/>
                         </p:inplace>
                     </h:panelGrid>
-                    
+
                     <br/>
                     <h:outputText value="Participantes del Proyecto:" styleClass="title_bold"/>
                     <br/>
@@ -95,7 +100,7 @@
                                          process="@parent tabla_participantes"
                                          disabled="#{mbEditProyecto.disableBtnAgregar}"/>
                     </h:panelGrid>
-                    
+
                     <p:dataTable id="tabla_participantes"
                                  value="#{mbEditProyecto.participantes}"
                                  var="part"
@@ -103,7 +108,7 @@
 
                         <p:column headerText="Nombre">
                             <h:outputText value="#{part.participante.nombreCompleto}" rendered="#{part.rol.idRol ne const.Rol_JP}"/>
-                             <p:cellEditor rendered="#{part.rol.idRol eq const.Rol_JP}" >  
+                            <p:cellEditor rendered="#{part.rol.idRol eq const.Rol_JP}" >  
                                 <f:facet name="output">
                                     <h:outputText value="#{part.participante.nombreCompleto}"/>
                                 </f:facet>   
@@ -134,8 +139,8 @@
                         <p:column headerText="Opciones" style="width:30px" styleClass="ui-editable-column-options">  
                             <p:rowEditor />
                             <p:commandLink title="Eliminar" actionListener="#{mbEditProyecto.removerParticipante(part)}" 
-                                             rendered="#{part.rol.idRol ne const.Rol_JP}"
-                                             update="@(.ui-datatable) :detalleProy:slct_rol :detalleProy:slct_funcionario" >
+                                           rendered="#{part.rol.idRol ne const.Rol_JP}"
+                                           update="@(.ui-datatable) :detalleProy:slct_rol :detalleProy:slct_funcionario" >
                                 <span class="ui-icon ui-icon-minus"></span>  
                             </p:commandLink>
                         </p:column>

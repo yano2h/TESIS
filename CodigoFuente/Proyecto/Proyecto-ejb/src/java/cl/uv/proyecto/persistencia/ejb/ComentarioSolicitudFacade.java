@@ -9,7 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -36,7 +36,8 @@ public class ComentarioSolicitudFacade extends AbstractFacade<ComentarioSolicitu
     
     @Override
     public List<ComentarioSolicitud> buscarComentariosPorSolicitud(Long idSolicitudRequerimiento){
-        Query q = em.createQuery("SELECT c FROM ComentarioSolicitud c WHERE c.solicitudRequerimiento.idSolicitudRequerimiento = :id ORDER BY c.fecha DESC");
+        System.out.println("/*Buscar Comentarios*/");
+        TypedQuery<ComentarioSolicitud> q = em.createNamedQuery("ComentarioSolicitud.findByIdSolicitud", ComentarioSolicitud.class);
         q.setParameter("id", idSolicitudRequerimiento);
         return q.getResultList();
     }

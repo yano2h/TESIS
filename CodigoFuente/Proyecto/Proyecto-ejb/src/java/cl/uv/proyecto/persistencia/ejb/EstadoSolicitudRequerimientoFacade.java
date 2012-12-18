@@ -5,9 +5,11 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.EstadoSolicitudRequerimiento;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,4 +29,9 @@ public class EstadoSolicitudRequerimientoFacade extends AbstractFacade<EstadoSol
         super(EstadoSolicitudRequerimiento.class);
     }
     
+    @Override
+    public List<EstadoSolicitudRequerimiento> findAll() {
+        TypedQuery<EstadoSolicitudRequerimiento> q = getEntityManager().createNamedQuery("EstadoSolicitudRequerimiento.findAll", EstadoSolicitudRequerimiento.class);
+        return q.getResultList();
+    }
 }

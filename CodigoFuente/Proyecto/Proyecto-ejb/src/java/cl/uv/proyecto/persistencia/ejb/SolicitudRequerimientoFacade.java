@@ -10,6 +10,8 @@ import cl.uv.proyecto.persistencia.entidades.Funcionario;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.SolicitudRequerimiento;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -102,6 +104,41 @@ public class SolicitudRequerimientoFacade extends AbstractFacade<SolicitudRequer
         return q.getResultList();
     }
 
+    @Override
+    public List<SolicitudRequerimiento> buscarSolicitudesAsignadasVencidas(FuncionarioDisico funcionarioDisico){
+        TypedQuery<SolicitudRequerimiento> q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.responsable = :responsable AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado", SolicitudRequerimiento.class);
+        q.setParameter("responsable", funcionarioDisico);
+        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<SolicitudRequerimiento> buscarSolicitudesAsignadasQueVencenProximamente(FuncionarioDisico funcionarioDisico, int horasAEvaluar){
+        Calendar calendario = Calendar.getInstance();
+        Date fechaActual = calendario.getTime();
+        calendario.add(Calendar.HOUR, horasAEvaluar);
+        Date fechaMaxima = calendario.getTime();
+        TypedQuery<SolicitudRequerimiento> q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.responsable = :responsable AND s.estadoSolicitud.idEstadoSolicitudRequerimiento NOT IN (:idEstados) AND s.fechaVencimiento BETWEEN :fechaActual AND :fechaMaxima", SolicitudRequerimiento.class);
+        q.setParameter("responsable", funcionarioDisico);
+        List<Short> estados = new ArrayList<Short>();
+        estados.add(Resources.getValueShort("Estados", "EstadoSR_VENCIDA"));
+        estados.add(Resources.getValueShort("Estados", "EstadoSR_RECHAZADA"));
+        estados.add(Resources.getValueShort("Estados", "EstadoSR_CERRADA"));
+        estados.add(Resources.getValueShort("Estados", "EstadoSR_FINALIZADA_SIN_RESPUESTA"));
+        q.setParameter("idEstados", estados);
+        q.setParameter("fechaActual", fechaActual);
+        q.setParameter("fechaMaxima", fechaMaxima);
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<SolicitudRequerimiento> buscarSolicitudesAsignadasNoRevisadas(FuncionarioDisico funcionarioDisico){
+        TypedQuery<SolicitudRequerimiento> q = em.createQuery("SELECT s FROM SolicitudRequerimiento s WHERE s.responsable = :responsable AND s.estadoSolicitud.idEstadoSolicitudRequerimiento = :idEstado", SolicitudRequerimiento.class);
+        q.setParameter("responsable", funcionarioDisico);
+        q.setParameter("idEstado", Resources.getValueShort("Estados", "EstadoSR_ASIGNADA"));
+        return q.getResultList();
+    }
+            
     @Override
     public List<SolicitudRequerimiento> getSolicitudesEnviadas(Funcionario funcionario) {
         return funcionario.getSolicitudesRequerimientoEnviadas();

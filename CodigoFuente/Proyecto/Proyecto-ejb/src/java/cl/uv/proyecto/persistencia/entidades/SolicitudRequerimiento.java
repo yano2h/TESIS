@@ -7,7 +7,6 @@ package cl.uv.proyecto.persistencia.entidades;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.NamedQueries;
@@ -24,6 +23,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
+import javax.persistence.OrderColumn;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.Fetch;
@@ -107,13 +107,13 @@ public class SolicitudRequerimiento implements Serializable {
     @ManyToOne(optional = false)
     private TipoSolicitudRequerimiento tipoSolicitud;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudRequerimiento", orphanRemoval=true)
-    @LazyCollection(value= LazyCollectionOption.FALSE)
-    @Fetch(value=FetchMode.SUBSELECT)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "solicitudRequerimiento", orphanRemoval=true)
+//    @LazyCollection(value= LazyCollectionOption.FALSE)
+//    @Fetch(value=FetchMode.SUBSELECT)
     private List<ComentarioSolicitud> comentarios;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudRequerimiento", orphanRemoval=true)
-    @LazyCollection(value= LazyCollectionOption.FALSE)
-    @Fetch(value=FetchMode.SUBSELECT)
+//    @LazyCollection(value= LazyCollectionOption.FALSE)
+//    @Fetch(value=FetchMode.SUBSELECT)
     private List<ArchivoSolicitudRequerimiento> archivosAdjuntos;
     
     public SolicitudRequerimiento() {
