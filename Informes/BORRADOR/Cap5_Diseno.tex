@@ -95,7 +95,7 @@ a la fase de diseño del sistema:
 	
 	\subsection{Estilo de Descomposición Modular}
 
-	En esta sección se describe como se descompone el sistema en diferentes modulos,
+	En esta sección se describe como se descompone el sistema en diferentes módulos,
 	esto se realizara utilizando el enfoque Orientado a Objetos (OO), para este caso 
 	este enfoque es el mas adecuado, ya que el sistema debe ser implementado 
 	haciendo uso de un lenguaje OO (particularmente java), así se mantendrá la 
@@ -111,7 +111,7 @@ a la fase de diseño del sistema:
 	A continuación se describen las responsabilidades de cada modulo:
 	\begin{itemize}
 		\item \textbf{Identity Services:} Servicio web proporcionado por
-		la Universidad de Valparaiso, que proporciona servicios de acceso a la
+		la Universidad de Valparaíso, que proporciona servicios de acceso a la
 		información de todas las cuentas de los funcionarios de la 
 		Universidad, que se encuentran almacenadas en LDAP.
 
@@ -128,7 +128,7 @@ a la fase de diseño del sistema:
 			a diferentes funcionalidades a los usuarios según sus roles.
 		\end{enumerate}
 			
-		\item \textbf{Modulo de Mensajeria:}
+		\item \textbf{Modulo de Mensajería:}
 		\begin{enumerate}	
 			\item \textbf{Generador de Notificaciones y Alertas:} Se encarga de detectar
 			los diferentes eventos ocurridos dentro del sistema que producen algún tipo 
@@ -175,8 +175,8 @@ a la fase de diseño del sistema:
 			\item \textbf{Gestor de Tareas SCM:} Permite editar las información de las
 			tareas de SCM y definir responsables para estas.
 	
-			\item \textbf{Administrador de Items de Configuración:} Proporciona funciones
-			para agregar, eliminar, editar y buscar Items de configuración de un proyecto.
+			\item \textbf{Administrador de Ítems de Configuración:} Proporciona funciones
+			para agregar, eliminar, editar y buscar Ítems de configuración de un proyecto.
 			
 			\item \textbf{Gestor de Solicitudes de Cambio:} Permite crear, eliminar, 
 			responder solicitudes de cambio y gestiona el ciclo de vida de estas.
@@ -226,7 +226,7 @@ a la fase de diseño del sistema:
 	donde el usuario puede rellenar los campos de un formulario. Algunos campos pueden
 	llevar menús asociados y el formulario puede tener botones de acción que, cuando
 	cuando se presionan, hacen que se de inicio a alguna acción. Este es el enfoque mas
-	se adecua a este sistema, ya que las principales operaciones del sistema como envio de 
+	se adecua a este sistema, ya que las principales operaciones del sistema como envío de 
 	solicitudes, asignación y respuesta de las mismas, etc. se basan en el ingreso de información 
 	y la presentación de la misma en pantalla, y este estilo proporciona una forma sencilla de 
 	introducir datos. 
@@ -242,7 +242,7 @@ a la fase de diseño del sistema:
 	los portales de la Universidad se extrae lo siguiente.
 
 	\begin{itemize}
-		\item \textbf{Tipografía:} La tipografia recomendada en el Manual para la aplicaciones 
+		\item \textbf{Tipografía:} La tipografía recomendada en el Manual para la aplicaciones 
 		institucionales es "Swiss 721 Condensed BT", sin embargo por motivos de compatibilidad 
 		el tipo de fuente utilizado normalmente por los sistemas de la universidad es "Arial, 
 		Helvetica, sans-serif". Y es este el que se utilizara en la interfaz del diseño del sistema.
@@ -264,7 +264,7 @@ a la fase de diseño del sistema:
 				\includegraphics[scale=0.5]{imagenes/coloresInstitucionales.png}
 			\end{center}
 			\end{figure}	
-		Aparte de estos dos colores, comunmente los portales de la universidad hacen uso de 
+		Aparte de estos dos colores, comúnmente los portales de la universidad hacen uso de 
 		los siguientes colores.
 
 		\begin{itemize}
@@ -336,7 +336,7 @@ a la fase de diseño del sistema:
 	Como se menciono anteriormente, se utilizara un paradigma Orientado a 
 	Objetos por lo que en esta sección, se presenta el diagrama de clases 
 	correspondiente al sistema a desarrollar. 
-	Para ver un mayor detalle de las clases y sus atributos y metodos
+	Para ver un mayor detalle de las clases y sus atributos y métodos
 	en el Anexo \ref{anexo4}.
 	
 	\subsection{Diseño de Clases}
@@ -367,7 +367,7 @@ a la fase de diseño del sistema:
 	acerca del significado de cada campo, ya que este se subentiende es el mismo que
 	el del atributo de la clase que le corresponde.\\
 	
-	El modelo cuenta de 23 tablas, todas relacionadas. En el Apendice \ref{dicDatos} se 
+	El modelo cuenta de 23 tablas, todas relacionadas. En el Apéndice \ref{dicDatos} se 
 	muestra en detalle los tipos de datos y cuales de los campos son claves primarias 
 	o foráneas. A continuación una breve explicación sobre el modelo y su relación con 
 	las clases.\\
@@ -380,7 +380,7 @@ a la fase de diseño del sistema:
 	propios en la tabla de FUNCIONARIO\_DISICO y los heredados en la tabla FUNCIONARIO.\\
 	
 	Dado que existe una serie de tareas de SCM por defecto, definidas por la metodología de SCM de 
-	disico \cite{paloma}, se utilizo una tabla tabla llamada TAREA\_SCM la cual almacena dichas tareas
+	Disico \cite{paloma}, se utilizo una tabla tabla llamada TAREA\_SCM la cual almacena dichas tareas
 	y aparte se creo una tabla llamada TAREAS\_SCM\_PROYECTO la cual establece una triple relación 
 	entre las tablas FUNCIONARIO\_DISICO, TAREA\_SCM y PROYECTO, estableciendo así las tareas 
 	de SCM de cada proyecto y el responsable de esta.\\
@@ -493,16 +493,16 @@ a la fase de diseño del sistema:
 	proveer de herramientas, clases y métodos para la creación y automatización
 	de pruebas, utiliza contenedores embebidos que le permiten simular la ejecución
 	de los componentes como si estuviesen en el contenedor real,  la diferencia 
-	es que el despliegue en este tipo de contenedores es mucho mas rapido
+	es que el despliegue en este tipo de contenedores es mucho mas rápido
 	y nos permite simular un ambiente mas real en nuestras pruebas.
-	Permite probar EJBs, CDI, Percistencia (JPA) entre otros, ademas entre los
+	Permite probar EJBs, CDI, Persistencia (JPA) entre otros, ademas entre los
 	contenedores con los que es compatible se encuentra Glassfish Embedded por 
 	lo que proporciona completa compatibilidad con el servidor de aplicaciones a utilizar.\\
 	
 
 	Estas pruebas se diseñaran y escribirán idealmente en conjunto con la implementación
 	de la aplicación, pero con el fin de cumplir con las fechas de entrega esta actividad 
-	podra ser postergada asta la fase de pruebas.\\
+	podrá ser postergada asta la fase de pruebas.\\
 			
 
 	\subsection{Pruebas de Integración}
@@ -669,7 +669,7 @@ a la fase de diseño del sistema:
 		\label{medicionPR}
 	\end{table}
 	
-	Ademas adjunto a la Tabla \ref{medicionPR} deben ir los graficos del uso de CPU y el uso de RAM, obtenidos con VisualVM.\\
+	Ademas adjunto a la Tabla \ref{medicionPR} deben ir los gráficos del uso de CPU y el uso de RAM, obtenidos con VisualVM.\\
 	
 	Con todo esto ademas de demostrar que la aplicación satisface los
 	requisitos de rendimiento impuestos por el cliente. Se debe determinar 
@@ -823,7 +823,7 @@ a la fase de diseño del sistema:
 
 	
 	\subsection{Pruebas Beta}
-	Por ultimo una vez que se hayan aprobado todas las pruebas diseñadas
+	Por último una vez que se hayan aprobado todas las pruebas diseñadas
 	el sistema pasara a las pruebas betas, donde el objetivo es estar preparado
 	para todos los tipos de usuarios. \\
 	
@@ -854,7 +854,7 @@ a la fase de diseño del sistema:
 		\item Fecha y Hora aproximada del error o problema.
 		\item Descripción del error o problema.
 		\item Información que permita la replicación del error o problema. Como
-		datos de entrada, pasos que realizo, opciones que selecciono, etc
+		datos de entrada, pasos que realizo, opciones que selecciono, etc.
 	\end{itemize}
 
 	Finalmente una vez terminadas la fase de pruebas beta, los usuario que participaron
@@ -941,7 +941,7 @@ a la fase de diseño del sistema:
 		\hline
 		{Los gráficos en los resumen permiten una mejor visualización de la información} & {} &{} &{} & {} & {} \\
 		\hline
-		{Las mediciones que se muestran en el Resumen Personal se entiend claramente} & {} &{} &{} & {} & {} \\
+		{Las mediciones que se muestran en el Resumen Personal se entienden claramente} & {} &{} &{} & {} & {} \\
 		\hline
 		{Es rápido y sencillo responder las solicitudes de los usuarios} & {} &{} &{} & {} & {} \\
 		\hline
@@ -949,13 +949,13 @@ a la fase de diseño del sistema:
 		\hline
 		{El sistema alerta oportunamente ante retrasos en las tareas de SCM} & {} &{} &{} & {} & {} \\
 		\hline
-		{Se entiende claramente la relacion las opciones del subsistema de SCM y la metodología de SCM de DISICO} & {} &{} &{} & {} & {} \\
+		{Se entiende claramente la relación las opciones del subsistema de SCM y la metodología de SCM de DISICO} & {} &{} &{} & {} & {} \\
 		\hline
 		{Es mas fácil mantener actualizada la información sobre los cambios} & {} &{} &{} & {} & {} \\
 		\hline
 		{El sistema documenta de forma clara el historial de cambios de los items de configuración} & {} &{} &{} & {} & {} \\
 		\hline
-		{El sistema permite administrar fácilmente los items de configuración de un proyecto} & {} &{} &{} & {} & {} \\
+		{El sistema permite administrar fácilmente los ítems de configuración de un proyecto} & {} &{} &{} & {} & {} \\
 		\hline
 		{El sistema permite agendar de forma fácil nuevas tareas	} & {} &{} &{} & {} & {} \\
 		\hline
@@ -1010,7 +1010,7 @@ a la fase de diseño del sistema:
 		\hline
 		{El sistema permite asignar fácilmente responsables de las tareas de SCM} & {} & {} & {} & {} & {}\\
 		\hline
-		{El sistema permite documentar correctamente los templates de la metodologia de SCM} & {} & {} & {} & {} & {}\\
+		{El sistema permite documentar correctamente los templates de la metodología de SCM} & {} & {} & {} & {} & {}\\
 		\hline
 	\end{tabular}
 	\end{center}

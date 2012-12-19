@@ -26,7 +26,7 @@ Para una mayor comprensión del diagrama de clases, se presenta una breve
 			primera vez el funcionario al sistema.
 			\item \textbf{fechaUltimoAcceso:} Fecha y hora en que accedió por
 			ultima vez el funcionario al sistema.
-			\item \textbf{notificaciones:} Lista del tipo Notificacion con todas las notificaciones
+			\item \textbf{notificaciones:} Lista del tipo Notificación con todas las notificaciones
 			del usuario.
 		\end{itemize}
 		
@@ -37,13 +37,13 @@ Para una mayor comprensión del diagrama de clases, se presenta una breve
 		\begin{itemize}
 			\item Hereda todos los atributos de la clase Funcionario.
 			\item \textbf{cargo:} Cadena con el cargo que tiene el funcionario
-			dentro de disico.
+			dentro de Disico.
 			\item \textbf{anexo:} Cadena con el anexo si es que posee para comunicarse
 			por teléfono con el funcionario.
 			\item \textbf{estadisticasPersonales:} Un lista (del tipo EstadisticaPersonalDiaria) que 
 			contiene todas las mediciones estadísticas del usuario que se han tomado desde que fue 
 			registrado en el sistema.
-			\item \textbf{area:} Area de disisco a la que pertenece el funcionario.
+			\item \textbf{area:} Área de Disico a la que pertenece el funcionario.
 		\end{itemize}
 
 		\item \textbf{Clase Area:} Esta clase representa a un área de DISICO.\\\\
@@ -77,7 +77,7 @@ Para una mayor comprensión del diagrama de clases, se presenta una breve
 			para que el responsable resuelva la solicitud.
 			\item \textbf{fechaUltimaActualizacion:} Fecha y hora en que fue modificada por ultima vez 
 			la solicitud ya sea por creación, edición, transferencia, comentario, cierre de esta.
-			\item \textbf{areaResponsable:} Objeto de la clase Area que contiene la información del 
+			\item \textbf{areaResponsable:} Objeto de la clase Área que contiene la información del 
 			área a la que fue enviada la solicitud.
 			\item \textbf{solicitante:} Objeto de la clase Funcionario que contiene la información del
 			funcionario que envió la solicitud a DISICO.
@@ -239,7 +239,7 @@ Para una mayor comprensión del diagrama de clases, se presenta una breve
 			\item \textbf{idTareaSCM:} Entero con el identificador de la tarea de SCM.
 			\item \textbf{nombreTarea:} Cadena con el nombre de la terea de SCM a realizar.
 			\item \textbf{descripcion:} Cadena con una descripción mas detallada de los objetivos
-			y alcanse de la tarea.
+			y alcance de la tarea.
 			\item \textbf{entregablesAsociados:} Lista de la clase Entregable que contiene información
 			de todos los entregables asociados a dicha tarea.
 			\item \textbf{responsable:} Objeto de la clase FuncionarioDisico con la información del
@@ -318,15 +318,15 @@ Para una mayor comprensión del diagrama de clases, se presenta una breve
 		\begin{itemize}
 			\item \textbf{idItemConfiguracion:} Entero con un numero identificador del item dentro de
 			la base de datos.
-			\item \textbf{codigoIdentificador:} Cadena con un codigo identificador del item dentro
+			\item \textbf{codigoIdentificador:} Cadena con un código identificador del item dentro
 			del proyecto, este debe ser unico dentro del proyecto.
 			\item \textbf{nombreItemConfiguracion:} Cadena con el nombre del item de configuración.
 			\item \textbf{version:} Cadena con el identificador de la versión del item en el sistema de
 			de control de versiones.
-			\item \textbf{ubicacionEnBiblioteca:} Cadena con una ruta que permite localizar el item
+			\item \textbf{ubicacionEnBiblioteca:} Cadena con una ruta que permite localizar el ítem
 			de configuración dentro de la biblioteca.
-			\item \textbf{fechaUltimaModificacion:} Fecha y hora en la que se realizo el ultimo
-			cambio al item de configuración.
+			\item \textbf{fechaUltimaModificacion:} Fecha y hora en la que se realizo el último
+			cambio al ítem de configuración.
 			\item \textbf{responsableDelItem:} Objeto de la clase FuncionarioDisico que contiene 
 			información del responsable de la solicitud.
 		\end{itemize}
@@ -414,7 +414,7 @@ Para una mayor comprensión del diagrama de clases, se presenta una breve
 			notificaciones que deben ser mostradas al usuario.
 			\item \textbf{generarNotificación:} Método que genera una notificación y la enviá al
 			usuario correspondiente.
-			\item \textbf{generarAlerta:} Método que genera una alerta cuando se produce algun 
+			\item \textbf{generarAlerta:} Método que genera una alerta cuando se produce algún 
 			evento como el retraso de una solicitud o tarea.
 		\end{itemize}
 		
@@ -442,17 +442,17 @@ Para una mayor comprensión del diagrama de clases, se presenta una breve
 		\end{itemize}
 		
 		\item \textbf{Clase EjbItemsConfiguracion:} Es una clase que implementa un Ejb con 
-		métodos para gestionar los items de configuración de un proyecto.\\\\
+		métodos para gestionar los ítems de configuración de un proyecto.\\\\
 		\textbf{Métodos de la Clase:}
 		\begin{itemize}
-			\item \textbf{agregarItemConfiguracion:} Método que permite agregar un item de 
+			\item \textbf{agregarItemConfiguracion:} Método que permite agregar un ítem de 
 			configuración a un proyecto.
 			\item \textbf{listarItemsConfiguracion:} Método para listar los items de configuración de un 
 			proyecto.
-			\item \textbf{editarItemConfiguracion:} Método para editar la información de un item de
+			\item \textbf{editarItemConfiguracion:} Método para editar la información de un ítem de
 			configuración.
 			\item \textbf{asignarResponsableItemConfiguracion:} Método para asignar responsable a
-			un item de configuración.
+			un ítem de configuración.
 		\end{itemize}
 		
 		\item \textbf{Clase EjbProyectos:} Es una clase que implementa un Ejb con 
