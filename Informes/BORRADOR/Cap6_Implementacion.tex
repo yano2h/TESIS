@@ -1,5 +1,5 @@
 \chapter{Implementaci\'on}
-En este Capítulo se presenta la plataforma de desarrollo a utilizar, las herramientas
+En este capítulo se presenta la plataforma de desarrollo utilizadas, las herramientas
 necesarias para el desarrollo tanto de software como de hardware, los lenguajes de 
 programación y las estrategias para utilizarlos.
 
@@ -19,8 +19,10 @@ manteniéndose al tanto del estado de sus solicitudes de requerimiento en todo mo
 		compañía adquirida por Oracle Corporation, que implementa las tecnologías definidas en la plataforma Java EE y 
 		permite ejecutar aplicaciones que siguen esta especificación. Es gratuito y de código libre, se distribuye bajo un 
 		licenciamiento dual a través de la licencia CDDL y la GNU GPL \cite{glassfish}.
-		\item \textbf{SQL Server 2008 R2:} Es un sistema gestor de Bases de Datos relacionales, desarrollado por Microsoft, 
-		que ademas incluye un conjunto de herramientas para su administración \cite{sqlserver}.
+		\item \textbf{PostgreSQL 9:} Es un sistema gestor de Bases de Datos 
+relacionales, de código abierto, publicado bajo la licencia BSD \cite{postgresql}.
+%		\item \textbf{SQL Server 2008 R2:} Es un sistema gestor de Bases de Datos relacionales, desarrollado por Microsoft, 
+%		que ademas incluye un conjunto de herramientas para su administración \cite{sqlserver}.
 	\end{itemize}
 
 %	\subsection{MySQL 5.1}
@@ -125,7 +127,7 @@ descrito en detalle los Casos de Uso Reales.
 	\end{figure}
 
 	\item Se implementa el sistema de envío de solicitudes de requerimientos
-	donde los usuarios crean, envian y buscan solicitudes de requerimientos. 
+	donde los usuarios crean, envían y buscan solicitudes de requerimientos. 
 	La creación y envío se observa en la Figura \ref{itf_envioSol}.
 
 	\begin{figure}[H]
@@ -175,10 +177,10 @@ descrito en detalle los Casos de Uso Reales.
 		\end{center}
 	\end{figure}
 
-	\item Por ultimo se implementa el sistema de gestión de SCM para dar soporte
+	\item Por último se implementa el sistema de gestión de SCM para dar soporte
 	a la metodología de SCM de DISICO. En la Figura \ref{itf_scm} se muestra la
 	interfaz de asignación de tareas de SCM. Y en la Figura \ref{itf_scm02} se muestra
-	la interfaz  para agregar Items de Configuración en un proyecto.
+	la interfaz  para agregar Ítems de Configuración en un proyecto.
 
 	\begin{figure}[H]
 		\begin{center}
