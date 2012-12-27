@@ -6,10 +6,7 @@ package cl.uv.proyecto.proyectos.ejb;
 
 import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.file.ejb.FileManagerEJBLocal;
-import cl.uv.proyecto.persistencia.ejb.EstadoProyectoFacadeLocal;
-import cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacadeLocal;
-import cl.uv.proyecto.persistencia.ejb.ProyectoFacadeLocal;
-import cl.uv.proyecto.persistencia.ejb.RolProyectoFacadeLocal;
+import cl.uv.proyecto.persistencia.ejb.*;
 import cl.uv.proyecto.persistencia.entidades.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +25,8 @@ import javax.ejb.Stateless;
 public class ProyectoEJB implements ProyectoEJBLocal {
 
     @EJB
+    private ArchivoProyectoFacadeLocal archivoProyectoFacade;
+    @EJB
     private ProyectoFacadeLocal proyectoFacade;
     @EJB
     private EstadoProyectoFacadeLocal estadoProyectoFacade;
@@ -37,7 +36,7 @@ public class ProyectoEJB implements ProyectoEJBLocal {
     private ParticipanteProyectoFacadeLocal participanteProyectoFacade;
     @EJB
     private FileManagerEJBLocal fileManagerEJB;
-    
+
     @Override
     public void cerrarProyecto(Proyecto p) {
         p.setFechaTermino(new Date());
@@ -79,6 +78,16 @@ public class ProyectoEJB implements ProyectoEJBLocal {
             }
         } else {
             throw new NullPointerException("Imposible crear el proyecto nulo o con un funcionario nulo o sin area");
+        }
+    }
+
+    @Override
+    public void removerArchivosAdjuntos(List<ArchivoProyecto> files) {
+        if (files != null) {
+            for (ArchivoProyecto a : files) {
+                fileManagerEJB.removerArchivoAdjuntoProyecto(a.getArchivoAdjunto());
+                archivoProyectoFacade.remove(a);
+            }
         }
     }
 }

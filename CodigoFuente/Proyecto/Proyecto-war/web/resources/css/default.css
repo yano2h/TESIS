@@ -267,6 +267,18 @@ a.small_link{
     padding: 3px;
 }
 
+.line_summary{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;;
+}
+
+.light_text{
+    color: #777; 
+    font-style: italic
+}
+
 .alig_top_column{
     vertical-align: top;
 }
@@ -282,6 +294,11 @@ a.small_link{
 .column_16p{
     min-width: 16px;
     max-width: 16px;
+}
+
+.column_18p{
+    min-width: 18px;
+    max-width: 18px;
 }
 
 .column_20p{

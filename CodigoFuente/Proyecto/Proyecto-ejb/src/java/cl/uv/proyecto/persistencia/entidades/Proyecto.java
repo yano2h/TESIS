@@ -72,11 +72,11 @@ public class Proyecto implements Serializable {
     private List<TareaProyecto> tareasAgendadas;
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
     private List<TareaScmProyecto> tareasScmProyecto;
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "proyecto")
     private List<ParticipanteProyecto> participantes;
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
     private List<SolicitudCambio> solicitudesDeCambio;
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto", orphanRemoval=true)
+    @OneToMany(cascade = {CascadeType.REMOVE,CascadeType.MERGE}, mappedBy = "proyecto", orphanRemoval=true)
     private List<ArchivoProyecto> archivoProyectoList;
 
     public Proyecto() {

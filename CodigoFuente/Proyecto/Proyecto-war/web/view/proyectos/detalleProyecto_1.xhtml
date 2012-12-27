@@ -81,7 +81,7 @@
                     <h:outputText value="Archivos Adjuntos:" styleClass="title_bold"/>
                     <p:dataTable id="tabla_archivos_adjunto"
                                  value="#{mbDetalleProyecto.proyecto.archivoProyectoList}"
-                                 var="f">
+                                 var="f" emptyMessage="No hay archivos adjuntos al proyecto">
 
                         <p:column headerText="Tipo de Información">
                             <h:outputText value="#{f.tipoInformacion}"/>

@@ -4,9 +4,11 @@
  */
 package cl.uv.proyecto.proyectos.ejb;
 
+import cl.uv.proyecto.persistencia.entidades.ArchivoProyecto;
 import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -24,4 +26,5 @@ public interface ProyectoEJBLocal {
 
     public void crearProyecto(Proyecto p, FuncionarioDisico f);
     
+    void removerArchivosAdjuntos(List<ArchivoProyecto> files);
 }

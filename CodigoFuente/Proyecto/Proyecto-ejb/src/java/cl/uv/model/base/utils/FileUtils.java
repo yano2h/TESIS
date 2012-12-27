@@ -109,9 +109,12 @@ public class FileUtils {
             name = baseName+"_("+count+")."+extension;
             filename = path+name;
         }
-        
-        return name;
+        return (name!=null)?name:filename;
     }
     
-
+    public static String buildNewName(File f, String baseName){
+        String path = FilenameUtils.getFullPath(f.getPath());
+        String extension = FilenameUtils.getExtension(f.getPath());
+        return  buildNewName(path+baseName);
+    }
 }
