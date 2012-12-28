@@ -13,38 +13,36 @@
 
         <ui:define name="content">
             <h:outputScript library="js" name="calendar-localization.js" />
-            <h:form>
-                <p:growl id="growl" showDetail="true" /> 
-                
+            <h:form id="form_ic">
+                <p:growl id="growl" showDetail="true" autoUpdate="false" /> 
                 <p:panel id="pnl_items_config" header="Identificacion de la Configuracion">       
                     <p:panel header="Informacion Nuevo Item">
-                        <h:panelGrid columns="4" cellspacing="10">
-                            <p:outputLabel value="Identificador: " for="itxt_ident"/>
-                            <p:inputText id="itxt_ident" value="#{mbIdentificacionConfiguracion.nuevoItem.codigoIdentificadorIc}" required="true" size="5"/>
+                        <h:panelGrid columns="4" cellspacing="10" columnClasses="column_90p,column_90p,,">
+                            <p:outputLabel value="Identificador: " for="itxt_ident" styleClass="label_blod"/>
+                            <p:inputText id="itxt_ident" value="#{mbIdentificacionConfiguracion.nuevoItem.codigoIdentificadorIc}" required="true" size="5" maxlength="5"/>
 
-                            <p:outputLabel value="Nombre Item: " for="itxt_nombre"/>
-                            <p:inputText id="itxt_nombre" value="#{mbIdentificacionConfiguracion.nuevoItem.nombreItemConfiguracion}" style="width: 200px;" required="true" size="45"/>
-                        </h:panelGrid>
-                        <h:panelGrid columns="4" cellspacing="10">
-                            <p:outputLabel value="Version Item: " for="itxt_version"/>
-                            <p:inputText id="itxt_version" value="#{mbIdentificacionConfiguracion.nuevoItem.version}" required="true" size="10"/>
+                            <p:outputLabel value="Nombre Item: " for="itxt_nombre" styleClass="label_blod"/>
+                            <p:inputText id="itxt_nombre" value="#{mbIdentificacionConfiguracion.nuevoItem.nombreItemConfiguracion}" style="width: 200px;" required="true" size="45" maxlength="45"/>
 
-                            <p:outputLabel value="Fecha Ultima Modificación: " for="cal_fecha_modificacion"/>
+                            <p:outputLabel value="Version Item: " for="itxt_version" styleClass="label_blod"/>
+                            <p:inputText id="itxt_version" value="#{mbIdentificacionConfiguracion.nuevoItem.version}" required="true" size="10" maxlength="10"/>
+
+                            <p:outputLabel value="Fecha Ultima Modificación: " for="cal_fecha_modificacion" styleClass="label_blod"/>
                             <p:calendar id="cal_fecha_modificacion" value="#{mbIdentificacionConfiguracion.nuevoItem.fechaUltimaModificacion}" required="true" locale="es"/>
                         </h:panelGrid>
 
-                        <h:panelGrid columns="2" cellspacing="10">
-                            <p:outputLabel value="Ubicacion en la Biblioteca: " for="itxt_ubic_bibl"/>
-                            <p:inputText id="itxt_ubic_bibl" value="#{mbIdentificacionConfiguracion.nuevoItem.ubicacionEnBiblioteca}" style="width: 350px;" required="true"/>
+                        <h:panelGrid columns="2" cellspacing="10" style="margin-top: -10px;">
+                            <p:outputLabel value="Ubicacion en la Biblioteca: " for="itxt_ubic_bibl" styleClass="label_blod"/>
+                            <p:inputText id="itxt_ubic_bibl" value="#{mbIdentificacionConfiguracion.nuevoItem.ubicacionEnBiblioteca}" required="true" size="77" maxlength="200"/>
 
-                            <p:outputLabel value="Responsable Item:" for="selct_resp"/>
+                            <p:outputLabel value="Responsable Item:" for="selct_resp" styleClass="label_blod"/>
                             <p:selectOneMenu id="selct_resp" value="#{mbIdentificacionConfiguracion.nuevoItem.responsableItem}" required="true">
                                 <f:selectItem itemValue="" itemLabel="Seleccione un Responsable"/>
                                 <f:selectItems value="#{mbProyecto.itemsAvailableSelectManyNombreCompleto}"/>
                             </p:selectOneMenu>
                         </h:panelGrid>
 
-                        <p:commandButton value="Añadir Item" actionListener="#{mbIdentificacionConfiguracion.addItem}" update="@form"/>
+                        <p:commandButton value="Añadir Item" actionListener="#{mbIdentificacionConfiguracion.addItem}" update=":form_ic:pnl_items_config"/>
 
                         <h:panelGrid columns="2"  style="float: right;">
                             <p:commandButton value="Guardar" actionListener="#{mbIdentificacionConfiguracion.guardarItems}" update="growl" process="@this"/>
