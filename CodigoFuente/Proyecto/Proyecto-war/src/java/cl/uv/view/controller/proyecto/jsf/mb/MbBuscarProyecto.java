@@ -5,6 +5,7 @@
 package cl.uv.view.controller.proyecto.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.ProyectoFacadeLocal;
+import cl.uv.proyecto.persistencia.entidades.Area;
 import cl.uv.proyecto.persistencia.entidades.EstadoProyecto;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.persistencia.entidades.TipoProyecto;
@@ -22,7 +23,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class MbBuscarProyecto implements Serializable{
+public class MbBuscarProyecto implements Serializable {
 
     @EJB
     private ProyectoFacadeLocal proyectoFacade;
@@ -31,18 +32,18 @@ public class MbBuscarProyecto implements Serializable{
     private String descripcion;
     private TipoProyecto tipoProyecto;
     private EstadoProyecto estadoProyecto;
+    private Area areaProyecto;
     private Date minFechaInicio;
     private Date maxFechaInicio;
-    
     private List<Proyecto> resultadosBusqueda;
     private Proyecto prototipoProyecto;
-    
+
     public MbBuscarProyecto() {
         prototipoProyecto = new Proyecto();
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         resultadosBusqueda = proyectoFacade.findAll();
     }
 
@@ -105,16 +106,23 @@ public class MbBuscarProyecto implements Serializable{
     public List<Proyecto> getResultadosBusqueda() {
         return resultadosBusqueda;
     }
-    
-     public void filtrar(){
+
+    public Area getAreaProyecto() {
+        return areaProyecto;
+    }
+
+    public void setAreaProyecto(Area areaProyecto) {
+        this.areaProyecto = areaProyecto;
+    }
+
+    public void filtrar() {
         prototipoProyecto.setCodigoInterno(codigo);
         prototipoProyecto.setNombre(nombre);
         prototipoProyecto.setDescripcion(descripcion);
         prototipoProyecto.setEstadoProyecto(estadoProyecto);
         prototipoProyecto.setTipoProyecto(tipoProyecto);
-        maxFechaInicio = (maxFechaInicio!=null)? new Date(maxFechaInicio.getTime()+86400000-1):null;
-        System.out.println(maxFechaInicio);
+        prototipoProyecto.setAreaResponsable(areaProyecto);
+        maxFechaInicio = (maxFechaInicio != null) ? new Date(maxFechaInicio.getTime() + 86400000 - 1) : null;
         resultadosBusqueda = proyectoFacade.buscarProyectoPorFiltros(prototipoProyecto, minFechaInicio, maxFechaInicio);
     }
-    
 }
