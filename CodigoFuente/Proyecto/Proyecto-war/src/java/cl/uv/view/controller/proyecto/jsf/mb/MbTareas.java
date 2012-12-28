@@ -35,6 +35,7 @@ public class MbTareas extends MbBase{
     private TareaProyecto tareaSelected;
     private List<TareaProyecto> listaDeTareas;
     private List<Proyecto> listaProyectosEnQueParticipa;
+    private Proyecto proyectoSelected;
     
     public MbTareas() {
     }
@@ -85,17 +86,31 @@ public class MbTareas extends MbBase{
         tareaProyectoFacade.create(nuevaTarea);
         JsfUtils.performNavigation("misTareas", true);
     }
+
+    public Proyecto getProyectoSelected() {
+        return proyectoSelected;
+    }
+
+    public void setProyectoSelected(Proyecto proyectoSelected) {
+        this.proyectoSelected = proyectoSelected;
+    }
+    
+    
     
     public Date getMinDateFechaIni(){
         return new Date();
     }
     
     public SelectItem[] getProyectosEnQueParticipa(){
-        return JsfUtils.getSelectItems(listaProyectosEnQueParticipa, "getNombre", "Seleccione un Proyecto");
+        return JsfUtils.getSelectItems(listaProyectosEnQueParticipa, "getFullNameProyecto", "Todos");
     }
     
     public void onRowSelect(){
         putValueOnFlashContext("tarea", tareaSelected);
         JsfUtils.performNavigation("detalleTarea", true);
+    }
+    
+    public void onProyectoSelect(){
+        System.out.println("Proyecto: "+proyectoSelected);
     }
 }

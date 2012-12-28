@@ -221,6 +221,10 @@ public class Proyecto implements Serializable {
     public void setArchivoProyectoList(List<ArchivoProyecto> archivoProyectoList) {
         this.archivoProyectoList = archivoProyectoList;
     }
+    
+    public String getFullNameProyecto(){
+        return codigoInterno+" - "+nombre;
+    }
 
     @Override
     public int hashCode() {

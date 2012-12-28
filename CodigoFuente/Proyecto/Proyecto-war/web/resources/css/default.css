@@ -334,6 +334,11 @@ a.small_link{
     max-width: 70px;
 }
 
+.column_90p{
+    min-width: 90px;
+    max-width: 90px;
+}
+
 .column_100p{
     min-width: 100px;
     max-width: 100px;

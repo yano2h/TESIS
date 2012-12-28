@@ -24,29 +24,42 @@
 
                     <p:ajax event="rowSelect" listener="#{mbProyectoArea.onRowSelectSCM}"/>
 
-                    <p:column headerText="Codigo Interno" style="max-width: 90px;">
+                    <p:column headerText="Codigo Interno" style="max-width: 90px;" 
+                              sortBy="#{proyecto.codigoInterno}" 
+                              filterBy="#{proyecto.codigoInterno}"
+                              filterMatchMode="contains">
                         <h:outputText value="#{proyecto.codigoInterno}"/>
                     </p:column>
 
-                    <p:column headerText="Fecha Inicio" style="max-width: 90px;">
-                        <h:outputText value="#{proyecto.fechaInicio}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>
-                    </p:column>
-
-                    <p:column headerText="Nombre" style="min-width: 250px;">
+                    <p:column headerText="Nombre" style="min-width: 250px;" 
+                              sortBy="#{proyecto.nombre}"
+                              filterBy="#{proyecto.nombre}"
+                              filterMatchMode="contains">
                         <h:outputText value="#{proyecto.nombre}"/>
                     </p:column>
 
-                    <p:column headerText="Tipo">
+                    <p:column headerText="Tipo" 
+                              sortBy="#{proyecto.tipoProyecto.nombreTipoProyecto}"
+                              filterBy="#{proyecto.tipoProyecto.nombreTipoProyecto}"
+                              filterOptions="#{tipoProyectoController.itemsAvailableSelectOne}"
+                              filterMatchMode="exact">
                         <h:outputText value="#{proyecto.tipoProyecto.nombreTipoProyecto}"/>
                     </p:column>
 
-                    <p:column headerText="Estado">
+                    <p:column headerText="Estado" 
+                              sortBy="#{proyecto.estadoProyecto.nombreEstadoProyecto}"
+                              filterBy="#{proyecto.estadoProyecto.nombreEstadoProyecto}"
+                              filterOptions="#{estadoProyectoController.itemsAvailableSelectOne}" 
+                              filterMatchMode="exact">
                         <h:outputText value="#{proyecto.estadoProyecto.nombreEstadoProyecto}"/>
                     </p:column>
                 </p:dataTable> 
 
+                <p:column headerText="Fecha Inicio" style="max-width: 90px;" sortBy="#{proyecto.fechaInicio}">
+                    <h:outputText value="#{proyecto.fechaInicio}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
             </p:panel>
         </ui:define>
     </ui:composition>

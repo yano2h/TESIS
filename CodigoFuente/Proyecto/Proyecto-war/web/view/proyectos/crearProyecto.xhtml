@@ -15,8 +15,10 @@
 
 
             <p:panel id="pnl_crear_proyecto" header="Crear Nuevo Proyecto">
-                <h:outputText value="Para crear un nuevo proyecto por favor complete todos los campos obligatorios, recuerde que usted solo puede crear proyecto para su propia area." style="color: #616161;margin-top: 10px;"/>
-
+                <h:panelGroup style="padding-top: 10px;padding-bottom: 10px;" layout="block">
+                    <h:outputText value="Para crear un nuevo proyecto por favor complete todos los campos obligatorios, recuerde que usted solo puede crear proyecto para su propia area." styleClass="light_text"/>
+                </h:panelGroup>
+                
                 <h:panelGrid columns="3" columnClasses="alig_top_column,,alig_top_column" style="margin-left: 0px;margin-top: 10px;">
                     <h:form id="form_crear_proyecto">
                         <h:outputText value="Información del Proyecto" styleClass="title_bold" />
@@ -64,14 +66,15 @@
                         </h:panelGrid>
                         <h:panelGrid columns="1">
                             <p:outputLabel value="Descripción:" for="itxta_descripcion" styleClass="label_blod"/>
-                            <p:inputTextarea id="itxta_descripcion" value="#{mbProyecto.nuevoProyecto.descripcion}" maxlength="255" rows="4" cols="48" required="true"/>
+                            <p:inputTextarea id="itxta_descripcion" value="#{mbProyecto.nuevoProyecto.descripcion}" maxlength="255" rows="4" cols="50" required="true"/>
                         </h:panelGrid>
-                        <h:panelGrid>
-                            <p:commandButton value="Crear" actionListener="#{mbProyecto.crearProyecto}" update="@form" oncomplete="if(!args.validationFailed){dlgExito.show();}"/>
-                        </h:panelGrid>
+                        <h:panelGroup layout="block" style="margin-top: 20px;margin-bottom: 10px;">
+                            <p:commandButton value="Crear" actionListener="#{mbProyecto.crearProyecto}" 
+                                             update="@form" oncomplete="if(!args.validationFailed){dlgExito.show();}"/>
+                        </h:panelGroup>
                     </h:form>
 
-                    <p:separator style="width:1px;height: 450px;margin-left: 20px;margin-right: 20px;"/>
+                    <p:separator style="width:1px;height: 400px;margin-left: 20px;margin-right: 20px;"/>
 
                     <h:form id="form_adjuntar_archivos" enctype="multipart/form-data" >
                         <h:outputText value="Archivos Adjuntos" styleClass="title_bold" style="margin-bottom: 10px;"/>
@@ -86,7 +89,7 @@
                         </h:panelGrid>
                         <h:panelGrid id="grid_upload" columns="2" style="margin-left: 0px;">
                             <h:panelGroup style="margin-left: 0px;">
-                                <p:inputText id="itxt_tipoInfo" value="#{mbProyecto.tipoInformacion}" maxlength="200" required="true" size="60" />
+                                <p:inputText id="itxt_tipoInfo" value="#{mbProyecto.tipoInformacion}" maxlength="200" required="true" size="55" />
                                 <p:watermark for="itxt_tipoInfo" value="Tipo de Información" /> 
                             </h:panelGroup>
                             <p:commandButton value="Agregar" title="Agregar Archivo al Proyecto" actionListener="#{mbProyecto.addArchivoAdjunto}" ajax="true" update=":form_adjuntar_archivos" icon="ui-icon-plus" process=":form_adjuntar_archivos"/>
@@ -112,14 +115,6 @@
                         </p:dataList>
                     </h:form>
                 </h:panelGrid>
-
-                <br/>
-
-
-
-                <br/>
-
-
             </p:panel>
             <p:dialog id="dlg_creacion_exitosa" widgetVar="dlgExito" closable="false" resizable="false" modal="true" width="390" header="Creacion Exitosa">
                 <h:panelGrid>
