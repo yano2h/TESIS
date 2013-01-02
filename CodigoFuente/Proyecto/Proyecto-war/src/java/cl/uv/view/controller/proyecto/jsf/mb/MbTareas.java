@@ -35,6 +35,7 @@ public class MbTareas extends MbBase{
     private TareaProyecto tareaSelected;
     private List<TareaProyecto> listaDeTareas;
     private List<Proyecto> listaProyectosEnQueParticipa;
+    private SelectItem[] proyectosEnQueParticipa;
     private Proyecto proyectoSelected;
     
     public MbTareas() {
@@ -43,7 +44,8 @@ public class MbTareas extends MbBase{
     @PostConstruct
     private void init(){
         listaProyectosEnQueParticipa = proyectoFacade.buscarProyectosPorParticipante(getFuncionarioDisico());
-        listaDeTareas = tareaProyectoFacade.buscarTareasPorResponsable(getFuncionarioDisico());
+        proyectosEnQueParticipa = JsfUtils.getSelectItems(listaProyectosEnQueParticipa, "getFullNameProyecto", "---");
+        listaDeTareas = tareaProyectoFacade.buscarTareas(getFuncionarioDisico());
         nuevaTarea = generarNuevaTarea();
     }
     
@@ -102,7 +104,7 @@ public class MbTareas extends MbBase{
     }
     
     public SelectItem[] getProyectosEnQueParticipa(){
-        return JsfUtils.getSelectItems(listaProyectosEnQueParticipa, "getFullNameProyecto", "Todos");
+        return proyectosEnQueParticipa;
     }
     
     public void onRowSelect(){
@@ -111,6 +113,10 @@ public class MbTareas extends MbBase{
     }
     
     public void onProyectoSelect(){
-        System.out.println("Proyecto: "+proyectoSelected);
+        if (proyectoSelected==null) {
+            listaDeTareas = tareaProyectoFacade.buscarTareas(getFuncionarioDisico());
+        }else{
+            listaDeTareas = tareaProyectoFacade.buscarTareas(proyectoSelected, getFuncionarioDisico());
+        }
     }
 }

@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
-    
+
     <ui:composition template="#{pages.layout_atencion}">
         <ui:define name="title">
             <h:outputText value="Crear Solicitud"/>
@@ -14,12 +14,16 @@
             <h:outputScript library="js" name="calendar-localization.js" />
             <h:form>
                 <p:panel id="pnl_crear_tarea" header="Crear Tarea">
+                    <h:panelGroup layout="block" style="padding: 10px;">
+                        <h:outputText styleClass="light_text" value="A travez de esta opción puede agendar nuevas tareas a su persona en 
+                            cualquiera de los proyectos en los cuales te encuentras participando actualmente."/>
+                    </h:panelGroup>
                     <h:panelGrid columns="2" cellspacing="10">
                         <p:outputLabel value="Proyecto:" styleClass="label_blod" for="itxt_proyecto"/>
                         <p:selectOneMenu id="itxt_proyecto" value="#{mbTareas.nuevaTarea.proyecto}" required="true" style="min-width: 200px;">
                             <f:selectItems value="#{mbTareas.proyectosEnQueParticipa}"/>
                         </p:selectOneMenu>
-                        
+
                         <p:outputLabel value="Nombre Tarea:" for="itxt_nombre_tarea" styleClass="label_blod"/>
                         <p:inputText id="itxt_nombre_tarea" value="#{mbTareas.nuevaTarea.tarea}" required="true" style="min-width: 300px;" maxlength="60"/>
                     </h:panelGrid>
@@ -30,11 +34,11 @@
                     <h:panelGrid columns="5" cellspacing="10">
                         <p:outputLabel value="Fecha Inicio:" styleClass="label_blod" for="cal_fecha_ini"/>
                         <p:calendar id="cal_fecha_ini" locale="es" value="#{mbTareas.nuevaTarea.fechaInicioPropuesta}" showOn="button" mindate="#{mbTareas.minDateFechaIni}" required="true">
-                                <p:ajax event="dateSelect" update="cal_fecha_ter" />  
+                            <p:ajax event="dateSelect" update="cal_fecha_ter" />  
                         </p:calendar>  
-                        
+
                         <p:spacer width="20"/>
-                        
+
                         <p:outputLabel value="Fecha Termino:" styleClass="label_blod" for="cal_fecha_ter"/>
                         <p:calendar id="cal_fecha_ter" locale="es" value="#{mbTareas.nuevaTarea.fechaTerminoPropuesta}" showOn="button" mindate="#{mbTareas.nuevaTarea.fechaInicioPropuesta}" required="true" />
                     </h:panelGrid>

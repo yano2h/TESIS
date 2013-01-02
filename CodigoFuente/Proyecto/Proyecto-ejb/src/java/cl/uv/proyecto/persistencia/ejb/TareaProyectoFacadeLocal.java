@@ -31,9 +31,11 @@ public interface TareaProyectoFacadeLocal {
 
     int count();
     
-    public List<TareaProyecto> buscarTareasPorProyecto(Proyecto proyecto);
+    public List<TareaProyecto> buscarTareas(Proyecto proyecto);
     
-    public List<TareaProyecto> buscarTareasPorResponsable(FuncionarioDisico responsable);
+    public List<TareaProyecto> buscarTareas(FuncionarioDisico responsable);
 
+    public List<TareaProyecto> buscarTareas(Proyecto proyecto, FuncionarioDisico responsable);
+    
     public Integer calcularAvancePromedioTareasPorProyecto(Proyecto p);
 }

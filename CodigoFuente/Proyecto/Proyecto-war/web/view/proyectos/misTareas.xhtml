@@ -14,15 +14,15 @@
             <h:outputScript library="js" name="calendar-localization.js" />
             <h:form>
                 <p:panel header="Mis Tareas">
-                    <h:panelGrid columns="2">
+                    <h:panelGrid columns="2" style="margin-bottom: 10px;margin-top: 10px;">
                         <p:outputLabel value="Proyecto:" for="slct_proyecto" styleClass="label_blod"/>
                         <p:selectOneMenu id="slct_proyecto" value="#{mbTareas.proyectoSelected}">
                             <f:selectItems value="#{mbTareas.proyectosEnQueParticipa}"/>
-                            <p:ajax listener="#{mbTareas.onProyectoSelect}" update="table_sol_area"/>
+                            <p:ajax listener="#{mbTareas.onProyectoSelect}" update="table_mis_tareas"/>
                         </p:selectOneMenu>
                     </h:panelGrid>
                     
-                    <p:dataTable id="table_sol_area"
+                    <p:dataTable id="table_mis_tareas"
                                  value="#{mbTareas.listaDeTareas}"
                                  var="tarea" 
                                  paginator="true" rows="20"

@@ -34,7 +34,7 @@ public class MbTareasProyecto implements Serializable {
     @PostConstruct
     private void init() {
         proyecto = (Proyecto) JsfUtils.getParametro("proyecto");
-        tareasProyecto = tareaProyectoFacade.buscarTareasPorProyecto(proyecto);
+        tareasProyecto = tareaProyectoFacade.buscarTareas(proyecto);
         porcetajeAvance = tareaProyectoFacade.calcularAvancePromedioTareasPorProyecto(proyecto);
         porcentajeConFormato = porcetajeAvance+"%";
     }

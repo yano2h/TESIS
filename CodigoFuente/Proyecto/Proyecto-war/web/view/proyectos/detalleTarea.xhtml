@@ -15,18 +15,23 @@
                     <h:outputScript library="js" name="calendar-localization.js" />
                     
                     <p:menubar id="menu_bar_tarea" style="height: 30px;" styleClass="menu_bar" rendered="#{mbDetalleTarea.tarea.responsableTarea eq mbFuncionarioInfo.funcionario}">
-                        <p:menuitem value="Editar" icon="ui-icon-pencil" oncomplete="inpAvance.show();inpDesc.show();inpTarea.show();"/>
-                        <p:menuitem value="Guardar Cambios" icon="ui-icon-disk" 
+                        <p:menuitem value="Editar" icon="ui-icon-pencil" oncomplete="inpAvance.show();inpDesc.show();inpTarea.show();" 
+                                    actionListener="#{mbDetalleTarea.activarDesactivarEdicion}" rendered="#{not mbDetalleTarea.editar}" 
+                                    update="info_tarea grid_desc @parent"/>
+                        <p:menuitem value="Guardar Cambios" icon="ui-icon-disk" rendered="#{mbDetalleTarea.editar}"
                                     oncomplete="if(!args.validationFailed){inpAvance.save();inpDesc.save();inpTarea.save();}" 
-                                    update="grid_desc grid_avance" actionListener="#{mbDetalleTarea.guardarCambios}"/>
+                                    update="info_tarea grid_desc @parent" actionListener="#{mbDetalleTarea.guardarCambios}"/>
+                        <p:menuitem value="Cancelar" oncomplete="inpAvance.cancel();inpDesc.cancel();inpTarea.cancel();" icon="ui-icon-close"
+                                    actionListener="#{mbDetalleTarea.cancelarEdicion}" rendered="#{mbDetalleTarea.editar}" update="@form"/>
                         <p:menuitem value="Volver" icon="ui-icon-back" action="misTareas?faces-redirect=true"/>
                     </p:menubar>
                     <br/>
-                    <h:panelGrid columns="4" cellspacing="10" columnClasses="width:100px,width:250px, width:100px, width:250px" style="width: 850px;">
+                    <h:panelGrid id="info_tarea" columns="4" cellspacing="10" columnClasses="width:100px,width:250px, width:100px, width:250px" style="width: 850px;">
 
                         <h:outputLabel value="Tarea:" styleClass="label_blod"/>
-                        <p:inplace widgetVar="inpTarea">
-                            <p:inputText id="itxt_nombre_tarea" value="#{mbDetalleTarea.tarea.tarea}" required="true" style="min-width: 300px;" maxlength="60"/>
+                        <p:inplace id="inpTarea" widgetVar="inpTarea" editor="#{not mbDetalleTarea.editar}" >
+                            <p:ajax event="save" listener="#{mbDetalleTarea.guardar}" />
+                            <p:inputText id="itxt_nombre_tarea" value="#{mbDetalleTarea.tarea.tarea}" required="true" style="max-width: 300px;" maxlength="60"/>
                         </p:inplace>
 
                         <h:outputLabel value="Responsable:" styleClass="label_blod"/>
@@ -36,8 +41,9 @@
                         <h:outputText value="#{mbDetalleTarea.tarea.proyecto.nombre}"/>
 
                         <h:outputLabel value="Avance:" styleClass="label_blod"/>
-                        <h:panelGrid id="grid_avance" columns="2">                                                        
-                            <p:inplace widgetVar="inpAvance">
+                        <h:panelGrid id="grid_avance" columns="2">  
+                            <p:inplace widgetVar="inpAvance" editor="#{not mbDetalleTarea.editar}">
+                                <p:ajax event="save" listener="#{mbDetalleTarea.guardar}" update=":detalle_tarea:info_tarea"/>
                                 <p:spinner value="#{mbDetalleTarea.tarea.nivelAvance}" max="100" min="#{mbDetalleTarea.minAvance}" size="5"/>
                             </p:inplace>
                             <h:outputText value="%"/>
@@ -66,7 +72,8 @@
 
                     <h:panelGrid id="grid_desc" columns="1" cellspacing="10">
                         <p:outputLabel value="Descripcion:" styleClass="label_blod" for="itxt_desc"/>
-                        <p:inplace  widgetVar="inpDesc">
+                        <p:inplace  widgetVar="inpDesc" editor="#{not mbDetalleTarea.editar}">
+                            <p:ajax event="save" listener="#{mbDetalleTarea.guardar}"/>
                             <p:inputTextarea id="itxt_desc" value="#{mbDetalleTarea.tarea.descripcionTarea}" cols="80" rows="3"/>
                         </p:inplace>  
                     </h:panelGrid>
