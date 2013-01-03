@@ -60,6 +60,8 @@
                         <h:panelGrid columns="2" cellspacing="10">
                             <h:outputText value="Codigo Interno:" styleClass="label_blod label"/>
                             <h:outputText value="#{mbEditProyecto.proyecto.codigoInterno}"/>
+                            <h:outputText value="Unidad Solicitante:" styleClass="label_blod label"/>
+                            <h:outputText value="#{mbDetalleProyecto.proyecto.unidadSolicitante.nombreUnidadSolicitante}"/>
                             <h:outputText value="Fecha de Inicio:" styleClass="label_blod label"/>
                             <p:inplace widgetVar="inpFechaIni" >                                
                                 <p:calendar id="cal_fecha_ini" showOn="button" pattern="dd/MM/yyyy" locale="es" navigator="true" required="true" value="#{mbEditProyecto.proyecto.fechaInicio}" style="margin-left: 5px;">

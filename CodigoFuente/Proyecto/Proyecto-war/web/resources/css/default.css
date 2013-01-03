@@ -68,6 +68,10 @@ label{
     color: black;
 }
 
+.block_title{
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
 
 .text_blod_blue{
     font-family: Helvetica, Arial, sans-serif;
@@ -200,6 +204,10 @@ a.small_link{
     text-align: left;
     font-size: 13px;
     height: 2em;
+}
+
+.ui-datatable .ui-expanded-row{
+    border-bottom: 0px none #A6C9E2 !important;
 }
 
 .menu_bar{
