@@ -7,6 +7,7 @@ package cl.uv.view.controller.proyecto.jsf.mb;
 import cl.uv.proyecto.persistencia.ejb.TareaProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.persistencia.entidades.TareaProyecto;
+import cl.uv.view.controller.base.jsf.mb.MbBase;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import java.io.Serializable;
 import java.util.List;
@@ -21,7 +22,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class MbTareasProyecto implements Serializable {
+public class MbTareasProyecto extends MbBase implements Serializable {
 
     @EJB
     private TareaProyectoFacadeLocal tareaProyectoFacade;
@@ -53,6 +54,11 @@ public class MbTareasProyecto implements Serializable {
 
     public void setPorcentajeConFormato(String porcentajeConFormato) {
         this.porcentajeConFormato = porcentajeConFormato;
+    }
+    
+    public void volverProyecto(){
+        putValueOnFlashContext("proyecto", proyecto);
+        JsfUtils.performNavigation("detalleProyecto_1", true);
     }
     
     public void onRowSelect(){    

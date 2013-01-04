@@ -68,6 +68,10 @@ label{
     color: black;
 }
 
+.title_with_image{
+    vertical-align: super;
+}
+
 .block_title{
     margin-top: 15px;
     margin-bottom: 8px;
@@ -289,6 +293,16 @@ a.small_link{
 
 .alig_top_column{
     vertical-align: top;
+}
+
+.title_image{
+    margin-right: 8px;
+    height: 24px;
+    width: 24px;
+}
+
+.table_info{
+    margin-bottom: 5px; 
 }
 
 .column_5p{

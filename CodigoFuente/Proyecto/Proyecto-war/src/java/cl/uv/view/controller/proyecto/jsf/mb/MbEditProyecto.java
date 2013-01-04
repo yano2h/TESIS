@@ -254,6 +254,6 @@ public class MbEditProyecto extends MbBase {
     }
     
     public String getContadorArchivosAdjuntos(){
-        return (archivosProyectoAdjuntos==null || archivosProyectoAdjuntos.isEmpty())?"":" ("+archivosProyectoAdjuntos.size()+")...";
+        return (archivosProyectoAdjuntos==null || archivosProyectoAdjuntos.isEmpty())?"":" ...("+archivosProyectoAdjuntos.size()+")";
     }
 }

@@ -26,8 +26,11 @@
                         <p:menuitem value="Cancelar" icon="ui-icon-closethick" actionListener="#{mbEditProyecto.volverDetalleProyecto}"/>
                     </p:menubar>
 
-                    <br/>
-                    <h:outputText id="nombreProy" value="Información Proyecto: #{mbEditProyecto.proyecto.codigoInterno}" styleClass="title_bold"/>
+                    <h:panelGroup layout="block" styleClass="block_title">
+                        <h:graphicImage library="imagenes" name="edit_info.png" styleClass="title_image"/>
+                        <h:outputText id="nombreProy" value="Información Proyecto: #{mbDetalleProyecto.proyecto.codigoInterno}" styleClass="title_bold title_with_image"/>
+                    </h:panelGroup>
+                    
                     <h:panelGrid columns="3" style="border-spacing: 0px;">
                         <h:panelGrid columns="2" cellspacing="10" width="400" style="margin-left: -10px">
                             <h:outputText value="Nombre Proyecto:" styleClass="label_blod label" />
@@ -77,35 +80,41 @@
                         </h:panelGrid>
                     </h:panelGrid>
 
-                    <br/>
-                    <h:panelGrid columns="1">
-                        <h:outputText value="Descripción del Proyecto:" styleClass="title_bold"/>
+                    <h:panelGrid columns="1" cellspacing="10" style="margin-left: -9px;margin-top: -10px;" width="600">
+                        <h:outputText value="Descripción del Proyecto:" styleClass="label_blod label"/>
                         <p:inplace widgetVar="inpDesc">
                             <p:inputTextarea id="itxta_descripcion" value="#{mbEditProyecto.proyecto.descripcion}" cols="100" rows="4" maxlength="255"/>
                         </p:inplace>
                     </h:panelGrid>
 
-                    <br/>
-                    <h:outputText value="Participantes del Proyecto:" styleClass="title_bold"/>
-                    <h:panelGroup style="height: 10px;" layout="block"/>
-                    <h:outputText value="Agregar Participante" styleClass="light_text"/>
-                    <h:panelGrid id="menus" columns="3">
-                        <p:selectOneMenu id="slct_funcionario" value="#{mbEditProyecto.funcionarioSelected}">
+                    <h:panelGroup layout="block" styleClass="block_title" style="height: 24px;">
+                        <h:graphicImage library="imagenes" name="user_group.png"  styleClass="title_image"/>
+                        <h:outputText value="Participantes del Proyecto:" styleClass="title_bold title_with_image"/>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" style="margin-top: 5px;">
+                        <h:outputText value="Agregar Nuevo Participante" styleClass="light_text"/>
+                    </h:panelGroup>
+                    
+                    <h:panelGroup id="menus" layout="block" style="margin-top: 5px;margin-bottom: 5px;">
+                        <p:selectOneMenu id="slct_funcionario" value="#{mbEditProyecto.funcionarioSelected}" style="vertical-align: middle;">
                             <f:selectItems value="#{mbEditProyecto.funcionariosDisponibles}"/>
                         </p:selectOneMenu>
-                        <p:selectOneMenu id="slct_rol" value="#{mbEditProyecto.rolSelected}">
+                        <p:spacer width="8"/>
+                        <p:selectOneMenu id="slct_rol" value="#{mbEditProyecto.rolSelected}" style="vertical-align: middle;">
                             <f:selectItems value="#{mbEditProyecto.rolesDisponibles}"/>
                         </p:selectOneMenu>
+                        <p:spacer width="8"/>
                         <p:commandButton value="Agregar" icon="ui-icon-plus" 
                                          actionListener="#{mbEditProyecto.agregarParticipante}" 
                                          update="slct_funcionario slct_rol tabla_participantes" 
                                          process="@parent tabla_participantes"
+                                         style="vertical-align: middle;"
                                          disabled="#{mbEditProyecto.disableBtnAgregar}"/>
-                    </h:panelGrid>
+                    </h:panelGroup>
 
                     <p:dataTable id="tabla_participantes"
                                  value="#{mbEditProyecto.participantes}"
-                                 var="part"
+                                 var="part" styleClass="table_info"
                                  editable="true">
 
                         <p:column headerText="Nombre">
@@ -148,9 +157,11 @@
                         </p:column>
                     </p:dataTable>
 
-                    <h:panelGroup style="height: 15px;" layout="block"/>
-                    <h:outputText value="Archivos Adjuntos:" styleClass="title_bold"/>
-                    <h:panelGroup style="height: 5px;" layout="block"/>
+                    <h:panelGroup layout="block" styleClass="block_title" style="height: 24px;">
+                        <h:graphicImage library="imagenes" name="paperclip_black.png"  styleClass="title_image"/>
+                        <h:outputText value="Archivos Adjuntos:" styleClass="title_bold title_with_image" />
+                    </h:panelGroup>
+                    
                     <p:commandLink id="linkAdjuntar" value="Adjuntar mas archivos#{mbEditProyecto.contadorArchivosAdjuntos}" 
                                    onclick="dlgAdjuntar.show();" style="font-style: italic;"/>
                     <h:panelGroup style="height: 5px;" layout="block"/>
@@ -180,7 +191,7 @@
                             </p:column>   
                         </p:dataList>
                     </p:overlayPanel>  
-                    <p:dataTable id="tabla_archivos_adjunto" editable="true" 
+                    <p:dataTable id="tabla_archivos_adjunto" editable="true" styleClass="table_info"
                                  value="#{mbEditProyecto.proyecto.archivoProyectoList}"
                                  var="f" emptyMessage="No hay archivos adjuntos al proyecto">
 

@@ -29,6 +29,9 @@
                 </script>
 
                 <p:panel header="Proyectos del Area">
+                    <p:menubar id="menu_bar_proy" style="height: 30px;" styleClass="menu_bar">
+                        <p:menuitem value="Volver" icon="ui-icon-back" action="#{mbTareasProyecto.volverProyecto}"/>
+                    </p:menubar>
                     <h:panelGrid>
                         <h:outputText id="titulo" value="Avance Proyecto:[#{mbTareasProyecto.proyecto.codigoInterno}] #{mbTareasProyecto.proyecto.nombre}" styleClass="title_italic"/>
                         <br/>
