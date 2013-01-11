@@ -36,19 +36,29 @@ public class ProyectoEJB implements ProyectoEJBLocal {
     private ParticipanteProyectoFacadeLocal participanteProyectoFacade;
     @EJB
     private FileManagerEJBLocal fileManagerEJB;
+    @EJB
+    private RegistroBitacoraFacadeLocal registroBitacoraFacade;
 
     @Override
-    public void cerrarProyecto(Proyecto p) {
+    public void cerrarProyecto(Proyecto p, FuncionarioDisico f) {
         p.setFechaTermino(new Date());
         p.setEstadoProyecto(estadoProyectoFacade.find(Resources.getValueShort("Estados", "EstadoP_FINALIZADO")));
         proyectoFacade.edit(p);
+        RegistroBitacora r = new RegistroBitacora(p.getFechaTermino(), p);
+        r.setEstadoProyecto(p.getEstadoProyecto());
+        r.setDescripcion("El proyecto fue cerrado a travez de la función cerrar proyecto por "+f.getNombreCompleto());
+        registroBitacoraFacade.create(r);
     }
 
     @Override
-    public void reabrirProyecto(Proyecto p) {
+    public void reabrirProyecto(Proyecto p, FuncionarioDisico f) {
         p.setFechaTermino(null);
         p.setEstadoProyecto(estadoProyectoFacade.find(Resources.getValueShort("Estados", "EstadoP_ACTIVO")));
         proyectoFacade.edit(p);
+        RegistroBitacora r = new RegistroBitacora(new Date(), p);
+        r.setEstadoProyecto(p.getEstadoProyecto());
+        r.setDescripcion("El proyecto fue reabierto a travez de la función reabrirr proyecto por "+f.getNombreCompleto());
+        registroBitacoraFacade.create(r);
     }
 
     @Override

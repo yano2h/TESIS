@@ -8,6 +8,7 @@ import cl.uv.proyecto.persistencia.ejb.ArchivoProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.RegistroBitacoraFacadeLocal;
+import cl.uv.proyecto.persistencia.entidades.ParticipanteProyecto;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.proyectos.ejb.ProyectoEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbBase;
@@ -66,7 +67,8 @@ public class MbDetalleProyecto extends MbBase {
     }
 
     public String verResumenAvance() {
-        JsfUtils.addParametro("proyecto", proyecto);
+        putValueOnFlashContext("proyecto", proyecto);
+        putValueOnFlashContext("proyectoTarea", proyecto);
         return "avanceProyecto?faces-redirect=true";
     }
 
@@ -74,16 +76,31 @@ public class MbDetalleProyecto extends MbBase {
         putValueOnFlashContext("proyecto", proyecto);
         return "editProyecto?faces-redirect=true";
     }
+    
+    public String verBitacora(){
+        putValueOnFlashContext("proyecto", proyecto);
+        return "bitacoraProyecto?faces-redirect=true";
+    }
 
     public void cerrarProyecto() {
-        proyectoEJB.cerrarProyecto(proyecto);
+        proyectoEJB.cerrarProyecto(proyecto, getFuncionarioDisico());
     }
 
     public void reabrirProyecto() {
-        proyectoEJB.reabrirProyecto(proyecto);
+        proyectoEJB.reabrirProyecto(proyecto, getFuncionarioDisico());
     }
     
     public void cargarBitacora() {
         proyecto.setBitacora(registroBitacoraFacade.buscarBitacoraProyecto(proyecto));
     }
+    
+    public boolean isUsuarioEsParticipanteProyecto(){
+        for (ParticipanteProyecto p : proyecto.getParticipantes()) {
+            if (p.getParticipante().equals(getFuncionarioDisico())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

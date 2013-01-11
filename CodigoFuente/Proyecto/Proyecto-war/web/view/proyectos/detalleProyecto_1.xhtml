@@ -18,10 +18,19 @@
                 <p:panel id="panelDetalleProyecto" header="Detalle Proyecto" >
                     <p:menubar id="menu_bar_proy" style="height: 30px;" styleClass="menu_bar">
                         <p:menuitem value="Ver Avance" icon="ui-icon-search" action="#{mbDetalleProyecto.verResumenAvance}"/>
-                        <p:menuitem value="Editar" icon="ui-icon-pencil" action="#{mbDetalleProyecto.editarProyecto}" rendered="#{p:ifAnyGranted(security.rolMenuEditarProyecto)}"/>
-                        <p:menuitem value="Eliminar" icon="ui-icon-trash" onclick="confirmarEliminacion.show();" rendered="#{p:ifAnyGranted(security.rolMenuEliminarProyecto)}" />
-                        <p:menuitem value="Cerrar" icon="ui-icon-locked" update="@form" actionListener="#{mbDetalleProyecto.cerrarProyecto}" disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto eq const.EstadoP_FINALIZADO}"/>
-                        <p:menuitem value="Volver a abrir" icon="ui-icon-unlocked" update="@form" actionListener="#{mbDetalleProyecto.reabrirProyecto}" disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto ne const.EstadoP_FINALIZADO}"/>
+                        <p:menuitem value="Bitacora" icon="ui-icon-note" action="#{mbDetalleProyecto.verBitacora}" 
+                                    rendered="#{mbDetalleProyecto.usuarioEsParticipanteProyecto}"/>
+                        <p:menuitem value="Editar" icon="ui-icon-pencil" action="#{mbDetalleProyecto.editarProyecto}" 
+                                    rendered="#{p:ifAnyGranted(security.rolMenuEditarProyecto) and mbFuncionarioInfo.funcionario.area == mbDetalleProyecto.proyecto.areaResponsable}"/>
+                        <p:menuitem value="Eliminar" icon="ui-icon-trash" onclick="confirmarEliminacion.show();" 
+                                    rendered="#{p:ifAnyGranted(security.rolMenuEliminarProyecto) and mbFuncionarioInfo.funcionario.area == mbDetalleProyecto.proyecto.areaResponsable}" />
+                        <p:menuitem value="Cerrar" icon="ui-icon-locked" update="@form" actionListener="#{mbDetalleProyecto.cerrarProyecto}" 
+                                    disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto eq const.EstadoP_FINALIZADO}" 
+                                    rendered="#{mbFuncionarioInfo.funcionario.area == mbDetalleProyecto.proyecto.areaResponsable}"/>
+                        <p:menuitem value="Volver a abrir" icon="ui-icon-unlocked" update="@form" 
+                                    actionListener="#{mbDetalleProyecto.reabrirProyecto}" 
+                                    disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto ne const.EstadoP_FINALIZADO}" 
+                                    rendered="#{mbFuncionarioInfo.funcionario.area == mbDetalleProyecto.proyecto.areaResponsable}"/>
                     </p:menubar>
 
                     <h:panelGroup layout="block" styleClass="block_title">
@@ -123,7 +132,8 @@
 
                     <p:dataTable id="tbl_bitacora" var="b" emptyMessage="No hay registros en la bitacora"
                                  rendered="#{mbDetalleProyecto.proyecto.bitacora != null}"
-                                 value="#{mbDetalleProyecto.proyecto.bitacora}" styleClass="table_info">
+                                 value="#{mbDetalleProyecto.proyecto.bitacora}" styleClass="table_info"
+                                 paginator="true" rows="12" paginatorPosition="bottom">
 
                         <p:column style="width:4%">  
                             <p:rowToggler />  
@@ -137,10 +147,12 @@
                             <h:outputText value="#{b.estadoProyecto.nombreEstadoProyecto}"/>
                         </p:column>
                         <p:column headerText="Responsable">
-                            <h:outputText value="#{b.funcionarioResponsable.nombreCorto}"/>
+                            <h:outputText value="#{b.funcionarioResponsable.nombreCorto}" rendered="#{b.funcionarioResponsable != null}"/>
+                            <h:outputText value="No Aplica" rendered="#{b.funcionarioResponsable == null}"/>
                         </p:column>
                         <p:column headerText="Contraparte Responsable" style="width: 300px;">
-                            <h:outputText value="#{b.contraparteResponsable}"/>
+                            <h:outputText value="#{b.contraparteResponsable}" rendered="#{not empty b.contraparteResponsable}"/>
+                            <h:outputText value="No Aplica" rendered="#{empty b.contraparteResponsable}"/>
                         </p:column>
                         <p:rowExpansion>
                             <h:panelGroup layout="block" style="width: 100%;padding: 5px;">

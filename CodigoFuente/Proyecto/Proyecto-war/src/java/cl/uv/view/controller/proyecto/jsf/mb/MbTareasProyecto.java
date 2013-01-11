@@ -5,6 +5,7 @@
 package cl.uv.view.controller.proyecto.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.TareaProyectoFacadeLocal;
+import cl.uv.proyecto.persistencia.entidades.ParticipanteProyecto;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.persistencia.entidades.TareaProyecto;
 import cl.uv.view.controller.base.jsf.mb.MbBase;
@@ -34,8 +35,13 @@ public class MbTareasProyecto extends MbBase implements Serializable {
     
     @PostConstruct
     private void init() {
-        proyecto = (Proyecto) JsfUtils.getParametro("proyecto");
+        proyecto = (Proyecto) getValueOfFlashContext("proyecto");
         tareasProyecto = tareaProyectoFacade.buscarTareas(proyecto);
+        porcetajeAvance = tareaProyectoFacade.calcularAvancePromedioTareasPorProyecto(proyecto);
+        porcentajeConFormato = porcetajeAvance+"%";
+    }
+    
+    public void updatePorcentajeAvance(){
         porcetajeAvance = tareaProyectoFacade.calcularAvancePromedioTareasPorProyecto(proyecto);
         porcentajeConFormato = porcetajeAvance+"%";
     }
@@ -46,6 +52,18 @@ public class MbTareasProyecto extends MbBase implements Serializable {
 
     public List<TareaProyecto> getTareasProyecto() {
         return tareasProyecto;
+    }
+
+    public void setTareasProyecto(List<TareaProyecto> tareasProyecto) {
+        this.tareasProyecto = tareasProyecto;
+    }
+
+    public TareaProyecto getTareaSelected() {
+        return tareaSelected;
+    }
+
+    public void setTareaSelected(TareaProyecto tareaSelected) {
+        this.tareaSelected = tareaSelected;
     }
 
     public String getPorcentajeConFormato() {
@@ -62,5 +80,14 @@ public class MbTareasProyecto extends MbBase implements Serializable {
     }
     
     public void onRowSelect(){    
+    }
+    
+    public boolean isUsuarioEsParticipanteProyecto(){
+        for (ParticipanteProyecto p : proyecto.getParticipantes()) {
+            if (p.getParticipante().equals(getFuncionarioDisico())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

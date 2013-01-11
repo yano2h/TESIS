@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -41,6 +42,7 @@ public class RegistroBitacora implements Serializable {
     @Column(name ="fecha_registro")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaRegistro;
+    @Size(min = 1, max = 255)
     @Column(name ="descripcion")
     private String descripcion;
     @Column(name ="contraparte_responsable")
@@ -55,6 +57,14 @@ public class RegistroBitacora implements Serializable {
     @ManyToOne(optional = false)
     private Proyecto proyecto;
 
+    public RegistroBitacora() {
+    }
+
+    public RegistroBitacora(Date fechaRegistro, Proyecto proyecto) {
+        this.fechaRegistro = fechaRegistro;
+        this.proyecto = proyecto;
+    }
+    
     public Long getIdRegistroBitacora() {
         return idRegistroBitacora;
     }

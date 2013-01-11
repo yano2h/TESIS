@@ -6,6 +6,7 @@ package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.persistencia.entidades.RegistroBitacora;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,4 +31,8 @@ public interface RegistroBitacoraFacadeLocal {
     int count();
     
     List<RegistroBitacora> buscarBitacoraProyecto(Proyecto p);
+    
+    Date getFechaUltimoRegistro(Proyecto p);
+    
+    List<String> buscarContraparte(String contraparte);
 }

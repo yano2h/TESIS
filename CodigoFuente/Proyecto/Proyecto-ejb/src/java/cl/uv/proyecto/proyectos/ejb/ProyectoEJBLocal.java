@@ -18,9 +18,9 @@ import javax.ejb.Local;
 @Local
 public interface ProyectoEJBLocal {
 
-    public void cerrarProyecto(Proyecto p);
+    public void cerrarProyecto(Proyecto p, FuncionarioDisico f);
 
-    public void reabrirProyecto(Proyecto p);
+    public void reabrirProyecto(Proyecto p, FuncionarioDisico f);
 
     public String sugerirCodigoInterno(Area a);
 

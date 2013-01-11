@@ -21,7 +21,7 @@
                 <p:panel id="panelDetalleProyecto" header="Editar Proyecto" >
                     <p:menubar id="menu_bar_proy" style="height: 30px;" styleClass="menu_bar" rendered="#{p:ifAnyGranted(ROLES_ADM_JA)}">
                         <p:menuitem value="Guardar Cambios" icon="ui-icon-disk" 
-                                    oncomplete="if(!args.validationFailed){inpNombre.save();inpCodigo.save(); inpTipo.save(); inpEstado.save(); inpFechaIni.save();inpDesc.save();inpFechaTer.save();}"
+                                    oncomplete="if(!args.validationFailed){inpNombre.save();inpCodigo.save(); inpTipo.save();inpFechaIni.save();inpDesc.save();inpFechaTer.save();}"
                                     action="#{mbEditProyecto.guardarCambios}" update="@form" />
                         <p:menuitem value="Cancelar" icon="ui-icon-closethick" actionListener="#{mbEditProyecto.volverDetalleProyecto}"/>
                     </p:menubar>
@@ -45,7 +45,12 @@
                                 </p:selectOneMenu>
                             </p:inplace>
                             <h:outputText value="Estado Proyecto:" styleClass="label_blod label"/>    
-                            <p:inplace widgetVar="inpEstado">
+                            <h:panelGroup layout="block">
+                                <h:outputText id="estado" value="#{mbEditProyecto.proyecto.estadoProyecto.nombreEstadoProyecto}" />
+                                <p:tooltip for="estado" value="Para modificar el estado, es necesario agregar un nuevo registro en la bitacora del proyecto" showEffect="fade" style="width: 220px;"/>
+                            </h:panelGroup>
+                            
+                            <p:inplace widgetVar="inpEstado" rendered="#{false}">
                                 <h:inputHidden value="#{mbEditProyecto.proyecto.estadoProyecto.nombreEstadoProyecto}" />  
                                 <p:selectOneMenu id="slct_estado_proyecto" value="#{mbEditProyecto.proyecto.estadoProyecto}" required="true" style="min-width: 250px;margin-left: 5px;" >
                                     <f:selectItems value="#{estadoProyectoController.itemsAvailableSelectMany}"/>
