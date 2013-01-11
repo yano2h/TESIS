@@ -1,0 +1,118 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="#{pages.layout_atencion}">
+    <ui:define name="title">
+        <h:outputText value="Bitacora Proyecto"/>
+    </ui:define>
+    <ui:define name="content">  
+        <h:form id="form_bitacora">
+            <p:blockUI block="menu_bar" widgetVar="block" />
+            <p:panel id="panelBitacora" header="Bitacora del Proyecto">
+                <p:menubar id="menu_bar" styleClass="menu_bar">
+                    <p:menuitem value="Volver" icon="ui-icon-back" action="#{mbBitacoraProyecto.volver}"/>
+                    <p:menuitem value="Nuevo Registro" icon="ui-icon-plus" 
+                                oncomplete="dlg_bitacora.show();block.show();" actionListener="#{mbBitacoraProyecto.crearNuevoRegistro}"/>
+                </p:menubar>
+
+                <h:panelGroup layout="block" styleClass="block_title">    
+                    <h:outputText value="Bitacora:" styleClass="titulo_label"/>
+                    <h:outputText value="#{mbBitacoraProyecto.proyecto.fullNameProyecto}" styleClass="titulo"/>
+                </h:panelGroup>
+
+                <p:dataTable id="tbl_bitacora" var="b" emptyMessage="No hay registros en la bitacora"
+                             rendered="#{mbBitacoraProyecto.proyecto.bitacora != null}"
+                             value="#{mbBitacoraProyecto.proyecto.bitacora}" styleClass="table_info">
+
+                    <p:column style="width:4%">  
+                        <p:rowToggler />  
+                    </p:column>  
+                    <p:column headerText="Fecha" style="width: 120px;">
+                        <h:outputText value="#{b.fechaRegistro}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Estado" style="width: 280px;">
+                        <h:outputText value="#{b.estadoProyecto.nombreEstadoProyecto}"/>
+                    </p:column>
+                    <p:column headerText="Responsable">
+                        <h:outputText value="#{b.funcionarioResponsable.nombreCorto}" rendered="#{b.funcionarioResponsable != null}"/>
+                        <h:outputText value="No Aplica" rendered="#{b.funcionarioResponsable == null}"/>
+                    </p:column>
+                    <p:column headerText="Contraparte Responsable" style="width: 300px;">
+                        <h:outputText value="#{b.contraparteResponsable}" rendered="#{not empty b.contraparteResponsable}"/>
+                        <h:outputText value="No Aplica" rendered="#{empty b.contraparteResponsable}"/>
+                    </p:column>
+                    <p:rowExpansion>
+                        <h:panelGroup layout="block" style="width: 100%;padding: 5px;">
+                            <h:outputText value="Detalle: " styleClass="label_blod label"/>
+                            <h:outputText value="#{b.descripcion}" style="font-style: italic;"/>
+                        </h:panelGroup>
+                    </p:rowExpansion>
+                </p:dataTable>
+
+            </p:panel>
+        </h:form>
+        <h:form id="form_dialog">
+            <p:dialog id="dlg_bitacora" widgetVar="dlg_bitacora" modal="false" resizable="false" closable="false" header="Nuevo Registro de Bitacora">
+                <h:panelGroup layout="block" style="width: 420px;padding: 10px;">
+                    <h:outputText value="Agregar un nuevo registro a la bitacora del proyecto, es la unica forma de cambiar el estado del proyecto" 
+                                  styleClass="light_text"/>
+                </h:panelGroup>
+                <h:panelGroup id="panelDialog" layout="block">
+                    <h:panelGrid columns="2" cellspacing="10" columnClasses="column_150p,column_250p">
+                        <p:outputLabel value="Fecha:" for="cal_fecha_ini" styleClass="label_blod"/>
+                        <p:inplace id="inpCalendar" widgetVar="inpCalendar">    
+                            <p:calendar id="cal_fecha_ini" value="#{mbBitacoraProyecto.nuevoRegistroBitacora.fechaRegistro}" 
+                                        showOn="button" pattern="dd/MM/yyyy HH:mm" locale="es" navigator="true" required="true" 
+                                        mindate="#{mbBitacoraProyecto.fechaUltimoRegistroBitacora}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </p:calendar>
+                        </p:inplace>
+
+                        <p:outputLabel value="Estado:" for="slct_estado_proyecto" styleClass="label_blod"/>
+                        <p:selectOneMenu id="slct_estado_proyecto" value="#{mbBitacoraProyecto.nuevoRegistroBitacora.estadoProyecto}" 
+                                         required="true" style="width: 100%;" >
+                            <f:selectItems value="#{estadoProyectoController.itemsAvailableSelectMany}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Responsable (Disico):" for="slct_responsable" styleClass="label_blod"/>
+                        <p:selectOneMenu id="slct_responsable" value="#{mbBitacoraProyecto.nuevoRegistroBitacora.funcionarioResponsable}" style="width: 100%;">
+                            <f:selectItem itemValue="" itemLabel="No Aplica"/>
+                            <f:selectItems value="#{funcionarioDisicoController.selectItemsFuncionariosAreaSinOpcionNula}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Contraparte Responsable:" for="complete_contraparte" styleClass="label_blod"/>
+                        <h:panelGroup layout="block">    
+                            <p:autoComplete id="complete_contraparte" size="38" maxlength="60" dropdown="true" effect="blind" maxResults="15"
+                                            completeMethod="#{mbBitacoraProyecto.complete}"   
+                                            value="#{mbBitacoraProyecto.nuevoRegistroBitacora.contraparteResponsable}"/>
+                            <p:watermark for="complete_contraparte" value="Vacío si No Aplica"/>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                    <h:panelGrid columns="1" style="margin-left: 10px;">
+                        <p:outputLabel value="Descripción:" for="itxtDescripcion" styleClass="label_blod"/>
+                        <h:panelGroup>
+                            <p:inputTextarea id="itxtDescripcion" widgetVar="itxtDescripcion" maxlength="255"
+                                             value="#{mbBitacoraProyecto.nuevoRegistroBitacora.descripcion}" 
+                                             required="true" style="width: 400px;" rows="4"/>
+                            <p:watermark for="itxtDescripcion" value="Describa de forma detallada el evento registrado ..."/>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" cellspacing="10" style="float: right;">
+                        <p:commandButton value="Aceptar" update=":form_bitacora:tbl_bitacora :form_dialog:panelDialog" 
+                                         oncomplete="if(!args.validationFailed) {dlg_bitacora.hide();block.hide();}" 
+                                         actionListener="#{mbBitacoraProyecto.agregarRegistroBitacora}" />
+                        <p:commandButton value="Cancelar" 
+                                         onclick="dlg_bitacora.hide();
+                                                 inpCalendar.cancel();
+                                                 block.hide();" 
+                                         process="@this" update=":form_dialog" />
+                    </h:panelGrid>
+                </h:panelGroup>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
