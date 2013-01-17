@@ -20,6 +20,7 @@
                         <p:menuitem value="Ver Avance" icon="ui-icon-search" action="#{mbDetalleProyecto.verResumenAvance}"/>
                         <p:menuitem value="Bitacora" icon="ui-icon-note" action="#{mbDetalleProyecto.verBitacora}" 
                                     rendered="#{mbDetalleProyecto.usuarioEsParticipanteProyecto}"/>
+                        <p:menuitem value="Info SCM" icon="ui-icon-gear" action="#{mbDetalleProyecto.verInfoSCM}" />
                         <p:menuitem value="Editar" icon="ui-icon-pencil" action="#{mbDetalleProyecto.editarProyecto}" 
                                     rendered="#{p:ifAnyGranted(security.rolMenuEditarProyecto) and mbFuncionarioInfo.funcionario.area == mbDetalleProyecto.proyecto.areaResponsable}"/>
                         <p:menuitem value="Eliminar" icon="ui-icon-trash" onclick="confirmarEliminacion.show();" 

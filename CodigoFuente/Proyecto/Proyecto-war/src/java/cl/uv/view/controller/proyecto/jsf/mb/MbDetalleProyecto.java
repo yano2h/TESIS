@@ -82,6 +82,11 @@ public class MbDetalleProyecto extends MbBase {
         return "bitacoraProyecto?faces-redirect=true";
     }
 
+    public String verInfoSCM(){
+        putValueOnFlashContext("proyecto", proyecto);
+        return "detalleScmProyecto?faces-redirect=true";
+    }
+    
     public void cerrarProyecto() {
         proyectoEJB.cerrarProyecto(proyecto, getFuncionarioDisico());
     }
