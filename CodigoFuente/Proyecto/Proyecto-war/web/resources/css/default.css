@@ -397,9 +397,24 @@ a.small_link{
     min-width: 125px;
 }
 
+.column_130p{
+    min-width: 130px;
+    max-width: 130px;
+}
+
+.column_140p{
+    min-width: 140px;
+    max-width: 140px;
+}
+
 .column_150p{
     max-width: 150px;
     min-width: 150px;
+}
+
+.column_160p{
+    max-width: 160px;
+    min-width: 160px;
 }
 
 .column_175p{
@@ -410,6 +425,11 @@ a.small_link{
 .column_200p{
     max-width: 200px;
     min-width: 200px;
+}
+
+.column_220p{
+    max-width: 220px;
+    min-width: 220px;
 }
 
 .column_250p{
@@ -430,6 +450,16 @@ a.small_link{
 .column_400p{
     max-width: 400px;
     min-width: 400px;
+}
+
+.column_500p{
+    max-width: 500px;
+    min-width: 500px;
+}
+
+.column_550p{
+    max-width: 550px;
+    min-width: 550px;
 }
 
 .border_rh{

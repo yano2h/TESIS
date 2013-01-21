@@ -4,7 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:composition template="#{pages.layout_atencion}">
         <ui:define name="title">
@@ -15,7 +16,20 @@
             <h:outputScript library="js" name="calendar-localization.js" />
             <h:form id="form_ic">
                 <p:growl id="growl" showDetail="true" autoUpdate="false" /> 
-                <p:panel id="pnl_items_config" header="Identificacion de la Configuracion">       
+                <p:panel id="pnl_items_config" header="Identificacion de la Configuracion">
+                    
+                    <p:menubar  style="height: 30px;" styleClass="menu_bar">
+                        <p:menuitem value="Volver" icon="ui-icon-back" action="identificarConfiguracionProyecto.xhtml?faces-redirect=true" process="@this"/>
+                        <p:menuitem value="Guardar Cambios" icon="ui-icon-disk" 
+                                    action="#{mbIdentificacionConfiguracion.guardarItems}" update="growl" process="@this" />
+                        <p:menuitem value="Cancelar" icon="ui-icon-closethick" actionListener="#{mbIdentificacionConfiguracion.redirectCancelar}" 
+                                    process="@this" update="@all"/>
+                    </p:menubar>
+                    <h:panelGroup layout="block" styleClass="block_title">    
+                        <h:outputText value="Proyecto:" styleClass="titulo_label"/>
+                        <h:outputText value="#{mbIdentificacionConfiguracion.proyecto.fullNameProyecto}" styleClass="titulo"/>
+                    </h:panelGroup>
+
                     <p:panel header="Informacion Nuevo Item">
                         <h:panelGrid columns="4" cellspacing="10" columnClasses="column_90p,column_90p,,">
                             <p:outputLabel value="Identificador: " for="itxt_ident" styleClass="label_blod"/>
@@ -43,15 +57,13 @@
                         </h:panelGrid>
 
                         <p:commandButton value="Añadir Item" actionListener="#{mbIdentificacionConfiguracion.addItem}" update=":form_ic:pnl_items_config"/>
-
-                        <h:panelGrid columns="2"  style="float: right;">
-                            <p:commandButton value="Guardar" actionListener="#{mbIdentificacionConfiguracion.guardarItems}" update="growl" process="@this"/>
-                            <p:commandButton value="Cancelar" actionListener="#{mbIdentificacionConfiguracion.redirectCancelar}" process="@this" update="@all"/>
-                        </h:panelGrid>
-
                     </p:panel>
-                    <br/>
-                    <h:outputText value="Items de Configuracion del Proyecto:" styleClass="title_bold"/>
+                    
+                    <h:panelGroup layout="block" styleClass="block_title">
+                        <h:graphicImage library="imagenes" name="item_config.png" styleClass="title_image"/>
+                        <h:outputText value="Items de Configuración del Proyecto" styleClass="title_bold title_with_image"/>
+                    </h:panelGroup>
+
                     <p:dataTable id="tbl_items_configuracion"  
                                  value="#{mbIdentificacionConfiguracion.listaItemConfiguracion}"
                                  var="item"
@@ -59,9 +71,9 @@
                                  rows="20"
                                  emptyMessage="No hay Items de Configuracion"
                                  paginatorPosition="bottom">
-                        
+
                         <p:ajax event="rowSelect" listener="#{mbIdentificacionConfiguracion.redirectIC}"/>
-                        
+
                         <p:column headerText="Codigo" sortBy="#{item.codigoIdentificadorIc}">
                             <h:outputText value="#{item.codigoIdentificadorIc}"/>
                         </p:column>

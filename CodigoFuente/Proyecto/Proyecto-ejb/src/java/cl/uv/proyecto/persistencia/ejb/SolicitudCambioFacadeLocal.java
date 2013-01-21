@@ -5,6 +5,7 @@
 package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
+import cl.uv.proyecto.persistencia.entidades.ItemConfiguracion;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.persistencia.entidades.SolicitudCambio;
 import java.util.List;
@@ -56,5 +57,7 @@ public interface SolicitudCambioFacadeLocal {
     public Long contarSolicitudEvaluacionPendiente(FuncionarioDisico funcionario);
 
     public Long contarSolicitudImplementacionPendiente(FuncionarioDisico funcionario);
+    
+    public List<SolicitudCambio> buscarSolicitudesPorIC(ItemConfiguracion ic);
     
 }

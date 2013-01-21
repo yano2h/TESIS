@@ -39,7 +39,10 @@ public class MbBitacoraProyecto extends MbBase implements Serializable {
     private void init(){
         proyecto = (Proyecto) getValueOfFlashContext("proyecto");
         proyecto.setBitacora(registroBitacoraFacade.buscarBitacoraProyecto(proyecto));
-        fechaUltimoRegistroBitacora = registroBitacoraFacade.getFechaUltimoRegistro(proyecto);
+        if (proyecto.getBitacora()!=null && !proyecto.getBitacora().isEmpty()) {
+            fechaUltimoRegistroBitacora = registroBitacoraFacade.getFechaUltimoRegistro(proyecto);
+        }
+        
         crearNuevoRegistro();
     }
     
