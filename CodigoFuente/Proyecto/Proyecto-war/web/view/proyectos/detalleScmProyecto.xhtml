@@ -8,82 +8,158 @@
     <ui:define name="title">
         <h:outputText value="Información SCM del Proyecto"/>
     </ui:define>
+    
     <ui:define name="content">
+        
         <h:form id="detalleScmProyecto">
             <p:panel header="Información SCM del Proyecto">
+                
                 <p:menubar id="menu_bar_proy" style="height: 30px;" styleClass="menu_bar">
                     <p:menuitem value="Volver" icon="ui-icon-back" action="#{mbDetalleScmProyecto.volverProyecto}"/>
                 </p:menubar>
-                    <h:panelGroup styleClass="block_title" layout="block">
-                        <h:outputText value="Proyecto:" styleClass="titulo_label"/>
-                        <h:outputText id="titulo" styleClass="titulo"
-                                      value="#{mbDetalleScmProyecto.proyecto.fullNameProyecto}"/>
-                    </h:panelGroup>
+                
+                <h:panelGroup styleClass="block_title" layout="block">
+                    <h:outputText value="Proyecto:" styleClass="titulo_label"/>
+                    <h:outputText id="titulo" styleClass="titulo" value="#{mbDetalleScmProyecto.proyecto.fullNameProyecto}"/>
+                </h:panelGroup>
 
-                    <h:panelGroup layout="block" styleClass="block_title">
-                        <h:graphicImage library="imagenes" name="tasks.png" styleClass="title_image"/>
-                        <h:outputText value="Tareas de SCM del Proyecto" styleClass="title_bold title_with_image"/>
-                    </h:panelGroup>
+                <h:panelGroup layout="block" styleClass="block_title">
+                    <h:graphicImage library="imagenes" name="tasks.png" styleClass="title_image"/>
+                    <h:outputText value="Tareas de SCM del Proyecto" styleClass="title_bold title_with_image"/>
+                </h:panelGroup>
 
-                    <p:dataTable id="tbl_tareas_scm_proyecto"
-                                 value="#{mbDetalleScmProyecto.proyecto.tareasScmProyecto}"
-                                 var="tarea"
-                                 emptyMessage="No hay tareas añadidas">
+                <p:dataTable id="tbl_tareas_scm_proyecto"
+                             value="#{mbDetalleScmProyecto.proyecto.tareasScmProyecto}"
+                             var="tarea"
+                             emptyMessage="No hay tareas añadidas">
 
-                        <p:column headerText="Tarea" style="width:300px">
-                            <h:outputText value="#{tarea.tareaScm.nombreTarea}" />  
-                        </p:column> 
+                    <p:column headerText="Tarea" style="width:300px">
+                        <h:outputText value="#{tarea.tareaScm.nombreTarea}" />  
+                    </p:column> 
 
-                        <p:column headerText="Responsable" style="width:250px">  
-                            <h:outputText value="#{tarea.responsable.nombre} #{tarea.responsable.apellidoPaterno} #{tarea.responsable.apellidoMaterno}" />  
-                        </p:column> 
+                    <p:column headerText="Responsable" style="width:250px">  
+                        <h:outputText value="#{tarea.responsable.nombre} #{tarea.responsable.apellidoPaterno} #{tarea.responsable.apellidoMaterno}" />  
+                    </p:column> 
 
-                        <p:column headerText="F.Inicio" style="width:50px; text-align: center;">  
-                            <h:outputText value="#{tarea.fechaInicio}">  
-                                <f:convertDateTime pattern="dd/MM/yyyy"/>
-                            </h:outputText>
-                        </p:column>
-                        <p:column headerText="F.Termino" style="width:50px; text-align: center;">  
-                            <h:outputText value="#{tarea.fechaTermino}">  
-                                <f:convertDateTime pattern="dd/MM/yyyy"/>
-                            </h:outputText>
-                        </p:column>
-                    </p:dataTable>
+                    <p:column headerText="F.Inicio" style="width:50px; text-align: center;">  
+                        <h:outputText value="#{tarea.fechaInicio}">  
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="F.Termino" style="width:50px; text-align: center;">  
+                        <h:outputText value="#{tarea.fechaTermino}">  
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
 
+                <h:panelGroup layout="block" styleClass="block_title">
+                    <h:graphicImage library="imagenes" name="item_config.png" styleClass="title_image"/>
+                    <h:outputText value="Items de Configuración del Proyecto" styleClass="title_bold title_with_image"/>
+                </h:panelGroup>
+
+                <p:dataTable id="tbl_items_configuracion"  
+                             value="#{mbDetalleScmProyecto.proyecto.itemsDeConfiguracion}"
+                             var="item"
+                             scrollHeight="300" 
+                             emptyMessage="No hay Items de Configuración"
+                             paginatorPosition="bottom"
+                             selectionMode="single"
+                             selection="#{mbDetalleScmProyecto.itemSelected}"
+                             rowKey="#{item.codigoIdentificadorIc}">
+
+                    <p:ajax event="rowSelect" listener="#{mbDetalleScmProyecto.onRowItemSelected}" update=":detalleScmProyecto:dlg_detalle_item" oncomplete="dlgDetalle.show()"/>
+
+                    <p:column headerText="Codigo" sortBy="#{item.codigoIdentificadorIc}" style="text-align: center;max-width: 60px;">
+                        <h:outputText value="#{item.codigoIdentificadorIc}"/>
+                    </p:column>
+
+                    <p:column headerText="Nombre Item" sortBy="#{item.nombreItemConfiguracion}" style="min-width: 265px;">
+                        <h:outputText value="#{item.nombreItemConfiguracion}"/>
+                    </p:column>
+
+                    <p:column headerText="Version" sortBy="#{item.version}" style="text-align: center;max-width: 60px;">
+                        <h:outputText value="#{item.version}"/>
+                    </p:column>
+
+                    <p:column headerText="Responsable" sortBy="#{item.responsableItem.nombreCompleto}" style="min-width: 210px;">
+                        <h:outputText value="#{item.responsableItem.nombreCompleto}"/>
+                    </p:column>
+
+                    <p:column headerText="F. Actualizacion" sortBy="#{item.fechaUltimaModificacion}" style="text-align: center;max-width: 110px;">
+                        <h:outputText value="#{item.fechaUltimaModificacion}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+
+                <p:dialog id="dlg_detalle_item" widgetVar="dlgDetalle" modal="true" closable="true" 
+                          dynamic="true" resizable="false" width="710" style="max-height: 450px;">
                     <h:panelGroup layout="block" styleClass="block_title">
                         <h:graphicImage library="imagenes" name="item_config.png" styleClass="title_image"/>
-                        <h:outputText value="Items de Configuración del Proyecto" styleClass="title_bold title_with_image"/>
+                        <h:outputText value="Detalle Item de Configuración" styleClass="title_bold title_with_image"/>
                     </h:panelGroup>
 
-                    <p:dataTable id="tbl_items_configuracion"  
-                                 value="#{mbDetalleScmProyecto.proyecto.itemsDeConfiguracion}"
-                                 var="item"
-                                 scrollHeight="300" 
-                                 emptyMessage="No hay Items de Configuración"
-                                 paginatorPosition="bottom"  >
+                    <h:panelGrid columns="4" cellspacing="10" columnClasses="column_130p,column_220p,column_160p,column_100p">
+                        <h:outputText value="Nombre:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleScmProyecto.itemSelected.nombreItemConfiguracion}"/>
 
-                        <p:column headerText="Codigo" sortBy="#{item.codigoIdentificadorIc}" style="text-align: center;max-width: 60px;">
-                            <h:outputText value="#{item.codigoIdentificadorIc}"/>
+                        <h:outputText value="Codigo:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleScmProyecto.itemSelected.codigoIdentificadorIc}"/>
+
+                        <h:outputText value="Nombre Proyecto:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleScmProyecto.itemSelected.proyecto.nombre}"/>
+
+                        <h:outputText value="Fecha Ultima Modificacion:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleScmProyecto.itemSelected.fechaUltimaModificacion}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+
+                        <h:outputText value="Responsable:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleScmProyecto.itemSelected.responsableItem.nombreCompleto}"/>
+
+                        <h:outputText value="Version Item:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleScmProyecto.itemSelected.version}"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" cellspacing="10" style="margin-top: -10px;" columnClasses="column_130p,column_500p">
+                        <h:outputText value="Ubicacion Biblioteca:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleScmProyecto.itemSelected.ubicacionEnBiblioteca}"/>
+                    </h:panelGrid>
+
+                    <h:panelGroup layout="block" styleClass="block_title">
+                        <h:graphicImage library="imagenes" name="documents.png" styleClass="title_image"/>
+                        <h:outputText value="Solicitudes de Cambio Relacionadas:" styleClass="title_bold title_with_image"/>
+                    </h:panelGroup>
+
+                    <p:dataTable id="tblSolCambio"
+                                 emptyMessage="No hay solicitudes de cambio"
+                                 value="#{mbDetalleScmProyecto.solicitudesRelacionadas}"
+                                 var="solicitud" style="width: 680px;margin-bottom: 15px;"
+                                 paginator="true" rows="6" paginatorPosition="bottom" paginatorAlwaysVisible="false" >
+
+                        <p:column headerText="Nº" style="min-width: 28px;text-align: center;" sortBy="#{solicitud.idSolicitudCambio}">
+                            <h:outputText value="#{solicitud.idSolicitudCambio}"/>
                         </p:column>
 
-                        <p:column headerText="Nombre Item" sortBy="#{item.nombreItemConfiguracion}" style="min-width: 265px;">
-                            <h:outputText value="#{item.nombreItemConfiguracion}"/>
-                        </p:column>
-
-                        <p:column headerText="Version" sortBy="#{item.version}" style="text-align: center;max-width: 60px;">
-                            <h:outputText value="#{item.version}"/>
-                        </p:column>
-
-                        <p:column headerText="Responsable" sortBy="#{item.responsableItem.nombre}" style="min-width: 210px;">
-                            <h:outputText value="#{item.responsableItem.nombre} #{item.responsableItem.apellidoPaterno} #{item.responsableItem.apellidoMaterno}"/>
-                        </p:column>
-
-                        <p:column headerText="F. Actualizacion" sortBy="#{item.fechaUltimaModificacion}" style="text-align: center;max-width: 110px;">
-                            <h:outputText value="#{item.fechaUltimaModificacion}">
+                        <p:column headerText="F.Envio" style="width: 65px;text-align: center;" sortBy="#{solicitud.fechaEnvio}">
+                            <h:outputText value="#{solicitud.fechaEnvio}">
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </p:column>
-                    </p:dataTable>
+
+                        <p:column headerText="Titulo" style="min-width: 250px;" sortBy="#{solicitud.titulo}">
+                            <h:outputText value="#{solicitud.titulo}"/>
+                        </p:column>
+
+                        <p:column headerText="Solicitante" style="max-width: 110px;" sortBy="#{solicitud.solicitante.nombreCorto}">
+                            <h:outputText value="#{solicitud.solicitante.nombreCorto}"/>
+                        </p:column>
+
+                        <p:column headerText="Estado" sortBy="#{solicitud.estadoSolicitud.nombreEstadoSolicitud}" style="min-width: 110px;text-align: center;">
+                            <h:outputText value="#{solicitud.estadoSolicitud.nombreEstadoSolicitud}"/>
+                        </p:column>
+                    </p:dataTable>  
+                </p:dialog>
 
             </p:panel>
         </h:form>

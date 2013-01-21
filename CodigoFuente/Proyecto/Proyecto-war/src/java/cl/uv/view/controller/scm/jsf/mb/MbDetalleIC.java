@@ -26,8 +26,6 @@ import javax.faces.bean.ViewScoped;
 public class MbDetalleIC extends MbBase{
 
     @EJB
-    private ItemConfiguracionFacadeLocal itemConfiguracionFacade;
-    @EJB
     private SolicitudCambioFacadeLocal solicitudCambioFacade;
     
     private ItemConfiguracion ic;
