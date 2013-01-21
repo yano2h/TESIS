@@ -53,13 +53,13 @@
                               filterMatchMode="exact">
                         <h:outputText value="#{proyecto.estadoProyecto.nombreEstadoProyecto}"/>
                     </p:column>
+                    
+                    <p:column headerText="Fecha Inicio" style="max-width: 90px;" sortBy="#{proyecto.fechaInicio}">
+                        <h:outputText value="#{proyecto.fechaInicio}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
                 </p:dataTable> 
-
-                <p:column headerText="Fecha Inicio" style="max-width: 90px;" sortBy="#{proyecto.fechaInicio}">
-                    <h:outputText value="#{proyecto.fechaInicio}">
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </h:outputText>
-                </p:column>
             </p:panel>
         </ui:define>
     </ui:composition>
