@@ -59,14 +59,16 @@
                         </p:column>
 
                         <p:column headerText="F.Envio" 
-                                  sortBy="#{solicitud.fechaEnvio}" >  
+                                  sortBy="#{solicitud.fechaEnvio}"
+                                  style="text-align: center;width: 120px;" width="100">  
                             <h:outputText value="#{solicitud.fechaEnvio}" >
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                             </h:outputText>  
                         </p:column>
 
                         <p:column headerText="F.Vencimiento" 
-                                  sortBy="#{solicitud.fechaVencimiento}" >  
+                                  sortBy="#{solicitud.fechaVencimiento}"
+                                  style="text-align: center;width: 120px;" width="100">  
                             <h:outputText value="#{solicitud.fechaVencimiento}" >
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                             </h:outputText>  

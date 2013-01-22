@@ -23,29 +23,32 @@
                                  selection="#{mbSolicitudesArea.selectedSolicitud}"
                                  rowKey="#{solicitud.codigoConsulta}"
                                  rowStyleClass="#{solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 0? 'row_solicitud_nueva':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 6? 'row_solicitud_vencida':(solicitud.estadoSolicitud.idEstadoSolicitudRequerimiento eq 8?'row_solicitud_cerrada':null))}"
-                                 style="min-width: 350px;"
                                  >
                         
                         <p:ajax event="rowSelect" listener="#{mbSolicitudesArea.onRowSelect}"/>
                         
                         <p:column headerText="Codigo" 
                                   sortBy="#{solicitud.codigoConsulta}" 
-                                  style="width: 60px;">  
-
+                                  width="68" style="width: 88px;">
                             <h:outputText value="#{solicitud.codigoConsulta}" />  
                         </p:column>
                         
                         <p:column headerText="Asunto" 
                                   sortBy="#{solicitud.asunto}"
                                   filterBy="#{solicitud.asunto}"
-                                  filterMatchMode="contains">  
+                                  filterMatchMode="contains"
+                                  filterStyle="min-width: 100px;">  
                             <h:outputText value="#{solicitud.asunto}" />  
                         </p:column>  
 
                         <p:column headerText="Responsable" 
                                   sortBy="#{solicitud.nombreCorto}"
                                   filterBy="#{solicitud.nombreCorto}"
-                                  filterMatchMode="contains">  
+                                  filterMatchMode="contains"
+                                  filterMaxLength="15"
+                                  filterStyle="max-width:60px;"
+                                  width="80"
+                                  style="width: 100px;">  
                             <h:outputText value="#{solicitud.nombreCorto}" />  
                         </p:column>  
                         
@@ -53,7 +56,8 @@
                                   sortBy="#{solicitud.estadoSolicitud.nombreEstadoSolicitud}"
                                   filterBy="#{solicitud.estadoSolicitud.nombreEstadoSolicitud}"
                                   filterOptions="#{estadoSolicitudRequerimientoController.filterOptions}"
-                                  filterMatchMode="exact">
+                                  filterMatchMode="exact"
+                                  width="100" style="width: 120px;">
                             <h:outputText value="#{solicitud.estadoSolicitud.nombreEstadoSolicitud}"/>
                         </p:column>
 
@@ -61,19 +65,22 @@
                                   sortBy="#{solicitud.tipoSolicitud.nombreTipoSolicitud}"
                                   filterBy="#{solicitud.tipoSolicitud.nombreTipoSolicitud}"
                                   filterOptions="#{tipoSolicitudRequerimientoController.filterOptions}"
-                                  filterMatchMode="exact">
+                                  filterMatchMode="exact"
+                                  width="110" style="width: 130px;">
                             <h:outputText value="#{solicitud.tipoSolicitud.nombreTipoSolicitud}"/>
                         </p:column>
                         
                         <p:column headerText="F.Envio" 
-                                  sortBy="#{solicitud.fechaEnvio}" >  
+                                  sortBy="#{solicitud.fechaEnvio}" 
+                                  style="text-align: center;width: 120px;" width="100">
                             <h:outputText value="#{solicitud.fechaEnvio}" >
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                             </h:outputText>  
                         </p:column>
                         
                         <p:column headerText="F.Vencimiento" 
-                                  sortBy="#{solicitud.fechaVencimiento}" >  
+                                  sortBy="#{solicitud.fechaVencimiento}" 
+                                  style="text-align: center;width: 120px;" width="100">  
                             <h:outputText value="#{solicitud.fechaVencimiento}" >
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                             </h:outputText>  
