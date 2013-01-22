@@ -93,6 +93,11 @@ label{
     margin-bottom: 8px;
 }
 
+.block_text{
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
+
 .text_blod_blue{
     font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
