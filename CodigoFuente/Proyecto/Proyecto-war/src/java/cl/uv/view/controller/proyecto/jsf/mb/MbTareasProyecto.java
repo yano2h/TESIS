@@ -5,8 +5,10 @@
 package cl.uv.view.controller.proyecto.jsf.mb;
 
 import cl.uv.proyecto.persistencia.ejb.TareaProyectoFacadeLocal;
+import cl.uv.proyecto.persistencia.entidades.ParticipanteProyecto;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.persistencia.entidades.TareaProyecto;
+import cl.uv.view.controller.base.jsf.mb.MbBase;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import java.io.Serializable;
 import java.util.List;
@@ -21,7 +23,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class MbTareasProyecto implements Serializable {
+public class MbTareasProyecto extends MbBase implements Serializable {
 
     @EJB
     private TareaProyectoFacadeLocal tareaProyectoFacade;
@@ -33,8 +35,13 @@ public class MbTareasProyecto implements Serializable {
     
     @PostConstruct
     private void init() {
-        proyecto = (Proyecto) JsfUtils.getParametro("proyecto");
-        tareasProyecto = tareaProyectoFacade.buscarTareasPorProyecto(proyecto);
+        proyecto = (Proyecto) getValueOfFlashContext("proyecto");
+        tareasProyecto = tareaProyectoFacade.buscarTareas(proyecto);
+        porcetajeAvance = tareaProyectoFacade.calcularAvancePromedioTareasPorProyecto(proyecto);
+        porcentajeConFormato = porcetajeAvance+"%";
+    }
+    
+    public void updatePorcentajeAvance(){
         porcetajeAvance = tareaProyectoFacade.calcularAvancePromedioTareasPorProyecto(proyecto);
         porcentajeConFormato = porcetajeAvance+"%";
     }
@@ -47,6 +54,18 @@ public class MbTareasProyecto implements Serializable {
         return tareasProyecto;
     }
 
+    public void setTareasProyecto(List<TareaProyecto> tareasProyecto) {
+        this.tareasProyecto = tareasProyecto;
+    }
+
+    public TareaProyecto getTareaSelected() {
+        return tareaSelected;
+    }
+
+    public void setTareaSelected(TareaProyecto tareaSelected) {
+        this.tareaSelected = tareaSelected;
+    }
+
     public String getPorcentajeConFormato() {
         return porcentajeConFormato;
     }
@@ -55,6 +74,20 @@ public class MbTareasProyecto implements Serializable {
         this.porcentajeConFormato = porcentajeConFormato;
     }
     
+    public void volverProyecto(){
+        putValueOnFlashContext("proyecto", proyecto);
+        JsfUtils.performNavigation("detalleProyecto_1", true);
+    }
+    
     public void onRowSelect(){    
+    }
+    
+    public boolean isUsuarioEsParticipanteProyecto(){
+        for (ParticipanteProyecto p : proyecto.getParticipantes()) {
+            if (p.getParticipante().equals(getFuncionarioDisico())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -6,6 +6,7 @@ import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
 import cl.uv.proyecto.persistencia.jsf.mb.util.JsfUtil;
 import cl.uv.proyecto.persistencia.jsf.mb.util.PaginationHelper;
 import cl.uv.view.controller.base.jsf.mb.MbBase;
+import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
 import java.io.Serializable;
 import java.util.List;
@@ -222,6 +223,16 @@ public class FuncionarioDisicoController extends MbBase implements Serializable 
         }
         
         return funcionariosArea;
+    }
+    
+    public SelectItem[] getSelectItemsFuncionariosArea(){
+        List<FuncionarioDisico> funcionarios = ejbFacade.buscarFuncrionariosPorArea(getFuncionarioDisico().getArea());
+        return JsfUtils.getSelectItems(funcionarios, "getNombreCompleto", "---");
+    }
+    
+    public SelectItem[] getSelectItemsFuncionariosAreaSinOpcionNula(){
+        List<FuncionarioDisico> funcionarios = ejbFacade.buscarFuncrionariosPorArea(getFuncionarioDisico().getArea());
+        return JsfUtils.getSelectItems(funcionarios, "getNombreCompleto",false);
     }
     
     @FacesConverter(forClass = FuncionarioDisico.class)

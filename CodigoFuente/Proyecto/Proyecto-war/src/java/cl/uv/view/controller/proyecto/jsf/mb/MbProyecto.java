@@ -8,6 +8,7 @@ import cl.uv.proyecto.persistencia.ejb.FuncionarioDisicoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ParticipanteProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.ProyectoFacadeLocal;
 import cl.uv.proyecto.persistencia.ejb.RolProyectoFacadeLocal;
+import cl.uv.proyecto.persistencia.ejb.UnidadSolicitanteFacadeLocal;
 import cl.uv.proyecto.persistencia.entidades.*;
 import cl.uv.proyecto.proyectos.ejb.ProyectoEJBLocal;
 import cl.uv.view.controller.base.jsf.mb.MbBase;
@@ -43,6 +44,9 @@ public class MbProyecto extends MbBase {
     private ParticipanteProyectoFacadeLocal participanteProyectoFacade;
     @EJB
     private ProyectoEJBLocal proyectoEJB;
+    @EJB
+    private UnidadSolicitanteFacadeLocal unidadSolicitanteFacade;
+    
     @ManagedProperty(value = "#{mbFilesUpload}")
     private MbFilesUpload mbFilesUpload;
     private String tipoInformacion;
@@ -54,6 +58,7 @@ public class MbProyecto extends MbBase {
     private List<RolProyecto> rolesProyecto;
     private RolProyecto rolJefeProyecto;
     private Proyecto nuevoProyecto;
+    private UnidadSolicitante nuevaUnidad;
 
     public MbProyecto() {
     }
@@ -65,6 +70,7 @@ public class MbProyecto extends MbBase {
         rolJefeProyecto = rolProyectoFacade.find(new Short(Resources.getValue("const", "RolProyecto_JP")));
         rolesProyecto = rolProyectoFacade.findAll();
         rolesProyecto.remove(rolJefeProyecto);
+        nuevaUnidad = null;
     }
 
     public void setMbFilesUpload(MbFilesUpload mbFilesUpload) {
@@ -112,6 +118,14 @@ public class MbProyecto extends MbBase {
         this.nuevoParticipanteProyecto = nuevoParticipanteProyecto;
     }
 
+    public UnidadSolicitante getNuevaUnidad() {
+        return nuevaUnidad;
+    }
+
+    public void setNuevaUnidad(UnidadSolicitante nuevaUnidad) {
+        this.nuevaUnidad = nuevaUnidad;
+    }
+
     public FuncionarioDisico getJefeProyecto() {
         return jefeProyecto;
     }
@@ -137,6 +151,7 @@ public class MbProyecto extends MbBase {
     }
 
     public void crearProyecto() {
+        unidadSolicitanteFacade.create(nuevaUnidad);
         nuevoProyecto.setArchivoProyectoList(archivosProyectoAdjuntos);
         proyectoEJB.crearProyecto(nuevoProyecto, jefeProyecto);
     }
@@ -189,6 +204,16 @@ public class MbProyecto extends MbBase {
                 break;
             }
         }
+    }
+    
+    public void agregarNuevaUnidadSolicitante(){
+        nuevaUnidad = new UnidadSolicitante();
+        nuevoProyecto.setUnidadSolicitante(nuevaUnidad);
+    }
+    
+    public void reutilizarUnidadSolicitante(){
+        nuevaUnidad = null;
+        nuevoProyecto.setUnidadSolicitante(null);
     }
 
 }

@@ -31,12 +31,6 @@
         <welcome-file>faces/view/mainPage.xhtml</welcome-file>
         <!-- <welcome-file>faces/view/index.xhtml</welcome-file> -->
     </welcome-file-list>
-    <ejb-local-ref>
-        <ejb-ref-name>AuthEJBBean</ejb-ref-name>
-        <ejb-ref-type>Session</ejb-ref-type>
-        <local>cl.uv.model.base.core.ejb.AuthEJBBeanLocal</local>
-        <ejb-link>Proyecto-ejb.jar#AuthEJBBean</ejb-link>
-    </ejb-local-ref>
     <!-- Spring Security -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -62,10 +56,18 @@
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <servlet-name>Faces Servlet</servlet-name>
     </filter-mapping>
+    
+    <!-- Referencias EJB -->
     <ejb-local-ref>
         <ejb-ref-name>FuncionarioFacade</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <local>cl.uv.proyecto.persistencia.ejb.FuncionarioFacadeLocal</local>
         <ejb-link>Proyecto-ejb.jar#FuncionarioFacade</ejb-link>
+    </ejb-local-ref>
+     <ejb-local-ref>
+        <ejb-ref-name>AuthEJBBean</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>cl.uv.model.base.core.ejb.AuthEJBBeanLocal</local>
+        <ejb-link>Proyecto-ejb.jar#AuthEJBBean</ejb-link>
     </ejb-local-ref>
 </web-app>

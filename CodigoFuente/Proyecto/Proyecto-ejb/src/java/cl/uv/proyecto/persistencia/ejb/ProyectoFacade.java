@@ -71,6 +71,10 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
             condicion += (condicion.isEmpty()) ? " p.tipoProyecto = :tipoProyecto" : " AND p.tipoProyecto = :tipoProyecto";
         }
         
+        if (proyecto.getAreaResponsable()!= null) {
+            condicion += (condicion.isEmpty()) ? " p.areaResponsable = :areaResponsable" : " AND p.areaResponsable = :areaResponsable";
+        }
+        
         if (minDate != null) {
             condicion += (condicion.isEmpty()) ? " p.fechaInicio >= :minFechaInicio" : " AND p.fechaInicio >= :minFechaInicio";
         }
@@ -106,6 +110,10 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
 
         if (proyecto.getTipoProyecto() != null) {
             q.setParameter("tipoProyecto", proyecto.getTipoProyecto());
+        }
+        
+        if (proyecto.getAreaResponsable() != null) {
+            q.setParameter("areaResponsable", proyecto.getAreaResponsable());
         }
         
         if (minDate != null) {

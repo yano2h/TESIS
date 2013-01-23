@@ -86,6 +86,9 @@ public class MbFilesUpload {
         }
     }
 
+    public void handleFileUploadWithoutSizeValidation(FileUploadEvent event) {
+        setUploadFile(event.getFile());
+    }
 
     public void remove(ArchivoAdjunto f) {
         archivosAdjuntos.remove(f);
@@ -112,8 +115,6 @@ public class MbFilesUpload {
     public void setArchivosAdjuntos(List<ArchivoAdjunto> archivosAdjuntos) {
         this.archivosAdjuntos = archivosAdjuntos;
     }
-
-
 
     public UploadedFile getUploadFile() {
         return uploadFile;
@@ -163,8 +164,7 @@ public class MbFilesUpload {
         archivosAdjuntos.clear();
     }
 
-    
-    public void downloadFileProyecto(ArchivoProyecto a){
+    public void downloadFileProyecto(ArchivoProyecto a) {
         System.out.println("downloadFile(Proyecto)");
         ArchivoAdjunto file = a.getArchivoAdjunto();
         if (file.getInputStream() == null) {
@@ -173,8 +173,8 @@ public class MbFilesUpload {
 
         setFileDownload(new DefaultStreamedContent(file.getInputStream(), file.getMimetype(), file.getNombre()));
     }
-    
-    public void downloadFileSolicitud(ArchivoSolicitudRequerimiento a){
+
+    public void downloadFileSolicitud(ArchivoSolicitudRequerimiento a) {
         System.out.println("downloadFile(Solicitud)");
         ArchivoAdjunto file = a.getArchivoAdjunto();
         if (file.getInputStream() == null) {
@@ -182,6 +182,18 @@ public class MbFilesUpload {
         }
 
         setFileDownload(new DefaultStreamedContent(file.getInputStream(), file.getMimetype(), file.getNombre()));
+    }
+
+    public String findIcon(ArchivoAdjunto a) {
+        String pathIcon = Resources.getValue("iconos", "path_iconos");
+        String extension = FilenameUtils.getExtension(a.getNombre());
+        String icono = "";
+        try {
+            icono = Resources.getValue("iconos", extension);
+        } catch (Exception e) {
+            icono = Resources.getValue("iconos", "notfound");
+        }
+        return pathIcon + icono;
     }
 
     public StreamedContent getFileDownload() {

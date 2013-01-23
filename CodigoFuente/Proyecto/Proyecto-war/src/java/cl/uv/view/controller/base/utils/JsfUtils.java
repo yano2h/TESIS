@@ -153,9 +153,9 @@ public class JsfUtils {
         try {
             if (entities.size() > 0) {
                 Class clase = entities.get(0).getClass();
-                Method getLabel = clase.getMethod(nombreMetodo, null);
+                Method getLabel = clase.getMethod(nombreMetodo);
                 for (Object o : entities) {
-                    Object labelSelectItem = getLabel.invoke(o, null);
+                    Object labelSelectItem = getLabel.invoke(o);
                     items[i++] = new SelectItem(o, labelSelectItem.toString());
                 }
             }
@@ -183,9 +183,9 @@ public class JsfUtils {
         try {
             if (entities.size() > 0) {
                 Class clase = entities.get(0).getClass();
-                Method getLabel = clase.getMethod(nombreMetodo, null);
+                Method getLabel = clase.getMethod(nombreMetodo);
                 for (Object o : entities) {
-                    Object labelSelectItem = getLabel.invoke(o, null);
+                    Object labelSelectItem = getLabel.invoke(o);
                     items[i++] = new SelectItem(o, labelSelectItem.toString());
                 }
             }
@@ -213,9 +213,9 @@ public class JsfUtils {
 
         try {
             Class clase = entities.get(0).getClass();
-            Method getLabel = clase.getMethod(nombreMetodo, null);
+            Method getLabel = clase.getMethod(nombreMetodo);
             for (Object o : entities) {
-                Object labelSelectItem = getLabel.invoke(o, null);
+                Object labelSelectItem = getLabel.invoke(o);
                 items[i++] = new SelectItem(labelSelectItem.toString(), labelSelectItem.toString());
             }
         } catch (IllegalAccessException ex) {

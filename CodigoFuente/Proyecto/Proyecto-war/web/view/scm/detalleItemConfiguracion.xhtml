@@ -12,41 +12,88 @@
         </ui:define>
         <ui:define name="content">
             <h:outputScript library="js" name="calendar-localization.js" />
-            <p:panel header="Item de Configuracion">
-                <p:menubar rendered="">
-                    <p:menuitem value="Editar" actionListener="#{mbDetalleIC.editar}" process="@this" />
-                    <p:menuitem value="Volver" actionListener="#{mbDetalleIC.volver}" process="@this"/>
-                </p:menubar>
-                <h:panelGrid columns="4" cellspacing="10">
-                    <h:outputText value="Nombre:" styleClass="label_blod label"/>
-                    <h:outputText value="#{mbDetalleIC.ic.nombreItemConfiguracion}"/>
+            <h:form id="dettalleIC">
+                <p:panel id="panelDettalleIC" header="Item de Configuracion">
+                    <p:menubar styleClass="menu_bar">
+                        <p:menuitem value="Volver" icon="ui-icon-back" actionListener="#{mbDetalleIC.volver}" process="@this"/>
+                        <p:menuitem value="Editar" icon="ui-icon-pencil" actionListener="#{mbDetalleIC.editar}" process="@this"/>
+                    </p:menubar>
 
-                    <h:outputText value="Codigo:" styleClass="label_blod label"/>
-                    <h:outputText value="#{mbDetalleIC.ic.codigoIdentificadorIc}"/>
+                    <h:panelGroup layout="block" styleClass="block_title">
+                        <h:graphicImage library="imagenes" name="item_config.png" styleClass="title_image"/>
+                        <h:outputText value="Detalle Item de Configuración" styleClass="title_bold title_with_image"/>
+                    </h:panelGroup>
 
-                    <h:outputText value="Nombre Proyecto:" styleClass="label_blod label"/>
-                    <h:outputText value="#{mbDetalleIC.ic.proyecto.nombre}"/>
+                    <h:panelGrid columns="4" cellspacing="10" columnClasses="column_130p,column_220p,column_160p,column_140p">
+                        <h:outputText value="Nombre:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleIC.ic.nombreItemConfiguracion}"/>
 
-                    <h:outputText value="Fecha Ultima Modificacion:" styleClass="label_blod label"/>
-                    <h:outputText value="#{mbDetalleIC.ic.fechaUltimaModificacion}">
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </h:outputText>
+                        <h:outputText value="Codigo:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleIC.ic.codigoIdentificadorIc}"/>
 
-                    <h:outputText value="Responsable:" styleClass="label_blod label"/>
-                    <h:outputText value="#{mbDetalleIC.ic.responsableItem.nombreCompleto}"/>
+                        <h:outputText value="Nombre Proyecto:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleIC.ic.proyecto.nombre}"/>
 
-                    <h:outputText value="Version Item:" styleClass="label_blod label"/>
-                    <h:outputText value="#{mbDetalleIC.ic.version}"/>
-                </h:panelGrid>
-                <h:panelGrid columns="2" style="margin-left: 10px;">
-                    <h:outputText value="Ubicacion Biblioteca:" styleClass="label_blod label"/>
-                    <h:outputText value="#{mbDetalleIC.ic.ubicacionEnBiblioteca}"/>
-                </h:panelGrid>
-                <br/>
-                <p:commandButton value="Volver" actionListener="#{mbDetalleIC.volver}" style="margin-left: 10px;"/>
+                        <h:outputText value="Fecha Ultima Modificacion:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleIC.ic.fechaUltimaModificacion}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
 
+                        <h:outputText value="Responsable:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleIC.ic.responsableItem.nombreCompleto}"/>
 
-            </p:panel>
+                        <h:outputText value="Version Item:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleIC.ic.version}"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" cellspacing="10" style="margin-top: -10px;" columnClasses="column_130p,column_550p">
+                        <h:outputText value="Ubicacion Biblioteca:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbDetalleIC.ic.ubicacionEnBiblioteca}"/>
+                    </h:panelGrid>
+
+                    <h:panelGroup layout="block" styleClass="block_title">
+                        <h:graphicImage library="imagenes" name="documents.png" styleClass="title_image"/>
+                        <p:commandLink id="linkSol" value="Ver Solicitudes de Cambio" process="@this" styleClass="title_with_image"
+                                       actionListener="#{mbDetalleIC.cargarSolicitudesDeCambio}" update=":dettalleIC:panelDettalleIC"
+                                       rendered="#{mbDetalleIC.solicitudesRelacionadas eq null}"/>
+                        <h:outputText value="Solicitudes de Cambio Relacionadas:" styleClass="title_bold title_with_image"
+                                      rendered="#{mbDetalleIC.solicitudesRelacionadas != null}"/>
+                    </h:panelGroup>
+
+                    <p:dataTable id="tblSolCambio"
+                                 emptyMessage="No hay solicitudes de cambio"
+                                 value="#{mbDetalleIC.solicitudesRelacionadas}"
+                                 var="solicitud"
+                                 rendered="#{mbDetalleIC.solicitudesRelacionadas != null}"
+                                 selectionMode="single"
+                                 selection="#{mbDetalleIC.solicitudCambioSelected}"
+                                 rowKey="#{solicitud.idSolicitudCambio}">
+
+                        <p:ajax event="rowSelect" listener="#{mbDetalleIC.redirctToDetalle}"/>
+                        
+                        <p:column headerText="Nº" style="min-width: 28px;text-align: center;" sortBy="#{solicitud.idSolicitudCambio}">
+                            <h:outputText value="#{solicitud.idSolicitudCambio}"/>
+                        </p:column>
+
+                        <p:column headerText="F.Envio" style="width: 65px;text-align: center;" sortBy="#{solicitud.fechaEnvio}">
+                            <h:outputText value="#{solicitud.fechaEnvio}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Titulo" style="min-width: 350px;" sortBy="#{solicitud.titulo}">
+                            <h:outputText value="#{solicitud.titulo}"/>
+                        </p:column>
+
+                        <p:column headerText="Solicitante" style="min-width: 250px;" sortBy="#{solicitud.solicitante.nombre}">
+                            <h:outputText value="#{solicitud.solicitante.nombreCompleto}"/>
+                        </p:column>
+
+                        <p:column headerText="Estado" sortBy="#{solicitud.estadoSolicitud.nombreEstadoSolicitud}" style="min-width: 150px;text-align: center;">
+                            <h:outputText value="#{solicitud.estadoSolicitud.nombreEstadoSolicitud}"/>
+                        </p:column>
+                    </p:dataTable>             
+                </p:panel>
+            </h:form>
         </ui:define>
     </ui:composition>
 </html>

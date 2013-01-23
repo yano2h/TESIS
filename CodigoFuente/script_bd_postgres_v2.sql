@@ -580,3 +580,35 @@ ALTER TABLE PROYECTO ADD FOREIGN KEY(etapa_proyecto) REFERENCES ETAPA_PROYECTO(i
 -- ---------------------------------------------------------------------------------
 
 ALTER TABLE archivo_proyecto ADD COLUMN tipo_informacion VARCHAR(200) NOT NULL;
+
+-- ---------------------------------------------------------------------------------
+-- Se agrega la bitacora de proyectos
+-- ---------------------------------------------------------------------------------
+CREATE TABLE REGISTRO_BITACORA(
+    id_registro_bitacora BIGSERIAL NOT NULL,
+    fecha_registro DATE NOT NULL,
+    estado_proyecto SMALLINT NOT NULL ,
+    descripcion VARCHAR(255) NOT NULL ,
+    funcionario_responsable INT NULL,
+    contraparte_responsable VARCHAR(60) NULL,
+    proyecto INT NOT NULL,
+    FOREIGN KEY (estado_proyecto) REFERENCES ESTADO_PROYECTO (id_estado_proyecto),
+    FOREIGN KEY (funcionario_responsable) REFERENCES FUNCIONARIO_DISICO (rut),
+    FOREIGN KEY (proyecto) REFERENCES PROYECTO (id_proyecto),
+    PRIMARY KEY (id_registro_bitacora)
+);
+
+-- ---------------------------------------------------------------------------------
+-- Se agrega la unidad solicitante del proyecto
+-- ---------------------------------------------------------------------------------
+CREATE TABLE UNIDAD_SOLICITANTE(
+    id_unidad_solicitante SERIAL NOT NULL ,
+    nombre_unidad_solicitante VARCHAR(60) NOT NULL ,
+    PRIMARY KEY(id_unidad_solicitante)
+);
+
+INSERT INTO UNIDAD_SOLICITANTE VALUES
+(0,'No Especificado');
+
+ALTER TABLE PROYECTO ADD unidad_solicitante INT NOT NULL DEFAULT 0;
+ALTER TABLE PROYECTO ADD FOREIGN KEY(unidad_solicitante) REFERENCES UNIDAD_SOLICITANTE(id_unidad_solicitante);

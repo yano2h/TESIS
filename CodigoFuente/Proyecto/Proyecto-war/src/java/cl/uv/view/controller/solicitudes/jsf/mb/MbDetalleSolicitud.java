@@ -74,7 +74,7 @@ public class MbDetalleSolicitud extends MbBase implements Serializable {
         } else {
             solicitud.setComentarios(comentarioFacade.buscarComentariosPorSolicitud(solicitud.getIdSolicitudRequerimiento()));
             solicitud.setArchivosAdjuntos(archivosAdjuntosFacade.buscarArchivosPorSolicitud(solicitud));
-            if (solicitud.getResponsable().equals(getFuncionarioDisico())) {
+            if (solicitud.getResponsable()!=null && solicitud.getResponsable().equals(getFuncionarioDisico())) {
                 solicitudRequerimientoEJB.dejarPendienteSolicitud(solicitud);
             }
         }

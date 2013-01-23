@@ -63,6 +63,14 @@ public class MbIdentificacionConfiguracion extends MbBase{
     public void setListaItemConfiguracion(List<ItemConfiguracion> listaItemConfiguracion) {
         this.listaItemConfiguracion = listaItemConfiguracion;
     }
+
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
+    }
     
     public void addItem(){
         listaItemConfiguracion.add(nuevoItem);

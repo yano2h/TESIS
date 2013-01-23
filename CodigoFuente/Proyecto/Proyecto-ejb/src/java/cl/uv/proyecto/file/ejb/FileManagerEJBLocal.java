@@ -26,4 +26,8 @@ public interface FileManagerEJBLocal {
     public ArchivoAdjunto loadContentFileProyecto(ArchivoAdjunto a);
     public String buildFullPath(ArchivoAdjunto a);
     
+    public void removerArchivoAdjunto(String path, ArchivoAdjunto a);
+
+    public void removerArchivoAdjuntoProyecto(ArchivoAdjunto a);
+    
 }

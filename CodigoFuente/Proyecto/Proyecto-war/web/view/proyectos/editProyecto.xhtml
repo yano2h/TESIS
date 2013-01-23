@@ -21,13 +21,16 @@
                 <p:panel id="panelDetalleProyecto" header="Editar Proyecto" >
                     <p:menubar id="menu_bar_proy" style="height: 30px;" styleClass="menu_bar" rendered="#{p:ifAnyGranted(ROLES_ADM_JA)}">
                         <p:menuitem value="Guardar Cambios" icon="ui-icon-disk" 
-                                    oncomplete="if(!args.validationFailed){inpNombre.save();inpCodigo.save(); inpTipo.save(); inpEstado.save(); inpFechaIni.save();inpDesc.save();inpFechaTer.save();}"
+                                    oncomplete="if(!args.validationFailed){inpNombre.save();inpCodigo.save(); inpTipo.save();inpFechaIni.save();inpDesc.save();inpFechaTer.save();}"
                                     action="#{mbEditProyecto.guardarCambios}" update="@form" />
                         <p:menuitem value="Cancelar" icon="ui-icon-closethick" actionListener="#{mbEditProyecto.volverDetalleProyecto}"/>
                     </p:menubar>
 
-                    <br/>
-                    <h:outputText id="nombreProy" value="Información Proyecto: #{mbEditProyecto.proyecto.codigoInterno}" styleClass="title_bold"/>
+                    <h:panelGroup layout="block" styleClass="block_title">
+                        <h:graphicImage library="imagenes" name="edit_info.png" styleClass="title_image"/>
+                        <h:outputText id="nombreProy" value="Información Proyecto: #{mbDetalleProyecto.proyecto.codigoInterno}" styleClass="title_bold title_with_image"/>
+                    </h:panelGroup>
+                    
                     <h:panelGrid columns="3" style="border-spacing: 0px;">
                         <h:panelGrid columns="2" cellspacing="10" width="400" style="margin-left: -10px">
                             <h:outputText value="Nombre Proyecto:" styleClass="label_blod label" />
@@ -42,7 +45,12 @@
                                 </p:selectOneMenu>
                             </p:inplace>
                             <h:outputText value="Estado Proyecto:" styleClass="label_blod label"/>    
-                            <p:inplace widgetVar="inpEstado">
+                            <h:panelGroup layout="block">
+                                <h:outputText id="estado" value="#{mbEditProyecto.proyecto.estadoProyecto.nombreEstadoProyecto}" />
+                                <p:tooltip for="estado" value="Para modificar el estado, es necesario agregar un nuevo registro en la bitacora del proyecto" showEffect="fade" style="width: 220px;"/>
+                            </h:panelGroup>
+                            
+                            <p:inplace widgetVar="inpEstado" rendered="#{false}">
                                 <h:inputHidden value="#{mbEditProyecto.proyecto.estadoProyecto.nombreEstadoProyecto}" />  
                                 <p:selectOneMenu id="slct_estado_proyecto" value="#{mbEditProyecto.proyecto.estadoProyecto}" required="true" style="min-width: 250px;margin-left: 5px;" >
                                     <f:selectItems value="#{estadoProyectoController.itemsAvailableSelectMany}"/>
@@ -60,6 +68,8 @@
                         <h:panelGrid columns="2" cellspacing="10">
                             <h:outputText value="Codigo Interno:" styleClass="label_blod label"/>
                             <h:outputText value="#{mbEditProyecto.proyecto.codigoInterno}"/>
+                            <h:outputText value="Unidad Solicitante:" styleClass="label_blod label"/>
+                            <h:outputText value="#{mbDetalleProyecto.proyecto.unidadSolicitante.nombreUnidadSolicitante}"/>
                             <h:outputText value="Fecha de Inicio:" styleClass="label_blod label"/>
                             <p:inplace widgetVar="inpFechaIni" >                                
                                 <p:calendar id="cal_fecha_ini" showOn="button" pattern="dd/MM/yyyy" locale="es" navigator="true" required="true" value="#{mbEditProyecto.proyecto.fechaInicio}" style="margin-left: 5px;">
@@ -75,35 +85,41 @@
                         </h:panelGrid>
                     </h:panelGrid>
 
-                    <br/>
-                    <h:panelGrid columns="1">
-                        <h:outputText value="Descripción del Proyecto:" styleClass="title_bold"/>
+                    <h:panelGrid columns="1" cellspacing="10" style="margin-left: -9px;margin-top: -10px;" width="600">
+                        <h:outputText value="Descripción del Proyecto:" styleClass="label_blod label"/>
                         <p:inplace widgetVar="inpDesc">
                             <p:inputTextarea id="itxta_descripcion" value="#{mbEditProyecto.proyecto.descripcion}" cols="100" rows="4" maxlength="255"/>
                         </p:inplace>
                     </h:panelGrid>
 
-                    <br/>
-                    <h:outputText value="Participantes del Proyecto:" styleClass="title_bold"/>
-                    <br/>
-                    <h:outputText value="Agregar Participante"/>
-                    <h:panelGrid id="menus" columns="3">
-                        <p:selectOneMenu id="slct_funcionario" value="#{mbEditProyecto.funcionarioSelected}">
+                    <h:panelGroup layout="block" styleClass="block_title" style="height: 24px;">
+                        <h:graphicImage library="imagenes" name="user_group.png"  styleClass="title_image"/>
+                        <h:outputText value="Participantes del Proyecto:" styleClass="title_bold title_with_image"/>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" style="margin-top: 5px;">
+                        <h:outputText value="Agregar Nuevo Participante" styleClass="light_text"/>
+                    </h:panelGroup>
+                    
+                    <h:panelGroup id="menus" layout="block" style="margin-top: 5px;margin-bottom: 5px;">
+                        <p:selectOneMenu id="slct_funcionario" value="#{mbEditProyecto.funcionarioSelected}" style="vertical-align: middle;">
                             <f:selectItems value="#{mbEditProyecto.funcionariosDisponibles}"/>
                         </p:selectOneMenu>
-                        <p:selectOneMenu id="slct_rol" value="#{mbEditProyecto.rolSelected}">
+                        <p:spacer width="8"/>
+                        <p:selectOneMenu id="slct_rol" value="#{mbEditProyecto.rolSelected}" style="vertical-align: middle;">
                             <f:selectItems value="#{mbEditProyecto.rolesDisponibles}"/>
                         </p:selectOneMenu>
+                        <p:spacer width="8"/>
                         <p:commandButton value="Agregar" icon="ui-icon-plus" 
                                          actionListener="#{mbEditProyecto.agregarParticipante}" 
                                          update="slct_funcionario slct_rol tabla_participantes" 
                                          process="@parent tabla_participantes"
+                                         style="vertical-align: middle;"
                                          disabled="#{mbEditProyecto.disableBtnAgregar}"/>
-                    </h:panelGrid>
+                    </h:panelGroup>
 
                     <p:dataTable id="tabla_participantes"
                                  value="#{mbEditProyecto.participantes}"
-                                 var="part"
+                                 var="part" styleClass="table_info"
                                  editable="true">
 
                         <p:column headerText="Nombre">
@@ -145,10 +161,143 @@
                             </p:commandLink>
                         </p:column>
                     </p:dataTable>
+
+                    <h:panelGroup layout="block" styleClass="block_title" style="height: 24px;">
+                        <h:graphicImage library="imagenes" name="paperclip_black.png"  styleClass="title_image"/>
+                        <h:outputText value="Archivos Adjuntos:" styleClass="title_bold title_with_image" />
+                    </h:panelGroup>
+                    
+                    <p:commandLink id="linkAdjuntar" value="Adjuntar mas archivos#{mbEditProyecto.contadorArchivosAdjuntos}" 
+                                   onclick="dlgAdjuntar.show();" style="font-style: italic;"/>
+                    <h:panelGroup style="height: 5px;" layout="block"/>
+                    <p:overlayPanel id="adjuntosPanel" for="linkAdjuntar" showEffect="blind" hideEffect="explode" showEvent="mouseover" hideEvent="mousedown" style="max-height: 500px;">  
+                        <h:outputText value="No hay nuevos archivos por adjuntar" rendered="#{empty mbEditProyecto.archivosProyectoAdjuntos}" style="padding: 10px;" styleClass="light_text"/>
+                        <h:panelGroup id="header_datalist" >    
+                            <h:outputText value="Nuevos archivos que seran adjuntados" rendered="#{not empty mbEditProyecto.archivosProyectoAdjuntos}" style="padding: 10px;color: #777; font-style: italic;"/>
+                            <h:panelGrid columns="3" columnClasses="column_150p border_rh,column_150p border_rh,column_70p"
+                                         rendered="#{not empty mbEditProyecto.archivosProyectoAdjuntos}"
+                                         styleClass="header_file_upload_proyecto" style="margin-top: 15px;">
+                                <h:outputText value="Tipo de Información" />
+                                <h:outputText value="Archivo" />
+                                <h:outputText value="Size" />
+                            </h:panelGrid>
+                        </h:panelGroup>
+                        <p:dataList id="selectFiles" value="#{mbEditProyecto.archivosProyectoAdjuntos}" var="f" type="none" >
+                            <p:column>
+                                <h:panelGrid columns="4" columnClasses="column_150p border_rb,column_150p border_rb,column_50p border_rb," styleClass="file_upload_proyecto_background">
+                                    <h:outputText value="#{f.tipoInformacion}" styleClass="file_upload_proyecto"/>
+                                    <h:outputText value="#{f.archivoAdjunto.nombre}" styleClass="file_upload_proyecto"/>
+                                    <h:outputText value="#{f.archivoAdjunto.sizeFormat}" styleClass="file_upload_proyecto"/>
+                                    <p:commandLink id="link" title="Eliminar" actionListener="#{mbEditProyecto.remove(f)}" 
+                                                   process="@this" update=":detalleProy:adjuntosPanel :form_adjuntar_archivos" style="float: right;color: steelblue;max-width: 20px;">
+                                        <span class="ui-icon ui-icon-close"></span>  
+                                    </p:commandLink>
+                                </h:panelGrid>
+                            </p:column>   
+                        </p:dataList>
+                    </p:overlayPanel>  
+                    <p:dataTable id="tabla_archivos_adjunto" editable="true" styleClass="table_info"
+                                 value="#{mbEditProyecto.proyecto.archivoProyectoList}"
+                                 var="f" emptyMessage="No hay archivos adjuntos al proyecto">
+
+                        <p:column headerText="Tipo de Información">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{f.tipoInformacion}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="itxt_tipoInfo" value="#{f.tipoInformacion}" maxlength="200" required="true" size="50" />
+                                    <p:watermark for="itxt_tipoInfo" value="Tipo de Información" /> 
+                                </f:facet>
+                            </p:cellEditor>
+
+                        </p:column>
+                        <p:column headerText="Archivo" style="width: 250px;">
+                            <p:commandLink id="link" value="#{f.archivoAdjunto.nombre}" title="Descargar #{f.archivoAdjunto.nombre}" 
+                                           actionListener="#{mbFilesUpload.downloadFileProyecto(f)}" ajax="false"
+                                           process="@this" styleClass="line_summary" style="max-width: 248px;">
+                                <p:fileDownload value="#{mbFilesUpload.fileDownload}"  />
+                            </p:commandLink>
+                        </p:column>
+                        <p:column headerText="Size" style="width: 60px;">
+                            <h:outputText value="#{f.archivoAdjunto.sizeFormat}"/>
+                        </p:column>
+                        <p:column headerText="Fecha" style="width: 90px;">
+                            <h:outputText value="#{f.archivoAdjunto.fechaUpload}">
+                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Opciones" style="width:30px" styleClass="ui-editable-column-options">  
+                            <p:rowEditor />
+                            <p:commandLink title="Eliminar" actionListener="#{mbEditProyecto.removerArchivo(f)}" 
+                                           update="@(.ui-datatable) :detalleProy:slct_rol :detalleProy:slct_funcionario" >
+                                <span class="ui-icon ui-icon-minus"></span>  
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+
                 </p:panel>
 
             </h:form>
 
+            <h:form id="form_adjuntar_archivos" enctype="multipart/form-data">
+                <p:dialog id="dlgAdjuntar" widgetVar="dlgAdjuntar" 
+                          header="Adjuntar mas archivos" 
+                          modal="true"
+                          closable="false"
+                          resizable="false"
+                          showEffect="fade" 
+                          hideEffect="fade"
+                          style="min-height: 250px;max-height: 400px;overflow: auto;margin-bottom: 5px;">
+
+                    <p:fileUpload id="filesUpload" style="max-width: 400px;overflow: auto;"     
+                                  fileUploadListener="#{mbFilesUpload.handleFileUploadWithoutSizeValidation}"
+                                  mode="advanced" required="true" auto="true" label="Adjuntar" update="grid_file_selected">
+                    </p:fileUpload> 
+                    <h:panelGrid id="grid_file_selected" columns="2" style="margin-left: 0px;max-width: 400px;">
+                        <h:outputText value="Archivo Seleccionado:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbFilesUpload.uploadFile.fileName}" styleClass="line_summary" style="max-width: 268px;color: #777;font-style: italic;"/>
+                    </h:panelGrid>
+                    <h:panelGrid id="grid_upload" columns="2" style="margin-left: 0px;">
+                        <h:panelGroup style="margin-left: 0px;">
+                            <p:inputText id="itxt_tipoInfo" value="#{mbEditProyecto.tipoInformacion}" maxlength="200" required="true" size="58" />
+                            <p:watermark for="itxt_tipoInfo" value="Tipo de Información" /> 
+                        </h:panelGroup>
+                        <p:commandButton value="Agregar" title="Agregar Archivo al Proyecto" 
+                                         actionListener="#{mbEditProyecto.addArchivoAdjunto}" ajax="true" 
+                                         update=":form_adjuntar_archivos:selectFiles  :form_adjuntar_archivos:header_datalist :form_adjuntar_archivos:grid_file_selected :form_adjuntar_archivos:grid_upload" 
+                                         process=":form_adjuntar_archivos"/>
+                    </h:panelGrid>
+
+
+                    <h:panelGroup id="header_datalist" >    
+                        <h:panelGroup style="height: 15px;" layout="block"/>
+                        <h:outputText value="Nuevos archivos que seran adjuntados" rendered="#{not empty mbEditProyecto.archivosProyectoAdjuntos}" styleClass="light_text" style="padding-left: 5px;"/>
+                        <h:panelGrid columns="3" columnClasses="column_150p border_rh,column_150p border_rh,column_70p"
+                                     rendered="#{not empty mbEditProyecto.archivosProyectoAdjuntos}"
+                                     styleClass="header_file_upload_proyecto" style="margin-top: 5px;">
+                            <h:outputText value="Tipo de Información" />
+                            <h:outputText value="Archivo" />
+                            <h:outputText value="Size" />
+                        </h:panelGrid>
+                    </h:panelGroup>
+                    <p:dataList id="selectFiles" value="#{mbEditProyecto.archivosProyectoAdjuntos}" var="f" type="none" >
+                        <p:column>
+                            <h:panelGrid columns="4" columnClasses="column_150p border_rb,column_150p border_rb,column_50p border_rb," styleClass="file_upload_proyecto_background">
+                                <h:outputText value="#{f.tipoInformacion}" styleClass="file_upload_proyecto"/>
+                                <h:outputText value="#{f.archivoAdjunto.nombre}" styleClass="file_upload_proyecto"/>
+                                <h:outputText value="#{f.archivoAdjunto.sizeFormat}" styleClass="file_upload_proyecto"/>
+                                <p:commandLink id="link" title="Eliminar" actionListener="#{mbEditProyecto.remove(f)}" 
+                                               process="@this" update=":form_adjuntar_archivos:header_datalist @(.ui-datatable) :detalleProy:adjuntosPanel" style="float: right;color: steelblue;">
+                                    <span class="ui-icon ui-icon-close"></span>  
+                                </p:commandLink>
+                            </h:panelGrid>
+                        </p:column>   
+                    </p:dataList>
+                    <p:commandButton value="Aceptar" oncomplete="dlgAdjuntar.hide()" update=":detalleProy:linkAdjuntar :detalleProy:adjuntosPanel"
+                                     style="margin-top: 25px;"/>
+                </p:dialog>
+            </h:form>
         </ui:define>
     </ui:composition>
 </html>

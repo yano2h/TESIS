@@ -27,7 +27,7 @@
                         </h:panelGrid>
                         <h:panelGrid columns="2" style="margin-top: 10px;">
                             <p:outputLabel value="Descripcion:" for="descripcion" styleClass="label_blod" />
-                            <p:inputText id="descripcion" value="#{mbBuscarProyecto.descripcion}" maxlength="200" style="min-width: 460px;max-width: 500px;margin-left: 15px;"/>
+                            <p:inputText id="descripcion" value="#{mbBuscarProyecto.descripcion}" maxlength="200" style="min-width: 505px;margin-left: 15px;"/>
                         </h:panelGrid>
                         <p:separator style="height: 1px;margin-bottom: 10px;margin-top: 10px;"/>
                         <h:panelGrid columns="4">
@@ -40,21 +40,26 @@
                             <p:selectOneMenu id="estado" value="#{mbBuscarProyecto.estadoProyecto}"  style="min-width: 250px;">
                                 <f:selectItems value="#{estadoProyectoController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
+                            
+                            <p:outputLabel value="Area:" for="area" styleClass="label_blod" style="margin-left: 0px;"/>
+                            <p:selectOneMenu id="area" value="#{mbBuscarProyecto.areaProyecto}"  style="min-width: 250px;">
+                                <f:selectItems value="#{areaController.itemsAvailableSelectOne}"/>
+                            </p:selectOneMenu>
                         </h:panelGrid>
                         <p:separator style="height: 1px;margin-bottom: 10px;margin-top: 10px;"/>
 
                         <h:panelGrid columns="6">
                             <p:outputLabel value="Fecha Inicio:" for="minFechaInicio" styleClass="label_blod"/>
-                            <h:outputText value="desde:" styleClass="label"/>
+                            <h:outputText value="desde:" styleClass="light_text" style="margin-left: 10px;"/>
                             <p:calendar id="minFechaInicio" locale="es" value="#{mbBuscarProyecto.minFechaInicio}" showOn="button" >
                                 <p:ajax event="dateSelect" update="maxFechaInicio" />  
                             </p:calendar>  
-                            <h:outputText value="hasta:" styleClass="label"/>
+                            <h:outputText value="hasta:" styleClass="light_text" style="margin-left: 20px;"/>
                             <p:calendar id="maxFechaInicio" locale="es" value="#{mbBuscarProyecto.maxFechaInicio}" showOn="button" mindate="#{mbBuscarProyecto.minFechaInicio}" >
                                 <p:ajax event="dateSelect"/>
                             </p:calendar>
                         </h:panelGrid>
-                        <p:commandButton id="filtrarBtn" actionListener="#{mbBuscarProyecto.filtrar}" value="Filtrar" update="panelResultados" />
+                        <p:commandButton id="filtrarBtn" actionListener="#{mbBuscarProyecto.filtrar}" value="Filtrar" update="panelResultados" style="margin-top: 15px;"/>
                     </p:panel>
                     <br/>
 
@@ -66,7 +71,8 @@
                                      paginatorPosition="bottom"
                                      selectionMode="single"
                                      selection="#{mbProyectoArea.proyectoSelected}"
-                                     rowKey="#{proyecto.idProyecto}">
+                                     rowKey="#{proyecto.idProyecto}"
+                                     emptyMessage="No existen proyectos que coincidan">
 
                             <p:ajax event="rowSelect" listener="#{mbProyectoArea.onRowSelect}"/>
 
@@ -90,6 +96,9 @@
 
                             <p:column headerText="Estado" sortBy="#{proyecto.estadoProyecto.nombreEstadoProyecto}">
                                 <h:outputText value="#{proyecto.estadoProyecto.nombreEstadoProyecto}"/>
+                            </p:column>
+                            <p:column headerText="Area" sortBy="#{proyecto.areaResponsable.nombreArea}">
+                                <h:outputText value="#{proyecto.areaResponsable.nombreArea}"/>
                             </p:column>
                         </p:dataTable> 
                     </p:panel>

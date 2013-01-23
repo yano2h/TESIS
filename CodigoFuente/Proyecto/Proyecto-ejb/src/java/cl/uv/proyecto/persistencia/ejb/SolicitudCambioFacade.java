@@ -6,6 +6,7 @@ package cl.uv.proyecto.persistencia.ejb;
 
 import cl.uv.model.base.utils.Resources;
 import cl.uv.proyecto.persistencia.entidades.FuncionarioDisico;
+import cl.uv.proyecto.persistencia.entidades.ItemConfiguracion;
 import cl.uv.proyecto.persistencia.entidades.Proyecto;
 import cl.uv.proyecto.persistencia.entidades.SolicitudCambio;
 import java.math.BigInteger;
@@ -16,6 +17,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -68,14 +70,14 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
     
     @Override
     public List<SolicitudCambio> buscarSolicitudPorProyecto(Proyecto proyecto) {
-        Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.proyecto = :proyecto ORDER BY s.fechaEnvio DESC");
+        TypedQuery<SolicitudCambio> q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.proyecto = :proyecto ORDER BY s.fechaEnvio DESC", SolicitudCambio.class);
         q.setParameter("proyecto", proyecto);
         return q.getResultList();
     }
 
     @Override
     public List<SolicitudCambio> buscarSolicitudAnalisisPendiente(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
+        TypedQuery<SolicitudCambio> q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC", SolicitudCambio.class);
         q.setParameter("responsable", funcionario);
         q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_ANALIZAR_SC") );
         q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_ENVIADA") ));
@@ -93,14 +95,14 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
     
     @Override
     public List<SolicitudCambio> buscarSolicitudAnalisadas(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.evaluadorImpacto = :evaluador ORDER BY s.fechaEnvio DESC");
+        TypedQuery<SolicitudCambio> q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.evaluadorImpacto = :evaluador ORDER BY s.fechaEnvio DESC", SolicitudCambio.class);
         q.setParameter("evaluador", funcionario);
         return q.getResultList();
     }
     
     @Override
     public List<SolicitudCambio> buscarSolicitudEvaluacionPendiente(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
+        TypedQuery<SolicitudCambio> q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC",SolicitudCambio.class);
         q.setParameter("responsable", funcionario);
         q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_APROBAR_SC"));
         q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_ANALISADA") ));
@@ -118,14 +120,14 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
      
     @Override
     public List<SolicitudCambio> buscarSolicitudEvaluadas(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.evaluadorFinal = :evaluador ORDER BY s.fechaEnvio DESC");
+        TypedQuery<SolicitudCambio> q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.evaluadorFinal = :evaluador ORDER BY s.fechaEnvio DESC", SolicitudCambio.class);
         q.setParameter("evaluador", funcionario);
         return q.getResultList();
     }
     
     @Override
     public List<SolicitudCambio> buscarSolicitudImplementacionPendiente(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC");
+        TypedQuery<SolicitudCambio> q = em.createQuery("SELECT s FROM SolicitudCambio s, TareaScmProyecto t WHERE t.responsable = :responsable AND t.tareaScmProyectoPK.idTareaScm = :idTarea  AND s.proyecto = t.proyecto AND s.estadoSolicitud = :estado ORDER BY s.fechaEnvio DESC", SolicitudCambio.class);
         q.setParameter("responsable", funcionario);
         q.setParameter("idTarea", Resources.getValueInteger("TareasSCM", "TSCM_IMPLEMENTAR_SC"));
         q.setParameter("estado", estadoSolicitudCambioFacade.find( Resources.getValueShort("Estados", "EstadoSC_APROBADA") ));
@@ -143,8 +145,15 @@ public class SolicitudCambioFacade extends AbstractFacade<SolicitudCambio> imple
 
     @Override
     public List<SolicitudCambio> buscarSolicitudImplementadas(FuncionarioDisico funcionario) {
-        Query q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.formularioImplementacion.implementador = :implementador ORDER BY s.fechaEnvio DESC");
+        TypedQuery<SolicitudCambio> q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.formularioImplementacion.implementador = :implementador ORDER BY s.fechaEnvio DESC", SolicitudCambio.class);
         q.setParameter("implementador", funcionario);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<SolicitudCambio> buscarSolicitudesPorIC(ItemConfiguracion ic) {
+        TypedQuery<SolicitudCambio> q = em.createQuery("SELECT s FROM SolicitudCambio s WHERE s.itemConfiguracion = :ic", SolicitudCambio.class);
+        q.setParameter("ic", ic);
         return q.getResultList();
     }
 }

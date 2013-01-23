@@ -18,14 +18,27 @@
                 <p:panel id="panelDetalleProyecto" header="Detalle Proyecto" >
                     <p:menubar id="menu_bar_proy" style="height: 30px;" styleClass="menu_bar">
                         <p:menuitem value="Ver Avance" icon="ui-icon-search" action="#{mbDetalleProyecto.verResumenAvance}"/>
-                        <p:menuitem value="Editar" icon="ui-icon-pencil" action="#{mbDetalleProyecto.editarProyecto}" rendered="#{p:ifAnyGranted(security.rolMenuEditarProyecto)}"/>
-                        <p:menuitem value="Eliminar" icon="ui-icon-trash" onclick="confirmarEliminacion.show()" rendered="#{p:ifAnyGranted(security.rolMenuEliminarProyecto)}" />
-                        <p:menuitem value="Cerrar" icon="ui-icon-locked" update="@form" actionListener="#{mbDetalleProyecto.cerrarProyecto}" disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto eq const.EstadoP_FINALIZADO}"/>
-                        <p:menuitem value="Volver a abrir" icon="ui-icon-unlocked" update="@form" actionListener="#{mbDetalleProyecto.reabrirProyecto}" disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto ne const.EstadoP_FINALIZADO}"/>
+                        <p:menuitem value="Bitacora" icon="ui-icon-note" action="#{mbDetalleProyecto.verBitacora}" 
+                                    rendered="#{mbDetalleProyecto.usuarioEsParticipanteProyecto}"/>
+                        <p:menuitem value="Info SCM" icon="ui-icon-gear" action="#{mbDetalleProyecto.verInfoSCM}" />
+                        <p:menuitem value="Editar" icon="ui-icon-pencil" action="#{mbDetalleProyecto.editarProyecto}" 
+                                    rendered="#{p:ifAnyGranted(security.rolMenuEditarProyecto) and mbFuncionarioInfo.funcionario.area == mbDetalleProyecto.proyecto.areaResponsable}"/>
+                        <p:menuitem value="Eliminar" icon="ui-icon-trash" onclick="confirmarEliminacion.show();" 
+                                    rendered="#{p:ifAnyGranted(security.rolMenuEliminarProyecto) and mbFuncionarioInfo.funcionario.area == mbDetalleProyecto.proyecto.areaResponsable}" />
+                        <p:menuitem value="Cerrar" icon="ui-icon-locked" update="@form" actionListener="#{mbDetalleProyecto.cerrarProyecto}" 
+                                    disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto eq const.EstadoP_FINALIZADO}" 
+                                    rendered="#{mbFuncionarioInfo.funcionario.area == mbDetalleProyecto.proyecto.areaResponsable}"/>
+                        <p:menuitem value="Volver a abrir" icon="ui-icon-unlocked" update="@form" 
+                                    actionListener="#{mbDetalleProyecto.reabrirProyecto}" 
+                                    disabled="#{mbDetalleProyecto.proyecto.estadoProyecto.idEstadoProyecto ne const.EstadoP_FINALIZADO}" 
+                                    rendered="#{mbFuncionarioInfo.funcionario.area == mbDetalleProyecto.proyecto.areaResponsable}"/>
                     </p:menubar>
 
-                    <br/>
-                    <h:outputText id="nombreProy" value="Información Proyecto: #{mbDetalleProyecto.proyecto.codigoInterno}" styleClass="title_bold"/>
+                    <h:panelGroup layout="block" styleClass="block_title">
+                        <h:graphicImage library="imagenes" name="text_info.png" styleClass="title_image"/>
+                        <h:outputText id="nombreProy" value="Información Proyecto: #{mbDetalleProyecto.proyecto.codigoInterno}" styleClass="title_bold title_with_image"/>
+                    </h:panelGroup>
+
                     <h:panelGrid columns="3" style="border-spacing: 0px;">
                         <h:panelGrid columns="2" cellspacing="10" width="400" style="margin-left: -10px">
                             <h:outputText value="Nombre Proyecto:" styleClass="label_blod label" />
@@ -41,6 +54,8 @@
                         <h:panelGrid columns="2" cellspacing="10">
                             <h:outputText value="Codigo Interno:" styleClass="label_blod label"/>
                             <h:outputText value="#{mbDetalleProyecto.proyecto.codigoInterno}"/>
+                            <h:outputText value="Unidad Solicitante:" styleClass="label_blod label"/>
+                            <h:outputText value="#{mbDetalleProyecto.proyecto.unidadSolicitante.nombreUnidadSolicitante}"/>
                             <h:outputText value="Fecha de Inicio:" styleClass="label_blod label"/>
                             <h:outputText value="#{mbDetalleProyecto.proyecto.fechaInicio}">
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
@@ -52,16 +67,19 @@
                             </h:outputText>
                         </h:panelGrid>
                     </h:panelGrid>
-                    <h:panelGrid columns="1" cellspacing="10" style="margin-left: -9px" width="600">
+                    <h:panelGrid columns="1" cellspacing="10" style="margin-left: -9px;margin-top: -10px;" width="600">
                         <h:outputText value="Descripción del Proyecto:" styleClass="label_blod label"/>
                         <h:outputText id="otxt_descripcion_proyecto" value="#{mbDetalleProyecto.proyecto.descripcion}"/>
                     </h:panelGrid>
 
-                    <br/>
-                    <h:outputText value="Participantes del Proyecto:" styleClass="title_bold"/>
+                    <h:panelGroup layout="block" styleClass="block_title" style="height: 24px;">
+                        <h:graphicImage library="imagenes" name="user_group.png"  styleClass="title_image"/>
+                        <h:outputText value="Participantes del Proyecto:" styleClass="title_bold title_with_image"/>
+                    </h:panelGroup>
+
                     <p:dataTable id="tabla_participantes"
                                  value="#{mbDetalleProyecto.proyecto.participantes}"
-                                 var="part">
+                                 var="part" styleClass="table_info">
 
                         <p:column headerText="Nombre">
                             <h:outputText value="#{part.participante.nombre}"/>
@@ -77,34 +95,81 @@
                         </p:column>
                     </p:dataTable>
 
-                    <br/>
-                    <h:outputText value="Archivos Adjuntos:" styleClass="title_bold"/>
+                    <h:panelGroup layout="block" styleClass="block_title" style="height: 24px;">
+                        <h:graphicImage library="imagenes" name="paperclip_black.png"  styleClass="title_image"/>
+                        <h:outputText value="Archivos Adjuntos:" styleClass="title_bold title_with_image" />
+                    </h:panelGroup>
+
                     <p:dataTable id="tabla_archivos_adjunto"
                                  value="#{mbDetalleProyecto.proyecto.archivoProyectoList}"
-                                 var="f">
+                                 var="f" emptyMessage="No hay archivos adjuntos al proyecto"
+                                 styleClass="table_info">
 
                         <p:column headerText="Tipo de Información">
                             <h:outputText value="#{f.tipoInformacion}"/>
                         </p:column>
-                        <p:column headerText="Size">
+                        <p:column headerText="Size" style="width: 60px;">
                             <h:outputText value="#{f.archivoAdjunto.sizeFormat}"/>
                         </p:column>
-                        <p:column headerText="Archivo">
+                        <p:column headerText="Archivo" style="width: 50px;">
                             <p:commandLink id="link" title="Descargar" actionListener="#{mbFilesUpload.downloadFileProyecto(f)}" ajax="false"
-                                           style="float: right;color: steelblue;font-style: italic;" process="@this">
-                                
-                                <h:graphicImage library="imagenes" name="logo_uv.png"/>
+                                           process="@this">
+
+                                <h:graphicImage library="imagenes" name="#{mbFilesUpload.findIcon(f.archivoAdjunto)}" width="24" height="24" style="display: block;margin: 0 auto;"/>
                                 <p:fileDownload value="#{mbFilesUpload.fileDownload}"  />
                             </p:commandLink>
                         </p:column>
                     </p:dataTable>
+
+                    <h:panelGroup layout="block" styleClass="block_title" style="height:24px;" >
+                        <h:graphicImage library="imagenes" name="book_open.png"  styleClass="title_image"/>
+                        <p:commandLink id="linkBitacora" value="Ver Bitacora" process="@this" style="font-style: italic;vertical-align: super;"
+                                       actionListener="#{mbDetalleProyecto.cargarBitacora}" update=":detalleProy:panelDetalleProyecto" 
+                                       rendered="#{mbDetalleProyecto.proyecto.bitacora eq null}"/>
+
+                        <h:outputText id="titulo_bitacora" value="Bitacora del Proyecto:" styleClass="title_bold title_with_image" 
+                                      rendered="#{mbDetalleProyecto.proyecto.bitacora != null}"/>
+                    </h:panelGroup>
+
+                    <p:dataTable id="tbl_bitacora" var="b" emptyMessage="No hay registros en la bitacora"
+                                 rendered="#{mbDetalleProyecto.proyecto.bitacora != null}"
+                                 value="#{mbDetalleProyecto.proyecto.bitacora}" styleClass="table_info"
+                                 paginator="true" rows="12" paginatorPosition="bottom">
+
+                        <p:column style="width:4%">  
+                            <p:rowToggler />  
+                        </p:column>  
+                        <p:column headerText="Fecha" style="width: 120px;">
+                            <h:outputText value="#{b.fechaRegistro}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Estado" style="width: 280px;">
+                            <h:outputText value="#{b.estadoProyecto.nombreEstadoProyecto}"/>
+                        </p:column>
+                        <p:column headerText="Responsable">
+                            <h:outputText value="#{b.funcionarioResponsable.nombreCorto}" rendered="#{b.funcionarioResponsable != null}"/>
+                            <h:outputText value="No Aplica" rendered="#{b.funcionarioResponsable == null}"/>
+                        </p:column>
+                        <p:column headerText="Contraparte Responsable" style="width: 300px;">
+                            <h:outputText value="#{b.contraparteResponsable}" rendered="#{not empty b.contraparteResponsable}"/>
+                            <h:outputText value="No Aplica" rendered="#{empty b.contraparteResponsable}"/>
+                        </p:column>
+                        <p:rowExpansion>
+                            <h:panelGroup layout="block" style="width: 100%;padding: 5px;">
+                                <h:outputText value="Detalle: " styleClass="label_blod label"/>
+                                <h:outputText value="#{b.descripcion}" style="font-style: italic;"/>
+                            </h:panelGroup>
+                        </p:rowExpansion>
+                    </p:dataTable>
+
                 </p:panel>
 
                 <p:confirmDialog id="confirm_dlg_eliminacion" message="¿Esta seguro que realmente desea eliminar este proyecto del sistema?"  
                                  header="Eliminar Proyecto" severity="info" widgetVar="confirmarEliminacion">
                     <p:commandButton id="btn_confirmar" value="Si" oncomplete="confirmarEliminacion.hide()"  
                                      actionListener="#{mbDetalleProyecto.eliminarProyecto}" action="proyectosArea?faces-redirect=true" />  
-                    <p:commandButton id="btn_cancelar" value="No" onclick="confirmarEliminacion.hide()" type="button" />
+                    <p:commandButton id="btn_cancelar" value="No" onclick="confirmarEliminacion.hide();" type="button" />
 
                 </p:confirmDialog>
 

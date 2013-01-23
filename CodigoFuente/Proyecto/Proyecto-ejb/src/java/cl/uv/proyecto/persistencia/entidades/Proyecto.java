@@ -65,6 +65,9 @@ public class Proyecto implements Serializable {
     @JoinColumn(name = "area_responsable", referencedColumnName = "id_area")
     @ManyToOne(optional = false)
     private Area areaResponsable;
+    @JoinColumn(name = "unidad_solicitante", referencedColumnName = "id_unidad_solicitante")
+    @ManyToOne(optional = false)
+    private UnidadSolicitante unidadSolicitante;
     
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
     private List<ItemConfiguracion> itemsDeConfiguracion;
@@ -72,12 +75,14 @@ public class Proyecto implements Serializable {
     private List<TareaProyecto> tareasAgendadas;
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
     private List<TareaScmProyecto> tareasScmProyecto;
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "proyecto")
     private List<ParticipanteProyecto> participantes;
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
     private List<SolicitudCambio> solicitudesDeCambio;
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto", orphanRemoval=true)
+    @OneToMany(cascade = {CascadeType.REMOVE,CascadeType.MERGE}, mappedBy = "proyecto", orphanRemoval=true)
     private List<ArchivoProyecto> archivoProyectoList;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "proyecto")
+    private List<RegistroBitacora> bitacora;
 
     public Proyecto() {
     }
@@ -220,6 +225,26 @@ public class Proyecto implements Serializable {
 
     public void setArchivoProyectoList(List<ArchivoProyecto> archivoProyectoList) {
         this.archivoProyectoList = archivoProyectoList;
+    }
+
+    public UnidadSolicitante getUnidadSolicitante() {
+        return unidadSolicitante;
+    }
+
+    public void setUnidadSolicitante(UnidadSolicitante unidadSolicitante) {
+        this.unidadSolicitante = unidadSolicitante;
+    }
+
+    public List<RegistroBitacora> getBitacora() {
+        return bitacora;
+    }
+
+    public void setBitacora(List<RegistroBitacora> bitacora) {
+        this.bitacora = bitacora;
+    }
+    
+    public String getFullNameProyecto(){
+        return codigoInterno+" - "+nombre;
     }
 
     @Override

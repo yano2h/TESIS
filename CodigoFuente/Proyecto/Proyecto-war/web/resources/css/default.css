@@ -68,6 +68,35 @@ label{
     color: black;
 }
 
+.titulo{
+    font-size: 14px;
+    line-height: 1.5em;
+    font-weight: bold;
+    font-style: italic; 
+    color: black;
+}
+
+.titulo_label{
+    font-size: 14px;
+    line-height: 1.5em;
+    font-weight: bold;
+    color: #18316D;
+    margin-right: 5px;
+}
+
+.title_with_image{
+    vertical-align: super;
+}
+
+.block_title{
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+.block_text{
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
 
 .text_blod_blue{
     font-family: Helvetica, Arial, sans-serif;
@@ -202,6 +231,10 @@ a.small_link{
     height: 2em;
 }
 
+.ui-datatable .ui-expanded-row{
+    border-bottom: 0px none #A6C9E2 !important;
+}
+
 .menu_bar{
     height: 2.5em;
     background: #EFFFFF;
@@ -267,8 +300,30 @@ a.small_link{
     padding: 3px;
 }
 
+.line_summary{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;;
+}
+
+.light_text{
+    color: #777; 
+    font-style: italic
+}
+
 .alig_top_column{
     vertical-align: top;
+}
+
+.title_image{
+    margin-right: 8px;
+    height: 24px;
+    width: 24px;
+}
+
+.table_info{
+    margin-bottom: 5px; 
 }
 
 .column_5p{
@@ -277,6 +332,16 @@ a.small_link{
 
 .column_10p{
     width: 10px;
+}
+
+.column_16p{
+    min-width: 16px;
+    max-width: 16px;
+}
+
+.column_18p{
+    min-width: 18px;
+    max-width: 18px;
 }
 
 .column_20p{
@@ -312,9 +377,24 @@ a.small_link{
     max-width: 70px;
 }
 
+.column_90p{
+    min-width: 90px;
+    max-width: 90px;
+}
+
 .column_100p{
     min-width: 100px;
     max-width: 100px;
+}
+
+.column_110p{
+    min-width: 110px;
+    max-width: 110px;
+}
+
+.column_115p{
+    min-width: 115px;
+    max-width: 115px;
 }
 
 .column_125p{
@@ -322,9 +402,24 @@ a.small_link{
     min-width: 125px;
 }
 
+.column_130p{
+    min-width: 130px;
+    max-width: 130px;
+}
+
+.column_140p{
+    min-width: 140px;
+    max-width: 140px;
+}
+
 .column_150p{
     max-width: 150px;
     min-width: 150px;
+}
+
+.column_160p{
+    max-width: 160px;
+    min-width: 160px;
 }
 
 .column_175p{
@@ -337,14 +432,39 @@ a.small_link{
     min-width: 200px;
 }
 
+.column_220p{
+    max-width: 220px;
+    min-width: 220px;
+}
+
 .column_250p{
     max-width: 250px;
     min-width: 250px;
 }
 
+.column_260p{
+    max-width: 260px;
+    min-width: 260px;
+}
+
 .column_300p{
     max-width: 300px;
     min-width: 300px;
+}
+
+.column_400p{
+    max-width: 400px;
+    min-width: 400px;
+}
+
+.column_500p{
+    max-width: 500px;
+    min-width: 500px;
+}
+
+.column_550p{
+    max-width: 550px;
+    min-width: 550px;
 }
 
 .border_rh{

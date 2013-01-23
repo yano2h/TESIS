@@ -12,29 +12,38 @@
         </ui:define>
 
         <ui:define name="content">
-            <h:form>
+                            
+            <h:form id="form_avance">
 
-                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>                    
+                 
                 <script>
-                        $(function() {
-                                $(".meter > span").each(function() {
-                                        $(this)
-                                                .data("origWidth", $(this).width())
-                                                .width(0)
-                                                .animate({
-                                                        width: $(this).data("origWidth")
-                                                }, 1200);
-                                });
+                    $(function() {
+                        $(".meter > span").each(function() {
+                            $(this)
+                                    .data("origWidth", $(this).width())
+                                    .width(0)
+                                    .animate({
+                                width: $(this).data("origWidth")
+                            }, 1200);
                         });
+                    });
                 </script>
 
-                <p:panel header="Proyectos del Area">
+                <p:panel header="Tareas del Area">
+                    <p:menubar id="menu_bar_proy" style="height: 30px;" styleClass="menu_bar">
+                        <p:menuitem value="Volver" icon="ui-icon-back" action="#{mbTareasProyecto.volverProyecto}"/>
+                        <p:menuitem value="Agregar Tarea" icon="ui-icon-plus" onclick="dlgCrearTarea.show();" 
+                                    rendered="#{mbTareasProyecto.usuarioEsParticipanteProyecto}"/>
+                    </p:menubar>
                     <h:panelGrid>
-                        <h:outputText id="titulo" value="Avance Proyecto:[#{mbTareasProyecto.proyecto.codigoInterno}] #{mbTareasProyecto.proyecto.nombre}" styleClass="title_italic"/>
-                        <br/>
+                        <h:panelGroup styleClass="block_title" layout="block">
+                            <h:outputText value="Avance:" styleClass="titulo_label"/>
+                            <h:outputText id="titulo" styleClass="titulo"
+                                          value="#{mbTareasProyecto.proyecto.fullNameProyecto}"/>
+                        </h:panelGroup>
 
                         <h:panelGrid columns="2">
-                            <h:outputText id="label_avance" value="Avance General del Proyecto: "/>
+                            <h:outputText styleClass="label_blod" value="Avance General del Proyecto: "/>
                             <div style="width: 400px;position: relative;">
                                 <div class="meter blue">
                                     <span style="width: #{mbTareasProyecto.porcentajeConFormato}"></span>
@@ -49,11 +58,14 @@
                                  var="tarea" 
                                  paginator="true" rows="20"
                                  paginatorPosition="bottom"
-                                 >
+                                 style="margin-top: 15px;"
+                                 selectionMode="single"
+                                 rowKey="#{tarea.idTareaProyecto}"
+                                 selection="#{mbTareasProyecto.tareaSelected}">
 
-                        <p:ajax event="rowSelect" listener="#{mbTareasProyecto.onRowSelect}"/>
+                        <p:ajax event="rowSelect" update=":form_avance:detalleTarea" oncomplete="detalleTarea.show()"/>
 
-                        <p:column headerText="F. Inicio Propuesta" style="width: 90px;">
+                        <p:column headerText="F. Inicio" style="width: 90px;">
                             <h:outputText value="#{tarea.fechaInicioPropuesta}">
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </h:outputText>
@@ -72,8 +84,83 @@
                         </p:column>
 
                     </p:dataTable> 
-
                 </p:panel>
+                
+                <p:dialog id="detalleTarea" widgetVar="detalleTarea" closable="true" resizable="false" modal="true" header="Detalle Tarea">
+                     <h:panelGrid id="info_tarea" columns="4" cellspacing="10" columnClasses="column_125p,column_250p,column_125p,column_250p" style="max-width: 850px;">
+
+                        <h:outputText value="Tarea:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbTareasProyecto.tareaSelected.tarea}" />
+
+                        <h:outputText value="Responsable:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbTareasProyecto.tareaSelected.responsableTarea.nombreCompleto}"/>
+
+                        <h:outputText value="Proyecto:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbTareasProyecto.tareaSelected.proyecto.nombre}"/>
+
+                        <h:outputText value="Avance:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbTareasProyecto.tareaSelected.nivelAvance}%"/>
+
+                        <h:outputText value="Fecha de Inicio:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbTareasProyecto.tareaSelected.fechaInicioPropuesta}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+
+                        <h:outputText value="Fecha de Termino:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbTareasProyecto.tareaSelected.fechaTerminoPropuesta}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+
+                        <h:outputText value="Fecha de Inicio Real:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbTareasProyecto.tareaSelected.fechaInicioReal}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+
+                        <h:outputText value="Fecha de Termino Real:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbTareasProyecto.tareaSelected.fechaTerminoReal}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </h:panelGrid>
+
+                    <h:panelGrid id="grid_desc" columns="1" cellspacing="10">
+                        <h:outputText value="Descripcion:" styleClass="label_blod label"/>
+                        <h:outputText value="#{mbTareasProyecto.tareaSelected.descripcionTarea}" />
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+            <h:form id="form_dialog">         
+                <p:dialog id="dlg_crear_tarea" widgetVar="dlgCrearTarea" header="Crear Tarea" modal="true" closable="false" resizable="false">
+                    <h:panelGroup id="pnl_crear_tarea">
+                        <h:panelGrid columns="2" cellspacing="10">
+                            <p:outputLabel value="Nombre Tarea:" for="itxt_nombre_tarea" styleClass="label_blod"/>
+                            <p:inputText id="itxt_nombre_tarea" value="#{mbTareas.nuevaTarea.tarea}" required="true" maxlength="60" size="54"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1" cellspacing="10" style="margin-top: -10px;">
+                            <p:outputLabel value="Descripcion:" styleClass="label_blod" for="itxt_desc"/>
+                            <p:inputTextarea id="itxt_desc" value="#{mbTareas.nuevaTarea.descripcionTarea}" required="true" cols="54" rows="4" maxlength="255"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="3" cellspacing="10" style="margin-top: -10px;">
+                            <p:outputLabel value="Fecha Inicio:" styleClass="label_blod" for="cal_fecha_ini"/>
+                            <p:spacer width="60" height="1"/>
+                            <p:outputLabel value="Fecha Termino:" styleClass="label_blod" for="cal_fecha_ter"/>
+                            <p:calendar id="cal_fecha_ini" locale="es" value="#{mbTareas.nuevaTarea.fechaInicioPropuesta}" 
+                                        showOn="button" mindate="#{mbTareas.minDateFechaIni}" pattern="dd/MM/yyyy" required="true">
+                                <p:ajax event="dateSelect" update="cal_fecha_ter" />  
+                            </p:calendar>  
+                            <p:spacer width="60" height="1"/>
+                            <p:calendar id="cal_fecha_ter" locale="es" value="#{mbTareas.nuevaTarea.fechaTerminoPropuesta}" 
+                                        showOn="button" mindate="#{mbTareas.nuevaTarea.fechaInicioPropuesta}" required="true" pattern="dd/MM/yyyy"/>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="2" style="float: right;margin: 10px;">
+                            <p:commandButton id="btn_aceptar" value="Aceptar" actionListener="#{mbTareas.guardar}" 
+                                             update="pnl_crear_tarea :form_avance"
+                                             oncomplete="if(!args.validationFailed) {dlgCrearTarea.hide();}"/>
+                            <p:commandButton id="btn_cancelar" value="Cancelar"  process="@this" onclick="dlgCrearTarea.hide();"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </p:dialog>
             </h:form>
         </ui:define>
     </ui:composition>

@@ -11,16 +11,12 @@ import cl.uv.proyecto.persistencia.entidades.FormularioImplementacion;
 import cl.uv.proyecto.persistencia.entidades.SolicitudCambio;
 import cl.uv.proyecto.persistencia.entidades.TareaScmProyecto;
 import cl.uv.proyecto.persistencia.entidades.TareaScmProyectoPK;
-import cl.uv.view.controller.base.jsf.mb.MbFuncionarioInfo;
+import cl.uv.view.controller.base.jsf.mb.MbBase;
 import cl.uv.view.controller.base.utils.JsfUtils;
 import cl.uv.view.controller.base.utils.Resources;
-import java.io.Serializable;
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -29,7 +25,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class MbDetalleSolicitudCambio implements Serializable {
+public class MbDetalleSolicitudCambio extends MbBase {
 
     @EJB
     private SolicitudCambioFacadeLocal solicitudCambioFacade;
@@ -38,8 +34,6 @@ public class MbDetalleSolicitudCambio implements Serializable {
     @EJB
     private FormularioImplementacionFacadeLocal formularioImplementacionFacade;
     
-    @ManagedProperty(value = "#{mbFuncionarioInfo}")
-    private MbFuncionarioInfo mbFuncionarioInfo;
     private SolicitudCambio solicitudCambio;
     private FormularioImplementacion formularioImplementacion;
 
@@ -48,15 +42,11 @@ public class MbDetalleSolicitudCambio implements Serializable {
 
     @PostConstruct
     private void init() {
-        solicitudCambio = (SolicitudCambio) JsfUtils.getValue("solicitudCambio");
+        solicitudCambio = (SolicitudCambio) JsfUtils.getParametro("solicitudCambio");
         formularioImplementacion = solicitudCambio.getFormularioImplementacion();
         if(formularioImplementacion == null ){
             formularioImplementacion = new FormularioImplementacion();
         }
-    }
-
-    public void setMbFuncionarioInfo(MbFuncionarioInfo mbFuncionarioInfo) {
-        this.mbFuncionarioInfo = mbFuncionarioInfo;
     }
 
     public SolicitudCambio getSolicitudCambio() {
@@ -76,12 +66,12 @@ public class MbDetalleSolicitudCambio implements Serializable {
     }
 
     public void guardarAnalisis() {
-        solicitudCambioFacade.guardarAnalisisImpacto(solicitudCambio, mbFuncionarioInfo.getFuncionario());
+        solicitudCambioFacade.guardarAnalisisImpacto(solicitudCambio, getFuncionarioDisico());
        // JsfUtils.addMessage(FacesMessage.SEVERITY_INFO, "Guardado Exitoso", "Los cambios realizados en la solicitud fueron guardados exitosamente");
     }
 
     public void guardarEvaluacion() {
-        solicitudCambioFacade.guardarEvaluacionSolicitud(solicitudCambio, mbFuncionarioInfo.getFuncionario());
+        solicitudCambioFacade.guardarEvaluacionSolicitud(solicitudCambio, getFuncionarioDisico());
        // JsfUtils.addMessage(FacesMessage.SEVERITY_INFO, "Guardado Exitoso", "Los cambios realizados en la solicitud fueron guardados exitosamente");
     }
     
@@ -99,7 +89,7 @@ public class MbDetalleSolicitudCambio implements Serializable {
                                                                                 solicitudCambio.getProyecto().getIdProyecto()));
         return (solicitudCambio.getEstadoSolicitud().getIdEstadoSolicitudCambio().equals(Resources.getValueShort("const", "EstadoSC_ENVIADA"))
                 && t != null
-                && t.getResponsable().getRut().equals(mbFuncionarioInfo.getFuncionario().getRut()));
+                && t.getResponsable().getRut().equals(getFuncionarioDisico().getRut()));
     }
 
     public Boolean getEnabledEvaluacion() {
@@ -107,7 +97,7 @@ public class MbDetalleSolicitudCambio implements Serializable {
                                                                                 solicitudCambio.getProyecto().getIdProyecto()));
         return (solicitudCambio.getEstadoSolicitud().getIdEstadoSolicitudCambio().equals(Resources.getValueShort("const", "EstadoSC_ANALISADA"))
                 && t != null
-                && t.getResponsable().getRut().equals(mbFuncionarioInfo.getFuncionario().getRut()));
+                && t.getResponsable().getRut().equals(getFuncionarioDisico().getRut()));
     }
 
     public Boolean getEnabledFormularioImpl() {
@@ -115,6 +105,6 @@ public class MbDetalleSolicitudCambio implements Serializable {
                                                                                 solicitudCambio.getProyecto().getIdProyecto()));
         return (solicitudCambio.getEstadoSolicitud().getIdEstadoSolicitudCambio().equals(Resources.getValueShort("const", "EstadoSC_APROBADA"))
                 && t != null
-                && t.getResponsable().getRut().equals(mbFuncionarioInfo.getFuncionario().getRut()));
+                && t.getResponsable().getRut().equals(getFuncionarioDisico().getRut()));
     }
 }

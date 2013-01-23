@@ -15,7 +15,9 @@
 
 
             <p:panel id="pnl_crear_proyecto" header="Crear Nuevo Proyecto">
-                <h:outputText value="Para crear un nuevo proyecto por favor complete todos los campos obligatorios, recuerde que usted solo puede crear proyecto para su propia area." style="color: #616161;margin-top: 10px;"/>
+                <h:panelGroup style="padding-top: 10px;padding-bottom: 10px;" layout="block">
+                    <h:outputText value="Para crear un nuevo proyecto por favor complete todos los campos obligatorios, recuerde que usted solo puede crear proyecto para su propia area." styleClass="light_text"/>
+                </h:panelGroup>
 
                 <h:panelGrid columns="3" columnClasses="alig_top_column,,alig_top_column" style="margin-left: 0px;margin-top: 10px;">
                     <h:form id="form_crear_proyecto">
@@ -33,7 +35,39 @@
                         </h:panelGrid>
                         <h:panelGrid columns="2" cellspacing="10" style="line-height: 1.4em;margin-top: -10px;margin-left: -10px;">
                             <p:outputLabel value="Nombre Proyecto:" for="itxt_nombre_proyecto" styleClass="label_blod" />
-                            <p:inputText id="itxt_nombre_proyecto" value="#{mbProyecto.nuevoProyecto.nombre}" required="true" maxlength="45" size="45"/>
+                            <p:inputText id="itxt_nombre_proyecto" style="margin-left: 5px;"
+                                         value="#{mbProyecto.nuevoProyecto.nombre}" required="true" maxlength="45" size="45"/>
+
+                            <h:panelGroup id="label_unidad">
+                                <p:outputLabel value="Unidad Solicitante:" for="slct_unidad_solicitante" styleClass="label_blod" rendered="#{mbProyecto.nuevaUnidad == null}" />
+                                <p:outputLabel value="Unidad Solicitante:" for="itxt_unidad_solicitante" styleClass="label_blod" rendered="#{mbProyecto.nuevaUnidad != null}" />
+                            </h:panelGroup>
+
+                            <h:panelGroup id="input_unidad_sol">
+                                <p:selectOneMenu id="slct_unidad_solicitante" value="#{mbProyecto.nuevoProyecto.unidadSolicitante}" 
+                                                 required="true" style="min-width: 250px;margin-left: 5px;"
+                                                 rendered="#{mbProyecto.nuevaUnidad == null}">
+                                    <f:selectItems value="#{unidadSolicitanteController.itemsAvailableSelectOne}"/>
+                                </p:selectOneMenu>
+
+
+                                <p:inputText id="itxt_unidad_solicitante" value="#{mbProyecto.nuevaUnidad.nombreUnidadSolicitante}" 
+                                             required="true" maxlength="60" size="45" style="margin-left: 5px;"
+                                             rendered="#{mbProyecto.nuevaUnidad != null}"/>
+                            </h:panelGroup>
+                            <br/>
+                            <h:panelGroup id="opc_unidad_sol" layout="block" style="margin-left: 5px;">
+                                <h:graphicImage library="imagenes" name="reload.png" width="16" height="16" rendered="#{mbProyecto.nuevaUnidad != null}"/>
+                                <p:commandLink value="Reutilizar Unidad" process="@this" rendered="#{mbProyecto.nuevaUnidad != null}"
+                                               actionListener="#{mbProyecto.reutilizarUnidadSolicitante}" style="margin-left: 5px;vertical-align: top;font-weight: normal;font-style: italic;"
+                                               update=":form_crear_proyecto:opc_unidad_sol :form_crear_proyecto:label_unidad :form_crear_proyecto:input_unidad_sol"/>
+
+                                <h:graphicImage library="imagenes" name="add.png" width="16" height="16" rendered="#{mbProyecto.nuevaUnidad == null}"/>
+                                <p:commandLink value="Agregar Nueva Unidad" process="@this" rendered="#{mbProyecto.nuevaUnidad == null}"
+                                               actionListener="#{mbProyecto.agregarNuevaUnidadSolicitante}" style="margin-left: 5px;vertical-align: top;font-weight: normal;font-style: italic;" 
+                                               update=":form_crear_proyecto:opc_unidad_sol :form_crear_proyecto:label_unidad :form_crear_proyecto:input_unidad_sol"/>
+                            </h:panelGroup>
+
 
                             <p:outputLabel value="Tipo Proyecto:" for="slct_tipo_proyecto" styleClass="label_blod"/>
                             <p:selectOneMenu id="slct_tipo_proyecto" value="#{mbProyecto.nuevoProyecto.tipoProyecto}" required="true" style="min-width: 250px;margin-left: 5px;">
@@ -64,28 +98,33 @@
                         </h:panelGrid>
                         <h:panelGrid columns="1">
                             <p:outputLabel value="Descripción:" for="itxta_descripcion" styleClass="label_blod"/>
-                            <p:inputTextarea id="itxta_descripcion" value="#{mbProyecto.nuevoProyecto.descripcion}" maxlength="255" rows="4" cols="48" required="true"/>
+                            <p:inputTextarea id="itxta_descripcion" value="#{mbProyecto.nuevoProyecto.descripcion}" maxlength="255" rows="4" cols="50" required="true"/>
                         </h:panelGrid>
-                        <h:panelGrid>
-                            <p:commandButton value="Crear" actionListener="#{mbProyecto.crearProyecto}" update="@form" oncomplete="if(!args.validationFailed){dlgExito.show();}"/>
-                        </h:panelGrid>
+                        <h:panelGroup layout="block" style="margin-top: 20px;margin-bottom: 10px;">
+                            <p:commandButton value="Crear" actionListener="#{mbProyecto.crearProyecto}" 
+                                             update="@form" oncomplete="if(!args.validationFailed){dlgExito.show();}"/>
+                        </h:panelGroup>
                     </h:form>
 
-                    <p:separator style="width:1px;height: 450px;margin-left: 20px;margin-right: 20px;"/>
+                    <p:separator style="width:1px;height: 400px;margin-left: 20px;margin-right: 20px;"/>
 
                     <h:form id="form_adjuntar_archivos" enctype="multipart/form-data" >
                         <h:outputText value="Archivos Adjuntos" styleClass="title_bold" style="margin-bottom: 10px;"/>
                         <br/>
-                        <p:fileUpload id="filesUpload" style="margin-left: 0px;margin-top: 15px;margin-bottom: 5px;"     
-                                          value="#{mbFilesUpload.uploadFile}"
-                                          mode="simple" required="true">
-                            </p:fileUpload>
+                        <p:fileUpload id="filesUpload" style="margin-left: 0px;margin-top: 15px;margin-bottom: 5px;max-width: 400px;overflow: auto;"     
+                                      fileUploadListener="#{mbFilesUpload.handleFileUploadWithoutSizeValidation}"
+                                      mode="advanced" required="true" auto="true" label="Adjuntar" update="grid_file_selected">
+                        </p:fileUpload> 
+                        <h:panelGrid id="grid_file_selected" columns="2" style="margin-left: 0px;max-width: 400px;">
+                            <h:outputText value="Archivo Seleccionado:" styleClass="label_blod label"/>
+                            <h:outputText value="#{mbFilesUpload.uploadFile.fileName}"/>
+                        </h:panelGrid>
                         <h:panelGrid id="grid_upload" columns="2" style="margin-left: 0px;">
                             <h:panelGroup style="margin-left: 0px;">
-                                <p:inputText id="itxt_tipoInfo" value="#{mbProyecto.tipoInformacion}" maxlength="200" required="true" size="60" style="margin-bottom: 4px;"/>
+                                <p:inputText id="itxt_tipoInfo" value="#{mbProyecto.tipoInformacion}" maxlength="200" required="true" size="55" />
                                 <p:watermark for="itxt_tipoInfo" value="Tipo de Información" /> 
                             </h:panelGroup>
-                            <p:commandButton title="Agregar Archivo al Proyecto" actionListener="#{mbProyecto.addArchivoAdjunto}" ajax="false" update=":form_adjuntar_archivos" icon="ui-icon-plus"/>
+                            <p:commandButton value="Agregar" title="Agregar Archivo al Proyecto" actionListener="#{mbProyecto.addArchivoAdjunto}" ajax="true" update=":form_adjuntar_archivos" icon="ui-icon-plus" process=":form_adjuntar_archivos"/>
                         </h:panelGrid>
 
                         <h:panelGrid columns="3" columnClasses="column_150p border_rh,column_150p border_rh,column_70p" styleClass="header_file_upload_proyecto" style="margin-top: 15px;" rendered="#{not empty mbProyecto.archivosProyectoAdjuntos}">
@@ -108,14 +147,6 @@
                         </p:dataList>
                     </h:form>
                 </h:panelGrid>
-
-                <br/>
-
-
-
-                <br/>
-
-
             </p:panel>
             <p:dialog id="dlg_creacion_exitosa" widgetVar="dlgExito" closable="false" resizable="false" modal="true" width="390" header="Creacion Exitosa">
                 <h:panelGrid>

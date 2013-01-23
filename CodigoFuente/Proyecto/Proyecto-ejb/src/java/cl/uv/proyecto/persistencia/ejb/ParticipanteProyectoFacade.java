@@ -29,6 +29,12 @@ public class ParticipanteProyectoFacade extends AbstractFacade<ParticipanteProye
     public ParticipanteProyectoFacade() {
         super(ParticipanteProyecto.class);
     }
+
+    @Override
+    public void remove(ParticipanteProyecto p) {
+        super.remove(find(p.getParticipanteProyectoPK()));
+    }
+    
     
     @Override
     public List<ParticipanteProyecto> buscarParticipantesProyecto(Proyecto proyecto){
