@@ -108,7 +108,7 @@
 \contentsline {section}{\numberline {8.5}Configuraci\'on para el env\IeC {\'\i }o de Correo Electr\'onico}{116}{section.8.5}
 \contentsline {section}{\numberline {8.6}Configuraci\'on para subir y descargar archivos}{118}{section.8.6}
 \contentsline {section}{\numberline {8.7}Configuraci\'on de Seguridad OpenAM}{118}{section.8.7}
-\contentsline {chapter}{\numberline {9}Conclusi\'on}{120}{chapter.9}
+\contentsline {chapter}{\numberline {9}Conclusiones}{120}{chapter.9}
 \contentsline {chapter}{Bibliograf\'{\i }a}{122}{chapter*.6}
 \contentsline {chapter}{\numberline {A}Casos de Uso Extendidos}{125}{appendix.Alph1}
 \contentsline {chapter}{\numberline {B}Diccionario de Datos}{192}{appendix.Alph2}
