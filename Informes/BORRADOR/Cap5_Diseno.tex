@@ -30,7 +30,7 @@ a la fase de diseño del sistema:
 	\end{itemize}
 	
 	\subsection{Estructura del Sistema}
-	Para satisfacer los requerimientos y restricciones del cliente, se utilizara la
+	Para satisfacer los requerimientos y restricciones del cliente, se utiliza una
 	arquitectura Cliente-Servidor separada en Múltiples-Capas como lo plantea el 
 	estándar definido por Java EE 6\cite{javaee}. En la Figura \ref{arqSistema} se
 	puede observar la Arquitectura propuesta.
@@ -96,7 +96,7 @@ a la fase de diseño del sistema:
 	\subsection{Estilo de Descomposición Modular}
 
 	En esta sección se describe como se descompone el sistema en diferentes módulos,
-	esto se realizara utilizando el enfoque Orientado a Objetos (OO), para este caso 
+	esto se realiza utilizando el enfoque Orientado a Objetos (OO), para este caso 
 	este enfoque es el mas adecuado, ya que el sistema debe ser implementado 
 	haciendo uso de un lenguaje OO (particularmente java), así se mantendrá la 
 	correcta correspondencia entre los modelos y la implementación.
@@ -197,8 +197,8 @@ a la fase de diseño del sistema:
 	
 	\subsection{Modelo de Control}
 	Para que el sistema trabaje como tal, se deben controlar los diferentes módulos o 
-	subsistemas de este de manera tal que sus servicios se entregue en el lugar 
-	correcto en el momento preciso. Para este caso el modelo de control seleccionado 
+	subsistemas de este, de manera tal que sus servicios se entreguen en el lugar 
+	correcto y en el momento preciso. Para este caso el modelo de control seleccionado 
 	es el control Basado en Eventos de Broadcast, esta decisión se justifica 
 	principalmente en el echo que el sistema debe generar notificaciones 
 	o alertas en las pantallas de los diferentes usuarios en respuesta a algún evento de
@@ -206,8 +206,8 @@ a la fase de diseño del sistema:
 	comunicados y con la información actualizada.
 
 \section{Diseño de Interfaz}
-	En esta sección se mencionan los criterios básicos que serán considerados al
-	momento de implementar la interfaz con la que interactúaran los usuarios finales.
+	En esta sección se mencionan los criterios básicos considerados al
+	momento de implementar la interfaz con la que interactuarán los usuarios finales.
 	Para esto se definen:
 	\begin{itemize}
 		\item Estilo de Interacción.
@@ -222,7 +222,7 @@ a la fase de diseño del sistema:
 	varios enfoques los cuales son mas fáciles de utilizar, estos fueron clasificados en cinco 
 	estilos principales de interacción en 1998 por Shniederman \cite{sommerville}. \\
 	
-	Para el desarrollo de este sistema se utilizara el estilo de rellenado de formularios,
+	Para el sistema se utiliza el estilo de rellenado de formularios,
 	donde el usuario puede rellenar los campos de un formulario. Algunos campos pueden
 	llevar menús asociados y el formulario puede tener botones de acción que, cuando
 	cuando se presionan, hacen que se de inicio a alguna acción. Este es el enfoque mas
@@ -232,7 +232,7 @@ a la fase de diseño del sistema:
 	introducir datos. 
 	
 	\subsection{Pautas de Estilo}
-	Dado que el sistema a desarrollar, es un sistema tanto para DISICO, como para diferentes 
+	Dado que este es un sistema tanto para DISICO, como para diferentes 
 	funcionarios de la Universidad de Valparaíso, este debe mantener la uniformidad con el resto
 	de los sistema de la universidad, tanto en el uso de la marca, símbolos, colores 
 	institucionales, tipografías, etc. Cumpliendo así con la normativa existente, definida en el 
@@ -245,7 +245,7 @@ a la fase de diseño del sistema:
 		\item \textbf{Tipografía:} La tipografía recomendada en el Manual para la aplicaciones 
 		institucionales es "Swiss 721 Condensed BT", sin embargo por motivos de compatibilidad 
 		el tipo de fuente utilizado normalmente por los sistemas de la universidad es "Arial, 
-		Helvetica, sans-serif". Y es este el que se utilizara en la interfaz del diseño del sistema.
+		Helvetica, sans-serif". Y es este el que se utiliza en la interfaz del diseño del sistema.
 		
 		\item \textbf{Marca Institucional:} Se recomienda utilizar el logo institucional 
 		especialmente, preparado para paginas Web (en formato jpg, png o gif). Este debe
@@ -333,11 +333,11 @@ a la fase de diseño del sistema:
 
 	
 \section{Diseño Lógico}
-	Como se menciono anteriormente, se utilizara un paradigma Orientado a 
+	Como se menciono anteriormente, se utiliza un paradigma Orientado a 
 	Objetos por lo que en esta sección, se presenta el diagrama de clases 
-	correspondiente al sistema a desarrollar. 
-	Para ver un mayor detalle de las clases y sus atributos y métodos
-	en el Anexo \ref{anexo4}.
+	correspondiente al sistema. 
+	Para ver un mayor detalle de las clases, sus atributos y métodos
+	revisar el Anexo \ref{anexo4}.
 	
 	\subsection{Diseño de Clases}
 	A continuación se presenta el diagrama de clases del sistema.
@@ -354,8 +354,7 @@ a la fase de diseño del sistema:
 \newpage
 \section{Diseño de Datos}
 	Dado que los datos serán almacenados dentro de una base de datos relacional,
-	en esta sección se presenta el diagrama de entidad relación que se implementara y
-	un diccionario de datos de este.
+	en esta sección se presenta el diagrama de entidad relación correspondiente al sistema.
 	
 	\subsection{Modelo Entidad Relación}
 	En esta sección se presenta el modelo de entidad-relación que se utilizara para el 

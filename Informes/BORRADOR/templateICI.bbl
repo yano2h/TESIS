@@ -1,5 +1,10 @@
 \begin{thebibliography}{10}
 
+\bibitem{paloma}
+P.~Méndez, ``{Desarrollo de Metodologías de SQA y SCM para la Dirección de
+  Servicios de Información y Computación},'' {Trabajo de Título}, Universidad
+  de Valparaíso, 2011.
+
 \bibitem{disico}
 {Universidad de Valparaíso}, ``Dirección de servicios de información y
   computación.'' Último acceso: 4 Abril 2012, \url{http://www.disico.uv.cl}.
@@ -8,11 +13,6 @@
 {Rectoría de la Universidad de Valparaíso}, ``Decreto universitario nº427.''
   Último acceso: 4 Abril 2012,
   \url{http://disico.uv.cl/images/docs/decreto427.pdf}.
-
-\bibitem{paloma}
-P.~Méndez, ``{Desarrollo de Metodologías de SQA y SCM para la Dirección de
-  Servicios de Información y Computación},'' {Trabajo de Título}, Universidad
-  de Valparaíso, 2011.
 
 \bibitem{ieee610.12:1990}
 {The Institute of Electrical and Eletronics Engineers}, ``{IEEE Standard
@@ -117,9 +117,9 @@ M.~I.~M. Estellés, M.~C. Bria, P.~L. Torres, and F.~S. Grueso, ``Gestión de
 {Oracle Corporation}, ``Glassfish.'' Último acceso: 4 Abril 2012,
   \url{http://glassfish.java.net/es/}.
 
-\bibitem{sqlserver}
-{Micrososf}, ``Sql server.'' Último acceso: 9 Abril 2012,
-  \url{http://www.microsoft.com/es-es/sqlserver/default.aspx}.
+\bibitem{postgresql}
+{The PostgreSQL Global Development Group}, ``Postresql.'' Último acceso: 9
+  Abril 2012, \url{http://www.postgresql.org/}.
 
 \bibitem{hibernate}
 {JBoss Community}, ``Hibernate.'' Último acceso: 6 Abril 2012,

@@ -3,7 +3,7 @@
 \contentsline {chapter}{Agradecimientos}{\es@scroman {iv}}{chapter*.2}
 \contentsline {chapter}{\numberline {1}Introducci\'on}{1}{chapter.1}
 \contentsline {chapter}{\numberline {2}Marco Conceptual}{3}{chapter.2}
-\contentsline {section}{\numberline {2.1}Conceptos y Terminologia}{3}{section.2.1}
+\contentsline {section}{\numberline {2.1}Conceptos y Terminolog\IeC {\'\i }a}{3}{section.2.1}
 \contentsline {section}{\numberline {2.2}Metodolog\IeC {\'\i }as para la solicitudes de Requerimientos}{4}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}ITIL v3 - Petici\'on de Servicios TI}{5}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}ITIL v3 - Gesti\'on de Incidencias}{6}{subsection.2.2.2}
@@ -26,7 +26,7 @@
 \contentsline {subsection}{\numberline {2.6.2}Mercurial}{23}{subsection.2.6.2}
 \contentsline {subsection}{\numberline {2.6.3}Git}{23}{subsection.2.6.3}
 \contentsline {subsection}{\numberline {2.6.4}ChangeGear - Change Edition}{23}{subsection.2.6.4}
-\contentsline {section}{\numberline {2.7}Comparaci\'on entre Estandares}{24}{section.2.7}
+\contentsline {section}{\numberline {2.7}Comparaci\'on entre Est\'andares}{24}{section.2.7}
 \contentsline {subsection}{\numberline {2.7.1}Comparaci\'on entre est\'andares y metodolog\IeC {\'\i }as para solicitud y descripci\'on Requerimientos}{24}{subsection.2.7.1}
 \contentsline {subsection}{\numberline {2.7.2}Comparaci\'on entre est\'andares para SCM}{25}{subsection.2.7.2}
 \contentsline {section}{\numberline {2.8}Comparaci\'on entre Herramientas}{25}{section.2.8}
@@ -47,7 +47,7 @@
 \contentsline {subsection}{\numberline {3.4.2}Objetivos Espec\IeC {\'\i }ficos}{35}{subsection.3.4.2}
 \contentsline {chapter}{\numberline {4}An\'alisis}{36}{chapter.4}
 \contentsline {section}{\numberline {4.1}Especificaci\'on de Requerimientos}{36}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Acronimos y Abreviaturas}{36}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.1}Acr\'onimos y Abreviaturas}{36}{subsection.4.1.1}
 \contentsline {subsection}{\numberline {4.1.2}Tipos de Usuarios}{36}{subsection.4.1.2}
 \contentsline {subsection}{\numberline {4.1.3}Requerimientos Funcionales}{37}{subsection.4.1.3}
 \contentsline {subsection}{\numberline {4.1.4}Requerimientos No Funcionales}{43}{subsection.4.1.4}
@@ -116,4 +116,3 @@
 \contentsline {chapter}{\numberline {D}Descripci\'on de las clases}{264}{appendix.Alph4}
 \contentsline {chapter}{\numberline {E}Descripci\'on de las Pruebas de Aceptaci\'on}{278}{appendix.Alph5}
 \contentsline {chapter}{\numberline {F}Resultados de las Pruebas de Aceptaci\'on}{292}{appendix.Alph6}
-\contentsline {chapter}{Bibliograf\'{\i }a}{303}{appendix*.7}

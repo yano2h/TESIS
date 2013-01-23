@@ -17,18 +17,18 @@ A level-1 auxiliary file: anexo3_CasosDeUsoReales.aux
 A level-1 auxiliary file: anexo4_DescripcionDeLasClases.aux
 A level-1 auxiliary file: anexo5_DescripcionDeLasPruebasDeAceptacion.aux
 A level-1 auxiliary file: anexo6_ResultadosDeLasPruebasDeAceptacion.aux
-Illegal, another \bibstyle command---line 48 of file templateICI.aux
+Illegal, another \bibstyle command---line 76 of file templateICI.aux
  : \bibstyle
  :          {plain}
 I'm skipping whatever remains of this command
-Illegal, another \bibdata command---line 49 of file templateICI.aux
+Illegal, another \bibdata command---line 77 of file templateICI.aux
  : \bibdata
  :         {template}
 I'm skipping whatever remains of this command
 Database file #1: template.bib
 You've used 30 entries,
             1876 wiz_defined-function locations,
-            625 strings with 7581 characters,
+            625 strings with 7584 characters,
 and the built_in function-call counts, 4040 in all, are:
 = -- 348
 > -- 138
