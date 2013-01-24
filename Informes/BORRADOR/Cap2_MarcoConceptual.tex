@@ -1,6 +1,11 @@
 \chapter{Marco Conceptual}
 
 \section{Conceptos y Terminología}
+	Para evitar cualquier confusión y ambigüedad al momento de definir 
+	el marco conceptual, previamente se han definido una serie de conceptos y 
+	términos, los cuales permitirán mejorar la comprensión del resto de este 
+	capitulo. Los conceptos y términos definidos son los siguientes:
+
 	\begin{itemize}
 		%\item{\textbf{Solicitud:}}
 		\item{\textbf{Requerimiento:}} El Glosario de Terminología Estándar de 
@@ -195,7 +200,7 @@ Servicios TI} y \textit{Gestión de Incidencias}.
 		\item \textbf{Incorporación del diseño en la ERS:} La ERS debe centrarse en los 
 		servicios a realizar, normalmente no debe especificar los elementos del diseño 
 		tales como: partición del software en módulos, asignación de funciones a los 
-		módulos, describir flujo de información o control entre los modulos, elección de 
+		módulos, describir flujo de información o control entre los módulos, elección de 
 		estructuras de datos.
 		\item \textbf{Incorporación de los requerimientos del proyecto en la ERS:} 
 		La ERS debe dirigir el producto de software y no el proceso de producción de este. 
@@ -223,9 +228,22 @@ En este ámbito el tipo de herramientas en el mercado, que mas se adecua a
 este propósito son los Sistemas de Mesa de Ayuda (Help Desk System) o de 
 Asignamiento de tickets. Ambos se centran principalmente en el seguimiento 
 de problemas o de solicitudes de asistencia mediante el creación y asignación
-de Tickets. A continuación se nombran y describen algunas de las mas relevantes
-de este tipo:
+de Tickets. \\
 
+Existe una gran cantidad de este tipo de herramientas en el mercado, pero 
+aquí se evalúan solo algunas de estas, los criterios utilizados para su selección
+fueron los siguientes:
+\begin{itemize}
+	\item Herramientas que ya habían sido previamente consideradas para 	
+	propósitos similares en DISICO.	
+	\item Que el sitio web de la herramienta existiera una descripción 
+	detallada de sus características.
+	\item Que el sitio web contara con demos online que permitieran probar la
+	herramienta o con vídeos que demostraran sus funcionalidades.
+\end{itemize}
+
+A continuación se nombran y describen las herramientas seleccionadas según
+los criterios anteriores:
 
 	\subsection{Hesk}
 	Es un sistema gratuito, programado en php con mysql, que permite gestionar 
@@ -427,8 +445,8 @@ de este tipo:
 
 
 \section{Estándares para SCM}
+\label{estandar_scm}	
 	
-
 	\subsection{ISO Sistemas de Gestión de calidad. Directrices para la Gestión de la 
 	Configuración}
 	El propósito de este estándar, es aumentar el entendimiento común de los temas
@@ -616,8 +634,16 @@ de este tipo:
 Actualmente la mayoría de las herramientas relacionadas con SCM se enfocan 
 solo al control de versiones, por lo que no existen realmente herramientas que
 abarquen el proceso completo de SCM, ya que el proceso de SCM va mucho mas
-aya que solo el control de versiones. Algunas de las principales herramientas
-relacionadas a SCM de hoy en dia son:
+allá que solo el control de versiones.\\
+
+ A diferencia del caso anterior, el numero de herramientas de este tipo no es tan amplio por lo que los criterios de selección no fueron tan exhaustivos, estos son:
+ \begin{itemize}
+  	\item Herramientas que permitan documentar, gestionar y controlar los cambios.
+ 	\item Que sean de las herramientas mas populares, asociadas con 
+ 	SCM.
+ \end{itemize}
+
+Las herramientas seleccionadas según los criterios presentados se describen a continuación:
 
 
 	\subsection{SVN}
@@ -661,6 +687,11 @@ relacionadas a SCM de hoy en dia son:
 
 \section{Comparación entre Estándares}
 	
+	A continuación se presentan comparaciones entre los diferentes estándares
+	expuestos previamente en las secciones \ref{metod_sol_req}, 
+	\ref{estandar_req} y \ref{estandar_scm}. Los principales criterios utilizados
+	para la comparación entre estos estándares son su propósito y la adecuación
+	de este a los propósitos y objetivos de este trabajo.
 
 	\subsection{Comparación entre estándares y metodologías para solicitud y descripción Requerimientos}
 	\begin{table}[H]

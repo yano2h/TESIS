@@ -1,10 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{paloma}
-P.~Méndez, ``{Desarrollo de Metodologías de SQA y SCM para la Dirección de
-  Servicios de Información y Computación},'' {Trabajo de Título}, Universidad
-  de Valparaíso, 2011.
-
 \bibitem{disico}
 {Universidad de Valparaíso}, ``Dirección de servicios de información y
   computación.'' Último acceso: 4 Abril 2012, \url{http://www.disico.uv.cl}.
@@ -13,6 +8,11 @@ P.~Méndez, ``{Desarrollo de Metodologías de SQA y SCM para la Dirección de
 {Rectoría de la Universidad de Valparaíso}, ``Decreto universitario nº427.''
   Último acceso: 4 Abril 2012,
   \url{http://disico.uv.cl/images/docs/decreto427.pdf}.
+
+\bibitem{paloma}
+P.~Méndez, ``{Desarrollo de Metodologías de SQA y SCM para la Dirección de
+  Servicios de Información y Computación},'' {Trabajo de Título}, Universidad
+  de Valparaíso, 2011.
 
 \bibitem{ieee610.12:1990}
 {The Institute of Electrical and Eletronics Engineers}, ``{IEEE Standard

@@ -1,6 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2011)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: templateICI.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: templateICI.aux
 A level-1 auxiliary file: Cap1_Introduccion.aux
 A level-1 auxiliary file: Cap2_MarcoConceptual.aux
 A level-1 auxiliary file: Cap3_DefinicionProblema.aux
@@ -17,54 +15,4 @@ A level-1 auxiliary file: anexo3_CasosDeUsoReales.aux
 A level-1 auxiliary file: anexo4_DescripcionDeLasClases.aux
 A level-1 auxiliary file: anexo5_DescripcionDeLasPruebasDeAceptacion.aux
 A level-1 auxiliary file: anexo6_ResultadosDeLasPruebasDeAceptacion.aux
-Illegal, another \bibstyle command---line 76 of file templateICI.aux
- : \bibstyle
- :          {plain}
-I'm skipping whatever remains of this command
-Illegal, another \bibdata command---line 77 of file templateICI.aux
- : \bibdata
- :         {template}
-I'm skipping whatever remains of this command
 Database file #1: template.bib
-You've used 30 entries,
-            1876 wiz_defined-function locations,
-            625 strings with 7584 characters,
-and the built_in function-call counts, 4040 in all, are:
-= -- 348
-> -- 138
-< -- 0
-+ -- 65
-- -- 35
-* -- 159
-:= -- 590
-add.period$ -- 36
-call.type$ -- 30
-change.case$ -- 25
-chr.to.int$ -- 0
-cite$ -- 30
-duplicate$ -- 165
-empty$ -- 558
-format.name$ -- 35
-if$ -- 1021
-int.to.chr$ -- 0
-int.to.str$ -- 30
-missing$ -- 11
-newline$ -- 99
-num.names$ -- 32
-pop$ -- 155
-preamble$ -- 1
-purify$ -- 0
-quote$ -- 0
-skip$ -- 146
-stack$ -- 0
-substring$ -- 20
-swap$ -- 14
-text.length$ -- 0
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 0
-warning$ -- 0
-while$ -- 33
-width$ -- 32
-write$ -- 232
-(There were 2 error messages)
