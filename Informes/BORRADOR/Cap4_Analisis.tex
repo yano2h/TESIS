@@ -565,22 +565,20 @@
 
 	\subsection{Modelo de Casos de Uso}
 	Las Figuras \ref{CU_SolicitudReq} y \ref{CU_SolicitudSCM} muestran los 
-	respectivos casos de uso para los diferentes actores del sistema, y se encuentran 
+	casos de uso para los diferentes actores del sistema, y se encuentran 
 	separados entre lo que se refiere a solicitudes de requerimientos y los 
 	relacionados con la gestión de proyectos y SCM. El conjunto de casos de usos 
 	descritos nos da los lineamientos necesarios para saber que hará el 
-	sistema una vez construido. 
+	sistema una vez construido. \\
 	
-	En los diagramas se observa claramente las diversas funcionalidades a las que 
-	puede acceder cada uno de los actores, las cuales se encuentran representadas 
-	por casos de uso, también se observan la relación que existe entre los diferentes
-	casos de uso, las cuales pueden ser de dos tipos, ya se de inclusión  (las cuales 
-	se encuentran anotadas con la palabra include) donde por ejemplo el caso de uso 
-	\textit{"Asignar Solicitud"} se encuentra incluido dentro de un caso de uso mas 
-	general \textit{"Gestionar Solicitud"} y otras son relaciones de extension (anotadas con extiende) un ejemplo de esta relación es el caso de uso \textit{"Ver Resumen Departamento"} el cual es una extension del caso de uso \textit{"Ver Resumen Área"} y 
-	\textit{""}
-	Se observan que cada actor puede realizar diversas tareas, las cuales forman parte 
-	de un caso de uso general y otras son un caso de uso por si mismas. 
+	En los diagramas se observan las diversas acciones que 
+	pueden realizar cada uno de los actores, representadas por casos de uso, 
+	también se aprecia la relación que existe entre estos. Relaciones de inclusión, 
+	por ejemplo \textit{"Asignar Solicitud"} se encuentra incluido dentro 
+	de un caso de uso mas general \textit{"Gestionar Solicitud"} generando una 
+	dependencia, relaciones de extensión, por ejemplo \textit{"Ver Resumen Departamento"} 
+	extiende ha \textit{"Ver Resumen Área"} ya que puede insertar su comportamiento
+	bajo ciertas condiciones.\\
 	
 
 	\begin{figure}[H]
@@ -593,7 +591,7 @@
 
 	\begin{figure}[H]
 		\begin{center}
-			\includegraphics[width=16.5cm]{imagenes/CU/CU_SolicitudSCM.png}
+			\includegraphics[width=15cm]{imagenes/CU/CU_SolicitudSCM.png}
 			\caption{Modelo Casos de Uso Gestión de SCM}
 			\label{CU_SolicitudSCM}
 		\end{center}
@@ -614,5 +612,40 @@
 	\end{figure}
 
 	La Figura \ref{modConceptual} muestra el modelo conceptual de la plataforma, donde 
-	se representan los principales conceptos del dominio y la forma en que estos se encuentran 
-	relacionados.
+	se representan los principales conceptos del dominio que deben estar presentes al momento
+	del diseño. También se muestra la forma en que se relaciona cada uno de los conceptos del 
+	dominio.\\ 
+
+	A continuación se explica de forma resumida cada concepto del dominio presentado 
+	en el Modelo Conceptual:
+
+	\begin{itemize}
+		\item \textbf{Departamento:}  Representa a todo el Departamento de DISICO, el cual se 
+		encuentra compuesto por diversas Áreas.
+		\item \textbf{Área:} Son las áreas que componen DISICO.
+		\item \textbf{JefeDepartamento:} Representa a la persona a cargo de DISICO.
+		\item \textbf{JefeDeÁrea:} Corresponden a los jefes de cada área de DISICO.
+		\item \textbf{Funcionario:} Son los funcionarios que trabajan en las diferentes áreas de DISICO.
+		\item \textbf{Solicitud:} Es una petición de cualquier tipo que debe ser atendida en DISICO.
+		\item \textbf{SolicitudDeRequerimiento:} Representan los diferentes requerimientos que envían 
+		los funcionarios de la Universidad a DISICO.
+		\item \textbf{Solicitante:} Son los funcionarios de la Universidad que envían las solicitudes de 
+		requerimientos.
+		\item \textbf{SolicitudDeCambio:}  Representan las peticiones de cambió referente a cualquiera
+		de los items de configuración, realizadas por cualquier funcionario cuando se detecta la 
+		necesidad de un cambio.
+		\item \textbf{ItemDeConfiguracion:} Representa cualquier artefacto de software de un 
+		proyecto, cuyos cambios es necesario mantener controlados.
+		\item \textbf{IdentificacionDeLaConfiguracion:} Es la composición de items de configuración,
+		la cual representa la configuración del proyecto al que corresponden dichos items.
+		\item \textbf{Proyecto:} Corresponden a los diferentes proyectos de los cuales DISICO esta a 
+		cargo de ejecutar y desarrollar, y en los cuales participa uno o mas de los funcionarios.
+		\item \textbf{Tarea:} Representa una actividad, la cual debe ser ejecutada dentro de un 
+		cierto periodo de tiempo, para ayudar a cumplir con algún objetivo.
+		\item \textbf{TareaSCM:}  Son las tareas especificas definidas por la metodología de SCM.
+		\item \textbf{TareaProyecto:} Son las tareas que los participantes de un proyecto, calendarizan
+		y ejecutan, con la finalidad de ayudar a cumplir con los objetivos de un proyecto.
+		\item \textbf{FormularioImplementacionDeCambio:} Corresponde al documento que debe ser
+		completado una vez se aprueba una solicitud de cambio, este documento esta descrito por la
+		metodología de SCM de DISICO. 
+	\end{itemize}
